@@ -945,9 +945,12 @@ function exportCsv() {
   if (!ids.length) return toast('No tag or note changes to export yet.');
   const rows = ids.map(id => { const it = S.byId.get(id); return { Id: it.id, Hash: it.hash, Name: it.name, Tag: effTag(it) || '', Notes: (effNotes(it) || '').slice(0, NOTE_MAX) }; });
   const csv = Core.toCSV(['Name', 'Hash', 'Id', 'Tag', 'Notes'], rows);
+  // every column is formula-guarded (Core.toCSV); DIM's importer keeps the added ', so say which notes get one
+  const guarded = rows.filter(r => /^[=+\-@\t\r]/.test(r.Notes));
   const fname = `dim-tags-notes-${new Date().toISOString().slice(0, 10)}.csv`;
   modal(`<h2>Export ${ids.length} change${ids.length > 1 ? 's' : ''} from ${esc(activeProfile().name)} to DIM</h2>
   <p class="stat-pill">Import this file in DIM while <b>${esc(activeProfile().name)}</b>'s Bungie account is the one signed in.</p>
+  ${guarded.length ? `<p class="stat-pill" style="color:var(--mid)">${guarded.length} note${guarded.length > 1 ? 's start' : ' starts'} with = + - or @, so ${guarded.length > 1 ? 'they get' : 'it gets'} a leading ' (a safety guard against spreadsheet formulas). DIM keeps that ' in the note. To avoid it, start the note with another character: ${guarded.slice(0, 5).map(r => `<b>${esc(r.Name)}</b>`).join(', ')}${guarded.length > 5 ? '…' : ''}</p>` : ''}
   <ol class="steps">
     <li>Save the CSV below.</li>
     <li>In DIM, open <b>Settings</b> → <b>Spreadsheets</b> → <b>Import tags/notes</b> and choose this file. DIM only changes the items listed in it.</li>

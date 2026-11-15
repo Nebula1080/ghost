@@ -1,10 +1,9 @@
 # Handoff: Ghost, formerly Vault Sorter (from Claude on claude.ai, 2026-11-14)
 
 ## Ghost plan progress (`GHOST_PLAN.md`)
-- **Step 0, security groundwork: done 2026-11-15** in Claude Code. Done: local git repo (`main`, remote `origin` = github.com/nebula1080/ghost, **nothing pushed**), `.gitignore`, gitleaks pre-commit hook + CI workflow + Dependabot, `package-lock.json`, security unit + browser tests, the XSS/`innerHTML` audit with fixes (sanitizer for Clarity/Compendium HTML and CSS, CSV limits, id/ratings/profile validation, no inline handlers, banner as text), the hosted CSP with script hashes (`build.py --target hosted`), and a tighter service worker. See CLAUDE.md → Security.
+- **Step 0, security groundwork: done 2026-11-15** in Claude Code. Done: local git repo (`main`, remote `origin` = github.com/nebula1080/ghost, **nothing pushed**; commits use the GitHub noreply address; the repo is public so Pages works on a free account), `.gitignore`, gitleaks pre-commit hook + CI workflow + Dependabot, `package-lock.json`, security unit + browser tests, the XSS/`innerHTML` audit with fixes (sanitizer for Clarity/Compendium HTML and CSS, CSV limits, id/ratings/profile validation, no inline handlers, banner as text), the hosted CSP with script hashes (`build.py --target hosted`), and a tighter service worker. See CLAUDE.md → Security.
 - **Waiting on the user:**
   - GitHub settings: secret scanning + push protection, Dependabot alerts, Pages HTTPS, protect `main`. The user clicks these; Claude gives the steps.
-  - Export formula guard vs DIM notes (see CLAUDE.md → Security).
   - For later steps: inspo image placement, artist credits, `GILT_EXOTICS`, whether images ship in the artifact build.
 - GitHub: user `nebula1080`, repo `ghost`, Bungie app "Ghost Buddy". The user has added the repo secrets `BUNGIE_API_KEY` and `BUNGIE_CLIENT_ID`.
 - **Next: step 1** (V1 tokens/themes + rename to Ghost).
