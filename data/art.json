@@ -1,0 +1,40 @@
+{
+  "_comment": "Ghost imagery plan (chosen 2026-11-15). Source files live outside the repo in ../../UI Inspo/<theme folder>/<file>. Step 3 (V2) converts each to WebP sized for its slot, lazy-loads it, and puts it behind a dark scrim so text stays AA. Credits come from the design doc's credit table; the About screen lists every image used. GILT_EXOTICS stays empty until the exotic review.",
+  "slots": {
+    "loading":        { "img": 55, "fit": "contain, centered, 40% opacity behind the Ghost sigil and amber glow" },
+    "welcome":        { "img": 1,  "fit": "cover, right-anchored, scrim fading to --bg on the left where the text sits" },
+    "header.vault":   { "img": 17, "fit": "header band, cover, right 60%, left fade" },
+    "header.clean":   { "img": 10, "fit": "header band, cover, right 60%, left fade" },
+    "header.compare": { "img": 44, "fit": "header band, cover, centered on the figures, left fade" },
+    "header.sub":     { "img": 30, "fit": "header band, cover, right 60%, left fade" },
+    "about":          { "img": 51, "fit": "side panel beside the credits, contain" },
+    "sub.solar":      { "img": 2,  "fit": "Subclasses art panel (portrait), element glow edge" },
+    "sub.arc":        { "img": 48, "fit": "Subclasses art panel (portrait), element glow edge" },
+    "sub.void":       { "img": 46, "fit": "Subclasses art panel (portrait), element glow edge" },
+    "sub.strand":     { "img": 34, "fit": "Subclasses art panel (portrait), element glow edge" },
+    "sub.prismatic":  { "img": 49, "fit": "Subclasses art panel (portrait), element glow edge" },
+    "sub.stasis":     { "img": null, "fit": "no clean Stasis image in the set: CSS-only ice gradient" },
+    "light.header.vault":   { "img": 41, "fit": "Bone & Sepia theme swaps the header bands to the sepia silhouette set" },
+    "light.header.clean":   { "img": 42, "fit": "as above" },
+    "light.header.compare": { "img": 44, "fit": "as above (works in both themes)" },
+    "light.header.sub":     { "img": 57, "fit": "as above" }
+  },
+  "images": {
+    "1":  { "file": "05 Cinematic Scale/01 Traveler over storm valley - Darek Zabrocki.jpg", "credit": "Darek Zabrocki (keyframe for Blur Studio's Destiny 2 cinematics)", "link": "https://zabrocki.artstation.com/projects/rwewa" },
+    "2":  { "file": "01 Elemental Glow/02 Solar Warlock with flaming sword - Ryan DeMita.jpg", "credit": "Ryan DeMita (Destiny 2 Solar character illustrations)", "link": "https://ryandemita.artstation.com/projects/KDxXr" },
+    "10": { "file": "05 Cinematic Scale/10 Fallen walker in snow - concept art.jpg", "credit": "Bungie, Inc. (concept art)", "link": "https://www.bungie.net" },
+    "17": { "file": "05 Cinematic Scale/17 Beyond Light - pyramid over Europa.jpg", "credit": "Bungie, Inc. (Beyond Light key art)", "link": "https://www.bungie.net" },
+    "30": { "file": "05 Cinematic Scale/30 Traveler at sunset with Warlock.jpg", "credit": "Bungie, Inc. (The Witch Queen cutscene still)", "link": "https://www.bungie.net" },
+    "34": { "file": "01 Elemental Glow/34 Acid green marbled Strand sigil.jpg", "credit": "SilentWalker", "link": "https://www.instagram.com/silentwalker___/" },
+    "41": { "file": "06 Silhouette Posters/41 Bone-white ruins with caped guardian.jpg", "credit": "Bungie, Inc. (concept art)", "link": "https://www.bungie.net" },
+    "42": { "file": "06 Silhouette Posters/42 Sepia Titan with Hive Knight.jpg", "credit": "Bungie, Inc. (concept art)", "link": "https://www.bungie.net" },
+    "44": { "file": "06 Silhouette Posters/44 Iron Lords silhouette in sepia.jpg", "credit": "Bungie, Inc. (concept art)", "link": "https://www.bungie.net" },
+    "46": { "file": "01 Elemental Glow/46 Void Hunter with purple blades.jpg", "credit": "Ryan DeMita (Destiny 2 Void character illustrations)", "link": "https://ryandemita.artstation.com/projects/3G56g" },
+    "48": { "file": "01 Elemental Glow/48 Arc Warlock with lightning hands.jpg", "credit": "Ryan DeMita (Destiny 2 Arc character illustrations)", "link": "https://ryandemita.artstation.com" },
+    "49": { "file": "02 Sigils & Sacred Geometry/49 Abstract shard collage with emblem.jpg", "credit": "SilentWalker", "link": "https://www.instagram.com/silentwalker___/" },
+    "51": { "file": "03 Stained Glass & Gilt Deco/51 Deco poster - fireteam before the Witness.jpg", "credit": "Syed Ali Qaiser (Azlaar), \"Drown in the Deep, Children of the Light\"", "link": "https://azlaar.artstation.com/" },
+    "55": { "file": "02 Sigils & Sacred Geometry/55 Ghost shell on starfield.jpg", "credit": "SilentWalker", "link": "https://www.instagram.com/silentwalker___/" },
+    "57": { "file": "06 Silhouette Posters/57 Lone guardian at dusk.jpg", "credit": "Bungie, Inc. (concept art)", "link": "https://www.bungie.net" }
+  },
+  "GILT_EXOTICS": []
+}

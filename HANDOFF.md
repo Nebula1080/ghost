@@ -4,7 +4,9 @@
 - **Step 0, security groundwork: done 2026-11-15** in Claude Code. Done: local git repo (`main`, remote `origin` = github.com/nebula1080/ghost, **nothing pushed**; commits use the GitHub noreply address; the repo is public so Pages works on a free account), `.gitignore`, gitleaks pre-commit hook + CI workflow + Dependabot, `package-lock.json`, security unit + browser tests, the XSS/`innerHTML` audit with fixes (sanitizer for Clarity/Compendium HTML and CSS, CSV limits, id/ratings/profile validation, no inline handlers, banner as text), the hosted CSP with script hashes (`build.py --target hosted`), and a tighter service worker. See CLAUDE.md → Security.
 - **Waiting on the user:**
   - GitHub settings: secret scanning + push protection, Dependabot alerts, Pages HTTPS, protect `main`. The user clicks these; Claude gives the steps.
-  - For later steps: inspo image placement, artist credits, `GILT_EXOTICS`, whether images ship in the artifact build.
+  - Whether images ship in the artifact build too (recommended: yes, ~1 MB of lazy-loaded WebP).
+  - `GILT_EXOTICS`: exotic review later, with the user.
+- **Imagery chosen 2026-11-15:** `data/art.json` maps each slot (loading, welcome, view headers, About, Subclasses element panels, light-theme headers) to an image number in `UI Inspo/`, with credits and links from the design doc's credit table. Only images with high-confidence or user-confirmed credits were used. Text-heavy infographics, watermarked/logo images and unsure credits were excluded. Wired in at step 3.
 - GitHub: user `nebula1080`, repo `ghost`, Bungie app "Ghost Buddy". The user has added the repo secrets `BUNGIE_API_KEY` and `BUNGIE_CLIENT_ID`.
 - **Next: step 1** (V1 tokens/themes + rename to Ghost).
 
