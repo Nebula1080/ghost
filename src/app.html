@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#18191a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Vault Sorter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f14;--panel:#151922;--panel2:#1c2130;--line:#2a3142;--text:#e6e8ee;--dim:#8a93a8;--faint:#5b6378;
+  --exotic:#ceae33;--legendary:#7b4fb0;--rare:#5076a3;--uncommon:#366e42;--common:#c3bcb4;
+  --kinetic:#d9d9d9;--arc:#7aecf3;--solar:#f2721b;--void:#b185df;--stasis:#4d88ff;--strand:#35e366;--prismatic:#ff7ad9;
+  --good:#5bd17a;--mid:#e8c547;--bad:#e5624f;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:13px/1.35 Inter,system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.h{font-family:Rajdhani,Inter,sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+#app{display:flex;flex-direction:column;height:100%}
+header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:#10131a;flex-wrap:wrap}
+header .brand{font-size:20px;margin-right:6px}
+header .brand b{color:var(--exotic)}
+.btn{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:6px 10px;white-space:nowrap}
+.btn:hover{border-color:#47506a}
+.btn.primary{background:#2b3a5c;border-color:#3d5285}
+.btn.warn{background:#4a3517;border-color:#7a5520}
+.btn.small{padding:3px 7px;font-size:12px}
+.stat-pill{color:var(--dim);font-size:12px}
+.grow{flex:1}
+#banner{display:none;padding:8px 14px;background:#2a2112;color:#f0d9a8;border-bottom:1px solid #4a3a1c;font-size:12px}
+#panes{flex:1;display:flex;gap:10px;padding:10px;overflow-x:auto;overflow-y:hidden;align-items:stretch}
+.pane{flex:0 0 380px;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--pc);border-radius:8px;min-height:0}
+.pane.wide{flex-basis:560px}
+.pane-head{padding:8px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.pane-head .row{display:flex;gap:6px;align-items:center}
+.qin{flex:1;background:#0f1219;border:1px solid var(--line);border-radius:6px;padding:7px 9px;font-family:ui-monospace,Menlo,monospace;font-size:12px;outline:none}
+.qin:focus{border-color:var(--pc)}
+.qin.err{border-color:var(--bad)}
+.pane-title{flex:1;background:transparent;border:none;font-family:Rajdhani;font-weight:700;font-size:15px;letter-spacing:.03em;outline:none;min-width:0}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--pc);flex:none}
+select.s{background:#0f1219;border:1px solid var(--line);border-radius:6px;padding:4px 6px;font-size:12px;max-width:130px}
+.count{color:var(--dim);font-size:12px;white-space:nowrap}
+.pane-body{overflow-y:auto;padding:8px;flex:1;min-height:0}
+.group-h{font-family:Rajdhani;font-weight:700;font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin:10px 2px 6px;display:flex;justify-content:space-between}
+.group-h:first-child{margin-top:2px}
+.card{position:relative;background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--rc);border-radius:6px;padding:7px 8px 7px 9px;margin-bottom:6px;cursor:pointer}
+.card:hover{border-color:#47506a;border-left-color:var(--rc)}
+.card .top{display:flex;align-items:center;gap:6px}
+.card .nm{font-weight:600;font-size:13.5px;flex:1;min-width:0}
+.card .sub{color:var(--dim);font-size:12px;margin-top:2px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.el{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:3px;vertical-align:0}
+.ico{width:15px;height:15px;object-fit:contain;vertical-align:-3px;margin-right:3px;flex:none}
+.ico.big{width:20px;height:20px;vertical-align:-2px;margin-right:6px}
+.ammo-ico{height:12px;width:auto;vertical-align:-1px;margin-right:3px}
+.brk{display:inline-flex;align-items:center;gap:3px;background:#0f1219;border:1px solid #3a4258;border-radius:4px;padding:0 4px 0 2px}
+.brk .ico{background:#2b3346;border-radius:3px;padding:1px;margin:0}
+.crafted{display:inline-block;width:14px;height:14px;vertical-align:-2px;flex:none}
+.pk .pi,.bar .pi{width:15px;height:15px;border-radius:3px;vertical-align:-3px;margin:0 4px 0 -3px;background:#11151e}
+.bar .pi{margin:0 5px 0 0}
+details.pinfo{margin:1px 0}
+details.pinfo>summary{list-style:none;cursor:pointer}
+details.pinfo>summary::-webkit-details-marker{display:none}
+details.pinfo>summary .bar:hover{background:#1a2030;border-radius:4px}
+.ptext{margin:4px 0 8px 22px;padding:7px 9px;background:#0f1219;border:1px solid var(--line);border-radius:6px;font-size:12px;white-space:pre-wrap;color:#cfd4e0}
+/* words never break mid-word: wrap only at spaces */
+body{overflow-wrap:normal;word-break:normal;hyphens:manual}
+.ptext .src{display:block;font-family:Rajdhani;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:11px;color:var(--dim);margin:6px 0 2px}
+.ptext .src:first-child{margin-top:0}
+.ptext .enh{color:#f1df90}
+.has-info{text-decoration:underline dotted #5b6378;text-underline-offset:2px}
+/* game-style sockets: round perks, square intrinsics/mods; equipped perks get the blue fill */
+.sk-row{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:6px;align-items:flex-start}
+.sk-col{display:flex;flex-direction:column;gap:2px;min-width:0;max-width:150px}
+.sk-opts{display:flex;gap:2px;padding-left:2px}
+.sk{display:flex;align-items:center;gap:5px;cursor:pointer;border-radius:13px;padding:1px 6px 1px 1px;font-size:11.5px;color:#cfd4e0;min-width:0;border:1px solid transparent}
+.sk:hover{background:#262d42}
+.sk .nm2{white-space:normal;line-height:1.2}
+.ic{flex:none;width:24px;height:24px;border-radius:50%;background:#10141c;border:1px solid #3a4258;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.ic img{width:100%;height:100%;display:block}
+.spr{display:block;width:100%;height:100%;background-repeat:no-repeat;background-size:4800% auto}
+.ic.sq{border-radius:4px}
+.ic.sm{width:16px;height:16px}
+.ic.lg{width:38px;height:38px}
+.ic.xl{width:48px;height:48px}
+.ic .ph{font-size:10px;color:var(--faint)}
+.sk.sel .ic:not(.sq),.dsk.sel .ic:not(.sq){background:#4a7bb0;border-color:#9cc8ff}
+.sk.opt{opacity:.55}
+.sk.top .nm2{color:#f1df90}
+.sk.enh .ic:not(.sq),.dsk.enh .ic:not(.sq){border-color:#e8c547;box-shadow:inset 0 0 0 1px #e8c54766}
+.sk.hit{background:color-mix(in srgb,var(--pc) 30%,transparent);border-color:var(--pc);opacity:1}
+.sk-mods{display:flex;gap:3px;align-items:center;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:3px;background:#0f1219;border:1px solid #3a4258;border-radius:4px;padding:0 5px 0 2px;font-size:11.5px}
+.chip.art{border-style:dashed;color:var(--dim)}
+.chip .ico{background:#2b3346;border-radius:3px;padding:1px;margin:0}
+/* drawer socket layout */
+.dintr{display:flex;gap:10px;align-items:center;cursor:pointer;padding:6px;border-radius:6px;border:1px solid var(--line);background:#151a26;margin-bottom:8px}
+.dintr:hover,.dsk:hover{background:#1d2333}
+.dintr .t{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;font-family:Rajdhani;font-weight:700}
+.dcols{display:grid;gap:8px;margin-bottom:8px}
+.dcol{display:flex;flex-direction:column;gap:4px;background:#121722;border:1px solid var(--line);border-radius:6px;padding:5px;min-width:0}
+.dcol .t{font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;font-family:Rajdhani;font-weight:700;text-align:center}
+.dsk{display:flex;align-items:center;gap:6px;cursor:pointer;border-radius:6px;padding:2px;font-size:12px;min-width:0;border:1px solid transparent}
+.dsk .nm2{white-space:normal;line-height:1.2}
+.dsk.opt{opacity:.62}
+.dsk.on{border-color:var(--pc,#4da3ff);background:#1d2333;opacity:1}
+.dsk .pct{margin-left:auto;color:var(--faint);font-size:10.5px}
+.dcol .dsk{flex-direction:column;text-align:center;gap:2px;padding:3px 2px}
+.dcol .dsk .nm2{white-space:normal;font-size:11px;line-height:1.15}
+.dcol .dsk .pct{margin:0}
+.dmods{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.dmods .dsk{flex-direction:column;width:76px;text-align:center;font-size:11px}
+.dmods .dsk .nm2{white-space:normal;line-height:1.15}
+.dset{border:1px solid var(--line);border-radius:6px;background:#121722;padding:6px;margin-bottom:8px}
+.dset .h2{font-family:Rajdhani;font-weight:700;font-size:14px;margin-bottom:4px}
+.pdet{border:1px solid var(--pc,#4da3ff);border-radius:8px;background:#0f1219;padding:10px;margin:6px 0 10px}
+.pdet .ph2{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.pdet .ph2 b{font-family:Rajdhani;font-size:18px;display:block;line-height:1.1}
+.pdet .kind{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em}
+.src2{display:block;font-family:Rajdhani;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:11px;color:var(--dim);margin:8px 0 3px}
+.btxt{font-size:12.5px;color:#d7dbe6;white-space:pre-wrap}
+.dctx{background:#1a1b22;border:1px solid #2b2d38;border-radius:5px;padding:6px 8px;font-size:12px;line-height:1.4;color:#efefef}
+.cltx{font-size:12.5px;line-height:1.4;color:#d7dbe6}
+.cltx .cl-sp{height:7px}
+.cltx div.cl-pve::before,.cltx div.cl-pvp::before{display:inline-block;font-size:10px;font-weight:700;border-radius:3px;padding:0 4px;margin-right:5px;vertical-align:1px}
+.cltx div.cl-pve::before{content:'PvE';background:#1f3550;color:#8fc0ff}
+.cltx div.cl-pvp::before{content:'PvP';background:#4a2020;color:#ff9a9a}
+.cltx span.cl-pve{color:#8fc0ff}.cltx span.cl-pvp{color:#ff9a9a}
+.cl-enhancedArrow,.cl-yellow{color:#f1df90}.cl-bold{font-weight:700}.cl-blue{color:#8fb6ff}.cl-green{color:#5bd17a}.cl-purple{color:#b185df}
+.cl-arc{color:var(--arc)}.cl-solar{color:var(--solar)}.cl-void{color:var(--void)}.cl-stasis{color:var(--stasis)}.cl-strand{color:var(--strand)}.cl-kinetic{color:var(--kinetic)}
+.cl-primary{color:#fff}.cl-special{color:#7af48b}.cl-heavy{color:#b286ff}.cl-barrier{color:#f2b14f}.cl-overload{color:#7aecf3}.cl-unstoppable{color:#e5624f}
+.cl-title{text-decoration:underline dotted;cursor:help}
+/* subclass viewer */
+#subv{display:none;position:fixed;inset:0;z-index:35;background:var(--bg);flex-direction:column}
+#subv.open{display:flex}
+.sv-head{display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:#10131a;flex-wrap:wrap}
+.sv-head .h{font-size:20px;margin-right:8px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tab{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:5px 10px;display:inline-flex;align-items:center;gap:6px}
+.tab.on{border-color:var(--exotic);background:#2e2a17}
+.tab .ic{width:20px;height:20px;border:none;background:transparent}
+.sv-els{padding:8px 14px;border-bottom:1px solid var(--line)}
+.sv-body{flex:1;display:flex;min-height:0}
+.sv-main{flex:1;overflow-y:auto;padding:12px 14px;min-width:0}
+.sv-det{width:min(460px,45%);border-left:1px solid var(--line);overflow-y:auto;padding:12px 14px;background:#121621}
+.sv-sec{margin-bottom:14px}
+.sv-sec .h{font-size:13px;color:var(--dim);margin-bottom:6px}
+.sv-grid{display:flex;flex-wrap:wrap;gap:8px}
+.sv-tile{width:92px;display:flex;flex-direction:column;align-items:center;gap:4px;background:#151a26;border:1px solid var(--line);border-radius:6px;padding:6px 4px;cursor:pointer;font-size:11.5px;text-align:center;line-height:1.15}
+.sv-tile:hover{border-color:#47506a}
+.sv-tile.on{border-color:var(--exotic);background:#2a2614}
+.sv-tile .ic{width:48px;height:48px;border-radius:4px;background:#0c0f15}
+@media (max-width:760px){.sv-body{flex-direction:column}.sv-det{width:auto;border-left:none;border-top:1px solid var(--line);max-height:50%}}
+.f{border-radius:4px;padding:0 3px;margin:0 -3px}
+.hit{background:color-mix(in srgb,var(--pc) 28%,transparent);outline:1px solid var(--pc);color:#fff}
+.perks{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.pk{font-size:11.5px;padding:1px 6px;border-radius:10px;background:#252b3b;border:1px solid #303850;color:#cfd4e0;white-space:nowrap}
+.pk.opt{opacity:.55;border-style:dashed}
+.pk.top{border-color:#8a7a2f;color:#f1df90}
+.pk .pct{color:var(--faint);margin-left:4px;font-size:10.5px}
+.pk.top .pct{color:#b9a75a}
+.pk.hit{background:color-mix(in srgb,var(--pc) 35%,#252b3b);border-color:var(--pc);color:#fff;opacity:1}
+.stats{display:flex;flex-wrap:wrap;gap:3px 9px;margin-top:5px;font-size:11.5px;color:var(--dim)}
+.stats b{color:var(--text);font-weight:600}
+.note{margin-top:5px;font-size:12px;color:#c9c2a5;background:#1f1d17;border-radius:4px;padding:3px 6px;white-space:pre-wrap}
+.rate{font-family:Rajdhani;font-weight:700;font-size:15px;min-width:30px;text-align:center;border-radius:5px;padding:0 4px;background:#0f1219}
+.tagi{font-size:13px;width:18px;text-align:center}
+.pend{position:absolute;top:-4px;right:-4px;width:9px;height:9px;border-radius:50%;background:var(--mid);border:2px solid var(--panel)}
+.others{display:flex;gap:3px}
+.others i{width:6px;height:6px;border-radius:50%;display:block}
+.more{width:100%;margin-top:4px}
+.empty{color:var(--dim);padding:20px 8px;text-align:center}
+.addpane{flex:0 0 220px;border:1px dashed var(--line);border-radius:8px;display:flex;flex-direction:column;gap:6px;padding:12px;background:transparent}
+.addpane .h{font-size:14px;color:var(--dim);margin-bottom:4px}
+.preset{text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:7px 9px;font-size:12px}
+.preset small{display:block;color:var(--faint);font-family:ui-monospace,monospace;font-size:10.5px;margin-top:2px}
+.menu{position:relative}
+.menu-list{display:none;position:absolute;right:0;top:110%;background:#1b2030;border:1px solid var(--line);border-radius:6px;z-index:20;min-width:200px;padding:4px;box-shadow:0 8px 24px #0008}
+.menu.open .menu-list{display:block}
+.menu-list button{display:block;width:100%;text-align:left;background:none;border:none;padding:6px 9px;border-radius:4px}
+.menu-list button:hover{background:#262d42}
+.menu-list hr{border:none;border-top:1px solid var(--line);margin:4px 0}
+/* drawer */
+#scrim{display:none;position:fixed;inset:0;background:#0009;z-index:30}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:#121621;border-left:1px solid var(--line);z-index:31;transform:translateX(100%);transition:transform .18s;display:flex;flex-direction:column}
+#drawer.open{transform:none}
+#scrim.open{display:block}
+.d-head{padding:14px 16px;border-bottom:1px solid var(--line);border-left:5px solid var(--rc)}
+.d-head .nm{font-family:Rajdhani;font-size:24px;font-weight:700;line-height:1.1}
+.d-body{padding:14px 16px;overflow-y:auto;flex:1}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:4px 10px;font-size:12.5px}
+.kv div:nth-child(odd){color:var(--dim)}
+.sec{margin-top:16px}
+.sec .h{font-size:13px;color:var(--dim);margin-bottom:6px}
+.bar{display:grid;grid-template-columns:150px 1fr 92px;gap:6px;align-items:center;font-size:12px;margin:2px 0}
+.bar .tr{height:6px;background:#232a3a;border-radius:3px;overflow:hidden}
+.bar .tr i{display:block;height:100%;background:#9aa6c4}
+.bar .tr{display:flex}
+.bar .tr i.mod{background:#5b9bd5}
+.bar .num{white-space:nowrap;text-align:right}
+.bar .num small{color:var(--faint);font-weight:400}
+.stat-legend{display:flex;gap:10px;font-size:11px;color:var(--dim);margin-bottom:4px}
+.stat-legend i{display:inline-block;width:10px;height:6px;border-radius:2px;margin-right:4px;vertical-align:1px}
+.cfield{display:inline-flex;align-items:center;gap:3px}
+.tagrow{display:flex;gap:5px;flex-wrap:wrap}
+.tagbtn{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:5px 9px}
+.tagbtn.on{border-color:var(--exotic);background:#2e2a17}
+textarea.notes{width:100%;min-height:90px;background:#0f1219;border:1px solid var(--line);border-radius:6px;padding:8px;resize:vertical}
+.d-foot{padding:10px 16px;border-top:1px solid var(--line);display:flex;gap:8px;align-items:center}
+/* modal */
+#modal{display:none;position:fixed;inset:0;z-index:40;background:#000a;align-items:center;justify-content:center;padding:16px}
+#modal.open{display:flex}
+#modal .box{background:#141824;border:1px solid var(--line);border-radius:10px;max-width:760px;width:100%;max-height:90vh;overflow:auto;padding:18px 20px}
+#modal h2{font-family:Rajdhani;margin:0 0 10px;font-size:22px}
+#modal code,.help code{background:#0f1219;border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:12px}
+.help table{border-collapse:collapse;width:100%;font-size:12.5px}
+.help td{border-top:1px solid var(--line);padding:5px 6px;vertical-align:top}
+.help td:first-child{white-space:nowrap}
+.drop{border:2px dashed var(--line);border-radius:10px;padding:28px;text-align:center;color:var(--dim);margin:10px 0}
+.drop.over{border-color:var(--exotic);color:var(--text)}
+ol.steps li{margin:4px 0}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#232a3d;border:1px solid var(--line);padding:8px 14px;border-radius:8px;display:none;z-index:50}
+.welcome{margin:auto;max-width:620px;text-align:center;color:var(--dim)}
+.welcome h1{font-family:Rajdhani;color:var(--text);font-size:30px;margin:0 0 8px}
+
+/* ===== theme: flat, squared, grayscale panels with slate→amber page bands (bray.tech-inspired) ===== */
+:root{--bg:#18191a;--panel:#1f2021;--panel2:#252627;--line:#323334;--text:#e9e9e9;--dim:#9a9b9c;--faint:#68696a;
+  --legendary:#6b4a8a;--exotic:#ceae33;--rare:#5076a3;--uncommon:#366e42;--common:#c3bcb4;--keep:#5bd17a;--trash:#e5624f}
+html,body{font:13px/1.45 Inter,system-ui,sans-serif;font-weight:400;background:var(--bg)}
+.h{font-family:Inter,system-ui,sans-serif;font-weight:700;letter-spacing:.12em}
+header{background:#202122;border-bottom:1px solid #2c2d2e;padding:0 14px;min-height:46px;gap:14px}
+header .brand{font-size:13px;letter-spacing:.14em;display:flex;align-items:center;gap:7px}
+header .brand b{color:var(--text)}
+header .brand .logo{font-size:16px;color:var(--prof,#f0c27b);letter-spacing:0}
+.pbtn{display:inline-flex;align-items:center;gap:7px;background:#2a2b2c;border:1px solid #3a3b3c;color:var(--text);padding:5px 10px;font-size:12.5px;max-width:200px}
+.pbtn i{width:9px;height:9px;border-radius:50%;flex:none}
+.pbtn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pbtn b{color:var(--dim);font-weight:400}
+.pbtn:hover{border-color:#55565a}
+header{box-shadow:inset 0 -2px 0 var(--prof,transparent)}
+.plist{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.prow{display:flex;align-items:center;gap:10px;background:#202122;border:1px solid #333435;padding:8px 10px;cursor:pointer}
+.prow:hover{border-color:#55565a}
+.prow.on{border-color:var(--prof,#e9e9e9);background:#2a2b2c}
+.prow>i{width:12px;height:12px;border-radius:50%;flex:none}
+.prow .pinfo{flex:1;min-width:0;display:flex;flex-direction:column}
+.pcur{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.pnew{display:flex;gap:8px}
+.pnew .qin{flex:1}
+nav.views{display:flex;align-self:stretch}
+nav.views button{background:none;border:none;border-bottom:2px solid transparent;color:var(--dim);padding:0 14px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+nav.views button:hover{color:var(--text)}
+nav.views button.on{color:var(--text);border-bottom-color:#f0c27b}
+.btn,.tab,.preset,.tagbtn,select.s,.qin,textarea.notes,#modal .box,.menu-list,.pane,.card,.chip,.dcol,.dintr,.dset,.pdet,.sv-tile,.ic.sq,.dctx,.note{border-radius:0}
+.btn{background:#2c2d2e;border:1px solid #3a3b3c;color:var(--text);padding:6px 12px;font-size:12px}
+.btn:hover{background:#38393a;border-color:#4a4b4c}
+.btn.primary{background:#e9e9e9;color:#141516;border-color:#e9e9e9;font-weight:600}
+.btn.primary:hover{background:#fff}
+.btn.warn{background:#3b2f1c;border-color:#6b5328;color:#f0d9a8}
+.btn:disabled{opacity:.45;cursor:default}
+#panes{background:var(--bg)}
+.pane{background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--pc)}
+.pane-head{background:#232425}
+.pane-title{font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:13px;letter-spacing:.02em}
+.qin,select.s{background:#151617;border-color:#333435}
+.card{background:var(--panel2);border:1px solid var(--line);border-left:none;padding:0;overflow:hidden}
+.card .top{background:var(--rc);padding:5px 8px;color:#fff}
+.card .top .nm{color:#fff;text-shadow:0 1px 0 #0004}
+.card .sub,.card .sk-row,.card .stats,.card .note{margin-left:8px;margin-right:8px}
+.card .sub{margin-top:6px}.card>:last-child{margin-bottom:8px}
+.card .pend{top:3px;right:3px;border-color:var(--rc)}
+.card .tagi{color:#fff}
+.card .rate{background:#0006;color:#fff}
+.group-h{font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:.12em;color:var(--faint)}
+.addpane{border-radius:0;border-color:#333435}
+#drawer{background:#1c1d1e;border-left:1px solid #333435}
+.d-head{background:linear-gradient(180deg,var(--rc),color-mix(in srgb,var(--rc) 55%,#1c1d1e));border-left:none;color:#fff}
+.d-head .nm{font-family:Inter,system-ui,sans-serif;font-weight:300;font-size:26px;letter-spacing:.01em}
+.d-head .stat-pill,.d-head a{color:#ffffffcc!important}
+.sec .h,.src2,.dcol .t,.dintr .t,.pdet .kind,.eyebrow,.vlabel{font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.pdet{border-color:#4a4b4c;background:#161718}
+.sk.sel .ic:not(.sq),.dsk.sel .ic:not(.sq){background:#4f7fb3;border-color:#a9cdf5}
+.sv-head,.sv-els{background:#202122}
+.tab.on{border-color:#e9e9e9;background:#2f3031}
+.sv-tile.on{border-color:#e9e9e9;background:#2f3031}
+.sv-tile{border-radius:0}
+.chip{background:#151617;border-color:#3a3b3c}
+.tagbtn.on{border-color:#e9e9e9;background:#2f3031}
+.welcome h1{font-family:Inter,system-ui,sans-serif;font-weight:300;font-size:34px}
+/* views below the header */
+.view{display:none;position:fixed;left:0;right:0;bottom:0;top:46px;z-index:25;background:var(--bg);flex-direction:column;overflow:auto}
+.view.open{display:flex}
+.view>*{flex-shrink:0}
+#clFilter{width:100%;max-width:560px;flex:none}
+.card .top .f.hit{background:#0006;outline:1px solid #ffffffaa}
+#subv.view{z-index:25}
+.band{position:relative;padding:28px 28px 22px;background:linear-gradient(160deg,#4a5563 0%,#3a414b 45%,#2a2d31 100%);border-bottom:1px solid #333435;overflow:hidden}
+.band::after{content:'';position:absolute;left:10%;right:-10%;bottom:-120px;height:240px;background:radial-gradient(ellipse at center,#f6c27a55 0%,#e9884a22 45%,transparent 70%);pointer-events:none}
+.band.slim{padding:16px 24px 0}
+.band h1{font-weight:300;font-size:30px;margin:4px 0 6px;letter-spacing:.01em;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.band p{max-width:760px;color:#d5d6d7;margin:0}
+.band .k,.tally .k{color:var(--keep)}.band .t,.tally .t{color:var(--trash)}
+.band-row{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;position:relative;z-index:1}
+.band-row>div:first-child{flex:1;min-width:280px}
+.band-actions{display:flex;gap:8px;align-items:center;padding-bottom:12px}
+.tally{font-size:13px;color:#d5d6d7;margin-right:6px}
+.gchip{display:inline-flex;align-items:center;gap:6px}
+.gchip .ico{width:22px;height:22px}.gchip .ammo-ico{height:16px}
+.gsep{color:#ffffff55;font-weight:200}
+.progress{height:3px;background:#0004;margin:0 -24px;position:relative;z-index:1}
+.progress i{display:block;height:100%;background:#f0c27b}
+.clean-body{padding:16px 24px 40px}
+.gnav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.tile{background:var(--panel2);border:1px solid var(--line);display:flex;flex-direction:column;cursor:pointer}
+.tile:hover{border-color:#4a4b4c}
+.tile-h{background:var(--rc);color:#fff;padding:6px 9px;display:flex;align-items:center;gap:7px}
+.tile-h .tn{flex:1;font-weight:600}
+.tile-h .rank{font-size:11px;opacity:.75}
+.tile-h .rv{background:#0006;padding:0 6px;font-weight:600}
+.tile-b{padding:8px 9px;flex:1}
+.tile-b .sub{display:flex;flex-wrap:wrap;gap:4px 10px;color:var(--dim);font-size:12px;align-items:center}
+.tile-f{display:flex;gap:0;border-top:1px solid var(--line);align-items:stretch}
+.dec{flex:0 0 auto;background:#202122;border:none;border-right:1px solid var(--line);color:var(--dim);padding:7px 16px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:11px}
+.dec:hover{color:var(--text);background:#2a2b2c}
+.dec.keep.on{background:#1f3a27;color:var(--keep)}
+.dec.trash.on{background:#3d1f1b;color:var(--trash)}
+.tile .sugg{margin-left:auto;padding:7px 10px;font-size:11px;color:var(--faint)}
+.tile.trash{opacity:.62}
+.tile.trash:hover{opacity:.9}
+.tile.keep{box-shadow:inset 3px 0 0 var(--keep)}
+.tile.trash{box-shadow:inset 3px 0 0 var(--trash)}
+.setup{display:flex;flex-direction:column;gap:0;max-width:980px}
+.vsec{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid #2a2b2c}
+.vlabel{writing-mode:vertical-rl;transform:rotate(180deg);flex:none;width:16px;padding-top:4px;white-space:nowrap}
+.vlabel.h2{writing-mode:horizontal-tb;transform:none;width:auto;margin-bottom:6px}
+.vbody{flex:1;min-width:0}
+.seg{display:inline-flex;border:1px solid #3a3b3c}
+.seg button{background:#202122;border:none;border-right:1px solid #3a3b3c;color:var(--dim);padding:7px 14px;font-size:12px}
+.seg button:last-child{border-right:none}
+.seg button.on{background:#e9e9e9;color:#141516;font-weight:600}
+.checks{display:flex;flex-wrap:wrap;gap:6px}
+.checks.col{flex-direction:column;align-items:flex-start}
+.check{display:inline-flex;align-items:center;gap:6px;background:#202122;border:1px solid #333435;padding:6px 10px;cursor:pointer;font-size:12.5px}
+.check.on{border-color:#a8a9aa;background:#2a2b2c}
+.check input{accent-color:#f0c27b}
+.check small{background:#f0c27b;color:#141516;font-weight:700;padding:0 5px}
+.row2{margin-top:10px;font-size:12.5px}
+.row2 input{width:56px;background:#151617;border:1px solid #333435;padding:4px 6px;color:var(--text)}
+.setup-foot{display:flex;gap:10px;align-items:center;padding-top:16px;flex-wrap:wrap}
+.rev-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rev-list{display:flex;flex-direction:column;gap:3px;max-height:none}
+.rev{display:flex;gap:10px;align-items:baseline;background:var(--panel2);border-left:3px solid var(--rc);padding:5px 9px;cursor:pointer;flex-wrap:wrap}
+.rev:hover{background:#2c2d2e}
+.rev .tn{font-weight:600}
+/* triage in the item panel */
+.tri{background:#202122;border:1px solid #2f3031;padding:0}
+.tri>summary{list-style:none;cursor:pointer;padding:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0}
+.tri>summary::-webkit-details-marker{display:none}
+.tri>summary::after{content:'▾';margin-left:auto;color:var(--dim);font-size:13px;transition:transform .15s}
+.tri[open]>summary::after{transform:rotate(180deg)}
+.tri>summary .stat-pill{text-transform:none;letter-spacing:0;font-weight:400}
+.tri>:not(summary){margin-left:10px;margin-right:10px}
+.tri>.tri-act{margin-bottom:10px}
+.dcols>.pdet.inrow{grid-column:1/-1;margin:0}
+.pdet{scroll-margin:70px 0 90px}
+.tri-chips{display:flex;flex-wrap:wrap;gap:5px}
+.tchip{display:flex;flex-direction:column;align-items:flex-start;gap:1px;background:#18191a;border:1px solid #333435;padding:4px 8px;text-align:left;color:var(--dim);max-width:100%}
+.tchip small{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.tchip span{display:inline-flex;align-items:center;gap:4px;font-size:12px;white-space:normal}
+.tchip .ic.sm{width:16px;height:16px}
+.tchip:hover{border-color:#55565a;color:var(--text)}
+.tchip.on{border-color:#e9e9e9;background:#2f3031;color:var(--text)}
+.tchip.on small{color:#f0c27b}
+.tchip.fixed{cursor:default;opacity:.8}
+.tri-q{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.tri-q code{background:#151617;border:1px solid #333435;padding:3px 6px;font-size:11.5px;white-space:normal}
+.tri-act{display:flex;gap:6px;flex-wrap:wrap}
+/* compare table */
+#cmpN{color:#f0c27b}
+.ctable{display:grid;grid-template-columns:150px repeat(var(--n),minmax(190px,1fr));overflow:auto;max-height:calc(100dvh - 260px);border:1px solid var(--line);background:var(--panel)}
+/* one grid for the whole table: every row shares the same column widths, so a cell can't drift into its neighbour */
+.cr{display:contents}
+.cr>div{border-bottom:1px solid #2a2b2c}
+.cr:hover>div{background-color:#ffffff05}
+.cl{position:sticky;left:0;background:#202122;padding:7px 10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border-right:1px solid var(--line);z-index:1}
+.cl small{display:block;text-transform:none;letter-spacing:0;color:var(--faint);font-size:10.5px}
+.cc{padding:7px 9px;font-size:12.5px;border-right:1px solid #2a2b2c;display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-width:0;overflow:hidden}
+.cr.ch>div{position:sticky;top:0;z-index:2;background:var(--panel)}
+.cr.ch>.cl{z-index:3}
+.cr.ch .cc{padding:0;display:block}
+.chd{background:var(--rc);color:#fff;padding:8px 26px 8px 9px;font-weight:600;cursor:pointer;position:relative;height:100%;display:flex;align-items:center;gap:6px}
+.chd .x{position:absolute;right:3px;top:3px;background:#0006;border:none;color:#fff;width:20px;height:20px;line-height:18px;padding:0}
+.chd .x:hover{background:#e5624f}
+.cr.sech .cl{color:var(--text);font-weight:700;background:#262728}
+.cr.sech>div{background:#262728}
+.statsort{background:none;border:none;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;padding:0;text-align:left}
+.statsort:hover,.statsort.on{color:#f0c27b}
+.cstat{width:100%}
+.cstat small{color:var(--faint)}
+.cstat .tr{display:flex;height:5px;background:#2a2b2c;margin-top:3px}
+.cstat .tr i{display:block;height:100%;background:#9aa6c4}.cstat .tr i.mod{background:#5b9bd5}
+.cstat.best b{color:var(--keep)}
+.cpks{display:flex;flex-direction:column;gap:3px;min-width:0;width:100%}
+.copts{display:flex;gap:2px;flex-wrap:wrap}
+.cpk{display:inline-flex;align-items:center;gap:5px;cursor:pointer;padding:1px 4px 1px 1px;border:1px solid transparent;max-width:100%;min-width:0}
+.cpk span{white-space:normal;min-width:0}
+.cpk .ic{flex:none}
+.cpk:hover{border-color:#4a4b4c}
+.cpk.uniq.sel span{color:#fff;font-weight:600}
+.cpk.shared{opacity:.55}
+.cpk.opt{opacity:.5}
+.cpk .ic{width:26px;height:26px}.cpk .ic.sm{width:16px;height:16px}
+.cc .small{font-size:11.5px;width:100%}
+.faint{color:var(--faint)}
+@media (max-width:760px){.rev-cols{grid-template-columns:1fr}.band{padding:20px 16px}.clean-body{padding:12px 16px 30px}.vsec{flex-direction:column;gap:6px}.vlabel{writing-mode:horizontal-tb;transform:none;width:auto}}
+
+/* ===== phones & touch ===== */
+#paneChips{display:none}
+.msort,.mmenu,.qchips,.mtags,.grab,.hint-touch,.mup{display:none}
+.pane-head .row.qchips{display:none}
+nav.views svg{display:none}
+@media (pointer:coarse){.hint-touch{display:inline}.hint-desk{display:none}}
+#banner{align-items:center;gap:8px}
+#banner .btxt{flex:1;cursor:pointer}
+#banner .bx{background:none;border:none;color:inherit;font-size:18px;line-height:1;padding:0 4px}
+.mdot{display:none;position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:#f0c27b}
+.mmenu{position:relative}
+.msheet{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.msheet .btn{min-height:46px;font-size:14px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+@media (max-width:760px){
+  html,body{font-size:14px}
+  :root{--bar:58px}
+  body{padding-bottom:0}
+  #app{height:calc(100% - var(--bar) - env(safe-area-inset-bottom))}
+  header{min-height:48px;padding:env(safe-area-inset-top) 12px 0;flex-wrap:nowrap;gap:8px}
+  header #summary,header #pending,header #bLoad,header #bExport,header #bHelp{display:none!important}
+  .mmenu{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:40px;font-size:18px;margin-left:auto}
+  .pbtn{max-width:44vw;min-height:36px}
+  header .brand{font-size:11px}
+  .pnew{flex-direction:column}
+  .prow{flex-wrap:wrap}
+  nav.views{position:fixed;left:0;right:0;bottom:0;z-index:28;height:calc(var(--bar) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#202122;border-top:1px solid #333435;align-self:auto}
+  nav.views button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-bottom:none;border-top:2px solid transparent;font-size:10px;letter-spacing:.04em;padding:0 2px}
+  nav.views button.on{border-top-color:#f0c27b;border-bottom:none}
+  nav.views svg{display:block;width:22px;height:22px}
+  nav.views i{font-style:normal}
+  #banner{padding:6px 12px;font-size:12px}
+  #banner .btxt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #banner.exp .btxt{white-space:normal}
+  /* panes: one at a time, swipe between them */
+  #paneChips{display:flex;gap:6px;overflow-x:auto;padding:8px 12px;border-bottom:1px solid #2a2b2c;background:#1c1d1e;scrollbar-width:none}
+  #paneChips::-webkit-scrollbar{display:none}
+  .pchip{flex:none;display:inline-flex;align-items:center;gap:6px;background:#252627;border:1px solid #333435;color:var(--dim);padding:0 12px;min-height:36px;white-space:nowrap}
+  .pchip i{width:8px;height:8px;border-radius:50%;background:var(--pc)}
+  .pchip small{color:var(--faint)}
+  .pchip.on{color:var(--text);border-color:var(--pc,#e9e9e9);background:#2c2d2e}
+  .pchip.add{color:#f0c27b}
+  #panes{scroll-snap-type:x mandatory;padding:8px;gap:8px;overscroll-behavior-x:contain}
+  .pane,.pane.wide,.addpane{flex:0 0 calc(100vw - 16px);width:calc(100vw - 16px);max-width:calc(100vw - 16px);min-width:0;scroll-snap-align:center}
+  .pane-head,.pane-head .row,.qin,.qchips{min-width:0;max-width:100%}
+  .pane-head .ctl{display:none}
+  .pane.ctl-open .pane-head .ctl{display:flex;flex-wrap:wrap}
+  .pane-head .ctl select.s{max-width:none;flex:1}
+  .msort{display:inline-flex}
+  .pane-head .row.qchips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+  .qchips::-webkit-scrollbar{display:none}
+  .qc{flex:none;background:#18191a;border:1px solid #333435;color:var(--dim);padding:0 11px;min-height:34px;font-size:12.5px;white-space:nowrap}
+  .qc.on{border-color:#e9e9e9;color:var(--text);background:#2c2d2e}
+  .menu-list{right:0;max-width:calc(100vw - 32px)}
+  .menu-list button{min-height:44px}
+  /* bigger tap targets, 16px inputs (stops iOS zoom) */
+  .btn,.tab,.seg button,.check,.tchip,.dec,.preset,.tagbtn{min-height:44px}
+  .btn.small{min-height:36px;min-width:40px}
+  .qin,select.s,.pane-title,textarea.notes,.row2 input,#clFilter,#svq{font-size:16px}
+  .qin{padding:9px 10px}
+  .sk{padding:3px 8px 3px 2px}
+  .sk .ic{width:28px;height:28px}.sk .ic.sm{width:20px;height:20px}
+  .dsk .ic.lg{width:42px;height:42px}
+  .cpk .ic{width:30px;height:30px}
+  /* item panel = bottom sheet */
+  #drawer{top:auto;left:0;right:0;bottom:0;width:100%;height:64dvh;max-height:calc(100dvh - 24px);transform:translateY(105%);transition:transform .22s ease,height .22s ease;border-left:none;border-top:1px solid #3a3b3c;box-shadow:0 -12px 40px #000a;z-index:31}
+  #drawer.open{transform:none}
+  #drawer.full{height:calc(100dvh - 24px - env(safe-area-inset-top))}
+  .grab{display:flex;justify-content:center;padding:8px 0 4px;background:#1c1d1e;cursor:grab;touch-action:none}
+  .grab i{width:42px;height:5px;border-radius:3px;background:#55565a}
+  .d-head{touch-action:none}
+  .d-head .nm{font-size:22px}
+  .d-foot{flex-wrap:wrap;padding:8px 12px calc(8px + env(safe-area-inset-bottom))}
+  .mtags{display:flex;width:100%;gap:4px;margin-bottom:6px}
+  .mtags .tagbtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:0;padding:4px 2px;font-size:16px;line-height:1.1}
+  .mtags .tagbtn small{font-size:9.5px;color:var(--dim)}
+  .d-body .tagrow{display:none}
+  .dcols{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  /* modals become bottom sheets */
+  #modal{align-items:flex-end;padding:0}
+  #modal .box{max-height:86dvh;padding:16px 16px calc(16px + env(safe-area-inset-bottom));border-top:1px solid #3a3b3c}
+  /* views sit between header and bottom bar */
+  .view{bottom:calc(var(--bar) + env(safe-area-inset-bottom))}
+  #toast{bottom:calc(var(--bar) + 14px + env(safe-area-inset-bottom));max-width:calc(100vw - 32px)}
+  .band h1{font-size:24px}
+  .band-actions{flex-wrap:wrap}
+  .tiles{grid-template-columns:1fr}
+  .tile{touch-action:pan-y;position:relative}
+  .tile[data-swipe=keep]{box-shadow:inset 0 0 0 2px var(--keep)}
+  .tile[data-swipe=trash]{box-shadow:inset 0 0 0 2px var(--trash)}
+  .gnav{position:sticky;top:0;z-index:3;background:var(--bg);padding:6px 0}
+  .gnav .btn{flex:1 1 auto}
+  /* compare: swipe between item columns, 1 or 2 at a time */
+  .mup{display:inline-flex}
+  .ctable{scroll-snap-type:x mandatory;scroll-padding-left:92px;overscroll-behavior-x:contain}
+  .ctable{grid-template-columns:92px repeat(var(--n),calc((100vw - 34px - 92px) / var(--k,1)));max-height:none}
+  .cr .cc{scroll-snap-align:start}
+  .cl{font-size:10px;padding:7px 6px}
+  /* subclasses */
+  .sv-head{flex-wrap:wrap}
+  .sv-head #svq{max-width:none!important;width:100%;order:5}
+  .sv-head .stat-pill{display:none}
+  .sv-els .tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .sv-els .tabs::-webkit-scrollbar{display:none}
+  .sv-els .tab{flex:none}
+  .sv-det{display:none}
+  .sv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr))}
+  .sv-tile{width:auto;min-height:44px}
+  /* triage chips in the sheet */
+  .tri-act .btn{flex:1 1 auto}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="brand h"><span class="logo">◇</span> Vault <b>Sorter</b></div>
+    <button class="pbtn" id="bProf" title="Switch or manage profiles"><i></i><span>Profile</span><b>▾</b></button>
+    <nav class="views"><button data-view="vault" class="on"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span>Vault</span></button><button data-view="clean"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 20h14" stroke="currentColor" stroke-width="1.8"/></svg><span>Clean up</span></button><button data-view="compare"><svg viewBox="0 0 24 24"><path d="M4 5h6v14H4zM14 5h6v14h-6z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span>Compare <i id="cmpN"></i></span></button><button data-view="subv"><svg viewBox="0 0 24 24"><path d="M12 3l8 9-8 9-8-9z M12 8l4 4-4 4-4-4z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span>Subclasses</span></button></nav>
+    <span class="stat-pill" id="summary">No vault loaded</span>
+    <span class="grow"></span>
+    <span class="stat-pill" id="pending"></span>
+    <button class="btn" id="bLoad">Load DIM CSVs</button>
+    <button class="btn warn" id="bExport" title="Download a CSV of your tag/note changes to import in DIM">Export to DIM</button>
+    <button class="btn" id="bHelp">Search help</button>
+    <button class="btn mmenu" id="bMenu" aria-label="Menu">⋯<i class="mdot" id="mDot"></i></button>
+  </header>
+  <div id="banner"></div>
+  <div id="paneChips"></div>
+  <div id="panes"></div>
+</div>
+<div id="scrim"></div>
+<aside id="drawer"></aside>
+<div id="subv" class="view"></div>
+<div id="clean" class="view"></div>
+<div id="compare" class="view"></div>
+<div id="modal"><div class="box" id="modalBox"></div></div>
+<div id="toast"></div>
+<input type="file" id="file" accept=".csv,text/csv" multiple hidden>
+
+<script>window.VS_DEFS = /*__DEFS__*/null;</script>
+<script>
+/*__CORE__*/
+</script>
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Clarity / Data Compendium text is rendered as markup to keep its formatting; it is untrusted, so it always goes
+// through Core.sanitizeHtml (strict allowlist: div, span, br, known class names, span title). Never insert it raw.
+const SH = h => Core.sanitizeHtml(h);
+const PANE_COLORS = ['#4da3ff','#f2a33a','#5bd17a','#e05fb7','#a67cff','#41d6c3','#e5624f','#d8d35a'];
+const TAGS = [['','None','·'],['favorite','Favorite','♥'],['keep','Keep','✓'],['infuse','Infuse','⚡'],['archive','Archive','▣'],['junk','Junk','✕']];
+const TAG_ICON = Object.fromEntries(TAGS.map(t => [t[0], t[2]]));
+const NOTE_MAX = 1024;
+const D = window.VS_DEFS || null;   // reference data: icons, breakers, Clarity + Data Compendium text
+const ICON_BASE = 'https://www.bungie.net/common/destiny2_content/icons/';
+const CRAFTED_SVG = '<svg class="crafted" viewBox="0 0 16 16" aria-label="Crafted"><title>Crafted</title><path d="M8 1 15 8 8 15 1 8Z" fill="#d4522f"/><path d="M8 4.2 11.8 8 8 11.8 4.2 8Z" fill="none" stroke="#ffd2c2" stroke-width="1.3"/><circle cx="8" cy="8" r="1.4" fill="#ffd2c2"/></svg>';
+function elIcon(e, cls = 'ico') { const k = Core.norm(e); const src = okSrc(D?.icons?.['el-' + k]); return src ? `<img class="${cls}" src="${src}" alt="" title="${esc(e)}">` : (e ? `<span class="el" style="background:${elColor(e)}"></span>` : ''); }
+function ammoIcon(a) { const n = { primary: 1, special: 2, heavy: 3 }[Core.norm(a)]; const src = n && okSrc(D?.icons?.['ammo-' + n]); return src ? `<img class="ammo-ico" src="${src}" alt="" title="${esc(a)} ammo">` : ''; }
+function breakerIcon(b, cls = 'ico') { const n = Core.breakerId(b); const src = n && okSrc(D?.icons?.['breaker-' + n]); return src ? `<img class="${cls}" src="${src}" alt="" title="${esc(b)}">` : ''; }
+const iconUrl = tail => tail ? ICON_BASE + tail : '';
+const okSrc = u => /^data:image\/(png|webp|jpeg|gif|svg\+xml)[;,]/.test(u || '') ? u : '';
+// round (perk) or square (intrinsic / mod) icon; falls back to a placeholder when Bungie has no icon or it fails to load
+// Icons come from one sprite sheet shipped next to the page (icons.png), so nothing loads from bungie.net.
+// the icon sheet (~2 MB) loads after the first screen has rendered
+if (D?.spr) {
+  const loadSprite = () => { const st = document.createElement('style'); st.textContent = `.spr{background-image:url("${D.spr.f}")}`; document.head.appendChild(st); };
+  const later = () => (window.requestIdleCallback ? requestIdleCallback(loadSprite, { timeout: 1200 }) : setTimeout(loadSprite, 300));
+  if (document.readyState === 'complete') later(); else addEventListener('load', later);
+}
+function plugIcon(name, cls = '', idx) {
+  const i = idx ?? D?.pi?.[Core.norm(name)]?.[0];
+  const ok = D?.spr && typeof i === 'number' && i >= 0;
+  const c = ok ? i % D.spr.c : 0, r = ok ? Math.floor(i / D.spr.c) : 0;
+  return `<span class="ic ${cls}">${ok ? `<i class="spr" style="background-position:${(c * 100 / (D.spr.c - 1)).toFixed(4)}% ${(D.spr.r > 1 ? r * 100 / (D.spr.r - 1) : 0).toFixed(4)}%"></i>` : `<span class="ph">${esc((name || '?').slice(0, 1))}</span>`}</span>`;
+}
+const stripHtml = h => String(h || '').replace(/<div class="cl-sp"><\/div>/g, '\n').replace(/<br>|<\/div>/g, '\n').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\n{3,}/g, '\n\n').trim();
+const pIdx = (n, kind) => Core.plugOf(n, D, kind)?.[0];
+function perkInfoText(name, kind) {
+  const i = Core.perkInfo(name, D, kind); if (!i) return '';
+  const enh = /^enhanced\s/i.test(name);
+  return stripHtml(i.cl ? (enh && i.cl.e ? i.cl.e : i.cl.h) : i.dc?.h || i.bd);
+}
+// intrinsic champion breaker: from the weapon's archetype (Update 9.7.0) or the exotic's own intrinsic
+function breakerChips(it) {
+  if (!it.breaker) return '';
+  const why = it.breakerSrc === 'bungie' ? `Intrinsic (${it.frame}), from Bungie's game data` : `Intrinsic (${it.frame}), from the Update 9.7.0 archetype table`;
+  return `<span class="chip" title="${esc(why)}: ${esc(it.breaker)}">${breakerIcon(it.breaker)}${esc(it.breaker)}</span>`;
+}
+const breakerLabel = b => b ? `<span class="chip">${breakerIcon(b)}${esc(b)}</span>` : '';
+// Compendium style classes (the sheet's own colors / bold / italics)
+if (D?.dcs) { const st = document.createElement('style'); st.textContent = D.dcs.map((x, i) => `.dctx .d${i}{${Core.sanitizeCss(x)}}`).join(''); document.head.appendChild(st); }
+const TYPE_LABEL = { i: 'Intrinsic', r: 'Armor archetype', b: 'Barrel / sight', m: 'Magazine / battery', t: 'Trait', o: 'Origin trait', w: 'Weapon mod', k: 'Masterwork', c: 'Catalyst', a: 'Armor mod', x: 'Exotic perk' };
+const COL_LABEL = { b: 'Barrel', m: 'Magazine', t: 'Trait', o: 'Origin', '?': 'Perk' };
+// Full detail block for one plug / perk / ability: Bungie text, Clarity, Data Compendium, light.gg link
+function infoHtml(name, opt = {}) {
+  const i = Core.perkInfo(name, D, opt.ikind) || {};
+  const enh = /^enhanced\s/i.test(name);
+  const bd = opt.bd || i.bd;
+  const hash = opt.hash || i.hash;
+  const kind = opt.kind || TYPE_LABEL[i.ty] || '';
+  const parts = [];
+  if (bd) parts.push(`<span class="src2">Bungie</span><div class="btxt">${esc(bd)}</div>`);
+  if (i.cl) parts.push(`<span class="src2">Clarity · ${esc(i.cl.ty)}</span><div class="cltx">${SH(enh && i.cl.e ? i.cl.e : i.cl.h)}</div>${i.cl.e && !enh ? `<details><summary class="stat-pill" style="cursor:pointer">Enhanced version</summary><div class="cltx">${SH(i.cl.e)}</div></details>` : ''}`);
+  if (i.dc?.h) parts.push(`<span class="src2">Data Compendium${i.dc.s ? ' · ' + esc(i.dc.s) : ''}</span><div class="dctx">${SH(i.dc.h)}</div>`);
+  if (opt.extra) parts.push(opt.extra);
+  if (!parts.length) parts.push('<div class="stat-pill">No description found in Bungie’s data, Clarity or the Data Compendium for this name.</div>');
+  return `<div class="ph2">${plugIcon(name, opt.sq ? 'sq xl' : 'xl', opt.icon ?? (opt.ikind ? pIdx(name, opt.ikind) : undefined))}<div><b>${esc(name)}</b><span class="kind">${esc(kind)}</span>${hash ? ` · <a href="https://www.light.gg/db/items/${esc(hash)}/" target="_blank" rel="noopener noreferrer" style="color:#8fb6ff;font-size:12px">light.gg</a>` : ''}</div></div>${parts.join('')}`;
+}
+const CHUNK = 60;
+
+const S = {
+  items: [], byId: new Map(), weapons: [], armor: [],
+  edits: {},            // id -> {tag, notes}
+  ratingsRaw: {}, R: {},
+  panes: [],            // {id, title, q, sort, dir, group, wide}
+  limits: {},           // pane id -> shown count
+  results: {},          // pane id -> Map(id->hits)
+  db: null, downloads: null, meta: null,
+};
+
+// ---------- utilities ----------
+function toast(msg, ms = 2600) { const t = $('#toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(toast.h); toast.h = setTimeout(() => t.style.display = 'none', ms); }
+function banner(msg) {
+  const b = $('#banner'); let off = '';
+  try { off = localStorage.getItem('vs:bannerOff') || ''; } catch {}
+  const show = msg && off !== msg.slice(0, 80);
+  b.textContent = '';
+  if (show) { const t = document.createElement('span'); t.className = 'btxt'; t.textContent = msg; const x = document.createElement('button'); x.className = 'bx'; x.setAttribute('aria-label', 'Dismiss'); x.textContent = '×'; b.append(t, x); }
+  b.style.display = show ? 'flex' : 'none';
+  if (show) {
+    b.querySelector('.btxt').onclick = () => b.classList.toggle('exp');
+    b.querySelector('.bx').onclick = () => { try { localStorage.setItem('vs:bannerOff', msg.slice(0, 80)); } catch {} b.style.display = 'none'; placeViews?.(); };
+  }
+}
+const isMobile = () => matchMedia('(max-width: 760px)').matches;
+const uid = () => Math.random().toString(36).slice(2, 9);
+function rarityColor(r) { const k = Core.norm(r); return `var(--${['exotic','legendary','rare','uncommon','common'].includes(k) ? k : 'common'})`; }
+function elColor(e) { const k = Core.norm(e); return ['kinetic','arc','solar','void','stasis','strand','prismatic'].includes(k) ? `var(--${k})` : 'transparent'; }
+function rateColor(r) { return r == null ? 'var(--faint)' : r >= 80 ? 'var(--good)' : r >= 55 ? 'var(--mid)' : 'var(--bad)'; }
+const effTag = it => (S.edits[it.id] && 'tag' in S.edits[it.id]) ? S.edits[it.id].tag : it.dimTag;
+const effNotes = it => (S.edits[it.id] && 'notes' in S.edits[it.id]) ? S.edits[it.id].notes : it.dimNotes;
+
+// ---------- persistence ----------
+async function withTimeout(p, ms = 10000) { return Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms))]); }
+async function dbGet(path) { const s = await withTimeout(S.db.doc(path).get()); return s.exists ? s.data() : null; }
+async function dbSet(path, data) { return withTimeout(S.db.doc(path).set(data), 20000); }
+async function dbAll(coll) { const s = await withTimeout(S.db.collection(coll).limit(1000).get()); return s.docs.map(d => [d.id, d.data()]); }
+
+const LS = {
+  get(k) { try { return JSON.parse(localStorage.getItem('vs:' + k)); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem('vs:' + k, JSON.stringify(v)); } catch {} },
+  del(k) { try { localStorage.removeItem('vs:' + k); } catch {} },
+};
+
+// ---------- profiles: one vault (and its tags, notes, panes, clean-up and compare state) per player ----------
+// The first profile, "main", keeps the original storage paths, so existing data needs no migration.
+// Other profiles prefix every path: db collection "edits" -> "p_<id>_edits", localStorage "vs:vault" -> "vs:p:<id>:vault".
+// Shared by all profiles: light.gg ratings and the game data.
+const PROF = { list: [], active: 'main' };
+const PROF_COLORS = ['#f0c27b', '#4da3ff', '#5bd17a', '#e05fb7', '#a67cff', '#41d6c3', '#e5624f', '#d8d35a'];
+const ppath = (pid, path) => pid === 'main' ? path : `p_${pid}_${path}`;
+const pkey = (pid, k) => pid === 'main' ? k : `p:${pid}:${k}`;
+const PP = path => ppath(PROF.active, path);
+const PK = k => pkey(PROF.active, k);
+const activeProfile = () => PROF.list.find(x => x.id === PROF.active) || PROF.list[0];
+async function loadRegistry() {
+  let reg = LS.get('profiles');
+  if (S.db) { try { const r = await dbGet('config/profiles'); if (r?.list?.length) reg = { ...structuredClone(r), active: reg?.active }; } catch {} }
+  const okProf = pr => pr && typeof pr === 'object' && /^(main|[a-z0-9]{1,24})$/.test(pr.id);
+  const list = Array.isArray(reg?.list) ? reg.list.filter(okProf).map((pr, i) => ({ ...pr, name: String(pr.name ?? 'Profile').slice(0, 60), color: /^#[0-9a-fA-F]{6}$/.test(pr.color) ? pr.color : PROF_COLORS[i % PROF_COLORS.length] })) : [];
+  PROF.list = list.length ? list : [{ id: 'main', name: 'My vault', color: PROF_COLORS[0] }];
+  let dev = null; try { dev = localStorage.getItem('vs:activeProfile'); } catch {}
+  PROF.active = [dev, reg?.active].find(id => id && PROF.list.some(x => x.id === id)) || PROF.list[0].id;
+}
+async function saveRegistry() {
+  const reg = { list: PROF.list, active: PROF.active };
+  LS.set('profiles', reg); try { localStorage.setItem('vs:activeProfile', PROF.active); } catch {}
+  if (S.db) { try { await dbSet('config/profiles', reg); } catch (e) { console.warn(e); } }
+}
+// remember counts and a sample of item ids, so freshly loaded CSVs can be matched to the right player
+function noteProfileVault() {
+  const e = activeProfile(); if (!e || !S.items.length) return;
+  const ids = S.items.map(i => i.id); const step = Math.max(1, Math.floor(ids.length / 400));
+  Object.assign(e, { weapons: S.weapons.length, armor: S.armor.length, updated: new Date().toISOString(), sample: ids.filter((_, i) => i % step === 0).slice(0, 400) });
+  saveRegistry();
+}
+
+async function loadAll() {
+  try { S.db = await window.claude?.use?.('db'); } catch { S.db = null; }
+  try { S.downloads = await window.claude?.use?.('downloads'); } catch { S.downloads = null; }
+  if (!S.db) banner('Cloud storage isn’t available in this view, so your vault and edits are kept in this browser only. Open the page from claude.ai while signed in to save them and let Claude read them.');
+  await loadRegistry();
+  if (!S.db) S.ratingsRaw = LS.get('ratings') || {};
+  else { try { const ratings = await dbAll('ratings'); S.ratingsRaw = Object.assign({}, ...ratings.map(([, d]) => d.w || {})); } catch {} }
+  await loadProfile();
+  if (!activeProfile().sample && S.items.length) noteProfileVault();
+  renderProfileButton();
+}
+function resetProfileState() {
+  Object.assign(S, { items: [], byId: new Map(), weapons: [], armor: [], edits: {}, panes: [], limits: {}, results: {}, computed: {}, meta: null });
+  editQueue.clear();
+}
+async function loadProfile() {
+  resetProfileState(); loadCompareState(); loadCleanState();
+  if (!S.db) {
+    const v = LS.get(PK('vault')); if (v) setVault(v.weapon || [], v.armor || []);
+    S.edits = LS.get(PK('edits')) || {}; S.panes = LS.get(PK('panes')) || defaultPanes();
+    applyRatings(); renderAll(); return;
+  }
+  try {
+    const [meta, panes, edits] = await Promise.all([
+      dbGet(PP('meta/vault')), dbGet(PP('config/panes')), dbAll(PP('edits'))
+    ]);
+    S.meta = meta;
+    S.panes = panes?.list?.length ? panes.list : defaultPanes();
+    S.edits = Object.fromEntries(edits.map(([id, d]) => [id, d]));
+    if (meta) {
+      const chunks = await Promise.all((meta.chunks || []).map(c => dbGet(PP('vault/' + c))));
+      const w = [], a = [];
+      chunks.forEach(c => (c?.items || []).forEach(it => (it.kind === 'armor' ? a : w).push(it)));
+      setVault(w, a, true);
+    }
+    await loadCleanFromDb();
+    applyRatings(); renderAll();
+  } catch (e) {
+    console.error(e);
+    banner('Couldn’t reach saved data yet (' + (e.message || e.code) + '). You can still load CSVs; reload later to see saved data.');
+    if (!S.panes.length) S.panes = defaultPanes();
+    renderAll();
+  }
+}
+// finish every pending save for the current profile before switching away from it
+async function flushSaves() {
+  if (paneSaveT) { clearTimeout(paneSaveT); paneSaveT = null; await writePanes(); }
+  if (cleanSaveT) { clearTimeout(cleanSaveT); cleanSaveT = null; await writeClean(); }
+  for (let i = 0; i < 100 && (editBusy || editQueue.size); i++) await new Promise(r => setTimeout(r, 100));
+}
+async function switchProfile(id) {
+  if (id === PROF.active) return;
+  await flushSaves();
+  closeDrawer(); closeModal();
+  PROF.active = id; await saveRegistry();
+  await loadProfile();
+  renderProfileButton(); setView('vault');
+  toast(`Switched to ${activeProfile().name}.`);
+}
+async function deleteProfileData(pid) {
+  for (const k of ['vault', 'edits', 'panes', 'clean', 'compare']) LS.del(pkey(pid, k));
+  if (!S.db) return;
+  const del = async path => { try { await S.db.doc(path).delete(); } catch {} };
+  try {
+    const meta = await dbGet(ppath(pid, 'meta/vault'));
+    for (const c of meta?.chunks || []) await del(ppath(pid, 'vault/' + c));
+    for (const [id] of await dbAll(ppath(pid, 'edits'))) await del(ppath(pid, 'edits/' + id));
+  } catch (e) { console.warn(e); }
+  for (const path of ['meta/vault', 'meta/weaponHashes', 'config/panes', 'config/clean']) await del(ppath(pid, path));
+}
+
+function setVault(weapons, armor, fromDb) {
+  const all = [...weapons, ...armor];
+  all.forEach(it => {
+    if (!fromDb || it.dimTag === undefined) { it.dimTag = it.dimTag ?? it.tag ?? ''; it.dimNotes = it.dimNotes ?? it.notes ?? ''; }
+  });
+  Core.applyDefs(all, D);
+  S.weapons = weapons; S.armor = armor; S.items = all; S.byId = new Map(all.map(i => [i.id, i]));
+  refreshEffective();
+}
+function refreshEffective() { S.items.forEach(it => { it.tag = effTag(it); it.notes = effNotes(it); }); }
+function applyRatings() { S.R = Core.prepRatings(S.ratingsRaw); S.items.forEach(it => Core.rateItem(it, S.R)); }
+
+async function saveVault() {
+  const strip = it => { const o = { ...it }; delete o.breaker; delete o.rating; delete o.pve; delete o.pvp; delete o.perkRel; delete o.tag; delete o.notes; return o; };
+  const all = S.items.map(strip);
+  if (!S.db) { LS.set(PK('vault'), { weapon: S.weapons.map(strip), armor: S.armor.map(strip) }); return; }
+  // pack into chunks under 200KB
+  const chunks = []; let cur = []; let size = 0;
+  for (const it of all) {
+    const s = JSON.stringify(it).length;
+    if (cur.length && (cur.length >= CHUNK || size + s > 190000)) { chunks.push(cur); cur = []; size = 0; }
+    cur.push(it); size += s;
+  }
+  if (cur.length) chunks.push(cur);
+  const names = chunks.map((_, i) => 'c' + i);
+  for (let i = 0; i < chunks.length; i++) await dbSet(PP('vault/' + names[i]), { items: chunks[i] });
+  const old = S.meta?.chunks || [];
+  for (const o of old) if (!names.includes(o)) { try { await S.db.doc(PP('vault/' + o)).delete(); } catch {} }
+  const weaponList = [...new Map(S.weapons.map(w => [w.hash, w.name])).entries()];
+  S.meta = { chunks: names, updated: new Date().toISOString(), weapons: S.weapons.length, armor: S.armor.length };
+  await dbSet(PP('meta/vault'), S.meta);
+  await dbSet(PP('meta/weaponHashes'), { list: weaponList, updated: S.meta.updated });
+}
+let paneSaveT;
+async function writePanes() {
+  const list = S.panes.map(({ id, title, q, sort, dir, group, wide }) => ({ id, title, q, sort, dir, group, wide: !!wide }));
+  if (!S.db) return LS.set(PK('panes'), list);
+  try { await dbSet(PP('config/panes'), { list }); } catch (e) { console.warn(e); }
+}
+function savePanes() {
+  clearTimeout(paneSaveT);
+  paneSaveT = setTimeout(() => { paneSaveT = null; writePanes(); }, 800);
+}
+// queue entries carry their full path and data, so a profile switch can't redirect them
+const editQueue = new Map(); let editBusy = false;
+async function saveEdit(id) {
+  if (!S.db) return LS.set(PK('edits'), S.edits);
+  editQueue.set(PP('edits/' + id), S.edits[id] ? { ...S.edits[id] } : null); if (editBusy) return; editBusy = true;
+  while (editQueue.size) {
+    const [path, data] = editQueue.entries().next().value; editQueue.delete(path);
+    try { if (data) await dbSet(path, data); else await S.db.doc(path).delete(); }
+    catch (e) { toast('Couldn’t save an edit: ' + (e.message || e.code)); }
+  }
+  editBusy = false;
+}
+
+// ---------- edits ----------
+function setItemEdit(it, patch) {
+  const cur = { ...(S.edits[it.id] || {}) };
+  Object.assign(cur, patch);
+  if ('tag' in cur && cur.tag === it.dimTag) delete cur.tag;
+  if ('notes' in cur && cur.notes === it.dimNotes) delete cur.notes;
+  if ('tag' in cur || 'notes' in cur) { cur.hash = it.hash; cur.name = it.name; S.edits[it.id] = cur; }
+  else delete S.edits[it.id];
+  it.tag = effTag(it); it.notes = effNotes(it);
+  saveEdit(it.id);
+}
+const pendingIds = () => Object.keys(S.edits).filter(id => S.byId.has(id) && ('tag' in S.edits[id] || 'notes' in S.edits[id]));
+
+// ---------- import ----------
+function openLoad() {
+  modal(`<h2>Load your vault from DIM</h2>
+  <ol class="steps">
+    <li>In DIM, open <b>Settings</b> → <b>Spreadsheets</b>.</li>
+    <li>Click <b>Weapons</b> and <b>Armor</b> to download <code>destiny-weapon.csv</code> and <code>destiny-armor.csv</code>.</li>
+    <li>Drop both files below (or click to choose). Reload them whenever your vault changes.</li>
+  </ol>
+  <div class="drop" id="drop">Drop DIM CSV files here, or click to choose</div>
+  <div style="margin:-2px 0 10px"><button class="btn primary" id="pick">Choose files</button></div>
+  <p class="stat-pill"><b>On a phone:</b> open DIM in your phone's browser → Settings → Spreadsheets to download both CSVs, then tap <b>Choose files</b> and pick them from Downloads (select both at once).</p>
+  <p class="stat-pill">Loading fresh CSVs keeps your unsent edits here. Any edit that already matches what DIM has is marked as synced and cleared.</p>
+  <div style="text-align:right"><button class="btn" data-close>Close</button></div>`);
+  const d = $('#drop');
+  d.onclick = () => $('#file').click(); $('#pick').onclick = () => $('#file').click();
+  d.ondragover = e => { e.preventDefault(); d.classList.add('over'); };
+  d.ondragleave = () => d.classList.remove('over');
+  d.ondrop = e => { e.preventDefault(); d.classList.remove('over'); handleFiles([...e.dataTransfer.files]); };
+}
+$('#file').onchange = e => { handleFiles([...e.target.files]); e.target.value = ''; };
+// Item instance ids are unique to one Bungie account, so the share of ids a CSV has in common with a profile's
+// saved sample says whose vault it is.
+function profileMatch(ids) {
+  const set = new Set(ids); const out = [];
+  for (const pr of PROF.list) {
+    const sample = pr.id === PROF.active && S.items.length ? S.items.map(i => i.id) : (pr.sample || []);
+    if (!sample.length) continue;
+    const hit = sample.filter(id => set.has(id)).length;
+    out.push({ pr, score: hit / Math.min(sample.length, set.size || 1) });
+  }
+  return out.sort((a, b) => b.score - a.score);
+}
+async function handleFiles(files) {
+  const parsed = []; const msgs = [];
+  for (const f of files) {
+    try {
+      if (f.size > Core.LIMITS.csvBytes) { msgs.push(`${f.name}: larger than ${Core.LIMITS.csvBytes / 1048576} MB, skipped`); continue; }
+      const { kind, items } = Core.parseDimCsv(await f.text());
+      items.forEach(it => { it.dimTag = it.tag; it.dimNotes = it.notes; });
+      if (kind !== 'weapon' && kind !== 'armor') { msgs.push(`${f.name}: not a weapon or armor export, skipped`); continue; }
+      parsed.push({ kind, items }); msgs.push(`${f.name}: ${items.length} ${kind}`);
+    } catch (e) { msgs.push(`${f.name}: ${e.message}`); }
+  }
+  if (!parsed.length) return toast(msgs.join(' · ') || 'Nothing loaded.', 5000);
+  const ids = parsed.flatMap(x => x.items.map(i => i.id));
+  const matches = profileMatch(ids);
+  const cur = activeProfile(); const curScore = matches.find(m => m.pr.id === cur.id)?.score ?? null;
+  const other = matches.find(m => m.pr.id !== cur.id && m.score >= 0.3);
+  const go = () => applyParsed(parsed, msgs);
+  // matches the open profile, or the open profile is empty and nobody else matches: just load
+  if ((curScore != null && curScore >= 0.3) || (!S.items.length && !other)) return go();
+  closeModal();
+  const curName = esc(cur.name);
+  if (other) {
+    modal(`<h2>These look like ${esc(other.pr.name)}'s items</h2>
+      <p>${Math.round(other.score * 100)}% of the items in these CSVs are in <b>${esc(other.pr.name)}</b>'s saved vault${S.items.length ? `, and they don't match <b>${curName}</b>` : ''}.</p>
+      <div class="msheet"><button class="btn primary" id="pmSwitch">Switch to ${esc(other.pr.name)} and load them there</button>
+        <button class="btn" id="pmHere">Load into ${curName} anyway</button><button class="btn" data-close>Cancel</button></div>`);
+    $('#pmSwitch').onclick = async () => { closeModal(); await switchProfile(other.pr.id); go(); };
+    $('#pmHere').onclick = () => { closeModal(); go(); };
+    return;
+  }
+  modal(`<h2>These aren't ${curName}'s items</h2>
+    <p>None of the items in these CSVs are in <b>${curName}</b>'s vault, so they're probably from a different Bungie account. Loading them here would replace ${curName}'s vault.</p>
+    <label class="stat-pill" for="pmName">New profile name</label><input class="qin" id="pmName" value="Player ${PROF.list.length + 1}" style="width:100%;margin:4px 0 10px">
+    <div class="msheet"><button class="btn primary" id="pmNew">Create this profile and load them there</button>
+      <button class="btn" id="pmHere">Replace ${curName}'s vault</button><button class="btn" data-close>Cancel</button></div>`);
+  $('#pmNew').onclick = async () => { const name = $('#pmName').value.trim() || `Player ${PROF.list.length + 1}`; closeModal(); await createProfile(name); go(); };
+  $('#pmHere').onclick = () => { closeModal(); go(); };
+}
+async function applyParsed(parsed, msgs) {
+  let w = S.weapons, a = S.armor;
+  for (const { kind, items } of parsed) { if (kind === 'weapon') w = items; else a = items; }
+  setVault(w, a);
+  // clear edits that now match DIM
+  let synced = 0;
+  for (const id of Object.keys(S.edits)) {
+    const it = S.byId.get(id); if (!it) continue;
+    const e = S.edits[id]; let ch = false;
+    if ('tag' in e && e.tag === it.dimTag) { delete e.tag; ch = true; }
+    if ('notes' in e && e.notes === it.dimNotes) { delete e.notes; ch = true; }
+    if (ch) { synced++; if (!('tag' in e) && !('notes' in e)) delete S.edits[id]; saveEdit(id); }
+  }
+  refreshEffective(); applyRatings(); closeModal(); renderAll();
+  toast(msgs.join(' · ') + (synced ? ` · ${synced} edits now synced` : ''), 5000);
+  try { await saveVault(); noteProfileVault(); renderProfileButton(); toast(`Saved to ${activeProfile().name}.`); } catch (e) { toast('Vault loaded but not saved: ' + (e.message || e.code), 6000); }
+}
+
+// ---------- export ----------
+function exportCsv() {
+  const ids = pendingIds();
+  if (!ids.length) return toast('No tag or note changes to export yet.');
+  const rows = ids.map(id => { const it = S.byId.get(id); return { Id: it.id, Hash: it.hash, Name: it.name, Tag: effTag(it) || '', Notes: (effNotes(it) || '').slice(0, NOTE_MAX) }; });
+  const csv = Core.toCSV(['Name', 'Hash', 'Id', 'Tag', 'Notes'], rows);
+  const fname = `dim-tags-notes-${new Date().toISOString().slice(0, 10)}.csv`;
+  modal(`<h2>Export ${ids.length} change${ids.length > 1 ? 's' : ''} from ${esc(activeProfile().name)} to DIM</h2>
+  <p class="stat-pill">Import this file in DIM while <b>${esc(activeProfile().name)}</b>'s Bungie account is the one signed in.</p>
+  <ol class="steps">
+    <li>Save the CSV below.</li>
+    <li>In DIM, open <b>Settings</b> → <b>Spreadsheets</b> → <b>Import tags/notes</b> and choose this file. DIM only changes the items listed in it.</li>
+    <li>Then re-download your DIM CSVs and load them here. That marks these edits as synced.</li>
+  </ol>
+  <div style="display:flex;gap:8px;margin:10px 0">
+    ${S.downloads ? '<button class="btn primary" id="dl">Download CSV</button>' : ''}
+    <button class="btn" id="cp">Copy CSV text</button>
+  </div>
+  <textarea class="notes" style="min-height:160px;font-family:ui-monospace,monospace;font-size:11px" readonly>${esc(csv)}</textarea>
+  ${S.downloads ? '' : '<p class="stat-pill">Downloads aren’t available in this view: copy the text, paste it into a text editor and save it as a <code>.csv</code> file.</p>'}
+  <div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`);
+  const dl = $('#dl'); if (dl) dl.onclick = async () => { try { await S.downloads.save({ filename: fname, data: csv }); toast('Saved ' + fname); } catch (e) { toast('Download was cancelled or refused.'); } };
+  $('#cp').onclick = async () => { try { await navigator.clipboard.writeText(csv); toast('Copied.'); } catch { toast('Copy blocked: select the text and copy it.'); } };
+  addShareButton($('#cp'), { file: new File([csv], fname, { type: 'text/csv' }) });
+}
+// Phone share sheet (send the CSV or a DIM search to DIM, Files, Messages…) where the browser supports it
+function addShareButton(after, payload) {
+  if (!navigator.share || !after) return;
+  const data = payload.file ? { files: [payload.file], title: payload.file.name } : { text: payload.text, title: payload.title || 'DIM search' };
+  if (payload.file && !(navigator.canShare && navigator.canShare(data))) return;
+  const b = document.createElement('button'); b.className = 'btn'; b.textContent = 'Share…';
+  b.onclick = async () => { try { await navigator.share(data); } catch {} };
+  after.insertAdjacentElement('afterend', b);
+}
+
+// ---------- panes ----------
+function defaultPanes() {
+  return [
+    { id: uid(), title: 'Junk candidates', q: 'is:weapon is:legendary rating<45 -tag:favorite -tag:keep -is:locked', sort: 'rating', dir: 'asc', group: '' },
+    { id: uid(), title: 'Top rolls', q: 'is:weapon rating>=85', sort: 'rating', dir: 'desc', group: 'type' },
+    { id: uid(), title: 'Duplicates', q: 'is:dupe', sort: 'rating', dir: 'desc', group: 'name' },
+  ];
+}
+const PRESETS = [
+  ['Untagged weapons', 'is:weapon tag:none'],
+  ['Duplicates', 'is:dupe'],
+  ['Low-rated legendaries', 'is:weapon is:legendary rating<45'],
+  ['God rolls', 'rating>=85'],
+  ['Tier 5 gear', 'tier>=5'],
+  ['Has notes', 'is:hasnotes'],
+  ['Unsent edits', 'is:pending'],
+  ['High-stat armor', 'is:armor total>=70'],
+  ['Unrated weapons', 'is:unrated'],
+  ['Champion breakers', 'is:breaker sort:breaker'],
+  ['Armor by set', 'is:armor sort:set'],
+  ['By ammo type', 'is:weapon sort:ammo'],
+];
+function addPane(q = '', title = '') {
+  S.panes.push({ id: uid(), title: title || 'New sort', q, sort: 'rating', dir: 'desc', group: '' });
+  savePanes(); renderPanes();
+  setTimeout(() => { const ins = document.querySelectorAll('.qin'); ins[ins.length - 1]?.focus(); }, 30);
+}
+// Options follow the pane's results: weapon-only keys appear when weapons match, armor-only keys when armor does,
+// and stat options list only stats the matching items have. The current choice always stays listed.
+function kindsOf(items) { const w = items.some(i => i.kind === 'weapon'), a = items.some(i => i.kind === 'armor'); return (w || a) ? { w, a } : { w: true, a: true }; }
+function sortChoices(items) {
+  const { w, a } = kindsOf(items);
+  const o = [];
+  if (w) o.push(['rating', 'Rating'], ['pve', 'Light.gg PvE'], ['pvp', 'Light.gg PvP']);
+  o.push(['power', 'Power'], ['tier', 'Tier'], ['rarity', 'Rarity'], ['name', 'Name'], ['type', 'Type'], ['frame', w && a ? 'Frame / archetype' : w ? 'Frame' : 'Archetype']);
+  if (w) o.push(['element', 'Element'], ['ammo', 'Ammo type'], ['breaker', 'Breaker'], ['crafted', 'Crafted'], ['kills', 'Kills']);
+  if (a) o.push(['set', 'Armor set'], ['class', 'Class'], ['total', 'Stat total']);
+  o.push(['tag', 'Tag'], ['source', 'Source'], ['season', 'Season']);
+  const statNames = new Set(); items.forEach(it => Object.keys(it.stats).forEach(k => statNames.add(k)));
+  [...statNames].filter(s => s !== 'Total').sort().forEach(s => o.push(['stat:' + s, 'Stat: ' + s]));
+  return o;
+}
+function groupChoices(items) {
+  const { w, a } = kindsOf(items);
+  const o = [['', 'No grouping'], ['type', 'Type'], ['frame', w && a ? 'Frame / archetype' : w ? 'Frame' : 'Archetype'], ['rarity', 'Rarity'], ['tier', 'Tier']];
+  if (w) o.push(['element', 'Element'], ['ammo', 'Ammo type'], ['breaker', 'Breaker'], ['crafted', 'Crafted']);
+  if (a) o.push(['set', 'Armor set'], ['class', 'Class']);
+  o.push(['tag', 'Tag'], ['source', 'Source'], ['season', 'Season'], ['name', 'Item name']);
+  return o;
+}
+function optionsHtml(choices, sel, allLabels) {
+  const list = [...choices];
+  if (sel && !list.some(([v]) => v === sel)) list.push([sel, (allLabels[sel] || sel.replace(/^stat:/, 'Stat: ')) + ' (not in results)']);
+  return list.map(([v, l]) => `<option value="${esc(v)}" ${v === sel ? 'selected' : ''}>${esc(l)}</option>`).join('');
+}
+const SORT_LABELS = Object.fromEntries(sortChoices([]).map(x => x));
+const GROUP_LABELS = Object.fromEntries(groupChoices([]).map(x => x));
+function sortOptions(sel, items = S.items) { return optionsHtml(sortChoices(items), sel, SORT_LABELS); }
+function groupOptions(sel, items = S.items) { return optionsHtml(groupChoices(items), sel, GROUP_LABELS); }
+
+function computePane(p) {
+  const parsed = Core.parseQuery(p.q);
+  const ctx = Core.buildCtx(S.items, new Set(pendingIds()), D);
+  const res = Core.runQuery(parsed, S.items, ctx);
+  S.results[p.id] = res;
+  const sortKey = parsed.sort || p.sort || 'rating';
+  let list = Core.sortItems([...res.keys()].map(id => S.byId.get(id)), sortKey.replace(/^stat\./, 'stat:'), p.dir);
+  if (p.group) {
+    const groups = new Map();
+    list.forEach(it => { const g = Core.groupKey(it, p.group); if (!groups.has(g)) groups.set(g, []); groups.get(g).push(it); });
+    let gs = [...groups.entries()];
+    if (p.group === 'name') gs = gs.sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+    else if (p.group === 'tier') gs = gs.sort((a, b) => b[0].localeCompare(a[0]));
+    else if (p.group === 'ammo' || p.group === 'breaker' || p.group === 'set') gs = gs.sort((a, b) => Core.groupOrder(p.group, a[0]) - Core.groupOrder(p.group, b[0]) || a[0].localeCompare(b[0]));
+    else gs = gs.sort((a, b) => a[0].localeCompare(b[0]));
+    return { parsed, groups: gs, total: list.length, sortKey };
+  }
+  return { parsed, groups: [['', list]], total: list.length, sortKey };
+}
+
+function renderPanes() {
+  const root = $('#panes');
+  if (!S.items.length) {
+    root.innerHTML = `<div class="welcome"><h1>Load ${esc(activeProfile()?.name || 'your vault')}${activeProfile()?.name && activeProfile().name !== 'My vault' ? '’s vault' : ''} to start</h1>
+      <p>Export your weapons and armor from DIM (Settings → Spreadsheets), drop the CSVs in here, then sort them with as many side-by-side searches as you like. Tags and notes you set here go back into DIM through its CSV import.</p>
+      <button class="btn primary" id="welcomeLoad">Load DIM CSVs</button></div>`;
+    $('#welcomeLoad').onclick = () => $('#bLoad').click();
+    return;
+  }
+  root.innerHTML = '';
+  S.panes.forEach((p, idx) => {
+    const color = PANE_COLORS[idx % PANE_COLORS.length];
+    const el = document.createElement('section');
+    el.className = 'pane' + (p.wide ? ' wide' : ''); el.style.setProperty('--pc', color); el.dataset.id = p.id;
+    el.innerHTML = `<div class="pane-head">
+        <div class="row"><span class="dot"></span><input class="pane-title" value="${esc(p.title)}" aria-label="Pane title">
+          <span class="count"></span>
+          <button class="btn small msort" data-act="ctl" title="Sort &amp; group">Sort ▾</button>
+          <div class="menu"><button class="btn small" data-act="menu">⋯</button><div class="menu-list">
+            <button data-act="clean">Clean up these results…</button>
+            <button data-act="tagall">Tag all results…</button>
+            <button data-act="dimq">Copy DIM search for these items</button>
+            <button data-act="wide">${p.wide ? 'Narrow pane' : 'Widen pane'}</button>
+            <button data-act="left">Move left</button><button data-act="right">Move right</button>
+            <hr><button data-act="dup">Duplicate pane</button><button data-act="del">Remove pane</button>
+          </div></div></div>
+        <div class="row"><input class="qin" spellcheck="false" placeholder="e.g. is:weapon perk:&quot;kill clip&quot; rating>=70" value="${esc(p.q)}"></div>
+        <div class="row qchips">${QUICK.map(([t, l]) => `<button class="qc${hasTok(p.q, t) ? ' on' : ''}" data-qt="${esc(t)}">${esc(l)}</button>`).join('')}</div>
+        <div class="row ctl">
+          <select class="s" data-k="sort" title="Sort by">${sortOptions(p.sort)}</select>
+          <button class="btn small" data-act="dir" title="Sort direction">${p.dir === 'asc' ? '↑ Asc' : '↓ Desc'}</button>
+          <select class="s" data-k="group" title="Group by">${groupOptions(p.group)}</select>
+        </div>
+      </div><div class="pane-body"></div>`;
+    root.appendChild(el);
+    bindPane(el, p);
+  });
+  renderPaneChips();
+  const add = document.createElement('div'); add.className = 'addpane';
+  add.innerHTML = `<div class="h">+ Add a sort</div><button class="preset" data-q=""><b>Blank search</b></button>` +
+    PRESETS.map(([t, q]) => `<button class="preset" data-q="${esc(q)}" data-t="${esc(t)}"><b>${esc(t)}</b><small>${esc(q)}</small></button>`).join('');
+  add.querySelectorAll('.preset').forEach(b => b.onclick = () => addPane(b.dataset.q, b.dataset.t));
+  root.appendChild(add);
+  refreshBodies();
+}
+
+// quick filter chips (mostly for phones): toggle a term in the pane's search
+const QUICK = [['is:weapon', 'Weapons'], ['is:armor', 'Armor'], ['is:dupe', 'Dupes'], ['tag:none', 'Untagged'], ['-tag:junk', 'Not junk'], ['is:exotic', 'Exotic'], ['is:crafted', 'Crafted'], ['is:breaker', 'Breaker'], ['is:pending', 'Unsent']];
+const toks = q => (q.match(/(?:[^\s"]+|"[^"]*")+/g) || []);
+const hasTok = (q, t) => toks(q).some(x => x.toLowerCase() === t);
+function toggleTok(q, t) { const list = toks(q); return (hasTok(q, t) ? list.filter(x => x.toLowerCase() !== t) : [...list, t]).join(' '); }
+// pane name chips: on phones one pane fills the screen, swipe or tap a chip to switch
+function renderPaneChips() {
+  const c = $('#paneChips'); if (!c) return;
+  if (!S.items.length) { c.innerHTML = ''; return; }
+  c.innerHTML = S.panes.map((p, i) => `<button class="pchip" data-i="${i}" style="--pc:${PANE_COLORS[i % PANE_COLORS.length]}"><i></i>${esc(p.title)}<small>${S.computed?.[p.id]?.total ?? ''}</small></button>`).join('') + `<button class="pchip add" data-i="${S.panes.length}">+ Add</button>`;
+  c.querySelectorAll('.pchip').forEach(b => b.onclick = () => { const el = $('#panes').children[+b.dataset.i]; el?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', inline: 'start', block: 'nearest' }); });
+  markPaneChip();
+}
+function markPaneChip() {
+  const root = $('#panes'), c = $('#paneChips'); if (!root || !c) return;
+  const w = root.clientWidth || 1; const i = Math.round(root.scrollLeft / (root.firstElementChild?.offsetWidth + 8 || w));
+  c.querySelectorAll('.pchip').forEach(b => b.classList.toggle('on', +b.dataset.i === i));
+  c.querySelector('.pchip.on')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+}
+$('#panes').addEventListener('scroll', () => { clearTimeout(markPaneChip.t); markPaneChip.t = setTimeout(markPaneChip, 80); }, { passive: true });
+function bindPane(el, p) {
+  const qin = el.querySelector('.qin'); let t;
+  el.querySelector('.msort').onclick = () => el.classList.toggle('ctl-open');
+  el.querySelectorAll('.qc').forEach(b => b.onclick = () => { p.q = toggleTok(p.q, b.dataset.qt); qin.value = p.q; el.querySelectorAll('.qc').forEach(x => x.classList.toggle('on', hasTok(p.q, x.dataset.qt))); S.limits[p.id] = 0; savePanes(); refreshBodies(); });
+  qin.oninput = () => { clearTimeout(t); t = setTimeout(() => { p.q = qin.value; S.limits[p.id] = 0; el.querySelectorAll('.qc').forEach(x => x.classList.toggle('on', hasTok(p.q, x.dataset.qt))); savePanes(); refreshBodies(); }, 220); };
+  el.querySelector('.pane-title').onchange = e => { p.title = e.target.value; savePanes(); };
+  el.querySelectorAll('select.s').forEach(s => s.onchange = () => { p[s.dataset.k] = s.value; savePanes(); refreshBodies(); });
+  el.querySelector('[data-act=dir]').onclick = e => { p.dir = p.dir === 'asc' ? 'desc' : 'asc'; e.target.textContent = p.dir === 'asc' ? '↑ Asc' : '↓ Desc'; savePanes(); refreshBodies(); };
+  const menu = el.querySelector('.menu');
+  menu.onclick = e => {
+    const act = e.target.dataset.act; if (!act) return;
+    if (act === 'menu') { document.querySelectorAll('.menu.open').forEach(m => m !== menu && m.classList.remove('open')); menu.classList.toggle('open'); return; }
+    menu.classList.remove('open');
+    const i = S.panes.indexOf(p);
+    if (act === 'del') { S.panes.splice(i, 1); savePanes(); renderPanes(); }
+    if (act === 'dup') { S.panes.splice(i + 1, 0, { ...p, id: uid(), title: p.title + ' (copy)' }); savePanes(); renderPanes(); }
+    if (act === 'wide') { p.wide = !p.wide; savePanes(); renderPanes(); }
+    if (act === 'left' && i > 0) { [S.panes[i - 1], S.panes[i]] = [S.panes[i], S.panes[i - 1]]; savePanes(); renderPanes(); }
+    if (act === 'right' && i < S.panes.length - 1) { [S.panes[i + 1], S.panes[i]] = [S.panes[i], S.panes[i + 1]]; savePanes(); renderPanes(); }
+    if (act === 'dimq') copyDimQuery(p);
+    if (act === 'tagall') tagAll(p);
+    if (act === 'clean') { CL.setup.filter = p.q; CL.gi = 0; CL.step = 'groups'; saveClean(); setView('clean'); }
+  };
+  el.querySelector('.pane-body').onclick = e => {
+    const c = e.target.closest('.card'); if (c) return openItem(c.dataset.id, p.id, e.target.closest('[data-pk]')?.dataset.pk);
+    if (e.target.dataset.act === 'more') { S.limits[p.id] = (S.limits[p.id] || PAGE()) + PAGE(); refreshBody(el, p); }
+  };
+}
+document.addEventListener('click', e => { if (!e.target.closest('.menu')) document.querySelectorAll('.menu.open').forEach(m => m.classList.remove('open')); });
+
+const PAGE = () => isMobile() ? 40 : 150;
+function refreshBodies() {
+  // compute all first so cards can show membership in other panes
+  S.computed = {};
+  S.panes.forEach(p => { S.computed[p.id] = computePane(p); });
+  document.querySelectorAll('.pane').forEach(el => { const p = S.panes.find(x => x.id === el.dataset.id); if (p) refreshBody(el, p); });
+  renderHeader();
+  document.querySelectorAll('#paneChips .pchip small').forEach((s, i) => { const p = S.panes[i]; if (p) s.textContent = S.computed[p.id]?.total ?? ''; });
+}
+function refreshBody(el, p) {
+  const c = S.computed[p.id] || computePane(p);
+  const qin = el.querySelector('.qin');
+  el.querySelector('.count').textContent = `${c.total} item${c.total === 1 ? '' : 's'}`;
+  qin.classList.toggle('err', !!p.q.trim() && !c.parsed.groups.length && !c.parsed.sort);
+  // refresh the sort / group menus for what this query returns
+  const resItems = [...(S.results[p.id]?.keys() || [])].map(id => S.byId.get(id));
+  for (const [k, fn] of [['sort', sortOptions], ['group', groupOptions]]) {
+    const sel = el.querySelector(`select[data-k=${k}]`); if (!sel || document.activeElement === sel) continue;
+    const html = fn(p[k], resItems); if (sel.dataset.h !== html) { sel.innerHTML = html; sel.dataset.h = html; }
+  }
+  const body = el.querySelector('.pane-body');
+  if (!c.total) { body.innerHTML = `<div class="empty">Nothing matches this search.</div>`; return; }
+  const limit = S.limits[p.id] || PAGE(); let shown = 0; const out = [];
+  const paneIdx = S.panes.indexOf(p);
+  for (const [g, list] of c.groups) {
+    if (shown >= limit) break;
+    if (p.group) out.push(`<div class="group-h"><span>${groupIcon(p.group, g)}${esc(g)}</span><span>${list.length}</span></div>`);
+    for (const it of list) { if (shown >= limit) break; out.push(cardHtml(it, S.results[p.id].get(it.id), paneIdx, c.sortKey)); shown++; }
+  }
+  if (shown < c.total) out.push(`<button class="btn more" data-act="more">Show more (${c.total - shown} left)</button>`);
+  body.innerHTML = out.join('');
+  // load the next page automatically when the "Show more" button scrolls into view
+  const more = body.querySelector('[data-act=more]');
+  if (more && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { io.disconnect(); more.click(); } }, { root: body, rootMargin: '300px' }); io.observe(more); }
+}
+
+const STAT_SHOW_W = ['Range', 'Stability', 'Handling', 'Reload', 'AA', 'Impact', 'ROF', 'Mag', 'Velocity', 'Blast Radius', 'Charge Time', 'Draw Time', 'Accuracy', 'Swing Speed', 'Guard Resistance', 'Shield Duration', 'Charge Rate'];
+const STAT_SHOW_A = ['Health', 'Melee', 'Grenade', 'Super', 'Class', 'Weapons', 'Mobility', 'Resilience', 'Recovery', 'Discipline', 'Intellect', 'Strength', 'Total'];
+function groupIcon(g, name) {
+  if (g === 'element') return elIcon(name);
+  if (g === 'ammo') return ammoIcon(name);
+  if (g === 'breaker') return breakerIcon(name);
+  if (g === 'set' && name !== 'No set bonus') return '◈ ';
+  if (g === 'crafted' && name === 'Crafted') return CRAFTED_SVG + ' ';
+  return '';
+}
+// tooltip text for a socket
+function skTitle(p, it) {
+  const rel = it.perkRel?.[p.n]; const info = perkInfoText(p.n, it.kind);
+  return `${p.n} · ${p.s ? 'Equipped' : 'Selectable option'}${rel ? ` · light.gg: ${rel.pct}% of rolls` : ''}${info ? '\n\n' + info.slice(0, 380) : ''}\n\nClick for details`;
+}
+function skHtml(p, it, hits, opt = {}) {
+  const rel = it.perkRel?.[p.n]; const top = rel && rel.rel >= 80;
+  const cls = ['sk', p.s ? 'sel' : 'opt', top ? 'top' : '', /^enhanced\s/i.test(p.n) ? 'enh' : '', hits.has('perk:' + p.n) ? 'hit' : ''].join(' ');
+  return `<span class="${cls}" data-pk="${esc(p.n)}" title="${esc(skTitle(p, it))}">${plugIcon(p.n, opt.sq ? 'sq' + (opt.small ? ' sm' : '') : (opt.small ? 'sm' : ''), pIdx(p.n, it.kind))}${opt.noName ? '' : `<span class="nm2">${esc(p.n)}</span>`}</span>`;
+}
+// compact game-style sockets on cards: intrinsic (square), one column per perk socket with the
+// equipped perk named and its other options as small circles, then mods as small squares
+function socketsCard(it, hits) {
+  const s = Core.sockets(it, D);
+  const parts = [];
+  s.intrinsic.forEach(p => parts.push(`<div class="sk-col">${skHtml({ ...p, s: 1 }, it, hits, { sq: true })}</div>`));
+  s.exotic.forEach(p => parts.push(`<div class="sk-col">${skHtml({ ...p, s: 1 }, it, hits, { sq: true })}</div>`));
+  s.cols.forEach(c => {
+    const eq = c.perks.filter(p => p.s), opts = c.perks.filter(p => !p.s);
+    parts.push(`<div class="sk-col">${eq.map(p => skHtml(p, it, hits)).join('')}${opts.length ? `<div class="sk-opts">${opts.map(p => skHtml(p, it, hits, { small: true, noName: true })).join('')}</div>` : ''}</div>`);
+  });
+  if (s.mods.length) parts.push(`<div class="sk-mods">${s.mods.map(p => skHtml({ ...p, s: 1 }, it, hits, { sq: true, small: true, noName: true })).join('')}</div>`);
+  // junk perks only when the search hit them
+  it.perks.filter(p => p.j && hits.has('perk:' + p.n)).forEach(p => parts.push(skHtml(p, it, hits, { sq: true, small: true })));
+  return parts.length ? `<div class="sk-row">${parts.join('')}</div>` : '';
+}
+const TAG_LABEL = Object.fromEntries(TAGS.map(t => [t[0], t[1]]));
+// Card preview shows: name, rarity, tier, power, element, ammo, armor type, archetype/frame, intrinsic,
+// breaker, crafted, tag and notes. Anything else appears only when the pane's search matched it (highlighted)
+// or it's the pane's sort key.
+function cardHtml(it, hits, paneIdx, sortKey) {
+  hits = hits || new Set();
+  const H = k => hits.has(k) ? ' hit' : '';
+  const F = (k, html) => `<span class="f cfield${H(k)}">${html}</span>`;
+  const others = S.panes.map((p, i) => (i !== paneIdx && S.results[p.id]?.has(it.id)) ? `<i title="Also in: ${esc(p.title)}" style="background:${PANE_COLORS[i % PANE_COLORS.length]}"></i>` : '').join('');
+  const sk = Core.sockets(it, D);
+  const sub = [];
+  if (it.rarity) sub.push(F('rarity', `<span style="color:${rarityColor(it.rarity)}">${esc(it.rarity)}</span>`));
+  if (it.tier != null) sub.push(F('tier', 'Tier ' + it.tier));
+  if (it.power != null) sub.push(F('power', '◆ ' + it.power));
+  if (it.kind === 'weapon' && it.element) sub.push(F('element', `${elIcon(it.element)}${esc(it.element)}`));
+  if (it.kind === 'weapon' && it.ammo) sub.push(F('ammo', `${ammoIcon(it.ammo)}${esc(it.ammo)}`));
+  if (it.type) sub.push(F('type', esc(it.type)));
+  const intrNames = new Set([...sk.intrinsic, ...sk.exotic].map(p => Core.norm(p.n)));
+  if (it.frame && !intrNames.has(Core.norm(it.frame))) sub.push(F('frame', esc(it.frame)));
+  if (Core.anyBreaker(it)) sub.push(F('breaker', breakerChips(it)));
+  if (it.crafted) sub.push(F('crafted', `${CRAFTED_SVG} Crafted${it.level != null ? ' · Lv ' + it.level : ''}`));
+  if (it.tag) sub.push(F('tag', `${TAG_ICON[it.tag] || ''} ${esc(TAG_LABEL[it.tag] || it.tag)}`));
+  // fields outside the preview, shown when searched (highlighted) or sorted by
+  const extra = { source: it.source, owner: it.owner, season: it.season != null ? 'Season ' + it.season : '', locked: it.locked ? 'Locked' : 'Unlocked', holofoil: 'Holofoil', featured: 'Featured', mw: it.mwType ? `MW ${it.mwType} ${it.mwTier ?? ''}` : '', event: it.event, foundry: it.foundry, kills: it.kills != null ? it.kills + ' kills' : '', energy: it.energy != null ? 'Energy ' + it.energy : '', set: it.set ? '◈ ' + it.set : '', equippable: it.equippable, tertiary: it.tertiary ? '3rd: ' + it.tertiary : '', tuning: it.tuning ? 'Tuned: ' + it.tuning : '', name: '', notes: '', element: it.kind === 'armor' ? it.element : '', level: '' };
+  const sortField = { set: 'set', class: 'equippable', source: 'source', season: 'season', kills: 'kills', type: 'type' }[sortKey];
+  for (const [k, v] of Object.entries(extra)) if (v && (hits.has(k) || k === sortField)) sub.push(F(k, esc(v)));
+  // intrinsic (and exotic perks) always; other perks / mods only when the search hit them
+  const parts = [];
+  [...sk.intrinsic, ...sk.exotic].forEach(p => parts.push(`<div class="sk-col">${skHtml({ ...p, s: 1 }, it, hits, { sq: true })}</div>`));
+  const hitPerks = it.perks.filter(p => hits.has('perk:' + p.n) && !intrNames.has(Core.norm(p.n)));
+  hitPerks.forEach(p => { const ty = D?.pi?.[Core.norm(p.n)]?.[1]; parts.push(`<div class="sk-col">${skHtml(p, it, hits, { sq: !['b', 'm', 't', 'o'].includes(ty) })}</div>`); });
+  const perkHtml = parts.length ? `<div class="sk-row">${parts.join('')}</div>` : '';
+  // stats only when searched or sorted by
+  const statKeys = new Set([...hits].filter(h => h.startsWith('stat:')).map(h => h.slice(5)));
+  if (sortKey?.startsWith('stat:')) { const [k] = Core.findStat(it.stats, sortKey.slice(5)); if (k) statKeys.add(k); }
+  if (sortKey === 'total' && 'Total' in it.stats) statKeys.add('Total');
+  const statHtml = [...statKeys].filter(k => k in it.stats).map(k => `<span class="f${H('stat:' + k)}">${esc(k)} <b>${it.stats[k]}</b>${it.base[k] != null && it.base[k] !== it.stats[k] ? ` <small style="color:var(--faint)">(base ${it.base[k]})</small>` : ''}</span>`).join('');
+  const showRating = it.kind === 'weapon' && (hits.has('rating') || ['rating', 'pve', 'pvp'].includes(sortKey));
+  const rating = showRating ? `<span class="rate f${H('rating')}" style="color:${rateColor(it.rating)}" title="${it.rating == null ? 'No light.gg data yet' : `Perk rating ${it.rating}/100 · light.gg PvE ${it.pve ?? '–'}★ PvP ${it.pvp ?? '–'}★`}">${it.rating ?? '–'}</span>` : '';
+  const pend = S.edits[it.id] ? '<span class="pend" title="Changed here, not yet imported into DIM"></span>' : '';
+  return `<div class="card" data-id="${esc(it.id)}" style="--rc:${rarityColor(it.rarity)}">${pend}
+    <div class="top"><span class="tagi f${H('tag')}" title="Tag: ${esc(it.tag || 'none')}">${TAG_ICON[it.tag] ?? ''}</span>
+      <span class="nm f${H('name')}">${esc(it.name)}</span><span class="others">${others}</span>${rating}</div>
+    <div class="sub">${sub.join('')}</div>
+    ${perkHtml}
+    ${statHtml ? `<div class="stats">${statHtml}</div>` : ''}
+    ${it.notes ? `<div class="note f${H('notes')}">${esc(it.notes)}</div>` : ''}
+  </div>`;
+}
+
+// ---------- item drawer ----------
+let drawerItem = null;
+function openItem(id, paneId, focusPerk) {
+  const it = S.byId.get(id); if (!it) return; drawerItem = it;
+  const pIdx = S.panes.findIndex(p => p.id === paneId);
+  const hits = S.results[paneId]?.get(id) || new Set();
+  const d = $('#drawer'); d.style.setProperty('--pc', PANE_COLORS[(pIdx < 0 ? 0 : pIdx) % PANE_COLORS.length]);
+  const H = k => hits.has(k) ? ' hit' : '';
+  const kv = [['Type', it.type, 'type'], ['Frame / archetype', it.frame, 'frame'], ['Element', it.element, 'element', elIcon(it.element)], ['Rarity', it.rarity, 'rarity'], ['Gear tier', it.tier, 'tier'], ['Power', it.power, 'power'], ['Source', it.source, 'source'], ['Season', it.season != null ? `${it.season} (Year ${it.year ?? '?'})` : '', 'season'], ['Ammo', it.ammo, 'ammo', ammoIcon(it.ammo)], ['Intrinsic breaker', it.breaker ? `${it.breaker}${it.breakerSrc === 'rule' ? ' (from the 9.7.0 archetype table)' : ''}` : '', 'breaker', breakerIcon(it.breaker)], ['Armor set', it.set, 'set', '◈ '], ['Class', it.equippable, 'equippable'], ['Tertiary stat', it.tertiary, 'tertiary'], ['Tuning stat', it.tuning, 'tuning'], ['Masterwork', it.mwType ? `${it.mwType} ${it.mwTier ?? ''}` : '', 'mw'], ['Location', it.owner, 'owner'], ['Crafted', it.crafted ? `Yes, level ${it.level ?? '?'}` : '', 'crafted', CRAFTED_SVG + ' '], ['Kills', it.kills, 'kills'], ['Foundry', it.foundry, 'foundry'], ['Event', it.event, 'event'], ['In loadouts', it.loadouts, '']]
+    .filter(r => r[1] !== '' && r[1] != null).map(([k, v, h, ic]) => `<div>${k}</div><div><span class="f${H(h)}">${ic || ''}${esc(v)}</span></div>`).join('');
+  // base stat (gray) vs what mods / masterwork / tuning add (blue); DIM exports both as "Stat" and "Stat (Base)"
+  const hasBase = Object.keys(it.base).length > 0;
+  const statRows = Object.entries(it.stats).filter(([k]) => k !== 'Total').map(([k, v]) => {
+    const max = ['ROF', 'Mag', 'Charge Time', 'Draw Time'].includes(k) ? null : (it.kind === 'armor' ? Math.max(45, ...Object.entries(it.stats).filter(([x]) => x !== 'Total').map(([, y]) => y)) : 100);
+    const b = it.base[k] ?? v; const add = v - b;
+    const bar = max ? `<i style="width:${Math.min(100, Math.min(b, v) / max * 100)}%"></i>${add > 0 ? `<i class="mod" style="width:${Math.min(100, add / max * 100)}%"></i>` : ''}` : '';
+    return `<div class="bar"><span class="f${H('stat:' + k)}">${esc(k)}</span><span class="tr">${bar}</span><span class="num"><b>${v}</b>${hasBase && it.base[k] != null ? ` <small>base ${b}${add ? (add > 0 ? ' +' : ' ') + add : ''}</small>` : ''}</span></div>`;
+  }).join('') + ('Total' in it.stats ? `<div class="bar"><b class="f${H('stat:Total')}">Total</b><span></span><span class="num"><b>${it.stats.Total}</b>${it.base.Total != null ? ` <small>base ${it.base.Total}</small>` : ''}</span></div>` : '');
+  const statLegend = hasBase ? '<div class="stat-legend"><span><i style="background:#9aa6c4"></i>Base</span><span><i style="background:#5b9bd5"></i>From mods, masterwork &amp; tuning</span></div>' : '';
+  const r = S.R[it.hash];
+  const perkRows = socketsDrawer(it, hits);
+  const ex = it.kind === 'weapon' && Core.norm(it.rarity) === 'exotic' ? D?.dcx?.[Core.norm(it.name)] : null;
+  d.innerHTML = `<div class="d-head" style="--rc:${rarityColor(it.rarity)}">
+      <div class="nm">${it.element ? elIcon(it.element, 'ico big') : ''}${esc(it.name)}${it.crafted ? ' ' + CRAFTED_SVG : ''}</div>
+      <div class="stat-pill">${it.ammo ? ammoIcon(it.ammo) : ''}${esc(it.rarity)} ${esc(it.type)}${Core.anyBreaker(it) ? ' · ' + breakerChips(it, true) : ''}${it.set ? ` · <span class="chip">◈ ${esc(it.set)}</span>` : ''} · <a href="https://www.light.gg/db/items/${esc(it.hash)}/" target="_blank" rel="noopener noreferrer" style="color:#8fb6ff">light.gg</a></div>
+      ${it.kind === 'weapon' ? `<div style="margin-top:8px;display:flex;gap:12px;align-items:center">
+        <span class="rate" style="font-size:22px;color:${rateColor(it.rating)}">${it.rating ?? '–'}</span>
+        <span class="stat-pill">${r ? `Perk rating from light.gg community popularity<br>light.gg PvE ${r.pve ?? '–'}★ · PvP ${r.pvp ?? '–'}★` : 'No light.gg data for this weapon yet, so no perk rating. Clarity and the Data Compendium don’t publish ratings; their perk details are below.'}</span></div>` : ''}
+    </div>
+    <div class="d-body">
+      <div class="sec"><div class="h">Tag</div><div class="tagrow">${TAGS.map(([v, l, i]) => `<button class="tagbtn${(it.tag || '') === v ? ' on' : ''}" data-tag="${v}">${i} ${l}</button>`).join('')}</div></div>
+      <div class="sec"><div class="h">Notes</div><textarea class="notes" maxlength="${NOTE_MAX}" placeholder="Notes show up on this item in DIM after you import.">${esc(it.notes)}</textarea>
+        <div class="stat-pill" id="dState">${S.edits[it.id] ? 'Changed here, not yet in DIM' : 'Matches DIM'}</div></div>
+      <div class="sec"><div class="h">${it.kind === 'armor' ? 'Perks, set bonus &amp; mods' : 'Perks &amp; mods'}${r ? ' · light.gg popularity' : ''}</div>${perkRows ? `<div class="stat-pill" style="margin-bottom:6px">Click any perk, mod or set bonus for its Bungie, Clarity and Data Compendium details.</div>${perkRows}<div class="pdet" id="pdet" hidden></div>` : '<span class="stat-pill">None listed</span>'}</div>
+      ${triageHtml(it)}
+      ${ex ? `<div class="sec"><div class="h">Data Compendium · exotic</div><div class="dctx">${SH(ex)}</div></div>` : ''}
+      <div class="sec"><div class="h">Stats</div>${statLegend}${statRows || '<span class="stat-pill">None listed</span>'}</div>
+      <div class="sec"><div class="h">Details</div><div class="kv">${kv}</div></div>
+      <div class="sec stat-pill">Item ID ${esc(it.id)} · Hash ${esc(it.hash)}</div>
+    </div>
+    <div class="d-foot"><div class="mtags">${TAGS.map(([v, l, i]) => `<button class="tagbtn${(it.tag || '') === v ? ' on' : ''}" data-tag="${v}" title="${l}">${i}<small>${l}</small></button>`).join('')}</div><button class="btn" id="dRevert" ${S.edits[it.id] ? '' : 'disabled'}>Revert to DIM</button><span class="grow"></span><button class="btn primary" id="dClose">Done</button></div>`;
+  d.querySelectorAll('.tagbtn').forEach(b => b.onclick = () => {
+    setItemEdit(it, { tag: b.dataset.tag }); d.querySelectorAll('.tagbtn').forEach(x => x.classList.toggle('on', x.dataset.tag === b.dataset.tag)); afterEdit();
+  });
+  const ta = d.querySelector('textarea'); let nt;
+  ta.oninput = () => { clearTimeout(nt); nt = setTimeout(() => { setItemEdit(it, { notes: ta.value.slice(0, NOTE_MAX) }); afterEdit(); }, 500); };
+  $('#dRevert').onclick = () => { delete S.edits[it.id]; it.tag = effTag(it); it.notes = effNotes(it); saveEdit(it.id); afterEdit(); openItem(id, paneId); };
+  $('#dClose').onclick = closeDrawer;
+  // socket clicks -> detail panel
+  d.querySelectorAll('[data-pk],[data-setp]').forEach(b => b.onclick = () => showPerk(b));
+  bindTriage(it);
+  const first = focusPerk ? [...d.querySelectorAll('[data-pk]')].find(b => b.dataset.pk === focusPerk) : null;
+  if (first) { showPerk(first); setTimeout(() => $('#pdet')?.scrollIntoView({ block: 'center' }), 260); }
+  d.classList.remove('full'); d.insertAdjacentHTML('afterbegin', '<div class="grab" aria-hidden="true"><i></i></div>'); sheetDrag(d);
+  d.classList.add('open'); $('#scrim').classList.add('open');
+  function showPerk(b) {
+    const det = $('#pdet'); if (!det) return;
+    // clicking the open one again closes it
+    if (b.classList.contains('on') && !det.hidden) { b.classList.remove('on'); det.hidden = true; return; }
+    d.querySelectorAll('.dsk.on,.dintr.on').forEach(x => x.classList.remove('on')); b.classList.add('on');
+    if (b.dataset.setp) {
+      const [si, pi] = b.dataset.setp.split(':').map(Number); const set = D.sets[si]; const sp = set.p[pi];
+      const ds = D.dset?.[Core.norm(set.n)]; const dch = ds?.p?.[sp.c]?.[1];
+      det.innerHTML = infoHtml(sp.n, { kind: `${set.n} · ${sp.c}-piece bonus`, bd: sp.d, icon: sp.i, sq: true, extra: dch && !Core.perkInfo(sp.n, D)?.dc ? `<span class="src2">Data Compendium · ${esc(set.n)}</span><div class="dctx">${SH(dch)}</div>` : '' });
+    } else {
+      const n = b.dataset.pk; const rel = it.perkRel?.[n];
+      det.innerHTML = infoHtml(n, { kind: b.dataset.kind, ikind: it.kind, sq: b.dataset.sq === '1', extra: rel ? `<span class="src2">light.gg</span><div class="btxt">On ${rel.pct}% of community rolls · ${rel.rel}% as popular as the top perk in its column</div>` : '' });
+    }
+    // place the description directly under the clicked row: after the intrinsic / set / mods block,
+    // or as a full-width row right below the line of perk columns that holds the clicked perk
+    det.classList.remove('inrow');
+    const grid = b.closest('.dcols');
+    if (grid) {
+      const colsEls = [...grid.querySelectorAll(':scope > .dcol')]; const col = b.closest('.dcol');
+      const perRow = Math.max(1, getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length);
+      const idx = colsEls.indexOf(col); const last = colsEls[Math.min(colsEls.length - 1, Math.floor(idx / perRow) * perRow + perRow - 1)];
+      last.insertAdjacentElement('afterend', det); det.classList.add('inrow');
+    } else (b.closest('.dmods') || b.closest('.dset') || b).insertAdjacentElement('afterend', det);
+    det.hidden = false;
+    det.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+  function afterEdit() { const st = $('#dState'); if (st) st.textContent = S.edits[it.id] ? 'Changed here, not yet in DIM' : 'Matches DIM'; $('#dRevert').disabled = !S.edits[it.id]; renderHeader(); }
+}
+// drawer: intrinsic block, perk columns (circles), exotic perks, armor set bonus, mods (squares)
+function socketsDrawer(it, hits) {
+  const s = Core.sockets(it, D); const out = [];
+  const H = n => hits.has('perk:' + n) ? ' hit' : '';
+  const dsk = (p, opt = {}) => {
+    const rel = it.perkRel?.[p.n];
+    return `<div class="dsk${p.s ? ' sel' : ' opt'}${/^enhanced\s/i.test(p.n) ? ' enh' : ''}" data-pk="${esc(p.n)}" data-kind="${esc(opt.kind || '')}" data-sq="${opt.sq ? 1 : 0}" title="${esc(p.n)}">${plugIcon(p.n, opt.sq ? 'sq lg' : 'lg', pIdx(p.n, it.kind))}<span class="nm2 f${H(p.n)}">${esc(p.n)}</span>${rel && !opt.sq ? `<span class="pct">${rel.pct}%</span>` : ''}</div>`;
+  };
+  const intr = (p, kind) => `<div class="dintr" data-pk="${esc(p.n)}" data-kind="${esc(kind)}" data-sq="1">${plugIcon(p.n, 'sq xl', pIdx(p.n, it.kind))}<div style="min-width:0"><div class="t">${esc(kind)}</div><b class="f${H(p.n)}">${esc(p.n)}</b><div class="stat-pill" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(perkInfoText(p.n, it.kind).split('\n')[0] || '')}</div></div></div>`;
+  s.intrinsic.forEach(p => out.push(intr(p, it.kind === 'armor' ? 'Archetype' : 'Intrinsic')));
+  s.exotic.forEach(p => out.push(intr(p, /^spirit of/i.test(p.n) ? 'Exotic class item perk' : 'Exotic perk')));
+  if (s.cols.length) out.push(`<div class="dcols" style="grid-template-columns:repeat(${Math.min(s.cols.length, 5)},minmax(0,1fr))">${s.cols.map(c => `<div class="dcol"><div class="t">${COL_LABEL[c.ty] || 'Perk'}</div>${c.perks.map(p => dsk(p, { kind: TYPE_LABEL[c.ty] || 'Perk' })).join('')}</div>`).join('')}</div>`);
+  const si = D?.as?.[it.hash]; const set = si != null ? D.sets[si] : null;
+  if (set) out.push(`<div class="dset"><div class="h2">◈ ${esc(set.n)} <span class="stat-pill">set bonus</span></div>${set.p.map((sp, i) => `<div class="dsk sel" data-setp="${si}:${i}" title="${esc(sp.n)}">${plugIcon(sp.n, 'sq lg', sp.i)}<span class="nm2"><b>${sp.c}-piece</b> · ${esc(sp.n)}</span></div>`).join('')}</div>`);
+  const grp = (label, list, kind) => list.length ? `<div class="t stat-pill" style="margin:2px 0 4px">${label}</div><div class="dmods">${list.map(p => dsk({ ...p, s: 1 }, { sq: true, kind: kind || TYPE_LABEL[Core.plugOf(p.n, D, it.kind)?.[1]] || 'Mod' })).join('')}</div>` : '';
+  out.push(grp('Mods', s.mods));
+  out.push(grp(it.mwType ? `Masterwork · ${esc(it.mwType)}${it.mwTier != null ? ' tier ' + it.mwTier : ''}` : 'Masterwork', s.mw, 'Masterwork'));
+  out.push(grp('Catalyst', s.catalyst, 'Catalyst'));
+  return out.join('');
+}
+// ---------- triage: identifier buttons -> search -> compare / new pane ----------
+const TRI = { sel: null, forId: null };
+function triageHtml(it) {
+  const ids = Core.identifiers(it, D);
+  if (TRI.forId !== it.id) { TRI.forId = it.id; TRI.sel = new Set(ids.filter(x => x.def).map(x => x.id)); }
+  const icon = x => x.id === 'element' ? elIcon(x.label) : x.id === 'ammo' ? ammoIcon(x.label) : x.id === 'breaker' ? breakerIcon(x.label) : x.id.startsWith('perk:') ? plugIcon(x.id.slice(5), 'sm') : x.id === 'set' ? '◈ ' : '';
+  return `<details class="sec tri"${TRI.open ? ' open' : ''}><summary class="h">Find &amp; compare similar <span class="stat-pill">type, archetype, element, perks…</span></summary>
+    <div class="tri-chips">${ids.map(x => `<button class="tchip${TRI.sel.has(x.id) ? ' on' : ''}${x.fixed ? ' fixed' : ''}" data-tid="${esc(x.id)}" title="${esc(x.term)}"><small>${esc(x.group)}</small><span>${icon(x)}${esc(x.label)}</span></button>`).join('')}</div>
+    <div class="tri-q"><code id="triQ"></code><span id="triN" class="stat-pill"></span></div>
+    <div class="tri-act"><button class="btn primary" id="triCmp">Compare</button><button class="btn" id="triPane">Open as sort pane</button><button class="btn" id="triAdd">Add this item to compare</button></div></details>`;
+}
+function triageQuery(it) { return Core.identifiers(it, D).filter(x => TRI.sel.has(x.id)).map(x => x.term).join(' '); }
+function triageMatches(it) {
+  const q = triageQuery(it);
+  const res = Core.runQuery(Core.parseQuery(q), S.items, Core.buildCtx(S.items, new Set(pendingIds()), D));
+  return { q, ids: [...res.keys()] };
+}
+function bindTriage(it) {
+  const d = $('#drawer');
+  const tri = d.querySelector('details.tri'); tri.ontoggle = () => { TRI.open = tri.open; if (tri.open) setTimeout(() => tri.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 30); };
+  const upd = () => {
+    const m = triageMatches(it);
+    $('#triQ').textContent = m.q; $('#triN').textContent = `${m.ids.length} match${m.ids.length === 1 ? '' : 'es'}`;
+    $('#triCmp').textContent = m.ids.length > 1 ? `Compare ${Math.min(m.ids.length, CMP_MAX)}${m.ids.length > CMP_MAX ? ` of ${m.ids.length}` : ''}` : 'Compare (no other matches)';
+    $('#triCmp').disabled = m.ids.length < 2;
+  };
+  d.querySelectorAll('.tchip').forEach(b => b.onclick = () => { if (b.classList.contains('fixed')) return; const id = b.dataset.tid; TRI.sel.has(id) ? TRI.sel.delete(id) : TRI.sel.add(id); b.classList.toggle('on'); upd(); });
+  $('#triCmp').onclick = () => {
+    const m = triageMatches(it);
+    const label = Core.identifiers(it, D).filter(x => TRI.sel.has(x.id) && !x.fixed).map(x => x.label).join(' · ') || it.kind;
+    startCompare(m.ids, it.id, label, m.q); closeDrawer(); setView('compare');
+  };
+  $('#triPane').onclick = () => { const m = triageMatches(it); closeDrawer(); setView('vault'); addPane(m.q, 'Like ' + it.name); toast('Added a pane with that search.'); };
+  $('#triAdd').onclick = () => { addToCompare(it.id); };
+  upd();
+}
+
+// ---------- compare: up to 10 items side by side ----------
+const CMP_MAX = 10;
+const CMP = { ids: [], label: '', q: '', sort: null, diff: false };
+function loadCompareState() { Object.assign(CMP, { ids: [], label: '', q: '', sort: null, diff: false, total: 0, k: 1 }, LS.get(PK('compare')) || {}); }
+const saveCmp = () => { LS.set(PK('compare'), CMP); updCmpN(); };
+function updCmpN() { const n = CMP.ids.filter(id => S.byId.has(id)).length; const el = $('#cmpN'); if (el) el.textContent = n ? `(${n})` : ''; }
+// Pick up to 10: the anchor item first, then the best of the rest (rating, then power)
+function startCompare(ids, anchorId, label, q) {
+  const items = ids.map(id => S.byId.get(id)).filter(Boolean);
+  const rest = items.filter(i => i.id !== anchorId).sort((a, b) => (b.rating ?? -1) - (a.rating ?? -1) || (b.power ?? 0) - (a.power ?? 0) || (b.tier ?? 0) - (a.tier ?? 0));
+  CMP.ids = [anchorId, ...rest.map(i => i.id)].filter(id => S.byId.has(id)).slice(0, CMP_MAX);
+  CMP.label = label; CMP.q = q; CMP.sort = null; CMP.total = ids.length; CMP.diff = isMobile() ? true : CMP.diff; saveCmp();
+}
+function addToCompare(id) {
+  const it = S.byId.get(id); if (!it) return;
+  const first = S.byId.get(CMP.ids[0]);
+  if (first && first.kind !== it.kind) { CMP.ids = []; toast('Compare holds one kind at a time: started a new comparison.'); }
+  if (CMP.ids.includes(id)) return toast('Already in compare.');
+  if (CMP.ids.length >= CMP_MAX) return toast(`Compare holds up to ${CMP_MAX} items. Remove one first.`);
+  CMP.ids.push(id); if (CMP.ids.length === 1) { CMP.label = ''; CMP.q = ''; CMP.total = 0; } saveCmp(); toast(`Added to compare (${CMP.ids.length}/${CMP_MAX}).`);
+}
+function renderCompare() {
+  const v = $('#compare');
+  const items = CMP.ids.map(id => S.byId.get(id)).filter(Boolean);
+  if (!items.length) {
+    v.innerHTML = `<div class="band"><div class="eyebrow">Compare</div><h1>Nothing to compare yet</h1><p>Open any item, pick identifiers under <b>Find &amp; compare similar</b> (type, archetype, element, perks…) and press <b>Compare</b>, or use <b>Add this item to compare</b> on up to ${CMP_MAX} items.</p></div>`;
+    return;
+  }
+  // optional column sort by a stat row
+  if (CMP.sort) { const [k, dir] = CMP.sort; items.sort((a, b) => ((b.stats[k] ?? -1) - (a.stats[k] ?? -1)) * dir); }
+  const kind = items[0].kind;
+  const cols = items.map(it => ({ it, sk: Core.sockets(it, D) }));
+  const n = items.length;
+  if (CMP.diff == null) CMP.diff = isMobile();
+  const diffOnly = CMP.diff;
+  const rows = [];
+  const same = vals => vals.every(x => x === vals[0]);
+  const row = (label, cells, raw, cls = '') => { if (diffOnly && raw && same(raw)) return; rows.push(`<div class="cr ${cls}"><div class="cl">${label}</div>${cells.map(c => `<div class="cc">${c}</div>`).join('')}</div>`); };
+  // header
+  rows.push(`<div class="cr ch"><div class="cl">${n} item${n === 1 ? '' : 's'}</div>${cols.map(({ it }) => `<div class="cc"><div class="chd" style="--rc:${rarityColor(it.rarity)}" data-open="${esc(it.id)}"><span class="tn">${esc(it.name)}</span>${it.crafted ? CRAFTED_SVG : ''}<button class="x" data-rm="${esc(it.id)}" title="Remove from compare">×</button></div></div>`).join('')}</div>`);
+  const info = (label, f, raw) => row(label, cols.map(({ it }) => f(it) || '<span class="faint">–</span>'), cols.map(({ it }) => raw ? raw(it) : f(it)));
+  info('Type', it => esc(it.type));
+  info(kind === 'armor' ? 'Archetype' : 'Frame', it => esc(it.frame));
+  if (kind === 'weapon') {
+    info('Element', it => it.element ? `${elIcon(it.element)}${esc(it.element)}` : '', it => it.element);
+    info('Ammo', it => it.ammo ? `${ammoIcon(it.ammo)}${esc(it.ammo)}` : '', it => it.ammo);
+    info('Breaker', it => breakerChips(it), it => Core.anyBreaker(it));
+    info('Rating', it => it.rating != null ? `<b style="color:${rateColor(it.rating)}">${it.rating}</b>` : '', it => it.rating);
+  } else {
+    info('Class', it => esc(it.equippable));
+    info('Armor set', it => it.set ? '◈ ' + esc(it.set) : '', it => it.set);
+    info('Tertiary', it => esc(it.tertiary));
+  }
+  info('Rarity', it => `<span style="color:${rarityColor(it.rarity)}">${esc(it.rarity)}</span>`, it => it.rarity);
+  info('Tier', it => it.tier != null ? 'Tier ' + it.tier : '', it => it.tier);
+  info('Power', it => it.power != null ? '◆ ' + it.power : '', it => it.power);
+  info('Source', it => esc(it.source));
+  info('Tag', it => it.tag ? `${TAG_ICON[it.tag] || ''} ${esc(TAG_LABEL[it.tag] || it.tag)}` : '', it => it.tag);
+  // stats with best value highlighted; armor shows base
+  const statNames = [...new Set(items.flatMap(it => Object.keys(it.stats)))].filter(k => k !== 'Total');
+  if ('Total' in items[0].stats) statNames.push('Total');
+  const lowerBetter = new Set(['Charge Time', 'Draw Time']);
+  rows.push(`<div class="cr sech"><div class="cl">Stats <small>click a stat to sort</small></div>${cols.map(() => '<div class="cc"></div>').join('')}</div>`);
+  for (const k of statNames) {
+    const vals = items.map(it => it.stats[k]);
+    const nums = vals.filter(x => x != null);
+    const best = nums.length ? (lowerBetter.has(k) ? Math.min(...nums) : Math.max(...nums)) : null;
+    const max = k === 'Total' ? Math.max(...nums, 1) : ['ROF', 'Mag'].includes(k) ? Math.max(...nums, 1) : kind === 'armor' ? Math.max(45, ...nums) : 100;
+    const sorted = CMP.sort?.[0] === k;
+    row(`<button class="statsort${sorted ? ' on' : ''}" data-stat="${esc(k)}">${esc(k)}${sorted ? (CMP.sort[1] > 0 ? ' ↓' : ' ↑') : ''}</button>`, items.map(it => {
+      const x = it.stats[k]; if (x == null) return '<span class="faint">–</span>';
+      const b = it.base[k]; const add = b != null ? x - b : 0;
+      return `<div class="cstat${x === best && nums.length > 1 && !same(nums) ? ' best' : ''}"><b>${x}</b>${b != null && add ? ` <small>base ${b}${add > 0 ? ' +' + add : ' ' + add}</small>` : ''}<span class="tr"><i style="width:${Math.min(100, (b ?? x) / max * 100)}%"></i>${add > 0 ? `<i class="mod" style="width:${Math.min(100, add / max * 100)}%"></i>` : ''}</span></div>`;
+    }), vals);
+  }
+  // perks: intrinsic, then each column; perks every item shares are muted, unique ones stand out
+  const pk = (p, shared) => `<span class="cpk${p.s ? ' sel' : ' opt'}${shared ? ' shared' : ' uniq'}" data-pk="${esc(p.n)}" title="${esc(p.n)}">${plugIcon(p.n, p.s ? '' : 'sm', pIdx(p.n, kind))}${p.s ? `<span>${esc(p.n)}</span>` : ''}</span>`;
+  const sqpk = (p, shared) => `<span class="cpk sel${shared ? ' shared' : ' uniq'}" data-pk="${esc(p.n)}" title="${esc(p.n)}">${plugIcon(p.n, 'sq', pIdx(p.n, kind))}<span>${esc(p.n)}</span></span>`;
+  const sharedSet = lists => { const sets = lists.map(l => new Set(l.map(p => Core.norm(p.n)))); return x => sets.every(st => st.has(Core.norm(x.n))); };
+  rows.push(`<div class="cr sech"><div class="cl">${kind === 'armor' ? 'Perks &amp; mods' : 'Perks &amp; traits'} <small>muted = all share it</small></div>${cols.map(() => '<div class="cc"></div>').join('')}</div>`);
+  const intr = cols.map(c => [...c.sk.intrinsic, ...c.sk.exotic]);
+  { const sh = sharedSet(intr); row(kind === 'armor' ? 'Archetype / exotic' : 'Intrinsic', intr.map(l => l.map(p => sqpk(p, n > 1 && sh(p))).join('')), intr.map(l => l.map(p => Core.norm(p.n)).join())); }
+  // perk rows line up by socket type (Barrel, Magazine, Trait 1, Trait 2, Origin…), never by position,
+  // so each row compares like with like and an item without that socket shows a dash
+  const byType = cols.map(c => { const m = {}; c.sk.cols.forEach(col => (m[col.ty] ||= []).push(col)); return m; });
+  for (const ty of ['b', 'm', 't', 'o', '?']) {
+    const count = Math.max(0, ...byType.map(m => (m[ty] || []).length));
+    for (let i = 0; i < count; i++) {
+      const lists = byType.map(m => m[ty]?.[i]?.perks || []);
+      const eq = lists.map(l => l.filter(p => p.s));
+      const sh = sharedSet(eq);
+      const lbl = (COL_LABEL[ty] || 'Perk') + (count > 1 ? ' ' + (i + 1) : '');
+      row(lbl, lists.map(l => l.length ? `<div class="cpks">${l.filter(p => p.s).map(p => pk(p, n > 1 && sh(p))).join('')}${l.some(p => !p.s) ? `<div class="copts">${l.filter(p => !p.s).map(p => pk(p, false)).join('')}</div>` : ''}</div>` : '<span class="faint">–</span>'), eq.map(l => l.map(p => Core.norm(p.n)).sort().join()));
+    }
+  }
+  for (const [key, label] of [['mods', 'Mods'], ['mw', 'Masterwork'], ['catalyst', 'Catalyst']]) {
+    const lists = cols.map(c => c.sk[key]);
+    if (!lists.some(l => l.length)) continue;
+    const sh = sharedSet(lists);
+    row(label, lists.map(l => l.map(p => sqpk(p, n > 1 && sh(p))).join('') || '<span class="faint">–</span>'), lists.map(l => l.map(p => Core.norm(p.n)).sort().join()));
+  }
+  if (kind === 'armor') {
+    const sets = items.map(it => D?.sets?.[D?.as?.[it.hash]]);
+    row('Set bonus', sets.map(st => st ? st.p.map(x => `<div class="small"><b>${x.c}pc</b> ${esc(x.n)}</div>`).join('') : '<span class="faint">–</span>'), sets.map(st => st?.n || ''));
+  }
+  row('Notes', items.map(it => it.notes ? `<div class="note">${esc(it.notes)}</div>` : ''), items.map(it => it.notes));
+  v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Compare · ${n} of ${CMP_MAX}${CMP.total > n ? ` · ${CMP.total} matched, showing the best ${n}` : ''}</div><h1>${esc(CMP.label || (kind === 'armor' ? 'Armor' : 'Weapons'))}</h1>${CMP.q ? `<div class="stat-pill"><code>${esc(CMP.q)}</code></div>` : ''}</div>
+      <div class="band-actions"><label class="check${diffOnly ? ' on' : ''}"><input type="checkbox" id="cmpDiff" ${diffOnly ? 'checked' : ''}> Only differences</label><span class="seg mup"><button data-k="1" class="${(CMP.k || 1) === 1 ? 'on' : ''}">1-up</button><button data-k="2" class="${CMP.k === 2 ? 'on' : ''}">2-up</button></span>${CMP.q ? '<button class="btn" id="cmpPane">Open as sort pane</button>' : ''}<button class="btn" id="cmpClear">Clear</button></div></div><div class="progress"></div></div>
+    <div class="clean-body"><div class="stat-pill hint-touch" style="margin-bottom:6px">Swipe sideways between items · long-press a perk for details</div><div class="ctable" style="--n:${n};--k:${CMP.k || 1}">${rows.join('')}</div></div>`;
+  v.querySelectorAll('.mup button').forEach(b => b.onclick = () => { CMP.k = +b.dataset.k; saveCmp(); renderCompare(); });
+  v.querySelectorAll('[data-rm]').forEach(b => b.onclick = e => { e.stopPropagation(); CMP.ids = CMP.ids.filter(x => x !== b.dataset.rm); saveCmp(); renderCompare(); });
+  v.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openItem(b.dataset.open, null));
+  v.querySelectorAll('[data-stat]').forEach(b => b.onclick = () => { const k = b.dataset.stat; CMP.sort = CMP.sort?.[0] === k ? (CMP.sort[1] > 0 ? [k, -1] : null) : [k, lowerBetter.has(k) ? -1 : 1]; saveCmp(); renderCompare(); });
+  v.querySelectorAll('[data-pk]').forEach(b => b.onclick = () => { modal(`<div class="pdet" style="margin:0">${infoHtml(b.dataset.pk, { sq: !b.querySelector('.ic:not(.sq)'), ikind: kind })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); });
+  $('#cmpDiff').onchange = e => { CMP.diff = e.target.checked; saveCmp(); renderCompare(); };
+  $('#cmpClear').onclick = () => { CMP.ids = []; CMP.label = ''; CMP.q = ''; CMP.total = 0; saveCmp(); renderCompare(); };
+  const cp = $('#cmpPane'); if (cp) cp.onclick = () => { setView('vault'); addPane(CMP.q, CMP.label || 'Compare'); };
+}
+
+// phones: the item panel is a bottom sheet; drag the handle/header up for full height, down to shrink or close
+function sheetDrag(d) {
+  let y0 = null, dy = 0;
+  const start = e => { if (!isMobile()) return; y0 = (e.touches ? e.touches[0] : e).clientY; dy = 0; d.style.transition = 'none'; };
+  const move = e => { if (y0 == null) return; dy = (e.touches ? e.touches[0] : e).clientY - y0; if (dy > 0) d.style.transform = `translateY(${dy}px)`; };
+  const end = () => { if (y0 == null) return; y0 = null; d.style.transition = ''; d.style.transform = '';
+    if (dy < -40) d.classList.add('full'); else if (dy > 90) { if (d.classList.contains('full')) d.classList.remove('full'); else closeDrawer(); } };
+  for (const el of [d.querySelector('.grab'), d.querySelector('.d-head')]) { if (!el) continue; el.addEventListener('touchstart', start, { passive: true }); el.addEventListener('touchmove', move, { passive: true }); el.addEventListener('touchend', end); }
+  d.querySelector('.grab').onclick = () => d.classList.toggle('full');
+}
+// long-press any perk / mod (touch) for its full description in a sheet
+(() => {
+  let t = null, x0 = 0, y0 = 0, fired = false;
+  document.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'touch') return; const el = e.target.closest('[data-pk]'); if (!el) return;
+    fired = false; x0 = e.clientX; y0 = e.clientY;
+    const host = el.closest('[data-id]'); const ik = host ? S.byId.get(host.dataset.id)?.kind : (drawerItem?.kind);
+    t = setTimeout(() => { fired = true; navigator.vibrate?.(15); modal(`<div class="pdet" style="margin:0">${infoHtml(el.dataset.pk, { sq: !!el.querySelector('.ic.sq'), ikind: ik })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); }, 450);
+  });
+  const cancel = e => { if (t && (e.type !== 'pointermove' || Math.hypot(e.clientX - x0, e.clientY - y0) > 10)) { clearTimeout(t); t = null; } };
+  ['pointerup', 'pointercancel', 'pointermove'].forEach(k => document.addEventListener(k, cancel));
+  document.addEventListener('click', e => { if (fired) { fired = false; e.preventDefault(); e.stopPropagation(); } }, true);
+  document.addEventListener('contextmenu', e => { if (e.target.closest('[data-pk]') && matchMedia('(pointer:coarse)').matches) e.preventDefault(); });
+})();
+
+// ---------- profile switcher ----------
+function renderProfileButton() {
+  const pr = activeProfile(); const b = $('#bProf'); if (!b || !pr) return;
+  b.querySelector('i').style.background = pr.color; b.querySelector('span').textContent = pr.name;
+  document.documentElement.style.setProperty('--prof', pr.color);
+}
+async function createProfile(name) {
+  const used = new Set(PROF.list.map(x => x.color));
+  PROF.list.push({ id: uid(), name, color: PROF_COLORS.find(c => !used.has(c)) || PROF_COLORS[PROF.list.length % PROF_COLORS.length] });
+  await saveRegistry();
+  await switchProfile(PROF.list[PROF.list.length - 1].id);
+}
+function openProfiles() {
+  const rows = PROF.list.map(pr => {
+    const live = pr.id === PROF.active;
+    const w = live ? S.weapons.length : pr.weapons, a = live ? S.armor.length : pr.armor;
+    const info = (w || a) ? `${w || 0} weapons · ${a || 0} armor${pr.updated ? ' · loaded ' + new Date(pr.updated).toLocaleDateString() : ''}` : 'No vault loaded yet';
+    return `<div class="prow${live ? ' on' : ''}" data-pid="${esc(pr.id)}"><i style="background:${pr.color}"></i><div class="pinfo"><b>${esc(pr.name)}</b><span class="stat-pill">${info}</span></div>
+      ${live ? '<span class="pcur">Open</span>' : ''}<button class="btn small" data-ren="${esc(pr.id)}" title="Rename">Rename</button><button class="btn small" data-delp="${esc(pr.id)}" title="Delete" ${PROF.list.length < 2 ? 'disabled' : ''}>Delete</button></div>`;
+  }).join('');
+  modal(`<h2>Profiles</h2><p class="stat-pill">Each profile keeps its own vault, tags and notes, panes, Clean up and Compare. Loading CSVs that belong to another profile's account is caught and you're asked what to do.</p>
+    <div class="plist">${rows}</div>
+    <div class="pnew"><input class="qin" id="newProf" placeholder="New profile name, e.g. a friend's Bungie name"><button class="btn primary" id="addProf">+ Add profile</button></div>
+    <div style="text-align:right;margin-top:10px"><button class="btn" data-close>Close</button></div>`);
+  document.querySelectorAll('.prow').forEach(r => r.onclick = e => { if (e.target.closest('button')) return; switchProfile(r.dataset.pid); });
+  document.querySelectorAll('[data-ren]').forEach(b => b.onclick = () => {
+    const pr = PROF.list.find(x => x.id === b.dataset.ren);
+    modal(`<h2>Rename profile</h2><input class="qin" id="renName" value="${esc(pr.name)}" style="width:100%;margin:6px 0 12px"><div class="msheet"><button class="btn primary" id="renOk">Save</button><button class="btn" id="renBack">Cancel</button></div>`);
+    $('#renName').focus();
+    $('#renOk').onclick = async () => { pr.name = $('#renName').value.trim() || pr.name; await saveRegistry(); renderProfileButton(); openProfiles(); };
+    $('#renBack').onclick = openProfiles;
+  });
+  document.querySelectorAll('[data-delp]').forEach(b => b.onclick = () => {
+    const pr = PROF.list.find(x => x.id === b.dataset.delp); const n = pr.id === PROF.active ? pendingIds().length : null;
+    modal(`<h2>Delete ${esc(pr.name)}?</h2><p>This permanently removes ${esc(pr.name)}'s saved vault${n ? `, <b>${n} tag/note change${n > 1 ? 's' : ''} not yet sent to DIM</b>` : ', any tag/note changes not yet sent to DIM'}, panes, Clean up choices and Compare list from this app. It can't be undone. Nothing in DIM or the game is touched.</p>
+      <div class="msheet"><button class="btn warn" id="delOk">Delete ${esc(pr.name)}</button><button class="btn" id="delBack">Cancel</button></div>`);
+    $('#delBack').onclick = openProfiles;
+    $('#delOk').onclick = async () => {
+      if (pr.id === PROF.active) await switchProfile(PROF.list.find(x => x.id !== pr.id).id);
+      await deleteProfileData(pr.id);
+      PROF.list = PROF.list.filter(x => x.id !== pr.id); await saveRegistry();
+      toast(`Deleted ${pr.name}.`); openProfiles();
+    };
+  });
+  const add = async () => { const name = $('#newProf').value.trim(); if (!name) return $('#newProf').focus(); closeModal(); await createProfile(name); };
+  $('#addProf').onclick = add; $('#newProf').onkeydown = e => { if (e.key === 'Enter') add(); };
+}
+$('#bProf').onclick = openProfiles;
+
+function closeDrawer() { $('#drawer').classList.remove('open'); $('#scrim').classList.remove('open'); if (drawerItem) { drawerItem = null; if (VIEW === 'clean') renderClean(); else if (VIEW === 'compare') renderCompare(); else refreshBodies(); } }
+$('#scrim').onclick = closeDrawer;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (VIEW !== 'vault' && !$('#drawer').classList.contains('open') && !$('#modal').classList.contains('open')) setView('vault'); closeDrawer(); closeModal(); } });
+
+// ---------- bulk actions ----------
+function tagAll(p) {
+  const ids = [...(S.results[p.id]?.keys() || [])];
+  if (!ids.length) return toast('Nothing to tag in this pane.');
+  modal(`<h2>Tag all ${ids.length} items in “${esc(p.title)}”</h2>
+    <p class="stat-pill">This changes the tag here; it reaches DIM when you export and import the CSV. You can revert items one by one.</p>
+    <div class="tagrow" style="margin:12px 0">${TAGS.map(([v, l, i]) => `<button class="tagbtn" data-tag="${v}">${i} ${l}</button>`).join('')}</div>
+    <div style="text-align:right"><button class="btn" data-close>Cancel</button></div>`);
+  document.querySelectorAll('#modal .tagbtn').forEach(b => b.onclick = () => {
+    ids.forEach(id => setItemEdit(S.byId.get(id), { tag: b.dataset.tag }));
+    closeModal(); refreshBodies(); toast(`Tagged ${ids.length} items as ${b.dataset.tag || 'none'}.`);
+  });
+}
+async function copyDimQuery(p) {
+  const ids = [...(S.results[p.id]?.keys() || [])];
+  if (!ids.length) return toast('Nothing in this pane.');
+  const q = ids.map(id => 'id:' + id).join(' or ');
+  modal(`<h2>DIM search for “${esc(p.title)}”</h2><p class="stat-pill">Paste this into DIM’s search bar to see exactly these ${ids.length} items there.</p>
+    <textarea class="notes" readonly style="font-family:ui-monospace,monospace;font-size:11px">${esc(q)}</textarea>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px"><button class="btn primary" id="cpq">Copy</button><button class="btn" data-close>Close</button></div>`);
+  $('#cpq').onclick = async () => { try { await navigator.clipboard.writeText(q); toast('Copied.'); } catch { toast('Copy blocked: select the text and copy it.'); } };
+  addShareButton($('#cpq'), { text: q, title: 'DIM search: ' + p.title });
+}
+
+// ---------- modal / help ----------
+function modal(html) { $('#modalBox').innerHTML = html; $('#modal').classList.add('open'); $('#modalBox').querySelectorAll('[data-close]').forEach(b => b.onclick = closeModal); }
+function closeModal() { $('#modal').classList.remove('open'); }
+$('#modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
+function openHelp() {
+  const rows = [
+    ['<code>pulse rifle</code> <code>ignition</code> <code>freeze</code> <code>suppress</code>', 'Free text: name, type, frame, perks, notes, source, armor set, breaker, then keywords inside perk, mod, set bonus and exotic descriptions (Bungie, Clarity, Data Compendium). Word forms match too: freeze finds frozen, ignition finds ignite'],
+    ['<code>is:weapon</code> <code>is:armor</code>', 'Item kind'],
+    ['<code>is:exotic</code> <code>rarity:legendary</code>', 'Rarity'],
+    ['<code>is:solar</code> <code>element:strand</code>', 'Element'],
+    ['<code>type:"hand cannon"</code> <code>is:helmet</code>', 'Weapon or armor type'],
+    ['<code>frame:aggressive</code> <code>archetype:bulwark</code>', 'Weapon frame or armor archetype (DIM’s Archetype column)'],
+    ['<code>tier>=4</code> <code>power:>=550</code>', 'Gear tier and power, with <code>= &gt; &gt;= &lt; &lt;=</code>'],
+    ['<code>stat:range>=60</code> <code>stat:rpm:=140</code> <code>basestat:health>=20</code> <code>total>=70</code>', 'Stats (DIM column names; armor 3.0 names and the old names both work)'],
+    ['<code>perk:"kill clip"</code> <code>perksel:frenzy</code> <code>exactperk:"Rampage"</code>', 'Perks: any option, equipped only, or exact name'],
+    ['<code>source:"vault of glass"</code> <code>season:>=24</code>', 'Source and season'],
+    ['<code>tag:keep</code> <code>tag:none</code> <code>is:tagged</code>', 'DIM tags (favorite, keep, infuse, archive, junk)'],
+    ['<code>notes:pvp</code> <code>is:hasnotes</code> <code>notes:none</code>', 'Notes'],
+    ['<code>rating>=80</code> <code>pve>=4.5</code> <code>pvp>=4</code> <code>is:unrated</code>', 'Perk rating (0–100) and light.gg star ratings'],
+    ['<code>is:dupe</code> <code>count>=3</code>', 'Duplicates by name'],
+    ['<code>ammo:heavy</code> <code>is:special</code> <code>sort:ammo</code>', 'Ammo type (sorts Primary → Special → Heavy)'],
+    ['<code>is:breaker</code> <code>breaker:stagger</code> <code>is:shieldpiercing</code> <code>is:disruption</code> <code>breaker:none</code>', 'Intrinsic champion breaker. Every weapon has one (Update 9.7.0), read from Bungie’s game data for each weapon, exotics included. Aliases: antibarrier, overload, unstoppable'],
+    ['<code>set:"smoke jumper"</code> <code>is:setbonus</code> <code>set:none</code> <code>sort:set</code>', 'Armor set bonuses'],
+    ['<code>desc:"damage"</code> <code>clarity:reload</code>', 'Search the Bungie, Clarity and Data Compendium text of an item’s perks and mods'],
+    ['<code>is:crafted</code> <code>is:locked</code> <code>is:vault</code> <code>is:masterwork</code> <code>is:holofoil</code> <code>is:pending</code>', 'Flags (<code>is:pending</code> = edited here, not yet in DIM)'],
+    ['<code>-tag:junk</code> <code>not:is:locked</code>', 'Put <code>-</code> in front of a term to exclude it'],
+    ['<code>is:smg or is:sidearm</code>', '<code>or</code> separates alternatives; terms side by side are all required'],
+    ['<code>sort:stat:range</code>', 'Sort from the search box (overrides the dropdown)'],
+  ];
+  modal(`<h2>Search help</h2><div class="help"><p class="stat-pill">The syntax is close to DIM’s. Every part of an item that made it match is highlighted in that pane’s color, and the colored dots on a card show which other panes it appears in.</p>
+  <table>${rows.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join('')}</table>
+  <p class="stat-pill" style="margin-top:12px"><b>How the rating works:</b> for each perk column on light.gg, your roll gets the popularity of its best perk in that column, scaled so the most popular perk scores 100. The columns are then averaged, with the two trait columns counting double and the origin-trait column counting half. light.gg lists about the top 9 perks per column, so a perk below that list scores half of the lowest listed one. Perks that are among the top picks in their column get a gold outline. The ★ ratings are light.gg’s community PvE/PvP scores for the weapon.</p>
+  <p class="stat-pill"><b>Perk details:</b> descriptions come from the <a href="https://www.d2clarity.com/" target="_blank" rel="noopener noreferrer" style="color:#8fb6ff">Clarity</a> community database and Pip1n’s <a href="https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4" target="_blank" rel="noopener noreferrer" style="color:#8fb6ff">Destiny Data Compendium</a>${D ? ` (snapshot ${esc(D.built)})` : ''}. Icons and intrinsic breakers come from Bungie’s game data.</p></div>
+  <div style="text-align:right"><button class="btn" data-close>Close</button></div>`);
+}
+
+// ---------- subclass viewer ----------
+const SV = { cls: 'warlock', el: 'solar', sel: null, q: '' };
+try { const v = JSON.parse(localStorage.getItem('vs:subv') || 'null'); if (v) Object.assign(SV, { cls: v.cls || SV.cls, el: v.el || SV.el }); } catch {}
+const SV_ELS = [['solar', 'Solar'], ['arc', 'Arc'], ['void', 'Void'], ['stasis', 'Stasis'], ['strand', 'Strand'], ['prism', 'Prismatic']];
+const SV_SECS = [['super', 'Super'], ['classAbility', 'Class ability'], ['movement', 'Movement'], ['melee', 'Melee'], ['grenade', 'Grenade'], ['aspects', 'Aspects'], ['fragments', 'Fragments'], ['transcendence', 'Transcendence']];
+function openSubclasses() {
+  const v = $('#subv');
+  if (!D?.sub) { toast('Subclass data isn’t in this build.'); return; }
+  renderSub();
+}
+function renderSub() {
+  const v = $('#subv'); const cdata = D.sub[SV.cls] || {}; if (!cdata[SV.el]) SV.el = Object.keys(cdata)[0];
+  const sc = cdata[SV.el];
+  try { localStorage.setItem('vs:subv', JSON.stringify({ cls: SV.cls, el: SV.el })); } catch {}
+  const q = SV.q.toLowerCase();
+  const match = a => !q || (a.n + ' ' + a.d + ' ' + perkInfoText(a.n)).toLowerCase().includes(q);
+  const secs = SV_SECS.map(([k, l]) => { const list = (sc?.s?.[k] || []).filter(match); return list.length ? `<div class="sv-sec"><div class="h">${l} · ${list.length}</div><div class="sv-grid">${list.map(a => `<div class="sv-tile${SV.sel === a.h ? ' on' : ''}" data-h="${a.h}" title="${esc(a.n)}">${plugIcon(a.n, 'sq', a.i)}<span>${esc(a.n)}</span></div>`).join('')}</div></div>` : ''; }).join('');
+  v.innerHTML = `<div class="sv-head"><div class="h">Subclasses</div>
+      <div class="tabs">${[['warlock', 'Warlock'], ['titan', 'Titan'], ['hunter', 'Hunter']].filter(([c]) => D.sub[c]).map(([c, l]) => `<button class="tab${c === SV.cls ? ' on' : ''}" data-cls="${c}">${l}</button>`).join('')}</div>
+      <input class="qin" id="svq" placeholder="Filter by name or description…" value="${esc(SV.q)}" style="max-width:280px">
+      <span class="grow"></span><span class="stat-pill">Bungie · Clarity · Data Compendium · light.gg links</span><button class="btn" id="svClose">Close</button></div>
+    <div class="sv-els"><div class="tabs">${SV_ELS.filter(([e]) => cdata[e]).map(([e, l]) => `<button class="tab${e === SV.el ? ' on' : ''}" data-el="${e}">${plugIcon(cdata[e].n, 'sq', cdata[e].i)}${esc(cdata[e].n)}</button>`).join('')}</div></div>
+    <div class="sv-body"><div class="sv-main">${secs || '<div class="empty">Nothing matches.</div>'}</div><div class="sv-det" id="svdet"></div></div>`;
+  v.querySelectorAll('[data-cls]').forEach(b => b.onclick = () => { SV.cls = b.dataset.cls; SV.sel = null; renderSub(); });
+  v.querySelectorAll('[data-el]').forEach(b => b.onclick = () => { SV.el = b.dataset.el; SV.sel = null; renderSub(); });
+  v.querySelectorAll('.sv-tile').forEach(t => t.onclick = () => { const h = +t.dataset.h; v.querySelectorAll('.sv-tile.on').forEach(x => x.classList.remove('on')); if (SV.sel === h) SV.sel = null; else { SV.sel = h; t.classList.add('on'); } showSubDetail(); });
+  const qi = $('#svq'); let tq; qi.oninput = () => { clearTimeout(tq); tq = setTimeout(() => { SV.q = qi.value; const pos = qi.selectionStart; renderSub(); const n = $('#svq'); n.focus(); n.setSelectionRange(pos, pos); }, 200); };
+  $('#svClose').onclick = () => setView('vault');
+  showSubDetail();
+}
+function showSubDetail() {
+  const det = $('#svdet'); if (!det) return;
+  const sc = D.sub[SV.cls]?.[SV.el]; let a = null, sec = '';
+  for (const [k, l] of SV_SECS) { const f = (sc?.s?.[k] || []).find(x => x.h === SV.sel); if (f) { a = f; sec = l; } }
+  if (isMobile() && a) {
+    modal(`<div class="pdet" style="margin:0">${infoHtml(a.n, { bd: a.d, hash: a.h, icon: a.i, sq: true, kind: `${sc.n} · ${sec}` })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`);
+    const prevClose = $('#modalBox').querySelector('[data-close]'); prevClose.onclick = () => { closeModal(); SV.sel = null; document.querySelectorAll('.sv-tile.on').forEach(x => x.classList.remove('on')); };
+  }
+  det.innerHTML = a ? `<div class="pdet" style="margin:0">${infoHtml(a.n, { bd: a.d, hash: a.h, icon: a.i, sq: true, kind: `${sc.n} · ${sec}` })}</div>`
+    : `<div class="stat-pill">Pick an ability, aspect or fragment to read Bungie’s description, Clarity’s tested numbers and the Data Compendium notes. light.gg links open each item’s page there.</div>`;
+}
+
+// ---------- views: Vault (panes) · Clean up · Subclasses ----------
+let VIEW = 'vault';
+function setView(v) {
+  VIEW = v;
+  document.querySelectorAll('nav.views button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
+  const hh = document.querySelector('header').offsetHeight + ($('#banner').offsetHeight || 0);
+  for (const id of ['subv', 'clean', 'compare']) { const el = $('#' + id); el.style.top = hh + 'px'; el.classList.toggle('open', v === id); }
+  if (v === 'subv') openSubclasses();
+  if (v === 'clean') renderClean();
+  if (v === 'compare') renderCompare();
+  if (v === 'vault') refreshBodies();
+}
+document.querySelectorAll('nav.views button').forEach(b => b.onclick = () => setView(b.dataset.view));
+// keep the views just below the header even when it wraps or the banner appears
+const placeViews = () => { const hh = document.querySelector('header').offsetHeight + ($('#banner').offsetHeight || 0); for (const id of ['subv', 'clean', 'compare']) $('#' + id).style.top = hh + 'px'; };
+try { const ro = new ResizeObserver(placeViews); ro.observe(document.querySelector('header')); ro.observe($('#banner')); } catch { window.addEventListener('resize', placeViews); }
+
+// ---------- Clean up: group the vault, decide keep / trash per group, review, apply as DIM tags ----------
+// Like a vault cleaner: pick what makes items "the same kind" (weapon type, frame, element…), the tool ranks each
+// group and suggests keeping the best N; you step through the groups, override any suggestion, then apply.
+const CLEAN_KEYS = {
+  weapon: [['type', 'Weapon type'], ['frame', 'Archetype / frame'], ['element', 'Element'], ['ammo', 'Ammo'], ['slot', 'Slot'], ['rarity', 'Rarity'], ['breaker', 'Breaker'], ['name', 'Same weapon (name)']],
+  armor: [['class', 'Class'], ['type', 'Armor slot'], ['frame', 'Archetype'], ['set', 'Armor set'], ['tertiary', 'Tertiary stat'], ['rarity', 'Rarity'], ['name', 'Same armor (name)']],
+};
+const CLEAN_RANK = { weapon: [['rating', 'Perk rating (light.gg)'], ['tier', 'Gear tier'], ['power', 'Power'], ['season', 'Newest season'], ['kills', 'Kills']], armor: [['total', 'Stat total'], ['tier', 'Gear tier'], ['power', 'Power'], ['season', 'Newest season']] };
+const CL = {
+  setup: { kind: 'weapon', keys: { weapon: ['type', 'frame', 'element'], armor: ['class', 'type', 'frame'] }, rank: { weapon: 'rating', armor: 'total' }, keep: 1, filter: '', exoticsByName: true, protectTags: true, protectLocked: true, onlyNeeded: true },
+  dec: {},        // itemId -> 'keep' | 'trash' (explicit choices; otherwise the suggestion applies)
+  gi: 0, step: 'setup',
+};
+const CL_DEFAULT = JSON.stringify(CL.setup);
+function loadCleanState() {
+  CL.setup = JSON.parse(CL_DEFAULT); CL.dec = {}; CL.gi = 0; CL.step = 'setup';
+  const v = LS.get(PK('clean')); if (v) { Object.assign(CL.setup, v.setup || {}); CL.dec = v.dec || {}; CL.gi = v.gi || 0; CL.step = v.step || 'setup'; }
+}
+let cleanSaveT;
+async function writeClean() {
+  const v = { setup: CL.setup, dec: CL.dec, gi: CL.gi, step: CL.step };
+  LS.set(PK('clean'), v);
+  if (S.db) { try { await dbSet(PP('config/clean'), v); } catch (e) { console.warn(e); } }
+}
+function saveClean() {
+  clearTimeout(cleanSaveT);
+  cleanSaveT = setTimeout(() => { cleanSaveT = null; writeClean(); }, 600);
+}
+async function loadCleanFromDb() { if (!S.db) return; try { const v = await dbGet(PP('config/clean')); if (v) { Object.assign(CL.setup, structuredClone(v.setup || {})); CL.dec = structuredClone(v.dec || {}); CL.gi = v.gi || 0; CL.step = v.step || 'setup'; } } catch {} }
+const cleanKey = (it, k) => k === 'slot' ? (it.category || '—') : k === 'class' ? (it.equippable || '—') : k === 'tertiary' ? (it.tertiary || '—') : Core.groupKey(it, k) || '—';
+function cleanRankVal(it, r) { const v = r === 'total' ? Core.findStat(it.stats, 'total')[1] : r === 'rating' ? it.rating : it[r]; return v == null ? -Infinity : v; }
+const isProtected = it => (CL.setup.protectTags && (it.tag === 'favorite' || it.tag === 'keep')) || (CL.setup.protectLocked && it.locked);
+function cleanGroups() {
+  const st = CL.setup, kind = st.kind;
+  let items = S.items.filter(i => i.kind === kind);
+  if (st.filter.trim()) { const res = Core.runQuery(Core.parseQuery(st.filter), items, Core.buildCtx(S.items, new Set(pendingIds()), D)); items = items.filter(i => res.has(i.id)); }
+  const keys = st.keys[kind]?.length ? st.keys[kind] : ['type'];
+  const rank = st.rank[kind] || CLEAN_RANK[kind][0][0];
+  const map = new Map();
+  for (const it of items) {
+    const ex = st.exoticsByName && /exotic/i.test(it.rarity);
+    const parts = ex ? [it.name] : keys.map(k => cleanKey(it, k));
+    const key = (ex ? 'Exotic · ' : '') + parts.join(' · ');
+    if (!map.has(key)) map.set(key, { key, parts, ex, items: [] });
+    map.get(key).items.push(it);
+  }
+  const groups = [...map.values()];
+  for (const g of groups) {
+    g.items.sort((a, b) => cleanRankVal(b, rank) - cleanRankVal(a, rank) || (b.crafted - a.crafted) || ((b.mwTier ?? 0) - (a.mwTier ?? 0)) || (b.power ?? 0) - (a.power ?? 0));
+    let kept = 0;
+    g.sugg = {};
+    for (const it of g.items) {
+      if (isProtected(it)) { g.sugg[it.id] = 'keep'; kept++; continue; }
+      g.sugg[it.id] = kept < st.keep ? 'keep' : 'trash'; if (g.sugg[it.id] === 'keep') kept++;
+    }
+    g.needs = g.items.some(i => g.sugg[i.id] === 'trash');
+  }
+  const shown = st.onlyNeeded ? groups.filter(g => g.needs) : groups;
+  shown.sort((a, b) => b.items.length - a.items.length || a.key.localeCompare(b.key));
+  return { groups: shown, all: groups, total: items.length, rank };
+}
+const decOf = (it, g) => CL.dec[it.id] || g.sugg[it.id];
+function renderClean() {
+  const v = $('#clean');
+  if (!S.items.length) { v.innerHTML = `<div class="band"><h1>Clean up</h1><p>Load your DIM CSVs first.</p></div>`; return; }
+  if (CL.step === 'setup') return renderCleanSetup(v);
+  const G = cleanGroups();
+  if (CL.step === 'review' || !G.groups.length) return renderCleanReview(v, G);
+  CL.gi = Math.max(0, Math.min(CL.gi, G.groups.length - 1));
+  const g = G.groups[CL.gi];
+  const kind = CL.setup.kind;
+  const counts = G.groups.reduce((a, gg) => { gg.items.forEach(i => a[decOf(i, gg)]++); return a; }, { keep: 0, trash: 0 });
+  const chip = (k, val) => k === 'element' ? `${elIcon(val)}${esc(val)}` : k === 'ammo' ? `${ammoIcon(val)}${esc(val)}` : k === 'breaker' ? `${breakerIcon(val)}${esc(val)}` : esc(val);
+  const keys = g.ex ? ['name'] : (CL.setup.keys[kind] || []);
+  v.innerHTML = `<div class="band slim"><div class="band-row">
+      <div><div class="eyebrow">Clean up · ${kind === 'weapon' ? 'Weapons' : 'Armor'} · group ${CL.gi + 1} of ${G.groups.length}</div>
+        <h1>${g.parts.map((x, i) => `<span class="gchip">${chip(keys[i], x)}</span>`).join('<span class="gsep">/</span>')}</h1>
+        <div class="stat-pill">${g.items.length} items · ranked by ${esc((CLEAN_RANK[kind].find(r => r[0] === G.rank) || [, G.rank])[1])} · suggestion keeps the best ${CL.setup.keep}${CL.setup.protectTags ? ', plus anything tagged favorite/keep' : ''}${CL.setup.protectLocked ? ' or locked' : ''}</div></div>
+      <div class="band-actions"><span class="tally"><b class="k">${counts.keep}</b> keep · <b class="t">${counts.trash}</b> trash</span>
+        <button class="btn" id="clSetup">Setup</button><button class="btn" id="clReview">Review &amp; apply</button></div></div>
+      <div class="progress"><i style="width:${((CL.gi + 1) / G.groups.length * 100).toFixed(1)}%"></i></div></div>
+    <div class="clean-body">
+      <div class="gnav"><button class="btn" id="clPrev" ${CL.gi ? '' : 'disabled'}>← Previous</button>
+        <button class="btn" id="clKeepAll">Keep all</button><button class="btn" id="clReset">Use suggestions</button><button class="btn" id="clTrashRest">Keep best ${CL.setup.keep}, trash rest</button>
+        <span class="grow"></span><span class="stat-pill hint-desk">Keys: K keep · T trash · ← → groups</span><span class="stat-pill hint-touch">Swipe a card right to keep, left to trash</span>
+        <button class="btn primary" id="clNext">${CL.gi < G.groups.length - 1 ? 'Next group →' : 'Review →'}</button></div>
+      <div class="tiles">${g.items.map((it, i) => cleanTile(it, g, i)).join('')}</div>
+    </div>`;
+  v.querySelectorAll('[data-dec]').forEach(b => b.onclick = e => { e.stopPropagation(); const id = b.closest('.tile').dataset.id; const it = S.byId.get(id); const val = b.dataset.dec; CL.dec[id] = val; if (val === g.sugg[id]) delete CL.dec[id]; saveClean(); renderClean(); });
+  if (matchMedia('(pointer:coarse)').matches) v.querySelectorAll('.tile').forEach(t => swipeTile(t, val => { const next = t.nextElementSibling?.dataset.id; t.querySelector(`[data-dec=${val}]`).click(); if (next) setTimeout(() => document.querySelector(`#clean .tile[data-id="${next}"]`)?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 30); }));
+  v.querySelectorAll('.tile').forEach(t => { t.onclick = e => { if (!e.target.closest('[data-dec]')) openItem(t.dataset.id, null, e.target.closest('[data-pk]')?.dataset.pk); }; t.onmouseenter = () => { CL.hover = t.dataset.id; }; });
+  $('#clPrev').onclick = () => { CL.gi--; saveClean(); renderClean(); };
+  $('#clNext').onclick = () => { if (CL.gi < G.groups.length - 1) CL.gi++; else CL.step = 'review'; saveClean(); renderClean(); };
+  $('#clSetup').onclick = () => { CL.step = 'setup'; saveClean(); renderClean(); };
+  $('#clReview').onclick = () => { CL.step = 'review'; saveClean(); renderClean(); };
+  $('#clKeepAll').onclick = () => { g.items.forEach(i => { if (g.sugg[i.id] === 'keep') delete CL.dec[i.id]; else CL.dec[i.id] = 'keep'; }); saveClean(); renderClean(); };
+  $('#clReset').onclick = () => { g.items.forEach(i => delete CL.dec[i.id]); saveClean(); renderClean(); };
+  $('#clTrashRest').onclick = () => { g.items.forEach(i => delete CL.dec[i.id]); saveClean(); renderClean(); };
+}
+// touch: drag a tile right to keep, left to trash
+function swipeTile(t, decide) {
+  let x0 = null, y0 = 0, dx = 0, horiz = null;
+  t.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; dx = 0; horiz = null; t.style.transition = 'none'; }, { passive: true });
+  t.addEventListener('touchmove', e => {
+    if (x0 == null) return; dx = e.touches[0].clientX - x0; const dy = e.touches[0].clientY - y0;
+    if (horiz == null && Math.hypot(dx, dy) > 8) horiz = Math.abs(dx) > Math.abs(dy);
+    if (!horiz) return;
+    t.style.transform = `translateX(${dx}px) rotate(${dx / 40}deg)`;
+    t.dataset.swipe = dx > 60 ? 'keep' : dx < -60 ? 'trash' : '';
+  }, { passive: true });
+  t.addEventListener('touchend', () => {
+    if (x0 == null) return; x0 = null; t.style.transition = ''; t.style.transform = ''; const s = t.dataset.swipe; t.dataset.swipe = '';
+    if (horiz && Math.abs(dx) > 90) decide(dx > 0 ? 'keep' : 'trash');
+  });
+}
+function cleanTile(it, g, i) {
+  const d = decOf(it, g), sug = g.sugg[it.id], prot = isProtected(it);
+  const kind = it.kind; const r = CL.setup.rank[kind] || 'rating';
+  const rv = cleanRankVal(it, r);
+  const sk = socketsCard(it, new Set());
+  const stats = kind === 'armor' ? `<div class="stats">${['Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee'].filter(k => k in it.stats).map(k => `<span>${k} <b>${it.stats[k]}</b></span>`).join('')}${'Total' in it.stats ? `<span>Total <b>${it.stats.Total}</b></span>` : ''}</div>` : '';
+  return `<div class="tile ${d}" data-id="${esc(it.id)}" style="--rc:${rarityColor(it.rarity)}">
+    <div class="tile-h"><span class="rank">#${i + 1}</span><span class="tn">${esc(it.name)}</span>${it.crafted ? CRAFTED_SVG : ''}<span class="rv">${rv === -Infinity ? '–' : rv}</span></div>
+    <div class="tile-b">
+      <div class="sub">${it.element ? `<span class="cfield">${elIcon(it.element)}${esc(it.element)}</span>` : ''}${it.tier != null ? `<span>Tier ${it.tier}</span>` : ''}${it.power != null ? `<span>◆ ${it.power}</span>` : ''}${it.tag ? `<span>${TAG_ICON[it.tag] || ''} ${esc(TAG_LABEL[it.tag] || it.tag)}</span>` : ''}${it.locked ? '<span title="Locked in game">🔒</span>' : ''}${Core.anyBreaker(it) ? breakerChips(it) : ''}</div>
+      ${sk}${stats}${it.notes ? `<div class="note">${esc(it.notes)}</div>` : ''}
+    </div>
+    <div class="tile-f"><button class="dec keep${d === 'keep' ? ' on' : ''}" data-dec="keep">Keep</button><button class="dec trash${d === 'trash' ? ' on' : ''}" data-dec="trash">Trash</button>
+      <span class="sugg">${CL.dec[it.id] ? 'Your choice' : prot ? 'Protected' : 'Suggested'}</span></div>
+  </div>`;
+}
+function renderCleanSetup(v) {
+  const st = CL.setup, kind = st.kind;
+  const sel = st.keys[kind] || [];
+  const G = cleanGroups();
+  v.innerHTML = `<div class="band"><div class="eyebrow">Clean up</div><h1>Sort your vault into groups</h1>
+      <p>Pick what makes two items “the same kind”. Every group is ranked, the best ${st.keep} are suggested to keep and the rest to trash. You step through the groups, change any call, then apply your choices as DIM tags (keep / junk).</p></div>
+    <div class="clean-body setup">
+      <section class="vsec"><div class="vlabel">Gear</div><div class="vbody"><div class="seg">${[['weapon', `Weapons (${S.weapons.length})`], ['armor', `Armor (${S.armor.length})`]].map(([k, l]) => `<button data-kind="${k}" class="${k === kind ? 'on' : ''}">${l}</button>`).join('')}</div></div></section>
+      <section class="vsec"><div class="vlabel">Group by</div><div class="vbody"><div class="checks">${CLEAN_KEYS[kind].map(([k, l]) => `<label class="check${sel.includes(k) ? ' on' : ''}"><input type="checkbox" data-key="${k}" ${sel.includes(k) ? 'checked' : ''}> ${l}${sel.includes(k) ? ` <small>${sel.indexOf(k) + 1}</small>` : ''}</label>`).join('')}</div>
+        <p class="stat-pill">Groups use the keys in the order you tick them. Weapon type + archetype + element is the classic split.</p></div></section>
+      <section class="vsec"><div class="vlabel">Rank by</div><div class="vbody"><div class="seg">${CLEAN_RANK[kind].map(([k, l]) => `<button data-rank="${k}" class="${(st.rank[kind] || CLEAN_RANK[kind][0][0]) === k ? 'on' : ''}">${l}</button>`).join('')}</div>
+        <div class="row2"><label>Keep the best <input type="number" min="0" max="20" id="clKeep" value="${st.keep}"> per group</label></div></div></section>
+      <section class="vsec"><div class="vlabel">Rules</div><div class="vbody checks col">
+        <label class="check${st.exoticsByName ? ' on' : ''}"><input type="checkbox" data-opt="exoticsByName" ${st.exoticsByName ? 'checked' : ''}> Exotics: compare copies of the same exotic only</label>
+        <label class="check${st.protectTags ? ' on' : ''}"><input type="checkbox" data-opt="protectTags" ${st.protectTags ? 'checked' : ''}> Always keep items tagged favorite or keep</label>
+        <label class="check${st.protectLocked ? ' on' : ''}"><input type="checkbox" data-opt="protectLocked" ${st.protectLocked ? 'checked' : ''}> Always keep locked items</label>
+        <label class="check${st.onlyNeeded ? ' on' : ''}"><input type="checkbox" data-opt="onlyNeeded" ${st.onlyNeeded ? 'checked' : ''}> Skip groups where nothing would be trashed</label></div></section>
+      <section class="vsec"><div class="vlabel">Only items matching</div><div class="vbody"><input class="qin" id="clFilter" spellcheck="false" placeholder="optional search, e.g. -is:crafted season:<20" value="${esc(st.filter)}"></div></section>
+      <div class="setup-foot"><span class="stat-pill">${G.total} ${kind === 'weapon' ? 'weapons' : 'armor pieces'} → <b>${G.groups.length}</b> groups to review (${G.all.length} groups in all)${Object.keys(CL.dec).length ? ` · ${Object.keys(CL.dec).length} choices saved` : ''}</span>
+        <span class="grow"></span>${Object.keys(CL.dec).length ? '<button class="btn" id="clClear">Clear my choices</button>' : ''}<button class="btn primary" id="clStart" ${G.groups.length ? '' : 'disabled'}>Start reviewing →</button></div>
+    </div>`;
+  v.querySelectorAll('[data-kind]').forEach(b => b.onclick = () => { st.kind = b.dataset.kind; CL.gi = 0; saveClean(); renderClean(); });
+  v.querySelectorAll('[data-key]').forEach(c => c.onchange = () => { const k = c.dataset.key; const arr = st.keys[kind] = (st.keys[kind] || []).filter(x => x !== k); if (c.checked) arr.push(k); CL.gi = 0; saveClean(); renderClean(); });
+  v.querySelectorAll('[data-rank]').forEach(b => b.onclick = () => { st.rank[kind] = b.dataset.rank; saveClean(); renderClean(); });
+  v.querySelectorAll('[data-opt]').forEach(c => c.onchange = () => { st[c.dataset.opt] = c.checked; saveClean(); renderClean(); });
+  $('#clKeep').onchange = e => { st.keep = Math.max(0, Math.min(20, +e.target.value || 0)); saveClean(); renderClean(); };
+  let ft; $('#clFilter').oninput = e => { clearTimeout(ft); ft = setTimeout(() => { st.filter = e.target.value; saveClean(); const pos = e.target.selectionStart; renderClean(); const n = $('#clFilter'); n.focus(); n.setSelectionRange(pos, pos); }, 350); };
+  $('#clStart').onclick = () => { CL.step = 'groups'; CL.gi = 0; saveClean(); renderClean(); };
+  const cc = $('#clClear'); if (cc) cc.onclick = () => { CL.dec = {}; saveClean(); renderClean(); toast('Cleared your keep/trash choices.'); };
+}
+function renderCleanReview(v, G) {
+  const keep = [], trash = [];
+  for (const g of G.groups) for (const it of g.items) (decOf(it, g) === 'trash' ? trash : keep).push(it);
+  const newTag = (it, d) => d === 'trash' ? 'junk' : (it.tag === 'favorite' ? 'favorite' : 'keep');
+  const changes = [...keep.map(it => [it, 'keep']), ...trash.map(it => [it, 'trash'])].filter(([it, d]) => it.tag !== newTag(it, d));
+  const list = (arr, cls) => arr.length ? `<div class="rev-list">${arr.map(it => `<div class="rev ${cls}" data-id="${esc(it.id)}" style="--rc:${rarityColor(it.rarity)}"><span class="tn">${esc(it.name)}</span><span class="stat-pill">${esc(it.type)}${it.frame ? ' · ' + esc(it.frame) : ''}${it.tier != null ? ' · T' + it.tier : ''}${it.power != null ? ' · ◆' + it.power : ''}</span></div>`).join('')}</div>` : '<div class="stat-pill">None.</div>';
+  v.innerHTML = `<div class="band"><div class="eyebrow">Clean up · review</div><h1><span class="k">${keep.length}</span> keep · <span class="t">${trash.length}</span> trash</h1>
+      <p>Applying sets the DIM tag: <b>keep</b> (favorites stay favorite) or <b>junk</b>. Nothing is deleted. Then use <b>Export to DIM</b>, import the CSV in DIM, and use the copied DIM search to find the junk items and dismantle them in game.</p></div>
+    <div class="clean-body">
+      <div class="gnav"><button class="btn" id="clBack">← Back to groups</button><button class="btn" id="clSetup2">Setup</button><span class="grow"></span>
+        <button class="btn" id="clCopyT" ${trash.length ? '' : 'disabled'}>Copy DIM search: trash</button>
+        <button class="btn primary" id="clApply" ${changes.length ? '' : 'disabled'}>Apply ${changes.length} tag change${changes.length === 1 ? '' : 's'}</button></div>
+      <div class="rev-cols"><div><div class="vlabel h2">Trash · ${trash.length}</div>${list(trash, 'trash')}</div><div><div class="vlabel h2">Keep · ${keep.length}</div>${list(keep, 'keep')}</div></div>
+    </div>`;
+  v.querySelectorAll('.rev').forEach(r => r.onclick = () => openItem(r.dataset.id, null));
+  $('#clBack').onclick = () => { CL.step = 'groups'; saveClean(); renderClean(); };
+  $('#clSetup2').onclick = () => { CL.step = 'setup'; saveClean(); renderClean(); };
+  addShareButton($('#clCopyT'), { text: trash.map(it => 'id:' + it.id).join(' or '), title: 'DIM search: trash' });
+  $('#clCopyT').onclick = async () => { const q = trash.map(it => 'id:' + it.id).join(' or '); try { await navigator.clipboard.writeText(q); toast(`Copied a DIM search for ${trash.length} items.`); } catch { modal(`<h2>DIM search for trash</h2><textarea class="notes" readonly>${esc(q)}</textarea><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); } };
+  $('#clApply').onclick = () => { changes.forEach(([it, d]) => setItemEdit(it, { tag: newTag(it, d) })); renderHeader(); renderClean(); toast(`Tagged ${changes.length} items. Use Export to DIM to send them.`); };
+}
+document.addEventListener('keydown', e => {
+  if (VIEW !== 'clean' || CL.step !== 'groups' || e.target.closest('input,textarea,select') || $('#drawer').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') $('#clNext')?.click();
+  else if (e.key === 'ArrowLeft') $('#clPrev')?.click();
+  else if ((e.key === 'k' || e.key === 't') && CL.hover) document.querySelector(`#clean .tile[data-id="${CL.hover}"] [data-dec=${e.key === 'k' ? 'keep' : 'trash'}]`)?.click();
+});
+
+// ---------- header ----------
+function renderHeader() {
+  const nr = S.weapons.filter(w => w.rating != null).length;
+  $('#summary').textContent = S.items.length ? `${S.weapons.length} weapons · ${S.armor.length} armor · ${nr}/${S.weapons.length} weapons rated${S.meta?.updated ? ' · loaded ' + new Date(S.meta.updated).toLocaleDateString() : ''}` : 'No vault loaded';
+  const n = pendingIds().length;
+  $('#pending').textContent = n ? `${n} change${n > 1 ? 's' : ''} not yet in DIM` : '';
+  $('#bExport').style.display = n ? '' : 'none';
+  const md = $('#mDot'); if (md) md.style.display = n ? 'block' : 'none';
+}
+function renderAll() { renderPanes(); renderHeader(); updCmpN(); }
+
+$('#bLoad').onclick = openLoad;
+$('#bExport').onclick = exportCsv;
+$('#bHelp').onclick = openHelp;
+// phone ⋯ menu: everything the desktop header shows
+let installPrompt = null;
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; });
+$('#bMenu').onclick = () => {
+  const n = pendingIds().length;
+  modal(`<h2>Vault Sorter</h2><p class="stat-pill">${esc($('#summary').textContent)}</p>
+    <div class="msheet">
+      <button class="btn" id="mProf">Profile: ${esc(activeProfile().name)} ▾</button>
+      <button class="btn" id="mLoad">Load DIM CSVs</button>
+      ${n ? `<button class="btn warn" id="mExport">Export ${n} change${n > 1 ? 's' : ''} to DIM</button>` : ''}
+      <button class="btn" id="mHelp">Search help</button>
+      ${installPrompt ? '<button class="btn" id="mInstall">Install app on this phone</button>' : ''}
+      <button class="btn" data-close>Close</button></div>
+    ${!installPrompt && !matchMedia('(display-mode: standalone)').matches ? '<p class="stat-pill">To add it to your home screen: iPhone Safari → Share → Add to Home Screen; Android Chrome → ⋮ → Install app. Works for a hosted copy of the app, not inside claude.ai.</p>' : ''}`);
+  $('#mLoad').onclick = () => { closeModal(); openLoad(); };
+  $('#mProf').onclick = () => openProfiles();
+  $('#mHelp').onclick = () => { closeModal(); openHelp(); };
+  const me = $('#mExport'); if (me) me.onclick = () => { closeModal(); exportCsv(); };
+  const mi = $('#mInstall'); if (mi) mi.onclick = async () => { closeModal(); installPrompt.prompt(); try { await installPrompt.userChoice; } catch {} installPrompt = null; };
+};
+// offline cache / installability for hosted copies (not inside claude.ai, where service workers aren't available)
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost') && !/claude\.ai|claudeusercontent/.test(location.hostname)) {
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+// re-layout when crossing the phone breakpoint (rotation, resizing)
+matchMedia('(max-width: 760px)').addEventListener?.('change', () => { if (VIEW === 'vault') renderPanes(); else setView(VIEW); });
+
+renderAll();
+loadAll();
+})();
+</script>
+</body>
+</html>

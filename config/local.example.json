@@ -1,0 +1,5 @@
+{
+  "_comment": "Copy to config/local.json (gitignored) and fill in locally. Never commit the real values; CI uses the BUNGIE_API_KEY and BUNGIE_CLIENT_ID repository secrets instead.",
+  "bungieApiKey": "",
+  "bungieClientId": ""
+}

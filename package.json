@@ -1,0 +1,18 @@
+{
+  "name": "ghost",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ghost: sort, tag and annotate a Destiny 2 vault from DIM CSV exports, with light.gg-based perk ratings",
+  "scripts": {
+    "build": "python build.py",
+    "build:hosted": "python build.py --target hosted",
+    "defs": "node --max-old-space-size=4096 tools/build-defs.mjs --refresh",
+    "icons": "node tools/fetch-icons.mjs && python tools/build-sprite.py",
+    "test": "node test/core.smoke.js && node test/security.test.js",
+    "e2e": "python build.py && python build.py --target hosted && node test/e2e.playwright.js && node test/security.e2e.js",
+    "secrets": "node tools/check-secrets.mjs --all",
+    "audit": "npm audit --audit-level=high",
+    "gates": "npm run audit && npm run secrets && npm test && npm run e2e"
+  },
+  "devDependencies": { "playwright": "^1.48.0" }
+}

@@ -1,0 +1,71 @@
+# Security gates + tests on every push and pull request (GHOST_PLAN → Security).
+# Actions are pinned to full commit SHAs; the workflow token is read-only.
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets:
+    name: Secret scan (gitleaks, full history)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install gitleaks 8.30.1 (checksum-verified)
+        run: |
+          set -euo pipefail
+          V=8.30.1
+          curl -sSfL -o gl.tgz "https://github.com/gitleaks/gitleaks/releases/download/v${V}/gitleaks_${V}_linux_x64.tar.gz"
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  gl.tgz" | sha256sum -c -
+          tar -xzf gl.tgz gitleaks && rm gl.tgz
+      - name: gitleaks
+        run: ./gitleaks git --config .gitleaks.toml --redact --no-banner --exit-code 1 .
+      - name: Real key/client_id never in the repo
+        env:
+          BUNGIE_API_KEY: ${{ secrets.BUNGIE_API_KEY }}
+          BUNGIE_CLIENT_ID: ${{ secrets.BUNGIE_CLIENT_ID }}
+        run: node tools/check-secrets.mjs --all
+
+  test:
+    name: Audit, build, unit + browser security tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.11'
+      - run: npm ci
+      - name: npm audit (fails on high/critical)
+        run: npm audit --audit-level=high
+      - name: Build both targets
+        run: |
+          python build.py
+          python build.py --target hosted
+      - name: Artifact build never contains the real key or client_id
+        env:
+          BUNGIE_API_KEY: ${{ secrets.BUNGIE_API_KEY }}
+          BUNGIE_CLIENT_ID: ${{ secrets.BUNGIE_CLIENT_ID }}
+        run: node tools/check-secrets.mjs --dir dist
+      - run: npm test
+      - name: Browser for the e2e tests
+        run: npx playwright install --with-deps chromium
+      - name: e2e + browser security tests (XSS, CSP violations, SW cache, storage)
+        run: npm run e2e

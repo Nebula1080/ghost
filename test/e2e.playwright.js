@@ -1,0 +1,30 @@
+const { chromium } = require('playwright');
+(async () => {
+  // CHROME_PATH, else a locally installed Chrome/Edge, else Playwright's own Chromium (CI)
+  const exe = process.env.CHROME_PATH || ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find(p => require('fs').existsSync(p));
+  const b = await chromium.launch({ ...(exe ? { executablePath: exe } : {}) });
+  const pg = await b.newPage({ viewport: { width: 1500, height: 900 } });
+  pg.on('pageerror', e => console.log('PAGEERROR', e.message));
+  pg.on('console', m => { if (m.type()==='error') console.log('CONSOLE', m.text()); });
+  await pg.addInitScript(() => localStorage.setItem('vs:ratings', JSON.stringify({"1399243961":{n:"Reed",pve:4.8,pvp:3.7,c:[[["Arrowhead Brake",100,20.6],["Corkscrew Rifling",60,12.5]],[["Accelerated Coils",100,30],["Liquid Coils",40,12]],[["Triple Tap",100,39.6],["Surplus",26,10.2]],[["Firing Line",100,40]]]}})));
+  await pg.goto('file://'+require('path').resolve(__dirname,'../dist/index.html'));
+  await pg.waitForTimeout(500);
+  await pg.click('#bLoad');
+  await pg.setInputFiles('#file', [__dirname+'/fixtures/sample-weapons.csv',__dirname+'/fixtures/sample-armor.csv']);
+  await pg.waitForTimeout(800);
+  console.log(await pg.textContent('#summary'));
+  const qs = await pg.$$('.qin');
+  await qs[1].fill('rating>=50 or is:armor total>=70'); await pg.waitForTimeout(400);
+  console.log((await pg.$$eval('.pane', ps => ps.map(p => p.querySelector('.count').textContent + ' | ' + [...p.querySelectorAll('.hit')].map(h=>h.textContent.trim()).join(', ')))));
+  await pg.screenshot({ path: __dirname+'/shot1.png' });
+  await pg.click('.pane:nth-child(2) .card');
+  await pg.waitForTimeout(300);
+  await pg.click('.tagbtn[data-tag=junk]');
+  await pg.fill('#drawer textarea', 'test note, "quoted"'); await pg.waitForTimeout(700);
+  await pg.screenshot({ path: __dirname+'/shot2.png' });
+  await pg.click('#dClose'); await pg.waitForTimeout(300);
+  console.log(await pg.textContent('#pending'));
+  await pg.click('#bExport'); await pg.waitForTimeout(300);
+  console.log(await pg.$eval('#modal textarea', t => t.value));
+  await b.close();
+})();

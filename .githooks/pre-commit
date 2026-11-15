@@ -1,0 +1,23 @@
+#!/bin/sh
+# Ghost pre-commit: secret scan of the staged changes. Enabled with: git config core.hooksPath .githooks
+# Fails the commit if gitleaks or the exact-value check finds anything. Never bypass with --no-verify.
+set -e
+cd "$(git rev-parse --show-toplevel)"
+
+GL=""
+if [ -x tools/bin/gitleaks.exe ]; then GL=tools/bin/gitleaks.exe
+elif [ -x tools/bin/gitleaks ]; then GL=tools/bin/gitleaks
+elif command -v gitleaks >/dev/null 2>&1; then GL=gitleaks
+fi
+if [ -z "$GL" ]; then
+  echo "pre-commit: gitleaks not found (expected tools/bin/gitleaks.exe). Install it; commits are blocked until then." >&2
+  exit 1
+fi
+"$GL" git --staged --config .gitleaks.toml --redact --no-banner --exit-code 1
+node tools/check-secrets.mjs
+
+# real vault exports must never be staged, even if someone force-adds them
+if git diff --cached --name-only --diff-filter=ACMR | grep -E '\.csv$' | grep -vE '^test/fixtures/' >/dev/null; then
+  echo "pre-commit: a CSV outside test/fixtures/ is staged. Real DIM exports stay out of git (private/)." >&2
+  exit 1
+fi

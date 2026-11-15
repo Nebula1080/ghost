@@ -1,0 +1,28 @@
+# --- Secrets & private data (GHOST_PLAN Security: release blockers) ---
+private/
+config/local.json
+.env
+.env*
+*.pem
+*.key
+# Real vault exports and any other CSVs. Only the synthetic test fixtures are allowed.
+*.csv
+!test/fixtures/*.csv
+*.local.csv
+# DIM exports sometimes get saved with these names
+destiny-*.csv
+dim-*.json
+
+# --- Tooling ---
+node_modules/
+tools/bin/
+test/*.png
+test/out/
+
+# --- Build output (rebuilt by build.py / CI) ---
+dist/
+dist-hosted/
+
+# --- Reference data caches (rebuilt by tools/build-defs.mjs; defs.json + sprite.webp are committed) ---
+data/raw/
+data/sprite.png

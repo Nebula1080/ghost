@@ -1,0 +1,125 @@
+# Ghost (formerly Vault Sorter): Destiny 2 vault sorting on top of DIM
+
+**Current plan: `GHOST_PLAN.md`** (visual overhaul + GitHub Pages copy with Bungie sign-in). Its Security section is a release blocker for every step; see *Security* below for what is in place.
+
+## Goal (in the user's words, condensed)
+Help sort a Destiny 2 vault. Read all the information for each item, and tag and add notes to items so they show up in **DIM (Destiny Item Manager)**. Auto-sort and view items by notes, tags, rarity, element, archetype, frame, stats, source, power, tier and perks. Show **several sort queries at once**. **Highlight on each item why it matched** a query. Show a **rating per item based on community perk data from light.gg**.
+
+## How it works
+- **Input:** DIM's own spreadsheet export (DIM → Settings → Spreadsheets → Weapons / Armor CSV). The claude.ai artifact build has no Bungie API code; the hosted build (GitHub Pages, GHOST_PLAN track A) will add Bungie sign-in and keep the CSV drop for tags/notes.
+- **Output to DIM:** a CSV with `Name,Hash,Id,Tag,Notes` for changed items only, loaded through DIM → Settings → Spreadsheets → *Import tags/notes*. This is the **only** write path into DIM: DIM Sync's API keys are issued by the DIM team, so outside apps can't use it. Importer source: `reference/dim-spreadsheets.ts` → `importTagsNotesFromCsv`.
+  - It needs the columns `Id`, `Hash`, `Tag`, `Notes`. An empty Tag or Notes **clears** that field in DIM, which is why only changed rows are exported, each carrying its full current tag and notes.
+  - Valid tags: `favorite keep junk infuse archive`. DIM caps notes at 1024 characters.
+- **Ratings:** scraped from light.gg weapon pages (`https://www.light.gg/db/items/<hash>/`). DIM item hashes equal light.gg ids. See *Rating algorithm* below.
+
+## Files
+| Path | What it is |
+|---|---|
+| `src/core.js` | Pure logic with no DOM: CSV parse/serialize, DIM row → item, query language, sort/group, rating. Exported for Node via `module.exports`. |
+| `src/app.html` | The UI, a single page. `/*__CORE__*/` gets replaced with core.js at build time. |
+| `build.py` | Inlines core into the page. `python build.py` → **`dist/`** (artifact build); `python build.py --target hosted` → **`dist-hosted/`** with the strict CSP `<meta>` (sha256 of every inline script), `no-referrer`, and no Google Fonts. Also patches in `structuredClone` for db reads (see Gotchas) and writes the PWA files + service worker. |
+| `dist/index.html` | Built app. Opens directly from disk (falls back to localStorage) or as the claude.ai artifact. |
+| `tools/build-defs.mjs` | Builds **`data/defs.json`** (inlined into the page by build.py): element/ammo/breaker icons as data URIs, intrinsic breaker per weapon hash, perk name → Bungie icon path, Clarity perk text, Destiny Data Compendium perk + exotic text. Caches downloads in `data/raw/`; `npm run defs` re-downloads everything. |
+| `data/raw/compendium/*.csv` | Saved snapshot of Pip1n's **Destiny Data Compendium** Google Sheet (one CSV per tab, via the public gviz endpoint; the sheet blocks xlsx export). |
+| `data/raw/clarity.json` | Saved snapshot of the **Clarity** live database (github.com/Database-Clarity/Live-Clarity-Database). |
+| `tools/lightgg-scraper.js` | Browser-side scraper. Inject it into a light.gg tab (same-origin fetch + DOMParser) and run `await lgScrape([[hash,name],...])`, then read `window.lgOut`. |
+| `test/core.smoke.js` | Node smoke test of parser, queries and ratings on `test/fixtures/*.csv`. |
+| `test/e2e.playwright.js` | Headless check: load the CSVs, query, tag, export. Uses `CHROME_PATH`, else local Chrome/Edge, else Playwright's Chromium. |
+| `test/security.test.js` | Security unit tests (part of `npm test`): sanitizer, CSV limits, ids, ratings validation, export guard, source checks, hosted CSP/SW checks. |
+| `test/security.e2e.js` | Browser security test (part of `npm run e2e`): hostile CSVs/ratings/profiles through every view on both builds; fails on executed payloads, on*/javascript: in the DOM, CSP violations, non-build files in the SW cache, token-like storage. |
+| `tools/check-secrets.mjs` | Exact-value check: the real key/client_id (from `config/local.json` or env) must not appear in staged files, the repo, or `dist/`. |
+| `.githooks/pre-commit`, `.gitleaks.toml` | Pre-commit secret scan (gitleaks at `tools/bin/gitleaks.exe`, gitignored, v8.30.1 checksum-verified) + exact-value check + no CSVs outside `test/fixtures/`. Enabled with `git config core.hooksPath .githooks`. |
+| `.github/workflows/ci.yml`, `.github/dependabot.yml` | CI: gitleaks over full history, exact-value check, `npm ci`, `npm audit --audit-level=high`, both builds, `npm test`, `npm run e2e`. Actions pinned to commit SHAs, `contents: read`. |
+| `reference/dim-spreadsheets.ts` | DIM's CSV export/import code, copied from github.com/DestinyItemManager/DIM, for column names and import behavior. |
+| `HANDOFF.md` | Current status and the next tasks. **Read it first.** |
+
+Commands: `npm run defs` (refresh reference data), `npm run icons` (download icons + rebuild sprite), `npm run build`, `npm run build:hosted`, `npm test`, `npm run e2e` (builds both targets first), `npm run secrets`, `npm run audit`, and **`npm run gates`** (all security gates: audit, secrets, unit, e2e).
+
+## DIM CSV format (from DIM source `generateCSVExportData` + `organizer/Columns.tsx`)
+Column order: `Name, Hash, Id, Tag, Rarity, Tier, Type, Source, Equippable, Category, Element, Ammo, Power, Energy Capacity, Archetype, Tertiary Stat, Tuning Stat, Masterwork Type, Masterwork Tier, Owner, Locked, Equipped, Featured, Holofoil, Year, Season, Event, <stats>, <stat> (Base)…, Crafted, Crafted Level, Kill Tracker, Foundry, Seasonal Mod, Loadouts, Notes, Perks 0..N`.
+- `Rarity` = Exotic/Legendary…; `Tier` = gear tier (1–5, from Edge of Fate). These are different things.
+- `Archetype` = **frame** for weapons (e.g. "Precision Frame") and **armor archetype** for armor (e.g. "Bulwark").
+- Weapon stats: `Recoil, AA, Impact, Range, Zoom, Blast Radius, Velocity, Stability, ROF, Reload, Mag, Handling, Charge Time, Draw Time, Accuracy, …`. Armor 3.0 stats: `Weapons, Health, Class, Grenade, Super, Melee, Total`.
+- `Perks N`: a **flat list**. Socket boundaries are lost. Order is intrinsic, then perk sockets (every plug option; the equipped one ends in `*`), then mods/masterwork/shader. Kill trackers appear as a single name.
+- PapaParse `escapeFormulae`: values starting with `= + - @` get a leading `'`, which `unesc()` strips.
+
+## Query language (in `core.js`, close to DIM's)
+Terms placed side by side are ANDed, `or` separates alternatives, `-term` or `not:` negates, `"quotes"` group words. Keys: `is:` (weapon armor exotic… solar… crafted locked vault dupe tagged hasnotes pending rated unrated masterwork holofoil, or any type such as `is:handcannon`), `tag: notes: name: rarity: element: type: frame:/archetype: source: ammo: class: slot: owner: tertiary: tuning: mw: event: foundry: perk: perksel: exactperk:`. Numeric keys take `= > >= < <=`: `power tier rating pve pvp level kills season year energy mwtier total count`, plus `stat:<name><op>N` / `basestat:`. `sort:<key>` inside the query overrides the pane's sort dropdown.
+Also: `breaker:` (`shieldpiercing|antibarrier`, `disruption|overload`, `stagger|unstoppable`, `any`, `none`), `is:breaker`, `is:shieldpiercing/antibarrier/disruption/overload/stagger/unstoppable` (hit key `breaker`); `desc:`/`clarity:` searches Clarity + Compendium text of the item's perks (hit keys `perk:<name>`). Sort keys `ammo` (Primary→Special→Heavy), `breaker`, `crafted`; group keys `ammo`, `breaker`, `crafted`.
+`runQuery` returns `Map(itemId → Set(hitKeys))`. Hit keys (`type`, `frame`, `perk:<name>`, `stat:<name>`, `rating`, …) drive the per-pane highlight on cards and in the item drawer. **Every new filter must return the field keys it matched**, or highlighting breaks.
+
+## Rating algorithm (`rateItem`)
+light.gg "Popular Individual Perks" (`#community-average ul.sockets`) gives one list per column (barrel, mag, trait 1, trait 2, origin), roughly the top 9 perks each, with `pct` (% of rolls) and `rel` (bar width, top perk = 100).
+For each column, the item scores the best `rel` among its perks, all options included, with names normalized (`Enhanced ` prefix removed). If no perk matches in columns 0–3 and the column lists ≥5 perks, it scores half the lowest listed `rel`. Weights are `[1,1,2,2,0.5,…]` and the result is a 0–100 weighted mean. The light.gg community stars are stored separately as `pve` and `pvp`.
+Ratings JSON shape: `{ "<hash>": { n, pve, pvp, c: [ [ [perkName, rel, pct], … ], … ] } }`, about 1 KB per weapon.
+
+## Reference data (`data/defs.json`, ~3 MB, built by `tools/build-defs.mjs`)
+- **Breakers (every weapon has one since Update 9.7.0):** Bungie stores each weapon's breaker as a sandbox perk named `[Shield-Piercing] Barrier` / `[Disruption] Overload` / `[Stagger] Unstoppable` on its intrinsic (frame) plug. `build-defs.mjs` reads it per weapon hash into `wb` (weapon perks → initial intrinsic plug → first plug of the intrinsic socket's plug set → legacy `breakerType` → another copy with the same name): 2208/2208 weapons in manifest 245114. `fb` maps intrinsic names to breakers where every weapon with that intrinsic agrees. `Core.applyDefs`: `wb[hash]` → `fb[frame]` → `Core.archetypeBreaker` (Bungie's 9.7.0 archetype table, only for weapons newer than the data snapshot). `it.breakerSrc` = 'bungie' | 'rule'. Checked against light.gg (Dead Man's Tale = Shield Piercing, Witherhoard = Disruption); the archetype table agrees with Bungie's data on every legendary. Don't guess exotics from names or the Compendium.
+- **Armor sets:** `as` (armor hash → index into `sets`), `sets[i] = {n, p:[{c: pieces, n, d, i}]}` from `DestinyEquipableItemSetDefinition` + sandbox perks. `it.set`; query `set:` / `is:setbonus`; sort/group `set`.
+- **Plugs:** `pi[normName] = [iconPath, socketType, bungieDescription, hash]`; `pw` / `pa` hold weapon-side / armor-side entries for names used by both (e.g. Demolitionist = weapon trait and armor archetype). Always look plugs up with `Core.plugOf(name, defs, kind)`, which also refuses armor-only types on weapons and vice versa. Socket types drive the game-style layout (`Core.sockets`): `i` intrinsic, `r` armor archetype, `b` barrel-like, `m` magazine-like, `t` trait, `o` origin, `w` weapon mod, `k` masterwork, `c` catalyst, `a` armor mod. DIM's flat perk list is split into columns when the type changes or a second equipped perk appears.
+- **Clarity** (`cl[normName] = {h, ty, e?}`): rendered to HTML keeping Clarity's own classes (`cl-pve`, `cl-solar`, `cl-enhancedArrow`…), styled in app.html.
+- **Destiny Data Compendium** (`dc[normName] = {h, s}` or `{x: exoticKey, s}`, `dcx` exotic weapon docs, `dset` set bonuses, `dcs` style list): parsed from each tab's public `htmlview` page by `tools/compendium-html.mjs`, keeping the sheet's colors/bold/italics as `<span class=dN>` with the styles in `dcs`. Saved under `data/raw/compendium-html/`. Gviz CSVs drop formatting, and xlsx export is disabled by the owner.
+- **Subclasses:** `sub[class][element] = {n, h, i, s: {super, classAbility, movement, melee, grenade, aspects, fragments, transcendence}}` from plug categories `warlock.<el>.*` / `shared.<el>.*` (stasis aspects = `totems`, fragments = `trinkets`, Prismatic = `prism`). Shown in the Subclasses viewer (Warlock first) with Bungie + Clarity + Compendium text and light.gg links.
+- **Icons:** elements, ammo, breakers are data URIs. Every other icon (perks, mods, intrinsics, set bonuses, subclass abilities) comes from one sprite sheet, `dist/icons.webp` (48px cells, 48 columns, ~2.3 MB), because claude.ai blocks images from bungie.net. Pipeline: `tools/build-defs.mjs` → `node tools/fetch-icons.mjs` (downloads to `data/raw/icons/b/`, writes `list.json`) → `python tools/build-sprite.py` (Pillow, writes `data/sprite.webp`; `tools/build-sprite.ps1` is a no-install PNG fallback, ~5 MB) → `build.py` swaps icon paths for sprite indices and copies the sheet to `dist/icons.webp` (or `.png`). **Publish the sheet alongside the page** (`files: {"icons.webp": "dist/icons.webp"}`).
+- **Cosmetics hidden:** `cos` lists normalized shader/ornament/Combat Flair/tracker/memento names; `applyDefs` marks those perks junk so they never show.
+- **Sockets:** `Core.sockets` returns intrinsic, perk columns, exotic perks, mods, `mw` (masterwork) and `catalyst` separately.
+- **Keyword search:** free text and `desc:` match Bungie + Clarity + Compendium text of perks, mods, set bonuses and exotic weapon notes (`Core.descHits`), with word-form matching (`Core.keywordRe`: freeze→frozen, ignition→ignite…).
+- **Card preview** shows only name, rarity, tier, power, element, ammo, weapon or armor type, archetype/frame, intrinsic (+exotic perks), breaker, crafted, tag, notes. Anything else (perks, stats, source, set, rating…) appears only when the pane's search hits it (highlighted) or it is the sort key.
+- **Clarity / Data Compendium have no perk ratings.** light.gg returned **403** to plain `curl` from the user's machine (2026-11-14), so use the in-browser scraper for ratings.
+- **Sort/group menus follow the query:** options are rebuilt from each pane's results (weapon-only vs armor-only keys, stats present); the current choice stays listed with "(not in results)".
+
+## Views
+Header tabs switch views (`setView`): **Vault** (the query panes), **Clean up**, **Subclasses**. Non-vault views are fixed overlays placed under the header (`placeViews`).
+
+### Clean up (vault-cleaner workflow)
+State `CL = {setup, dec, gi, step}` saved to localStorage `vs:clean` and db `config/clean`.
+- **Setup:** gear kind; group keys in tick order (weapons: type, frame, element, ammo, slot, rarity, breaker, name; armor: class, slot, archetype, set, tertiary, rarity, name); rank key (weapons: rating/tier/power/season/kills; armor: total/tier/power/season); keep N per group; rules: exotics compared by name only, favorite/keep tags and locked items always kept (they count toward N), skip groups with nothing to trash; optional query filter (any search syntax). Pane menu → "Clean up these results" seeds the filter.
+- **Groups:** one group at a time, items ranked, suggestion = keep best N, trash rest. `CL.dec` stores only overrides. Keys: K / T on the hovered tile, ← → between groups.
+- **Review & apply:** sets DIM tags (keep, favorites stay favorite / junk) through the normal edit path, so **Export to DIM** sends them; "Copy DIM search: trash" gives an `id:` query for dismantling in DIM.
+
+### Triage & Compare
+- **Item panel → "Find & compare similar"** (a collapsed dropdown below the perks): `Core.identifiers(it)` lists only the identifiers the item has (kind, weapon/armor type, class, archetype/frame, element, ammo, breaker, armor set, tertiary, rarity, each equipped perk/trait and exotic perk, name, source) as toggle buttons, each with an exact search term (`exacttype:`, `exactframe:`, `exactname:`, `exactsource:`, `exactset:`, `exactperk:`…). Selected buttons build the query live with a match count. Defaults: type (+ frame for weapons, + class for armor). Buttons: **Compare** (the item plus the best 9 other matches by rating, then power), **Open as sort pane**, **Add this item to compare**.
+- **Compare view** (`CMP`, localStorage `vs:compare`, max 10, one kind at a time): columns per item; rows for type, frame, element, ammo, breaker, rating, rarity, tier, power, source, tag (armor: class, set, tertiary), every stat (best value green, armor base vs modded, click a stat to sort columns), intrinsic, each perk column (perks every item shares are muted, unique ones bold; options as small icons), mods, masterwork, catalyst, set bonus, notes. "Only differences" (in the header band) hides identical rows. The table is one CSS grid (`.ctable` with `--n` columns, rows are `display:contents`), so every row shares the same column widths; perk rows line up by socket type (Barrel, Magazine, Trait 1, Trait 2, Origin, Perk), not by position. Clicking a perk opens its full description in a floating window. In the item panel, a perk/mod description opens directly below the clicked row (a full-width row under that line of perk columns, or right after the intrinsic / set / mods block); clicking it again closes it.
+
+### Phones (≤760px, plus touch behaviours)
+CSS block "phones & touch" at the end of `<style>`; `isMobile()` = `matchMedia('(max-width: 760px)')`; crossing the breakpoint re-renders.
+- Bottom tab bar (the `nav.views` buttons, with inline SVG icons), 48px header with a ⋯ menu sheet (summary, Load, Export, Help, Install). Banner is one line, tap to expand, × dismisses (remembered in `vs:bannerOff`).
+- Vault: one pane per screen with scroll-snap; `#paneChips` row to jump between panes (+ Add). Each pane has quick filter chips (`QUICK`, toggle a term in the query) and a "Sort ▾" button that reveals the sort/group row.
+- Item panel = bottom sheet (64dvh, drag handle/header up for full height, down to shrink/close; `sheetDrag`), tag buttons pinned in the footer. Modals become bottom sheets. Long-press any `[data-pk]` (touch) opens its description.
+- Clean up: single-column cards; swipe right = keep, left = trash (`swipeTile`), then it scrolls to the next card.
+- Compare: columns snap sideways, 1-up/2-up toggle (`CMP.k`), "Only differences" on by default on phones.
+- Subclasses: element tabs scroll sideways; details open as a sheet.
+- 44px tap targets, 16px inputs (no iOS zoom), safe-area insets, `prefers-reduced-motion` respected.
+- Performance: cards render 40 at a time on phones (150 on desktop) and load more automatically as you scroll (IntersectionObserver on "Show more"); the icon sheet loads after first render.
+- Share sheet (`addShareButton`) for the export CSV and DIM searches where `navigator.share` exists. Load dialog has a "Choose files" button and DIM-mobile instructions.
+- Installable web app for hosted copies: `build.py` writes `dist/manifest.webmanifest`, `dist/sw.js` (stale-while-revalidate cache, versioned per build) and copies `data/icon-192.png` / `icon-512.png` (drawn by `tools/build-app-icons.py`). The service worker only registers on https/localhost outside claude.ai. When testing on localhost after a rebuild, reload twice or unregister the worker.
+
+### Look
+Theme block at the end of the `<style>` (bray.tech-inspired: flat squared grayscale panels, slate→amber page bands, light large titles, small letter-spaced uppercase labels, rotated section labels, rarity-colored item header strips like in-game tooltips). No bray.tech name, logo or assets are used.
+
+## Persistence (`src/app.html` → `loadAll` → `loadProfile`)
+- **Profiles:** each profile has its own vault, edits (tags/notes), panes, Clean up state and Compare list. Light.gg ratings and game data are shared. Registry `PROF = {list:[{id, name, color, weapons, armor, updated, sample}], active}` in localStorage `vs:profiles` and db `config/profiles`; the device's last active profile is `vs:activeProfile`.
+  - Profile `main` keeps the original paths (no migration). Other profiles prefix them: db `ppath(pid, 'edits/x')` → `p_<pid>_edits/x`, localStorage `pkey(pid, 'vault')` → `vs:p:<pid>:vault`. Always go through `PP(path)` / `PK(key)` for per-profile data.
+  - Switching (`switchProfile`) first flushes pending saves (`flushSaves`: panes, Clean up, the edit queue, whose entries carry their full path), then reloads everything for the new profile.
+  - **CSV matching:** item instance ids are unique per Bungie account. `noteProfileVault` stores up to 400 ids per profile; `handleFiles` → `profileMatch` compares a new CSV's ids with every profile (≥30% overlap = match) and offers to switch to the matching profile, or to create a new one when nothing matches, instead of overwriting the open profile's vault.
+  - Delete (`deleteProfileData`) removes that profile's localStorage keys and db docs; the last profile can't be deleted.
+- **As a claude.ai artifact:** `claude.use('db')` is an owner-only document store. Paths (main profile): `meta/vault`, `vault/c0..cN` (≤60 items per doc, docs under 256 KiB), `meta/weaponHashes`, `edits/<itemId>`, `config/panes`, `config/clean`; shared: `ratings/r0..rN` (`{w:{hash:…}}`), `config/profiles`.
+- **Opened locally / db unavailable:** localStorage keys `vs:vault`, `vs:edits`, `vs:panes`, `vs:clean`, `vs:compare` (main profile; others `vs:p:<id>:…`), plus shared `vs:ratings`, `vs:profiles`.
+
+## Security (GHOST_PLAN → Security; release blockers)
+- **Untrusted input:** everything from DIM CSVs, ratings JSON, localStorage/db, Clarity, the Compendium (and later the Bungie API).
+  - Item text: always `esc()` in templates. Toasts use `textContent`; the banner builds text nodes.
+  - Clarity/Compendium HTML: always `SH(html)` = `Core.sanitizeHtml` (re-serialises; only `div span br`, classes `cl-*`/`dN`, `title` on span). Compendium styles: `Core.sanitizeCss` (color, background-color, font-weight/style, text-decoration only). `test/security.test.js` fails if a `cltx`/`dctx` insert skips `SH()`.
+  - CSV import: `Core.LIMITS` (25 MB, 20,000 rows, 600 columns, 20,000-char cells); rows whose `Id` isn't 1–20 digits are dropped. Ratings JSON is coerced in `prepRatings`. Profile ids/colours are validated in `loadRegistry`. Defs icons must be `data:image/…`.
+  - No `eval`, `new Function`, string timers, dynamic `<script>`, or inline `on*=` handlers (the strict CSP blocks them anyway).
+- **CSV export:** `Core.toCSV(headers, rows)` prefixes `'` to any cell starting with `= + - @` tab/CR (all columns by default). DIM's importer does **not** strip that `'`, so a note starting with one of those characters gains a visible `'` in DIM (open question for the user, 2026-11-15).
+- **Hosted CSP** (`build.py --target hosted`): `default-src 'none'`, `script-src` = sha256 of each inline script (hashed over the LF-written file; build output is always written with `\n`), `connect-src 'self' https://www.bungie.net`, `img-src 'self' data: https://www.bungie.net`, `style-src 'self' 'unsafe-inline'` (needed for the many `style="--var:…"` attributes and runtime `<style>` blocks; every value in them is a number, constant, validated hex or `sanitizeCss` output), `font-src 'self' data:`, `manifest-src`/`worker-src 'self'`, `base-uri`/`form-action`/`object-src 'none'`. JSON in the page escapes `</` and `<!--`.
+- **Service worker:** caches only this build's listed files (same origin, path in `ASSETS`, no `Authorization` header, `basic` responses); old caches deleted on activate.
+- **Secrets:** the Bungie API key / client_id live only in GitHub Actions secrets (`BUNGIE_API_KEY`, `BUNGIE_CLIENT_ID`) and the gitignored `config/local.json` (`config/local.example.json` shows the shape). Never paste them into chat, commits, logs or issues. `.gitignore` covers `private/`, `*.csv` (except `test/fixtures/`), `config/local.json`, `.env*`, `dist*/`, `data/raw/`.
+- **Gates before every commit touching code and every deploy:** `npm run gates`, gitleaks (pre-commit + CI), then a security review of the diff (`/security-review` once `origin` exists; until then a manual checklist pass over GHOST_PLAN's Security section). Report results to the user before deploying.
+
+## Gotchas
+- DB snapshot `data()` objects are **frozen**, so build.py wraps them in `structuredClone`. Keep those anchors intact in `app.html`, or update `build.py`.
+- Artifact page CSP: inline scripts only (plus cdnjs and similar), no fetch to other hosts, `alert`/`confirm`/`<a download>` blocked. Downloads go through `claude.use('downloads')`, with a copy-text fallback.
+- light.gg: be polite. Fetch sequentially with a delay of about 0.9 s, and back off on 429. Server-side fetches from Anthropic's cloud were refused (`client_error`). Fetching from inside a real browser tab on light.gg works.
+- Item ids are 19-digit strings. Always treat them as strings, never as Numbers.
