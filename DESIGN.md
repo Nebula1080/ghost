@@ -161,7 +161,7 @@ components:
 
 Ghost is a Ghost shell throwing Destiny's Light across a dark vault. The screen reads as a projected dossier: ruled sheets on a dusk ground, Cinzel inscriptions carved across the top of each view, and thin warm light that picks out whatever matters. The Light has two jobs and only two: it marks what the user is touching (hover, focus, the active nav row) and it marks *why* something matched (each search pane owns a colour, and every field, perk cell and icon it hit glows in that colour). Everything else stays quiet, dim and square.
 
-The world is dense but legible. Desktop is the Vanguard Dossier: a 232px left rail, a scene header where relevant Bungie art sits behind the title band only, and search panes laid side by side as ruled sheets. Phone is Leaded Light: one pane per screen, items as framed cards whose perks sit in leaded-glass cells, bottom tabs, a bottom-sheet item panel. Seven colour worlds share one structure; Dusk is the default, Bone & Sepia is the light world.
+The world is dense but legible. Desktop is the Vanguard Dossier: a 232px left rail, a scene header where relevant Bungie art sits behind the title band only, and search panes laid side by side as ruled sheets. Phone is Leaded Light: one pane per screen, items as framed cards whose perks sit in leaded-glass cells, bottom tabs, a bottom-sheet item panel. Seven colour worlds share one structure; Dusk is the default,  is the light world.
 
 It refuses the generic dark-blue dashboard: no rounded card grids, no blue-grey chrome, no gradient KPI tiles. Depth comes from light and hairlines, not from lifted boxes.
 
@@ -202,7 +202,7 @@ Each world is a near-black tinted ground with one warm Light and one accent; mea
 
 **The Matched Colour Rule.** A pane colour appears only where that pane's search matched, plus the pane's own top rule and chip. If a highlight cannot say which search lit it, it is wrong.
 
-**The Seven Worlds Rule.** Every surface uses theme tokens (`--bg`, `--panel`, `--line`, `--light`, `--accent`...), never literal hexes, so all seven worlds (and the Bone & Sepia light world, which also darkens the element and keep/trash colours) work unchanged.
+**The Six Worlds Rule.** Every surface uses theme tokens (`--bg`, `--panel`, `--line`, `--light`, `--accent`...), never literal hexes, so all six worlds (and the  light world, which also darkens the element and keep/trash colours) work unchanged.
 
 ## Typography
 
@@ -298,7 +298,7 @@ Square tiles with keep/trash split footers; a decision colours the border (55% k
 ## Do's and Don'ts
 
 ### Do:
-- **Do** use theme tokens for every surface and text colour so all seven worlds work, including Bone & Sepia.
+- **Do** use theme tokens for every surface and text colour so all six worlds work.
 - **Do** light a search match in that pane's colour, on the exact field, perk or icon it matched.
 - **Do** keep every container square and separate with 1px hairlines.
 - **Do** set titles and section heads in uppercase Cinzel tracked 0.1em to 0.24em; everything else in Hanken Grotesk.
@@ -315,3 +315,6 @@ Square tiles with keep/trash split footers; a decision colours the border (55% k
 - **Don't** set body text, buttons or numbers in Cinzel.
 - **Don't** use text glyphs or emoji as icons, and don't copy Bungie's UI glyphs; chrome is original SVG.
 - **Don't** add small uppercase kicker labels above titles; the inscription title stands alone.
+
+
+> **2026-11-15:** the Bone & Sepia light theme was retired at the user's request: too bright for them, and Destiny's white-on-dark icons, Clarity and Data Compendium colours are made for dark grounds. All worlds are dark.

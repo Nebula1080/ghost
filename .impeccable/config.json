@@ -1,7 +1,9 @@
 {
   "detector": {
     "ignoreRules": [],
-    "ignoreFiles": [],
+    "ignoreFiles": [
+      "data/raw/compendium-html/**"
+    ],
     "ignoreValues": [
       {
         "rule": "dark-glow",

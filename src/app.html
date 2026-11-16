@@ -581,9 +581,9 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt
 // through Core.sanitizeHtml (strict allowlist: div, span, br, known class names, span title). Never insert it raw.
 const SH = h => Core.sanitizeHtml(h);
 // ---------- Ghost: colour worlds (from the inspo set), motion preference, intro ----------
-const WORLDS = [['dusk', 'Dusk', '#2b1e33', '#f2a65a'], ['oxblood', 'Oxblood', '#331618', '#ddb167'], ['gilded', 'Gilded', '#231c13', '#e2b552'], ['nebula', 'Nebula', '#251a42', '#ff8f5e'], ['abyss', 'Abyss', '#10282c', '#d9b75e'], ['verdant', 'Verdant', '#17281a', '#a6e84a'], ['bone', 'Bone & Sepia', '#ebe4d6', '#a25a16']];
+const WORLDS = [['dusk', 'Dusk', '#2b1e33', '#f2a65a'], ['oxblood', 'Oxblood', '#331618', '#ddb167'], ['gilded', 'Gilded', '#231c13', '#e2b552'], ['nebula', 'Nebula', '#251a42', '#ff8f5e'], ['abyss', 'Abyss', '#10282c', '#d9b75e'], ['verdant', 'Verdant', '#17281a', '#a6e84a']];
 const UI = { theme: 'dusk', motion: true };
-try { const t = localStorage.getItem('vs:theme'); UI.theme = WORLDS.some(w => w[0] === t) ? t : (matchMedia('(prefers-color-scheme: light)').matches ? 'bone' : 'dusk'); UI.motion = localStorage.getItem('vs:motion') !== 'off'; } catch {}
+try { const t = localStorage.getItem('vs:theme'); UI.theme = WORLDS.some(w => w[0] === t) ? t : 'dusk'; /* a saved 'bone' (retired light theme) falls back to Dusk */ UI.motion = localStorage.getItem('vs:motion') !== 'off'; } catch {}
 function applyUI() {
   document.documentElement.dataset.theme = UI.theme; document.documentElement.dataset.motion = UI.motion ? 'on' : 'off';
   const meta = document.querySelector('meta[name=theme-color]'); if (meta) meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#170f1c';

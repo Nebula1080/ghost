@@ -24,9 +24,6 @@
 :root[data-theme=abyss]{--bg:#061416;--bg2:#0a1d20;--well:#041012;--panel:#0e2528;--panel2:#10282c;--raise:#153337;--line:#1f4a4f;--line2:#2c5f65;--text:#e8f4f1;--dim:#a9c7c2;--faint:#7da09a;--light:#e4cf8d;--accent:#d9b75e;--accent-ink:#1b1505;--mid:#d9b75e;--sel:rgba(217,183,94,.28)}
 /* Verdant: #34, #52 */
 :root[data-theme=verdant]{--bg:#0b120c;--bg2:#111b12;--well:#080e09;--panel:#152417;--panel2:#17281a;--raise:#1e3321;--line:#2d4a30;--line2:#3d613f;--text:#eef6e8;--dim:#b8cdb0;--faint:#8aa383;--light:#c8f56a;--accent:#a6e84a;--accent-ink:#152005;--mid:#a6e84a;--sel:rgba(166,232,74,.26)}
-/* Bone & Sepia (light): #41, #44 */
-:root[data-theme=bone]{--bg:#ebe4d6;--bg2:#e2d8c6;--well:#f6f1e7;--panel:#f6f0e4;--panel2:#efe7d8;--raise:#e5dbc8;--line:#cbbfa9;--line2:#b3a68e;--text:#1d1915;--dim:#4f463b;--faint:#6f6456;--light:#8a4f12;--accent:#a25a16;--accent-ink:#fff8ee;--mid:#a25a16;--sel:rgba(162,90,22,.22);
-  --solar:#c4520a;--arc:#13838f;--void:#7a4bb3;--stasis:#2f62c4;--strand:#1d8a47;--kinetic:#5a5246;--keep:#2f8a4b;--trash:#b8402f;--good:#2f8a4b;--bad:#b8402f;--exotic:#a8871c}
 
 html,body{background:var(--bg);color:var(--text);font:14px/1.5 var(--ui);-webkit-font-smoothing:antialiased}
 ::selection{background:var(--sel);color:var(--text)}
@@ -107,8 +104,6 @@ a{color:var(--light)}
 .scene::before,.band::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--art,none) center 40%/cover no-repeat;animation:drift 22s ease-in-out infinite alternate}
 .scene::after,.band::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;width:auto;height:auto;z-index:-1;
   background:linear-gradient(90deg,var(--bg) 16%,color-mix(in srgb,var(--bg) 62%,transparent) 44%,color-mix(in srgb,var(--bg) 8%,transparent) 80%),linear-gradient(0deg,var(--bg) 0%,transparent 55%)}
-[data-theme=bone] .scene::before,[data-theme=bone] .band::before,[data-theme=bone] .sv-head::before{filter:sepia(.7) saturate(.6) contrast(.9) brightness(1.1);opacity:.42}
-[data-theme=bone] .dctx{background:#211c17;border-color:#3a3128;color:#efe7dc}
 @keyframes drift{to{transform:scale(1.06) translateX(-1.2%)}}
 #vscene{--art:url("art/bg-vault.webp")}
 #clean .band{--art:url("art/bg-clean.webp")}
@@ -405,8 +400,6 @@ a{color:var(--light)}
 .empty span{max-width:34ch;font-size:13.5px;color:var(--dim)}
 #compare .band,#compare .band.slim{min-height:0;padding-bottom:18px}
 .dcol .dsk.sel{box-shadow:inset 0 -2px 0 var(--el,var(--light)),inset 0 0 18px -6px color-mix(in srgb,var(--el,var(--light)) 55%,transparent)}
-/* Clarity text colours readable on the light theme */
-[data-theme=bone] .cltx .cl-enhancedArrow,[data-theme=bone] .cltx .cl-yellow{color:#7a5a00}[data-theme=bone] .cl-blue,[data-theme=bone] .cltx span.cl-pve{color:#2f5fa8}[data-theme=bone] .cl-green{color:#2f7a3e}[data-theme=bone] .cl-purple{color:#6b3fa0}[data-theme=bone] .cltx span.cl-pvp{color:#a3332a}
 
 /* pane controls stay inside their sheet */
 .pane-head .row{flex-wrap:wrap;min-width:0}

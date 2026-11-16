@@ -645,33 +645,6 @@
           "light": "#c8f56a",
           "accent": "#a6e84a",
           "accentInk": "#152005"
-        },
-        "bone": {
-          "bg": "#ebe4d6",
-          "bg2": "#e2d8c6",
-          "well": "#f6f1e7",
-          "panel": "#f6f0e4",
-          "panel2": "#efe7d8",
-          "raise": "#e5dbc8",
-          "line": "#cbbfa9",
-          "line2": "#b3a68e",
-          "text": "#1d1915",
-          "dim": "#4f463b",
-          "faint": "#6f6456",
-          "light": "#8a4f12",
-          "accent": "#a25a16",
-          "accentInk": "#fff8ee",
-          "overrides": {
-            "solar": "#c4520a",
-            "arc": "#13838f",
-            "void": "#7a4bb3",
-            "stasis": "#2f62c4",
-            "strand": "#1d8a47",
-            "kinetic": "#5a5246",
-            "keep": "#2f8a4b",
-            "trash": "#b8402f",
-            "exotic": "#a8871c"
-          }
         }
       }
     },
@@ -915,8 +888,8 @@
         "section": "colors"
       },
       {
-        "name": "The Seven Worlds Rule",
-        "body": "Every surface uses theme tokens (`--bg`, `--panel`, `--line`, `--light`, `--accent`...), never literal hexes, so all seven worlds (and the Bone & Sepia light world, which also darkens the element and keep/trash colours) work unchanged.",
+        "name": "The Six Worlds Rule",
+        "body": "Every surface uses theme tokens (`--bg`, `--panel`, `--line`, `--light`, `--accent`...), never literal hexes, so all six worlds (and the Bone & Sepia light world, which also darkens the element and keep/trash colours) work unchanged.",
         "section": "colors"
       },
       {
@@ -941,7 +914,7 @@
       }
     ],
     "dos": [
-      "**Do** use theme tokens for every surface and text colour so all seven worlds work, including Bone & Sepia.",
+      "**Do** use theme tokens for every surface and text colour so all six worlds work, including Bone & Sepia.",
       "**Do** light a search match in that pane's colour, on the exact field, perk or icon it matched.",
       "**Do** keep every container square and separate with 1px hairlines.",
       "**Do** set titles and section heads in uppercase Cinzel tracked 0.1em to 0.24em; everything else in Hanken Grotesk.",

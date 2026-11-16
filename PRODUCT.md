@@ -58,7 +58,7 @@ DIM stays the source of truth and the only write path (CSV tags/notes import).
   - Elemental Glow on item cards
   - Sigil Minimal for navigation, empty and loading states
   - Tower amber accent when no element applies
-  - dark default plus a Bone & Sepia light theme
+  - dark themes only (the Bone & Sepia light theme was retired on 2026-11-15 at the user's request)
   - motion modeled on bray.tech
   - a gilt frame for selected exotics only
 
