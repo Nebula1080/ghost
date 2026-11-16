@@ -32,9 +32,13 @@ jobs:
       - name: npm audit (fails on high/critical)
         run: npm audit --audit-level=high
       - run: npx playwright install --with-deps chromium
+      - name: Build both targets (the tests check the built pages)
+        run: |
+          python build.py
+          python build.py --target hosted
       - name: Unit + browser security tests
         run: npm test && npm run e2e
-      - name: Hosted build
+      - name: Hosted build (fresh, for the deploy)
         run: python build.py --target hosted
       - name: Built site never contains the real key or client_id
         env:
