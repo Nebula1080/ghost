@@ -569,7 +569,7 @@ nav.views svg{display:none}
 <div id="intro" aria-hidden="true"><svg class="sig" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-ghost"/></svg><span>GHOST</span></div>
 <input type="file" id="file" accept=".csv,text/csv" multiple hidden>
 
-<script>window.VS_DEFS = /*__DEFS__*/null;window.VS_ART = /*__ART__*/null;</script>
+<script>window.VS_DEFS = /*__DEFS__*/null;window.VS_ART = /*__ART__*/null;window.VS_ISPR = /*__ISPR__*/null;</script>
 <script>
 /*__CORE__*/
 </script>
@@ -616,9 +616,18 @@ function itemArt(it) {
   const shot = a[2] === 1 ? BNG + 'screenshots/' + it.hash + '.jpg' : (typeof a[2] === 'string' && /^[\w.-]+\.(jpg|png)$/.test(a[2]) ? BNG + 'screenshots/' + a[2] : '');
   return icon ? { icon, wm, shot } : null;
 }
+// claude.ai artifact: Bungie's item icons (season watermark baked in) come from bundled sprite sheets
+const ISPR = window.VS_ISPR || null;
+function itemSprite(it, size) {
+  const k = ISPR && /^\d{1,12}$/.test(it.hash) ? ISPR.i?.[it.hash] : undefined; if (typeof k !== 'number') return '';
+  const sheet = ISPR.sheets?.[Math.floor(k / ISPR.per)]; if (!/^items-\d+\.webp$/.test(sheet || '')) return '';
+  const c = k % ISPR.per; const col = c % ISPR.cols, row = Math.floor(c / ISPR.cols);
+  return `<i class="ispr" style="background-image:url(isprites/${sheet});background-size:${ISPR.cols * size}px auto;background-position:-${col * size}px -${row * size}px"></i>`;
+}
 function itemIcon(it, size = 48) {
   const a = itemArt(it); const sk = Core.sockets(it, D); const intr = (sk.intrinsic[0] || sk.exotic[0])?.n || it.frame;
-  return `<span class="itm" style="--is:${size}px">${a ? `<img src="${esc(a.icon)}" alt="" loading="lazy" decoding="async">${a.wm ? `<img class="wm" src="${esc(a.wm)}" alt="" loading="lazy" decoding="async">` : ''}` : (intr ? plugIcon(intr, 'sq', pIdx(intr, it.kind)) : '')}${it.kind === 'weapon' && it.element ? elIcon(it.element, 'eli') : ''}${it.crafted ? '<i class="cr"></i>' : ''}</span>`;
+  const spr = a ? '' : itemSprite(it, size);
+  return `<span class="itm" style="--is:${size}px">${a ? `<img src="${esc(a.icon)}" alt="" loading="lazy" decoding="async">${a.wm ? `<img class="wm" src="${esc(a.wm)}" alt="" loading="lazy" decoding="async">` : ''}` : spr || (intr ? plugIcon(intr, 'sq', pIdx(intr, it.kind)) : '')}${it.kind === 'weapon' && it.element ? elIcon(it.element, 'eli') : ''}${it.crafted ? '<i class="cr"></i>' : ''}</span>`;
 }
 const GILT_EXOTICS = []; // item hashes; filled after the exotic review with the user
 const PANE_COLORS = ['#4da3ff','#f2a33a','#5bd17a','#e05fb7','#a67cff','#41d6c3','#e5624f','#d8d35a'];
@@ -1183,7 +1192,7 @@ function bindPane(el, p) {
   el.querySelector('[data-act=dir]').onclick = e => { p.dir = p.dir === 'asc' ? 'desc' : 'asc'; e.currentTarget.innerHTML = p.dir === 'asc' ? ICO.up + ' Asc' : ICO.down + ' Desc'; savePanes(); refreshBodies(); };
   const menu = el.querySelector('.menu');
   menu.onclick = e => {
-    const act = e.target.dataset.act; if (!act) return;
+    const act = e.target.closest('[data-act]')?.dataset.act; if (!act) return;
     if (act === 'menu') { document.querySelectorAll('.menu.open').forEach(m => m !== menu && m.classList.remove('open')); menu.classList.toggle('open'); return; }
     menu.classList.remove('open');
     const i = S.panes.indexOf(p);
@@ -1198,7 +1207,7 @@ function bindPane(el, p) {
   };
   el.querySelector('.pane-body').onclick = e => {
     const c = e.target.closest('.card'); if (c) return openItem(c.dataset.id, p.id, e.target.closest('[data-pk]')?.dataset.pk);
-    if (e.target.dataset.act === 'more') { S.limits[p.id] = (S.limits[p.id] || PAGE()) + PAGE(); refreshBody(el, p); }
+    if (e.target.closest('[data-act]')?.dataset.act === 'more') { S.limits[p.id] = (S.limits[p.id] || PAGE()) + PAGE(); refreshBody(el, p); }
   };
 }
 document.addEventListener('click', e => { if (!e.target.closest('.menu')) document.querySelectorAll('.menu.open').forEach(m => m.classList.remove('open')); });
@@ -1293,11 +1302,16 @@ function cardHtml(it, hits, paneIdx, sortKey) {
   if (it.kind === 'weapon' && it.ammo) sub.push(F('ammo', `${ammoIcon(it.ammo)}${esc(it.ammo)}`));
   if (it.type) sub.push(F('type', esc(it.type)));
   const intrNames = new Set([...sk.intrinsic, ...sk.exotic].map(p => Core.norm(p.n)));
-  if (it.frame && !intrNames.has(Core.norm(it.frame))) sub.push(F('frame', esc(it.frame)));
+  if (it.frame && (it.kind === 'armor' || !intrNames.has(Core.norm(it.frame)))) sub.push(F('frame', esc(it.frame)));
+  if (it.kind === 'armor') {
+    const [, tot] = Core.findStat(it.stats, 'total');
+    if (tot != null) sub.push(F('stat:Total', `Total <b>${esc(tot)}</b>`));
+    if (it.tertiary) sub.push(F('tertiary', `Tertiary <b>${esc(it.tertiary)}</b>`));
+  }
   if (Core.anyBreaker(it)) sub.push(F('breaker', breakerChips(it)));
   if (it.crafted) sub.push(F('crafted', `${CRAFTED_SVG} Crafted${it.level != null ? ' · Lv ' + it.level : ''}`));
   // fields outside the preview, shown when searched (highlighted) or sorted by
-  const extra = { source: it.source, owner: it.owner, season: it.season != null ? 'Season ' + it.season : '', locked: it.locked ? 'Locked' : 'Unlocked', holofoil: 'Holofoil', featured: 'Featured', mw: it.mwType ? `MW ${it.mwType} ${it.mwTier ?? ''}` : '', event: it.event, foundry: it.foundry, kills: it.kills != null ? it.kills + ' kills' : '', energy: it.energy != null ? 'Energy ' + it.energy : '', set: it.set ? '◈ ' + it.set : '', equippable: it.equippable, tertiary: it.tertiary ? '3rd: ' + it.tertiary : '', tuning: it.tuning ? 'Tuned: ' + it.tuning : '', name: '', notes: '', element: it.kind === 'armor' ? it.element : '', level: '' };
+  const extra = { source: it.source, owner: it.owner, season: it.season != null ? 'Season ' + it.season : '', locked: it.locked ? 'Locked' : 'Unlocked', holofoil: 'Holofoil', featured: 'Featured', mw: it.mwType ? `MW ${it.mwType} ${it.mwTier ?? ''}` : '', event: it.event, foundry: it.foundry, kills: it.kills != null ? it.kills + ' kills' : '', energy: it.energy != null ? 'Energy ' + it.energy : '', set: it.set ? '◈ ' + it.set : '', equippable: it.equippable, tertiary: it.kind === 'armor' ? '' : (it.tertiary ? '3rd: ' + it.tertiary : ''), tuning: it.tuning ? 'Tuned: ' + it.tuning : '', name: '', notes: '', element: it.kind === 'armor' ? it.element : '', level: '' };
   const sortField = { set: 'set', class: 'equippable', source: 'source', season: 'season', kills: 'kills', type: 'type' }[sortKey];
   for (const [k, v] of Object.entries(extra)) if (v && (hits.has(k) || k === sortField)) sub.push(F(k, esc(v)));
   // intrinsic (and exotic perks) always; other perks / mods only when the search hit them
@@ -1776,7 +1790,10 @@ function renderSub() {
   const fileEl = SV.el === 'prism' ? 'prismatic' : SV.el;
   const ecol = { solar: 'var(--solar)', arc: 'var(--arc)', void: 'var(--void)', stasis: 'var(--stasis)', strand: 'var(--strand)', prism: 'var(--prismatic)' }[SV.el] || 'var(--light)';
   v.style.setProperty('--ec', ecol);
-  v.innerHTML = `<div class="sv-head" style="--art:url('art/sub-${['warlock', 'titan', 'hunter'].includes(SV.cls) ? SV.cls : 'warlock'}-${['solar', 'arc', 'void', 'stasis', 'strand', 'prismatic'].includes(fileEl) ? fileEl : 'solar'}.webp')"><div class="svt"><h1 class="title lw">${esc(sc?.n || 'Subclasses')}</h1><p class="sum">${esc(SV.cls[0].toUpperCase() + SV.cls.slice(1))} · <b>${esc((SV_ELS.find(x => x[0] === SV.el) || [, ''])[1])}</b></p></div><div class="h">Subclasses</div>
+  // focal point of each subclass image (the element effect in hand / the figure), as background-position %, so it stays in the header band
+  const FOCUS = { 'hunter-arc': [78, 45], 'hunter-prismatic': [45, 35], 'hunter-solar': [82, 45], 'hunter-stasis': [78, 45], 'hunter-strand': [75, 45], 'hunter-void': [82, 50], 'titan-arc': [80, 38], 'titan-prismatic': [55, 35], 'titan-solar': [82, 38], 'titan-stasis': [82, 45], 'titan-strand': [80, 45], 'titan-void': [82, 45], 'warlock-arc': [80, 50], 'warlock-prismatic': [58, 40], 'warlock-solar': [82, 52], 'warlock-stasis': [82, 42], 'warlock-strand': [78, 55], 'warlock-void': [80, 50] };
+  const fc = FOCUS[`${SV.cls}-${fileEl}`] || [70, 40];
+  v.innerHTML = `<div class="sv-head" style="--fx:${fc[0]}%;--fy:${fc[1]}%;--art:url('art/sub-${['warlock', 'titan', 'hunter'].includes(SV.cls) ? SV.cls : 'warlock'}-${['solar', 'arc', 'void', 'stasis', 'strand', 'prismatic'].includes(fileEl) ? fileEl : 'solar'}.webp')"><div class="svt"><h1 class="title lw">${esc(sc?.n || 'Subclasses')}</h1><p class="sum">${esc(SV.cls[0].toUpperCase() + SV.cls.slice(1))} · <b>${esc((SV_ELS.find(x => x[0] === SV.el) || [, ''])[1])}</b></p></div><div class="h">Subclasses</div>
       <div class="tabs">${[['warlock', 'Warlock'], ['titan', 'Titan'], ['hunter', 'Hunter']].filter(([c]) => D.sub[c]).map(([c, l]) => `<button class="tab${c === SV.cls ? ' on' : ''}" data-cls="${c}">${l}</button>`).join('')}</div>
       <input class="qin" id="svq" placeholder="Filter by name or description…" value="${esc(SV.q)}" style="max-width:280px">
       <span class="grow"></span><span class="stat-pill">Bungie · Clarity · Data Compendium · light.gg links</span><button class="btn" id="svClose">Close</button></div>

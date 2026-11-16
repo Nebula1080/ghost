@@ -253,11 +253,12 @@ a{color:var(--light)}
 /* projection: the panel unfolds from a line of Light (desktop) */
 @media (min-width:761px){
   #drawer{transform:none;visibility:hidden;clip-path:inset(50% 0 50% 0);transition:none}
-  #drawer.open{visibility:visible;animation:project .55s var(--ease) forwards}
-  #drawer.closing{visibility:visible;animation:unproject .22s var(--ease-in) forwards}
+  /* the open state is complete without animation (reduced motion, or animations disabled); the projection only decorates it */
+  #drawer.open{visibility:visible;clip-path:inset(0);animation:project .55s var(--ease)}
+  #drawer.closing{visibility:visible;clip-path:inset(49.6% 0 49.6% 0);opacity:0;animation:unproject .22s var(--ease-in)}
 }
-@keyframes project{0%,30%{clip-path:inset(49.6% 0 49.6% 0);filter:brightness(2.4)}100%{clip-path:inset(0);filter:none}}
-@keyframes unproject{from{clip-path:inset(0)}to{clip-path:inset(49.6% 0 49.6% 0);opacity:0}}
+@keyframes project{0%,30%{clip-path:inset(49.6% 0 49.6% 0);filter:brightness(2.4)}}
+@keyframes unproject{from{clip-path:inset(0);opacity:1}}
 /* gilt arch for chosen exotics (list kept empty until the exotic review) */
 #drawer.gilt .hero{margin:12px 12px 0;border:1px solid #c9a24f;border-bottom:0;border-radius:200px 200px 0 0;box-shadow:inset 0 0 0 5px rgba(201,162,79,.25),inset 0 0 0 6px #c9a24f}
 
@@ -303,7 +304,7 @@ a{color:var(--light)}
 
 /* ---------- Subclasses: Bungie's in-game subclass art ---------- */
 .sv-head{position:relative;isolation:isolate;min-height:360px;align-items:flex-end;padding:30px 40px 22px;background:var(--bg);border-bottom:0}
-.sv-head::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--art,none) 70% 20%/cover no-repeat;transition:opacity .4s}
+.sv-head::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--art,none) var(--fx,70%) var(--fy,40%)/cover no-repeat;transition:opacity .4s}
 .sv-head::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,var(--bg) 14%,color-mix(in srgb,var(--bg) 40%,transparent) 42%,transparent 72%),linear-gradient(0deg,var(--bg) 0%,transparent 45%)}
 .sv-head .svt{flex-basis:100%;order:-1}
 .sv-head .h{display:none}
@@ -405,3 +406,6 @@ a{color:var(--light)}
 .pane-head .row{flex-wrap:wrap;min-width:0}
 .pane-head select.s{flex:1 1 96px;min-width:0;max-width:150px}
 .pane-head [data-act=dir]{flex:none}
+
+/* bundled item icon (artifact build) */
+.itm .ispr{position:absolute;inset:0;background-repeat:no-repeat;display:block}

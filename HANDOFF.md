@@ -10,6 +10,8 @@
 - GitHub: user `nebula1080`, repo `ghost`, Bungie app "Ghost Buddy". The user has added the repo secrets `BUNGIE_API_KEY` and `BUNGIE_CLIENT_ID`.
 - **Design overhaul built 2026-11-15** (covers GHOST_PLAN steps 1, 3, 5 and 7: tokens/themes + rename, type/layout, components, motion), after three prototype rounds with the user (`.impeccable/mocks/`). The user chose: Vanguard Dossier layout on desktop, Leaded Light on phones, relevant high-res art only, real item icons, stat bars, seven themes from the inspo images. Details in CLAUDE.md → Look.
   - Still open: exotic review for `GILT_EXOTICS`; About screen (A7) with credits; artifact build shows sprite icons instead of Bungie item icons (CSP).
+- **2026-11-15 fixes after the first artifact republish:** item panel stayed invisible when the OS asks for reduced motion (now its open state needs no animation; tested both ways), pane ⋯ menu ignored clicks on its icon, armor rows now show slot, archetype, total and tertiary, subclass art has per-image focal points, artifact build bundles Bungie item icons as sprites. Light theme retired.
+- `.github/workflows/deploy.yml` (Pages) is written. When the API key is injected (step 4) the hosted build will contain it by design (public client), so its `check-secrets --dir dist-hosted` step must then exclude the key.
 - **Next: step 2** (A1 build targets are partly done; A2 GitHub Pages deploy). Then the user activates the `protect-main` ruleset after the first push.
 
 ## Status

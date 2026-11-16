@@ -48,6 +48,16 @@ OUT.mkdir(exist_ok=True)
 art_files = sorted((root / 'data/art').glob('*.webp'))
 for f in art_files: shutil.copyfile(f, OUT / 'art' / f.name)
 print('art:', len(art_files), 'files')
+# artifact build: Bungie item icons as bundled sprite sheets (tools/build-item-sprites.py), since bungie.net is blocked there
+assert '/*__ISPR__*/null' in s
+isp = root / 'data/item-sprites/index.json'
+if TARGET == 'artifact' and isp.exists():
+    ispr = json.loads(isp.read_text(encoding='utf-8'))
+    (OUT / 'isprites').mkdir(exist_ok=True)
+    for f in ispr['sheets']: shutil.copyfile(root / 'data/item-sprites' / f, OUT / 'isprites' / f)
+    ispr_json = json.dumps(ispr, separators=(',', ':')); assert '<' not in ispr_json
+    s = s.replace('/*__ISPR__*/null', ispr_json)
+    print('item sprites:', len(ispr['sheets']), 'sheets,', len(ispr['i']), 'items')
 # Bungie item icons / screenshots (hosted only: the claude.ai artifact's CSP blocks bungie.net)
 assert '/*__ART__*/null' in s
 ia = root / 'data/item-art.json'
