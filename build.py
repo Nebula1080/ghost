@@ -165,14 +165,21 @@ const CACHE = 'ghost-{version}';
 const ASSETS = {json.dumps(assets)};
 const SCOPE = new URL('./', self.registration.scope).pathname;
 const PATHS = new Set(ASSETS.map(a => SCOPE + (a === './' ? '' : a)));
-self.addEventListener('install', e => {{ e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())); }});
+// install bypasses the HTTP cache (GitHub Pages sends max-age=600), so a new worker never stores the old page
+self.addEventListener('install', e => {{ e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS.map(a => new Request(a, {{ cache: 'reload' }})))).then(() => self.skipWaiting())); }});
 self.addEventListener('activate', e => {{ e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); }});
-// this build's static files only: answer from cache, refresh in the background (stale-while-revalidate)
+const PAGE = new Set([SCOPE, SCOPE + 'index.html']);
+// this build's static files only. The page itself is network-first (revalidated, so a deploy shows on the next
+// open); the cache answers only offline. Art, icons and the manifest are cache-first, refreshed in the background.
 self.addEventListener('fetch', e => {{
   const r = e.request, u = new URL(r.url);
   if (r.method !== 'GET' || u.origin !== location.origin || !PATHS.has(u.pathname) || r.headers.has('Authorization')) return;
   e.respondWith(caches.open(CACHE).then(async c => {{
     const hit = await c.match(r, {{ ignoreSearch: true }});
+    if (PAGE.has(u.pathname)) {{
+      try {{ const res = await fetch(u.pathname, {{ cache: 'no-cache', credentials: 'same-origin' }}); if (res.ok && res.type === 'basic') c.put(r, res.clone()); return res; }}
+      catch {{ return hit || Response.error(); }}
+    }}
     const net = fetch(r).then(res => {{ if (res.ok && res.type === 'basic') c.put(r, res.clone()); return res; }}).catch(() => hit);
     return hit || net;
   }}));

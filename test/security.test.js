@@ -179,6 +179,7 @@ t('hosted build: service worker caches only its own static files', () => {
   assert.ok(/!PATHS\.has\(u\.pathname\)/.test(sw) && /headers\.has\('Authorization'\)/.test(sw) && /u\.origin !== location\.origin/.test(sw), 'sw fetch guard missing');
   assert.ok(/caches\.delete/.test(sw), 'old caches must be deleted');
   assert.ok(!/bungie/i.test(sw), 'sw must not mention bungie.net');
+  assert.ok(/cache: 'reload'/.test(sw) && /cache: 'no-cache'/.test(sw), 'sw must install past the HTTP cache and fetch the page network-first');
 });
 
 // ---------- repo hygiene ----------
