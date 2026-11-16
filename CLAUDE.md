@@ -87,6 +87,7 @@ State `CL = {setup, dec, gi, step}` saved to localStorage `vs:clean` and db `con
 ### Phones (≤760px, plus touch behaviours)
 CSS block "phones & touch" at the end of `<style>`; `isMobile()` = `matchMedia('(max-width: 760px)')`; crossing the breakpoint re-renders.
 - Bottom tab bar (the `nav.views` buttons, with inline SVG icons), 48px header with a ⋯ menu sheet (summary, Load, Export, Help, Install). Banner is one line, tap to expand, × dismisses (remembered in `vs:bannerOff`).
+- Collapse on scroll: scrolling any list down sets `body.compact` (header, Vault scene, pane chips, quick filters, Subclasses art header shrink); scrolling up, reaching the top, tapping the slim scene or switching views restores it. Only lists with >360px left to scroll collapse (no flip-flop). The pane ⋯ menu stays a dropdown and scrolls: `fitMenu` caps its height at the pane bottom / tab bar (user preferred this over a bottom sheet, 2026-11-16). Covered in `test/ui.e2e.js`.
 - Vault: one pane per screen with scroll-snap; `#paneChips` row to jump between panes (+ Add). Each pane has quick filter chips (`QUICK`, toggle a term in the query) and a "Sort ▾" button that reveals the sort/group row.
 - Item panel = bottom sheet (64dvh, drag handle/header up for full height, down to shrink/close; `sheetDrag`), tag buttons pinned in the footer. Modals become bottom sheets. Long-press any `[data-pk]` (touch) opens its description.
 - Clean up: single-column cards; swipe right = keep, left = trash (`swipeTile`), then it scrolls to the next card.

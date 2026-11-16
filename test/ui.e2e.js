@@ -58,6 +58,35 @@ const fails = []; const ok = m => console.log('  ok  ', m); const fail = m => { 
     v ? ok(`item panel visible (${rm} motion)`) : fail(`item panel invisible (${rm} motion)`);
     await b2.close();
   }
+  // phone: scrolling a list down collapses the header chrome, scrolling up restores it; the pane menu fits on screen
+  {
+    const b3 = await chromium.launch({ ...(exe ? { executablePath: exe } : {}) });
+    const p3 = await b3.newPage({ viewport: { width: 390, height: 667 }, isMobile: true, hasTouch: true });
+    const e3 = []; p3.on('pageerror', e => e3.push(e.message));
+    await p3.goto('file://' + path.join(root, 'dist/index.html').split(path.sep).join('/')); await p3.waitForTimeout(400);
+    await p3.evaluate(() => document.getElementById('intro')?.remove());
+    await p3.setInputFiles('#file', fx); await p3.waitForTimeout(900);
+    const pb = () => p3.evaluate(() => { const p = [...document.querySelectorAll('.pane')].find(p => p.getBoundingClientRect().left < 50 && p.getBoundingClientRect().left > -5); window.__pb = p.querySelector('.pane-body'); return window.__pb.clientHeight; });
+    const h0 = await pb();
+    await p3.evaluate(() => { const f = document.createElement('div'); f.style.height = '3000px'; window.__pb.appendChild(f); });
+    for (let i = 0; i < 5; i++) { await p3.evaluate(() => window.__pb.scrollBy(0, 120)); await p3.waitForTimeout(50); }
+    await p3.waitForTimeout(400);
+    const c1 = await p3.evaluate(() => document.body.classList.contains('compact')), h1 = await pb();
+    c1 && h1 > h0 + 150 ? ok(`phone: scrolling down collapses the header chrome (list ${h0}px → ${h1}px)`) : fail(`phone: no collapse on scroll (compact ${c1}, ${h0} → ${h1})`);
+    for (let i = 0; i < 3; i++) { await p3.evaluate(() => window.__pb.scrollBy(0, -40)); await p3.waitForTimeout(50); }
+    await p3.waitForTimeout(300);
+    (await p3.evaluate(() => !document.body.classList.contains('compact'))) ? ok('phone: scrolling up restores it') : fail('phone: header chrome stays collapsed after scrolling up');
+    await p3.evaluate(() => window.__pb.closest('.pane').querySelector('[data-act=menu]').click()); await p3.waitForTimeout(200);
+    const m = await p3.evaluate(() => {
+      const pane = window.__pb.closest('.pane'), l = pane.querySelector('.menu-list'), r = l.getBoundingClientRect();
+      const limit = Math.min(document.querySelector('nav.views').getBoundingClientRect().top, pane.getBoundingClientRect().bottom);
+      l.scrollTop = l.scrollHeight; const last = [...l.querySelectorAll('button')].pop().getBoundingClientRect();
+      return { fits: r.top >= 0 && r.bottom <= limit + 1 && r.height > 0, lastVisible: last.bottom <= r.bottom + 1 && last.top >= r.top - 1 };
+    });
+    m.fits && m.lastVisible ? ok('phone: pane menu stays inside the pane and scrolls to its last option') : fail('phone: pane menu runs off screen or cannot reach its last option ' + JSON.stringify(m));
+    e3.length ? fail('phone page errors: ' + e3.join(' | ')) : ok('phone: no page errors');
+    await b3.close();
+  }
   // art resolution (backdrops must be high resolution)
   const sizeOf = f => { const b = fs.readFileSync(f); if (b.toString('ascii', 12, 16) === 'VP8X') return 1 + b.readUIntLE(24, 3); if (b.toString('ascii', 12, 16) === 'VP8 ') return b.readUInt16LE(26) & 0x3fff; if (b.toString('ascii', 12, 16) === 'VP8L') return 1 + (b.readUInt32LE(21) & 0x3fff); return 0; };
   const small = fs.readdirSync(path.join(root, 'data/art')).filter(f => f.endsWith('.webp')).map(f => [f, sizeOf(path.join(root, 'data/art', f))]).filter(([, w]) => w < 1920);
