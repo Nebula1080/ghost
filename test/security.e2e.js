@@ -160,7 +160,10 @@ async function run(label, url, hosted) {
   res.xss ? fail('payload executed: ' + JSON.stringify(res.xss)) : ok('no payload executed');
   res.bad.length ? fail('dangerous attributes in DOM: ' + res.bad.slice(0, 5).join(' | ')) : ok('no on* attributes or javascript: URLs in the DOM');
   res.scripts === 3 ? ok('script count unchanged (3)') : fail('script elements: ' + res.scripts);
-  res.imgs.length ? fail('non-data images: ' + res.imgs.slice(0, 3).join(', ')) : ok('only data: images');
+  // artifact build: data: images only; hosted build may also show Bungie's own item art from its content CDN (CSP img-src)
+  const BUNGIE_ART = /^https:\/\/www\.bungie\.net\/common\/destiny2_content\/(icons|screenshots)\/[0-9a-f]{32}\.(jpg|png)$|^https:\/\/www\.bungie\.net\/common\/destiny2_content\/screenshots\/\d{1,12}\.jpg$/;
+  const badImgs = res.imgs.filter(u => !(hosted && BUNGIE_ART.test(u)));
+  badImgs.length ? fail('unexpected image sources: ' + badImgs.slice(0, 3).join(', ')) : ok(hosted ? 'images: data: or Bungie item art only' : 'only data: images');
   res.profColors.every(c => /^#[0-9a-f]{6}$/i.test(c)) ? ok('profile colours sanitised') : fail('profile colour: ' + res.profColors);
   res.lsTokeny.length ? fail('token-like data in localStorage: ' + res.lsTokeny) : ok('no token-like data in localStorage');
   errors.length ? fail('page errors: ' + errors.slice(0, 3).join(' | ')) : ok('no page errors');
@@ -170,7 +173,8 @@ async function run(label, url, hosted) {
     const cached = await pg.evaluate(async () => { const o = []; for (const k of await caches.keys()) { const c = await caches.open(k); for (const r of await c.keys()) o.push(new URL(r.url).pathname); } return o; }).catch(() => null);
     if (cached == null) fail('could not read the SW cache');
     else {
-      const allowed = new Set(['/', '/index.html', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/icons.webp', '/icons.png']);
+      const allowed = new Set(['/', '/index.html', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/icons.webp', '/icons.png',
+        ...fs.readdirSync(path.join(root, 'dist-hosted', 'art')).map(f => '/art/' + f)]);
       const extra = cached.filter(p => !allowed.has(p));
       extra.length ? fail('SW cached non-build files: ' + extra.join(', ')) : ok(`SW cache holds only build files (${cached.length})`);
     }

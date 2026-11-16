@@ -26,3 +26,9 @@ dist-hosted/
 # --- Reference data caches (rebuilt by tools/build-defs.mjs; defs.json + sprite.webp are committed) ---
 data/raw/
 data/sprite.png
+
+# Impeccable design runtime (prototypes, decision pages, review captures); PRODUCT.md, DESIGN.md and .impeccable/config.json + design.json are committed
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/review/
+.impeccable/hook.cache.json

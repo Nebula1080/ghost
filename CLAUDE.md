@@ -17,6 +17,8 @@ Help sort a Destiny 2 vault. Read all the information for each item, and tag and
 |---|---|
 | `src/core.js` | Pure logic with no DOM: CSV parse/serialize, DIM row → item, query language, sort/group, rating. Exported for Node via `module.exports`. |
 | `src/app.html` | The UI, a single page. `/*__CORE__*/` gets replaced with core.js at build time. |
+| `src/ghost.css` | The Ghost design system (themes, layout, components, motion), inlined at build. |
+| `data/art/`, `data/fonts/`, `data/item-art.json` | Backdrops + subclass art, embedded fonts, hosted-only Bungie item art map. |
 | `build.py` | Inlines core into the page. `python build.py` → **`dist/`** (artifact build); `python build.py --target hosted` → **`dist-hosted/`** with the strict CSP `<meta>` (sha256 of every inline script), `no-referrer`, and no Google Fonts. Also patches in `structuredClone` for db reads (see Gotchas) and writes the PWA files + service worker. |
 | `dist/index.html` | Built app. Opens directly from disk (falls back to localStorage) or as the claude.ai artifact. |
 | `tools/build-defs.mjs` | Builds **`data/defs.json`** (inlined into the page by build.py): element/ammo/breaker icons as data URIs, intrinsic breaker per weapon hash, perk name → Bungie icon path, Clarity perk text, Destiny Data Compendium perk + exotic text. Caches downloads in `data/raw/`; `npm run defs` re-downloads everything. |
@@ -26,6 +28,7 @@ Help sort a Destiny 2 vault. Read all the information for each item, and tag and
 | `test/core.smoke.js` | Node smoke test of parser, queries and ratings on `test/fixtures/*.csv`. |
 | `test/e2e.playwright.js` | Headless check: load the CSVs, query, tag, export. Uses `CHROME_PATH`, else local Chrome/Edge, else Playwright's Chromium. |
 | `test/security.test.js` | Security unit tests (part of `npm test`): sanitizer, CSV limits, ids, ratings validation, export guard, source checks, hosted CSP/SW checks. |
+| `test/ui.e2e.js` | UI regressions: perk description open/close (incl. rapid clicks), Clean up card opens the item panel, theme/motion persist, art ≥1920px. |
 | `test/security.e2e.js` | Browser security test (part of `npm run e2e`): hostile CSVs/ratings/profiles through every view on both builds; fails on executed payloads, on*/javascript: in the DOM, CSP violations, non-build files in the SW cache, token-like storage. |
 | `tools/check-secrets.mjs` | Exact-value check: the real key/client_id (from `config/local.json` or env) must not appear in staged files, the repo, or `dist/`. |
 | `.githooks/pre-commit`, `.gitleaks.toml` | Pre-commit secret scan (gitleaks at `tools/bin/gitleaks.exe`, gitignored, v8.30.1 checksum-verified) + exact-value check + no CSVs outside `test/fixtures/`. Enabled with `git config core.hooksPath .githooks`. |
@@ -94,8 +97,15 @@ CSS block "phones & touch" at the end of `<style>`; `isMobile()` = `matchMedia('
 - Share sheet (`addShareButton`) for the export CSV and DIM searches where `navigator.share` exists. Load dialog has a "Choose files" button and DIM-mobile instructions.
 - Installable web app for hosted copies: `build.py` writes `dist/manifest.webmanifest`, `dist/sw.js` (stale-while-revalidate cache, versioned per build) and copies `data/icon-192.png` / `icon-512.png` (drawn by `tools/build-app-icons.py`). The service worker only registers on https/localhost outside claude.ai. When testing on localhost after a rebuild, reload twice or unregister the worker.
 
-### Look
-Theme block at the end of the `<style>` (bray.tech-inspired: flat squared grayscale panels, slate→amber page bands, light large titles, small letter-spaced uppercase labels, rotated section labels, rarity-colored item header strips like in-game tooltips). No bray.tech name, logo or assets are used.
+### Look (Ghost design, 2026-11-15; see PRODUCT.md and `.impeccable/` for the design process)
+- **Stylesheet:** `src/ghost.css` (inlined by `build.py` at `/*__GHOST_CSS__*/`, after the legacy CSS, whose neutral colours were converted to theme tokens by `tools/ghost-patch.py`).
+- **Layout:** desktop = "Vanguard Dossier" (left rail with the Ghost sigil, nav, profile, actions, theme picker; scene headers; panes as ruled sheets). Phone (≤760px) = "Leaded Light" (cards with glass perk cells, bottom tab bar, bottom-sheet item panel).
+- **Themes:** `WORLDS` in app.html + `:root[data-theme=…]` tokens in ghost.css: Dusk (default dark), Oxblood, Gilded, Nebula, Abyss, Verdant, Bone & Sepia (light; default when the OS prefers light). Remembered in `vs:theme`; motion toggle in `vs:motion` (also off under `prefers-reduced-motion`).
+- **Type:** Hanken Grotesk (UI) + Cinzel (inscription titles), OFL, Latin WOFF2 subsets in `data/fonts/`, embedded as data URIs at `/*__FONTS__*/` (CSP `font-src data:`).
+- **Art:** `data/art/` (copied to `dist*/art/`): 2560px Bungie Press Room backdrops per view (`bg-*.webp`) and the 18 in-game subclass screenshots (`sub-<class>-<element>.webp`, 1920×1080). Sources in `data/art/SOURCES.md`; `test/ui.e2e.js` fails on any file under 1920px. Backdrops sit behind the title area only, under a scrim (`.scene`, `.band`, `.sv-head`).
+- **Item art (hosted only):** `tools/build-item-art.mjs` → `data/item-art.json` (hash → icon, watermark, screenshot); `build.py --target hosted` inlines it at `window.VS_ART`. `itemArt()` / `itemIcon()` build bungie.net URLs from validated names only; the artifact build falls back to the intrinsic's sprite icon.
+- **Motion:** item panel projects from a line of light (desktop), pointer light on panes/tiles, titles written in light on view change, tag light bursts, Clean up stamps, intro sigil once per session (`#intro`), cursor-following item tooltip (`#tip`, desktop pointer only).
+- **Exotic gilt arch:** `GILT_EXOTICS = []` (item hashes), filled after the exotic review with the user.
 
 ## Persistence (`src/app.html` → `loadAll` → `loadProfile`)
 - **Profiles:** each profile has its own vault, edits (tags/notes), panes, Clean up state and Compare list. Light.gg ratings and game data are shared. Registry `PROF = {list:[{id, name, color, weapons, armor, updated, sample}], active}` in localStorage `vs:profiles` and db `config/profiles`; the device's last active profile is `vs:activeProfile`.

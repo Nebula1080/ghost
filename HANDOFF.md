@@ -8,7 +8,9 @@
   - `GILT_EXOTICS`: exotic review later, with the user.
 - **Imagery chosen 2026-11-15:** `data/art.json` maps each slot (loading, welcome, view headers, About, Subclasses element panels, light-theme headers) to an image number in `UI Inspo/`, with credits and links from the design doc's credit table. Only images with high-confidence or user-confirmed credits were used. Text-heavy infographics, watermarked/logo images and unsure credits were excluded. Wired in at step 3.
 - GitHub: user `nebula1080`, repo `ghost`, Bungie app "Ghost Buddy". The user has added the repo secrets `BUNGIE_API_KEY` and `BUNGIE_CLIENT_ID`.
-- **Next: step 1** (V1 tokens/themes + rename to Ghost).
+- **Design overhaul built 2026-11-15** (covers GHOST_PLAN steps 1, 3, 5 and 7: tokens/themes + rename, type/layout, components, motion), after three prototype rounds with the user (`.impeccable/mocks/`). The user chose: Vanguard Dossier layout on desktop, Leaded Light on phones, relevant high-res art only, real item icons, stat bars, seven themes from the inspo images. Details in CLAUDE.md → Look.
+  - Still open: exotic review for `GILT_EXOTICS`; About screen (A7) with credits; artifact build shows sprite icons instead of Bungie item icons (CSP).
+- **Next: step 2** (A1 build targets are partly done; A2 GitHub Pages deploy). Then the user activates the `protect-main` ruleset after the first push.
 
 ## Status
 - **Built and published** as a claude.ai artifact, private to the user: https://claude.ai/artifact/Xcjyw6xewWGirToYpj5Uq2 (slug `f7efae1b-2831-4dd2-83dd-80c970fc780d`). The code in `dist/index.html` is identical to what's published.

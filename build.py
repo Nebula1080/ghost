@@ -31,6 +31,31 @@ assert '/*__CORE__*/' in s
 assert '</script' not in core.lower(), 'core.js must not contain "</script"'
 s = s.replace('/*__CORE__*/', core)
 
+# ---- Ghost design: stylesheet, embedded fonts (OFL, data/fonts), art next to the page ----
+assert '/*__GHOST_CSS__*/' in s and '/*__FONTS__*/' in s
+ghost_css = (root / 'src/ghost.css').read_text(encoding='utf-8')
+assert '</style' not in ghost_css.lower()
+s = s.replace('/*__GHOST_CSS__*/', ghost_css)
+fonts = []
+for fam, f, wght in (('Hanken Grotesk', 'hanken-latin.woff2', '100 900'), ('Cinzel', 'cinzel-latin.woff2', '400 900')):
+    fp = root / 'data/fonts' / f
+    if fp.exists():
+        b64 = base64.b64encode(fp.read_bytes()).decode()
+        fonts.append(f'@font-face{{font-family:"{fam}";src:url(data:font/woff2;base64,{b64}) format("woff2");font-weight:{wght};font-style:normal;font-display:swap}}')
+s = s.replace('/*__FONTS__*/', '\n'.join(fonts))
+OUT.mkdir(exist_ok=True)
+(OUT / 'art').mkdir(exist_ok=True)
+art_files = sorted((root / 'data/art').glob('*.webp'))
+for f in art_files: shutil.copyfile(f, OUT / 'art' / f.name)
+print('art:', len(art_files), 'files')
+# Bungie item icons / screenshots (hosted only: the claude.ai artifact's CSP blocks bungie.net)
+assert '/*__ART__*/null' in s
+ia = root / 'data/item-art.json'
+if TARGET == 'hosted' and ia.exists():
+    art_json = json.dumps(json.loads(ia.read_text(encoding='utf-8')), separators=(',', ':'))
+    assert '<' not in art_json
+    s = s.replace('/*__ART__*/null', art_json)
+
 # reference data (icons, breakers, Clarity + Data Compendium); run tools/build-defs.mjs to refresh
 OUT.mkdir(exist_ok=True)
 defs_path = root / 'data/defs.json'
@@ -114,16 +139,16 @@ for n in ('icon-192.png', 'icon-512.png'):
     if (root / 'data' / n).exists(): shutil.copyfile(root / 'data' / n, OUT / n)
 sprite_name = next((f.name for f in OUT.glob('icons.*')), None)
 (OUT / 'manifest.webmanifest').write_text(json.dumps({
-    'name': 'Vault Sorter', 'short_name': 'Vault Sorter', 'start_url': './', 'scope': './', 'display': 'standalone',
-    'background_color': '#18191a', 'theme_color': '#18191a', 'orientation': 'any',
+    'name': 'Ghost', 'short_name': 'Ghost', 'start_url': './', 'scope': './', 'display': 'standalone',
+    'background_color': '#170f1c', 'theme_color': '#170f1c', 'orientation': 'any',
     'icons': [{'src': 'icon-192.png', 'sizes': '192x192', 'type': 'image/png'}, {'src': 'icon-512.png', 'sizes': '512x512', 'type': 'image/png', 'purpose': 'any maskable'}],
 }, indent=1), encoding='utf-8', newline='\n')
 version = hashlib.sha1(s.encode('utf-8')).hexdigest()[:10]
-assets = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'] + ([sprite_name] if sprite_name else [])
+assets = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'] + ([sprite_name] if sprite_name else []) + ['art/' + f.name for f in art_files]
 # Security (GHOST_PLAN): cache only this build's own static files. Never cache bungie.net, API calls,
 # anything with an Authorization header, or any URL not in ASSETS. Old caches are deleted on activate.
 (OUT / 'sw.js').write_text(f'''// Offline cache for hosted copies. The version changes with every build, so updates replace the cache.
-const CACHE = 'vault-sorter-{version}';
+const CACHE = 'ghost-{version}';
 const ASSETS = {json.dumps(assets)};
 const SCOPE = new URL('./', self.registration.scope).pathname;
 const PATHS = new Set(ASSETS.map(a => SCOPE + (a === './' ? '' : a)));

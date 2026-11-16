@@ -1,0 +1,963 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T02:23:30.398Z",
+  "title": "Design System: Ghost",
+  "extensions": {
+    "colorMeta": {
+      "dusk-ground": {
+        "role": "neutral",
+        "displayName": "Dusk Ground",
+        "canonical": "#170f1c",
+        "tonalRamp": [
+          "#130c18",
+          "#170f1c",
+          "#211627",
+          "#241a2b",
+          "#2b1e33",
+          "#352640",
+          "#4a3a55",
+          "#62506d"
+        ]
+      },
+      "dusk-rail": {
+        "role": "neutral",
+        "displayName": "Dusk Rail",
+        "canonical": "#211627",
+        "tonalRamp": [
+          "#130c18",
+          "#170f1c",
+          "#211627",
+          "#241a2b",
+          "#2b1e33",
+          "#352640",
+          "#4a3a55",
+          "#62506d"
+        ]
+      },
+      "dusk-well": {
+        "role": "neutral",
+        "displayName": "Dusk Well",
+        "canonical": "#130c18",
+        "tonalRamp": [
+          "#130c18",
+          "#170f1c",
+          "#211627",
+          "#241a2b",
+          "#2b1e33",
+          "#352640",
+          "#4a3a55",
+          "#62506d"
+        ]
+      },
+      "dusk-sheet": {
+        "role": "neutral",
+        "displayName": "Dusk Sheet",
+        "canonical": "#241a2b",
+        "tonalRamp": [
+          "#130c18",
+          "#170f1c",
+          "#211627",
+          "#241a2b",
+          "#2b1e33",
+          "#352640",
+          "#4a3a55",
+          "#62506d"
+        ]
+      },
+      "dusk-sheet-raised": {
+        "role": "neutral",
+        "displayName": "Dusk Sheet Raised",
+        "canonical": "#2b1e33",
+        "tonalRamp": [
+          "#130c18",
+          "#170f1c",
+          "#211627",
+          "#241a2b",
+          "#2b1e33",
+          "#352640",
+          "#4a3a55",
+          "#62506d"
+        ]
+      },
+      "dusk-raise": {
+        "role": "neutral",
+        "displayName": "Dusk Raise",
+        "canonical": "#352640",
+        "tonalRamp": [
+          "#130c18",
+          "#170f1c",
+          "#211627",
+          "#241a2b",
+          "#2b1e33",
+          "#352640",
+          "#4a3a55",
+          "#62506d"
+        ]
+      },
+      "dusk-hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#4a3a55",
+        "tonalRamp": [
+          "#130c18",
+          "#170f1c",
+          "#211627",
+          "#241a2b",
+          "#2b1e33",
+          "#352640",
+          "#4a3a55",
+          "#62506d"
+        ]
+      },
+      "dusk-hairline-strong": {
+        "role": "neutral",
+        "displayName": "Hairline Strong",
+        "canonical": "#62506d",
+        "tonalRamp": [
+          "#130c18",
+          "#170f1c",
+          "#211627",
+          "#241a2b",
+          "#2b1e33",
+          "#352640",
+          "#4a3a55",
+          "#62506d"
+        ]
+      },
+      "dusk-ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#f7ece5",
+        "tonalRamp": [
+          "#332f31",
+          "#5e5959",
+          "#938b89",
+          "#c7beb9",
+          "#f7ece5",
+          "#f8efe8",
+          "#f9f2eb",
+          "#f9f4ee"
+        ]
+      },
+      "dusk-ink-dim": {
+        "role": "neutral",
+        "displayName": "Ink Dim",
+        "canonical": "#c9b8bf",
+        "tonalRamp": [
+          "#2b262b",
+          "#4d464b",
+          "#786d73",
+          "#a2949b",
+          "#c9b8bf",
+          "#d8cbce",
+          "#e4dada",
+          "#f0eae6"
+        ]
+      },
+      "dusk-ink-faint": {
+        "role": "neutral",
+        "displayName": "Ink Faint",
+        "canonical": "#a08e9a",
+        "tonalRamp": [
+          "#231e24",
+          "#3f373e",
+          "#60555e",
+          "#82737d",
+          "#a08e9a",
+          "#bbadb4",
+          "#d2c7c9",
+          "#e8e1df"
+        ]
+      },
+      "peach-light": {
+        "role": "primary",
+        "displayName": "Peach Light",
+        "canonical": "#f7d3bd",
+        "tonalRamp": [
+          "#332b2a",
+          "#5e504a",
+          "#937d72",
+          "#c7aa99",
+          "#f7d3bd",
+          "#f8decc",
+          "#f9e6d9",
+          "#f9efe6"
+        ]
+      },
+      "tower-amber": {
+        "role": "primary",
+        "displayName": "Tower Amber",
+        "canonical": "#f2a65a",
+        "tonalRamp": [
+          "#322318",
+          "#5c4027",
+          "#906338",
+          "#c3864a",
+          "#f2a65a",
+          "#f4be87",
+          "#f6d2ad",
+          "#f8e6d2"
+        ]
+      },
+      "amber-ink": {
+        "role": "primary",
+        "displayName": "Amber Ink",
+        "canonical": "#2a1608",
+        "tonalRamp": [
+          "#0e090a",
+          "#140c09",
+          "#1c0f09",
+          "#231308",
+          "#2a1608",
+          "#68594e",
+          "#9c9188",
+          "#d0c9c2"
+        ]
+      },
+      "solar": {
+        "role": "secondary",
+        "displayName": "Solar",
+        "canonical": "#f2721b",
+        "tonalRamp": [
+          "#32190d",
+          "#5c2d10",
+          "#904514",
+          "#c35c18",
+          "#f2721b",
+          "#f49a5b",
+          "#f6bb90",
+          "#f8dcc5"
+        ]
+      },
+      "arc": {
+        "role": "secondary",
+        "displayName": "Arc",
+        "canonical": "#7aecf3",
+        "tonalRamp": [
+          "#1d2f34",
+          "#31595e",
+          "#4a8b91",
+          "#63bec4",
+          "#7aecf3",
+          "#a0eff2",
+          "#c0f2f1",
+          "#e0f4f1"
+        ]
+      },
+      "void": {
+        "role": "secondary",
+        "displayName": "Void",
+        "canonical": "#b98ae8",
+        "tonalRamp": [
+          "#281e32",
+          "#48365a",
+          "#6f538b",
+          "#9670bc",
+          "#b98ae8",
+          "#cdaaea",
+          "#ddc5ec",
+          "#ede0ee"
+        ]
+      },
+      "stasis": {
+        "role": "secondary",
+        "displayName": "Stasis",
+        "canonical": "#6aa6ff",
+        "tonalRamp": [
+          "#1a2336",
+          "#2b4062",
+          "#416398",
+          "#5686ce",
+          "#6aa6ff",
+          "#95befb",
+          "#b9d2f7",
+          "#dde6f3"
+        ]
+      },
+      "strand": {
+        "role": "secondary",
+        "displayName": "Strand",
+        "canonical": "#3fe07a",
+        "tonalRamp": [
+          "#122d1e",
+          "#1c5432",
+          "#28844b",
+          "#34b464",
+          "#3fe07a",
+          "#77e79d",
+          "#a6ecbb",
+          "#d5f2d8"
+        ]
+      },
+      "kinetic": {
+        "role": "secondary",
+        "displayName": "Kinetic",
+        "canonical": "#e9e2d6",
+        "tonalRamp": [
+          "#312e2f",
+          "#595553",
+          "#8b8680",
+          "#bcb6ad",
+          "#e9e2d6",
+          "#eee8de",
+          "#f2ede4",
+          "#f7f2eb"
+        ]
+      },
+      "prismatic": {
+        "role": "secondary",
+        "displayName": "Prismatic",
+        "canonical": "#ff7ad9",
+        "tonalRamp": [
+          "#341b2f",
+          "#613055",
+          "#974982",
+          "#ce63b0",
+          "#ff7ad9",
+          "#fe9fe0",
+          "#fcbee6",
+          "#fbddeb"
+        ]
+      },
+      "exotic": {
+        "role": "tertiary",
+        "displayName": "Exotic",
+        "canonical": "#ceae33",
+        "tonalRamp": [
+          "#2c2411",
+          "#4f4219",
+          "#7b6722",
+          "#a68c2b",
+          "#ceae33",
+          "#dbc46c",
+          "#e6d69b",
+          "#f1e8ca"
+        ]
+      },
+      "legendary": {
+        "role": "tertiary",
+        "displayName": "Legendary",
+        "canonical": "#8e5fd0",
+        "tonalRamp": [
+          "#20162e",
+          "#382651",
+          "#563a7d",
+          "#734da8",
+          "#8e5fd0",
+          "#ae8cda",
+          "#c9b2e2",
+          "#e4d8ea"
+        ]
+      },
+      "rare": {
+        "role": "tertiary",
+        "displayName": "Rare",
+        "canonical": "#5a8fd6",
+        "tonalRamp": [
+          "#171f2f",
+          "#263753",
+          "#385580",
+          "#4a74ad",
+          "#5a8fd6",
+          "#8aaede",
+          "#b2c8e4",
+          "#dae1eb"
+        ]
+      },
+      "uncommon": {
+        "role": "tertiary",
+        "displayName": "Uncommon",
+        "canonical": "#4f9a5f",
+        "tonalRamp": [
+          "#152119",
+          "#223b29",
+          "#315c3b",
+          "#417c4e",
+          "#4f9a5f",
+          "#82b68b",
+          "#adcdaf",
+          "#d8e4d3"
+        ]
+      },
+      "common": {
+        "role": "tertiary",
+        "displayName": "Common",
+        "canonical": "#c3bcb4",
+        "tonalRamp": [
+          "#2a2729",
+          "#4b4847",
+          "#74706d",
+          "#9e9892",
+          "#c3bcb4",
+          "#d4cdc6",
+          "#e1dcd5",
+          "#efeae4"
+        ]
+      },
+      "keep": {
+        "role": "tertiary",
+        "displayName": "Keep",
+        "canonical": "#6fd389",
+        "tonalRamp": [
+          "#1b2b21",
+          "#2d5038",
+          "#447d54",
+          "#5aaa70",
+          "#6fd389",
+          "#99dea8",
+          "#bbe6c2",
+          "#deefdb"
+        ]
+      },
+      "trash": {
+        "role": "tertiary",
+        "displayName": "Trash",
+        "canonical": "#f0715f",
+        "tonalRamp": [
+          "#321919",
+          "#5c2d29",
+          "#8f443b",
+          "#c25c4e",
+          "#f0715f",
+          "#f3998b",
+          "#f6baaf",
+          "#f8dbd3"
+        ]
+      },
+      "pane-1": {
+        "role": "secondary",
+        "displayName": "Pane colour 1",
+        "canonical": "#4da3ff",
+        "tonalRamp": [
+          "#142236",
+          "#213f62",
+          "#306198",
+          "#3f84ce",
+          "#4da3ff",
+          "#81bcfb",
+          "#acd1f7",
+          "#d7e5f3"
+        ]
+      },
+      "pane-2": {
+        "role": "secondary",
+        "displayName": "Pane colour 2",
+        "canonical": "#f2a33a",
+        "tonalRamp": [
+          "#322213",
+          "#5c3f1b",
+          "#906126",
+          "#c38430",
+          "#f2a33a",
+          "#f4bc71",
+          "#f6d19e",
+          "#f8e5cc"
+        ]
+      },
+      "pane-3": {
+        "role": "secondary",
+        "displayName": "Pane colour 3",
+        "canonical": "#5bd17a",
+        "tonalRamp": [
+          "#172b1e",
+          "#264f32",
+          "#387c4b",
+          "#4aa864",
+          "#5bd17a",
+          "#8bdc9d",
+          "#b2e5bb",
+          "#daefd8"
+        ]
+      },
+      "pane-4": {
+        "role": "secondary",
+        "displayName": "Pane colour 4",
+        "canonical": "#e05fb7",
+        "tonalRamp": [
+          "#2f1629",
+          "#562648",
+          "#853a6e",
+          "#b54d94",
+          "#e05fb7",
+          "#e88cc8",
+          "#eeb2d6",
+          "#f5d8e5"
+        ]
+      },
+      "pane-5": {
+        "role": "secondary",
+        "displayName": "Pane colour 5",
+        "canonical": "#a67cff",
+        "tonalRamp": [
+          "#241b36",
+          "#413062",
+          "#644a98",
+          "#8664ce",
+          "#a67cff",
+          "#bfa1fb",
+          "#d4bff7",
+          "#e9def3"
+        ]
+      },
+      "pane-6": {
+        "role": "secondary",
+        "displayName": "Pane colour 6",
+        "canonical": "#41d6c3",
+        "tonalRamp": [
+          "#122b2b",
+          "#1d514d",
+          "#297f75",
+          "#36ac9e",
+          "#41d6c3",
+          "#79e0d1",
+          "#a7e8dc",
+          "#d5f0e7"
+        ]
+      },
+      "pane-7": {
+        "role": "secondary",
+        "displayName": "Pane colour 7",
+        "canonical": "#e5624f",
+        "tonalRamp": [
+          "#301716",
+          "#582723",
+          "#883b32",
+          "#b95041",
+          "#e5624f",
+          "#eb8e7f",
+          "#f1b3a8",
+          "#f6d8d0"
+        ]
+      },
+      "pane-8": {
+        "role": "secondary",
+        "displayName": "Pane colour 8",
+        "canonical": "#d8d35a",
+        "tonalRamp": [
+          "#2d2b18",
+          "#535027",
+          "#817d38",
+          "#aeaa4a",
+          "#d8d35a",
+          "#e2de87",
+          "#ebe6ad",
+          "#f3efd2"
+        ]
+      }
+    },
+    "worlds": {
+      "note": "Seven colour worlds share the token slots, set with :root[data-theme=<id>]. Dusk is the default; Bone & Sepia is the light world (default when the OS prefers light) and also overrides the element and keep/trash colours.",
+      "default": "dusk",
+      "light": "bone",
+      "values": {
+        "dusk": {
+          "bg": "#170f1c",
+          "bg2": "#211627",
+          "well": "#130c18",
+          "panel": "#241a2b",
+          "panel2": "#2b1e33",
+          "raise": "#352640",
+          "line": "#4a3a55",
+          "line2": "#62506d",
+          "text": "#f7ece5",
+          "dim": "#c9b8bf",
+          "faint": "#a08e9a",
+          "light": "#f7d3bd",
+          "accent": "#f2a65a",
+          "accentInk": "#2a1608"
+        },
+        "oxblood": {
+          "bg": "#150909",
+          "bg2": "#1e0f10",
+          "well": "#120708",
+          "panel": "#2a1213",
+          "panel2": "#331618",
+          "raise": "#3f1d1f",
+          "line": "#5a2b2d",
+          "line2": "#723a3c",
+          "text": "#f7e9df",
+          "dim": "#d4b6aa",
+          "faint": "#a88a80",
+          "light": "#efd5a6",
+          "accent": "#ddb167",
+          "accentInk": "#241606"
+        },
+        "gilded": {
+          "bg": "#0f0d0a",
+          "bg2": "#17130e",
+          "well": "#0b0a07",
+          "panel": "#1d1811",
+          "panel2": "#231c13",
+          "raise": "#2d2418",
+          "line": "#4a3c25",
+          "line2": "#655131",
+          "text": "#f5ecd9",
+          "dim": "#cdbd9b",
+          "faint": "#a39371",
+          "light": "#f0cf86",
+          "accent": "#e2b552",
+          "accentInk": "#1f1606"
+        },
+        "nebula": {
+          "bg": "#120c1f",
+          "bg2": "#1a1230",
+          "well": "#0e0918",
+          "panel": "#21173b",
+          "panel2": "#251a42",
+          "raise": "#2f2253",
+          "line": "#46356e",
+          "line2": "#5c478c",
+          "text": "#f4ecff",
+          "dim": "#c6b8e2",
+          "faint": "#9a8cbc",
+          "light": "#ffb38a",
+          "accent": "#ff8f5e",
+          "accentInk": "#2a0f05"
+        },
+        "abyss": {
+          "bg": "#061416",
+          "bg2": "#0a1d20",
+          "well": "#041012",
+          "panel": "#0e2528",
+          "panel2": "#10282c",
+          "raise": "#153337",
+          "line": "#1f4a4f",
+          "line2": "#2c5f65",
+          "text": "#e8f4f1",
+          "dim": "#a9c7c2",
+          "faint": "#7da09a",
+          "light": "#e4cf8d",
+          "accent": "#d9b75e",
+          "accentInk": "#1b1505"
+        },
+        "verdant": {
+          "bg": "#0b120c",
+          "bg2": "#111b12",
+          "well": "#080e09",
+          "panel": "#152417",
+          "panel2": "#17281a",
+          "raise": "#1e3321",
+          "line": "#2d4a30",
+          "line2": "#3d613f",
+          "text": "#eef6e8",
+          "dim": "#b8cdb0",
+          "faint": "#8aa383",
+          "light": "#c8f56a",
+          "accent": "#a6e84a",
+          "accentInk": "#152005"
+        },
+        "bone": {
+          "bg": "#ebe4d6",
+          "bg2": "#e2d8c6",
+          "well": "#f6f1e7",
+          "panel": "#f6f0e4",
+          "panel2": "#efe7d8",
+          "raise": "#e5dbc8",
+          "line": "#cbbfa9",
+          "line2": "#b3a68e",
+          "text": "#1d1915",
+          "dim": "#4f463b",
+          "faint": "#6f6456",
+          "light": "#8a4f12",
+          "accent": "#a25a16",
+          "accentInk": "#fff8ee",
+          "overrides": {
+            "solar": "#c4520a",
+            "arc": "#13838f",
+            "void": "#7a4bb3",
+            "stasis": "#2f62c4",
+            "strand": "#1d8a47",
+            "kinetic": "#5a5246",
+            "keep": "#2f8a4b",
+            "trash": "#b8402f",
+            "exotic": "#a8871c"
+          }
+        }
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Inscription Display",
+        "purpose": "View titles in scene headers; uppercase; written in light on view change."
+      },
+      "headline": {
+        "displayName": "Inscription Headline",
+        "purpose": "Band titles in Clean up, Compare and review."
+      },
+      "title": {
+        "displayName": "Inscription Title",
+        "purpose": "Pane titles."
+      },
+      "section": {
+        "displayName": "Inscription Section",
+        "purpose": "Item panel and Subclasses section heads, flanked by hairlines."
+      },
+      "summary": {
+        "displayName": "Summary",
+        "purpose": "One-sentence vault summary under the view title; key counts in Peach Light."
+      },
+      "item-name": {
+        "displayName": "Item Name",
+        "purpose": "Item panel heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All working UI."
+      },
+      "card-name": {
+        "displayName": "Card Name",
+        "purpose": "Item names in rows and tiles, ellipsised."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase group heads, column heads, field labels."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Ratings and rating rings."
+      },
+      "query": {
+        "displayName": "Query",
+        "purpose": "Search query fields only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "element-edge",
+        "value": "inset 2px 0 0 color-mix(in srgb,var(--el) 80%,transparent),inset 26px 0 30px -26px color-mix(in srgb,var(--el) 45%,transparent)",
+        "purpose": "Item row lit by its element (desktop). Phone: inset 0 3px 0 -1px in the element colour."
+      },
+      {
+        "name": "matched-glow",
+        "value": "0 0 0 1px var(--pc),0 0 14px 2px color-mix(in srgb,var(--pc) 55%,transparent)",
+        "purpose": "Perk icon a search matched, in the pane colour."
+      },
+      {
+        "name": "lit-cell",
+        "value": "inset 0 -2px 0 var(--el),inset 0 0 18px -6px color-mix(in srgb,var(--el) 55%,transparent)",
+        "purpose": "Equipped perk in a leaded-glass column."
+      },
+      {
+        "name": "float-modal",
+        "value": "0 24px 70px rgba(0,0,0,.55)",
+        "purpose": "Modals only."
+      },
+      {
+        "name": "float-toast",
+        "value": "0 10px 30px rgba(0,0,0,.4)",
+        "purpose": "Toasts only."
+      },
+      {
+        "name": "scanlines",
+        "value": "repeating-linear-gradient(180deg,color-mix(in srgb,var(--light) 3%,transparent) 0 1px,transparent 1px 4px)",
+        "purpose": "Background layer on panes, tiles and the item panel."
+      },
+      {
+        "name": "pointer-light",
+        "value": "radial-gradient(380px circle at var(--mx) var(--my),color-mix(in srgb,var(--light) 10%,transparent),transparent 70%)",
+        "purpose": "Follows the cursor over panes and tiles; fades in over .35s."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Shared easing for every entrance and state change."
+      },
+      {
+        "name": "ease-in",
+        "value": "cubic-bezier(.4,0,1,1)",
+        "purpose": "Exits (item panel closing)."
+      },
+      {
+        "name": "state",
+        "value": ".25s",
+        "purpose": "Border, background and colour transitions on controls and rows."
+      },
+      {
+        "name": "project",
+        "value": ".55s; clip-path inset(49.6% 0) to inset(0), brightness 2.4 to 1",
+        "purpose": "Item panel projects open from a line of light (desktop); closes in .22s."
+      },
+      {
+        "name": "write",
+        "value": "1.1s mask sweep",
+        "purpose": "View titles written in light."
+      },
+      {
+        "name": "rise",
+        "value": ".5s from translateY(16px), .08s stagger",
+        "purpose": "Panes and tiles entering."
+      },
+      {
+        "name": "burst",
+        "value": ".55s ring to scale(16)",
+        "purpose": "Tag light burst from the press point."
+      },
+      {
+        "name": "slam",
+        "value": ".38s from scale(2)",
+        "purpose": "Clean up stamp."
+      },
+      {
+        "name": "drift",
+        "value": "22s alternate to scale(1.06)",
+        "purpose": "Scene art drift."
+      },
+      {
+        "name": "intro",
+        "value": "1s sigil draw, fades out at 1.3s",
+        "purpose": "Once per session."
+      },
+      {
+        "name": "reduced",
+        "value": "1ms",
+        "purpose": "All animation and transition collapse under prefers-reduced-motion or data-motion=off; intro hidden."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "max-width: 760px"
+      },
+      {
+        "name": "desktop",
+        "value": "min-width: 761px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Quiet square slab that warms to the Light on hover.",
+      "html": "<button class=\"ds-btn\">Load CSVs</button>",
+      "css": ".ds-btn{background:var(--panel2,#2b1e33);border:1px solid var(--line2,#62506d);color:var(--text,#f7ece5);padding:8px 14px;font:600 13px 'Hanken Grotesk',system-ui,sans-serif;border-radius:0;cursor:pointer;transition:border-color .25s,background-color .25s}.ds-btn:hover{border-color:var(--light,#f7d3bd);background:var(--raise,#352640)}.ds-btn:focus-visible{outline:1.5px solid var(--light,#f7d3bd);outline-offset:2px}"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one amber fill; export and confirm actions.",
+      "html": "<button class=\"ds-btn-primary\">Export to DIM</button>",
+      "css": ".ds-btn-primary{background:var(--accent,#f2a65a);border:1px solid var(--accent,#f2a65a);color:var(--accent-ink,#2a1608);padding:8px 14px;font:600 13px 'Hanken Grotesk',system-ui,sans-serif;border-radius:0;cursor:pointer;transition:background-color .25s}.ds-btn-primary:hover{background:color-mix(in srgb,var(--accent,#f2a65a) 85%,#fff)}.ds-btn-primary:focus-visible{outline:1.5px solid var(--light,#f7d3bd);outline-offset:2px}"
+    },
+    {
+      "name": "Toggle Chip",
+      "kind": "chip",
+      "refersTo": "toggle-on",
+      "description": "Tabs, tag buttons and checks; on = amber border and wash.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip on\">Keep</button><button class=\"ds-chip\">Junk</button><button class=\"ds-chip\">Infuse</button></div>",
+      "css": ".ds-chips{display:flex;gap:6px}.ds-chip{background:var(--panel2,#2b1e33);border:1px solid var(--line2,#62506d);color:var(--text,#f7ece5);padding:5px 10px;font:500 13px 'Hanken Grotesk',system-ui,sans-serif;border-radius:0;cursor:pointer;transition:border-color .25s,background-color .25s}.ds-chip:hover{border-color:var(--light,#f7d3bd)}.ds-chip.on{border-color:var(--accent,#f2a65a);background:color-mix(in srgb,var(--accent,#f2a65a) 14%,var(--panel2,#2b1e33))}.ds-chip:focus-visible{outline:1.5px solid var(--light,#f7d3bd);outline-offset:2px}"
+    },
+    {
+      "name": "Query Input",
+      "kind": "input",
+      "refersTo": "query-input",
+      "description": "Sunken monospace search field; focus takes the pane colour.",
+      "html": "<input class=\"ds-qin\" style=\"--pc:#4da3ff\" value=\"is:handcannon perk:killclip\" aria-label=\"Search\">",
+      "css": ".ds-qin{width:100%;background:var(--well,#130c18);border:1px solid var(--line,#4a3a55);color:var(--text,#f7ece5);padding:7px 9px;font:12px ui-monospace,'Cascadia Mono',Consolas,monospace;border-radius:0;outline:none}.ds-qin:focus{border-color:var(--pc,var(--light,#f7d3bd))}"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "rail-nav-active",
+      "description": "Desktop rail nav; the active row is lit by a Light bar and gradient.",
+      "html": "<nav class=\"ds-nav\"><button class=\"on\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 6h16M4 12h16M4 18h10\"/></svg>Vault</button><button><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13\"/></svg>Clean up</button><button><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 4v16M16 4v16M4 9h8M12 15h8\"/></svg>Compare</button></nav>",
+      "css": ".ds-nav{display:flex;flex-direction:column;gap:2px;width:232px;background:var(--bg2,#211627);padding:8px 0}.ds-nav button{position:relative;display:flex;align-items:center;gap:14px;padding:12px;border:0;background:none;font:600 12.5px 'Hanken Grotesk',system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--dim,#c9b8bf);text-align:left;cursor:pointer;transition:color .25s,background-color .25s}.ds-nav svg{width:22px;height:22px;flex:none}.ds-nav button:hover{color:var(--text,#f7ece5)}.ds-nav button.on{color:var(--light,#f7d3bd);background:linear-gradient(90deg,color-mix(in srgb,var(--light,#f7d3bd) 14%,transparent),transparent)}.ds-nav button.on::before{content:\"\";position:absolute;left:0;top:6px;bottom:6px;width:2px;background:var(--light,#f7d3bd)}.ds-nav button:focus-visible{outline:1.5px solid var(--light,#f7d3bd);outline-offset:-2px}"
+    },
+    {
+      "name": "Ruled Sheet Pane",
+      "kind": "card",
+      "refersTo": "pane",
+      "description": "A search pane: square sheet, pane-colour top rule, Cinzel title, hairline-ruled item rows with element edges and matched highlights.",
+      "html": "<section class=\"ds-pane\" style=\"--pc:#4da3ff\"><header><i></i><b>Hand cannons</b><span>42</span></header><div class=\"ds-row\" style=\"--el:#f2721b\"><div class=\"ds-itm\"></div><div><div class=\"ds-nm\">Igneous Hammer</div><div class=\"ds-sub\">Adaptive Frame · <span class=\"ds-hit\">Kill Clip</span></div></div></div><div class=\"ds-row\" style=\"--el:#7aecf3\"><div class=\"ds-itm\"></div><div><div class=\"ds-nm\">Round Robin</div><div class=\"ds-sub\">Aggressive Frame · <span class=\"ds-hit\">Kill Clip</span></div></div></div></section>",
+      "css": ".ds-pane{width:340px;background:color-mix(in srgb,var(--panel,#241a2b) 92%,transparent);border:1px solid var(--line,#4a3a55);border-top:2px solid var(--pc);color:var(--text,#f7ece5);font:14px/1.5 'Hanken Grotesk',system-ui,sans-serif}.ds-pane header{display:flex;align-items:center;gap:8px;padding:12px 14px 10px;border-bottom:1px solid var(--line,#4a3a55)}.ds-pane header i{width:9px;height:9px;background:var(--pc);transform:rotate(45deg)}.ds-pane header b{flex:1;font:600 13.5px Cinzel,Georgia,serif;letter-spacing:.2em;text-transform:uppercase}.ds-pane header span{color:var(--dim,#c9b8bf);letter-spacing:.08em}.ds-row{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:11px 10px;border-top:1px solid color-mix(in srgb,var(--line,#4a3a55) 70%,transparent);box-shadow:inset 2px 0 0 color-mix(in srgb,var(--el) 80%,transparent),inset 26px 0 30px -26px color-mix(in srgb,var(--el) 45%,transparent);transition:background-color .25s}.ds-row:first-of-type{border-top:0}.ds-row:hover{background:color-mix(in srgb,var(--light,#f7d3bd) 6%,transparent)}.ds-row:hover .ds-nm{color:var(--light,#f7d3bd)}.ds-itm{width:48px;height:48px;background:#8e5fd0;border:1px solid color-mix(in srgb,#8e5fd0 75%,#000)}.ds-nm{font-weight:700;font-size:15px;transition:color .25s}.ds-sub{font-size:12.5px;color:var(--dim,#c9b8bf)}.ds-hit{color:var(--text,#f7ece5);background:linear-gradient(0deg,color-mix(in srgb,var(--pc) 32%,transparent),transparent 75%);box-shadow:inset 0 -1px 0 var(--pc);text-shadow:0 0 14px color-mix(in srgb,var(--pc) 80%,transparent)}"
+    },
+    {
+      "name": "Leaded-Glass Perk Columns",
+      "kind": "custom",
+      "refersTo": "perk-cell",
+      "description": "Perk columns as cells in a leaded window; the equipped perk is lit by its element.",
+      "html": "<div class=\"ds-dcols\" style=\"--el:#f2721b\"><div class=\"ds-dcol\"><div class=\"ds-t\">Barrel</div><div class=\"ds-dsk sel\">Arrowhead Brake</div><div class=\"ds-dsk\">Smallbore</div></div><div class=\"ds-dcol\"><div class=\"ds-t\">Magazine</div><div class=\"ds-dsk\">Ricochet Rounds</div><div class=\"ds-dsk sel\">Accurized Rounds</div></div><div class=\"ds-dcol\"><div class=\"ds-t\">Trait 1</div><div class=\"ds-dsk sel\">Kill Clip</div><div class=\"ds-dsk\">Rampage</div></div></div>",
+      "css": ".ds-dcols{display:flex;font:13px 'Hanken Grotesk',system-ui,sans-serif}.ds-dcol{flex:1;background:var(--bg2,#211627);border:1px solid var(--line,#4a3a55);margin-left:-1px}.ds-dcol:first-child{margin-left:0}.ds-t{padding:8px 6px;border-bottom:1px solid var(--line,#4a3a55);text-align:center;font:600 11px 'Hanken Grotesk',system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--faint,#a08e9a)}.ds-dsk{padding:10px 6px 8px;text-align:center;color:var(--dim,#c9b8bf);border-bottom:1px solid color-mix(in srgb,var(--line,#4a3a55) 55%,transparent);cursor:pointer;transition:background-color .25s}.ds-dsk:hover{background:color-mix(in srgb,var(--light,#f7d3bd) 7%,transparent)}.ds-dsk.sel{color:var(--text,#f7ece5);background:linear-gradient(180deg,color-mix(in srgb,var(--el) 30%,var(--bg2,#211627)),color-mix(in srgb,var(--el) 8%,var(--bg2,#211627)));box-shadow:inset 0 -2px 0 var(--el),inset 0 0 18px -6px color-mix(in srgb,var(--el) 55%,transparent)}"
+    },
+    {
+      "name": "Scene Header",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Inscription view title and one-sentence summary over scrimmed art (art behind the title band only; a gradient stands in for the Bungie backdrop here).",
+      "html": "<header class=\"ds-scene\"><h1>Vault</h1><p><b>962</b> items across <b>3</b> searches.</p></header>",
+      "css": ".ds-scene{position:relative;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px 30px;background:linear-gradient(90deg,var(--bg,#170f1c) 16%,color-mix(in srgb,var(--bg,#170f1c) 62%,transparent) 44%,transparent 80%),linear-gradient(0deg,var(--bg,#170f1c),transparent 55%),radial-gradient(80% 120% at 85% 20%,#5a3b52,#170f1c);color:var(--text,#f7ece5)}.ds-scene h1{margin:0;font:500 clamp(44px,6vw,78px)/.95 Cinzel,Georgia,serif;letter-spacing:.14em;text-transform:uppercase}.ds-scene p{margin:12px 0 0;font:300 22px/1.3 'Hanken Grotesk',system-ui,sans-serif;max-width:44ch}.ds-scene b{font-weight:500;color:var(--light,#f7d3bd)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Ghost's Projection",
+    "overview": "Ghost is a Ghost shell throwing Destiny's Light across a dark vault. The screen reads as a projected dossier: ruled sheets on a dusk ground, Cinzel inscriptions carved across the top of each view, and thin warm light that picks out whatever matters. The Light has two jobs and only two: it marks what the user is touching (hover, focus, the active nav row) and it marks *why* something matched (each search pane owns a colour, and every field, perk cell and icon it hit glows in that colour). Everything else stays quiet, dim and square.\n\nThe world is dense but legible. Desktop is the Vanguard Dossier: a 232px left rail, a scene header where relevant Bungie art sits behind the title band only, and search panes laid side by side as ruled sheets. Phone is Leaded Light: one pane per screen, items as framed cards whose perks sit in leaded-glass cells, bottom tabs, a bottom-sheet item panel. Seven colour worlds share one structure; Dusk is the default, Bone & Sepia is the light world.\n\nIt refuses the generic dark-blue dashboard: no rounded card grids, no blue-grey chrome, no gradient KPI tiles. Depth comes from light and hairlines, not from lifted boxes.",
+    "keyCharacteristics": [
+      "Square corners everywhere except round perk icons and theme orbs.",
+      "Hairline rules (1px) separate everything; sheets carry a 2px top rule in their pane colour.",
+      "Cinzel uppercase inscriptions for view titles, pane titles and section heads; Hanken Grotesk for all working UI.",
+      "Search matches glow in their pane's colour; the item's element lights its row edge.",
+      "Art lives behind titles, never behind data.",
+      "Motion is projection: things open from a line of light and titles are written in light; all of it switches off together."
+    ],
+    "rules": [
+      {
+        "name": "The Light Means Attention Rule",
+        "body": "Peach Light marks only what the user is pointing at, what is active, or progress. Never use it as a fill or as decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Matched Colour Rule",
+        "body": "A pane colour appears only where that pane's search matched, plus the pane's own top rule and chip. If a highlight cannot say which search lit it, it is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Seven Worlds Rule",
+        "body": "Every surface uses theme tokens (`--bg`, `--panel`, `--line`, `--light`, `--accent`...), never literal hexes, so all seven worlds (and the Bone & Sepia light world, which also darkens the element and keep/trash colours) work unchanged.",
+        "section": "colors"
+      },
+      {
+        "name": "The Inscription Rule",
+        "body": "Cinzel is only ever uppercase, tracked at 0.1em or more, and only for titles and section heads. Never set body, buttons or numbers in Cinzel.",
+        "section": "typography"
+      },
+      {
+        "name": "The Light Weight Rule",
+        "body": "Large Hanken text (20px and up) is weight 300; weight comes from size, not boldness.",
+        "section": "typography"
+      },
+      {
+        "name": "The Art Behind Titles Rule",
+        "body": "Bungie art appears only in scene headers, bands, the subclass head and the item panel hero, always under a scrim that fades to the ground from the left and bottom. It never sits behind lists, tables or controls.",
+        "section": "layout"
+      },
+      {
+        "name": "The Lit Not Lifted Rule",
+        "body": "Resting surfaces never cast drop shadows. Emphasis is an inset glow or a coloured hairline; only modals and toasts float.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** use theme tokens for every surface and text colour so all seven worlds work, including Bone & Sepia.",
+      "**Do** light a search match in that pane's colour, on the exact field, perk or icon it matched.",
+      "**Do** keep every container square and separate with 1px hairlines.",
+      "**Do** set titles and section heads in uppercase Cinzel tracked 0.1em to 0.24em; everything else in Hanken Grotesk.",
+      "**Do** put Bungie art only behind title bands and the item hero, under a scrim to the ground colour, and credit it.",
+      "**Do** use the authored line-icon set (24px viewBox, 1.6 stroke, round caps) and Bungie or sprite icons for game objects.",
+      "**Do** route all motion through the shared easing (`cubic-bezier(.16,1,.3,1)`) and make it stop under `prefers-reduced-motion` and the in-app Motion toggle."
+    ],
+    "donts": [
+      "**Don't** build the generic dark-blue dashboard: no rounded card grids, blue-grey chrome or gradient metric tiles.",
+      "**Don't** round containers or controls; roundness belongs to perk icons and theme orbs only.",
+      "**Don't** put art or imagery behind lists, tables or controls.",
+      "**Don't** use Peach Light or pane colours as decoration or large fills.",
+      "**Don't** cast drop shadows from resting surfaces.",
+      "**Don't** set body text, buttons or numbers in Cinzel.",
+      "**Don't** use text glyphs or emoji as icons, and don't copy Bungie's UI glyphs; chrome is original SVG.",
+      "**Don't** add small uppercase kicker labels above titles; the inscription title stands alone."
+    ]
+  }
+}

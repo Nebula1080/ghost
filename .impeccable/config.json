@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/assigned.html"
+        ],
+        "createdAt": "2026-11-16T00:01:31.523Z",
+        "reason": "user pinned Elemental Glow (GHOST_PLAN V3.1: 2px element edge plus soft outer glow on item cards)"
+      }
+    ]
+  }
+}
