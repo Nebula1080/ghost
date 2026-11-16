@@ -63,7 +63,9 @@ const Core = (() => {
       const text = html.slice(i, lt < 0 ? html.length : lt);
       if (!drop && text) out += escText(text);
       if (lt < 0) break;
-      if (html.startsWith('<!--', lt)) { const e = html.indexOf('-->', lt + 4); i = e < 0 ? html.length : e + 3; continue; }
+      // comment markers written as \x3c / \x3e: this file is inlined into a script tag, and a literal comment
+      // opener/closer there can be cut out by hosts that strip HTML comments (the artifact host did: "Core is not defined")
+      if (html.startsWith('\x3c!--', lt)) { const e = html.indexOf('--\x3e', lt + 4); i = e < 0 ? html.length : e + 3; continue; }
       const m = TAG_RE.exec(html.slice(lt));
       if (!m) { if (!drop) out += '&lt;'; i = lt + 1; continue; }
       i = lt + m[0].length;
