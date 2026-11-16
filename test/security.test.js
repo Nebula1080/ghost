@@ -149,7 +149,7 @@ t('built pages: no HTML comment markers inside inline scripts (hosts that strip 
   for (const f of ['dist/index.html', 'dist-hosted/index.html']) {
     const p = path.join(root, f);
     if (!fs.existsSync(p)) throw new Error(f + ' missing: run both builds first');
-    for (const [, js] of fs.readFileSync(p, 'utf8').matchAll(/<script>([^]*?)<\/script>/g))
+    for (const [, js] of fs.readFileSync(p, 'utf8').matchAll(/<script\b[^>]*>([^]*?)<\/script\b[^>]*>/gi))
       assert.ok(!js.includes('<!--') && !js.includes('-->'), f + ': an inline script contains <!-- or -->');
   }
 });
