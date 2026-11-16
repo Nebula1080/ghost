@@ -703,7 +703,7 @@ const S = {
 };
 
 // ---------- utilities ----------
-function toast(msg, ms = 2600) { const t = $('#toast'); t.textContent = msg; t.style.display = 'block'; t.classList.remove('on'); void t.offsetWidth; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.style.display = 'none', ms); }
+function toast(msg, ms = 2600) { const t = $('#toast'); t.onclick = null; t.textContent = msg; t.style.display = 'block'; t.classList.remove('on'); void t.offsetWidth; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.style.display = 'none', ms); }
 function banner(msg) {
   const b = $('#banner'); let off = '';
   try { off = localStorage.getItem('vs:bannerOff') || ''; } catch {}
@@ -2114,7 +2114,17 @@ $('#bMenu').onclick = () => {
 };
 // offline cache / installability for hosted copies (not inside claude.ai, where service workers aren't available)
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost') && !/claude\.ai|claudeusercontent/.test(location.hostname)) {
-  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').then(reg => {
+    // a home-screen copy can stay open for days: look for a new build whenever the app comes back to the front
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') reg.update().catch(() => {}); });
+  }).catch(() => {}));
+  // a new build took over while this page was open: offer a one-tap reload (saves are flushed first)
+  let hadWorker = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hadWorker) { hadWorker = true; return; }
+    const t = $('#toast'); toast('Ghost was updated. Tap here to load the new version.', 20000);
+    t.onclick = () => { t.onclick = null; flushSaves().catch(() => {}).finally(() => location.reload()); };
+  });
 }
 // re-layout when crossing the phone breakpoint (rotation, resizing)
 matchMedia('(max-width: 760px)').addEventListener?.('change', () => { if (VIEW === 'vault') renderPanes(); else setView(VIEW); });
