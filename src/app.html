@@ -491,7 +491,6 @@ nav.views svg{display:none}
   #drawer.full{height:calc(100dvh - 24px - env(safe-area-inset-top))}
   .grab{display:flex;justify-content:center;padding:8px 0 4px;background:var(--panel);cursor:grab;touch-action:none}
   .grab i{width:42px;height:5px;border-radius:3px;background:var(--line2)}
-  .d-head{touch-action:none}
   .d-head .nm{font-size:22px}
   .d-foot{flex-wrap:wrap;padding:8px 12px calc(8px + env(safe-area-inset-bottom))}
   .mtags{display:flex;width:100%;gap:4px;margin-bottom:6px}
@@ -1370,7 +1369,7 @@ function openItem(id, paneId, focusPerk) {
   d.style.setProperty('--rc', rarityColor(it.rarity)); d.style.setProperty('--el', elc && elc !== 'transparent' ? elc : rarityColor(it.rarity));
   d.classList.toggle('gilt', GILT_EXOTICS.includes(it.hash));
   const rv = it.kind === 'weapon' && it.rating != null ? it.rating : null;
-  d.innerHTML = `<div class="hero">${art?.shot ? `<img class="shot" src="${esc(art.shot)}" alt="" decoding="async">` : ''}
+  d.innerHTML = `<div class="d-scroll"><div class="hero">${art?.shot ? `<img class="shot" src="${esc(art.shot)}" alt="" decoding="async">` : ''}
       <div class="hin">${itemIcon(it, 64)}<div style="flex:1"></div>
       ${it.kind === 'weapon' ? `<svg class="ring" viewBox="0 0 66 66" style="--d:${rv == null ? 0 : (rv / 100 * 182).toFixed(0)};--mc:${rateColor(rv)}" aria-label="Perk rating ${rv ?? 'not rated'}"><circle class="tr" cx="33" cy="33" r="29"/><circle class="vl" cx="33" cy="33" r="29" transform="rotate(-90 33 33)"/><text x="33" y="40">${rv ?? '–'}</text></svg>` : ''}</div></div>
     <div class="d-head" style="--rc:${rarityColor(it.rarity)}">
@@ -1382,31 +1381,32 @@ function openItem(id, paneId, focusPerk) {
         <span class="stat-pill">${r ? `Perk rating from light.gg community popularity<br>light.gg PvE ${r.pve ?? '–'}★ · PvP ${r.pvp ?? '–'}★` : 'No light.gg data for this weapon yet, so no perk rating. Clarity and the Data Compendium don’t publish ratings; their perk details are below.'}</span></div>` : ''}
     </div>
     <div class="d-body">
-      <div class="sec"><div class="h">Tag</div><div class="tagrow">${TAGS.map(([v, l, i]) => `<button class="tagbtn${(it.tag || '') === v ? ' on' : ''}" data-tag="${v}">${i} ${l}</button>`).join('')}</div></div>
+      <div class="sec tagsec"><div class="h">Tag</div><div class="tagrow">${TAGS.map(([v, l, i]) => `<button class="tagbtn${(it.tag || '') === v ? ' on' : ''}" data-tag="${v}">${i} ${l}</button>`).join('')}</div></div>
       <div class="sec"><div class="h">Notes</div><textarea class="notes" maxlength="${NOTE_MAX}" placeholder="Notes show up on this item in DIM after you import.">${esc(it.notes)}</textarea>
-        <div class="stat-pill" id="dState">${S.edits[it.id] ? 'Changed here, not yet in DIM' : 'Matches DIM'}</div></div>
+        <div class="nstate"><span class="stat-pill" id="dState">${S.edits[it.id] ? 'Changed here, not yet in DIM' : 'Matches DIM'}</span><button class="btn small mrevert" data-revert ${S.edits[it.id] ? '' : 'disabled'}>Revert to DIM</button></div></div>
       <div class="sec"><div class="h">${it.kind === 'armor' ? 'Perks, set bonus &amp; mods' : 'Perks &amp; mods'}${r ? ' · light.gg popularity' : ''}</div>${perkRows ? `<div class="stat-pill" style="margin-bottom:6px">Click any perk, mod or set bonus for its Bungie, Clarity and Data Compendium details.</div>${perkRows}<div class="pdet" id="pdet" hidden></div>` : '<span class="stat-pill">None listed</span>'}</div>
       ${triageHtml(it)}
       ${ex ? `<div class="sec"><div class="h">Data Compendium · exotic</div><div class="dctx">${SH(ex)}</div></div>` : ''}
       <div class="sec"><div class="h">Stats</div>${statLegend}${statRows || '<span class="stat-pill">None listed</span>'}</div>
       <div class="sec"><div class="h">Details</div><div class="kv">${kv}</div></div>
       <div class="sec stat-pill">Item ID ${esc(it.id)} · Hash ${esc(it.hash)}</div>
-    </div>
+    </div></div>
     <div class="d-foot"><div class="mtags">${TAGS.map(([v, l, i]) => `<button class="tagbtn${(it.tag || '') === v ? ' on' : ''}" data-tag="${v}" title="${l}">${i}<small>${l}</small></button>`).join('')}</div><button class="btn" id="dRevert" ${S.edits[it.id] ? '' : 'disabled'}>Revert to DIM</button><span class="grow"></span><button class="btn primary" id="dClose">Done</button></div>`;
   d.querySelectorAll('.tagbtn').forEach(b => b.onclick = () => {
     setItemEdit(it, { tag: b.dataset.tag }); d.querySelectorAll('.tagbtn').forEach(x => x.classList.toggle('on', x.dataset.tag === b.dataset.tag)); afterEdit();
   });
   const ta = d.querySelector('textarea'); let nt;
   ta.oninput = () => { clearTimeout(nt); nt = setTimeout(() => { setItemEdit(it, { notes: ta.value.slice(0, NOTE_MAX) }); afterEdit(); }, 500); };
-  $('#dRevert').onclick = () => { delete S.edits[it.id]; it.tag = effTag(it); it.notes = effNotes(it); saveEdit(it.id); afterEdit(); openItem(id, paneId); };
+  d.querySelectorAll('#dRevert,[data-revert]').forEach(b => b.onclick = () => { delete S.edits[it.id]; it.tag = effTag(it); it.notes = effNotes(it); saveEdit(it.id); afterEdit(); openItem(id, paneId); });
   $('#dClose').onclick = closeDrawer;
   // socket clicks -> detail panel
   d.querySelectorAll('[data-pk],[data-setp]').forEach(b => b.onclick = () => showPerk(b));
   bindTriage(it);
   const first = focusPerk ? [...d.querySelectorAll('[data-pk]')].find(b => b.dataset.pk === focusPerk) : null;
   if (first) { showPerk(first); setTimeout(() => $('#pdet')?.scrollIntoView({ block: 'center' }), 260); }
-  d.classList.remove('full'); d.insertAdjacentHTML('afterbegin', '<div class="grab" aria-hidden="true"><i></i></div>'); sheetDrag(d);
-  d.classList.add('open'); $('#scrim').classList.add('open');
+  d.insertAdjacentHTML('afterbegin', '<div class="grab"><i aria-hidden="true"></i><button class="gx" type="button" aria-label="Close item panel">×</button></div>');
+  d.querySelector('.gx').onclick = closeDrawer; sheetDrag(d);
+  d.classList.add('open'); $('#scrim').classList.add('open'); if (isMobile()) setCompact(true);
   function showPerk(b) {
     const det = $('#pdet'); if (!det) return;
     // clicking the open one again closes it
@@ -1433,7 +1433,7 @@ function openItem(id, paneId, focusPerk) {
     det.hidden = false;
     det.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
-  function afterEdit() { const st = $('#dState'); if (st) st.textContent = S.edits[it.id] ? 'Changed here, not yet in DIM' : 'Matches DIM'; $('#dRevert').disabled = !S.edits[it.id]; renderHeader(); }
+  function afterEdit() { const st = $('#dState'); if (st) st.textContent = S.edits[it.id] ? 'Changed here, not yet in DIM' : 'Matches DIM'; d.querySelectorAll('#dRevert,[data-revert]').forEach(b => { b.disabled = !S.edits[it.id]; }); renderHeader(); }
 }
 // drawer: intrinsic block, perk columns (circles), exotic perks, armor set bonus, mods (squares)
 function socketsDrawer(it, hits) {
@@ -1611,15 +1611,34 @@ function renderCompare() {
   const cp = $('#cmpPane'); if (cp) cp.onclick = () => { setView('vault'); addPane(CMP.q, CMP.label || 'Compare'); };
 }
 
-// phones: the item panel is a bottom sheet; drag the handle/header up for full height, down to shrink or close
+// phones: the item panel opens as a near full-height sheet that scrolls as one piece. Pulling down on the handle, or
+// anywhere once the panel is scrolled to its top, follows the finger and closes it past a distance or with a flick;
+// the pull never reaches the page, so it can't trigger the browser's pull-to-refresh. Listeners attach once.
 function sheetDrag(d) {
-  let y0 = null, dy = 0;
-  const start = e => { if (!isMobile()) return; y0 = (e.touches ? e.touches[0] : e).clientY; dy = 0; d.style.transition = 'none'; };
-  const move = e => { if (y0 == null) return; dy = (e.touches ? e.touches[0] : e).clientY - y0; if (dy > 0) d.style.transform = `translateY(${dy}px)`; };
-  const end = () => { if (y0 == null) return; y0 = null; d.style.transition = ''; d.style.transform = '';
-    if (dy < -40) d.classList.add('full'); else if (dy > 90) { if (d.classList.contains('full')) d.classList.remove('full'); else closeDrawer(); } };
-  for (const el of [d.querySelector('.grab'), d.querySelector('.d-head')]) { if (!el) continue; el.addEventListener('touchstart', start, { passive: true }); el.addEventListener('touchmove', move, { passive: true }); el.addEventListener('touchend', end); }
-  d.querySelector('.grab').onclick = () => d.classList.toggle('full');
+  if (d.dataset.drag) return; d.dataset.drag = '1';
+  let y0 = null, x0 = 0, t0 = 0, dy = 0, dragging = false, fromGrab = false;
+  const pt = e => e.touches ? e.touches[0] : e;
+  d.addEventListener('touchstart', e => {
+    if (!isMobile() || !d.classList.contains('open') || e.target.closest('.gx,textarea,input,select')) { y0 = null; return; }
+    y0 = pt(e).clientY; x0 = pt(e).clientX; t0 = performance.now(); dy = 0; dragging = false; fromGrab = !!e.target.closest('.grab');
+  }, { passive: true });
+  d.addEventListener('touchmove', e => {
+    if (y0 == null) return;
+    dy = pt(e).clientY - y0; const dx = pt(e).clientX - x0;
+    if (!dragging) {
+      if (Math.abs(dy) < 6 && Math.abs(dx) < 6) return;
+      const top = (d.querySelector('.d-scroll')?.scrollTop || 0) <= 0;
+      if (dy > 0 && Math.abs(dy) > Math.abs(dx) && (fromGrab || top)) { dragging = true; d.style.transition = 'none'; } else { y0 = null; return; }
+    }
+    e.preventDefault(); d.style.transform = `translateY(${Math.max(0, dy)}px)`;
+  }, { passive: false });
+  const end = () => {
+    if (y0 == null) return; y0 = null; if (!dragging) return; dragging = false;
+    const v = dy / Math.max(1, performance.now() - t0);
+    d.style.transition = ''; d.style.transform = '';
+    if (dy > 120 || (dy > 40 && v > 0.5)) closeDrawer();
+  };
+  d.addEventListener('touchend', end); d.addEventListener('touchcancel', end);
 }
 // long-press any perk / mod (touch) for its full description in a sheet
 (() => {
@@ -1685,7 +1704,7 @@ function openProfiles() {
 }
 $('#bProf').onclick = openProfiles;
 
-function closeDrawer() { const dr = $('#drawer'); if (dr.classList.contains('open') && !isMobile() && motionOK()) { dr.classList.add('closing'); setTimeout(() => dr.classList.remove('closing'), 230); } dr.classList.remove('open'); $('#scrim').classList.remove('open'); if (drawerItem) { drawerItem = null; if (VIEW === 'clean') renderClean(); else if (VIEW === 'compare') renderCompare(); else refreshBodies(); } }
+function closeDrawer() { const dr = $('#drawer'); if (dr.classList.contains('open') && !isMobile() && motionOK()) { dr.classList.add('closing'); setTimeout(() => dr.classList.remove('closing'), 230); } dr.classList.remove('open'); $('#scrim').classList.remove('open'); if (drawerItem) { drawerItem = null; if (VIEW === 'clean') renderClean(); else if (VIEW === 'compare') renderCompare(); else refreshBodies(); } syncCompact(); }
 $('#scrim').onclick = closeDrawer;
 // in-game style tooltip on item rows (desktop pointer only)
 (() => {
@@ -1822,31 +1841,35 @@ function showSubDetail() {
 let VIEW = 'vault';
 // an open pane menu stays a dropdown under its button and scrolls when it would run past the pane, the tab bar or
 // the screen edge
-function fitMenu(menu) {
+function fitMenu(menu, again = true) {
   const l = menu.querySelector('.menu-list'); l.style.maxHeight = '';
   if (!menu.classList.contains('open')) return;
+  if (again) setTimeout(() => fitMenu(menu, false), 560); // re-fit once a header fold (.5s) has settled
   const bar = isMobile() ? document.querySelector('nav.views').getBoundingClientRect().top : innerHeight;
   const pane = menu.closest('.pane')?.getBoundingClientRect().bottom ?? innerHeight;
   l.style.maxHeight = Math.max(120, Math.min(bar, pane, innerHeight) - l.getBoundingClientRect().top - 8) + 'px';
 }
-// phone: scrolling down a list shrinks the header, scene art, pane chips and pane controls so the list gets the
-// screen; scrolling back up (or reaching the top) restores them. Only lists with plenty to scroll collapse, so the
-// list growing taller can never clamp it back to the top and flip-flop.
-const COMPACT = { last: new WeakMap(), acc: 0 };
+// phone: the header, scene art, pane chips and pane controls are full size only while the list is at its very top
+// (and no item panel is open); any scroll down shrinks them with a slow transition (ghost.css). Only lists with
+// enough to scroll collapse, so the list growing taller can never clamp it back to the top and flip-flop.
+const COMPACT = { el: null };
 const setCompact = on => document.body.classList.toggle('compact', !!on);
+const visiblePaneBody = () => [...document.querySelectorAll('#panes .pane')].find(p => { const r = p.getBoundingClientRect(); return r.left > -r.width / 2 && r.left < r.width / 2; })?.querySelector('.pane-body');
+function syncCompact(el = COMPACT.el) {
+  if (!isMobile()) return setCompact(false);
+  if ($('#drawer').classList.contains('open')) return setCompact(true);
+  if (!el || !el.isConnected) return setCompact(false);
+  const on = document.body.classList.contains('compact');
+  setCompact(el.scrollTop > 4 && (on || el.scrollHeight - el.clientHeight > 320));
+}
 document.addEventListener('scroll', e => {
   const el = e.target;
   if (!isMobile() || !(el instanceof Element) || el.closest('#drawer,#modal,.menu-list')) return;
-  const y = el.scrollTop, prev = COMPACT.last.get(el); COMPACT.last.set(el, y);
-  if (prev == null || y === prev) return;
-  if (y < 8) { COMPACT.acc = 0; setCompact(false); return; }
-  const d = y - prev; COMPACT.acc = Math.sign(d) === Math.sign(COMPACT.acc) ? COMPACT.acc + d : d;
-  if (COMPACT.acc > 24 && el.scrollHeight - el.clientHeight > 360) setCompact(true);
-  else if (COMPACT.acc < -48) setCompact(false);
+  if (el.id === 'panes' || el.id === 'paneChips' || el.closest('.qchips,.ctable,.tabs')) { if (el.id === 'panes') { COMPACT.el = visiblePaneBody(); syncCompact(); } return; }
+  COMPACT.el = el; syncCompact(el);
 }, { capture: true, passive: true });
-$('#vscene').addEventListener('click', () => setCompact(false));
 function setView(v) {
-  VIEW = v; setCompact(false);
+  VIEW = v; COMPACT.el = v === 'vault' ? visiblePaneBody() : null; syncCompact();
   document.querySelectorAll('nav.views button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
   placeViews();
   for (const id of ['subv', 'clean', 'compare']) $('#' + id).classList.toggle('open', v === id);
@@ -1945,10 +1968,10 @@ function renderClean() {
         <button class="btn" id="clSetup">Setup</button><button class="btn" id="clReview">Review &amp; apply</button></div></div>
       <div class="progress"><i style="width:${((CL.gi + 1) / G.groups.length * 100).toFixed(1)}%"></i></div></div>
     <div class="clean-body">
-      <div class="gnav"><button class="btn" id="clPrev" ${CL.gi ? '' : 'disabled'}>${ICO.prev} Previous</button>
-        <button class="btn" id="clKeepAll">Keep all</button><button class="btn" id="clReset">Use suggestions</button><button class="btn" id="clTrashRest">Keep best ${CL.setup.keep}, trash rest</button>
+      <div class="gnav"><button class="btn" id="clPrev" aria-label="Previous group" ${CL.gi ? '' : 'disabled'}>${ICO.prev}<span class="lfull"> Previous</span></button>
+        <button class="btn" id="clKeepAll">Keep all</button><button class="btn" id="clReset"><span class="lfull">Use suggestions</span><span class="lshort">Suggested</span></button><button class="btn" id="clTrashRest"><span class="lfull">Keep best ${CL.setup.keep}, trash rest</span><span class="lshort">Best ${CL.setup.keep} only</span></button>
         <span class="grow"></span><span class="stat-pill hint-desk">Keys: K keep · T trash · ← → groups</span><span class="stat-pill hint-touch">Swipe a card right to keep, left to trash</span>
-        <button class="btn primary" id="clNext">${CL.gi < G.groups.length - 1 ? 'Next group' : 'Review'} ${ICO.next}</button></div>
+        <button class="btn primary" id="clNext" aria-label="${CL.gi < G.groups.length - 1 ? 'Next group' : 'Review'}"><span class="lfull">${CL.gi < G.groups.length - 1 ? 'Next group' : 'Review'} </span>${ICO.next}</button></div>
       <div class="tiles">${g.items.map((it, i) => cleanTile(it, g, i)).join('')}</div>
     </div>`;
   v.querySelectorAll('[data-dec]').forEach(b => b.onclick = e => { e.stopPropagation(); const id = b.closest('.tile').dataset.id; const it = S.byId.get(id); const val = b.dataset.dec; CL.slam = id; CL.dec[id] = val; if (val === g.sugg[id]) delete CL.dec[id]; saveClean(); renderClean(); });

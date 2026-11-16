@@ -407,30 +407,68 @@ a{color:var(--light)}
 .pane-head select.s{flex:1 1 96px;min-width:0;max-width:150px}
 .pane-head [data-act=dir]{flex:none}
 
-/* phone: give the list the screen. Quick filters stay one swipeable row; scrolling down (body.compact, set in
-   app.html) shrinks the header, scene art, pane chips and pane controls; the pane menu scrolls within the space it has
-   (max-height set in app.html when it opens). */
+/* phone: give the list the screen. Quick filters stay one swipeable row. body.compact (app.html: on whenever the
+   list is scrolled off its very top or an item panel is open) shrinks the header, scene art, pane chips, pane
+   controls and the Subclasses header. Everything eases over .5s and nothing pops in or out (no display:none), so
+   the change reads as one smooth fold. The pane menu scrolls within the space it has (max-height set on open). */
+.d-scroll{display:contents}
+.mrevert,.grab .gx,.lshort{display:none}
 @media (max-width:760px){
+  html,body{overscroll-behavior-y:none}
   .pane-head .row.qchips{flex-wrap:nowrap}
-  header,.scene,#paneChips,.pane-head{transition:min-height .25s var(--ease),padding .25s var(--ease)}
+  :root{--fold:.5s cubic-bezier(.25,.8,.3,1)}
+  header,.scene,#paneChips,.pane-head,.sv-head,.sv-els{transition:min-height var(--fold),padding var(--fold)}
+  .pbtn,.mmenu,.pchip,.sv-head .tab,.sv-head .btn,.sv-els .tab{transition:min-height var(--fold),padding var(--fold),border-color .25s,background-color .25s,color .25s}
+  .scene .title,.sv-head .title{transition:font-size var(--fold),letter-spacing var(--fold)}
+  header .brand .word{display:inline-block;overflow:hidden;white-space:nowrap;max-width:90px;transition:max-width var(--fold),opacity var(--fold)}
+  .scene .sum,.scene .credit,.sv-head .sum,.sv-head #svq,.pane-head .row.qchips{max-height:70px;overflow:hidden;transition:max-height var(--fold),opacity var(--fold),margin var(--fold),padding var(--fold)}
   .compact header{min-height:38px}
-  .compact header .brand .word{display:none}
+  .compact header .brand .word{max-width:0;opacity:0}
   .compact .pbtn{min-height:30px}
   .compact .mmenu{min-height:32px}
-  .compact .scene{min-height:0;padding:8px 16px;cursor:pointer}
-  .compact .scene .title{font-size:20px}
-  .compact .scene .sum,.compact .scene .credit{display:none}
+  .compact .scene{min-height:0;padding:8px 16px}
+  .compact .scene .title,.compact .sv-head .title{font-size:20px}
+  .compact .scene .sum,.compact .scene .credit,.compact .sv-head .sum{max-height:0;opacity:0;margin:0}
+  .compact .sv-head #svq{max-height:0;opacity:0;padding-top:0;padding-bottom:0;border-width:0}
   .compact #paneChips{padding:4px 12px}
   .compact .pchip{min-height:30px}
   .compact .pane-head{padding:6px 12px}
-  .compact .pane-head .row.qchips{display:none}
-  .sv-head{transition:min-height .25s var(--ease),padding .25s var(--ease)}
+  .compact .pane-head .row.qchips{max-height:0;opacity:0;margin-top:-8px;padding-bottom:0}
   .compact .sv-head{min-height:0;padding:8px 16px}
-  .compact .sv-head .title{font-size:20px}
-  .compact .sv-head .sum,.compact .sv-head #svq{display:none}
   .compact .sv-head .tab,.compact .sv-head .btn,.compact .sv-els .tab{min-height:34px;padding-top:2px;padding-bottom:2px}
   .compact .sv-els{padding:4px 16px}
   .menu.open .menu-list{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+
+  /* item panel: near full height, hero + name + body scroll together, slim art strip, one tag row at the foot */
+  #drawer{height:calc(100dvh - 10px - env(safe-area-inset-top));max-height:none}
+  .d-scroll{display:block;flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .d-scroll .d-body{overflow:visible;flex:none}
+  #drawer .hero{height:96px}
+  #drawer .hero .hin{left:16px;right:16px;bottom:8px;gap:12px}
+  #drawer .hero .ring{width:52px;height:52px}
+  .d-head{padding:0 16px 10px}
+  .d-head .nm{font-size:22px}
+  .d-head .dtype{font-size:11px;margin-top:2px}
+  .d-head .facts{gap:6px;margin-top:8px}
+  .d-head .facts span{padding:3px 8px;font-size:12.5px}
+  .d-head .stat-pill{font-size:12px}
+  .d-body{padding:4px 16px 16px}
+  .grab{position:relative;align-items:center;min-height:30px;padding:6px 0}
+  .grab .gx{display:grid;place-items:center;position:absolute;right:4px;top:0;width:44px;height:100%;min-height:36px;background:none;border:0;color:var(--dim);font-size:24px;line-height:1}
+  .d-foot{padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+  .d-foot #dRevert,.d-foot #dClose,.d-foot .grow{display:none}
+  .mtags{margin:0}
+  .mtags .tagbtn{min-height:44px;padding:3px 2px}
+  .d-body .tagsec{display:none}
+  .nstate{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .mrevert{display:inline-flex}
+
+  /* Clean up: one slim row of group controls */
+  .gnav{flex-wrap:nowrap;gap:4px;margin-bottom:8px;padding:4px 0}
+  .gnav .btn{flex:1 1 auto;min-height:34px;padding:2px 6px;font-size:12px;justify-content:center;min-width:0}
+  .gnav #clPrev,.gnav #clNext{flex:0 0 40px}
+  .gnav .hint-touch,.gnav .grow{display:none}
+  .lfull{display:none}.lshort{display:inline}
 }
 
 /* bundled item icon (artifact build) */

@@ -75,7 +75,9 @@ const fails = []; const ok = m => console.log('  ok  ', m); const fail = m => { 
     c1 && h1 > h0 + 150 ? ok(`phone: scrolling down collapses the header chrome (list ${h0}px → ${h1}px)`) : fail(`phone: no collapse on scroll (compact ${c1}, ${h0} → ${h1})`);
     for (let i = 0; i < 3; i++) { await p3.evaluate(() => window.__pb.scrollBy(0, -40)); await p3.waitForTimeout(50); }
     await p3.waitForTimeout(300);
-    (await p3.evaluate(() => !document.body.classList.contains('compact'))) ? ok('phone: scrolling up restores it') : fail('phone: header chrome stays collapsed after scrolling up');
+    (await p3.evaluate(() => document.body.classList.contains('compact'))) ? ok('phone: scrolling up part way keeps it collapsed') : fail('phone: header expanded before reaching the top');
+    await p3.evaluate(() => { window.__pb.scrollTop = 0; }); await p3.waitForTimeout(800);
+    (await p3.evaluate(() => !document.body.classList.contains('compact'))) ? ok('phone: reaching the very top restores it') : fail('phone: header chrome stays collapsed at the top');
     await p3.evaluate(() => window.__pb.closest('.pane').querySelector('[data-act=menu]').click()); await p3.waitForTimeout(200);
     const m = await p3.evaluate(() => {
       const pane = window.__pb.closest('.pane'), l = pane.querySelector('.menu-list'), r = l.getBoundingClientRect();
@@ -84,6 +86,20 @@ const fails = []; const ok = m => console.log('  ok  ', m); const fail = m => { 
       return { fits: r.top >= 0 && r.bottom <= limit + 1 && r.height > 0, lastVisible: last.bottom <= r.bottom + 1 && last.top >= r.top - 1 };
     });
     m.fits && m.lastVisible ? ok('phone: pane menu stays inside the pane and scrolls to its last option') : fail('phone: pane menu runs off screen or cannot reach its last option ' + JSON.stringify(m));
+    // item panel: tall single scroll area, header collapsed while open, pull down from the top closes it
+    await p3.evaluate(() => document.querySelectorAll('.menu.open').forEach(m => m.classList.remove('open')));
+    await p3.evaluate(() => document.querySelector('#panes .card').click()); await p3.waitForTimeout(600);
+    const dr = await p3.evaluate(() => ({ sc: document.querySelector('#drawer .d-scroll').clientHeight, vh: innerHeight, compact: document.body.classList.contains('compact') }));
+    dr.sc > dr.vh * 0.6 && dr.compact ? ok(`phone: item panel scroll area is ${dr.sc}px of ${dr.vh}px, header collapsed`) : fail('phone: item panel too short or header not collapsed ' + JSON.stringify(dr));
+    const pulled = await p3.evaluate(() => new Promise(res => {
+      const el = document.querySelector('#drawer .grab'), r = el.getBoundingClientRect(), x = r.left + 40, y = r.top + 8;
+      const T = yy => new Touch({ identifier: 1, target: el, clientX: x, clientY: yy });
+      el.dispatchEvent(new TouchEvent('touchstart', { touches: [T(y)], changedTouches: [T(y)], bubbles: true, cancelable: true }));
+      let i = 0; const step = () => { i++; const yy = y + 20 * i; el.dispatchEvent(new TouchEvent('touchmove', { touches: [T(yy)], changedTouches: [T(yy)], bubbles: true, cancelable: true }));
+        if (i < 10) setTimeout(step, 20); else { el.dispatchEvent(new TouchEvent('touchend', { touches: [], changedTouches: [T(yy)], bubbles: true, cancelable: true })); setTimeout(() => res(!document.querySelector('#drawer').classList.contains('open')), 400); } };
+      setTimeout(step, 20);
+    }));
+    pulled ? ok('phone: pulling the item panel down closes it') : fail('phone: pulling the item panel down did not close it');
     e3.length ? fail('phone page errors: ' + e3.join(' | ')) : ok('phone: no page errors');
     await b3.close();
   }
