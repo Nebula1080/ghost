@@ -145,6 +145,14 @@ t('source: no tokens or secrets in persistent storage code paths', () => {
   assert.ok(!/localStorage\.setItem\([^)]*(token|access_token|apikey|api_key)/i.test(app), 'token written to localStorage');
   assert.ok(!/(X-API-Key|BUNGIE_API_KEY)['"]?\s*[:=]\s*['"][0-9a-f]{32}['"]/i.test(app + core), 'hard-coded API key');
 });
+t('built pages: no HTML comment markers inside inline scripts (hosts that strip comments would break them)', () => {
+  for (const f of ['dist/index.html', 'dist-hosted/index.html']) {
+    const p = path.join(root, f);
+    if (!fs.existsSync(p)) throw new Error(f + ' missing: run both builds first');
+    for (const [, js] of fs.readFileSync(p, 'utf8').matchAll(/<script\b[^>]*>([^]*?)<\/script\b[^>]*>/gi))
+      assert.ok(!js.includes('<!--') && !js.includes('-->'), f + ': an inline script contains <!-- or -->');
+  }
+});
 
 // ---------- hosted build: CSP and service worker ----------
 t('hosted build: strict CSP meta, hashes match, no third-party hosts', () => {

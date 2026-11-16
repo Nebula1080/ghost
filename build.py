@@ -29,6 +29,9 @@ for a, b in [
 core = (root / 'src/core.js').read_text(encoding='utf-8').replace("if (typeof module !== 'undefined') module.exports = Core;", '')
 assert '/*__CORE__*/' in s
 assert '</script' not in core.lower(), 'core.js must not contain "</script"'
+# an HTML comment opener/closer inside an inline script can be stripped by the host page pipeline, breaking the script
+for bad in ('<!--', '-->'):
+    assert bad not in core, f'core.js must not contain "{bad}" (write it as \\x3c!-- / --\\x3e)'
 s = s.replace('/*__CORE__*/', core)
 
 # ---- Ghost design: stylesheet, embedded fonts (OFL, data/fonts), art next to the page ----
