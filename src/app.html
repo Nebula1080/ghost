@@ -1193,7 +1193,7 @@ function bindPane(el, p) {
   const menu = el.querySelector('.menu');
   menu.onclick = e => {
     const act = e.target.closest('[data-act]')?.dataset.act; if (!act) return;
-    if (act === 'menu') { document.querySelectorAll('.menu.open').forEach(m => m !== menu && m.classList.remove('open')); menu.classList.toggle('open'); return; }
+    if (act === 'menu') { document.querySelectorAll('.menu.open').forEach(m => m !== menu && m.classList.remove('open')); menu.classList.toggle('open'); fitMenu(menu); return; }
     menu.classList.remove('open');
     const i = S.panes.indexOf(p);
     if (act === 'del') { S.panes.splice(i, 1); savePanes(); renderPanes(); }
@@ -1820,8 +1820,33 @@ function showSubDetail() {
 
 // ---------- views: Vault (panes) · Clean up · Subclasses ----------
 let VIEW = 'vault';
+// an open pane menu stays a dropdown under its button and scrolls when it would run past the pane, the tab bar or
+// the screen edge
+function fitMenu(menu) {
+  const l = menu.querySelector('.menu-list'); l.style.maxHeight = '';
+  if (!menu.classList.contains('open')) return;
+  const bar = isMobile() ? document.querySelector('nav.views').getBoundingClientRect().top : innerHeight;
+  const pane = menu.closest('.pane')?.getBoundingClientRect().bottom ?? innerHeight;
+  l.style.maxHeight = Math.max(120, Math.min(bar, pane, innerHeight) - l.getBoundingClientRect().top - 8) + 'px';
+}
+// phone: scrolling down a list shrinks the header, scene art, pane chips and pane controls so the list gets the
+// screen; scrolling back up (or reaching the top) restores them. Only lists with plenty to scroll collapse, so the
+// list growing taller can never clamp it back to the top and flip-flop.
+const COMPACT = { last: new WeakMap(), acc: 0 };
+const setCompact = on => document.body.classList.toggle('compact', !!on);
+document.addEventListener('scroll', e => {
+  const el = e.target;
+  if (!isMobile() || !(el instanceof Element) || el.closest('#drawer,#modal,.menu-list')) return;
+  const y = el.scrollTop, prev = COMPACT.last.get(el); COMPACT.last.set(el, y);
+  if (prev == null || y === prev) return;
+  if (y < 8) { COMPACT.acc = 0; setCompact(false); return; }
+  const d = y - prev; COMPACT.acc = Math.sign(d) === Math.sign(COMPACT.acc) ? COMPACT.acc + d : d;
+  if (COMPACT.acc > 24 && el.scrollHeight - el.clientHeight > 360) setCompact(true);
+  else if (COMPACT.acc < -48) setCompact(false);
+}, { capture: true, passive: true });
+$('#vscene').addEventListener('click', () => setCompact(false));
 function setView(v) {
-  VIEW = v;
+  VIEW = v; setCompact(false);
   document.querySelectorAll('nav.views button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
   placeViews();
   for (const id of ['subv', 'clean', 'compare']) $('#' + id).classList.toggle('open', v === id);
