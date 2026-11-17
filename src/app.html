@@ -2063,14 +2063,15 @@ function renderBuilds() {
   const st = Core.buildStats(b, D, S.byId);
   const nLinks = syn.keys.length;
   // subclass
-  const slot = (sec, i, a) => `<button class="bslot${a ? ' on' : ''}" data-sub="${sec}" data-i="${i}" title="${a ? esc(a.n) : 'Choose ' + SUB_L[sec].toLowerCase()}">${a ? plugIcon(a.n, 'sq', a.i) : '<span class="ic sq ph0">+</span>'}<span class="bl">${SUB_L[sec]}</span><span class="bn">${a ? esc(a.n) : 'Choose'}</span>${a?.st ? `<span class="bsts">${statChips(a.st)}</span>` : ''}</button>`;
+  const infoBtn = (attr, label) => `<button class="binfo" ${attr} title="Details" aria-label="Show ${esc(label)} details">${ICO.info}</button>`;
+  const slot = (sec, i, a) => `<div class="bslotw"><button class="bslot${a ? ' on' : ''}" data-sub="${sec}" data-i="${i}" title="${a ? esc(a.n) : 'Choose ' + SUB_L[sec].toLowerCase()}">${a ? plugIcon(a.n, 'sq', a.i) : '<span class="ic sq ph0">+</span>'}<span class="bl">${SUB_L[sec]}</span><span class="bn">${a ? esc(a.n) : 'Choose'}</span>${a?.st ? `<span class="bsts">${statChips(a.st)}</span>` : ''}</button>${a ? infoBtn(`data-sinfo="${sec}|${a.h}"`, a.n) : ''}</div>`;
   const nFrag = Core.fragSlots(b, D);
   const subHtml = `<div class="bclass"><div class="seg">${B_CLASSES.filter(([c]) => D.sub[c]).map(([c, l]) => `<button data-cls="${c}" class="${c === b.cls ? 'on' : ''}">${l}</button>`).join('')}</div>
       <div class="tabs bels">${SV_ELS.filter(([e]) => D.sub[b.cls]?.[e]).map(([e]) => { const s = D.sub[b.cls][e]; return `<button class="tab${e === b.el ? ' on' : ''}" data-el="${e}" style="--ec:${EL_COL[e]}">${plugIcon(s.n, 'sq', s.i)}<span>${esc(s.n)}</span></button>`; }).join('')}</div></div>
     <div class="bgrid">${['super', 'classAbility', 'movement', 'melee', 'grenade'].map(k => slot(k, 0, subPick(b, k, b.sub[k]))).join('')}</div>
     <div class="bsub-h">Aspects <small>2 slots</small></div><div class="bgrid">${[0, 1].map(i => slot('aspects', i, subPick(b, 'aspects', b.sub.aspects[i]))).join('')}</div>
     <div class="bsub-h">Fragments <small>${nFrag ? `${b.sub.fragments.length}/${nFrag} slots, opened by your aspects` : 'choose aspects to open fragment slots'}</small></div><div class="bgrid">${Array.from({ length: nFrag }, (_, i) => slot('fragments', i, subPick(b, 'fragments', b.sub.fragments[i]))).join('')}</div>
-    ${Core.subList(sc, 'transcendence').length ? `<div class="bsub-h">Transcendence <small>always part of Prismatic</small></div><div class="bgrid">${Core.subList(sc, 'transcendence').map(a => `<div class="bslot on fixed">${plugIcon(a.n, 'sq', a.i)}<span class="bl">Transcendence</span><span class="bn">${esc(a.n)}</span></div>`).join('')}</div>` : ''}`;
+    ${Core.subList(sc, 'transcendence').length ? `<div class="bsub-h">Transcendence <small>always part of Prismatic</small></div><div class="bgrid">${Core.subList(sc, 'transcendence').map(a => `<div class="bslotw"><div class="bslot on fixed">${plugIcon(a.n, 'sq', a.i)}<span class="bl">Transcendence</span><span class="bn">${esc(a.n)}</span></div>${infoBtn(`data-sinfo="transcendence|${a.h}"`, a.n)}</div>`).join('')}</div>` : ''}`;
   // weapons + armor
   const itemCard = (g, s) => {
     const ref = (g === 'w' ? b.w : b.a)[s]; const it = ref && S.byId.get(ref.id);
@@ -2087,7 +2088,7 @@ function renderBuilds() {
     let mods = '';
     if (g === 'a') {
       const ms = b.mods[s] || []; const used = ms.reduce((n, m) => n + Core.modCost(m, s, D), 0); const cap = it?.energy;
-      mods = `<div class="bmods">${[0, 1, 2].map(i => { const m = ms[i]; return `<button class="bmod${m ? ' on' : ''}" data-mod="${s}" data-mi="${i}" title="${m ? esc(m) : 'Add a mod'}">${m ? plugIcon(m, 'sq', pIdx(m, 'armor')) : '<span class="ic sq ph0">+</span>'}<span>${m ? esc(m) : 'Mod'}</span></button>`; }).join('')}<span class="ben${cap != null && used > cap ? ' over' : ''}" title="Armor energy used by these mods">${used}${cap != null ? '/' + cap : ''} energy</span></div>`;
+      mods = `<div class="bmods">${[0, 1, 2].map(i => { const m = ms[i]; return `<span class="bmodw"><button class="bmod${m ? ' on' : ''}" data-mod="${s}" data-mi="${i}" title="${m ? esc(m) : 'Add a mod'}">${m ? plugIcon(m, 'sq', pIdx(m, 'armor')) : '<span class="ic sq ph0">+</span>'}<span>${m ? esc(m) : 'Mod'}</span></button>${m ? infoBtn(`data-minfo="${esc(m)}"`, m) : ''}</span>`; }).join('')}<span class="ben${cap != null && used > cap ? ' over' : ''}" title="Armor energy used by these mods">${used}${cap != null ? '/' + cap : ''} energy</span></div>`;
     }
     return `<div class="bcard"><div class="bcl">${label}</div><div class="bcrow"><button class="bpick" data-${g}="${s}">${body}</button><span class="bacts">${it ? `<button class="x insp" data-insp="${esc(it.id)}" title="Details" aria-label="Show ${label} details">${ICO.info}</button>` : ''}${ref ? `<button class="x" data-clr${g}="${s}" title="Remove" aria-label="Remove ${label}">×</button>` : ''}</span></div>${mods}</div>`;
   };
@@ -2160,6 +2161,8 @@ function bindBuild(v, b, pieces, syn) {
   v.querySelectorAll('[data-sub]').forEach(x => x.onclick = () => pickSub(b, x.dataset.sub, +x.dataset.i, pieces));
   v.querySelectorAll('[data-w]').forEach(x => x.onclick = () => pickItem(b, 'w', x.dataset.w, pieces));
   v.querySelectorAll('[data-a]').forEach(x => x.onclick = () => pickItem(b, 'a', x.dataset.a, pieces));
+  v.querySelectorAll('[data-sinfo]').forEach(x => x.onclick = e => { e.stopPropagation(); const [sec, h] = x.dataset.sinfo.split('|'); const a = Core.subList(scAll(b), sec).find(y => y.h === +h); if (a) pieceInfo(a.n, { bd: a.d, hash: a.h, icon: a.i, sq: true, kind: `${scAll(b)?.n || ''} · ${SUB_L[sec] || 'Transcendence'}` }, 'sub:' + Core.norm(a.n)); });
+  v.querySelectorAll('[data-minfo]').forEach(x => x.onclick = e => { e.stopPropagation(); const n = x.dataset.minfo; pieceInfo(n, { ikind: 'armor', sq: true, kind: 'Armor mod' }, 'mod:' + Core.norm(n)); });
   v.querySelectorAll('[data-insp]').forEach(x => x.onclick = e => { e.stopPropagation(); openItem(x.dataset.insp); });
   v.querySelectorAll('[data-clrw]').forEach(x => x.onclick = () => { delete b.w[x.dataset.clrw]; saveBuilds(); renderBuilds(); });
   v.querySelectorAll('[data-clra]').forEach(x => x.onclick = () => { delete b.a[x.dataset.clra]; saveBuilds(); renderBuilds(); });
@@ -2202,6 +2205,14 @@ function openDimLink(b) {
   const inp = $('#dimUrl');
   $('#dimCopy').onclick = async () => { try { await navigator.clipboard.writeText(url); toast('DIM link copied.'); } catch { inp.focus(); inp.select(); toast('Press Ctrl+C (or long-press → Copy) to copy the selected link.'); } };
   addShareButton($('#dimCopy'), { text: url, title: b.name });
+}
+// details sheet for a subclass piece or mod: Bungie / Clarity / Compendium text, then what Ghost's curated data says
+// it does (with conditions), so you can read it without opening the picker
+function pieceInfo(name, opt, id) {
+  const fx = IX?.p?.[id] || [];
+  const cond = c => c.any ? c.any.map(cond).join(' or ') : c.slot ? c.is.join(' or ') : c.piece || c.item || (c.subclass ? `${c.subclass} subclass` : c.weapon ? `${c.weapon} weapon` : IX?.t?.[c.has]?.l || c.has || '');
+  const list = fx.length ? `<span class="src2">What it does in builds</span><ul class="pfx">${fx.map(e => `<li><b>${esc(VERB[e.do] || e.do)} ${esc(IX.t[e.t]?.l || e.t)}</b>${e.do === 'counts' ? ` as ${esc(IX.t[e.as]?.l || e.as)}` : ''}${e.amt ? ` <span class="bst">${esc(e.amt)}%</span>` : ''}${e.on ? ` <small>${esc(e.on)}</small>` : ''}${(e.if || []).length ? ` <small class="warn">only with ${esc(e.if.map(cond).join(' + '))}</small>` : ''}</li>`).join('')}</ul>` : (IX?.pending?.includes(id) ? '<p class="snote">Not reviewed for interactions yet.</p>' : '');
+  modal(`<div class="pdet" style="margin:0">${infoHtml(name, { ...opt, extra: list })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`);
 }
 // picker sheet: a searchable list of choices, best synergy first
 function openPicker(title, rows, onPick, opt = {}) {

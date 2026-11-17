@@ -57,6 +57,11 @@ const pick = async (pg, sel, text) => {
   const insp = await pg.evaluate(() => ({ drawer: document.querySelector('#drawer').classList.contains('open'), picker: document.querySelector('#modal').classList.contains('open') }));
   ppk > 0 && insp.drawer && !insp.picker ? ok('picker rows list perks; the details button opens the item panel') : fail('inspect/perks ' + JSON.stringify({ ppk, ...insp }));
   await pg.keyboard.press('Escape'); await pg.waitForTimeout(400);
+  // subclass pieces and mods open a details sheet (sources + curated effects) without opening the picker
+  await pg.evaluate(() => document.querySelector('[data-sinfo^=aspects]').click()); await pg.waitForTimeout(300);
+  const asheet = await pg.evaluate(() => ({ txt: document.querySelector('#modalBox').innerText, picker: !!document.querySelector('#plist') }));
+  /Touch of Flame/.test(asheet.txt) && /Bungie/i.test(asheet.txt) && !asheet.picker ? ok('aspect details sheet opens from its info button') : fail("aspect info " + JSON.stringify(asheet).slice(0, 200));
+  await pg.click('#modal [data-close]'); await pg.waitForTimeout(200);
   const syn = await pg.$$eval('#bSyn .skey', x => x.map(k => k.querySelector('.skh b').textContent));
   syn.includes('Scorch') ? ok('interactions show Scorch: Incinerator Snap -> Ember of Searing') : fail('no Scorch interaction: ' + syn.join(','));
   await pg.evaluate(() => [...document.querySelectorAll('#bSyn .skey')].find(k => k.querySelector('.skh b').textContent === 'Scorch').querySelector('.schip').click()); await pg.waitForTimeout(100);
