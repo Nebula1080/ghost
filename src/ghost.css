@@ -687,3 +687,5 @@ a{color:var(--light)}
 .sfxl{display:flex;flex-wrap:wrap;gap:4px}
 .sfxr .sev{grid-column:1/-1}
 @media (max-width:760px){.sfxr{grid-template-columns:1fr}}
+.prow[hidden]{display:none}
+.pkn{font-size:12px;color:var(--faint);margin-top:6px;min-height:1em}
