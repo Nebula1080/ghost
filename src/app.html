@@ -2199,10 +2199,19 @@ function openDimLink(b) {
 }
 // picker sheet: a searchable list of choices, best synergy first
 function openPicker(title, rows, onPick, opt = {}) {
-  modal(`<h2>${esc(title)}</h2>${opt.note ? `<p class="stat-pill">${opt.note}</p>` : ''}<input class="qin" id="pkq" type="search" placeholder="Search names and descriptions…" aria-label="Search choices">
+  modal(`<h2>${esc(title)}</h2>${opt.note ? `<p class="stat-pill">${opt.note}</p>` : ''}<input class="qin" id="pkq" type="search" placeholder="${esc(opt.placeholder || 'Search names and descriptions…')}" aria-label="Search choices" autocomplete="off" spellcheck="false"><div class="pkn" id="pkn" aria-live="polite"></div>
     <div class="plist" id="plist">${opt.clear ? '<button class="prow none" data-k="">Empty this slot</button>' : ''}${rows.map(r => `<button class="prow${r.on ? ' on' : ''}${r.off ? ' off' : ''}" data-k="${esc(r.k)}" data-s="${esc(r.s.toLowerCase())}">${r.icon}<span class="pt"><b>${esc(r.n)}</b>${r.sub ? `<small>${r.sub}</small>` : ''}${r.why?.length ? `<span class="whys">${whyHtml(r.why)}</span>` : ''}</span>${r.score ? `<span class="pscore" title="Synergy with the rest of this build">+${r.score}</span>` : ''}</button>`).join('') || '<div class="empty">Nothing to choose here.</div>'}</div>
     <div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`);
-  const q = $('#pkq'); q.oninput = () => { const t = q.value.toLowerCase().trim(); $('#plist').querySelectorAll('.prow[data-s]').forEach(r => r.hidden = !!t && !r.dataset.s.includes(t)); };
+  // item pickers search with Ghost's query language (names, perks, descriptions, is:void, frame:…); others match text
+  const q = $('#pkq'); let tq;
+  const filter = () => {
+    const t = q.value.trim(); let keep = null;
+    if (t && opt.query) { try { keep = opt.query(t); } catch { keep = new Set(); } }
+    let n = 0; const all = $('#plist').querySelectorAll('.prow[data-s]');
+    all.forEach(r => { const hide = !!t && (keep ? !keep.has(r.dataset.k) : !r.dataset.s.includes(t.toLowerCase())); r.hidden = hide; if (!hide) n++; });
+    $('#pkn').textContent = t ? (n ? `${n} of ${all.length} match` : 'Nothing matches this search.') : '';
+  };
+  q.oninput = () => { clearTimeout(tq); tq = setTimeout(filter, 120); };
   $('#plist').querySelectorAll('.prow').forEach(r => r.onclick = () => { if (r.classList.contains('off')) return toast(r.title || 'Already in this build.'); closeModal(); onPick(r.dataset.k); });
   if (!isMobile()) q.focus();
 }
@@ -2229,6 +2238,8 @@ function pickItem(b, g, slot, pieces) {
     const sub = (g === 'w' ? [it.type, it.element, it.power != null ? '◆ ' + it.power : '', it.rating != null ? 'rating ' + it.rating : ''] : [it.type, it.frame, it.set ? '◈ ' + it.set : '', it.stats.Total != null ? 'Total ' + it.stats.Total : '', it.tertiary ? '+' + it.tertiary : '']).filter(Boolean).map(esc).join(' · ') + (it.tag === 'junk' ? ' · <span class="warn">junk</span>' : '');
     return { k: it.id, n: it.name, icon: iIcon(it, 40), sub, s: [it.name, it.type, it.frame, it.element, it.set, ...it.perks.filter(p => p.s).map(p => p.n)].join(' '), score: r.score, why: r.why, on: it.id === cur, it }; })
     .sort((x, y) => (y.score - x.score) || ((x.it.tag === 'junk') - (y.it.tag === 'junk')) || ((y.it.rating ?? y.it.stats.Total ?? -1) - (x.it.rating ?? x.it.stats.Total ?? -1)) || ((y.it.power ?? 0) - (x.it.power ?? 0))).slice(0, 400);
+  let qctx = null;
+  const query = t => new Set(Core.runQuery(Core.parseQuery(t), pool, qctx ||= Core.buildCtx(S.items, new Set(pendingIds()), D)).keys());
   openPicker(`${g === 'w' ? W_LABEL[slot] + ' weapon' : A_LABEL[slot]}${g === 'a' ? ' · ' + cls : ''}`, rows, id => {
     const refs = g === 'w' ? b.w : b.a;
     if (!id) { delete refs[slot]; saveBuilds(); renderBuilds(); return; }
@@ -2236,7 +2247,7 @@ function pickItem(b, g, slot, pieces) {
     // one exotic weapon and one exotic armor piece: a new exotic replaces the other one
     if (/exotic/i.test(it.rarity)) for (const [s, r] of Object.entries(refs)) { const o = S.byId.get(r.id); if (s !== slot && o && /exotic/i.test(o.rarity)) { delete refs[s]; toast(`Only one exotic ${g === 'w' ? 'weapon' : 'armor piece'}: removed ${o.name}.`); } }
     refs[slot] = itemRef(it); saveBuilds(); renderBuilds();
-  }, { clear: !!cur, note: pool.length ? `${pool.length} in your vault. Best synergy with the rest of the build first.` : `No ${g === 'w' ? W_LABEL[slot].toLowerCase() + ' weapons' : cls + ' ' + A_LABEL[slot].toLowerCase()} in this vault.` });
+  }, { query, placeholder: g === 'w' ? 'Search: name, perk, is:void, frame:…' : 'Search: name, perk, set:, is:exotic…', clear: !!cur, note: pool.length ? `${pool.length} in your vault. Best synergy with the rest of the build first.` : `No ${g === 'w' ? W_LABEL[slot].toLowerCase() + ' weapons' : cls + ' ' + A_LABEL[slot].toLowerCase()} in this vault.` });
 }
 function pickMod(b, slot, i, pieces) {
   const ms = b.mods[slot] || []; const cur = ms[i];

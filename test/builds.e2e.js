@@ -38,6 +38,16 @@ const pick = async (pg, sel, text) => {
   const dup = await pg.$$eval('#plist .prow.off', r => r.map(x => x.textContent).join('|'));
   /Ember of Searing/.test(dup) ? ok('a chosen fragment is marked "in build" in the other slots') : fail('duplicate fragment not blocked');
   await pg.click('#modal [data-close]');
+  // picker search: Ghost's query language and plain names both filter the list (rows really disappear)
+  await pg.click('[data-w=energy]'); await pg.waitForSelector('#plist');
+  const vis = () => pg.$$eval('#plist .prow[data-s]', r => r.filter(x => x.offsetParent !== null).map(x => x.querySelector('b').textContent));
+  const before = await vis();
+  await pg.fill('#pkq', 'is:handcannon'); await pg.waitForTimeout(300); const hc = await vis();
+  await pg.fill('#pkq', 'zzzz-no-such-item'); await pg.waitForTimeout(300); const none = await vis(); const msg = await pg.$eval('#pkn', e => e.textContent);
+  await pg.fill('#pkq', before[0].slice(0, 6)); await pg.waitForTimeout(300); const byName = await vis();
+  before.length > 1 && hc.length >= 1 && hc.length < before.length && !none.length && /Nothing matches/.test(msg) && byName.includes(before[0])
+    ? ok(`picker search filters (${before.length} → is:handcannon ${hc.length}, name, no match)`) : fail('picker search ' + JSON.stringify({ before: before.length, hc: hc.length, none: none.length, msg, byName }));
+  await pg.click('#modal [data-close]');
   const w = await pick(pg, '[data-w=energy]'); const a = await pick(pg, '[data-a=class]'); await pick(pg, '[data-mod=class][data-mi="0"]');
   w && a ? ok('weapon and armor pickers list vault items') : fail('weapon/armor picker empty');
   const syn = await pg.$$eval('#bSyn .skey', x => x.map(k => k.querySelector('.skh b').textContent));
