@@ -50,6 +50,13 @@ const pick = async (pg, sel, text) => {
   await pg.click('#modal [data-close]');
   const w = await pick(pg, '[data-w=energy]'); const a = await pick(pg, '[data-a=class]'); await pick(pg, '[data-mod=class][data-mi="0"]');
   w && a ? ok('weapon and armor pickers list vault items') : fail('weapon/armor picker empty');
+  // picker rows show the item's perks; a chosen item opens its item panel from the card without the picker
+  await pg.waitForTimeout(300); await pg.evaluate(() => document.querySelector('[data-w=energy]').click()); await pg.waitForSelector('#plist');
+  const ppk = await pg.$$eval('#plist .prow[data-s] .ppks .ppk', x => x.length); await pg.click('#modal [data-close]');
+  await pg.click('[data-insp]'); await pg.waitForTimeout(700);
+  const insp = await pg.evaluate(() => ({ drawer: document.querySelector('#drawer').classList.contains('open'), picker: document.querySelector('#modal').classList.contains('open') }));
+  ppk > 0 && insp.drawer && !insp.picker ? ok('picker rows list perks; the details button opens the item panel') : fail('inspect/perks ' + JSON.stringify({ ppk, ...insp }));
+  await pg.keyboard.press('Escape'); await pg.waitForTimeout(400);
   const syn = await pg.$$eval('#bSyn .skey', x => x.map(k => k.querySelector('.skh b').textContent));
   syn.includes('Scorch') ? ok('interactions show Scorch: Incinerator Snap -> Ember of Searing') : fail('no Scorch interaction: ' + syn.join(','));
   await pg.evaluate(() => [...document.querySelectorAll('#bSyn .skey')].find(k => k.querySelector('.skh b').textContent === 'Scorch').querySelector('.schip').click()); await pg.waitForTimeout(100);

@@ -636,7 +636,7 @@ function itemIcon(it, size = 48) {
 const GILT_EXOTICS = []; // item hashes; filled after the exotic review with the user
 const PANE_COLORS = ['#4da3ff','#f2a33a','#5bd17a','#e05fb7','#a67cff','#41d6c3','#e5624f','#d8d35a'];
 const TI = d => `<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
-const ICO = { up: TI('M12 19V5M6 11l6-6 6 6'), down: TI('M12 5v14M6 13l6 6 6-6'), more: TI('M5 12h.01M12 12h.01M19 12h.01').replace('stroke-width="1.6"', 'stroke-width="3"'), chev: TI('M6 9l6 6 6-6'), prev: TI('M15 6l-6 6 6 6'), next: TI('M9 6l6 6-6 6'), lock: TI('M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5z'), power: TI('M12 4 20 12 12 20 4 12Z') };
+const ICO = { up: TI('M12 19V5M6 11l6-6 6 6'), down: TI('M12 5v14M6 13l6 6 6-6'), more: TI('M5 12h.01M12 12h.01M19 12h.01').replace('stroke-width="1.6"', 'stroke-width="3"'), chev: TI('M6 9l6 6 6-6'), prev: TI('M15 6l-6 6 6 6'), next: TI('M9 6l6 6-6 6'), lock: TI('M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5z'), info: TI('M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 11v5M12 8h.01'), power: TI('M12 4 20 12 12 20 4 12Z') };
 const TAGS = [['', 'None', TI('M8 12h8')], ['favorite', 'Favorite', TI('M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z')], ['keep', 'Keep', TI('M5 12.5 10 17l9-10')], ['infuse', 'Infuse', TI('M12 3v14M6 11l6 6 6-6M5 21h14')], ['archive', 'Archive', TI('M3 5h18v4H3zM5 9v10h14V9M10 13h4')], ['junk', 'Junk', TI('M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13')]];
 const TAG_ICON = Object.fromEntries(TAGS.map(t => [t[0], t[2]]));
 const NOTE_MAX = 1024;
@@ -1799,7 +1799,7 @@ function openProfiles() {
 }
 $('#bProf').onclick = openProfiles;
 
-function closeDrawer() { const dr = $('#drawer'); if (dr.classList.contains('open') && !isMobile() && motionOK()) { dr.classList.add('closing'); setTimeout(() => dr.classList.remove('closing'), 230); } dr.classList.remove('open'); $('#scrim').classList.remove('open'); if (drawerItem) { drawerItem = null; if (VIEW === 'clean') renderClean(); else if (VIEW === 'compare') renderCompare(); else refreshBodies(); } syncCompact(); }
+function closeDrawer() { const dr = $('#drawer'); if (dr.classList.contains('open') && !isMobile() && motionOK()) { dr.classList.add('closing'); setTimeout(() => dr.classList.remove('closing'), 230); } dr.classList.remove('open'); $('#scrim').classList.remove('open'); if (drawerItem) { drawerItem = null; if (VIEW === 'clean') renderClean(); else if (VIEW === 'compare') renderCompare(); else if (VIEW !== 'builds') refreshBodies(); } syncCompact(); }
 $('#scrim').onclick = closeDrawer;
 // in-game style tooltip on item rows (desktop pointer only)
 (() => {
@@ -2089,7 +2089,7 @@ function renderBuilds() {
       const ms = b.mods[s] || []; const used = ms.reduce((n, m) => n + Core.modCost(m, s, D), 0); const cap = it?.energy;
       mods = `<div class="bmods">${[0, 1, 2].map(i => { const m = ms[i]; return `<button class="bmod${m ? ' on' : ''}" data-mod="${s}" data-mi="${i}" title="${m ? esc(m) : 'Add a mod'}">${m ? plugIcon(m, 'sq', pIdx(m, 'armor')) : '<span class="ic sq ph0">+</span>'}<span>${m ? esc(m) : 'Mod'}</span></button>`; }).join('')}<span class="ben${cap != null && used > cap ? ' over' : ''}" title="Armor energy used by these mods">${used}${cap != null ? '/' + cap : ''} energy</span></div>`;
     }
-    return `<div class="bcard"><div class="bcl">${label}</div><div class="bcrow"><button class="bpick" data-${g}="${s}">${body}</button>${ref ? `<button class="x" data-clr${g}="${s}" title="Remove" aria-label="Remove ${label}">×</button>` : ''}</div>${mods}</div>`;
+    return `<div class="bcard"><div class="bcl">${label}</div><div class="bcrow"><button class="bpick" data-${g}="${s}">${body}</button><span class="bacts">${it ? `<button class="x insp" data-insp="${esc(it.id)}" title="Details" aria-label="Show ${label} details">${ICO.info}</button>` : ''}${ref ? `<button class="x" data-clr${g}="${s}" title="Remove" aria-label="Remove ${label}">×</button>` : ''}</span></div>${mods}</div>`;
   };
   // interactions panel (curated data only): one card per term with what provides it and what uses / changes it.
   // Tap a piece to read the quote, conditions and notes behind it.
@@ -2160,6 +2160,7 @@ function bindBuild(v, b, pieces, syn) {
   v.querySelectorAll('[data-sub]').forEach(x => x.onclick = () => pickSub(b, x.dataset.sub, +x.dataset.i, pieces));
   v.querySelectorAll('[data-w]').forEach(x => x.onclick = () => pickItem(b, 'w', x.dataset.w, pieces));
   v.querySelectorAll('[data-a]').forEach(x => x.onclick = () => pickItem(b, 'a', x.dataset.a, pieces));
+  v.querySelectorAll('[data-insp]').forEach(x => x.onclick = e => { e.stopPropagation(); openItem(x.dataset.insp); });
   v.querySelectorAll('[data-clrw]').forEach(x => x.onclick = () => { delete b.w[x.dataset.clrw]; saveBuilds(); renderBuilds(); });
   v.querySelectorAll('[data-clra]').forEach(x => x.onclick = () => { delete b.a[x.dataset.clra]; saveBuilds(); renderBuilds(); });
   v.querySelectorAll('[data-mod]').forEach(x => x.onclick = () => pickMod(b, x.dataset.mod, +x.dataset.mi, pieces));
@@ -2205,7 +2206,7 @@ function openDimLink(b) {
 // picker sheet: a searchable list of choices, best synergy first
 function openPicker(title, rows, onPick, opt = {}) {
   modal(`<h2>${esc(title)}</h2>${opt.note ? `<p class="stat-pill">${opt.note}</p>` : ''}<input class="qin" id="pkq" type="search" placeholder="${esc(opt.placeholder || 'Search names and descriptions…')}" aria-label="Search choices" autocomplete="off" spellcheck="false"><div class="pkn" id="pkn" aria-live="polite"></div>
-    <div class="plist" id="plist">${opt.clear ? '<button class="prow none" data-k="">Empty this slot</button>' : ''}${rows.map(r => `<button class="prow${r.on ? ' on' : ''}${r.off ? ' off' : ''}${r.fluff ? ' fluff' : ''}" data-k="${esc(r.k)}" data-s="${esc(r.s.toLowerCase())}">${r.icon}<span class="pt"><b>${esc(r.n)}</b>${r.sub ? `<small>${r.sub}</small>` : ''}${r.why?.length ? `<span class="whys">${whyHtml(r.why)}</span>` : ''}</span>${r.score ? `<span class="pscore" title="Synergy with the rest of this build">+${r.score}</span>` : ''}</button>`).join('') || '<div class="empty">Nothing to choose here.</div>'}</div>
+    <div class="plist" id="plist">${opt.clear ? '<button class="prow none" data-k="">Empty this slot</button>' : ''}${rows.map(r => `<button class="prow${r.on ? ' on' : ''}${r.off ? ' off' : ''}${r.fluff ? ' fluff' : ''}" data-k="${esc(r.k)}" data-s="${esc(r.s.toLowerCase())}">${r.icon}<span class="pt"><b>${esc(r.n)}</b>${r.sub ? `<small>${r.sub}</small>` : ''}${r.perks ? `<span class="ppks">${r.perks}</span>` : ''}${r.why?.length ? `<span class="whys">${whyHtml(r.why)}</span>` : ''}</span>${r.score ? `<span class="pscore" title="Synergy with the rest of this build">+${r.score}</span>` : ''}</button>`).join('') || '<div class="empty">Nothing to choose here.</div>'}</div>
     <div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`);
   // item pickers search with Ghost's query language (names, perks, descriptions, is:void, frame:…); others match text
   const q = $('#pkq'); let tq;
@@ -2250,7 +2251,10 @@ function pickItem(b, g, slot, pieces) {
   const cur = (g === 'w' ? b.w : b.a)[slot]?.id;
   const rows = pool.map(it => { const r = Core.synScore(it, pieces, D, slot, IX);
     const sub = (g === 'w' ? [it.type, it.element, it.power != null ? '◆ ' + it.power : '', it.rating != null ? 'rating ' + it.rating : ''] : [it.type, it.frame, it.set ? '◈ ' + it.set : '', it.stats.Total != null ? 'Total ' + it.stats.Total : '', it.tertiary ? '+' + it.tertiary : '']).filter(Boolean).map(esc).join(' · ') + (it.tag === 'junk' ? ' · <span class="warn">junk</span>' : '');
-    return { k: it.id, n: it.name, icon: iIcon(it, 40), sub, s: [it.name, it.type, it.frame, it.element, it.set, ...it.perks.filter(p => p.s).map(p => p.n)].join(' '), score: r.score, why: r.why, on: it.id === cur, it }; })
+    const sk = Core.sockets(it, D);
+    const pk = it.kind === 'weapon' ? [...sk.intrinsic.slice(0, 1).map(p => [p, 'i']), ...sk.cols.flatMap(c => c.perks.filter(p => p.s).map(p => [p, c.ty]))] : [...sk.intrinsic.slice(0, 1).map(p => [p, 'i']), ...sk.exotic.map(p => [p, 'x'])];
+    const perks = pk.map(([p, ty]) => `<span class="ppk${ty === 't' || ty === 'o' || ty === 'x' ? ' key' : ''}" title="${esc(p.n)}">${plugIcon(p.n, ty === 'i' || ty === 'x' ? 'sq sm' : 'sm', pIdx(p.n, it.kind))}${esc(p.n)}</span>`).join('');
+    return { k: it.id, n: it.name, icon: iIcon(it, 40), sub, perks, s: [it.name, it.type, it.frame, it.element, it.set, ...it.perks.filter(p => p.s).map(p => p.n)].join(' '), score: r.score, why: r.why, on: it.id === cur, it }; })
     .sort((x, y) => (y.score - x.score) || ((x.it.tag === 'junk') - (y.it.tag === 'junk')) || ((y.it.rating ?? y.it.stats.Total ?? -1) - (x.it.rating ?? x.it.stats.Total ?? -1)) || ((y.it.power ?? 0) - (x.it.power ?? 0))).slice(0, 400);
   let qctx = null;
   const query = t => new Set(Core.runQuery(Core.parseQuery(t), pool, qctx ||= Core.buildCtx(S.items, new Set(pendingIds()), D)).keys());
