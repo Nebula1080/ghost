@@ -678,6 +678,215 @@ const Core = (() => {
     return null;
   }
 
-  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker };
+  // ---------- build maker: element keyword synergies ----------
+  // Every build piece (super, abilities, aspects, fragments, weapons, armor, mods) is read from its own description
+  // text (Bungie + Clarity; the Data Compendium only where neither has text). For each keyword we decide, per
+  // sentence, whether the piece PRODUCES it ("make you radiant", "targets are scorched"), USES it ("while radiant",
+  // "defeating scorched targets") or only MENTIONS it. Sentences that negate ("does not", "cannot") are skipped.
+  // A producer and a user of the same keyword form an interaction; the sentence is kept as evidence.
+  const SYN = [
+    ['scorch', 'Scorch', 'solar', 'scorch'], ['ignite', 'Ignition', 'solar', 'ignit'], ['radiant', 'Radiant', 'solar', 'radian'],
+    ['restoration', 'Restoration', 'solar', '\\brestoration\\b'], ['cure', 'Cure', 'solar', '\\bcur(?:e|es|ed|ing)\\b'],
+    ['firesprite', 'Firesprite', 'solar', 'firesprite'], ['sunspot', 'Sunspot', 'solar', 'sunspot'],
+    ['jolt', 'Jolt', 'arc', 'jolt'], ['blind', 'Blind', 'arc', '\\bblind'], ['amplified', 'Amplified', 'arc', 'amplif'],
+    ['ionictrace', 'Ionic Trace', 'arc', 'ionic trace'], ['boltcharge', 'Bolt Charge', 'arc', 'bolt charge'],
+    ['volatile', 'Volatile', 'void', 'volatil'], ['weaken', 'Weaken', 'void', 'weaken'], ['suppress', 'Suppress', 'void', 'suppress'],
+    ['devour', 'Devour', 'void', 'devour'], ['overshield', 'Overshield', 'void', 'overshield'], ['invisible', 'Invisibility', 'void', 'invisib'],
+    ['voidbreach', 'Void Breach', 'void', 'void breach'],
+    ['slow', 'Slow', 'stasis', '\\bslow(?:s|ed|ing)?\\b'], ['freeze', 'Freeze', 'stasis', 'freez|frozen'], ['shatter', 'Shatter', 'stasis', 'shatter'],
+    ['crystal', 'Stasis crystal', 'stasis', 'crystal'], ['shard', 'Stasis shard', 'stasis', '\\bshards?\\b'], ['frostarmor', 'Frost Armor', 'stasis', 'frost armor'],
+    ['sever', 'Sever', 'strand', '\\bsever'], ['suspend', 'Suspend', 'strand', 'suspen'], ['unravel', 'Unravel', 'strand', 'unravel'],
+    ['wovenmail', 'Woven Mail', 'strand', 'woven mail'], ['threadling', 'Threadling', 'strand', 'threadling'], ['tangle', 'Tangle', 'strand', 'tangle'],
+    ['transcend', 'Transcendence', 'prism', 'transcend'],
+    ['orb', 'Orbs of Power', '', 'orbs? of (?:power|light)'], ['armorcharge', 'Armor Charge', '', 'armor charge'],
+    ['finisher', 'Finisher', '', 'finisher'], ['healing', 'Healing', '', '\\bheal(?:s|ed|ing)?\\b'],
+    ['grenadeenergy', 'Grenade energy', '', 'grenade energy'], ['meleeenergy', 'Melee energy', '', 'melee energy'],
+    ['classenergy', 'Class ability energy', '', 'class ability energy'], ['superenergy', 'Super energy', '', 'super energy'],
+  ].map(([k, l, el, re]) => ({ k, l, el, re: new RegExp(re, 'gi') }));
+  const SYN_BY = Object.fromEntries(SYN.map(s => [s.k, s]));
+  // ability energy is "used" by the build's own ability of that kind (super, grenade, melee, class ability)
+  const ENERGY_OF = { grenadeenergy: 'grenade', meleeenergy: 'melee', classenergy: 'classAbility', superenergy: 'super' };
+  const USE_W = /^(against|at|on|to|defeating|killing|damaging|while|whilst|when|whenever|if|pick|picking|picks|collect\w*|absorb\w*|consum\w*|from|affected|extend\w*|duration|destroy\w*|shooting|breaking|hitting|requires?|have|has|having)$/;
+  const PROD_W = /^(make|makes|making|become|becomes|becoming|grant|grants|granting|gain|gains|gaining|apply|applies|applying|create|creates|creating|spawn|spawns|spawning|generate|generates|cause|causes|inflict|inflicts|emit|emits|summon|summons|are|is|be|get|gets|leave|leaves|release|releases|produce|produces|return|returns|restore|restores|refund|refunds|give|gives|into|cast|casts|spread|spreads|spreading|trigger|triggers)$/;
+  const NEG = /\b(does not|doesn't|do not|don't|cannot|can't|no longer|will not|won't|unable)\b/i;
+  const TARGETY = /^\s*(targets?|combatants?|enemies|enemy|foes?|them|nearby|the target|you|allies)\b/i;
+  const sentences = t => String(t || '').split(/(?<=[.!?])\s+|\n+|•/).map(x => x.trim()).filter(x => x.length > 2);
+  // role of one keyword occurrence: the nearest trigger word before it in the same clause decides
+  function roleAt(clause, idx, tok) {
+    const words = clause.slice(0, idx).toLowerCase().split(/[^a-z']+/).filter(Boolean).reverse();
+    // nearest trigger wins; "use" words count only within 3 words ("defeating scorched", "while radiant"),
+    // "produce" words within 6 ("make you and nearby allies radiant", "cause targets to become severed")
+    for (let i = 0; i < Math.min(6, words.length); i++) { if (i < 3 && USE_W.test(words[i])) return 'u'; if (PROD_W.test(words[i])) return 'p'; }
+    if (TARGETY.test(clause.slice(idx + tok.length)) && !/ed$/i.test(tok)) return 'p';   // "scorches targets", not "scorched targets"
+    if (/ing$/i.test(tok)) return 'p';                                              // "a scorching explosion"
+    return 'm';
+  }
+  // text -> { key: { p?: evidence, u?: evidence, m?: evidence } }; src labels where the text came from
+  function synTags(parts) {
+    const out = {};
+    for (const [src, text] of parts) for (const sen of sentences(text)) {
+      if (NEG.test(sen)) continue;
+      for (const s of SYN) {
+        s.re.lastIndex = 0; let m;
+        while ((m = s.re.exec(sen))) {
+          const cs = sen.lastIndexOf(',', m.index) + 1;                  // clause start
+          const tok = m[0] + (sen.slice(m.index + m[0].length).match(/^[a-z]*/i)?.[0] || '');   // whole word: scorch -> scorches
+          const role = roleAt(sen.slice(cs), m.index - cs, tok);
+          const t = (out[s.k] ||= {});
+          if (!t[role]) t[role] = { src, text: sen.length > 260 ? sen.slice(0, 257) + '…' : sen };
+        }
+      }
+    }
+    return out;
+  }
+  // description text of a plug / ability by name: [[source, plainText], …]
+  function pieceText(name, defs, bungie, kind) {
+    const i = perkInfo(name, defs, kind) || {};
+    const out = [];
+    const bd = bungie || i.bd; if (bd) out.push(['Bungie', bd]);
+    if (i.cl) out.push(['Clarity', stripTags(String(i.cl.h || '').replace(/<\/div>|<br>/g, '\n'))]);
+    if (!out.length && i.dc?.h) out.push(['Data Compendium', stripTags(String(i.dc.h).replace(/<\/div>|<br>/g, '\n'))]);
+    return out;
+  }
+  // slots
+  const W_SLOTS = ['kinetic', 'energy', 'power'], A_SLOTS = ['head', 'arms', 'chest', 'legs', 'class'];
+  const weaponSlot = it => /kinetic/i.test(it.category) ? 'kinetic' : /energy/i.test(it.category) ? 'energy' : /power|heavy/i.test(it.category) ? 'power' : '';
+  function armorSlot(it) {
+    const t = `${it.category} ${it.type}`.toLowerCase();
+    return /helmet|head/.test(t) ? 'head' : /gauntlet|arms|glove/.test(t) ? 'arms' : /chest/.test(t) ? 'chest' : /leg|boots|greaves|strides/.test(t) ? 'legs' : /class item|bond|mark|cloak/.test(t) ? 'class' : '';
+  }
+  const SUB_SINGLE = ['super', 'classAbility', 'movement', 'melee', 'grenade'];
+  const subOf = (b, defs) => defs?.sub?.[b?.cls]?.[b?.el] || null;
+  const findSub = (sc, sec, h) => (sc?.s?.[sec] || []).find(a => a.h === h) || null;
+  // fragment slots: the chosen aspects' capacities (Bungie energyCapacity)
+  const fragSlots = (b, defs) => (b?.sub?.aspects || []).reduce((n, h) => n + (findSub(subOf(b, defs), 'aspects', h)?.fc || 0), 0);
+  // keep a build's choices inside the game's limits (2 aspects, fragments up to the aspects' slots, ≤3 mods a slot)
+  function normBuild(b, defs) {
+    const sc = subOf(b, defs);
+    b.sub ||= {}; b.w ||= {}; b.a ||= {}; b.mods ||= {};
+    for (const k of SUB_SINGLE) if (b.sub[k] != null && !findSub(sc, k, b.sub[k])) delete b.sub[k];
+    b.sub.aspects = [...new Set((b.sub.aspects || []).filter(h => findSub(sc, 'aspects', h)))].slice(0, 2);
+    b.sub.fragments = [...new Set((b.sub.fragments || []).filter(h => findSub(sc, 'fragments', h)))].slice(0, fragSlots(b, defs));
+    for (const s of A_SLOTS) b.mods[s] = (b.mods[s] || []).filter(n => typeof n === 'string').slice(0, 3);
+    return b;
+  }
+  // every piece of a build with its text: { g: group, slot, n: name, label, it?, parts }
+  function buildPieces(b, defs, byId) {
+    const out = []; const sc = subOf(b, defs);
+    if (sc) {
+      const SEC_L = { super: 'Super', classAbility: 'Class ability', movement: 'Movement', melee: 'Melee', grenade: 'Grenade', aspects: 'Aspect', fragments: 'Fragment' };
+      for (const k of SUB_SINGLE) { const a = findSub(sc, k, b.sub?.[k]); if (a) out.push({ g: 'subclass', slot: k, n: a.n, label: SEC_L[k], parts: pieceText(a.n, defs, a.d) }); }
+      for (const k of ['aspects', 'fragments']) for (const h of b.sub?.[k] || []) { const a = findSub(sc, k, h); if (a) out.push({ g: 'subclass', slot: k, n: a.n, label: SEC_L[k], st: a.st, parts: pieceText(a.n, defs, a.d) }); }
+      for (const a of sc.s.transcendence || []) out.push({ g: 'subclass', slot: 'transcendence', n: a.n, label: 'Transcendence', parts: pieceText(a.n, defs, a.d) });
+    }
+    const itemPieces = (it, slot, g) => {
+      const label = g === 'weapon' ? { kinetic: 'Kinetic', energy: 'Energy', power: 'Power' }[slot] : { head: 'Helmet', arms: 'Arms', chest: 'Chest', legs: 'Legs', class: 'Class item' }[slot];
+      const sk = sockets(it, defs);
+      const perks = g === 'weapon' ? [...sk.intrinsic, ...sk.exotic, ...sk.cols.flatMap(c => c.perks.filter(p => p.s && c.ty !== 'b' && c.ty !== 'm')), ...sk.catalyst.filter(p => p.s)] : [...sk.exotic];
+      const parts = [];
+      for (const p of perks) for (const [src, t] of pieceText(p.n, defs, null, it.kind)) parts.push([`${p.n} · ${src}`, t]);
+      if (g === 'weapon' && /exotic/i.test(it.rarity) && !perks.length && defs?.dcx?.[norm(it.name)]) parts.push(['Data Compendium', stripTags(defs.dcx[norm(it.name)])]);
+      out.push({ g, slot, n: it.name, label, it, parts });
+    };
+    for (const s of W_SLOTS) { const it = byId?.get(b.w?.[s]?.id); if (it) itemPieces(it, s, 'weapon'); }
+    for (const s of A_SLOTS) { const it = byId?.get(b.a?.[s]?.id); if (it) itemPieces(it, s, 'armor'); }
+    // armor set bonuses that the chosen pieces complete
+    const setN = {};
+    for (const s of A_SLOTS) { const it = byId?.get(b.a?.[s]?.id); const si = it && defs?.as?.[it.hash]; if (si != null) setN[si] = (setN[si] || 0) + 1; }
+    for (const [si, n] of Object.entries(setN)) for (const p of defs.sets[si]?.p || []) if (n >= p.c) out.push({ g: 'armor', slot: 'set', n: p.n, label: `${defs.sets[si].n} · ${p.c}-piece bonus`, parts: [['Bungie', p.d]] });
+    for (const s of A_SLOTS) for (const n of b.mods?.[s] || []) out.push({ g: 'mod', slot: s, n, label: 'Armor mod', parts: pieceText(n, defs, null, 'armor') });
+    for (const p of out) p.tags = synTags(p.parts);
+    return out;
+  }
+  const EL_WEAPON = /\b(solar|arc|void|stasis|strand|kinetic)\b(?:[\s/]+(?:solar|arc|void|stasis|strand|kinetic))*\s+weapons?\b/gi;
+  // interactions between pieces: producer -> keyword -> user; matching weapon elements; ability energy feeding the
+  // chosen ability. Returns { keys: [{k, l, el, p:[i], u:[i], m:[i]}], links: [{k, l, from, to, ef, et}] }
+  function synergy(pieces) {
+    const keys = [], links = [];
+    for (const s of SYN) {
+      const e = { k: s.k, l: s.l, el: s.el, p: [], u: [], m: [] };
+      pieces.forEach((pc, i) => { const t = pc.tags[s.k]; if (!t) return; if (t.p) e.p.push(i); if (t.u) e.u.push(i); if (t.m && !t.p && !t.u) e.m.push(i); });
+      const ab = ENERGY_OF[s.k] && pieces.findIndex(pc => pc.g === 'subclass' && pc.slot === ENERGY_OF[s.k]);
+      if (ab != null && ab >= 0 && e.p.length) e.u.push(ab);
+      if (!e.p.length && !e.u.length && !e.m.length) continue;
+      keys.push(e);
+      for (const a of e.p) for (const b of e.u) if (a !== b && !(pieces[a].g === pieces[b].g && pieces[a].g !== 'subclass' && pieces[a].slot === pieces[b].slot)) {
+        links.push({ k: s.k, l: s.l, from: a, to: b, ef: pieces[a].tags[s.k].p, et: pieces[b].tags[s.k]?.u || { src: 'Build', text: `Your chosen ${pieces[b].label.toLowerCase()} uses this energy.` } });
+      }
+    }
+    // "<Element> weapon" in a piece's text + a chosen weapon of that element
+    pieces.forEach((pc, i) => {
+      if (pc.g === 'weapon') return;
+      for (const [src, text] of pc.parts) for (const sen of sentences(text)) {
+        if (NEG.test(sen)) continue;
+        EL_WEAPON.lastIndex = 0; let m;
+        while ((m = EL_WEAPON.exec(sen))) {
+          const els = m[0].toLowerCase().match(/solar|arc|void|stasis|strand|kinetic/g);
+          pieces.forEach((w, j) => {
+            if (w.g !== 'weapon' || !els.includes(String(w.it.element).toLowerCase())) return;
+            if (links.some(x => x.k === 'el' && x.from === j && x.to === i)) return;
+            links.push({ k: 'el', l: `${w.it.element} weapon`, from: j, to: i, ef: { src: 'Item', text: `${w.n} deals ${w.it.element} damage.` }, et: { src, text: sen } });
+          });
+        }
+      }
+    });
+    return { keys, links };
+  }
+  // how well one candidate piece fits the build's other pieces (picker suggestions): score + reasons.
+  // Each keyword counts once per role: element verbs 2, generic ones (orbs, healing, energy…) 1, mentions 0.5.
+  function fitScore(mine, rest) {
+    const all = [...rest, mine]; const me = all.length - 1;
+    const { keys, links } = synergy(all);
+    const why = []; let score = 0; const counted = new Set();
+    const w = k => k === 'el' || SYN_BY[k]?.el ? 2 : 1;
+    for (const l of links) if (l.from === me || l.to === me) {
+      const role = l.from === me ? 'p' : 'u';
+      if (!counted.has(l.k + role)) { counted.add(l.k + role); score += w(l.k); }
+      why.push({ k: l.k, l: l.l, role, other: all[l.from === me ? l.to : l.from].n });
+    }
+    for (const e of keys) if (e.m.includes(me) && (e.p.length || e.u.length) && !counted.has(e.k + 'p') && !counted.has(e.k + 'u')) { score += 0.5; why.push({ k: e.k, l: e.l, role: 'm' }); }
+    const seen = new Set();
+    return { score, why: why.filter(x => { const id = x.k + x.role + (x.other || ''); if (seen.has(id)) return false; seen.add(id); return true; }) };
+  }
+  // a vault item as a candidate for a weapon / armor slot
+  function synScore(it, pieces, defs, slot) {
+    const g = it.kind === 'weapon' ? 'weapon' : 'armor';
+    const mine = buildPieces({ w: g === 'weapon' ? { [slot]: { id: it.id } } : {}, a: g === 'armor' ? { [slot]: { id: it.id } } : {} }, defs, new Map([[it.id, it]]))[0];
+    return mine ? fitScore(mine, pieces.filter(p => !(p.g === g && p.slot === slot))) : { score: 0, why: [] };
+  }
+  // a subclass choice (super, ability, aspect, fragment) as a candidate; replaces the current pick of a single slot
+  function subScore(b, defs, sec, h, pieces) {
+    const a = findSub(subOf(b, defs), sec, h); if (!a) return { score: 0, why: [] };
+    const mine = { g: 'subclass', slot: sec, n: a.n, label: sec, parts: pieceText(a.n, defs, a.d) }; mine.tags = synTags(mine.parts);
+    return fitScore(mine, pieces.filter(p => !(p.g === 'subclass' && (p.n === a.n || (SUB_SINGLE.includes(sec) && p.slot === sec)))));
+  }
+  // a mod as a candidate for an armor slot
+  function modScore(n, slot, defs, pieces) {
+    const mine = { g: 'mod', slot, n, label: 'Armor mod', parts: pieceText(n, defs, null, 'armor') }; mine.tags = synTags(mine.parts);
+    return fitScore(mine, pieces.filter(p => !(p.g === 'mod' && p.n === n)));
+  }
+  // character stats: armor (base values when DIM gives them, else current) + fragment and mod bonuses
+  const ARMOR3 = ['Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee'];
+  function buildStats(b, defs, byId) {
+    const out = Object.fromEntries(ARMOR3.map(k => [k, { armor: 0, frag: 0, mods: 0, total: 0 }]));
+    let src = '';
+    for (const s of A_SLOTS) {
+      const it = byId?.get(b.a?.[s]?.id); if (!it) continue;
+      const useBase = ARMOR3.some(k => it.base?.[k] != null); src ||= useBase ? 'base' : 'current';
+      for (const k of ARMOR3) out[k].armor += (useBase ? it.base[k] : it.stats[k]) || 0;
+    }
+    const sc = subOf(b, defs);
+    for (const h of b.sub?.fragments || []) { const f = findSub(sc, 'fragments', h); for (const [k, v] of Object.entries(f?.st || {})) if (out[k]) out[k].frag += v; }
+    const modSt = n => { for (const l of Object.values(defs?.am || {})) { const m = l.find(x => norm(x[0]) === norm(n)); if (m) return m[2] || {}; } return {}; };
+    for (const s of A_SLOTS) for (const n of b.mods?.[s] || []) for (const [k, v] of Object.entries(modSt(n))) if (out[k]) out[k].mods += v;
+    for (const k of ARMOR3) out[k].total = out[k].armor + out[k].frag + out[k].mods;
+    return { stats: out, src, total: ARMOR3.reduce((a, k) => a + out[k].total, 0) };
+  }
+  // armor mods a slot can take (its own list + general) and their energy cost
+  const modsFor = (slot, defs) => [...(defs?.am?.[slot] || []), ...(defs?.am?.general || [])];
+  const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
+
+  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
