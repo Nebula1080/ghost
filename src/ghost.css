@@ -80,7 +80,7 @@ a{color:var(--light)}
   #bProf{order:3}
   #summary{order:4;font-size:12.5px;line-height:1.45}
   #pending{order:5;color:var(--accent);font-size:12.5px}
-  #bExport{order:6}#bLoad{order:7}#bHelp{order:8}
+  #bExport{order:6}#bLoad{order:7}#bHelp{order:8}#bAbout{order:8}
   header .btn{width:100%;justify-content:center;text-align:center}
   .rail-foot{order:9;display:grid;gap:10px;border-top:1px solid var(--line);padding-top:14px}
   .pbtn{max-width:none;width:100%;background:var(--panel2);border-color:var(--line2)}

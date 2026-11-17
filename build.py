@@ -69,6 +69,40 @@ if TARGET == 'hosted' and ia.exists():
     assert '<' not in art_json
     s = s.replace('/*__ART__*/null', art_json)
 
+# ---- Bungie sign-in (hosted only; GHOST_PLAN A4/A5) ----
+# src/bungie.js, the item table for API loads (tools/build-api-defs.mjs) and the public-client config. The key and
+# client_id come from the BUNGIE_API_KEY / BUNGIE_CLIENT_ID env vars (GitHub Actions secrets) or the gitignored
+# config/local.json; they are never printed. The artifact build never gets any of this.
+def page_json(obj):
+    j = json.dumps(obj, separators=(',', ':'), ensure_ascii=False).replace('</', '<\\/').replace('<!--', '<\\u0021--').replace('\u2028', '\\u2028').replace('\u2029', '\\u2029')
+    assert '</' not in j and '<!--' not in j
+    return j
+assert '/*__BUNGIE__*/' in s and '/*__APIDEFS__*/null' in s and '/*__BUNGIECFG__*/null' in s
+if TARGET == 'hosted':
+    bj = (root / 'src/bungie.js').read_text(encoding='utf-8').replace("if (typeof module !== 'undefined') module.exports = Bungie;", '')
+    assert '</script' not in bj.lower() and '<!--' not in bj and '-->' not in bj
+    s = s.replace('/*__BUNGIE__*/', bj)
+    apd = root / 'data/api-defs.json'
+    if apd.exists():
+        s = s.replace('/*__APIDEFS__*/null', page_json(json.loads(apd.read_text(encoding='utf-8'))))
+    import os
+    local = {}
+    lp = root / 'config/local.json'
+    if lp.exists():
+        try: local = json.loads(lp.read_text(encoding='utf-8'))
+        except ValueError: raise SystemExit('config/local.json is not valid JSON')
+    key = os.environ.get('BUNGIE_API_KEY') or local.get('bungieApiKey') or ''
+    client = str(os.environ.get('BUNGIE_CLIENT_ID') or local.get('bungieClientId') or '')
+    if key and client:
+        if not re.fullmatch(r'[0-9a-fA-F]{32}', key) or not re.fullmatch(r'\d{1,12}', client):
+            raise SystemExit('Bungie API key or client_id has an unexpected format (values not shown)')
+        s = s.replace('/*__BUNGIECFG__*/null', json.dumps({'key': key, 'client': client}))
+        print(f'[{TARGET}] Bungie sign-in: configured')
+    else:
+        print(f'[{TARGET}] Bungie sign-in: not configured (no API key / client_id), the sign-in button stays hidden')
+else:
+    s = s.replace('/*__BUNGIE__*/', '').replace('/*__BUNGIECFG__*/null', 'null').replace('/*__APIDEFS__*/null', 'null')
+
 # reference data (icons, breakers, Clarity + Data Compendium); run tools/build-defs.mjs to refresh
 OUT.mkdir(exist_ok=True)
 defs_path = root / 'data/defs.json'

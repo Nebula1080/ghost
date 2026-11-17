@@ -188,5 +188,109 @@ t('.gitignore covers secrets and real exports', () => {
   for (const k of ['private/', '*.csv', 'config/local.json', '.env*']) assert.ok(gi.includes(k), '.gitignore missing ' + k);
 });
 
-console.log(`security unit tests: ${pass} passed, ${fail} failed`);
-if (fail) process.exit(1);
+// ---------- Bungie sign-in (src/bungie.js) and the API item adapter (Core.apiToItems) ----------
+const BG = require('../src/bungie.js');
+const bsrc = read('src/bungie.js');
+t('bungie: only the token exchange and read-only lookups are allowed (move/equip scope stays unused)', () => {
+  assert.ok(BG.allowed('POST', '/Platform/App/OAuth/token/'));
+  assert.ok(BG.allowed('GET', '/Platform/User/GetMembershipsForCurrentUser/'));
+  assert.ok(BG.allowed('GET', '/Platform/Destiny2/3/Profile/4611686018400000000/'));
+  for (const [m, p] of [['POST', '/Platform/Destiny2/Actions/Items/TransferItem/'], ['POST', '/Platform/Destiny2/Actions/Items/EquipItem/'],
+    ['POST', '/Platform/Destiny2/Actions/Items/SetLockState/'], ['POST', '/Platform/Destiny2/Actions/Items/PullFromPostmaster/'],
+    ['POST', '/Platform/Destiny2/Actions/Items/InsertSocketPlugFree/'], ['GET', '/Platform/Destiny2/Actions/Items/TransferItem/'],
+    ['PUT', '/Platform/App/OAuth/token/'], ['DELETE', '/Platform/User/GetMembershipsForCurrentUser/'], ['GET', '/Platform/User/GetMembershipsForCurrentUser/../Destiny2/Actions/'],
+    ['GET', '/Platform/Destiny2/3/Profile/123/../../Actions/Items/EquipItem/'], ['POST', '/Platform/User/GetMembershipsForCurrentUser/']])
+    assert.ok(!BG.allowed(m, p), `${m} ${p} must be refused`);
+  assert.ok(!/Actions|TransferItem|EquipItem|SetLockState|PullFromPostmaster|InsertSocketPlug|SetQuestTracked|Loadout/i.test(bsrc.replace(/^\s*\/\/.*$/gm, '')), 'bungie.js must not contain any write endpoint');
+  assert.ok(!/localStorage|indexedDB|document\.cookie|console\./.test(bsrc.replace(/^\s*\/\/.*$/gm, '')), 'bungie.js must not use persistent storage or log anything');
+});
+const mkStore = () => { const m = new Map(); return { m, getItem: k => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)), removeItem: k => m.delete(k) }; };
+const KEY = 'ab'.repeat(16) /* made-up test value */, CLIENT = '12345', TOKEN = 'tok_SECRET_value_123';
+const mkRes = (status, body) => ({ ok: status >= 200 && status < 300, status, json: async () => body });
+const asyncTests = [];
+const at = (name, fn) => asyncTests.push([name, fn]);
+at('bungie: a mismatched, missing or reused state is rejected and no token is requested', async () => {
+  let calls = 0; const store = mkStore();
+  const b = BG.create({ key: KEY, client: CLIENT, store, fetch: async () => { calls++; return mkRes(200, {}); }, random: n => new Uint8Array(n).fill(7) });
+  const url = b.authorizeUrl(); const st = new URL(url).searchParams.get('state');
+  assert.strictEqual(st.length, 64, 'state is 32 random bytes as hex');
+  assert.ok(url.startsWith('https://www.bungie.net/en/OAuth/Authorize?') && !/scope=/.test(url));
+  await assert.rejects(b.handleCallback(`?code=abc&state=${'0'.repeat(64)}`), e => e.code === 'state');
+  await assert.rejects(b.handleCallback(`?code=abc&state=${st}`), e => e.code === 'state', 'state is single use (cleared after the first callback)');
+  await assert.rejects(b.handleCallback('?code=abc'), e => e.code === 'state');
+  assert.strictEqual(calls, 0);
+  assert.strictEqual(await b.handleCallback('?foo=1'), null);
+});
+at('bungie: token exchange sends no secret, token lives only in the session store and never in messages', async () => {
+  const store = mkStore(); const sent = [];
+  const fetch = async (u, o) => {
+    sent.push([u, o]);
+    if (u.endsWith('/Platform/App/OAuth/token/')) return mkRes(200, { access_token: TOKEN, token_type: 'Bearer', expires_in: 3600, membership_id: '987' });
+    if (/GetMembershipsForCurrentUser/.test(u)) return mkRes(401, null);
+    return mkRes(500, { ErrorCode: 5, Message: 'x ' + TOKEN });
+  };
+  const b = BG.create({ key: KEY, client: CLIENT, store, fetch, random: n => new Uint8Array(n).fill(9), sleep: async () => {} });
+  const st = new URL(b.authorizeUrl()).searchParams.get('state');
+  assert.strictEqual(await b.handleCallback(`?code=good-code_1&state=${st}`), true);
+  const [u, o] = sent[0];
+  assert.strictEqual(u, 'https://www.bungie.net/Platform/App/OAuth/token/');
+  assert.strictEqual(o.method, 'POST'); assert.strictEqual(o.credentials, 'omit');
+  assert.deepStrictEqual(Object.fromEntries(new URLSearchParams(o.body)), { grant_type: 'authorization_code', code: 'good-code_1', client_id: CLIENT });
+  assert.ok(!/secret/i.test(o.body));
+  assert.ok([...store.m.values()].some(v => v.includes(TOKEN)) && b.signedIn());
+  const err = await b.memberships().catch(e => e);
+  assert.strictEqual(err.code, 'auth'); assert.ok(!err.message.includes(TOKEN));
+  assert.ok(!b.signedIn() && ![...store.m.values()].some(v => v.includes(TOKEN)), 'a 401 clears the token');
+  assert.ok(!/localStorage/.test(read('src/app.html').match(/const BG = \(\(\) => \{[^]*?\n\}\)\(\);/)[0]), 'the app hands Bungie sessionStorage only');
+});
+at('bungie: Bungie error messages are not echoed (they could carry a token or markup)', async () => {
+  const store = mkStore(); store.setItem(BG.K_TOKEN, JSON.stringify({ t: TOKEN, exp: Date.now() + 60000 }));
+  const b = BG.create({ key: KEY, client: CLIENT, store, fetch: async () => mkRes(500, { ErrorCode: 5, Message: '<img src=x onerror=alert(1)> ' + TOKEN }), random: n => new Uint8Array(n), sleep: async () => {} });
+  const e = await b.memberships().catch(x => x);
+  assert.ok(e instanceof Error && !e.message.includes(TOKEN) && !/onerror|<img/.test(e.message));
+});
+t('apiToItems: maps a Bungie profile to the CSV item shape; hostile values are dropped or coerced', () => {
+  const ad = require('../data/api-defs.json');
+  const resp = {
+    characters: { data: { '2305843009300000001': { classType: 2 } } },
+    profileInventory: { data: { items: [
+      { itemHash: 437854388, itemInstanceId: '6917529000000000001', state: 9 },
+      { itemHash: 341892117, itemInstanceId: '6917529000000000002', state: 0 },
+      { itemHash: 437854388, itemInstanceId: '<img src=x onerror=alert(1)>' },
+      { itemHash: '999999999999', itemInstanceId: '6917529000000000003' },
+    ] } },
+    characterEquipment: { data: { '2305843009300000001': { items: [{ itemHash: 437854388, itemInstanceId: '6917529000000000004' }] } } },
+    itemComponents: {
+      instances: { data: { '6917529000000000001': { damageType: 6, primaryStat: { value: 493 }, gearTier: 4 }, '6917529000000000002': { primaryStat: { value: '<b>' }, energy: { energyCapacity: 11 } } } },
+      stats: { data: { '6917529000000000002': { stats: { 2996146975: { value: 30 }, 392767087: { value: 25 }, 3493869314: { value: 20 }, 144602215: { value: 5 } } } } },
+      sockets: { data: { '6917529000000000001': { sockets: [{ plugHash: 1294026524, isVisible: true }, { plugHash: 1015611457, isVisible: true }, { plugHash: 150943600, isVisible: true }] },
+        '6917529000000000002': { sockets: [{ plugHash: 351770835, isVisible: true }] } } },
+      reusablePlugs: { data: { '6917529000000000001': { plugs: { 1: [{ plugItemHash: 1015611457 }, { plugItemHash: 1294026524 }] } } } },
+    },
+  };
+  const { weapons, armor } = C.apiToItems(resp, ad);
+  assert.strictEqual(weapons.length, 2); assert.strictEqual(armor.length, 1);
+  const w = weapons.find(x => x.id === '6917529000000000001');
+  assert.strictEqual(w.name, 'Action Item'); assert.strictEqual(w.type, 'Trace Rifle'); assert.strictEqual(w.element, 'Stasis');
+  assert.strictEqual(w.ammo, 'special'); assert.strictEqual(w.power, 493); assert.strictEqual(w.tier, 4); assert.strictEqual(w.frame, 'Adaptive Frame');
+  assert.ok(w.locked && w.crafted && w.owner === 'Vault' && w.src === 'api');
+  assert.strictEqual(w.mwType, 'Range'); assert.strictEqual(w.mwTier, 6);
+  assert.deepStrictEqual(w.perks.filter(p => p.s).map(p => p.n), ['Adaptive Frame', 'Kill Clip', 'Tier 6: Range']);
+  assert.ok(w.perks.some(p => p.n === 'Adaptive Frame' && !p.s), 'socket options listed, only the inserted one marked');
+  const e = weapons.find(x => x.id === '6917529000000000004'); assert.ok(e.equipped && e.owner === 'Warlock');
+  const a = armor[0]; assert.strictEqual(a.frame, 'Reaver'); assert.strictEqual(a.power, null); assert.strictEqual(a.energy, 11);
+  assert.strictEqual(a.stats.Total, 80); assert.strictEqual(a.tertiary, 'melee'); assert.strictEqual(a.equippable, 'Warlock');
+  assert.throws(() => C.apiToItems(null, ad)); assert.throws(() => C.apiToItems({}, null));
+});
+t('hosted build: Bungie config only in the hosted build; artifact build has no sign-in code', () => {
+  const art = fs.readFileSync(path.join(root, 'dist/index.html'), 'utf8');
+  assert.ok(/window\.VS_BUNGIE_CFG = null;/.test(art) && !/OAuth\/Authorize|X-API-Key/.test(art), 'artifact build must not carry Bungie sign-in');
+  const bp = read('build.py');
+  assert.ok(/os\.environ\.get\('BUNGIE_API_KEY'\)/.test(bp) && !/print\([^)]*\bkey\b[^)]*\)/.test(bp.replace(/'[^']*'/g, "''")), 'build.py must not print the key');
+});
+
+(async () => {
+  for (const [name, fn] of asyncTests) { try { await fn(); pass++; } catch (e) { fail++; console.log('FAIL', name, '\n   ', e.message); } }
+  console.log(`security unit tests: ${pass} passed, ${fail} failed`);
+  if (fail) process.exit(1);
+})();

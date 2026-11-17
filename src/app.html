@@ -441,7 +441,7 @@ nav.views svg{display:none}
   body{padding-bottom:0}
   #app{height:calc(100% - var(--bar) - env(safe-area-inset-bottom))}
   header{min-height:48px;padding:env(safe-area-inset-top) 12px 0;flex-wrap:nowrap;gap:8px}
-  header #summary,header #pending,header #bLoad,header #bExport,header #bHelp{display:none!important}
+  header #summary,header #pending,header #bLoad,header #bExport,header #bHelp,header #bAbout{display:none!important}
   .mmenu{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:40px;font-size:18px;margin-left:auto}
   .pbtn{max-width:44vw;min-height:36px}
   header .brand{font-size:11px}
@@ -547,6 +547,7 @@ nav.views svg{display:none}
     <button class="btn" id="bLoad">Load DIM CSVs</button>
     <button class="btn warn" id="bExport" title="Download a CSV of your tag/note changes to import in DIM">Export to DIM</button>
     <button class="btn" id="bHelp">Search help</button>
+    <button class="btn" id="bAbout">About &amp; privacy</button>
     <button class="btn mmenu" id="bMenu" aria-label="Menu"><svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg><i class="mdot" id="mDot"></i></button>
     <div class="rail-foot"><div class="wpick" id="wpick" role="group" aria-label="Colour theme"></div><div class="wrow"><span id="wname"></span><button id="bMotion" type="button"></button></div></div>
   </header>
@@ -568,9 +569,10 @@ nav.views svg{display:none}
 <div id="intro" aria-hidden="true"><svg class="sig" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-ghost"/></svg><span>GHOST</span></div>
 <input type="file" id="file" accept=".csv,text/csv" multiple hidden>
 
-<script>window.VS_DEFS = /*__DEFS__*/null;window.VS_ART = /*__ART__*/null;window.VS_ISPR = /*__ISPR__*/null;</script>
+<script>window.VS_DEFS = /*__DEFS__*/null;window.VS_ART = /*__ART__*/null;window.VS_ISPR = /*__ISPR__*/null;window.VS_APIDEFS = /*__APIDEFS__*/null;window.VS_BUNGIE_CFG = /*__BUNGIECFG__*/null;</script>
 <script>
 /*__CORE__*/
+/*__BUNGIE__*/
 </script>
 <script>
 (() => {
@@ -913,7 +915,7 @@ const pendingIds = () => Object.keys(S.edits).filter(id => S.byId.has(id) && ('t
 
 // ---------- import ----------
 function openLoad() {
-  modal(`<h2>Load your vault from DIM</h2>
+  modal(`${bungieOn() ? bungieLoadHtml() : ''}<h2>Load your vault from DIM</h2>
   <ol class="steps">
     <li>In DIM, open <b>Settings</b> → <b>Spreadsheets</b>.</li>
     <li>Click <b>Weapons</b> and <b>Armor</b> to download <code>destiny-weapon.csv</code> and <code>destiny-armor.csv</code>.</li>
@@ -929,6 +931,64 @@ function openLoad() {
   d.ondragover = e => { e.preventDefault(); d.classList.add('over'); };
   d.ondragleave = () => d.classList.remove('over');
   d.ondrop = e => { e.preventDefault(); d.classList.remove('over'); handleFiles([...e.dataTransfer.files]); };
+  bindBungieButtons($('#modalBox'));
+}
+
+// ---------- Bungie sign-in (hosted build only: src/bungie.js + the key/client_id injected at build) ----------
+// Never inside claude.ai or a frame (Bungie requires a visible address bar for sign-in).
+const BG = (() => {
+  const cfg = window.VS_BUNGIE_CFG;
+  if (typeof Bungie === 'undefined' || !cfg || /claude\.ai|claudeusercontent/.test(location.hostname) || window.top !== window.self) return null;
+  const store = { getItem: k => { try { return sessionStorage.getItem(k); } catch { return null; } }, setItem: (k, v) => { try { sessionStorage.setItem(k, v); } catch {} }, removeItem: k => { try { sessionStorage.removeItem(k); } catch {} } };
+  const b = Bungie.create({ key: cfg.key, client: cfg.client, fetch: (u, o) => fetch(u, o), store, random: n => crypto.getRandomValues(new Uint8Array(n)) });
+  return b.available ? b : null;
+})();
+const bungieOn = () => !!BG && !!window.VS_APIDEFS;
+function bungieLoadHtml() {
+  const inn = BG.signedIn();
+  return `<h2>Load from Bungie</h2>
+    <p class="stat-pill">Reads your weapons and armor straight from your Bungie account. Ghost only reads: it never moves, equips or changes items. DIM tags and notes still come from DIM's CSVs; drop them below and they merge onto these items.</p>
+    <div class="msheet bsign">${inn ? `<button class="btn primary" data-bg="load">Refresh from Bungie</button><button class="btn" data-bg="out">Sign out of Bungie</button>`
+      : `<button class="btn primary" data-bg="in">Sign in with Bungie</button>`}</div>`;
+}
+function bindBungieButtons(root) {
+  root.querySelectorAll('[data-bg]').forEach(b => b.onclick = async () => {
+    const a = b.dataset.bg;
+    if (a === 'in') { try { await flushSaves(); location.assign(BG.authorizeUrl()); } catch (e) { toast(e.message || 'Couldn’t start Bungie sign-in.', 6000); } }
+    else if (a === 'load') { closeModal(); loadFromBungie(); }
+    else if (a === 'out') { BG.signOut(); closeModal(); toast('Signed out of Bungie. Your loaded vault stays here.'); }
+  });
+}
+async function loadFromBungie(pick) {
+  if (!BG?.signedIn()) { toast('Your Bungie sign-in has expired. Sign in again to refresh your vault.', 6000); return; }
+  toast('Loading your vault from Bungie…', 20000);
+  try {
+    let m = pick;
+    if (!m) {
+      const { list } = await BG.memberships();
+      if (!list.length) { toast('No Destiny 2 account found on this Bungie account.', 6000); return; }
+      if (list.length > 1) {
+        const PLAT = { 1: 'Xbox', 2: 'PlayStation', 3: 'Steam', 4: 'Blizzard', 5: 'Stadia', 6: 'Epic' };
+        toast('Pick an account', 1500);
+        modal(`<h2>Which Destiny account?</h2><div class="msheet">${list.map((x, i) => `<button class="btn" data-acct="${i}">${esc(x.name)} · ${PLAT[x.type] || 'Platform ' + x.type}</button>`).join('')}<button class="btn" data-close>Cancel</button></div>`);
+        $('#modalBox').querySelectorAll('[data-acct]').forEach(b => b.onclick = () => { closeModal(); loadFromBungie(list[+b.dataset.acct]); });
+        return;
+      }
+      m = list[0];
+    }
+    const resp = await BG.profile(m.type, m.id);
+    const { weapons, armor } = Core.apiToItems(resp, window.VS_APIDEFS);
+    if (!weapons.length && !armor.length) { toast('Bungie returned no weapons or armor for this account.', 6000); return; }
+    routeParsed([{ kind: 'weapon', items: weapons }, { kind: 'armor', items: armor }], [`From Bungie: ${weapons.length} weapons, ${armor.length} armor`]);
+  } catch (e) { toast(e?.message || 'Couldn’t load your vault from Bungie.', 7000); }
+}
+// back from Bungie's sign-in page: check state, swap the code for a token, clean the address bar, load the vault
+async function bungieReturn() {
+  if (!BG) return;
+  const search = location.search; if (!/[?&](code|state|error)=/.test(search)) return;
+  try { history.replaceState(null, '', location.pathname + location.hash); } catch {}
+  try { if (await BG.handleCallback(search)) { toast('Signed in with Bungie.'); await loadFromBungie(); } }
+  catch (e) { toast(e?.message || 'Bungie sign-in didn’t complete.', 7000); }
 }
 $('#file').onchange = e => { handleFiles([...e.target.files]); e.target.value = ''; };
 // Item instance ids are unique to one Bungie account, so the share of ids a CSV has in common with a profile's
@@ -955,6 +1015,23 @@ async function handleFiles(files) {
     } catch (e) { msgs.push(`${f.name}: ${e.message}`); }
   }
   if (!parsed.length) return toast(msgs.join(' · ') || 'Nothing loaded.', 5000);
+  // the open vault came from Bungie: DIM's CSVs only add their tags and notes (GHOST_PLAN A6)
+  if (S.items.some(i => i.src === 'api')) {
+    const score = profileMatch(parsed.flatMap(x => x.items.map(i => i.id))).find(m => m.pr.id === PROF.active)?.score ?? 0;
+    if (score >= 0.3) return mergeCsvTags(parsed);
+  }
+  routeParsed(parsed, msgs);
+}
+// tags and notes from DIM CSVs onto a vault loaded from Bungie; items stay exactly as Bungie reported them
+async function mergeCsvTags(parsed) {
+  let n = 0;
+  for (const { items } of parsed) for (const c of items) { const it = S.byId.get(c.id); if (!it) continue; it.dimTag = c.tag || ''; it.dimNotes = c.notes || ''; n++; }
+  clearSyncedEdits(); refreshEffective(); closeModal(); renderAll();
+  toast(`Merged DIM tags and notes onto ${n} items`, 5000);
+  try { await saveVault(); } catch (e) { toast('Tags merged but not saved: ' + (e.message || e.code), 6000); }
+}
+// load parsed items into the right profile: the open one if they match it, otherwise offer to switch or make one
+function routeParsed(parsed, msgs) {
   const ids = parsed.flatMap(x => x.items.map(i => i.id));
   const matches = profileMatch(ids);
   const cur = activeProfile(); const curScore = matches.find(m => m.pr.id === cur.id)?.score ?? null;
@@ -981,11 +1058,8 @@ async function handleFiles(files) {
   $('#pmNew').onclick = async () => { const name = $('#pmName').value.trim() || `Player ${PROF.list.length + 1}`; closeModal(); await createProfile(name); go(); };
   $('#pmHere').onclick = () => { closeModal(); go(); };
 }
-async function applyParsed(parsed, msgs) {
-  let w = S.weapons, a = S.armor;
-  for (const { kind, items } of parsed) { if (kind === 'weapon') w = items; else a = items; }
-  setVault(w, a);
-  // clear edits that now match DIM
+// drop local edits that now match what DIM has
+function clearSyncedEdits() {
   let synced = 0;
   for (const id of Object.keys(S.edits)) {
     const it = S.byId.get(id); if (!it) continue;
@@ -994,6 +1068,16 @@ async function applyParsed(parsed, msgs) {
     if ('notes' in e && e.notes === it.dimNotes) { delete e.notes; ch = true; }
     if (ch) { synced++; if (!('tag' in e) && !('notes' in e)) delete S.edits[id]; saveEdit(id); }
   }
+  return synced;
+}
+async function applyParsed(parsed, msgs) {
+  let w = S.weapons, a = S.armor;
+  // a Bungie load carries no DIM tags/notes: keep the ones this vault already had (from earlier CSVs) by item id
+  const prev = S.byId;
+  for (const { items } of parsed) for (const it of items) if (it.src === 'api') { const p = prev.get(it.id); it.dimTag = p?.dimTag ?? ''; it.dimNotes = p?.dimNotes ?? ''; }
+  for (const { kind, items } of parsed) { if (kind === 'weapon') w = items; else a = items; }
+  setVault(w, a);
+  const synced = clearSyncedEdits();
   refreshEffective(); applyRatings(); closeModal(); renderAll();
   toast(msgs.join(' · ') + (synced ? ` · ${synced} edits now synced` : ''), 5000);
   try { await saveVault(); noteProfileVault(); renderProfileButton(); toast(`Saved to ${activeProfile().name}.`); } catch (e) { toast('Vault loaded but not saved: ' + (e.message || e.code), 6000); }
@@ -1759,6 +1843,39 @@ async function copyDimQuery(p) {
 function modal(html) { $('#modalBox').innerHTML = html; $('#modal').classList.add('open'); $('#modalBox').querySelectorAll('[data-close]').forEach(b => b.onclick = closeModal); }
 function closeModal() { $('#modal').classList.remove('open'); }
 $('#modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
+// About & privacy (GHOST_PLAN A7): Bungie notice, credits, what is stored where, and "Delete my data"
+function openAbout() {
+  modal(`<h2>About Ghost</h2>
+    <p>Ghost is a free, fan-made tool for sorting a Destiny 2 vault, tagging items for DIM, comparing rolls and cleaning up duplicates.</p>
+    <p class="stat-pill"><b>© Bungie, Inc. All rights reserved.</b> Destiny is a registered trademark of Bungie. Ghost is not affiliated with, endorsed or sponsored by Bungie.</p>
+    <h3>Credits</h3>
+    <ul class="steps">
+      <li><b>Bungie</b>: game data, item and perk icons, and all backdrop and subclass art (Bungie Press Room and the Destiny 2 manifest).</li>
+      <li><b>light.gg</b>: community perk popularity behind the perk ratings.</li>
+      <li><b>Clarity</b> (Database Clarity): tested perk descriptions.</li>
+      <li><b>Destiny Data Compendium</b> by Pip1n: perk, exotic and set-bonus notes.</li>
+      <li><b>DIM</b> (Destiny Item Manager): the spreadsheet format Ghost reads and writes.</li>
+    </ul>
+    <h3>Your data</h3>
+    <p class="stat-pill">Everything stays in this browser on this device: your vault, tags and notes, sort panes, Clean up and Compare state, theme, and profiles. There are no accounts, analytics or trackers, and nothing is sent anywhere except to Bungie when you sign in with Bungie${bungieOn() ? '' : ' (not available in this copy)'}. A Bungie sign-in lasts about an hour, is kept only for this browser tab, and is never saved on the device.</p>
+    <div class="msheet"><button class="btn warn" id="aDel">Delete my data</button><button class="btn" data-close>Close</button></div>`);
+  $('#aDel').onclick = () => {
+    modal(`<h2>Delete all Ghost data?</h2><p>This removes every profile's vault, tags, notes, panes, Clean up and Compare state, light.gg ratings and settings from this browser, and signs you out of Bungie. Tags already exported to DIM stay in DIM. This can't be undone.</p>
+      <div class="msheet"><button class="btn warn" id="aDelYes">Delete everything</button><button class="btn" data-close>Cancel</button></div>`);
+    $('#aDelYes').onclick = async () => {
+      closeModal();
+      try {
+        for (const pr of PROF.list) await deleteProfileData(pr.id);
+        if (S.db) {
+          try { for (const [id] of await dbAll('ratings')) await S.db.doc('ratings/' + id).delete(); } catch {}
+          try { await S.db.doc('config/profiles').delete(); } catch {}
+        }
+        try { Object.keys(localStorage).filter(k => k.startsWith('vs:')).forEach(k => localStorage.removeItem(k)); } catch {}
+        BG?.signOut();
+      } finally { location.reload(); }
+    };
+  };
+}
 function openHelp() {
   const rows = [
     ['<code>pulse rifle</code> <code>ignition</code> <code>freeze</code> <code>suppress</code>', 'Free text: name, type, frame, perks, notes, source, armor set, breaker, then keywords inside perk, mod, set bonus and exotic descriptions (Bungie, Clarity, Data Compendium). Word forms match too: freeze finds frozen, ignition finds ignite'],
@@ -2093,6 +2210,7 @@ function renderAll() { renderPanes(); renderHeader(); updCmpN(); }
 $('#bLoad').onclick = openLoad;
 $('#bExport').onclick = exportCsv;
 $('#bHelp').onclick = openHelp;
+$('#bAbout').onclick = openAbout;
 // phone ⋯ menu: everything the desktop header shows
 let installPrompt = null;
 addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; });
@@ -2102,15 +2220,19 @@ $('#bMenu').onclick = () => {
     <div class="wrow" style="margin:10px 0 4px"><span>Theme · <b data-wname>${esc((WORLDS.find(w => w[0] === UI.theme) || WORLDS[0])[1])}</b></span><button type="button" data-motion-toggle aria-pressed="${UI.motion}">${UI.motion ? 'Motion on' : 'Motion off'}</button></div><div class="wpick" style="margin-bottom:6px">${worldButtons()}</div>
     <div class="msheet">
       <button class="btn" id="mProf">Profile: ${esc(activeProfile().name)} ${ICO.chev}</button>
+      ${bungieOn() ? `<button class="btn" id="mBungie">${BG.signedIn() ? 'Refresh from Bungie' : 'Sign in with Bungie'}</button>` : ''}
       <button class="btn" id="mLoad">Load DIM CSVs</button>
       ${n ? `<button class="btn warn" id="mExport">Export ${n} change${n > 1 ? 's' : ''} to DIM</button>` : ''}
       <button class="btn" id="mHelp">Search help</button>
+      <button class="btn" id="mAbout">About &amp; privacy</button>
       ${installPrompt ? '<button class="btn" id="mInstall">Install app on this phone</button>' : ''}
       <button class="btn" data-close>Close</button></div>
     ${!installPrompt && !matchMedia('(display-mode: standalone)').matches ? '<p class="stat-pill">To add it to your home screen: iPhone Safari → Share → Add to Home Screen; Android Chrome → ⋮ → Install app. Works for a hosted copy of the app, not inside claude.ai.</p>' : ''}`);
   $('#mLoad').onclick = () => { closeModal(); openLoad(); };
   $('#mProf').onclick = () => openProfiles();
   $('#mHelp').onclick = () => { closeModal(); openHelp(); };
+  $('#mAbout').onclick = () => { closeModal(); openAbout(); };
+  const mb = $('#mBungie'); if (mb) mb.onclick = async () => { closeModal(); if (BG.signedIn()) loadFromBungie(); else { try { await flushSaves(); location.assign(BG.authorizeUrl()); } catch (e) { toast(e.message || 'Couldn’t start Bungie sign-in.', 6000); } } };
   const me = $('#mExport'); if (me) me.onclick = () => { closeModal(); exportCsv(); };
   const mi = $('#mInstall'); if (mi) mi.onclick = async () => { closeModal(); installPrompt.prompt(); try { await installPrompt.userChoice; } catch {} installPrompt = null; };
 };
@@ -2132,7 +2254,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 matchMedia('(max-width: 760px)').addEventListener?.('change', () => { if (VIEW === 'vault') renderPanes(); else setView(VIEW); });
 
 renderAll();
-loadAll();
+loadAll().then(bungieReturn);
 })();
 </script>
 </body>
