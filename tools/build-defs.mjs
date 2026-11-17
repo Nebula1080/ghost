@@ -173,6 +173,7 @@ function subPlugs(cats) {
     const e = { h: it.hash, n, i: iconTail(it.displayProperties.icon), d: bungieDesc(it) };
     const st = plugStats(it); if (st) e.st = st;                                   // fragment stat bonus / penalty
     const fc = it.plug?.energyCapacity?.capacityValue; if (fc) e.fc = fc;          // aspect: fragment slots it opens
+    e.c = it.plug.plugCategoryIdentifier;                                         // which subclass socket takes it (DIM loadout link)
     out.push(e);
   }
   return out;
@@ -184,6 +185,8 @@ for (const sc of Object.values(items).filter(x => x.itemType === 16 && x.sockets
   sub[cls] ||= {};
   sub[cls][el] = {
     n: name(sc), h: sc.hash, i: iconTail(sc.displayProperties.icon),
+    // socket index -> plug categories it accepts, for DIM loadout socketOverrides
+    so: (sc.sockets.socketEntries || []).map(e => [...new Set((plugSets[e.reusablePlugSetHash]?.reusablePlugItems || []).map(p => items[p.plugItemHash]?.plug?.plugCategoryIdentifier).filter(Boolean))].join('|') || items[e.singleInitialItemHash]?.plug?.plugCategoryIdentifier || ''),
     s: {
       super: subPlugs([S('supers')]),
       classAbility: subPlugs([S('class_abilities')]),
@@ -197,7 +200,7 @@ for (const sc of Object.values(items).filter(x => x.itemType === 16 && x.sockets
   };
 }
 
-// ---------- armor mods per slot (build maker): am[slot] = [[name, energyCost, stats?], ...] ----------
+// ---------- armor mods per slot (build maker): am[slot] = [[name, energyCost, stats|0, hash], ...] ----------
 // Icons and descriptions come from pi/pa by name (Core.plugOf(name, defs, 'armor')).
 const AM_CAT = { 'enhancements.v2_head': 'head', 'enhancements.v2_arms': 'arms', 'enhancements.v2_chest': 'chest', 'enhancements.v2_legs': 'legs', 'enhancements.v2_class_item': 'class', 'enhancements.v2_general': 'general' };
 const am = { head: [], arms: [], chest: [], legs: [], class: [], general: [] }; const amSeen = new Set();
@@ -205,7 +208,7 @@ for (const it of Object.values(items).sort((a, b) => (b.plug?.energyCost?.energy
   const slot = AM_CAT[it.plug?.plugCategoryIdentifier]; const n = name(it); if (!slot || !n || it.redacted || !it.displayProperties?.hasIcon) continue;
   if (/^(empty|locked|default)\b/i.test(n) || /deprecated|no longer functions/i.test(bungieDesc(it))) continue;
   const k = slot + ':' + norm(n); if (amSeen.has(k)) continue; amSeen.add(k);
-  const st = plugStats(it); am[slot].push(st ? [n, it.plug.energyCost?.energyCost || 0, st] : [n, it.plug.energyCost?.energyCost || 0]);
+  am[slot].push([n, it.plug.energyCost?.energyCost || 0, plugStats(it) || 0, it.hash]);   // [name, cost, stats|0, hash]
 }
 for (const l of Object.values(am)) l.sort((a, b) => a[0].localeCompare(b[0]));
 

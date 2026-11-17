@@ -2013,11 +2013,11 @@ function newBuild(from) {
 const iIcon = (it, size) => `<span class="iwrap" style="--rc:${rarityColor(it.rarity)}">${itemIcon(it, size)}</span>`;
 const itemRef = it => ({ id: it.id, hash: it.hash, name: it.name });
 const scAll = b => D.sub[b.cls]?.[b.el];
-const subPick = (b, sec, h) => (scAll(b)?.s?.[sec] || []).find(a => a.h === h) || null;
+const subPick = (b, sec, h) => Core.subList(scAll(b), sec).find(a => a.h === h) || null;
 function pieceIcon(pc, b) {
   if (pc.it) return iIcon(pc.it, 28);
   if (pc.g === 'mod') return plugIcon(pc.n, 'sq', pIdx(pc.n, 'armor'));
-  if (pc.g === 'subclass') { const a = (scAll(b)?.s?.[pc.slot] || []).find(x => x.n === pc.n); return plugIcon(pc.n, 'sq', a?.i); }
+  if (pc.g === 'subclass') { const a = Core.subList(scAll(b), pc.slot).find(x => x.n === pc.n); return plugIcon(pc.n, 'sq', a?.i); }
   return plugIcon(pc.n, 'sq');
 }
 const statChips = st => Object.entries(st || {}).map(([k, v]) => `<span class="bst ${v > 0 ? 'up' : 'dn'}">${v > 0 ? '+' : ''}${v} ${esc(k)}</span>`).join('');
@@ -2051,7 +2051,7 @@ function renderBuilds() {
     <div class="bgrid">${['super', 'classAbility', 'movement', 'melee', 'grenade'].map(k => slot(k, 0, subPick(b, k, b.sub[k]))).join('')}</div>
     <div class="bsub-h">Aspects <small>2 slots</small></div><div class="bgrid">${[0, 1].map(i => slot('aspects', i, subPick(b, 'aspects', b.sub.aspects[i]))).join('')}</div>
     <div class="bsub-h">Fragments <small>${nFrag ? `${b.sub.fragments.length}/${nFrag} slots, opened by your aspects` : 'choose aspects to open fragment slots'}</small></div><div class="bgrid">${Array.from({ length: nFrag }, (_, i) => slot('fragments', i, subPick(b, 'fragments', b.sub.fragments[i]))).join('')}</div>
-    ${(sc?.s?.transcendence || []).length ? `<div class="bsub-h">Transcendence <small>always part of Prismatic</small></div><div class="bgrid">${sc.s.transcendence.map(a => `<div class="bslot on fixed">${plugIcon(a.n, 'sq', a.i)}<span class="bl">Transcendence</span><span class="bn">${esc(a.n)}</span></div>`).join('')}</div>` : ''}`;
+    ${Core.subList(sc, 'transcendence').length ? `<div class="bsub-h">Transcendence <small>always part of Prismatic</small></div><div class="bgrid">${Core.subList(sc, 'transcendence').map(a => `<div class="bslot on fixed">${plugIcon(a.n, 'sq', a.i)}<span class="bl">Transcendence</span><span class="bn">${esc(a.n)}</span></div>`).join('')}</div>` : ''}`;
   // weapons + armor
   const itemCard = (g, s) => {
     const ref = (g === 'w' ? b.w : b.a)[s]; const it = ref && S.byId.get(ref.id);
@@ -2087,7 +2087,7 @@ function renderBuilds() {
   const statHtml = Core.ARMOR3.map(k => { const s = st.stats[k]; const w = x => Math.max(0, Math.min(100, x / 2)); return `<div class="bstat"><span class="sn">${esc(k)}</span><b>${s.total}</b><span class="tr" title="Armor ${s.armor}, fragments ${s.frag}, mods ${s.mods}"><i style="width:${w(s.armor)}%"></i>${s.mods > 0 ? `<i class="mod" style="width:${w(s.mods)}%"></i>` : ''}${s.frag > 0 ? `<i class="frag" style="width:${w(s.frag)}%"></i>` : ''}</span><small>${s.frag ? `<span class="${s.frag > 0 ? 'up' : 'dn'}">${s.frag > 0 ? '+' : ''}${s.frag} frag</span>` : ''}${s.mods ? ` <span class="up">+${s.mods} mods</span>` : ''}</small></div>`; }).join('');
   const subName = sc?.n || '';
   v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Builds</div><h1><span id="bName" class="bname" tabindex="0" title="Rename">${esc(b.name)}</span></h1><p class="sum"><b style="color:${EL_COL[b.el]}">${esc(subName)}</b> · ${esc(B_CLASSES.find(c => c[0] === b.cls)?.[1] || '')} · <button class="linkbtn" id="bJump">${nLinks} interaction${nLinks === 1 ? '' : 's'}</button> · ${st.total} stat total</p></div>
-      <div class="band-actions"><button class="btn" id="bRen">Rename</button><button class="btn" id="bDup">Duplicate</button><button class="btn" id="bDel">Delete</button></div></div>${list}</div>
+      <div class="band-actions"><button class="btn" id="bDim">Send to DIM</button><button class="btn" id="bRen">Rename</button><button class="btn" id="bDup">Duplicate</button><button class="btn" id="bDel">Delete</button></div></div>${list}</div>
     <div class="bld-body"><div class="bld-main">
       <section class="bsec"><h2 class="bh">Subclass</h2>${subHtml}</section>
       <section class="bsec"><h2 class="bh">Weapons</h2><div class="bcards">${Core.W_SLOTS.map(s => itemCard('w', s)).join('')}</div></section>
@@ -2112,6 +2112,7 @@ function bindBuild(v, b, pieces, syn) {
   };
   $('#bRen').onclick = rename; $('#bName').onclick = rename; $('#bName').onkeydown = e => { if (e.key === 'Enter') rename(); };
   $('#bDup').onclick = () => newBuild(b);
+  $('#bDim').onclick = () => openDimLink(b);
   $('#bJump').onclick = () => $('#bSyn').scrollIntoView({ behavior: motionOK() ? 'smooth' : 'auto', block: 'start' });
   $('#bDel').onclick = () => {
     modal(`<h2>Delete “${esc(b.name)}”?</h2><p>This removes the build from Ghost. Your items aren’t touched.</p><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" data-close>Cancel</button><button class="btn danger" id="bDelOk">Delete build</button></div>`);
@@ -2150,6 +2151,20 @@ function bindBuild(v, b, pieces, syn) {
     box.innerHTML = `<b>${esc(pc.n)}</b> <small>${esc(ev.src)}</small><q>${esc(ev.text)}</q>`;
   });
 }
+// DIM loadout link: opens the build on DIM's Loadouts page, where it can be saved, equipped or shared from DIM
+function openDimLink(b) {
+  const lo = Core.dimLoadout(b, D, S.byId, globalThis.crypto?.randomUUID?.() || 'ghost-' + uid());
+  const url = Core.dimLink(lo);
+  const nItems = lo.equipped.filter(x => x.hash !== scAll(b)?.h).length;
+  const nSub = Object.keys(lo.equipped[0]?.socketOverrides || {}).length;
+  modal(`<h2>Send “${esc(b.name)}” to DIM</h2>
+    <p class="stat-pill">The link opens DIM’s Loadouts page with this build: ${esc(scAll(b)?.n || 'subclass')}${nSub ? ` (${nSub} choices)` : ''}, ${nItems} item${nItems === 1 ? '' : 's'}, ${lo.parameters?.mods?.length || 0} mod${lo.parameters?.mods?.length === 1 ? '' : 's'}${lo.notes ? ', notes' : ''}. In DIM you can save it, equip it or share it. Anyone you send it to sees the same build with their own copies of the items.</p>
+    <input class="qin" id="dimUrl" readonly aria-label="DIM loadout link" value="${esc(url)}" style="width:100%;max-width:none">
+    <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px"><button class="btn" data-close>Close</button><button class="btn" id="dimCopy">Copy link</button><a class="btn" id="dimOpen" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Open in DIM</a></div>`);
+  const inp = $('#dimUrl');
+  $('#dimCopy').onclick = async () => { try { await navigator.clipboard.writeText(url); toast('DIM link copied.'); } catch { inp.focus(); inp.select(); toast('Press Ctrl+C (or long-press → Copy) to copy the selected link.'); } };
+  addShareButton($('#dimCopy'), { text: url, title: b.name });
+}
 // picker sheet: a searchable list of choices, best synergy first
 function openPicker(title, rows, onPick, opt = {}) {
   modal(`<h2>${esc(title)}</h2>${opt.note ? `<p class="stat-pill">${opt.note}</p>` : ''}<input class="qin" id="pkq" type="search" placeholder="Search names and descriptions…" aria-label="Search choices">
@@ -2160,7 +2175,7 @@ function openPicker(title, rows, onPick, opt = {}) {
   if (!isMobile()) q.focus();
 }
 function pickSub(b, sec, i, pieces) {
-  const list = scAll(b)?.s?.[sec] || []; const many = sec === 'aspects' || sec === 'fragments';
+  const list = Core.subList(scAll(b), sec); const many = sec === 'aspects' || sec === 'fragments';
   const cur = many ? b.sub[sec][i] : b.sub[sec];
   const rows = list.map(a => { const r = Core.subScore(b, D, sec, a.h, pieces); const used = many && b.sub[sec].includes(a.h) && a.h !== cur;
     return { k: String(a.h), n: a.n, icon: plugIcon(a.n, 'sq', a.i), sub: `${esc(a.d.replace(/\[[^\]]*\]\s*/g, '').slice(0, 160))}${a.d.length > 160 ? '…' : ''}${a.fc ? ` <span class="bst">${a.fc} fragment slots</span>` : ''}${statChips(a.st)}`, s: a.n + ' ' + a.d, score: r.score, why: r.why, on: a.h === cur, off: used }; })

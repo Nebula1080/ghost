@@ -755,7 +755,9 @@ const Core = (() => {
   }
   const SUB_SINGLE = ['super', 'classAbility', 'movement', 'melee', 'grenade'];
   const subOf = (b, defs) => defs?.sub?.[b?.cls]?.[b?.el] || null;
-  const findSub = (sc, sec, h) => (sc?.s?.[sec] || []).find(a => a.h === h) || null;
+  // choices a player makes; Prismatic's prism_grenade socket is the fixed transcendence grenade, shown with Transcendence
+  const subList = (sc, sec) => sec === 'grenade' ? (sc?.s?.grenade || []).filter(a => !/prism_grenade$/.test(a.c || '')) : sec === 'transcendence' ? [...(sc?.s?.transcendence || []), ...(sc?.s?.grenade || []).filter(a => /prism_grenade$/.test(a.c || ''))] : (sc?.s?.[sec] || []);
+  const findSub = (sc, sec, h) => subList(sc, sec).find(a => a.h === h) || null;
   // fragment slots: the chosen aspects' capacities (Bungie energyCapacity)
   const fragSlots = (b, defs) => (b?.sub?.aspects || []).reduce((n, h) => n + (findSub(subOf(b, defs), 'aspects', h)?.fc || 0), 0);
   // keep a build's choices inside the game's limits (2 aspects, fragments up to the aspects' slots, ≤3 mods a slot)
@@ -775,7 +777,7 @@ const Core = (() => {
       const SEC_L = { super: 'Super', classAbility: 'Class ability', movement: 'Movement', melee: 'Melee', grenade: 'Grenade', aspects: 'Aspect', fragments: 'Fragment' };
       for (const k of SUB_SINGLE) { const a = findSub(sc, k, b.sub?.[k]); if (a) out.push({ g: 'subclass', slot: k, n: a.n, label: SEC_L[k], parts: pieceText(a.n, defs, a.d) }); }
       for (const k of ['aspects', 'fragments']) for (const h of b.sub?.[k] || []) { const a = findSub(sc, k, h); if (a) out.push({ g: 'subclass', slot: k, n: a.n, label: SEC_L[k], st: a.st, parts: pieceText(a.n, defs, a.d) }); }
-      for (const a of sc.s.transcendence || []) out.push({ g: 'subclass', slot: 'transcendence', n: a.n, label: 'Transcendence', parts: pieceText(a.n, defs, a.d) });
+      for (const a of subList(sc, 'transcendence')) out.push({ g: 'subclass', slot: 'transcendence', n: a.n, label: 'Transcendence', parts: pieceText(a.n, defs, a.d) });
     }
     const itemPieces = (it, slot, g) => {
       const label = g === 'weapon' ? { kinetic: 'Kinetic', energy: 'Energy', power: 'Power' }[slot] : { head: 'Helmet', arms: 'Arms', chest: 'Chest', legs: 'Legs', class: 'Class item' }[slot];
@@ -881,10 +883,38 @@ const Core = (() => {
     return { stats: out, src, total: ARMOR3.reduce((a, k) => a + out[k].total, 0) };
   }
   // armor mods a slot can take (its own list + general) and their energy cost
+  // ---------- DIM loadout share link ----------
+  // DIM opens https://app.destinyitemmanager.com/loadouts?loadout=<JSON of its API Loadout> (DIM source:
+  // loadout-share/loadout-import.ts decodeUrlLoadout; type: dim-api api/shapes/loadouts.ts). The subclass is an
+  // equipped item with socketOverrides {socketIndex: plugHash}; weapons/armor are {id, hash}; mods go in
+  // parameters.mods as hashes and DIM assigns them to armor pieces itself.
+  const DIM_CLASS = { titan: 0, hunter: 1, warlock: 2 };
+  function dimLoadout(b, defs, byId, id) {
+    const equipped = []; const sc = subOf(b, defs);
+    if (sc?.so) {
+      const ov = {}; const used = new Set();
+      const place = a => { if (!a?.c) return; const i = sc.so.findIndex((c, k) => !used.has(k) && c.split('|').includes(a.c)); if (i >= 0) { used.add(i); ov[i] = a.h; } };
+      for (const k of SUB_SINGLE) place(findSub(sc, k, b.sub?.[k]));
+      for (const k of ['aspects', 'fragments']) for (const h of b.sub?.[k] || []) place(findSub(sc, k, h));
+      equipped.push(Object.keys(ov).length ? { hash: sc.h, socketOverrides: ov } : { hash: sc.h });
+    }
+    for (const [g, slots] of [['w', W_SLOTS], ['a', A_SLOTS]]) for (const s of slots) {
+      const r = b[g]?.[s]; if (!r) continue;
+      const hash = Number(byId?.get(r.id)?.hash || r.hash); if (!hash) continue;
+      equipped.push(ID_RE.test(String(r.id)) ? { id: String(r.id), hash } : { hash });
+    }
+    const mods = [];
+    for (const s of A_SLOTS) for (const n of b.mods?.[s] || []) { const m = modsFor(s, defs).find(x => norm(x[0]) === norm(n)); if (m?.[3]) mods.push(m[3]); }
+    const lo = { id, name: String(b.name || 'Ghost build').slice(0, 60), classType: DIM_CLASS[b.cls] ?? 3, equipped, unequipped: [] };
+    if (mods.length) lo.parameters = { mods };
+    if (b.notes) lo.notes = String(b.notes).slice(0, 1024);
+    return lo;
+  }
+  const dimLink = lo => 'https://app.destinyitemmanager.com/loadouts?loadout=' + encodeURIComponent(JSON.stringify(lo));
   const modsFor = (slot, defs) => [...(defs?.am?.[slot] || []), ...(defs?.am?.general || [])];
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
   return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost };
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
