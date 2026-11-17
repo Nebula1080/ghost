@@ -46,6 +46,13 @@ const pick = async (pg, sel, text) => {
   const ev = await pg.$eval('#bSyn .sev', e => e.textContent);
   /scorch/i.test(ev) ? ok('tapping a piece shows the sentence behind it') : fail('evidence missing: ' + ev);
   const stats = await pg.$$eval('.bstat', x => x.length); stats === 6 ? ok('six Armor 3.0 stats shown') : fail('stats rows ' + stats);
+  // DIM loadout link
+  await pg.click('#bDim'); await pg.waitForSelector('#dimUrl');
+  const dl = await pg.evaluate(() => { const u = new URL(document.querySelector('#dimUrl').value); const lo = JSON.parse(u.searchParams.get('loadout')); const a = document.querySelector('#dimOpen');
+    return { host: u.host, path: u.pathname, cls: lo.classType, sub: Object.keys(lo.equipped[0].socketOverrides || {}).length, items: lo.equipped.length, rel: a.rel, target: a.target, same: a.href === u.href }; });
+  dl.host === 'app.destinyitemmanager.com' && dl.path === '/loadouts' && dl.cls === 2 && dl.sub === 4 && dl.items === 3 && /noopener/.test(dl.rel) && dl.target === '_blank' && dl.same
+    ? ok('Send to DIM builds a DIM loadout link (subclass choices, weapon, armor)') : fail('DIM link ' + JSON.stringify(dl));
+  await pg.click('#modal [data-close]');
   // rename, reload, reopen
   await pg.click('#bRen'); await pg.fill('#bNameIn', 'Scorch test'); await pg.click('#bNameOk'); await pg.waitForTimeout(500);
   await pg.reload(); await pg.waitForTimeout(700); await pg.evaluate(() => document.getElementById('intro')?.remove());

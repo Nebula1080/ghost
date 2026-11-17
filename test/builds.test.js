@@ -71,4 +71,20 @@ t('stats: armor + fragment + mod bonuses (Bungie investment stats)', () => {
   assert.strictEqual(s.stats.Grenade.total, 0);
   assert.ok(C.modCost('Grenade Mod', 'head', D) > 0);
 });
+t('DIM loadout link: subclass socket overrides, items, mods, class', () => {
+  const pr = D.sub.warlock.prism, ph = (k, nm) => pr.s[k].find(x => x.n === nm).h;
+  assert.ok(!C.subList(pr, 'grenade').some(g => /prism_grenade$/.test(g.c)), 'transcendence grenade is not a grenade choice');
+  assert.ok(C.subList(pr, 'transcendence').some(g => /prism_grenade$/.test(g.c)), 'it shows with Transcendence');
+  const b = C.normBuild({ cls: 'warlock', el: 'solar', name: 'Sun', notes: 'n', sub: { super: sc.s.super[0].h, melee: h('melee', 'Incinerator Snap'), aspects: [h('aspects', 'Touch of Flame'), h('aspects', 'Heat Rises')], fragments: [h('fragments', 'Ember of Searing'), h('fragments', 'Ember of Torches')] }, w: { energy: { id: '6917529000000000001', hash: '1399243961', name: 'x' } }, mods: { head: ['Solar Siphon'] } }, D);
+  const lo = C.dimLoadout(b, D, new Map(), 'u1');
+  assert.strictEqual(lo.classType, 2); assert.strictEqual(lo.name, 'Sun'); assert.strictEqual(lo.notes, 'n');
+  const sub = lo.equipped[0]; assert.strictEqual(sub.hash, sc.h); assert.ok(!('id' in sub));
+  const ov = sub.socketOverrides, at = i => sc.so[i];
+  for (const [i, ph2] of Object.entries(ov)) { const a = Object.values(sc.s).flat().find(x => x.h === ph2); assert.ok(at(+i).split('|').includes(a.c), `${a.n} placed in a socket that takes ${a.c}`); }
+  assert.strictEqual(Object.keys(ov).length, 6);
+  assert.deepStrictEqual(lo.equipped[1], { id: '6917529000000000001', hash: 1399243961 });
+  assert.strictEqual(lo.parameters.mods.length, 1); assert.ok(Number.isInteger(lo.parameters.mods[0]));
+  const url = C.dimLink(lo); assert.ok(url.startsWith('https://app.destinyitemmanager.com/loadouts?loadout='));
+  assert.deepStrictEqual(JSON.parse(new URL(url).searchParams.get('loadout')), lo);
+});
 console.log(n, 'build tests passed');
