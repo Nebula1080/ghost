@@ -187,7 +187,8 @@ const Core = (() => {
     for (const [r, owner, equipped] of raw) {
       const id = String(r?.itemInstanceId ?? ''); if (!ID_RE.test(id)) continue;
       const hash = String(r.itemHash ?? '').replace(/\D/g, ''); const def = ad.i[hash]; if (!def) continue;
-      const [name, k, type, rarity, ammoT, bucket, classType] = def;
+      const [name, k, type, rarity, ammoT, bucket, classType, perkSockets] = def;
+      const rollIdx = new Set(Array.isArray(perkSockets) ? perkSockets : []);
       const kind = k === 'w' ? 'weapon' : 'armor';
       const ins = inst[id] || {}; const state = n(r.state) || 0;
       // perks: socket by socket, every option the item can switch to, the inserted one marked (like DIM's Perks N)
@@ -196,7 +197,8 @@ const Core = (() => {
       const opts = rp[id]?.plugs || {};
       sockets.forEach((s, i) => {
         if (!s || s.isVisible === false) return;
-        const cur = String(s.plugHash ?? ''); const list = Array.isArray(opts[i]) ? opts[i].map(o => String(o?.plugItemHash ?? '')) : [];
+        // only perk sockets list the roll's other options; mods, masterwork and the rest show what's inserted
+        const cur = String(s.plugHash ?? ''); const list = rollIdx.has(i) && Array.isArray(opts[i]) ? opts[i].map(o => String(o?.plugItemHash ?? '')) : [];
         if (cur && !list.includes(cur)) list.unshift(cur);
         for (const h of list) {
           const pn = plugName(h); if (!pn) continue;
