@@ -52,6 +52,10 @@ const damageDefs = JSON.parse(await cached('damage.json', B + P.DestinyDamageTyp
 const setDefs = JSON.parse(await cached('sets.json', B + P.DestinyEquipableItemSetDefinition));
 const perkDefs = JSON.parse(await cached('sandboxperks.json', B + P.DestinySandboxPerkDefinition));
 const artifactDefs = JSON.parse(await cached('artifacts.json', B + P.DestinyArtifactDefinition));
+const statDefs = JSON.parse(await cached('stats.json', B + P.DestinyStatDefinition));
+// Armor 3.0 character stats a fragment or armor mod can raise or lower (investmentStats), e.g. {Grenade: -10}
+const ARMOR_STATS = new Set(['Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee']);
+const plugStats = it => { const o = {}; for (const x of it?.investmentStats || []) { const n = statDefs[x.statTypeHash]?.displayProperties?.name; if (ARMOR_STATS.has(n) && x.value) o[n] = x.value; } return Object.keys(o).length ? o : undefined; };
 const name = it => it?.displayProperties?.name || '';
 // Bungie description, falling back to the item's first sandbox perk (aspects, set perks, many mods)
 const bungieDesc = it => (it?.displayProperties?.description || '').trim() || (it?.perks || []).map(p => perkDefs[p.perkHash]?.displayProperties?.description).find(Boolean) || '';
@@ -165,7 +169,11 @@ function subPlugs(cats) {
   for (const c of cats) for (const it of plugsByCat[c] || []) {
     const n = name(it); const k = norm(n);
     if (!n || /^(empty|locked|default)\b/i.test(n) || seen.has(k) || !it.displayProperties.hasIcon || it.redacted) continue;
-    seen.add(k); out.push({ h: it.hash, n, i: iconTail(it.displayProperties.icon), d: bungieDesc(it) });
+    seen.add(k);
+    const e = { h: it.hash, n, i: iconTail(it.displayProperties.icon), d: bungieDesc(it) };
+    const st = plugStats(it); if (st) e.st = st;                                   // fragment stat bonus / penalty
+    const fc = it.plug?.energyCapacity?.capacityValue; if (fc) e.fc = fc;          // aspect: fragment slots it opens
+    out.push(e);
   }
   return out;
 }
@@ -188,6 +196,18 @@ for (const sc of Object.values(items).filter(x => x.itemType === 16 && x.sockets
     },
   };
 }
+
+// ---------- armor mods per slot (build maker): am[slot] = [[name, energyCost, stats?], ...] ----------
+// Icons and descriptions come from pi/pa by name (Core.plugOf(name, defs, 'armor')).
+const AM_CAT = { 'enhancements.v2_head': 'head', 'enhancements.v2_arms': 'arms', 'enhancements.v2_chest': 'chest', 'enhancements.v2_legs': 'legs', 'enhancements.v2_class_item': 'class', 'enhancements.v2_general': 'general' };
+const am = { head: [], arms: [], chest: [], legs: [], class: [], general: [] }; const amSeen = new Set();
+for (const it of Object.values(items).sort((a, b) => (b.plug?.energyCost?.energyCost || 0) - (a.plug?.energyCost?.energyCost || 0))) {
+  const slot = AM_CAT[it.plug?.plugCategoryIdentifier]; const n = name(it); if (!slot || !n || it.redacted || !it.displayProperties?.hasIcon) continue;
+  if (/^(empty|locked|default)\b/i.test(n) || /deprecated|no longer functions/i.test(bungieDesc(it))) continue;
+  const k = slot + ':' + norm(n); if (amSeen.has(k)) continue; amSeen.add(k);
+  const st = plugStats(it); am[slot].push(st ? [n, it.plug.energyCost?.energyCost || 0, st] : [n, it.plug.energyCost?.energyCost || 0]);
+}
+for (const l of Object.values(am)) l.sort((a, b) => a[0].localeCompare(b[0]));
 
 // ---------- Clarity (rendered to HTML with Clarity's own color classes) ----------
 const clarity = JSON.parse(await cached('clarity.json', CLARITY));
@@ -285,7 +305,7 @@ for (const [tab, gid] of Object.entries(TABS)) {
 
 const out = {
   v: manifest.Response.version, built: new Date().toISOString().slice(0, 10), artifact: name(artifact),
-  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos],
+  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, am, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos],
 };
 fs.mkdirSync(path.join(root, 'data'), { recursive: true });
 fs.writeFileSync(path.join(root, 'data/defs.json'), JSON.stringify(out));

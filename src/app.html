@@ -540,7 +540,7 @@ nav.views svg{display:none}
   <header>
     <div class="brand"><svg class="sig" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-ghost"/></svg><span class="word">GHOST</span></div>
     <button class="pbtn" id="bProf" title="Switch or manage profiles"><i></i><span>Profile</span><b><svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></b></button>
-    <nav class="views"><button data-view="vault" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 4h16v16H4zM4 10h16M10 10v10M15 10v10"/></svg><span>Vault</span></button><button data-view="clean"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3 21 19H3Z"/><path d="M12 9v6M9 13h6"/></svg><span>Clean up</span></button><button data-view="compare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 20V9a4 4 0 0 1 8 0v11M13 20V9a4 4 0 0 1 8 0v11M2 20h20"/></svg><span>Compare <i id="cmpN"></i></span></button><button data-view="subv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/><circle cx="12" cy="13" r="1.4"/></svg><span>Subclasses</span></button></nav>
+    <nav class="views"><button data-view="vault" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 4h16v16H4zM4 10h16M10 10v10M15 10v10"/></svg><span>Vault</span></button><button data-view="clean"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3 21 19H3Z"/><path d="M12 9v6M9 13h6"/></svg><span>Clean up</span></button><button data-view="compare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 20V9a4 4 0 0 1 8 0v11M13 20V9a4 4 0 0 1 8 0v11M2 20h20"/></svg><span>Compare <i id="cmpN"></i></span></button><button data-view="builds"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3 20 7v6c0 4-3.5 7-8 8-4.5-1-8-4-8-8V7Z"/><path d="M8.5 12.5 11 15l4.5-5"/></svg><span>Builds</span></button><button data-view="subv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/><circle cx="12" cy="13" r="1.4"/></svg><span>Subclasses</span></button></nav>
     <span class="stat-pill" id="summary">No vault loaded</span>
     <span class="grow"></span>
     <span class="stat-pill" id="pending"></span>
@@ -563,6 +563,7 @@ nav.views svg{display:none}
 <div id="subv" class="view"></div>
 <div id="clean" class="view"></div>
 <div id="compare" class="view"></div>
+<div id="builds" class="view"></div>
 <div id="modal"><div class="box" id="modalBox"></div></div>
 <div id="toast"></div>
 <div id="tip" aria-hidden="true"></div>
@@ -789,7 +790,7 @@ function resetProfileState() {
   editQueue.clear();
 }
 async function loadProfile() {
-  resetProfileState(); loadCompareState(); loadCleanState();
+  resetProfileState(); loadCompareState(); loadCleanState(); loadBuildState();
   if (!S.db) {
     const v = LS.get(PK('vault')); if (v) setVault(v.weapon || [], v.armor || []);
     S.edits = LS.get(PK('edits')) || {}; S.panes = LS.get(PK('panes')) || defaultPanes();
@@ -808,7 +809,7 @@ async function loadProfile() {
       chunks.forEach(c => (c?.items || []).forEach(it => (it.kind === 'armor' ? a : w).push(it)));
       setVault(w, a, true);
     }
-    await loadCleanFromDb();
+    await loadCleanFromDb(); await loadBuildsFromDb();
     applyRatings(); renderAll();
   } catch (e) {
     console.error(e);
@@ -821,6 +822,7 @@ async function loadProfile() {
 async function flushSaves() {
   if (paneSaveT) { clearTimeout(paneSaveT); paneSaveT = null; await writePanes(); }
   if (cleanSaveT) { clearTimeout(cleanSaveT); cleanSaveT = null; await writeClean(); }
+  if (bldSaveT) { clearTimeout(bldSaveT); bldSaveT = null; await writeBuilds(); }
   for (let i = 0; i < 100 && (editBusy || editQueue.size); i++) await new Promise(r => setTimeout(r, 100));
 }
 async function switchProfile(id) {
@@ -833,7 +835,7 @@ async function switchProfile(id) {
   toast(`Switched to ${activeProfile().name}.`);
 }
 async function deleteProfileData(pid) {
-  for (const k of ['vault', 'edits', 'panes', 'clean', 'compare']) LS.del(pkey(pid, k));
+  for (const k of ['vault', 'edits', 'panes', 'clean', 'compare', 'builds']) LS.del(pkey(pid, k));
   if (!S.db) return;
   const del = async path => { try { await S.db.doc(path).delete(); } catch {} };
   try {
@@ -841,7 +843,7 @@ async function deleteProfileData(pid) {
     for (const c of meta?.chunks || []) await del(ppath(pid, 'vault/' + c));
     for (const [id] of await dbAll(ppath(pid, 'edits'))) await del(ppath(pid, 'edits/' + id));
   } catch (e) { console.warn(e); }
-  for (const path of ['meta/vault', 'meta/weaponHashes', 'config/panes', 'config/clean']) await del(ppath(pid, path));
+  for (const path of ['meta/vault', 'meta/weaponHashes', 'config/panes', 'config/clean', 'config/builds']) await del(ppath(pid, path));
 }
 
 function setVault(weapons, armor, fromDb) {
@@ -1956,6 +1958,250 @@ function showSubDetail() {
     : `<div class="stat-pill">Pick an ability, aspect or fragment to read Bungie’s description, Clarity’s tested numbers and the Data Compendium notes. light.gg links open each item’s page there.</div>`;
 }
 
+// ---------- Builds: subclass + weapons + armor + mods, with element keyword synergies ----------
+// A build stores references only (subclass plug hashes, item {id, hash, name}, mod names), per profile through
+// PK()/PP(). Items come from the vault; refs keep hash + name so a later theorycrafting mode can show items the
+// player doesn't own. The synergy engine (Core.buildPieces / synergy / *Score) reads every piece's own text.
+const BLD = { list: [], cur: null };
+const BLD_MAX = 60;
+const B_CLASSES = [['warlock', 'Warlock'], ['titan', 'Titan'], ['hunter', 'Hunter']];
+const W_LABEL = { kinetic: 'Kinetic', energy: 'Energy', power: 'Power' };
+const A_LABEL = { head: 'Helmet', arms: 'Arms', chest: 'Chest', legs: 'Legs', class: 'Class item' };
+const SUB_L = { super: 'Super', classAbility: 'Class ability', movement: 'Movement', melee: 'Melee', grenade: 'Grenade', aspects: 'Aspect', fragments: 'Fragment' };
+const EL_COL = { solar: 'var(--solar)', arc: 'var(--arc)', void: 'var(--void)', stasis: 'var(--stasis)', strand: 'var(--strand)', prism: 'var(--prismatic)', kinetic: 'var(--kinetic)' };
+const BID_RE = /^[a-z0-9]{1,16}$/, IID_RE = /^\d{1,20}$/;
+// stored builds are untrusted (localStorage / db): rebuild each one from validated fields only
+function validBuild(x) {
+  if (!x || typeof x !== 'object' || !BID_RE.test(String(x.id))) return null;
+  const str = (v, n) => typeof v === 'string' ? v.slice(0, n) : '';
+  const hash = v => Number.isInteger(v) && v > 0 && v < 2 ** 32 ? v : null;
+  const ref = r => r && IID_RE.test(String(r.id)) ? { id: String(r.id), hash: String(r.hash || '').replace(/\D/g, '').slice(0, 12), name: str(r.name, 120) } : null;
+  const subOf = s => { const o = { aspects: [], fragments: [] }; if (!s || typeof s !== 'object') return o;
+    for (const k of ['super', 'classAbility', 'movement', 'melee', 'grenade']) { const h = hash(s[k]); if (h) o[k] = h; }
+    for (const k of ['aspects', 'fragments']) o[k] = (Array.isArray(s[k]) ? s[k] : []).map(hash).filter(Boolean).slice(0, 8);
+    return o; };
+  const refs = (o, keys) => Object.fromEntries(keys.map(k => [k, ref(o?.[k])]).filter(([, r]) => r));
+  const mods = o => Object.fromEntries(Core.A_SLOTS.map(k => [k, (Array.isArray(o?.[k]) ? o[k] : []).filter(n => typeof n === 'string').map(n => n.slice(0, 80)).slice(0, 3)]));
+  const cls = B_CLASSES.some(c => c[0] === x.cls) ? x.cls : 'warlock';
+  const el = SV_ELS.some(e => e[0] === x.el) ? x.el : 'solar';
+  const mem = m => Object.fromEntries(Object.entries(m && typeof m === 'object' ? m : {}).filter(([k]) => /^[a-z]{4,8}\.[a-z]{3,7}$/.test(k)).slice(0, 18).map(([k, v]) => [k, subOf(v)]));
+  const amem = m => Object.fromEntries(Object.entries(m && typeof m === 'object' ? m : {}).filter(([k]) => B_CLASSES.some(c => c[0] === k)).map(([k, v]) => [k, { a: refs(v?.a, Core.A_SLOTS), mods: mods(v?.mods) }]));
+  return { id: String(x.id), name: str(x.name, 60) || 'Build', cls, el, sub: subOf(x.sub), w: refs(x.w, Core.W_SLOTS), a: refs(x.a, Core.A_SLOTS), mods: mods(x.mods), notes: str(x.notes, 1024), subMem: mem(x.subMem), aMem: amem(x.aMem), updated: Number.isFinite(x.updated) ? x.updated : 0 };
+}
+function loadBuildState() {
+  const v = LS.get(PK('builds')) || {};
+  BLD.list = (Array.isArray(v.list) ? v.list : []).map(validBuild).filter(Boolean).slice(0, BLD_MAX);
+  BLD.cur = BLD.list.some(b => b.id === v.cur) ? v.cur : BLD.list[0]?.id || null;
+}
+async function loadBuildsFromDb() {
+  if (!S.db) return;
+  try { const v = await dbGet(PP('config/builds')); if (v?.list) { BLD.list = structuredClone(v.list).map(validBuild).filter(Boolean).slice(0, BLD_MAX); BLD.cur = BLD.list.some(b => b.id === v.cur) ? v.cur : BLD.list[0]?.id || null; } } catch (e) { console.warn(e); }
+}
+let bldSaveT;
+async function writeBuilds() { const v = { list: BLD.list, cur: BLD.cur }; LS.set(PK('builds'), v); if (S.db) { try { await dbSet(PP('config/builds'), v); } catch (e) { console.warn(e); } } }
+function saveBuilds() { const b = curBuild(); if (b) b.updated = Date.now(); clearTimeout(bldSaveT); bldSaveT = setTimeout(() => { bldSaveT = null; writeBuilds(); }, 300); }
+const curBuild = () => BLD.list.find(b => b.id === BLD.cur) || null;
+function defaultClass() {
+  const n = {}; for (const it of S.armor) { const c = Core.norm(it.equippable); if (D?.sub?.[c]) n[c] = (n[c] || 0) + 1; }
+  return Object.entries(n).sort((a, b) => b[1] - a[1])[0]?.[0] || 'warlock';
+}
+function newBuild(from) {
+  if (BLD.list.length >= BLD_MAX) return toast(`Up to ${BLD_MAX} builds. Delete one first.`);
+  const b = from ? validBuild({ ...structuredClone(from), id: uid(), name: (from.name + ' copy').slice(0, 60) }) : validBuild({ id: uid(), name: `Build ${BLD.list.length + 1}`, cls: defaultClass(), el: 'solar' });
+  BLD.list.push(b); BLD.cur = b.id; saveBuilds(); renderBuilds();
+}
+const iIcon = (it, size) => `<span class="iwrap" style="--rc:${rarityColor(it.rarity)}">${itemIcon(it, size)}</span>`;
+const itemRef = it => ({ id: it.id, hash: it.hash, name: it.name });
+const scAll = b => D.sub[b.cls]?.[b.el];
+const subPick = (b, sec, h) => (scAll(b)?.s?.[sec] || []).find(a => a.h === h) || null;
+function pieceIcon(pc, b) {
+  if (pc.it) return iIcon(pc.it, 28);
+  if (pc.g === 'mod') return plugIcon(pc.n, 'sq', pIdx(pc.n, 'armor'));
+  if (pc.g === 'subclass') { const a = (scAll(b)?.s?.[pc.slot] || []).find(x => x.n === pc.n); return plugIcon(pc.n, 'sq', a?.i); }
+  return plugIcon(pc.n, 'sq');
+}
+const statChips = st => Object.entries(st || {}).map(([k, v]) => `<span class="bst ${v > 0 ? 'up' : 'dn'}">${v > 0 ? '+' : ''}${v} ${esc(k)}</span>`).join('');
+const whyHtml = why => {
+  const by = new Map();
+  for (const w of why) { const id = w.k + w.role; if (!by.has(id)) by.set(id, { ...w, others: [] }); if (w.other && !by.get(id).others.includes(w.other)) by.get(id).others.push(w.other); }
+  return [...by.values()].slice(0, 4).map(w => `<span class="why ${w.role}" style="--ec:${EL_COL[Core.SYN_BY[w.k]?.el] || (w.k === 'el' ? 'var(--light)' : 'var(--dim)')}">${w.role === 'p' ? 'makes' : w.role === 'u' ? 'uses' : 'mentions'} <b>${esc(w.l)}</b>${w.others.length ? ' · ' + esc(w.others.slice(0, 2).join(', ')) + (w.others.length > 2 ? '…' : '') : ''}</span>`).join('');
+};
+
+function renderBuilds() {
+  const v = $('#builds');
+  const list = `<div class="blist" role="tablist">${BLD.list.map(x => `<button class="tab${x.id === BLD.cur ? ' on' : ''}" data-bid="${esc(x.id)}" role="tab">${esc(x.name)}</button>`).join('')}<button class="tab add" id="bNew">+ New build</button></div>`;
+  if (!D?.sub) { v.innerHTML = `<div class="band slim"><div class="eyebrow">Builds</div><h1>Builds</h1><p>Subclass data isn’t in this build of Ghost.</p></div>`; return; }
+  const b = curBuild();
+  if (!b) {
+    v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Builds</div><h1>Make a build</h1><p>Pick a subclass, weapons, armor and mods from your vault. Ghost reads every piece’s description and shows how they feed each other: what makes scorch, jolt or volatile, and what pays off on it.</p></div></div>${list}</div>
+      <div class="empty"><b>No builds yet</b><span>${S.items.length ? 'Start one with the button above.' : 'Load your vault first to pick weapons and armor; you can already plan the subclass.'}</span><button class="btn" id="bNew2">+ New build</button></div>`;
+    bindBuildList(v); $('#bNew2').onclick = () => newBuild(); return;
+  }
+  Core.normBuild(b, D);
+  const sc = scAll(b);
+  const pieces = Core.buildPieces(b, D, S.byId);
+  const syn = Core.synergy(pieces);
+  const st = Core.buildStats(b, D, S.byId);
+  const nLinks = syn.keys.filter(k => k.p.length && k.u.length).length + new Set(syn.links.filter(l => l.k === 'el').map(l => l.l)).size;
+  // subclass
+  const slot = (sec, i, a) => `<button class="bslot${a ? ' on' : ''}" data-sub="${sec}" data-i="${i}" title="${a ? esc(a.n) : 'Choose ' + SUB_L[sec].toLowerCase()}">${a ? plugIcon(a.n, 'sq', a.i) : '<span class="ic sq ph0">+</span>'}<span class="bl">${SUB_L[sec]}</span><span class="bn">${a ? esc(a.n) : 'Choose'}</span>${a?.st ? `<span class="bsts">${statChips(a.st)}</span>` : ''}</button>`;
+  const nFrag = Core.fragSlots(b, D);
+  const subHtml = `<div class="bclass"><div class="seg">${B_CLASSES.filter(([c]) => D.sub[c]).map(([c, l]) => `<button data-cls="${c}" class="${c === b.cls ? 'on' : ''}">${l}</button>`).join('')}</div>
+      <div class="tabs bels">${SV_ELS.filter(([e]) => D.sub[b.cls]?.[e]).map(([e]) => { const s = D.sub[b.cls][e]; return `<button class="tab${e === b.el ? ' on' : ''}" data-el="${e}" style="--ec:${EL_COL[e]}">${plugIcon(s.n, 'sq', s.i)}<span>${esc(s.n)}</span></button>`; }).join('')}</div></div>
+    <div class="bgrid">${['super', 'classAbility', 'movement', 'melee', 'grenade'].map(k => slot(k, 0, subPick(b, k, b.sub[k]))).join('')}</div>
+    <div class="bsub-h">Aspects <small>2 slots</small></div><div class="bgrid">${[0, 1].map(i => slot('aspects', i, subPick(b, 'aspects', b.sub.aspects[i]))).join('')}</div>
+    <div class="bsub-h">Fragments <small>${nFrag ? `${b.sub.fragments.length}/${nFrag} slots, opened by your aspects` : 'choose aspects to open fragment slots'}</small></div><div class="bgrid">${Array.from({ length: nFrag }, (_, i) => slot('fragments', i, subPick(b, 'fragments', b.sub.fragments[i]))).join('')}</div>
+    ${(sc?.s?.transcendence || []).length ? `<div class="bsub-h">Transcendence <small>always part of Prismatic</small></div><div class="bgrid">${sc.s.transcendence.map(a => `<div class="bslot on fixed">${plugIcon(a.n, 'sq', a.i)}<span class="bl">Transcendence</span><span class="bn">${esc(a.n)}</span></div>`).join('')}</div>` : ''}`;
+  // weapons + armor
+  const itemCard = (g, s) => {
+    const ref = (g === 'w' ? b.w : b.a)[s]; const it = ref && S.byId.get(ref.id);
+    const label = g === 'w' ? W_LABEL[s] : A_LABEL[s];
+    let body;
+    if (it) {
+      const sk = Core.sockets(it, D);
+      const perks = g === 'w' ? sk.cols.filter(c => c.ty === 't' || c.ty === 'o' || c.ty === '?').flatMap(c => c.perks.filter(p => p.s)).slice(0, 3) : sk.exotic.slice(0, 2);
+      const sub = g === 'w' ? [it.type, it.element, it.power != null ? '◆ ' + it.power : ''] : [it.type, it.frame, it.set ? '◈ ' + it.set : '', it.stats.Total != null ? 'Total ' + it.stats.Total : ''];
+      const ws = g === 'w' ? STAT_SHOW_W.filter(k => it.stats[k] != null).slice(0, 4).map(k => `<span>${esc(k)} <b>${it.stats[k]}</b></span>`).join('') : '';
+      body = `${iIcon(it, 48)}<span class="bit"><b style="color:${rarityColor(it.rarity)}">${esc(it.name)}</b><small>${sub.filter(Boolean).map(esc).join(' · ')}</small>${perks.length ? `<small class="bpk">${perks.map(p => `<span data-pk="${esc(p.n)}">${plugIcon(p.n, 'sm', pIdx(p.n, it.kind))}${esc(p.n)}</span>`).join('')}</small>` : ''}${ws ? `<small class="bws">${ws}</small>` : ''}</span>`;
+    } else if (ref) body = `<span class="itm ph0" style="--is:48px"></span><span class="bit"><b>${esc(ref.name)}</b><small class="warn">Not in this vault any more. Pick again.</small></span>`;
+    else body = `<span class="itm ph0" style="--is:48px">+</span><span class="bit"><b class="faint">Choose ${label.toLowerCase()}</b><small>${S.items.length ? 'From your vault, best synergy first' : 'Load your vault to pick items'}</small></span>`;
+    let mods = '';
+    if (g === 'a') {
+      const ms = b.mods[s] || []; const used = ms.reduce((n, m) => n + Core.modCost(m, s, D), 0); const cap = it?.energy;
+      mods = `<div class="bmods">${[0, 1, 2].map(i => { const m = ms[i]; return `<button class="bmod${m ? ' on' : ''}" data-mod="${s}" data-mi="${i}" title="${m ? esc(m) : 'Add a mod'}">${m ? plugIcon(m, 'sq', pIdx(m, 'armor')) : '<span class="ic sq ph0">+</span>'}<span>${m ? esc(m) : 'Mod'}</span></button>`; }).join('')}<span class="ben${cap != null && used > cap ? ' over' : ''}" title="Armor energy used by these mods">${used}${cap != null ? '/' + cap : ''} energy</span></div>`;
+    }
+    return `<div class="bcard"><div class="bcl">${label}</div><div class="bcrow"><button class="bpick" data-${g}="${s}">${body}</button>${ref ? `<button class="x" data-clr${g}="${s}" title="Remove" aria-label="Remove ${label}">×</button>` : ''}</div>${mods}</div>`;
+  };
+  // synergy panel: one card per keyword with sources and payoffs; tap a piece to read the sentence it comes from
+  const pchip = (i, k, role) => { const pc = pieces[i]; return `<button class="schip" data-ev="${k}|${i}|${role}">${pieceIcon(pc, b)}<span class="pn">${esc(pc.n)}<small>${esc(pc.label)}</small></span></button>`; };
+  const cards = [];
+  for (const e of syn.keys.filter(k => k.p.length && k.u.length)) cards.push(`<div class="skey" style="--ec:${EL_COL[e.el] || 'var(--light)'}"><div class="skh"><i></i><b>${esc(e.l)}</b><small>${e.p.length} source${e.p.length === 1 ? '' : 's'} · ${e.u.length} payoff${e.u.length === 1 ? '' : 's'}</small></div><div class="srow"><span class="sl">Made by</span>${e.p.map(i => pchip(i, e.k, 'p')).join('')}</div><div class="srow"><span class="sl">Pays off</span>${e.u.map(i => pchip(i, e.k, 'u')).join('')}</div><div class="sev"></div></div>`);
+  const elGroups = {}; for (const l of syn.links.filter(x => x.k === 'el')) { const g = (elGroups[l.l] ||= { p: new Set(), u: new Set() }); g.p.add(l.from); g.u.add(l.to); }
+  for (const [l, g] of Object.entries(elGroups)) cards.push(`<div class="skey" style="--ec:${EL_COL[Core.norm(l.split(' ')[0])] || 'var(--light)'}"><div class="skh"><i></i><b>${esc(l)}</b><small>element match</small></div><div class="srow"><span class="sl">Weapon</span>${[...g.p].map(i => pchip(i, 'el:' + l, 'p')).join('')}</div><div class="srow"><span class="sl">Pays off</span>${[...g.u].map(i => pchip(i, 'el:' + l, 'u')).join('')}</div><div class="sev"></div></div>`);
+  const needs = syn.keys.filter(k => k.u.length && !k.p.length), spare = syn.keys.filter(k => k.p.length && !k.u.length);
+  const synHtml = `${cards.join('') || `<div class="stat-pill">${pieces.length ? 'No interactions yet. Add pieces that make and use the same keyword: e.g. a melee that scorches and a fragment that pays off on scorched targets.' : 'Choose subclass pieces, weapons and armor to see how they work together.'}</div>`}
+    ${needs.length ? `<div class="sgap"><b>Nothing here makes</b> ${needs.map(k => `<button class="schip sm" data-ev="${k.k}|${k.u[0]}|u"><span class="pn">${esc(k.l)}<small>${esc(pieces[k.u[0]].n)} uses it</small></span></button>`).join('')}<div class="sev"></div></div>` : ''}
+    ${spare.length ? `<div class="sgap dim"><b>Made but not used</b> ${spare.map(k => `<span class="tchip">${esc(k.l)}</span>`).join('')}</div>` : ''}
+    <p class="snote">From Bungie’s and Clarity’s descriptions of each piece. Tap a piece to read the sentence behind it.</p>`;
+  // stats
+  const statHtml = Core.ARMOR3.map(k => { const s = st.stats[k]; const w = x => Math.max(0, Math.min(100, x / 2)); return `<div class="bstat"><span class="sn">${esc(k)}</span><b>${s.total}</b><span class="tr" title="Armor ${s.armor}, fragments ${s.frag}, mods ${s.mods}"><i style="width:${w(s.armor)}%"></i>${s.mods > 0 ? `<i class="mod" style="width:${w(s.mods)}%"></i>` : ''}${s.frag > 0 ? `<i class="frag" style="width:${w(s.frag)}%"></i>` : ''}</span><small>${s.frag ? `<span class="${s.frag > 0 ? 'up' : 'dn'}">${s.frag > 0 ? '+' : ''}${s.frag} frag</span>` : ''}${s.mods ? ` <span class="up">+${s.mods} mods</span>` : ''}</small></div>`; }).join('');
+  const subName = sc?.n || '';
+  v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Builds</div><h1><span id="bName" class="bname" tabindex="0" title="Rename">${esc(b.name)}</span></h1><p class="sum"><b style="color:${EL_COL[b.el]}">${esc(subName)}</b> · ${esc(B_CLASSES.find(c => c[0] === b.cls)?.[1] || '')} · <button class="linkbtn" id="bJump">${nLinks} interaction${nLinks === 1 ? '' : 's'}</button> · ${st.total} stat total</p></div>
+      <div class="band-actions"><button class="btn" id="bRen">Rename</button><button class="btn" id="bDup">Duplicate</button><button class="btn" id="bDel">Delete</button></div></div>${list}</div>
+    <div class="bld-body"><div class="bld-main">
+      <section class="bsec"><h2 class="bh">Subclass</h2>${subHtml}</section>
+      <section class="bsec"><h2 class="bh">Weapons</h2><div class="bcards">${Core.W_SLOTS.map(s => itemCard('w', s)).join('')}</div></section>
+      <section class="bsec"><h2 class="bh">Armor &amp; mods</h2><div class="bcards">${Core.A_SLOTS.map(s => itemCard('a', s)).join('')}</div></section>
+      <section class="bsec"><h2 class="bh">Notes</h2><textarea class="notes" id="bNotes" maxlength="1024" placeholder="How to play it, what to swap…">${esc(b.notes)}</textarea></section>
+    </div><aside class="bld-side">
+      <section class="bsec syn" id="bSyn"><h2 class="bh">Interactions <small>${nLinks}</small></h2>${synHtml}</section>
+      <section class="bsec"><h2 class="bh">Stats <small>${st.total} total</small></h2>${statHtml}<p class="snote">${st.src === 'current' ? 'Armor: current values from Bungie (they include mods already on the armor).' : st.src === 'base' ? 'Armor: base values from DIM, plus the fragments and mods chosen here.' : 'Add armor to see its stats.'} What each stat does in Armor 3.0 isn’t in the game data, so it isn’t shown.</p></section>
+    </aside></div>`;
+  bindBuildList(v); bindBuild(v, b, pieces, syn);
+}
+function bindBuildList(v) {
+  v.querySelectorAll('[data-bid]').forEach(t => t.onclick = () => { BLD.cur = t.dataset.bid; saveBuilds(); renderBuilds(); });
+  const nb = v.querySelector('#bNew'); if (nb) nb.onclick = () => newBuild();
+}
+function bindBuild(v, b, pieces, syn) {
+  const rename = () => {
+    modal(`<h2>Rename build</h2><input class="qin" id="bNameIn" maxlength="60" aria-label="Build name" value="${esc(b.name)}"><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><button class="btn" data-close>Cancel</button><button class="btn" id="bNameOk">Save</button></div>`);
+    const inp = $('#bNameIn'); inp.focus(); inp.select();
+    const ok = () => { b.name = inp.value.trim().slice(0, 60) || b.name; closeModal(); saveBuilds(); renderBuilds(); };
+    $('#bNameOk').onclick = ok; inp.onkeydown = e => { if (e.key === 'Enter') ok(); };
+  };
+  $('#bRen').onclick = rename; $('#bName').onclick = rename; $('#bName').onkeydown = e => { if (e.key === 'Enter') rename(); };
+  $('#bDup').onclick = () => newBuild(b);
+  $('#bJump').onclick = () => $('#bSyn').scrollIntoView({ behavior: motionOK() ? 'smooth' : 'auto', block: 'start' });
+  $('#bDel').onclick = () => {
+    modal(`<h2>Delete “${esc(b.name)}”?</h2><p>This removes the build from Ghost. Your items aren’t touched.</p><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" data-close>Cancel</button><button class="btn danger" id="bDelOk">Delete build</button></div>`);
+    $('#bDelOk').onclick = () => { BLD.list = BLD.list.filter(x => x.id !== b.id); BLD.cur = BLD.list[0]?.id || null; closeModal(); saveBuilds(); renderBuilds(); };
+  };
+  const nt = $('#bNotes'); nt.oninput = () => { b.notes = nt.value.slice(0, 1024); saveBuilds(); };
+  // class / element: switching remembers the old choices so switching back restores them
+  v.querySelectorAll('[data-cls]').forEach(x => x.onclick = () => {
+    if (x.dataset.cls === b.cls) return;
+    b.subMem[`${b.cls}.${b.el}`] = b.sub; b.aMem[b.cls] = { a: b.a, mods: b.mods };
+    b.cls = x.dataset.cls; if (!D.sub[b.cls]?.[b.el]) b.el = Object.keys(D.sub[b.cls])[0];
+    b.sub = b.subMem[`${b.cls}.${b.el}`] || { aspects: [], fragments: [] }; ({ a: b.a, mods: b.mods } = b.aMem[b.cls] || { a: {}, mods: {} });
+    saveBuilds(); renderBuilds();
+  });
+  v.querySelectorAll('[data-el]').forEach(x => x.onclick = () => {
+    if (x.dataset.el === b.el) return;
+    b.subMem[`${b.cls}.${b.el}`] = b.sub; b.el = x.dataset.el; b.sub = b.subMem[`${b.cls}.${b.el}`] || { aspects: [], fragments: [] };
+    saveBuilds(); renderBuilds();
+  });
+  v.querySelectorAll('[data-sub]').forEach(x => x.onclick = () => pickSub(b, x.dataset.sub, +x.dataset.i, pieces));
+  v.querySelectorAll('[data-w]').forEach(x => x.onclick = () => pickItem(b, 'w', x.dataset.w, pieces));
+  v.querySelectorAll('[data-a]').forEach(x => x.onclick = () => pickItem(b, 'a', x.dataset.a, pieces));
+  v.querySelectorAll('[data-clrw]').forEach(x => x.onclick = () => { delete b.w[x.dataset.clrw]; saveBuilds(); renderBuilds(); });
+  v.querySelectorAll('[data-clra]').forEach(x => x.onclick = () => { delete b.a[x.dataset.clra]; saveBuilds(); renderBuilds(); });
+  v.querySelectorAll('[data-mod]').forEach(x => x.onclick = () => pickMod(b, x.dataset.mod, +x.dataset.mi, pieces));
+  v.querySelectorAll('.bpk [data-pk]').forEach(x => x.onclick = e => { e.stopPropagation(); modal(`<div class="pdet" style="margin:0">${infoHtml(x.dataset.pk)}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); });
+  // evidence: the sentence that made a piece a source / payoff of the keyword
+  v.querySelectorAll('[data-ev]').forEach(x => x.onclick = () => {
+    const [k, i, role] = x.dataset.ev.split('|'); const pc = pieces[+i]; const box = x.closest('.skey,.sgap')?.querySelector('.sev'); if (!pc || !box) return;
+    let ev;
+    if (k.startsWith('el:')) { const l = syn.links.find(y => y.k === 'el' && 'el:' + y.l === k && (role === 'p' ? y.from : y.to) === +i); ev = l && (role === 'p' ? l.ef : l.et); }
+    else ev = pc.tags[k]?.[role] || syn.links.find(y => y.k === k && y.to === +i)?.et;
+    const was = box.dataset.for === x.dataset.ev; v.querySelectorAll('.schip.on').forEach(y => y.classList.remove('on'));
+    if (was || !ev) { box.innerHTML = ''; box.dataset.for = ''; return; }
+    x.classList.add('on'); box.dataset.for = x.dataset.ev;
+    box.innerHTML = `<b>${esc(pc.n)}</b> <small>${esc(ev.src)}</small><q>${esc(ev.text)}</q>`;
+  });
+}
+// picker sheet: a searchable list of choices, best synergy first
+function openPicker(title, rows, onPick, opt = {}) {
+  modal(`<h2>${esc(title)}</h2>${opt.note ? `<p class="stat-pill">${opt.note}</p>` : ''}<input class="qin" id="pkq" type="search" placeholder="Search names and descriptions…" aria-label="Search choices">
+    <div class="plist" id="plist">${opt.clear ? '<button class="prow none" data-k="">Empty this slot</button>' : ''}${rows.map(r => `<button class="prow${r.on ? ' on' : ''}${r.off ? ' off' : ''}" data-k="${esc(r.k)}" data-s="${esc(r.s.toLowerCase())}">${r.icon}<span class="pt"><b>${esc(r.n)}</b>${r.sub ? `<small>${r.sub}</small>` : ''}${r.why?.length ? `<span class="whys">${whyHtml(r.why)}</span>` : ''}</span>${r.score ? `<span class="pscore" title="Synergy with the rest of this build">+${r.score}</span>` : ''}</button>`).join('') || '<div class="empty">Nothing to choose here.</div>'}</div>
+    <div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`);
+  const q = $('#pkq'); q.oninput = () => { const t = q.value.toLowerCase().trim(); $('#plist').querySelectorAll('.prow[data-s]').forEach(r => r.hidden = !!t && !r.dataset.s.includes(t)); };
+  $('#plist').querySelectorAll('.prow').forEach(r => r.onclick = () => { if (r.classList.contains('off')) return toast(r.title || 'Already in this build.'); closeModal(); onPick(r.dataset.k); });
+  if (!isMobile()) q.focus();
+}
+function pickSub(b, sec, i, pieces) {
+  const list = scAll(b)?.s?.[sec] || []; const many = sec === 'aspects' || sec === 'fragments';
+  const cur = many ? b.sub[sec][i] : b.sub[sec];
+  const rows = list.map(a => { const r = Core.subScore(b, D, sec, a.h, pieces); const used = many && b.sub[sec].includes(a.h) && a.h !== cur;
+    return { k: String(a.h), n: a.n, icon: plugIcon(a.n, 'sq', a.i), sub: `${esc(a.d.replace(/\[[^\]]*\]\s*/g, '').slice(0, 160))}${a.d.length > 160 ? '…' : ''}${a.fc ? ` <span class="bst">${a.fc} fragment slots</span>` : ''}${statChips(a.st)}`, s: a.n + ' ' + a.d, score: r.score, why: r.why, on: a.h === cur, off: used }; })
+    .sort((x, y) => (y.score - x.score) || x.n.localeCompare(y.n));
+  rows.forEach(r => { if (r.off) r.n += ' (in build)'; });
+  openPicker(`${SUB_L[sec]}${many ? ` ${i + 1}` : ''} · ${scAll(b)?.n || ''}`, rows, k => {
+    const h = k ? +k : null;
+    if (many) { const arr = b.sub[sec]; if (h) arr[i] = h; else arr.splice(i, 1); b.sub[sec] = arr.filter(Boolean); }
+    else if (h) b.sub[sec] = h; else delete b.sub[sec];
+    saveBuilds(); renderBuilds();
+  }, { clear: cur != null });
+}
+function pickItem(b, g, slot, pieces) {
+  if (!S.items.length) return toast('Load your vault first (DIM CSVs or Bungie sign-in).');
+  const cls = B_CLASSES.find(c => c[0] === b.cls)?.[1];
+  const pool = g === 'w' ? S.weapons.filter(it => Core.weaponSlot(it) === slot) : S.armor.filter(it => Core.armorSlot(it) === slot && (!it.equippable || it.equippable === 'Any' || it.equippable === cls));
+  const cur = (g === 'w' ? b.w : b.a)[slot]?.id;
+  const rows = pool.map(it => { const r = Core.synScore(it, pieces, D, slot);
+    const sub = (g === 'w' ? [it.type, it.element, it.power != null ? '◆ ' + it.power : '', it.rating != null ? 'rating ' + it.rating : ''] : [it.type, it.frame, it.set ? '◈ ' + it.set : '', it.stats.Total != null ? 'Total ' + it.stats.Total : '', it.tertiary ? '+' + it.tertiary : '']).filter(Boolean).map(esc).join(' · ') + (it.tag === 'junk' ? ' · <span class="warn">junk</span>' : '');
+    return { k: it.id, n: it.name, icon: iIcon(it, 40), sub, s: [it.name, it.type, it.frame, it.element, it.set, ...it.perks.filter(p => p.s).map(p => p.n)].join(' '), score: r.score, why: r.why, on: it.id === cur, it }; })
+    .sort((x, y) => (y.score - x.score) || ((x.it.tag === 'junk') - (y.it.tag === 'junk')) || ((y.it.rating ?? y.it.stats.Total ?? -1) - (x.it.rating ?? x.it.stats.Total ?? -1)) || ((y.it.power ?? 0) - (x.it.power ?? 0))).slice(0, 400);
+  openPicker(`${g === 'w' ? W_LABEL[slot] + ' weapon' : A_LABEL[slot]}${g === 'a' ? ' · ' + cls : ''}`, rows, id => {
+    const refs = g === 'w' ? b.w : b.a;
+    if (!id) { delete refs[slot]; saveBuilds(); renderBuilds(); return; }
+    const it = S.byId.get(id); if (!it) return;
+    // one exotic weapon and one exotic armor piece: a new exotic replaces the other one
+    if (/exotic/i.test(it.rarity)) for (const [s, r] of Object.entries(refs)) { const o = S.byId.get(r.id); if (s !== slot && o && /exotic/i.test(o.rarity)) { delete refs[s]; toast(`Only one exotic ${g === 'w' ? 'weapon' : 'armor piece'}: removed ${o.name}.`); } }
+    refs[slot] = itemRef(it); saveBuilds(); renderBuilds();
+  }, { clear: !!cur, note: pool.length ? `${pool.length} in your vault. Best synergy with the rest of the build first.` : `No ${g === 'w' ? W_LABEL[slot].toLowerCase() + ' weapons' : cls + ' ' + A_LABEL[slot].toLowerCase()} in this vault.` });
+}
+function pickMod(b, slot, i, pieces) {
+  const ms = b.mods[slot] || []; const cur = ms[i];
+  const rows = Core.modsFor(slot, D).map(([n, cost, st]) => { const r = Core.modScore(n, slot, D, pieces); const bd = Core.plugOf(n, D, 'armor')?.[2] || '';
+    return { k: n, n, icon: plugIcon(n, 'sq', pIdx(n, 'armor')), sub: `<span class="bst">${cost} energy</span>${statChips(st)} ${esc(bd.slice(0, 140))}${bd.length > 140 ? '…' : ''}`, s: n + ' ' + bd, score: r.score, why: r.why, on: n === cur }; })
+    .sort((x, y) => (y.score - x.score) || x.n.localeCompare(y.n));
+  openPicker(`${A_LABEL[slot]} mod ${i + 1}`, rows, n => {
+    const arr = [...ms]; if (n) arr[i] = n; else arr.splice(i, 1);
+    b.mods[slot] = arr.filter(Boolean).slice(0, 3); saveBuilds(); renderBuilds();
+  }, { clear: !!cur });
+}
+
 // ---------- views: Vault (panes) · Clean up · Subclasses ----------
 let VIEW = 'vault';
 // an open pane menu stays a dropdown under its button and scrolls when it would run past the pane, the tab bar or
@@ -1988,19 +2234,20 @@ document.addEventListener('scroll', e => {
   COMPACT.el = el; syncCompact(el);
 }, { capture: true, passive: true });
 function setView(v) {
-  VIEW = v; COMPACT.el = v === 'vault' ? visiblePaneBody() : null; syncCompact();
+  VIEW = v; COMPACT.el = v === 'vault' ? $('#main') : null; syncCompact();
   document.querySelectorAll('nav.views button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
   placeViews();
-  for (const id of ['subv', 'clean', 'compare']) $('#' + id).classList.toggle('open', v === id);
+  for (const id of ['subv', 'clean', 'compare', 'builds']) $('#' + id).classList.toggle('open', v === id);
   lightWrite(document.querySelector(v === 'vault' ? '#vscene .title' : `#${v} .band h1, #${v} .svt`));
   if (v === 'subv') openSubclasses();
   if (v === 'clean') renderClean();
+  if (v === 'builds') renderBuilds();
   if (v === 'compare') renderCompare();
   if (v === 'vault') refreshBodies();
 }
 document.querySelectorAll('nav.views button').forEach(b => b.onclick = () => setView(b.dataset.view));
 // keep the views just below the header even when it wraps or the banner appears
-const placeViews = () => { const hh = isMobile() ? document.querySelector('header').offsetHeight + ($('#banner').offsetHeight || 0) : ($('#banner').offsetHeight || 0); for (const id of ['subv', 'clean', 'compare']) $('#' + id).style.top = hh + 'px'; };
+const placeViews = () => { const hh = isMobile() ? document.querySelector('header').offsetHeight + ($('#banner').offsetHeight || 0) : ($('#banner').offsetHeight || 0); for (const id of ['subv', 'clean', 'compare', 'builds']) $('#' + id).style.top = hh + 'px'; };
 try { const ro = new ResizeObserver(placeViews); ro.observe(document.querySelector('header')); ro.observe($('#banner')); } catch { window.addEventListener('resize', placeViews); }
 
 // ---------- Clean up: group the vault, decide keep / trash per group, review, apply as DIM tags ----------

@@ -31,6 +31,7 @@ Help sort a Destiny 2 vault. Read all the information for each item, and tag and
 | `test/e2e.playwright.js` | Headless check: load the CSVs, query, tag, export. Uses `CHROME_PATH`, else local Chrome/Edge, else Playwright's Chromium. |
 | `test/security.test.js` | Security unit tests (part of `npm test`): sanitizer, CSV limits, ids, ratings validation, export guard, source checks, hosted CSP/SW checks. |
 | `test/ui.e2e.js` | UI regressions: perk description open/close (incl. rapid clicks), Clean up card opens the item panel, theme/motion persist, art ≥1920px. |
+| `test/builds.test.js`, `test/builds.e2e.js` | Build maker: keyword roles, interactions, limits, stats (unit); create/save/reopen on desktop, phone, landscape plus hostile stored builds (browser). |
 | `test/security.e2e.js` | Browser security test (part of `npm run e2e`): hostile CSVs/ratings/profiles through every view on both builds; fails on executed payloads, on*/javascript: in the DOM, CSP violations, non-build files in the SW cache, token-like storage. |
 | `tools/check-secrets.mjs` | Exact-value check: the real key/client_id (from `config/local.json` or env) must not appear in staged files, the repo, or `dist/`. |
 | `.githooks/pre-commit`, `.gitleaks.toml` | Pre-commit secret scan (gitleaks at `tools/bin/gitleaks.exe`, gitignored, v8.30.1 checksum-verified) + exact-value check + no CSVs outside `test/fixtures/`. Enabled with `git config core.hooksPath .githooks`. |
@@ -74,7 +75,16 @@ Ratings JSON shape: `{ "<hash>": { n, pve, pvp, c: [ [ [perkName, rel, pct], …
 - **Sort/group menus follow the query:** options are rebuilt from each pane's results (weapon-only vs armor-only keys, stats present); the current choice stays listed with "(not in results)".
 
 ## Views
-Header tabs switch views (`setView`): **Vault** (the query panes), **Clean up**, **Subclasses**. Non-vault views are fixed overlays placed under the header (`placeViews`).
+Header tabs switch views (`setView`): **Vault** (the query panes), **Clean up**, **Compare**, **Builds**, **Subclasses**. Non-vault views are fixed overlays placed under the header (`placeViews`).
+
+### Builds (build maker, 2026-11-17)
+State `BLD = {list, cur}` per profile in localStorage `PK('builds')` and db `PP('config/builds')`; every stored build is rebuilt by `validBuild()` (ids, hashes, item ids, string lengths). A build holds refs only: `cls`, `el`, `sub` (plug hashes: super, classAbility, movement, melee, grenade, aspects[2], fragments[≤ aspect slots]), `w`/`a` (`{id, hash, name}` per slot), `mods` (names, ≤3 per armor slot), `notes`, and `subMem`/`aMem` so switching class/element and back restores choices. Refs keep hash + name for a later theorycrafting mode (items the player doesn't own; decided 2026-11-17: vault only for now).
+- **Synergy engine (`core.js`):** `SYN` = keyword table per element (scorch, ignite, radiant… jolt, blind, amplified… volatile, weaken, suppress, devour, overshield, invisibility… slow, freeze, shatter, crystal… sever, suspend, unravel, woven mail, threadling, tangle; transcendence; generic: orbs, armor charge, finisher, healing, ability energy). `synTags` reads each piece's text (Bungie + Clarity; Compendium only when neither has text), sentence by sentence, skips negated sentences, and classifies each keyword as **p**roduces / **u**ses / **m**entions by the nearest trigger word (`USE_W` within 3 words, `PROD_W` within 6, "scorches targets" = p, "scorched targets" = adjective). `synergy` links producers to users (ability energy also feeds the chosen ability; "<Element> weapons" text links to weapons of that element). Evidence = the sentence, shown on tap. Never add a claim that isn't in the text.
+- **Suggestions:** `fitScore` (element keyword 2, generic 1, mention 0.5, once per keyword+role); `synScore` (vault items), `subScore` (subclass pieces), `modScore` (mods) sort every picker.
+- **Stats:** `buildStats` = armor base values (DIM) or current values (Bungie, include inserted mods) + fragment and mod bonuses from Bungie `investmentStats` (`defs.sub…st`, `defs.am`). No invented stat effects.
+- **Data:** `defs.am[slot] = [[name, energyCost, stats?]]` (head/arms/chest/legs/class/general from `enhancements.v2_*`), subclass pieces carry `st` (fragment stat bonus/penalty) and `fc` (aspect fragment slots).
+- **UI:** band with build tabs, subclass slots, weapon/armor cards with mod chips and energy, Interactions panel (per keyword: Made by / Pays off, gaps), Stats panel. Pickers are `modal()` sheets. One exotic weapon / one exotic armor: a new exotic replaces the other. Tests: `test/builds.test.js`, `test/builds.e2e.js`.
+- **Next (decided 2026-11-17):** DIM loadout share link; then equip weapons + armor from Ghost (subclass and mods stay a checklist) after the user approves the security design in GHOST_PLAN.
 
 ### Clean up (vault-cleaner workflow)
 State `CL = {setup, dec, gi, step}` saved to localStorage `vs:clean` and db `config/clean`.
