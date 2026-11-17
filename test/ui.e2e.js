@@ -100,8 +100,39 @@ const fails = []; const ok = m => console.log('  ok  ', m); const fail = m => { 
       setTimeout(step, 20);
     }));
     pulled ? ok('phone: pulling the item panel down closes it') : fail('phone: pulling the item panel down did not close it');
+    // ⋯ menu: tapping a theme or the motion switch updates the menu's own copies
+    await p3.click('#bMenu'); await p3.waitForTimeout(300);
+    const mv = await p3.evaluate(() => {
+      const m = document.querySelector('#modal'), pick = [...m.querySelectorAll('.wpick [data-world]')].find(b => b.getAttribute('aria-pressed') !== 'true');
+      const want = pick.dataset.world; pick.click();
+      const sel = m.querySelector('.wpick [aria-pressed=true]')?.dataset.world;
+      const mt = m.querySelector('[data-motion-toggle]'), before = mt.textContent; mt.click();
+      return { themeOk: sel === want, motionOk: mt.textContent !== before && mt.getAttribute('aria-pressed') === String(mt.textContent === 'Motion on') };
+    });
+    mv.themeOk && mv.motionOk ? ok('phone: ⋯ menu shows the chosen theme and motion setting') : fail('phone: ⋯ menu selection not shown ' + JSON.stringify(mv));
+    await p3.evaluate(() => document.querySelector('#modal [data-close]')?.click());
     e3.length ? fail('phone page errors: ' + e3.join(' | ')) : ok('phone: no page errors');
     await b3.close();
+  }
+  // landscape phone (desktop layout, short screen): item panel, Subclasses and Compare keep real scroll space
+  {
+    const b4 = await chromium.launch({ ...(exe ? { executablePath: exe } : {}) });
+    const p4 = await b4.newPage({ viewport: { width: 844, height: 340 }, hasTouch: true });
+    const e4 = []; p4.on('pageerror', e => e4.push(e.message));
+    await p4.goto('file://' + path.join(root, 'dist/index.html').split(path.sep).join('/')); await p4.waitForTimeout(400);
+    await p4.evaluate(() => document.getElementById('intro')?.remove());
+    await p4.setInputFiles('#file', fx); await p4.waitForTimeout(900);
+    await p4.evaluate(() => document.querySelector('#panes .card').click()); await p4.waitForTimeout(700);
+    const dh = await p4.evaluate(() => document.querySelector('#drawer .d-scroll').clientHeight);
+    dh > 340 * 0.6 ? ok(`landscape: item panel scrolls in ${dh}px of 340px`) : fail(`landscape: item panel scroll area only ${dh}px`);
+    const tri = await p4.evaluate(() => { const s = document.querySelector('#drawer .tri>summary'); return getComputedStyle(s, '::before').content === 'none' && parseFloat(getComputedStyle(s, '::after').width) < 20; });
+    tri ? ok('Find & compare title shows a chevron, no rule line') : fail('Find & compare title still draws a rule line');
+    await p4.evaluate(() => document.querySelector('#dClose').click()); await p4.waitForTimeout(300);
+    await p4.evaluate(() => document.querySelector('nav.views [data-view=subv]').click()); await p4.waitForTimeout(700);
+    const sv = await p4.evaluate(() => { const v = document.querySelector('#subv'); v.scrollTop = 300; return v.scrollTop; });
+    sv > 200 ? ok('landscape: Subclasses scrolls as one page') : fail('landscape: Subclasses view does not scroll');
+    e4.length ? fail('landscape page errors: ' + e4.join(' | ')) : ok('landscape: no page errors');
+    await b4.close();
   }
   // art resolution (backdrops must be high resolution)
   const sizeOf = f => { const b = fs.readFileSync(f); if (b.toString('ascii', 12, 16) === 'VP8X') return 1 + b.readUIntLE(24, 3); if (b.toString('ascii', 12, 16) === 'VP8 ') return b.readUInt16LE(26) & 0x3fff; if (b.toString('ascii', 12, 16) === 'VP8L') return 1 + (b.readUInt32LE(21) & 0x3fff); return 0; };
