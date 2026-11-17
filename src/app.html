@@ -586,9 +586,11 @@ try { const t = localStorage.getItem('vs:theme'); UI.theme = WORLDS.some(w => w[
 function applyUI() {
   document.documentElement.dataset.theme = UI.theme; document.documentElement.dataset.motion = UI.motion ? 'on' : 'off';
   const meta = document.querySelector('meta[name=theme-color]'); if (meta) meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#170f1c';
-  const wp = document.getElementById('wpick'); if (wp) wp.innerHTML = worldButtons();
-  const wn = document.getElementById('wname'); if (wn) wn.textContent = (WORLDS.find(w => w[0] === UI.theme) || WORLDS[0])[1];
-  const bm = document.getElementById('bMotion'); if (bm) { bm.textContent = UI.motion ? 'Motion on' : 'Motion off'; bm.setAttribute('aria-pressed', UI.motion); }
+  // every copy of the picker (rail + phone ⋯ menu) shows the current theme and motion setting
+  document.querySelectorAll('.wpick').forEach(wp => { wp.innerHTML = worldButtons(); });
+  const wname = (WORLDS.find(w => w[0] === UI.theme) || WORLDS[0])[1];
+  document.querySelectorAll('#wname,[data-wname]').forEach(wn => { wn.textContent = wname; });
+  document.querySelectorAll('#bMotion,[data-motion-toggle]').forEach(bm => { bm.textContent = UI.motion ? 'Motion on' : 'Motion off'; bm.setAttribute('aria-pressed', UI.motion); });
 }
 const worldButtons = () => WORLDS.map(([k, l, a, b]) => `<button type="button" data-world="${k}" title="${esc(l)}" aria-label="${esc(l)} theme" aria-pressed="${k === UI.theme}" style="--sw1:${a};--sw2:${b}"></button>`).join('');
 document.addEventListener('click', e => {
@@ -1814,7 +1816,7 @@ function renderSub() {
   const fc = FOCUS[`${SV.cls}-${fileEl}`] || [70, 40];
   v.innerHTML = `<div class="sv-head" style="--fx:${fc[0]}%;--fy:${fc[1]}%;--art:url('art/sub-${['warlock', 'titan', 'hunter'].includes(SV.cls) ? SV.cls : 'warlock'}-${['solar', 'arc', 'void', 'stasis', 'strand', 'prismatic'].includes(fileEl) ? fileEl : 'solar'}.webp')"><div class="svt"><h1 class="title lw">${esc(sc?.n || 'Subclasses')}</h1><p class="sum">${esc(SV.cls[0].toUpperCase() + SV.cls.slice(1))} · <b>${esc((SV_ELS.find(x => x[0] === SV.el) || [, ''])[1])}</b></p></div><div class="h">Subclasses</div>
       <div class="tabs">${[['warlock', 'Warlock'], ['titan', 'Titan'], ['hunter', 'Hunter']].filter(([c]) => D.sub[c]).map(([c, l]) => `<button class="tab${c === SV.cls ? ' on' : ''}" data-cls="${c}">${l}</button>`).join('')}</div>
-      <input class="qin" id="svq" placeholder="Filter by name or description…" value="${esc(SV.q)}" style="max-width:280px">
+      <input class="qin" id="svq" type="search" aria-label="Search abilities, aspects and fragments" placeholder="Search this subclass…" value="${esc(SV.q)}" style="max-width:280px">
       <span class="grow"></span><span class="stat-pill">Bungie · Clarity · Data Compendium · light.gg links</span><button class="btn" id="svClose">Close</button></div>
     <div class="sv-els"><div class="tabs">${SV_ELS.filter(([e]) => cdata[e]).map(([e, l]) => `<button class="tab${e === SV.el ? ' on' : ''}" data-el="${e}">${plugIcon(cdata[e].n, 'sq', cdata[e].i)}${esc(cdata[e].n)}</button>`).join('')}</div></div>
     <div class="sv-body"><div class="sv-main">${secs || '<div class="empty">Nothing matches.</div>'}</div><div class="sv-det" id="svdet"></div></div>`;
@@ -2097,7 +2099,7 @@ addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt
 $('#bMenu').onclick = () => {
   const n = pendingIds().length;
   modal(`<h2>Ghost</h2><p class="stat-pill">${esc($('#summary').textContent)}</p>
-    <div class="wrow" style="margin:10px 0 4px"><span>Theme</span><button type="button" data-motion-toggle>${UI.motion ? 'Motion on' : 'Motion off'}</button></div><div class="wpick" style="margin-bottom:6px">${worldButtons()}</div>
+    <div class="wrow" style="margin:10px 0 4px"><span>Theme · <b data-wname>${esc((WORLDS.find(w => w[0] === UI.theme) || WORLDS[0])[1])}</b></span><button type="button" data-motion-toggle aria-pressed="${UI.motion}">${UI.motion ? 'Motion on' : 'Motion off'}</button></div><div class="wpick" style="margin-bottom:6px">${worldButtons()}</div>
     <div class="msheet">
       <button class="btn" id="mProf">Profile: ${esc(activeProfile().name)} ${ICO.chev}</button>
       <button class="btn" id="mLoad">Load DIM CSVs</button>
