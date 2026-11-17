@@ -1332,7 +1332,7 @@ function refreshBody(el, p) {
   body.innerHTML = out.join('');
   // load the next page automatically when the "Show more" button scrolls into view
   const more = body.querySelector('[data-act=more]');
-  if (more && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { io.disconnect(); more.click(); } }, { root: body, rootMargin: '300px' }); io.observe(more); }
+  if (more && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { io.disconnect(); more.click(); } }, { root: isMobile() ? null : body, rootMargin: '300px' }); io.observe(more); }
 }
 
 const STAT_SHOW_W = ['Range', 'Stability', 'Handling', 'Reload', 'AA', 'Impact', 'ROF', 'Mag', 'Velocity', 'Blast Radius', 'Charge Time', 'Draw Time', 'Accuracy', 'Swing Speed', 'Guard Resistance', 'Shield Duration', 'Charge Rate'];
@@ -2229,12 +2229,11 @@ function fitMenu(menu, again = true) {
   const pane = menu.closest('.pane')?.getBoundingClientRect().bottom ?? innerHeight;
   l.style.maxHeight = Math.max(120, Math.min(bar, pane, innerHeight) - l.getBoundingClientRect().top - 8) + 'px';
 }
-// phone: the header, scene art, pane chips and pane controls are full size only while the list is at its very top
-// (and no item panel is open); any scroll down shrinks them with a slow transition (ghost.css). Only lists with
+// phone: the top bar is full size only while the page is at its very top (and no item panel is open); any scroll
+// down slims it with a slow transition (ghost.css). The pages themselves scroll as one, so content moves 1:1. Only lists with
 // enough to scroll collapse, so the list growing taller can never clamp it back to the top and flip-flop.
 const COMPACT = { el: null };
 const setCompact = on => document.body.classList.toggle('compact', !!on);
-const visiblePaneBody = () => [...document.querySelectorAll('#panes .pane')].find(p => { const r = p.getBoundingClientRect(); return r.left > -r.width / 2 && r.left < r.width / 2; })?.querySelector('.pane-body');
 function syncCompact(el = COMPACT.el) {
   if (!isMobile()) return setCompact(false);
   if ($('#drawer').classList.contains('open')) return setCompact(true);
@@ -2245,7 +2244,7 @@ function syncCompact(el = COMPACT.el) {
 document.addEventListener('scroll', e => {
   const el = e.target;
   if (!isMobile() || !(el instanceof Element) || el.closest('#drawer,#modal,.menu-list')) return;
-  if (el.id === 'panes' || el.id === 'paneChips' || el.closest('.qchips,.ctable,.tabs')) { if (el.id === 'panes') { COMPACT.el = visiblePaneBody(); syncCompact(); } return; }
+  if (el.id === 'panes' || el.id === 'paneChips' || el.closest('.qchips,.ctable,.tabs')) return; // sideways scrolling
   COMPACT.el = el; syncCompact(el);
 }, { capture: true, passive: true });
 function setView(v) {

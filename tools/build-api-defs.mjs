@@ -3,7 +3,7 @@
 // data/raw (no API key needed; the stat table is downloaded once if missing).
 //   node tools/build-api-defs.mjs
 // Output shape (all keys are item / plug / stat hashes as strings):
-//   i: weapons + armor  -> [name, kind 'w'|'a', type, rarity, ammo 0-3, bucket hash, classType]
+//   i: weapons + armor  -> [name, kind 'w'|'a', type, rarity, ammo 0-3, bucket hash, classType, perk socket indexes]
 //   p: plugs            -> [name, cat]  cat: i intrinsic, r armor archetype, m masterwork, u tuning, k tracker, '' other
 //   s: stats            -> short name as DIM's spreadsheet uses it (only stats DIM exports)
 import fs from 'node:fs';
@@ -32,6 +32,7 @@ const STAT_KEEP = new Set(['ROF', 'AA', 'Recoil', 'Mag', 'Reload', 'Impact', 'Ra
   'Charge Time', 'Draw Time', 'Accuracy', 'Persistence', 'Swing Speed', 'Guard Resistance', 'Guard Endurance', 'Charge Rate', 'Shield Duration',
   'Airborne Effectiveness', 'Ammo Generation', 'Heat Generated', 'Cooling Efficiency', 'Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee']);
 
+const PERK_CATS = new Set([4241085061, 3154740035]); // WEAPON PERKS, ARMOR PERKS
 const plugCat = c => !c ? '' : c === 'intrinsics' ? 'i' : /armor_archetypes/.test(c) ? 'r' : /trackers/.test(c) ? 'k'
   : /tuning/.test(c) ? 'u' : /masterwork/.test(c) ? 'm' : '';
 
@@ -40,7 +41,10 @@ for (const [h, d] of Object.entries(items)) {
   const n = d.displayProperties?.name; if (!n) continue;
   if (d.itemType === 3 || d.itemType === 2) {
     out.i[h] = [n, d.itemType === 3 ? 'w' : 'a', d.itemTypeDisplayName || '', d.inventory?.tierTypeName || '',
-      d.equippingBlock?.ammoType || 0, d.inventory?.bucketTypeHash || 0, d.classType ?? 3];
+      d.equippingBlock?.ammoType || 0, d.inventory?.bucketTypeHash || 0, d.classType ?? 3,
+      // socket indexes whose options belong to the roll (weapon perks: barrel, magazine, traits, origin; armor perks).
+      // Mods, masterworks, intrinsics, cosmetics show only the inserted plug.
+      (d.sockets?.socketCategories || []).filter(c => PERK_CATS.has(c.socketCategoryHash)).flatMap(c => c.socketIndexes || [])];
   }
   if (d.plug) out.p[h] = [n, plugCat(d.plug.plugCategoryIdentifier)];
 }
