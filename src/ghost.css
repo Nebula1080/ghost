@@ -306,6 +306,14 @@ a{color:var(--light)}
 .ctable{background:var(--panel);border-color:var(--line)}
 .cr>div{border-bottom-color:var(--line)}
 .cl{background:var(--panel2);border-right-color:var(--line);color:var(--faint)}
+/* sticky labels and header sit above anything inside the cells (perk icons, highlights) when the table scrolls */
+.ctable .cl{z-index:5}
+.ctable .cr.ch>div{z-index:6}
+.ctable .cr.ch>.cl{z-index:7}
+.ctable .cc{position:relative;z-index:0}
+/* WebKit (all iPhone browsers) paints transformed/animated cell content above sticky cells whatever their z-index;
+   giving the sticky cells their own compositing layer keeps them on top */
+.ctable .cl,.ctable .cr.ch>div{-webkit-transform:translateZ(0);transform:translateZ(0)}
 .cc{border-right-color:var(--line)}
 .cr.ch>div{background:var(--panel)}
 .cr.sech .cl,.cr.sech>div{background:var(--panel2)}
