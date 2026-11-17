@@ -525,6 +525,36 @@ a{color:var(--light)}
   .d-head .nm{font-size:26px}
 }
 
+/* game-style perk grid (Clean up tiles) and the armor-card mods row: every perk sits in a labelled column, so it's
+   clear which socket it belongs to; equipped perk on top with its name, the roll's other options underneath */
+.pgrid{margin-top:8px;display:grid;gap:8px}
+.pg-head{display:flex;flex-wrap:wrap;gap:6px 14px}
+.pg-cols{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.pg-col{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:6px 3px 8px;background:color-mix(in srgb,var(--bg2) 88%,transparent)}
+.pg-h{font:600 9.5px/1 var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+.sk.stk{flex-direction:column;align-items:center;gap:4px;padding:0;border-radius:0;text-align:center;min-width:0;max-width:100%}
+.sk.stk .ic{width:38px;height:38px}
+.sk.stk .nm2{font-size:11px;line-height:1.15;overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pg-opts{display:flex;flex-wrap:wrap;justify-content:center;gap:3px}
+.pg-opts .sk{padding:0}
+.pg-opts .ic,.pg-mods .ic{width:22px;height:22px}
+.pg-mods{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.pg-mods .pg-h{margin-right:4px}
+.pg-mods .sk{padding:0}
+.card .amods{margin-top:6px}
+/* on vault cards the grid spans the whole card (not just the column beside the icon) */
+.card>.pgrid{grid-column:1/-1;margin-top:10px}
+.pgrid{container-type:inline-size}
+.sk.stk .nm2{width:100%}
+/* narrow panes (desktop columns, small phones): tighter labels and names so nothing is cut off */
+@container (max-width:340px){
+  .pg-h{font-size:8px;letter-spacing:.03em}
+  .sk.stk .ic{width:30px;height:30px}
+  .sk.stk .nm2{font-size:9.5px}
+  .pg-col{padding:5px 1px 7px;gap:5px}
+}
+@media (max-width:760px){.sk.stk .ic{width:34px;height:34px}.sk.stk .nm2{font-size:10.5px}.pg-col{padding:6px 2px 8px}.pg-h{font-size:9px;letter-spacing:.08em}}
+
 /* bundled item icon (artifact build) */
 .itm .ispr{position:absolute;inset:0;background-repeat:no-repeat;display:block}
 

@@ -1352,24 +1352,30 @@ function skTitle(p, it) {
 }
 function skHtml(p, it, hits, opt = {}) {
   const rel = it.perkRel?.[p.n]; const top = rel && rel.rel >= 80;
-  const cls = ['sk', p.s ? 'sel' : 'opt', top ? 'top' : '', /^enhanced\s/i.test(p.n) ? 'enh' : '', hits.has('perk:' + p.n) ? 'hit' : ''].join(' ');
+  const cls = ['sk', opt.stack ? 'stk' : '', p.s ? 'sel' : 'opt', top ? 'top' : '', /^enhanced\s/i.test(p.n) ? 'enh' : '', hits.has('perk:' + p.n) ? 'hit' : ''].join(' ');
   return `<span class="${cls}" data-pk="${esc(p.n)}" title="${esc(skTitle(p, it))}">${plugIcon(p.n, opt.sq ? 'sq' + (opt.small ? ' sm' : '') : (opt.small ? 'sm' : ''), pIdx(p.n, it.kind))}${opt.noName ? '' : `<span class="nm2">${esc(p.n)}</span>`}</span>`;
 }
-// compact game-style sockets on cards: intrinsic (square), one column per perk socket with the
-// equipped perk named and its other options as small circles, then mods as small squares
+// game-style perk grid (Clean up tiles): the intrinsic and exotic perks on top, then one labelled column per perk
+// socket (Barrel, Magazine, Trait 1, Trait 2, Origin) with the equipped perk and its name on top and the roll's
+// other options as small icons underneath, then the equipped mods / masterwork / catalyst in one labelled row
 function socketsCard(it, hits) {
   const s = Core.sockets(it, D);
-  const parts = [];
-  s.intrinsic.forEach(p => parts.push(`<div class="sk-col">${skHtml({ ...p, s: 1 }, it, hits, { sq: true })}</div>`));
-  s.exotic.forEach(p => parts.push(`<div class="sk-col">${skHtml({ ...p, s: 1 }, it, hits, { sq: true })}</div>`));
-  s.cols.forEach(c => {
+  const head = [...s.intrinsic, ...s.exotic].map(p => skHtml({ ...p, s: 1 }, it, hits, { sq: true })).join('');
+  let tn = 0;
+  const cols = s.cols.map(c => {
     const eq = c.perks.filter(p => p.s), opts = c.perks.filter(p => !p.s);
-    parts.push(`<div class="sk-col">${eq.map(p => skHtml(p, it, hits)).join('')}${opts.length ? `<div class="sk-opts">${opts.map(p => skHtml(p, it, hits, { small: true, noName: true })).join('')}</div>` : ''}</div>`);
-  });
-  if (s.mods.length) parts.push(`<div class="sk-mods">${s.mods.map(p => skHtml({ ...p, s: 1 }, it, hits, { sq: true, small: true, noName: true })).join('')}</div>`);
-  // junk perks only when the search hit them
-  it.perks.filter(p => p.j && hits.has('perk:' + p.n)).forEach(p => parts.push(skHtml(p, it, hits, { sq: true, small: true })));
-  return parts.length ? `<div class="sk-row">${parts.join('')}</div>` : '';
+    const lab = c.ty === 't' ? 'Trait ' + (++tn) : (COL_LABEL[c.ty] || 'Perk');
+    return `<div class="pg-col"><span class="pg-h">${lab}</span>${eq.map(p => skHtml(p, it, hits, { stack: true })).join('')}${opts.length ? `<div class="pg-opts">${opts.map(p => skHtml(p, it, hits, { small: true, noName: true })).join('')}</div>` : ''}</div>`;
+  }).join('');
+  const mods = [...s.mods, ...s.mw, ...s.catalyst];
+  const junk = it.perks.filter(p => p.j && hits.has('perk:' + p.n)).map(p => skHtml(p, it, hits, { sq: true, small: true })).join('');
+  if (!head && !cols && !mods.length && !junk) return '';
+  return `<div class="pgrid">${head ? `<div class="pg-head">${head}</div>` : ''}${cols ? `<div class="pg-cols" style="--n:${s.cols.length}">${cols}</div>` : ''}${mods.length ? `<div class="pg-mods"><span class="pg-h">Mods</span>${mods.map(p => skHtml({ ...p, s: 1 }, it, hits, { sq: true, small: true, noName: true })).join('')}</div>` : ''}${junk ? `<div class="pg-mods">${junk}</div>` : ''}</div>`;
+}
+// armor cards: the equipped mods as a small labelled icon row (names on hover / in the item panel)
+function armorModsHtml(it, sk, hits) {
+  const mods = sk.mods.filter(p => p.s !== 0);
+  return mods.length ? `<div class="pg-mods amods"><span class="pg-h">Mods</span>${mods.map(p => skHtml({ ...p, s: 1 }, it, hits, { sq: true, small: true, noName: true })).join('')}</div>` : '';
 }
 const TAG_LABEL = Object.fromEntries(TAGS.map(t => [t[0], t[1]]));
 // Card preview shows: name, rarity, tier, power, element, ammo, armor type, archetype/frame, intrinsic,
@@ -1394,11 +1400,12 @@ function cardHtml(it, hits, paneIdx, sortKey) {
     const [, tot] = Core.findStat(it.stats, 'total');
     if (tot != null) sub.push(F('stat:Total', `Total <b>${esc(tot)}</b>`));
     if (it.tertiary) sub.push(F('tertiary', `Tertiary <b>${esc(it.tertiary)}</b>`));
+    if (it.set) sub.push(F('set', `◈ ${esc(it.set)}`));
   }
   if (Core.anyBreaker(it)) sub.push(F('breaker', breakerChips(it)));
   if (it.crafted) sub.push(F('crafted', `${CRAFTED_SVG} Crafted${it.level != null ? ' · Lv ' + it.level : ''}`));
   // fields outside the preview, shown when searched (highlighted) or sorted by
-  const extra = { source: it.source, owner: it.owner, season: it.season != null ? 'Season ' + it.season : '', locked: it.locked ? 'Locked' : 'Unlocked', holofoil: 'Holofoil', featured: 'Featured', mw: it.mwType ? `MW ${it.mwType} ${it.mwTier ?? ''}` : '', event: it.event, foundry: it.foundry, kills: it.kills != null ? it.kills + ' kills' : '', energy: it.energy != null ? 'Energy ' + it.energy : '', set: it.set ? '◈ ' + it.set : '', equippable: it.equippable, tertiary: it.kind === 'armor' ? '' : (it.tertiary ? '3rd: ' + it.tertiary : ''), tuning: it.tuning ? 'Tuned: ' + it.tuning : '', name: '', notes: '', element: it.kind === 'armor' ? it.element : '', level: '' };
+  const extra = { source: it.source, owner: it.owner, season: it.season != null ? 'Season ' + it.season : '', locked: it.locked ? 'Locked' : 'Unlocked', holofoil: 'Holofoil', featured: 'Featured', mw: it.mwType ? `MW ${it.mwType} ${it.mwTier ?? ''}` : '', event: it.event, foundry: it.foundry, kills: it.kills != null ? it.kills + ' kills' : '', energy: it.energy != null ? 'Energy ' + it.energy : '', set: it.kind === 'armor' ? '' : (it.set ? '◈ ' + it.set : ''), equippable: it.equippable, tertiary: it.kind === 'armor' ? '' : (it.tertiary ? '3rd: ' + it.tertiary : ''), tuning: it.tuning ? 'Tuned: ' + it.tuning : '', name: '', notes: '', element: it.kind === 'armor' ? it.element : '', level: '' };
   const sortField = { set: 'set', class: 'equippable', source: 'source', season: 'season', kills: 'kills', type: 'type' }[sortKey];
   for (const [k, v] of Object.entries(extra)) if (v && (hits.has(k) || k === sortField)) sub.push(F(k, esc(v)));
   // intrinsic (and exotic perks) always; other perks / mods only when the search hit them
@@ -1423,11 +1430,11 @@ function cardHtml(it, hits, paneIdx, sortKey) {
     <div class="cmain">
       <div class="top"><span class="nm f${H('name')}">${esc(it.name)}</span>${it.tag ? `<span class="tagi f${H('tag')}" title="Tag: ${esc(TAG_LABEL[it.tag] || it.tag)}">${TAG_ICON[it.tag] || ''} ${esc(TAG_LABEL[it.tag] || it.tag)}</span>` : ''}<span class="grow"></span><span class="others">${others}</span>${rating}</div>
       <div class="sub">${sub.join('')}</div>
-      ${stripHtml}
-      ${perkHtml}
+      ${it.kind === 'weapon' ? '' : stripHtml + armorModsHtml(it, sk, hits) + perkHtml}
       ${statHtml ? `<div class="stats">${statHtml}</div>` : ''}
       ${it.notes ? `<div class="note f${H('notes')}">${esc(it.notes)}</div>` : ''}
     </div>
+    ${it.kind === 'weapon' ? socketsCard(it, hits) : ''}
   </div>`;
 }
 
@@ -1805,7 +1812,7 @@ $('#scrim').onclick = closeDrawer;
     timer = setTimeout(() => {
       const it = S.byId.get(c.dataset.id); if (!it) return;
       const sk = Core.sockets(it, D); const pane = c.closest('.pane'); const pc = pane ? getComputedStyle(pane).getPropertyValue('--pc') : '';
-      const hits = new Set([...c.querySelectorAll('.pstrip .on')].map(x => x.dataset.pk));
+      const hits = new Set([...c.querySelectorAll('.pstrip .on, .pgrid .sk.hit')].map(x => x.dataset.pk));
       const rows = [...sk.intrinsic, ...sk.exotic].map(p => [p.n, 1]).concat(sk.cols.flatMap(col => col.perks.filter(p => p.s).map(p => [p.n, 0])));
       tip.style.setProperty('--rc', rarityColor(it.rarity));
       tip.innerHTML = `<div class="th"><b>${esc(it.name)}</b><small>${esc(it.rarity)} ${esc(it.type)}</small></div><div class="tb">${rows.map(([n, sq]) => `<div class="${hits.has(n) ? 'hit2' : ''}">${plugIcon(n, sq ? 'sq' : '', pIdx(n, it.kind))}${esc(n)}</div>`).join('')}<div style="color:#b9aeb6;font-size:12px">Click to open</div></div>`;
