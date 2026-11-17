@@ -70,6 +70,8 @@ const fails = []; const ok = m => console.log('  ok  ', m); const fail = m => { 
     await p3.evaluate(() => { const p = [...document.querySelectorAll('.pane')].find(p => p.getBoundingClientRect().left < 50 && p.getBoundingClientRect().left > -5); window.__pb = p.querySelector('.pane-body'); window.__sc = document.querySelector('#main'); const f = document.createElement('div'); f.style.height = '3000px'; window.__pb.appendChild(f); });
     const pageScroll = await p3.evaluate(() => getComputedStyle(window.__pb).overflowY === 'visible' && window.__sc.scrollHeight > window.__sc.clientHeight + 1000);
     pageScroll ? ok('phone: the vault scrolls as one page (no inner list scroller)') : fail('phone: the pane list still scrolls on its own');
+    const chipH = await p3.evaluate(() => { const c = document.querySelector('#paneChips .pchip'); return c ? Math.round(c.getBoundingClientRect().height) : 0; });
+    chipH >= 30 ? ok(`phone: pane tabs show in full (${chipH}px)`) : fail(`phone: pane tabs are squeezed (${chipH}px)`);
     const hh0 = await p3.evaluate(() => document.querySelector('header').offsetHeight);
     for (let i = 0; i < 5; i++) { await p3.evaluate(() => window.__sc.scrollBy(0, 120)); await p3.waitForTimeout(50); }
     await p3.waitForTimeout(700);

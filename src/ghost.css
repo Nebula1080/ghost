@@ -438,6 +438,8 @@ a{color:var(--light)}
   /* Vault and Subclasses scroll as one page: the art, pane chips, pane controls and subclass header scroll away
      with the finger (1:1, no jumps). Only the top bar slims while scrolled (body.compact). */
   #main{overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain}
+  /* the page scrolls, so nothing in it may shrink to fit the screen (that squeezed the pane tabs to a sliver) */
+  #main>*{flex-shrink:0}
   #panes{flex:none;align-items:flex-start}
   .pane{height:auto}
   .pane-body{overflow:visible;flex:none}
