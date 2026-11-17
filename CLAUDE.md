@@ -17,6 +17,8 @@ Help sort a Destiny 2 vault. Read all the information for each item, and tag and
 |---|---|
 | `src/core.js` | Pure logic with no DOM: CSV parse/serialize, DIM row → item, query language, sort/group, rating. Exported for Node via `module.exports`. |
 | `src/app.html` | The UI, a single page. `/*__CORE__*/` gets replaced with core.js at build time. |
+| `src/bungie.js` | Hosted build only (inlined at `/*__BUNGIE__*/`): Bungie public-client sign-in (state check, code→token, token in sessionStorage), read-only request guard `Bungie.allowed()` (token POST + memberships + profile GETs only; the app holds move/equip scope but must not use it, see GHOST_PLAN Security), throttling. Exported for Node tests. |
+| `data/api-defs.json`, `tools/build-api-defs.mjs` | Compact manifest table (items, plugs, stats) for `Core.apiToItems`, which turns a Bungie profile into the same item objects as a DIM CSV (`src:'api'`). Rebuild after a manifest refresh: `node tools/build-api-defs.mjs`. |
 | `src/ghost.css` | The Ghost design system (themes, layout, components, motion), inlined at build. |
 | `data/art/`, `data/fonts/`, `data/item-art.json` | Backdrops + subclass art, embedded fonts, hosted-only Bungie item art map. |
 | `build.py` | Inlines core into the page. `python build.py` → **`dist/`** (artifact build); `python build.py --target hosted` → **`dist-hosted/`** with the strict CSP `<meta>` (sha256 of every inline script), `no-referrer`, and no Google Fonts. Also patches in `structuredClone` for db reads (see Gotchas) and writes the PWA files + service worker. |
@@ -137,3 +139,11 @@ CSS block "phones & touch" at the end of `<style>`; `isMobile()` = `matchMedia('
 - Artifact page CSP: inline scripts only (plus cdnjs and similar), no fetch to other hosts, `alert`/`confirm`/`<a download>` blocked. Downloads go through `claude.use('downloads')`, with a copy-text fallback.
 - light.gg: be polite. Fetch sequentially with a delay of about 0.9 s, and back off on 429. Server-side fetches from Anthropic's cloud were refused (`client_error`). Fetching from inside a real browser tab on light.gg works.
 - Item ids are 19-digit strings. Always treat them as strings, never as Numbers.
+
+## Bungie sign-in (hosted build, 2026-11-16)
+- Load dialog, phone ⋯ menu: "Sign in with Bungie" → bungie.net authorize → back with `?code&state` → `bungieReturn()` cleans the URL, exchanges the code, `loadFromBungie()` picks the Destiny account (asks if several) and loads the profile through `routeParsed` (same profile matching as CSVs). Tags/notes from the previous vault carry over by item id.
+- With a Bungie-loaded vault, dropping DIM CSVs only merges Tag/Notes (`mergeCsvTags`). Export to DIM is unchanged.
+- Not from the API (left blank): season, year, source, kill count, crafted level, tuning stat. Armor tertiary = third-highest current stat (approximation).
+- Config: `BUNGIE_API_KEY` / `BUNGIE_CLIENT_ID` env (Actions secrets in deploy.yml) or `config/local.json`; without them the button is hidden. Deploy fails if the hosted build isn't configured.
+- About & privacy screen (`openAbout`): Bungie notice, credits, storage note, "Delete my data". The Bungie notice still needs the exact wording from bungie.net/7/en/Legal/Terms (Game Content Usage Rules); the page wouldn't render for Claude.
+- Tests: `test/security.test.js` (state, guard, token handling, adapter), `test/bungie.e2e.js` (full loop against a fake bungie.net).

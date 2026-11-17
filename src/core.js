@@ -161,6 +161,78 @@ const Core = (() => {
     return { kind, items: rows.map(r => rowToItem(r, kind)).filter(Boolean) };
   }
 
+  // ---------- Bungie API profile -> the same item objects rowToItem builds (hosted build, GHOST_PLAN A5) ----------
+  // resp: the Response of Destiny2/{type}/Profile/{id}/ with components 100,102,200,201,205,300,304,305,310.
+  // ad: data/api-defs.json (tools/build-api-defs.mjs). Everything from the API is untrusted: ids must be digit
+  // strings, hashes digits only, names come from our own defs table (never from the response), numbers are coerced.
+  const API_ELEMENT = { 1: 'Kinetic', 2: 'Arc', 3: 'Solar', 4: 'Void', 6: 'Stasis', 7: 'Strand' };
+  const API_AMMO = { 1: 'primary', 2: 'special', 3: 'heavy' };
+  const API_SLOT = { 1498876634: 'KineticSlot', 2465295065: 'EnergySlot', 953998645: 'PowerSlot' };
+  const API_CLASS = { 0: 'Titan', 1: 'Hunter', 2: 'Warlock' };
+  const ARMOR_STATS = ['Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee'];
+  function apiToItems(resp, ad) {
+    if (!resp || typeof resp !== 'object' || !ad?.i) throw new Error('Bungie returned an unexpected profile.');
+    const comp = resp.itemComponents || {};
+    const inst = comp.instances?.data || {}, st = comp.stats?.data || {}, so = comp.sockets?.data || {}, rp = comp.reusablePlugs?.data || {};
+    const chars = resp.characters?.data || {};
+    const clsOf = cid => API_CLASS[chars[cid]?.classType] || 'Character';
+    const n = v => (typeof v === 'number' && isFinite(v) ? v : null);
+    const plugName = h => ad.p?.[String(h)]?.[0] || '';
+    const plugCat = h => ad.p?.[String(h)]?.[1] || '';
+    const raw = [];
+    for (const it of resp.profileInventory?.data?.items || []) raw.push([it, 'Vault', false]);
+    for (const [cid, inv] of Object.entries(resp.characterInventories?.data || {})) for (const it of inv?.items || []) raw.push([it, clsOf(cid), false]);
+    for (const [cid, inv] of Object.entries(resp.characterEquipment?.data || {})) for (const it of inv?.items || []) raw.push([it, clsOf(cid), true]);
+    const weapons = [], armor = [];
+    for (const [r, owner, equipped] of raw) {
+      const id = String(r?.itemInstanceId ?? ''); if (!ID_RE.test(id)) continue;
+      const hash = String(r.itemHash ?? '').replace(/\D/g, ''); const def = ad.i[hash]; if (!def) continue;
+      const [name, k, type, rarity, ammoT, bucket, classType] = def;
+      const kind = k === 'w' ? 'weapon' : 'armor';
+      const ins = inst[id] || {}; const state = n(r.state) || 0;
+      // perks: socket by socket, every option the item can switch to, the inserted one marked (like DIM's Perks N)
+      const perks = []; let frame = '', mwType = '', mwTier = null;
+      const sockets = Array.isArray(so[id]?.sockets) ? so[id].sockets : [];
+      const opts = rp[id]?.plugs || {};
+      sockets.forEach((s, i) => {
+        if (!s || s.isVisible === false) return;
+        const cur = String(s.plugHash ?? ''); const list = Array.isArray(opts[i]) ? opts[i].map(o => String(o?.plugItemHash ?? '')) : [];
+        if (cur && !list.includes(cur)) list.unshift(cur);
+        for (const h of list) {
+          const pn = plugName(h); if (!pn) continue;
+          perks.push({ n: pn, s: h === cur ? 1 : 0, j: JUNK_PERK.test(pn) ? 1 : 0 });
+        }
+        const cat = plugCat(cur), cn = plugName(cur);
+        if (!frame && cn && (cat === 'i' && kind === 'weapon' || cat === 'r' && kind === 'armor')) frame = cn;
+        if (cat === 'm' && cn) {
+          const m = cn.match(/^Tier (\d+): (.+)$/) || cn.match(/^Masterworked: (.+)$/);
+          if (m) { mwType = m[2] || m[1]; mwTier = m[2] ? +m[1] : 10; }
+        }
+      });
+      const stats = {};
+      for (const [sh, sv] of Object.entries(st[id]?.stats || {})) { const sn = ad.s?.[sh]; const v = n(sv?.value); if (sn && v != null) stats[sn] = v; }
+      let tertiary = '';
+      if (kind === 'armor') {
+        const vals = ARMOR_STATS.filter(s => s in stats);
+        if (vals.length) stats.Total = vals.reduce((a, s) => a + stats[s], 0);
+        // Armor 3.0: archetype sets the top two stats; the third-highest rolled stat is the tertiary
+        const ranked = vals.filter(s => stats[s] > 0).sort((a, b) => stats[b] - stats[a]);
+        tertiary = (ranked[2] || '').toLowerCase();
+      }
+      const item = {
+        id, hash, name, kind, tag: '', notes: '', rarity, tier: n(ins.gearTier), type, source: '',
+        equippable: kind === 'armor' ? (API_CLASS[classType] || '') : '', category: kind === 'weapon' ? (API_SLOT[bucket] || '') : '',
+        element: kind === 'weapon' ? (API_ELEMENT[ins.damageType] || '') : '', ammo: kind === 'weapon' ? (API_AMMO[ammoT] || '') : '',
+        power: n(ins.primaryStat?.value), energy: n(ins.energy?.energyCapacity), frame, tertiary, tuning: '',
+        mwType, mwTier, owner, locked: !!(state & 1), equipped, featured: false, holofoil: false,
+        year: null, season: null, event: '', crafted: !!(state & 8), level: null, kills: null, foundry: '', loadouts: '',
+        stats, base: {}, perks, src: 'api',
+      };
+      (kind === 'weapon' ? weapons : armor).push(item);
+    }
+    return { weapons, armor };
+  }
+
   // ---------- reference data (data/defs.json, built by tools/build-defs.mjs) ----------
   // Adds the intrinsic breaker (exotics only; from Bungie's manifest) and fills a missing ammo type.
   const AMMO_NAMES = { 1: 'Primary', 2: 'Special', 3: 'Heavy' };
@@ -604,6 +676,6 @@ const Core = (() => {
     return null;
   }
 
-  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, prepRatings, rateItem, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker };
+  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
