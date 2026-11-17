@@ -695,3 +695,8 @@ a{color:var(--light)}
 .drv{font-size:12.5px;color:var(--dim)}.drv b{color:var(--good)}
 .prow.fluff{opacity:.62}
 .prow.fluff:not(.fluff ~ .fluff){margin-top:12px}
+.bacts{display:flex;flex-direction:column;gap:6px}
+.bcrow .x.insp{color:var(--light)}.bcrow .x .ti{width:16px;height:16px}
+.ppks{display:flex;flex-wrap:wrap;gap:3px 10px;font-size:12px;color:var(--faint)}
+.ppk{display:inline-flex;align-items:center;gap:4px}.ppk .ic{width:16px;height:16px}
+.ppk.key{color:var(--text)}
