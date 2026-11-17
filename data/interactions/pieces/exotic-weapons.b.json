@@ -1,0 +1,1650 @@
+[
+ {
+  "id": "xw:malfeasance",
+  "n": "Malfeasance",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "blight",
+    "perk": "Taken Predator",
+    "q": "Deals 25% increased damage against Taken combatants, Invaders in Gambit, and targets blighted by Witherhoard.",
+    "s": "clarity",
+    "note": "bonus damage vs Witherhoard-blighted targets"
+   }
+  ]
+ },
+ {
+  "id": "xw:merciless",
+  "n": "Merciless",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "cure",
+    "on": "reloading after a kill",
+    "who": "allies",
+    "perk": "Merciless Catalyst",
+    "q": "Finishing a reload within 5.3? seconds of a Kill grants Cure x2 to you and Cure x1 to allies within 15 meters.",
+    "s": "clarity",
+    "note": "catalyst; you and nearby allies"
+   }
+  ]
+ },
+ {
+  "id": "xw:microcosm",
+  "n": "Microcosm",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "on": "final blows",
+    "perk": "Paracausal Imbuement",
+    "q": "Final blows with this weapon grant Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "perk": "Paracausal Imbuement",
+    "q": "This weapon gains bonus damage once your Super expires.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "perk": "Paracausal Imbuement",
+    "q": "Refills the magazine on Super cast.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "xw:montecarlo",
+  "n": "Monte Carlo",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Monte Carlo Method",
+    "q": "Dealing damage with this weapon reduces your melee cooldown and grants a chance to fully charge your melee ability with each kill.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "on": "melee kills",
+    "perk": "Markov Chain",
+    "q": "This weapon gains increased damage from melee kills and kills with this weapon. Melee kills grant ammo for this weapon.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "q": "Bayonet Melee Attacks deal 2,495 [140] Kinetic Melee Damage, grant 50% Fixed Melee Ability Energy",
+    "s": "compendium",
+    "note": "catalyst (Bayonet Locked): the bayonet replaces your melee for one attack and counts as an unpowered melee"
+   }
+  ]
+ },
+ {
+  "id": "xw:necrochasm",
+  "n": "Necrochasm",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "corruption",
+    "perk": "Cursebringer",
+    "q": "Precision final blows with this weapon increase reload speed and trigger a Cursed Thrall explosion that inflicts corruption.",
+    "s": "bungie",
+    "note": "Weapon of Sorrow; Necrotic Grip spreads corruption from its kills"
+   },
+   {
+    "do": "uses",
+    "t": "corruption",
+    "q": "or upon killing a Corrupted Enemy",
+    "s": "compendium",
+    "note": "killing any corrupted target also triggers the Cursed Thrall explosion"
+   }
+  ]
+ },
+ {
+  "id": "xw:newmalpais",
+  "n": "New Malpais",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suspend",
+    "perk": "Suspending Blast",
+    "q": "Detonating a large number of rounds embedded in a single target suspends them.",
+    "s": "bungie",
+    "note": "manually detonating 6+ rounds on one target; Thread of Continuity extends it"
+   },
+   {
+    "do": "applies",
+    "t": "unravel",
+    "q": "Explosive Damage from Enemy-Embedded Projectiles now inflicts Unravel.",
+    "s": "compendium",
+    "note": "catalyst"
+   }
+  ]
+ },
+ {
+  "id": "xw:notimetoexplain",
+  "n": "No Time to Explain",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "slow",
+    "perk": "Rewind Again",
+    "q": "Precision shots and shots against combatants slowed or frozen by Stasis will return to the magazine.",
+    "s": "bungie",
+    "note": "hits on slowed/frozen targets refill ammo and build Time-Slip portal stacks"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "perk": "Rewind Again",
+    "q": "Precision shots and shots against combatants slowed or frozen by Stasis will return to the magazine.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:onethousandvoices",
+  "n": "One Thousand Voices",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Unforeseen Repercussions",
+    "q": "This weapon's beam superheats its targets upon impact, causing delayed scorching explosions.",
+    "s": "bungie",
+    "note": "Ember of Ashes increases the stacks"
+   },
+   {
+    "do": "modifies",
+    "t": "scorch",
+    "perk": "Ahamkara's Eye",
+    "q": "Scorch granted by me and Ignitions that started from me deal 31.6% increased damage.",
+    "s": "clarity",
+    "note": "only scorch/ignitions this weapon started"
+   },
+   {
+    "do": "modifies",
+    "t": "ignition",
+    "perk": "Ahamkara's Eye",
+    "q": "Scorch granted by me and Ignitions that started from me deal 31.6% increased damage.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "blight",
+    "q": "Blighted Enemies (Witherhoard Direct Hit) receive 100% increased tick damage.",
+    "s": "compendium",
+    "note": "catalyst Taken Seekers"
+   }
+  ]
+ },
+ {
+  "id": "xw:osteostriga",
+  "n": "Osteo Striga",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "corruption",
+    "perk": "Toxic Overload",
+    "q": "Landing a final blow or multiple precision hits triggers a burst that inflicts nearby targets with potent corruption.",
+    "s": "bungie",
+    "note": "Weapon of Sorrow; the poison counts as weapon damage; Necrotic Grip spreads it"
+   }
+  ]
+ },
+ {
+  "id": "xw:outbreakperfected",
+  "n": "Outbreak Perfected",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "sivananite",
+    "perk": "The Corruption Spreads",
+    "q": "This weapon creates SIVA nanite swarms on rapid hits and precision kills.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "sivananite",
+    "perk": "Parasitism",
+    "q": "This weapon does more damage to enemies based on the number of SIVA nanites that attach to them.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:polarislance",
+  "n": "Polaris Lance",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "The Perfect Fifth",
+    "q": "Landing 4 precision hits loads a delayed Solar explosive round that scorches targets for your next shot.",
+    "s": "bungie",
+    "note": "Ember of Ashes increases the stacks"
+   }
+  ]
+ },
+ {
+  "id": "xw:praxicblade",
+  "n": "Praxic Blade",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Ranged Weapon",
+    "if": [
+     {
+      "subclass": "arc"
+     }
+    ],
+    "q": "Grants x1 Bolt Charge",
+    "s": "clarity",
+    "note": "with Gyro Core equipped; thrown blade hits apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Ranged Weapon",
+    "if": [
+     {
+      "subclass": "solar"
+     }
+    ],
+    "q": "35? Scorch (50? with Ember of Ashes)",
+    "s": "clarity",
+    "note": "with Gyro Core equipped; thrown blade hits apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Ranged Weapon",
+    "if": [
+     {
+      "subclass": "void"
+     }
+    ],
+    "q": "Weakens for 6 seconds",
+    "s": "clarity",
+    "note": "with Gyro Core equipped; thrown blade hits apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Ranged Weapon",
+    "if": [
+     {
+      "subclass": "stasis"
+     }
+    ],
+    "q": "50 Slow for 4 seconds (8 with Whisper of Durance)",
+    "s": "clarity",
+    "note": "with Gyro Core equipped; thrown blade hits apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "perk": "Ranged Weapon",
+    "if": [
+     {
+      "subclass": "strand"
+     }
+    ],
+    "q": "Severs for 10 seconds (15 with Thread of Continuity)",
+    "s": "clarity",
+    "note": "with Gyro Core equipped; thrown blade hits apply your subclass element's effect"
+   },
+   {
+    "do": "consumes",
+    "t": "boltcharge",
+    "perk": "Ranged Weapon",
+    "q": "Melee Hits can discharge Bolt Charge stacks.",
+    "s": "clarity",
+    "note": "melee hits discharge Bolt Charge from any source"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Cormorant Reversal",
+    "if": [
+     {
+      "subclass": "arc"
+     }
+    ],
+    "q": "Grants x1 Bolt Charge",
+    "s": "clarity",
+    "note": "with Refraction Core equipped; reflected bolts apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Cormorant Reversal",
+    "if": [
+     {
+      "subclass": "solar"
+     }
+    ],
+    "q": "10? Scorch (17? with Ember of Ashes)",
+    "s": "clarity",
+    "note": "with Refraction Core equipped; reflected bolts apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Cormorant Reversal",
+    "if": [
+     {
+      "subclass": "void"
+     }
+    ],
+    "q": "Weakens for 6 seconds",
+    "s": "clarity",
+    "note": "with Refraction Core equipped; reflected bolts apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Cormorant Reversal",
+    "if": [
+     {
+      "subclass": "stasis"
+     }
+    ],
+    "q": "20 Slow for 1? second (2? with Whisper of Durance)",
+    "s": "clarity",
+    "note": "with Refraction Core equipped; reflected bolts apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "perk": "Cormorant Reversal",
+    "if": [
+     {
+      "subclass": "strand"
+     }
+    ],
+    "q": "Severs for 10 seconds (15 with Thread of Continuity)",
+    "s": "clarity",
+    "note": "with Refraction Core equipped; reflected bolts apply your subclass element's effect"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Cormorant Combo",
+    "if": [
+     {
+      "subclass": "arc"
+     }
+    ],
+    "q": "Grants x1 Bolt Charge",
+    "s": "clarity",
+    "note": "with Impact Core equipped; blade melee hits apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Cormorant Combo",
+    "if": [
+     {
+      "subclass": "solar"
+     }
+    ],
+    "q": "25? Scorch (35? with Ember of Ashes)",
+    "s": "clarity",
+    "note": "with Impact Core equipped; blade melee hits apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Cormorant Combo",
+    "if": [
+     {
+      "subclass": "void"
+     }
+    ],
+    "q": "Weakens for 6 seconds",
+    "s": "clarity",
+    "note": "with Impact Core equipped; blade melee hits apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Cormorant Combo",
+    "if": [
+     {
+      "subclass": "stasis"
+     }
+    ],
+    "q": "40 Slow for 1? second (2? with Whisper of Durance)",
+    "s": "clarity",
+    "note": "with Impact Core equipped; blade melee hits apply your subclass element's effect"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "perk": "Cormorant Combo",
+    "if": [
+     {
+      "subclass": "strand"
+     }
+    ],
+    "q": "Severs for 10 seconds (15 with Thread of Continuity)",
+    "s": "clarity",
+    "note": "with Impact Core equipped; blade melee hits apply your subclass element's effect"
+   }
+  ]
+ },
+ {
+  "id": "xw:prometheuslens",
+  "n": "Prometheus Lens",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Prismatic Inferno",
+    "q": "Sustained damage applies scorch to the target.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "scorch",
+    "perk": "Prismatic Inferno",
+    "q": "Scorch and Ignitions that originate from this weapon deal 15% increased damage.",
+    "s": "clarity"
+   },
+   {
+    "do": "modifies",
+    "t": "ignition",
+    "perk": "Prismatic Inferno",
+    "q": "Scorch and Ignitions that originate from this weapon deal 15% increased damage.",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Prometheus Catalyst",
+    "q": "Weapon Kills trigger a Solar explosion that applies 30 Scorch Stacks",
+    "s": "clarity",
+    "note": "catalyst (Incandescent)"
+   }
+  ]
+ },
+ {
+  "id": "xw:quicksilverstorm",
+  "n": "Quicksilver Storm",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "tangle",
+    "q": "Grenade Launcher Mode Kills create a Tangle.",
+    "s": "compendium",
+    "note": "catalyst; also turns the weapon Strand"
+   }
+  ]
+ },
+ {
+  "id": "xw:ratking",
+  "n": "Rat King",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "invisibility",
+    "perk": "Vermin",
+    "q": "Reloading immediately after a kill grants a brief period of invisibility.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:reddeathreformed",
+  "n": "Red Death Reformed",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "cure",
+    "perk": "Redemption",
+    "q": "Final blows with this weapon cure you",
+    "s": "bungie",
+    "note": "reduced to Cure x1 while On Your Mark is at x10"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "allies",
+    "perk": "Redemption",
+    "q": "reloading after final blows cures nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "q": "Restoration Orb grants Restoration x2 for 4+2 seconds.",
+    "s": "compendium",
+    "note": "catalyst (Helping Hand)"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "allies",
+    "q": "Healing Burst bestows Cure x2 to allies within 7.5? meters.",
+    "s": "compendium",
+    "note": "catalyst (Helping Hand)"
+   }
+  ]
+ },
+ {
+  "id": "xw:riskrunner",
+  "n": "Riskrunner",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "arcdamage",
+    "perk": "Arc Conductor",
+    "q": "When taking Arc Damage, this weapon becomes more powerful and resists incoming Arc Damage.",
+    "s": "bungie",
+    "note": "only Arc damage you receive; the catalyst's explosion can self-trigger it"
+   }
+  ]
+ },
+ {
+  "id": "xw:ruinouseffigy",
+  "n": "Ruinous Effigy",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suppress",
+    "perk": "Evolution",
+    "q": "Heavy Attacks consume the sphere, slamming it on the ground for 1350 [300] damage with no falloff, and Suppress enemies in a 5 meter radius.",
+    "s": "clarity",
+    "note": "Transmutation Sphere heavy attack"
+   },
+   {
+    "do": "applies",
+    "t": "disorient",
+    "perk": "Evolution",
+    "q": "Light Attacks deal 270 [150] damage, disorient combatants, and cost 1 ammo.",
+    "s": "clarity",
+    "note": "Transmutation Sphere light attacks"
+   },
+   {
+    "do": "applies",
+    "t": "volatile",
+    "if": [
+     {
+      "has": "volatilerounds"
+     }
+    ],
+    "q": "They are also able to inflict Volatile through Volatile Rounds.",
+    "s": "compendium",
+    "note": "spheres count as Void weapons but do not trigger or benefit from melee or Void ability effects"
+   },
+   {
+    "do": "uses",
+    "t": "volatilerounds",
+    "q": "They are also able to inflict Volatile through Volatile Rounds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "xw:salvationsgrip",
+  "n": "Salvation's Grip",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "perk": "Cryocannon",
+    "q": "This weapon's charged projectiles create a pattern of Stasis crystals on impact and freeze nearby targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "perk": "Cryocannon",
+    "q": "This weapon's charged projectiles create a pattern of Stasis crystals on impact and freeze nearby targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "perk": "Cryocannon",
+    "q": "Deals 25% increased damage to Frozen Enemies and always destroys Stasis Crystals on hit.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "perk": "Shatter Shot",
+    "q": "Rapidly destroying multiple Stasis crystals reloads this weapon from reserves.",
+    "s": "bungie",
+    "note": "crystals from any source"
+   }
+  ]
+ },
+ {
+  "id": "xw:serviceofluzaku",
+  "n": "Service of Luzaku",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "who": "allies",
+    "perk": "Dichotomous Thinking",
+    "q": "Hip firing at allies while this weapon is charged heals them",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "threadling",
+    "perk": "Dichotomous Thinking",
+    "q": "Rapid healing increases weapon damage and spawns Threadlings from your allies.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "threadling",
+    "perk": "Meaning-Making",
+    "q": "Final blows with this weapon create a Threadling nest that periodically spawns Threadlings.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "threadling",
+    "perk": "Meaning-Making",
+    "q": "Threadlings spawned from Teeming Nests interact with Strand Fragments, count as weapon damage, can trigger Armor Mods, and benefit from Empowering Buffs.",
+    "s": "clarity",
+    "note": "nest Threadlings work with Strand fragments"
+   },
+   {
+    "do": "creates",
+    "t": "tangle",
+    "q": "Harvesting a Nest destroys it to grant a Throwable Tangle.",
+    "s": "compendium",
+    "note": "catalyst"
+   }
+  ]
+ },
+ {
+  "id": "xw:skyburnersoath",
+  "n": "Skyburner's Oath",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Slug Rifle",
+    "q": "When you're firing from the hip, the explosion is larger and applies Scorch to the target.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Skyburner Catalyst",
+    "q": "Weapon Kills trigger a Solar explosion that applies 30 Scorch Stacks",
+    "s": "clarity",
+    "note": "catalyst (Incandescent)"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "perk": "Skyburner Catalyst",
+    "q": "Direct Hits against Scorched Enemies apply 10 [4] additional Scorch per Direct Hit",
+    "s": "clarity",
+    "note": "catalyst (Burning Ambition)"
+   }
+  ]
+ },
+ {
+  "id": "xw:slayersfang",
+  "n": "Slayer's Fang",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Nightsworn Sight",
+    "q": "submunitions weaken targets",
+    "s": "bungie",
+    "note": "while Nightsworn Sight is active"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "perk": "Nightsworn Sight",
+    "q": "Kills or collecting a Void Breach grants 'Nightsworn Sight' for 7 seconds and Truesight for 3 seconds.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "xw:stillhunt",
+  "n": "Still Hunt",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "perk": "Cayde's Retribution",
+    "q": "Pick up Orbs of Power or land precision hits to charge this weapon's Super bar.",
+    "s": "bungie",
+    "note": "the Golden Gun mode does not count as a Super"
+   },
+   {
+    "do": "grants",
+    "t": "goldengunmode",
+    "perk": "Cayde's Retribution",
+    "q": "Once full, [Alternate Weapon Action]  to fire Golden Gun shots.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "goldengunmode",
+    "perk": "Cayde's Retribution",
+    "if": [
+     {
+      "item": "Celestial Nighthawk"
+     }
+    ],
+    "q": "Wearing Celestial Nighthawk transforms Cayde's Retribution into a single high-powered shot",
+    "s": "clarity",
+    "note": "one shot instead of three; ~43% more damage and targets explode on death"
+   }
+  ]
+ },
+ {
+  "id": "xw:sunshot",
+  "n": "Sunshot",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Sun Blast",
+    "q": "Targets defeated with Sunshot explode in Solar energy, scorching other nearby targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:surosregime",
+  "n": "SUROS Regime",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "SUROS Legacy",
+    "q": "Kills have a 25% chance to grant 20 HP and begin Health Regeneration.",
+    "s": "clarity",
+    "note": "catalyst doubles the chance to 50%"
+   }
+  ]
+ },
+ {
+  "id": "xw:symmetry",
+  "n": "Symmetry",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Dynamic Charge",
+    "q": "Charged Arc Seeker hits grant, and can spend, Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "consumes",
+    "t": "boltcharge",
+    "perk": "Dynamic Charge",
+    "q": "Charged Arc Seeker hits grant, and can spend, Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "boltcharge",
+    "perk": "Revolution",
+    "q": "Bolt Charge that is discharged through Arc Seeker hits counts as 'Scout Rifle Weapon Damage'",
+    "s": "clarity",
+    "note": "Bolt Charge discharges then scale with weapon damage buffs (Radiant, surges)"
+   },
+   {
+    "do": "uses",
+    "t": "boltcharge",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "super",
+        "is": [
+         "Well of Radiance"
+        ]
+       },
+       {
+        "piece": "Storm's Keep"
+       }
+      ]
+     }
+    ],
+    "q": "Storm's Keep (and Well of Radiance's Caster) cause Bolt Discharge to occur twice simultaneously",
+    "s": "compendium",
+    "note": "as Well of Radiance caster or behind a Storm's Keep barricade, Arc Seeker hits discharge Bolt Charge twice"
+   }
+  ]
+ },
+ {
+  "id": "xw:tarrabah",
+  "n": "Tarrabah",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "scorch",
+    "perk": "Ravenous Beast",
+    "q": "defeating combatants or dealing damage to Scorched combatants grants increased progress.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:telesto",
+  "n": "Telesto",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "voiddamage",
+    "perk": "Harbinger's Pulse",
+    "q": "Scoring 3 Void Kills from any source within 4.5 seconds of each refills the magazine.",
+    "s": "clarity",
+    "note": "Void kills from any source (abilities included) refill the magazine"
+   }
+  ]
+ },
+ {
+  "id": "xw:tessellation",
+  "n": "Tessellation",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Property: Undecidable",
+    "q": "Final blows grant grenade and Transcendence energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "perk": "Property: Undecidable",
+    "q": "Final blows grant grenade and Transcendence energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "perk": "Property: Undecidable",
+    "q": "adapts its damage type to match your equipped grenade.",
+    "s": "bungie"
+   },
+   {
+    "do": "consumes",
+    "t": "grenade",
+    "perk": "Property: Irreducible",
+    "q": "Consume your grenade to load a large",
+    "s": "bungie"
+   },
+   {
+    "do": "consumes",
+    "t": "prismaticgrenade",
+    "perk": "Property: Irreducible",
+    "q": "Can consume both Transcendence Grenades and Song of Flame Wisps.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "perk": "Property: Irreducible",
+    "q": "deals increased damage while Transcendence is active.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Flux Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Skip Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ],
+    "q": "Arc = Blind",
+    "s": "compendium",
+    "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Firebolt Grenade",
+       "Fusion Grenade",
+       "Healing Grenade",
+       "Incendiary Grenade",
+       "Solar Grenade",
+       "Swarm Grenade",
+       "Thermite Grenade",
+       "Tripmine Grenade"
+      ]
+     }
+    ],
+    "q": "Solar = x70+10 Scorch",
+    "s": "compendium",
+    "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Magnetic Grenade",
+       "Scatter Grenade",
+       "Suppressor Grenade",
+       "Void Spike",
+       "Void Wall",
+       "Vortex Grenade"
+      ]
+     }
+    ],
+    "q": "Void = Weaken for 6 [2.5] seconds.",
+    "s": "compendium",
+    "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Coldsnap Grenade",
+       "Duskfield Grenade",
+       "Glacier Grenade",
+       "Shatter Grenade"
+      ]
+     }
+    ],
+    "q": "Stasis = x80 Slow",
+    "s": "compendium",
+    "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Grapple",
+       "Shackle Grenade",
+       "Slicewire Grenade",
+       "Threadling Grenade"
+      ]
+     }
+    ],
+    "q": "Strand = Sever for 5+2.5",
+    "s": "compendium",
+    "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
+   }
+  ]
+ },
+ {
+  "id": "xw:thejaderabbit",
+  "n": "The Jade Rabbit",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "perk": "Shoot to Loot",
+    "q": "Shooting an Orb of Power picks it up.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:thelament",
+  "n": "The Lament",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Revved Consumption",
+    "q": "Damaging a combatant heals the wielder.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Allows Scorch to be inflicted from a single Revved Light/Heavy Attack.",
+    "s": "compendium",
+    "note": "catalyst (Burning Ambition)"
+   }
+  ]
+ },
+ {
+  "id": "xw:themanticore",
+  "n": "The Manticore",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "perk": "Swooping Talons",
+    "q": "Dealing damage while airborne increases this weapon's damage output.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "q": "Scoring an Airborne Kill refills 12 Manticore Ammo and grants a 15HP Void Overshield for 6 seconds.",
+    "s": "compendium",
+    "note": "catalyst"
+   }
+  ]
+ },
+ {
+  "id": "xw:thenavigator",
+  "n": "The Navigator",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "wovenmail",
+    "who": "allies",
+    "perk": "Protective Weave",
+    "q": "Firing this weapon at an ally grants Woven Mail to both the user and the target.",
+    "s": "bungie",
+    "note": "you and the ally"
+   },
+   {
+    "do": "uses",
+    "t": "wovenmail",
+    "perk": "Protective Weave",
+    "q": "Deals more damage while you have Woven Mail.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "perk": "Weft Cutter",
+    "q": "Dealing sustained damage severs the target.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "wovenmail",
+    "perk": "Weft Cutter",
+    "q": "applies Sever for 10 seconds (15 seconds with Thread of Continuity) and grants you Woven Mail for 10 seconds.",
+    "s": "clarity"
+   },
+   {
+    "do": "creates",
+    "t": "tangle",
+    "q": "Grapple Tangle Mode shoots a Grapple Tangle",
+    "s": "compendium",
+    "note": "catalyst (Gordian Knot); 30 s cooldown"
+   }
+  ]
+ },
+ {
+  "id": "xw:thequeenbreaker",
+  "n": "The Queenbreaker",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blind",
+    "q": "Shoots a single chaining bolt that deals 439 [180] Arc Damage with a 3.44x Precision Multiplier and inflicts blinds.",
+    "s": "compendium",
+    "note": "Marksman Sights mode"
+   }
+  ]
+ },
+ {
+  "id": "xw:thewardcliffcoil",
+  "n": "The Wardcliff Coil",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "who": "allies",
+    "perk": "Mad Scientist",
+    "q": "grants Bolt Charge to all nearby allies for every other rocket that it fires.",
+    "s": "bungie",
+    "note": "you and nearby allies"
+   }
+  ]
+ },
+ {
+  "id": "xw:thirditeration",
+  "n": "Third Iteration",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "invisibility",
+    "perk": "Amalgamation Rounds",
+    "q": "Defeating a marked target or landing a precision final blow with an Amalgamation Round grants invisibility and truesight.",
+    "s": "bungie",
+    "note": "Echo of Persistence extends it"
+   },
+   {
+    "do": "grants",
+    "t": "truesight",
+    "perk": "Amalgamation Rounds",
+    "q": "Defeating a marked target or landing a precision final blow with an Amalgamation Round grants invisibility and truesight.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "q": "inflicting weaken over 8 meters",
+    "s": "compendium",
+    "note": "catalyst; Amalgamation Round precision kills"
+   }
+  ]
+ },
+ {
+  "id": "xw:thorn",
+  "n": "Thorn",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "corruption",
+    "perk": "Mark of the Devourer",
+    "q": "Rounds pierce targets and inflict corruption.",
+    "s": "bungie",
+    "note": "Weapon of Sorrow; Necrotic Grip spreads corruption from its kills"
+   }
+  ]
+ },
+ {
+  "id": "xw:thunderlord",
+  "n": "Thunderlord",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Reign Havoc",
+    "q": "Lightning strikes grant a stack of Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Lightning Rounds",
+    "q": "Summons a Lightning Strike after 10 hits and grants x1 Bolt Charge.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "xw:tommysmatchbook",
+  "n": "Tommy's Matchbook",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "cure",
+    "q": "Weapon Kills grant Cure x1.",
+    "s": "compendium",
+    "note": "catalyst; while Ignition Trigger is active"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Every 5th shot applies x15+5 [x10+10] Scorch.",
+    "s": "compendium",
+    "note": "catalyst; while Ignition Trigger is active"
+   }
+  ]
+ },
+ {
+  "id": "xw:touchofmalice",
+  "n": "Touch of Malice",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blind",
+    "perk": "Charged with Blight",
+    "q": "shrouding combatants in Darkness to temporarily blind them and inflict corruption.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "corruption",
+    "perk": "Charged with Blight",
+    "q": "shrouding combatants in Darkness to temporarily blind them and inflict corruption.",
+    "s": "bungie",
+    "note": "Weapon of Sorrow; targets hit take 50% more damage from Weapons of Sorrow"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Touch of Malice",
+    "q": "Defeating powerful combatants or multiple targets rapidly restores health.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:tractorcannon",
+  "n": "Tractor Cannon",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suppress",
+    "perk": "Repulsor Force",
+    "q": "suppressing their abilities and dramatically weakening them.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Repulsor Force",
+    "q": "suppressing their abilities and dramatically weakening them.",
+    "s": "bungie",
+    "note": "a stronger 30% weaken"
+   }
+  ]
+ },
+ {
+  "id": "xw:travelerschosen",
+  "n": "Traveler's Chosen",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Gathering Light",
+    "q": "Consume stacks, granting melee, grenade, and class ability energy based on the number of stacks.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Gathering Light",
+    "q": "Consume stacks, granting melee, grenade, and class ability energy based on the number of stacks.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "perk": "Gathering Light",
+    "q": "Consume stacks, granting melee, grenade, and class ability energy based on the number of stacks.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:trinityghoul",
+  "n": "Trinity Ghoul",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "arcdamage",
+    "q": "Lightning Rod now triggers by scoring any Arc Kill.",
+    "s": "compendium",
+    "note": "catalyst (Forked Lightning): any Arc kill, abilities included, grants Lightning Rod"
+   }
+  ]
+ },
+ {
+  "id": "xw:turncoat",
+  "n": "Turncoat",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Latent Power",
+    "q": "causing shots to weaken targets.",
+    "s": "bungie",
+    "note": "while Unleashed Power is active"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "q": "Void Overshield for 10+5 seconds.",
+    "s": "compendium",
+    "note": "catalyst; when Unleashed Power ends"
+   }
+  ]
+ },
+ {
+  "id": "xw:twotailedfox",
+  "n": "Two-Tailed Fox",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suppress",
+    "perk": "Play with Your Prey",
+    "q": "The Void rocket suppresses combatants.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Play with Your Prey",
+    "q": "The Solar rocket scorches.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "q": "The third rocket deals deals 102 [22] Impact Damage, up to 355 [76] Explosion Damage, and inflicts Jolt.",
+    "s": "compendium",
+    "note": "catalyst (Third Tail)"
+   }
+  ]
+ },
+ {
+  "id": "xw:verglascurve",
+  "n": "Verglas Curve",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "perk": "Hail Storm",
+    "q": "Stasis arrows that impact the environment create Stasis crystals.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "perk": "Hail Storm",
+    "q": "Direct hits with Stasis arrows freeze combatants",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "perk": "Hail Storm",
+    "q": "This weapon deals 50% increased damage to Frozen enemies and Stasis Crystals",
+    "s": "clarity",
+    "note": "stacks with Whisper of Rending"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "perk": "Hail Storm",
+    "q": "This weapon deals 50% increased damage to Frozen enemies and Stasis Crystals",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "0.65x Draw Time Multiplier for 5 seconds upon inflicting freeze or slow.",
+    "s": "compendium",
+    "note": "catalyst"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "0.65x Draw Time Multiplier for 5 seconds upon inflicting freeze or slow.",
+    "s": "compendium",
+    "note": "catalyst"
+   }
+  ]
+ },
+ {
+  "id": "xw:vexmythoclast",
+  "n": "Vex Mythoclast",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "ignition",
+    "perk": "Temporal Unlimiter",
+    "q": "fire Linear Fusion Rifle shots that cause an ignition on precision final blows.",
+    "s": "bungie",
+    "note": "Overcharge (linear) mode only"
+   }
+  ]
+ },
+ {
+  "id": "xw:vexcalibur",
+  "n": "Vexcalibur",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "overshield",
+    "who": "allies",
+    "perk": "M1R Distribution Matrix",
+    "q": "Blocking damage with your shield gradually bestows Void overshields to yourself and nearby allies.",
+    "s": "bungie",
+    "note": "you and nearby allies; Echo of Persistence extends it"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "perk": "Perpetual Loophole",
+    "q": "Deal additional melee damage while protected by an overshield.",
+    "s": "bungie",
+    "note": "any overshield; glaive melee kills refresh it"
+   }
+  ]
+ },
+ {
+  "id": "xw:vigilancewing",
+  "n": "Vigilance Wing",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Harsh Truths",
+    "q": "When a nearby ally is killed, gain health regeneration and increased movement speed.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:wavesplitter",
+  "n": "Wavesplitter",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "perk": "Supercharged Battery",
+    "q": "Collecting an Orb of Power grants a period of maximum power that starts with an automatic reload.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suppress",
+    "perk": "Supercharged Battery",
+    "q": "Sustained fire in this mode suppresses targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:whirlingovation",
+  "n": "Whirling Ovation",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "grenade",
+    "q": "create a Solar Grenade that lasts for ? seconds.",
+    "s": "compendium",
+    "note": "catalyst; fully charged shots; the Solar Grenade benefits from Touch of Flame but not Sunbracers. Counts as a Strand weapon for most mods"
+   }
+  ]
+ },
+ {
+  "id": "xw:wickedimplement",
+  "n": "Wicked Implement",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Creeping Attrition",
+    "q": "Rapidly landing precision hits causes targets to become slowed.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "perk": "Tithing Harvest",
+    "q": "While Creeping Attrition is active, destroying Stasis crystals or landing precision final blows creates a Stasis shard.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "perk": "Tithing Harvest",
+    "q": "While Creeping Attrition is active, destroying Stasis crystals or landing precision final blows creates a Stasis shard.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "perk": "Tithing Harvest",
+    "q": "collecting Stasis shards refills the magazine.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:winterbite",
+  "n": "Winterbite",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "perk": "Big Frigid Glaive",
+    "q": "Fires a large ball of energy that locks onto nearby targets and freezes them.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Big Frigid Glaive",
+    "q": "applying 60 Slow for 4 seconds (8 with Whisper of Durance).",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Weighted Edge",
+    "q": "This weapon's melee attacks deal increased damage and slow targets when loaded with ammo.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:wishender",
+  "n": "Wish-Ender",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "blight",
+    "q": "25% Increased damage against Combatants stuck by Witherhoard's Blight.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "xw:wishkeeper",
+  "n": "Wish-Keeper",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suspend",
+    "perk": "Snareweaver",
+    "q": "On impact, Snareweaver arrows create a pattern of traps that suspend nearby targets.",
+    "s": "bungie",
+    "note": "Thread of Continuity extends it"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "perk": "Silkbound Slayer",
+    "q": "This weapon deals bonus damage to suspended targets. Gain faster draw time for a short duration when you suspend a target from any source",
+    "s": "bungie",
+    "note": "suspends from any source (abilities included) trigger the buff"
+   }
+  ]
+ },
+ {
+  "id": "xw:witherhoard",
+  "n": "Witherhoard",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blight",
+    "perk": "Primeval's Torment",
+    "q": "Projectiles fired by this weapon blight the target or nearby area on impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "blight",
+    "perk": "Break the Bank",
+    "q": "Blighted targets take damage over time and blight the nearby area on death.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:wolfsbane",
+  "n": "Wolfsbane",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Resurgence Directive",
+    "q": "spawn seeking Quicksilver nanites that heal the wielder upon attaching.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "sivananite",
+    "perk": "Resurgence Directive",
+    "q": "Wolfsbane's damage is increased against enemies with Outbreak Perfected Nanites on them",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "q": "Grants Damage Resist for 5 seconds upon scoring Light Attack Hits within 3? seconds of each.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "_skipped",
+  "ids": [
+   "xw:midamultitool",
+   "xw:newlandbeyond",
+   "xw:parasite",
+   "xw:revisionzero",
+   "xw:sleepersimulant",
+   "xw:sturm",
+   "xw:sweetbusiness",
+   "xw:thechaperone",
+   "xw:thecolony",
+   "xw:thefourthhorseman",
+   "xw:thehuckleberry",
+   "xw:thelastword",
+   "xw:theprospector",
+   "xw:ticuusdivination",
+   "xw:trespasser",
+   "xw:truth",
+   "xw:whisperoftheworm",
+   "xw:worldlinezero",
+   "xw:xenophage"
+  ]
+ }
+]

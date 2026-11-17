@@ -1,0 +1,833 @@
+[
+ {
+  "id": "sub:bleakwatcher",
+  "n": "Bleak Watcher",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2642597904,
+   790664813
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "[Grenade]  : Hold to convert your grenade into a [Stasis] Stasis turret that fires slowing projectiles at nearby targets.",
+   "clarity": "Base Grenade Cooldown is set to 121 seconds while equipped.\nHolding [Grenade] charges your grenade and converts it into a throwable 'Stasis Turret' that targets enemies within a 35 meter radius.\nStasis Turret fires a burst of 5 seeking projectiles over 0.7 seconds every 2 seconds. Each projectile applies x20 [x10] Slow for 4.5 [2] seconds on hit (9 [3.75] seconds with Whisper of Durance).\nTurret lasts for 25 seconds (30 seconds with Whisper of Durance) and has 67% Damage Resistance until it has fired.\nStasis Turret counts as a Grenade Ability and is buffed by, and triggers, grenade-specific effects.",
+   "compendium": "Grenade Base Cooldown and Chunk Scalar is set to Glacier Grenade's while this Aspect is equipped.\nHold [Grenade] to convert the Grenade Ability into a Stasis Turret. \nStasis Turret:\nAutomatically shoots a burst of 5 seeking projectiles over 0.7 seconds every 2 seconds at enemies within 35 metres, inflicting x20 [x10] Slow for 4.5+4.5 [2+1.75] seconds per hit. \nLasts for 25+5 seconds, has 150 Construct HP, and 67% Damage Resist until it has fired.\nBleak Watcher damage counts as Stasis Grenade Ability Damage."
+  }
+ },
+ {
+  "id": "sub:coldsnapgrenade",
+  "n": "Coldsnap Grenade",
+  "kind": "grenade",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1399219,
+   4265391440
+  ],
+  "src": {
+   "bungie": "A grenade that freezes on impact and sends another seeker to find and freeze targets.",
+   "compendium": "Medium Trajectory | Seeker\nDirectly hitting an enemy inflicts x50 [x?] Slow Stacks for 4+2 seconds.\nDirect Hits count as Stasis Grenade Ability Damage.\nSpawns a seeker after 0.8 seconds of impacting the ground, tracking the closest enemy within 20 meters at a speed of 17m/s for 1 second.\nTracking strength gets weaker over the seeker's lifespan.\nSeeker detonates upon reaching an enemy or expiring, dealing 20 [20] damage and freezing enemies within 3 [1.75] meters.\nIf the seeker freezes an enemy, another seeker is spawned, targeting a different enemy, chaining up to 2 times."
+  }
+ },
+ {
+  "id": "sub:cryoclasm",
+  "n": "Cryoclasm",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2031919265
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Your slide distance is greatly increased. Sliding releases a wave that shatters [Stasis] Stasis crystals or frozen targets on contact, along with any other frozen targets nearby.",
+   "clarity": "Passively grants an 'Enhanced Slide' that travels 50% further and sends a Stasis Wave that travels 20? meters along the ground. This stasis wave instantly Shattering any Crystals or Frozen Targets on contact in a ? meter radius. Incurs a 2 second cooldown between uses.\nSliding into Stasis Crystals or Frozen Enemies instantly Shatters them and other targets within a ? meter radius.",
+   "compendium": "Sliding into Stasis Crystals and Frozen Enemies shatters on contact.\nPassively increases Slide Distance from 6.5 meters to 11 meters.\nIncurs a 2 second cooldown after an extended slide.\nSliding launches a Stasis wave that deals 18 [?] Damage, shatters Stasis Crystals and Frozen Enemies."
+  }
+ },
+ {
+  "id": "sub:diamondlance",
+  "n": "Diamond Lance",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   3866705246,
+   1262901522
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Shatter or defeat targets with [Stasis] Stasis abilities or weapons to create a Stasis lance.\n\n[Shoot]  : Throw the lance to freeze targets on impact.\n\n[Melee]  : Slam the lance to the ground to freeze targets in a small area.",
+   "clarity": "Scoring 1 [3] kills with Stasis Weapons, Abilities, or Shatter spawns a 'Diamond Lance' at the enemy's death location. Enters a 7 [17] second cooldown upon creation.\nDiamond Lance stays on the ground for 25 seconds, and lasts for 10 seconds upon pickup.\nThrowing the Lance with [Fire] launches it forward, Freezing enemies and Shattering Stasis Crystals within a 5 meters radius of its impact.\nPressing [Melee] will instead slam the lance onto the ground below you, Freezing enemies within an 8 [5?] meter radius and Shattering any Stasis Crystals it damages. Slamming the Diamond Lance grants you and allies within a ? meter radius x2 Frost Armor.",
+   "compendium": "Creates a Stasis Lance upon scoring 1 [3] Stasis Weapon Kills, a Stasis Ability Kill, or a Shatter Kill.\nStasis Lance is a single-use weapon that can be picked up while it is within 3 meters and can held for up to 10 seconds.\nRemains for up to 25 seconds on the ground.\n[Fire] throws the Stasis Lance, freezing enemies within 5 metres of the impact, shattering crystals on direct impact, and dealing 136 [45] damage. \n[Melee] slams the Stasis Lance, freezing enemies within 8 [6.75?] metres, dealing up to 180 [90] damage, and bestowing the user and their allies within ? meters x2 Frost Armor.\nDiamond Lances instantly shatter Stasis Crystals upon damaging them.\nDiamond Lance Damage is considered Generic Stasis Ability Damage. Not Grenade nor Melee Damage.\nIncurs a 7 [17] second cooldown after spawning a Stasis Lance before another can be spawned."
+  }
+ },
+ {
+  "id": "sub:duskfieldgrenade",
+  "n": "Duskfield Grenade",
+  "kind": "grenade",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1399216,
+   4051767608
+  ],
+  "src": {
+   "bungie": "A grenade that shatters on impact, leaving behind a field that slows targets and freezes those who do not leave the volume.",
+   "compendium": "Medium Trajectory | DoT Field\nDetonates on impact, dealing up to 20 [20] damage and inflicting x20 [x10] Slow Stacks for 2+2 seconds in a ? meter radius, as well as creating a Slowing Field.\nSlowing Field:\nDeals 1 damage and applies x10 [x5] Slow Stacks for 2+2 seconds every 0.35 [0.3] seconds for 7+2 seconds in a 4 meter radius."
+  }
+ },
+ {
+  "id": "sub:frostpulse",
+  "n": "Frostpulse",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   668903197
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Casting your Rift generates a shockwave that freezes nearby targets, granting you Frost Armor when it does so.\n\nFreezing combatants generates class ability energy.",
+   "clarity": "Freezing enemies grants 11% Class Ability Energy per enemy frozen.\nCasting your Class Ability instantly Freezes enemies within an 8.5 [5] meter radius and increases Melee Lunge Distance by 2.5 meters for 1.2 seconds. Enemy Players within 5 to 8 meters receive x50 Slow stacks for 3? seconds.\nSuccessfully freezing a target with this ability grants x5 Frost Armor.",
+   "compendium": "Grants 11% Class Ability Energy upon freezing an enemy.\nOn Class Ability Cast:\nFreezes enemies within 8.5 [5] metres. Grants +2.5 Meters Melee Lunge Distance for 1.2 seconds.\nFreezing an enemy with Frostpulse grants x5 Frost Armor.\n[Guardians within 5-8 meters are inflicted with x50 Slow for ?+? seconds instead.]"
+  }
+ },
+ {
+  "id": "sub:glacialharvest",
+  "n": "Glacial Harvest",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2651551055
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Picking up [Stasis] Stasis shards grants stacks of Frost Armor.\n\nWhile you have Frost Armor, defeating combatants with Stasis or Kinetic weapons may cause them to shatter, damaging other nearby foes. The shatter chance increases with your Frost Armor stacks.\n\nTaking damage while you have Frost Armor generates grenade energy.",
+   "clarity": "Stasis Shards now grant Frost Armor upon pickup:\n• Small Stasis Shards grant x1 Frost Armor, 10% Melee Ability Energy, and restore 10 HP.\n• Large Stasis Shards grant x3 Frost Armor, 50% Melee Ability Energy, and restore 20 HP.\nWhile Frost Armor is active:\n• Kinetic and Stasis Weapon Kills have an escalating chance to trigger a Stasis Shatter based on the number of Frost Armor stacks.\n• Taking damage grants ?% Grenade Ability energy (once per second).\nIntrinsic to All Stasis Subclasses:\nStasis Shards are generated by:\n• Shattering a Frozen target or Stasis Crystal\n• Defeating a Stasis-Debuffed (Slowed or Frozen) target\nMinor combatants generate a small Stasis Crystal, while Elites, Minibosses, and Guardians generate a Large Stasis Crystal.\nIn PvP Only:\nStasis Shards go on a 10 second cooldown upon creating 6 shards within ? seconds of the first.",
+   "compendium": "Picking up Small Stasis Shards restores 10 HP and grants x1 Frost Armor.\nPicking up Large Stasis Shards restore ? HP and grant x3 Frost Armor.\nWhile Frost Armor is active:\nKinetic and Stasis Weapon Kills has a chance to cause the kill to trigger a Stasis Shatter.\nEach Frost Armor stack increases the odds of it triggering.\nx1 = 10?% | x2 = 15?% | x3 = ?% | x4 = ?% | x5 = 50?% | x6 = 85?% | x7 = 100%\nTaking damage grants ?% Grenade Ability Energy, up to once a second?.\nCrucible-Only:\nIncurs a 10 second cooldown upon creating 6 Shards within ? seconds of the first shard?, preventing additional Stasis Shard creation from Harvest Aspects for 10 seconds.\nShard creation count and cooldown is shared for the entire fireteam."
+  }
+ },
+ {
+  "id": "sub:glacialquake",
+  "n": "Glacial Quake",
+  "kind": "super",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2021620139,
+   2529942645
+  ],
+  "src": {
+   "bungie": "Summon a [Stasis] Stasis gauntlet. While your Super is active:\n\n[Heavy Attack]  : Slam your gauntlet down to create a shockwave that freezes targets and sends out [Stasis] Stasis crystals to freeze additional ones.\n\n[Light Attack]  : Supercharge your Shiver Strike for bonus damage. Sprint through [Stasis] Stasis crystals or frozen targets to shatter them instantly.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [47%]\nBase Duration: 25 seconds, or 4% Super Drain per Second\nGrants increased Jump Height and Cryoclasm has no cooldown while in Super.\nOn Super Cast: Freezes enemies within 8 [6] meters.\nOn Super End: Grants 3 Melee Ability Charges.\nScoring a kill through any means while Glacial Quake is active spawn an Orbs of Power, each granting 7.15% Ability Energy up to 7 times per Super Cast.\nFrozen Enemies and Stasis Crystals are dealt 300 Stasis Super Damage every 0.15 seconds on contact, almost instantly shattering them. \nALL STASIS DAMAGE (except for Light Attacks and Contact Damage) against Frozen Enemies is increased by 310%, count as Super Damage, and is displayed in Yellow Numbers.\nLight Attack | Drains 7.45% Super Energy.\nLeaps through the air forward, dealing 1,838 [210] impact damage and heavily knocking enemies back.\nHits attach a delayed Stasis Explosive that deals up to 897 [?] explosive damage, and inflicts x100? [x?] Slow after 1 second to enemies, down to 20% damage over 8 meters.\n Impact Damage is non-lethal.\nHeavy Attack | Drains 7.45% Super Energy.\nSlams the ground, dealing 73 [50] damage and freezes over 9 meters, as well as creating 3 waves of Stasis Crystals, each composed of a Small, Medium and a Large Crystal.\nEnemies within a ~45 cone ahead of the caster are dealt up to 579 [?] Damage, down to 0% damage over 8 meters.\nGlacial Quake Stasis Crystals deal up to 158 [?] Stasis Super Damage and can be scaled with 100+ Super Stat and other Super Damage Increases.\nHowl of The Storm (Glacial Howl) | Drains 15% Super Energy (Up to x5 per Cast).\nBehaves and deals the same base damage as the regular Aspect and is considered \"Super Melee Damage\".\nGlacial Howl stacks Glacial Quake's 310% Frozen Enemy Damage Increase multiplicatively with Howl's intrinsic 1.5x Damage against Frozen Non-Boss Combatants.\nGlacial Howl damage can be further scaled by 100+ Super Stat, Super Melee Damage Buffs (Armorsmith, Shieldcrush, No Backup Plans), and Super Damage Buffs (Synthoceps).\nAll those damage buffs stack multiplicatively with each other. No Backup Plans is additive to Armorsmith/Shieldcrush.\nGlacial Howl against Frozen Enemies while Synthoceps' buff is active removes Titan's intrinsic 1.2x Melee Damage, only granting +25% Damage instead of the expected 50%"
+  }
+ },
+ {
+  "id": "sub:glaciergrenade",
+  "n": "Glacier Grenade",
+  "kind": "grenade",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1399217,
+   934199459
+  ],
+  "src": {
+   "bungie": "A grenade that creates walls out of [Stasis] Stasis crystals to block damage and freeze targets; these walls can be shattered for damage.",
+   "compendium": "Medium Trajectory\nCreates 5 Stasis Crystals in a straight line on impact, perpendicularly from where it was thrown.\nGlacier Grenades' Stasis Crystals deal up to 158 [?] Stasis Grenade Damage upon being shattered, down to 66% damage over 8 meters."
+  }
+ },
+ {
+  "id": "sub:grimharvest",
+  "n": "Grim Harvest",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   1920417385
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Picking up [Stasis] Stasis shards grants stacks of Frost Armor.\n\nWhile you have Frost Armor, defeating combatants with Stasis or Kinetic weapons may cause them to shatter, damaging nearby foes. The shatter chance increases with your Frost Armor stacks.\n\nTaking damage while you have Frost Armor generates class ability energy.",
+   "clarity": "Stasis Shards now grant Frost Armor upon pickup:\n• Small Stasis Shards grant x1 Frost Armor, 10% Melee Ability Energy, and restore 10 HP.\n• Large Stasis Shards grant x3 Frost Armor, 50% Melee Ability Energy, and restore 20 HP.\nWhile Frost Armor is active:\n• Kinetic and Stasis Weapon Kills have an escalating chance to trigger a Stasis Shatter based on the number of Frost Armor stacks.\n• Taking damage grants ?% Class Ability energy (once per second).\nIntrinsic to All Stasis Subclasses:\nStasis Shards are generated by:\n• Shattering a Frozen target or Stasis Crystal\n• Defeating a Stasis-Debuffed (Slowed or Frozen) target\nMinor combatants generate a small Stasis Crystal, while Elites, Minibosses, and Guardians generate a Large Stasis Crystal.\nIn PvP Only:\nStasis Shards go on a 10 second cooldown upon creating 6 shards within ? seconds of the first.",
+   "compendium": "Picking up Small Stasis Shards restores 10 HP and grants x1 Frost Armor.\nPicking up Large Stasis Shards restore ? HP and grant x3 Frost Armor.\nWhile Frost Armor is active:\nKinetic and Stasis Weapon Kills progress a counter that, upon reaching 100%, cause the kill to trigger a Stasis Shatter. \nEach Frost Armor stack increases the amount of progress gained per kill.\nTaking damage grants ?% Class Ability Energy, up to once a second?.\nCrucible-Only:\nIncurs a 10 second cooldown upon creating 6 Shards within ? seconds of the first shard?, preventing additional Stasis Shard creation from Harvest Aspects for 10 seconds.\nShard creation count and cooldown is shared for the entire fireteam."
+  }
+ },
+ {
+  "id": "sub:howlofthestorm",
+  "n": "Howl of the Storm",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   1563930741
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "While sliding, activate your charged melee ability to launch a wave of [Stasis] Stasis energy forward that freezes enemy combatants, slows enemy players, and creates [Stasis] Stasis crystals.\n\nGrants an additional melee charge.",
+   "clarity": "Grants an Additional Melee Charge.\nUsing your Charged Melee Ability while sliding performs a Stasis Uppercut, dealing damage and freezing [slowing] targets within ? meters of the attack.\nHowl of The Storm instantly spawns two lines of Stasis Crystals in a (V) Formation in front of you. Each line is comprised of one small, two medium, then one large Stasis Crystal.\nSpawned Crystals are considered Powered Melees and inherent damage boosts, melee effects, and Exotic benefits.\nThis attack can also be used during Glacial Quake at the cost of 15% Super Energy per Uppercut.\nFiring your weapon during the slide disables this ability.",
+   "compendium": "Grants an additional Melee Ability Charge.\nHowl of the Storm deals 1.5x Damage against Frozen Non-Boss Enemies.\nDoes not apply the 1.5x if Wormgod's Burning Fists is active.\nWhile Sliding:\n[Melee Ability] performs an uppercut, dealing 146 [?] Melee Damage, freezing [Slow x? for ? seconds] enemies within ? meters, and creating multiple Stasis Crystals.\nCreates 2 Small, 4 Medium, and 2 Large Crystal in a V formation ahead of the user. Uppercut damage scales with Melee Stat and Melee Damage Buffs.\nUnable to use during slide if user shoots.\nHowl of the Storm's Stasis Crystals deal 158 [?] Powered Stasis Melee Damage, down to 45% damage over 8 meters.\nHowl's Crystal Damage counts as Powered Stasis Melee Damage and scale normally with Melee Damage Buffs. DOES NOT SCALE WITH 100+ MELEE STAT.\nHowl of the Storm during Glacial Quake is complicated and is explained thoroughly in the Glacial Quake Super section."
+  }
+ },
+ {
+  "id": "sub:iceflarebolts",
+  "n": "Iceflare Bolts",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   668903196
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Shattering a frozen target spawns seekers that track and freeze other nearby targets.",
+   "clarity": "Shattering a Frozen enemy creates a Stasis Seeker that targets the closest enemy within a 12 meter radius.\nSeekers detonate in a 3 [1.75] meter radius upon reaching their target, Freezing all enemies hit.\nIceflare Bolts incur an 8 second cooldown upon creating 7 [1] Seekers within ? seconds of each other.",
+   "compendium": "Shattering a Frozen Enemy creates a seeker, targeting the closest enemy up to 12 metres away.\nSeeker detonates upon reaching an enemy or expiring, freezing enemies within 3 [1.75] meters.\nIncurs an 8 second cooldown after creating 7 [1] seekers."
+  }
+ },
+ {
+  "id": "sub:penumbralblast",
+  "n": "Penumbral Blast",
+  "kind": "melee",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2543177538,
+   3644045867
+  ],
+  "src": {
+   "bungie": "Raise your [Stasis] Stasis staff against your foe. Send a blast of [Stasis] Stasis forward to freeze your targets.",
+   "compendium": "Sends forth a freezing projectile that automatically detonates after traveling 22 metres.\nProjectile detonates on impact, dealing up 240 [30] damage and freezing enemies within 2.7 [2] metres on detonation."
+  }
+ },
+ {
+  "id": "sub:shattergrenade",
+  "n": "Shatter Grenade",
+  "kind": "grenade",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1399218
+  ],
+  "src": {
+   "bungie": "A grenade that sticks to combatants before exploding into razor-sharp [Stasis] Stasis shrapnel. The shrapnel ricochets off surfaces, dealing damage to all in its path. Hitting a frozen target shatters it instantly and deals bonus damage.",
+   "compendium": "Medium Trajectory | Sticky\nAttaches to enemies, inflicting Freeze [x? Slow] on direct hits.\nExplodes after ? seconds, dealing up to 325? [?] damage over ? meters and releasing 9 Tracking Stasis Shrapnel in 3 groups of 3, forming a Y shape.\nStasis Shrapnel deals 216 [?] damage and bounces up to ? times.\nSticking a Frozen Enemy causes an instantaneous explosion and increases the explosion damage by 100%."
+  }
+ },
+ {
+  "id": "sub:shatterdive",
+  "n": "Shatterdive",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   2934767476
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Activate while midair to quickly descend and shatter nearby targets on impact. Shattering targets grants you Frost Armor.",
+   "clarity": "Casting [Air Move] causes you to rapidly descend to the ground, instantly Shattering any Frozen targets or Stasis Crystals in a 8.5 meter radius.\nShatterdive deals a small amount of damage on impact, then deals an additional higher damage instance against Frozen enemies.\nShattering a Stasis Crystal or Frozen Target with Shatterdive grants x5 Stacks of Frost Armor in PvE (x7 with Whisper of Rime), and x2 stacks in PvP.\nGrants Fall Damage Immunity and ?% Damage Resistance against Crystal Shatter Damage while diving.",
+   "compendium": "[Air Move] activates Shatterdive.\nIncurs a 4 second cooldown between Shatterdive activations.\nShatterdive performs a dive, dealing up to 50 damage, and shattering frozen enemies and Stasis Crystals within 8.5 metres radius.\nShatterdive damage is increased to 180 against Frozen Enemies.\nShattering a Frozen Enemy deals an additional 250 Shatter Damage. Displayed in Yellow Numbers.\nShattering Stasis Crystals and Frozen Enemies grants maximum Frost Armor stacks.\nGrants ?% Stasis Shatter Damage Resist and Fall Damage Immunity while diving."
+  }
+ },
+ {
+  "id": "sub:shiverstrike",
+  "n": "Shiver Strike",
+  "kind": "melee",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2028772231,
+   1980796561
+  ],
+  "src": {
+   "bungie": "Hold input to leap through the air. Releasing unleashes a powerful dash attack that knocks targets back and attaches a delayed Stasis explosive to them.",
+   "compendium": "Leaps through the air, performing an extended lunge distance melee upon releasing [Melee Attack].\nShiver Strike shatters Stasis Crystals on contact. \nFailing to score a hit will refund 80% [40%] Melee Ability Energy.\nDeals 511 [105] impact damage on hit, heavily [moderately] knocking enemies back and inflicting x50 [x40] Slow.\nHits attach a delayed Stasis Explosive that deals up to 219 [?] explosive damage and inflicting x100 [x40] Slow after 1 second to enemies, down to 20% damage over 8 meters.\nBoth the Impact and Explosion benefit from Melee Damage Increases. Impact damage is non-lethal.\nGuardians directly hit by Shiver Strike have their Melee Lunge disabled for 0.5 seconds."
+  }
+ },
+ {
+  "id": "sub:silenceandsquall",
+  "n": "Silence and Squall",
+  "kind": "super",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   2625980631,
+   2370269391
+  ],
+  "src": {
+   "bungie": "Summon two Stasis kamas, Silence and Squall, that you throw one after another.\n\nSilence : Creates a flash-freeze blast that freezes and damages targets.\n\nSquall : Creates a Stasis Storm that slows and damages targets caught inside."
+  }
+ },
+ {
+  "id": "sub:tectonicharvest",
+  "n": "Tectonic Harvest",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2031919264
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Picking up [Stasis] Stasis shards grants stacks of Frost Armor.\n\nWhile you have Frost Armor, defeating combatants with Stasis or Kinetic weapons may cause them to shatter, damaging other nearby combatants. The shatter chance increases with your Frost Armor stacks.\n\nTaking damage while you have Frost Armor generates melee energy.",
+   "clarity": "Stasis Shards now grant Frost Armor upon pickup:\n• Small Stasis Shards grant x1 Frost Armor, 10% Melee Ability Energy, and restore 10 HP.\n• Large Stasis Shards grant x3 Frost Armor, 50% Melee Ability Energy, and restore 20 HP.\nWhile Frost Armor is active:\n• Kinetic and Stasis Weapon Kills have an escalating chance to trigger a Stasis Shatter based on the number of Frost Armor stacks.\n• Taking damage grants ?% Melee Ability energy (once per second).\nIntrinsic to All Stasis Subclasses:\nStasis Shards are generated by:\n• Shattering a Frozen target or Stasis Crystal\n• Defeating a Stasis-Debuffed (Slowed or Frozen) target\nMinor combatants generate a small Stasis Crystal, while Elites, Minibosses, and Guardians generate a Large Stasis Crystal.\nIn PvP Only:\nStasis Shards go on a 10 second cooldown upon creating 6 shards within ? seconds of the first.",
+   "compendium": "Picking up Small Stasis Shards restores 10 HP and grants x1 Frost Armor.\nPicking up Large Stasis Shards restore ? HP and grant x3 Frost Armor.\nWhile Frost Armor is active:\nKinetic and Stasis Weapon Kills progress a counter that, upon reaching 100%, cause the kill to trigger a Stasis Shatter.\nEach Frost Armor stack increases the amount of progress gained per kill.\nTaking damage grants ?% Melee Ability Energy, up to once a second?.\nCrucible-Only:\nIncurs a 10 second cooldown upon creating 6 Shards within ? seconds of the first shard?, preventing additional Stasis Shard creation from Harvest Aspects for 10 seconds.\nShard creation count and cooldown is shared for the entire fireteam."
+  }
+ },
+ {
+  "id": "sub:touchofwinter",
+  "n": "Touch of Winter",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   4184589900
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Your Glacier, Duskfield, Coldsnap, and Shatter grenades have enhanced functionality.\n\nGlacier Grenade: Adds a [Stasis] Stasis crystal and changes the formation.\n\nDuskfield Grenade: Increases slow-field size and creates a small [Stasis] Stasis crystal on impact.\n\nColdsnap Grenade: Seekers duplicate after freezing a target and create a [Stasis] Stasis crystal on detonation.\n\nShatter Grenade: Creates additional shrapnel projectiles on detonation. Hitting frozen targets with this grenade refunds some grenade energy.",
+   "clarity": "Enhances your Stasis Grenade abilities:\n• Coldsnap Grenades duplicate upon freezing an enemy, turning into two and then four additional seekers on hit. For each enemy hit, spawn a Small, Medium, and then Large Stasis Crystal on the 1st, 2nd, and 3rd stage of Seeker duplication\n• Duskfield Grenades gain 50% increased radius and spawn a Small Stasis Crystal on impact\n• Glacial Grenades now form in a heptagon pattern (7-sided circle) with two additional Large Stasis Crystals added to the formation\n• Shatter Grenades create ? additional shrapnel upon detonating. Hitting Frozen targets with the Shatter Grenade refunds 20?% Grenade Ability Energy.",
+   "compendium": "Seekers duplicate upon freezing an enemy. \nSeekers now spawn a Small, Medium, and Large Stasis Crystal on detonation upon chaining 1, 2, and 3 times respectively."
+  }
+ },
+ {
+  "id": "sub:whisperofbonds",
+  "n": "Whisper of Bonds",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3469412974
+  ],
+  "stats": {
+   "Super": -10
+  },
+  "src": {
+   "bungie": "Defeating frozen targets generates an Orb of Power.",
+   "clarity": "Killing Frozen enemies spawns an Orb of Power that grants 2.5% Super Energy.\n10 second cooldown between activations."
+  }
+ },
+ {
+  "id": "sub:whisperofchains",
+  "n": "Whisper of Chains",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   537774540
+  ],
+  "stats": {
+   "Class": 10
+  },
+  "src": {
+   "bungie": "Defeating targets while you have Frost Armor has a chance to create a [Stasis] Stasis shard.",
+   "clarity": "Scoring multiple Kills with Frost Armor active spawns a Stasis Shard.\nActivation progress on Kills by Enemy Rank:\n• Minors: 34%\n• Elites: 67%\n• Minibosses and Bosses: 100%\n• Players: ?%"
+  }
+ },
+ {
+  "id": "sub:whisperofchill",
+  "n": "Whisper of Chill",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2368990401
+  ],
+  "src": {
+   "bungie": "[Stasis] Stasis weapon final blows have a chance to create a Stasis Shard.",
+   "clarity": "Scoring multiple Stasis Weapon Kills spawns a Small Stasis Shard.\nActivation progress on Kills by Enemy Rank:\n• Minors: 34?%\n• Elites and Enemy Players: 67%\n• Minibosses and higher: 100%\nFurther Kills do not provide activation progress for 5? seconds after activation."
+  }
+ },
+ {
+  "id": "sub:whisperofconduction",
+  "n": "Whisper of Conduction",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2483898429
+  ],
+  "stats": {
+   "Super": 10,
+   "Health": 10
+  },
+  "src": {
+   "bungie": "Nearby [Stasis] Stasis shards track to your position.",
+   "clarity": "Stasis Shards within 15 meters are pulled toward you after a 1 second delay."
+  }
+ },
+ {
+  "id": "sub:whisperofdurance",
+  "n": "Whisper of Durance",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3469412969
+  ],
+  "stats": {
+   "Melee": 10
+  },
+  "src": {
+   "bungie": "Slow that you apply to targets lasts longer. For those abilities that linger, their duration will also increase.",
+   "clarity": "Slow you apply to targets and certain lingering abilities last longer.\nSpecific increases provided by Whisper of Durance can be found in the descriptions of the affected abilities and/or perks."
+  }
+ },
+ {
+  "id": "sub:whisperoffissures",
+  "n": "Whisper of Fissures",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3469412971
+  ],
+  "src": {
+   "bungie": "Increases the damage and size of the burst of [Stasis] Stasis when you destroy a [Stasis] Stasis crystal or defeat a frozen target.",
+   "clarity": "Shattering enemies or Crystals creates an additional damage instance, dealing up to 25 [9] damage in a 10 [8] meter radius.\nDamage falls off to 17 [4] damage at the edge of the radius."
+  }
+ },
+ {
+  "id": "sub:whisperoffractures",
+  "n": "Whisper of Fractures",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   537774542
+  ],
+  "src": {
+   "bungie": "Shattering a frozen target with a melee attack grants a stack of Frost Armor.",
+   "clarity": "Shattering a Frozen Enemy with a melee attack grants you a Stack of Frost Armor."
+  }
+ },
+ {
+  "id": "sub:whisperofhedrons",
+  "n": "Whisper of Hedrons",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3469412970
+  ],
+  "src": {
+   "bungie": "Increases weapon handling and health after freezing a target with [Stasis] Stasis.",
+   "clarity": "Freezing targets grants the following benefits for 11 seconds:\n• ? Handling\n• 30 Health stat"
+  }
+ },
+ {
+  "id": "sub:whisperofhunger",
+  "n": "Whisper of Hunger",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2483898431
+  ],
+  "stats": {
+   "Melee": -20
+  },
+  "src": {
+   "bungie": "Increases the melee energy gained from picking up [Stasis] Stasis shards.",
+   "clarity": "Stasis Shards grant increased Melee Energy:\n• Small Shards: 10% 🠚 17.5%\n• Large Shards: 50% 🠚 75%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website."
+  }
+ },
+ {
+  "id": "sub:whisperofimpetus",
+  "n": "Whisper of Impetus",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   537774543
+  ],
+  "stats": {
+   "Health": 10
+  },
+  "src": {
+   "bungie": "Damaging targets with a [Stasis] Stasis melee reloads your weapons and grants you a temporary boost to weapon ready speed.",
+   "clarity": "Powered Melee Hits grant 40 Handling for 5 seconds and refill all weapons from reserves.\nBuff duration cannot be refreshed."
+  }
+ },
+ {
+  "id": "sub:whisperofrefraction",
+  "n": "Whisper of Refraction",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3469412968
+  ],
+  "src": {
+   "bungie": "Defeating slowed or frozen targets grants you class ability energy.",
+   "clarity": "Killing Frozen or Slowed enemies grants Class Ability Energy based on Enemy Rank:\n• Tier 1 (T1) Minors: 9%\n• T2 Minors, T1 Elites: 13%\n• Enemy Players: 15%\n• T3 Minors, T2 Elites: 20%\n• T4 Minors, T3 Elites: 30%\n• T4 Elites, Minibosses: 40%\n• Bosses: 50%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website."
+  }
+ },
+ {
+  "id": "sub:whisperofrending",
+  "n": "Whisper of Rending",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2483898428
+  ],
+  "src": {
+   "bungie": "Primary ammo weapons do increased damage to [Stasis] Stasis crystals and frozen targets.",
+   "clarity": "Primary Ammo Weapons deal 100% Increased Damage against Stasis Crystals and 50% Increased Damage against Frozen Enemies.\nAlso applies to Fighting Lion, Revision Zero, Vex Mythoclast, and their alternate fire modes.\nFrozen enemies normally receive 5% [50%] decreased damage from Primary Weapons. Using the fragment results in a 42.5% overall Damage Increase in PVE and a 25% overall Decrease in PVP."
+  }
+ },
+ {
+  "id": "sub:whisperofreversal",
+  "n": "Whisper of Reversal",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2368990400
+  ],
+  "src": {
+   "bungie": "While you have Frost Armor, melee damage slows your target.",
+   "clarity": "Dealing or receiving Physical (non-projectile) Melee Damage while you have Frost Armor active applies 10? Slow Stacks to your enemy for ? seconds.\nGlaive Melees also benefit from this."
+  }
+ },
+ {
+  "id": "sub:whisperofrime",
+  "n": "Whisper of Rime",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2483898430
+  ],
+  "src": {
+   "bungie": "Your Frost Armor has increased duration and maximum stack count.",
+   "clarity": "Increases the maximum number of Frost Armor Stacks to 7 and its maximum duration to 6 seconds."
+  }
+ },
+ {
+  "id": "sub:whisperofshards",
+  "n": "Whisper of Shards",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3469412975
+  ],
+  "src": {
+   "bungie": "Shattering a [Stasis] Stasis crystal temporarily boosts your grenade recharge rate. Shattering additional [Stasis] Stasis crystals increases the duration of this benefit.",
+   "clarity": "Shattering a Stasis Crystal grants 500% [150%] Additional Base Grenade Regeneration Rate for 6 seconds, up to a maximum of 11 seconds."
+  }
+ },
+ {
+  "id": "sub:whisperoftorment",
+  "n": "Whisper of Torment",
+  "kind": "fragments",
+  "el": "stasis",
+  "subclasses": [
+   "stasis"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   537774541
+  ],
+  "stats": {
+   "Grenade": -10
+  },
+  "src": {
+   "bungie": "You gain grenade energy each time you take damage from targets. Having Frost Armor increases the amount of energy gained.",
+   "clarity": "Receiving damage from an enemy grants 7% Grenade Energy. This is increased to 12% while Frost Armor is active.\n1 second cooldown between activations.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website."
+  }
+ },
+ {
+  "id": "sub:wintersshroud",
+  "n": "Winter's Shroud",
+  "kind": "aspects",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   2934767477,
+   2835214902
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Dodging slows nearby targets.\n\nSlowing targets briefly increases your class ability regeneration.",
+   "clarity": "Applying Slow to a target grants 300% [150%] Increased Base Class Ability Regeneration Rate for 3 seconds.\nDodging applies 60x [40x] Slow to enemies in a 9 [8] meter radius for 8 [1.5] seconds (12 [2] seconds with Whisper of Durance).\nGrants 50% Damage Resistance against Combatants for 4 seconds after the dodge.",
+   "compendium": "Upon inflicting Slow to an enemy:\nGrants 300% [150%] Additional Base Class Ability Regeneration Rate for 3 seconds.\nOn Class Ability Usage:\nInflicts x60 [x40] Slow for 8+4? [1.5+0.5] seconds to enemies within 9 [8] metres.\nGrants 50% Damage Resist against Combatants for 4? seconds."
+  }
+ },
+ {
+  "id": "sub:winterswrath",
+  "n": "Winter's Wrath",
+  "kind": "super",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   3683904166,
+   1869939006
+  ],
+  "src": {
+   "bungie": "Summon a [Stasis] Stasis staff. While your Super is active:\n\n[Super Primary]  : Cast out a barrage of [Stasis] Stasis shards that freeze targets.\n\n[Super Secondary]  : Cast out a shockwave that shatters all frozen targets.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [51%]\nBase Duration: 24.5 seconds, or 4.08% Super Drain per Second\nGlide becomes a variant of Strafe Glide with unlimited duration.\nLight Attack | Drains 4.5% Super Energy per twin-shards.\nCasts two freezing homing twin-shards, one after another. Each projectile deals 11 impact damage and up to 50 [33] splash damage over ? meters to unfrozen enemies.\nFrozen enemies receive 90% decreased damage.\nHeavy Attack | Does not drain Super Energy.\nCasts a shockwave that deals 45 [? and Non-Lethal] damage and heavily staggers enemies within 30 metres. Shockwave travels 45 meters per second.\nStasis Crystals and Frozen Enemies hit by the shockwave are dealt 3,453 [?] Stasis Damage.\n Combatants of all ranks are dealt an additional Shatter Damage Instance of 361 damage, totalling 3814 Damage."
+  }
+ },
+ {
+  "id": "sub:witheringblade",
+  "n": "Withering Blade",
+  "kind": "melee",
+  "el": "stasis",
+  "subclasses": [
+   "stasis",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   1341767667,
+   2657901006
+  ],
+  "src": {
+   "bungie": "Toss a [Stasis] Stasis Shuriken at targets to damage and slow them.  \n\nProvides multiple charges.",
+   "compendium": "Innately has 2 Melee Ability Charges.\nQuickly tosses a Stasis Shuriken towards enemies.\nShurikens are able to ricochet up to 3 times off of surfaces or towards up to 4 enemies, tracking towards enemies within 12 [8] meters.\nWithering Blades deal 296 [72] damage and inflict x60 [x40] Slow for 3.5+3.5 [1.5+0.5] seconds on hit."
+  }
+ }
+]

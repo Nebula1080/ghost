@@ -1,0 +1,1067 @@
+[
+ {
+  "id": "xa:abeyantleap",
+  "n": "Abeyant Leap",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   3637722482
+  ],
+  "perks": [
+   {
+    "n": "Puppeteer's Control",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Improves Drengr's Lash and spawns additional projectiles. These projectiles track targets more aggressively, travel farther, and suspend stronger. Gain Woven Mail when you suspend a target.",
+     "clarity": "Improves Drengr's Lash and grants Woven Mail for 10 seconds upon Suspending enemies.\nWhen used with a Barricade:\nDrengr's Lash creates 2 additional Lashes. Lashes gain stronger seeking capabilities, travel 16.7% (5 meters) farther, and Suspend for 3 seconds longer (2 seconds for Minibosses).\nWhen used with Thruster:\nCreated Strand Knot is launched towards nearby enemies with some tracking. Detonates and Suspends nearby targets on contact.",
+     "compendium": "Enhances Drengr's Lash.\nSuspension inflicted by Drengr's Lash last +3 seconds longer.\nDrengr's Lash Suspension on Minibosses last +2 seconds longer\nBarricade:\nCreates 2 additional Lashes.\nLashes now seek enemies more aggressively and travel 16.7% (5 meters) farther.\nThruster:\nKnot lasts up to ? seconds, lobbing itself towards enemies within ? meters, and detonates on contact.\nUpon inflicting Suspension:\nGrants Woven Mail for 10 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:acd0feedbackfence",
+  "n": "ACD/0 Feedback Fence",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1035680664
+  ],
+  "perks": [
+   {
+    "n": "Fury Conductors",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Melee hits grant Armor Charge, and you take less melee damage from combatants while you have Armor Charge. Taking melee damage causes you to emit a burst of damaging Arc energy that jolts targets, consuming your Armor Charge and dealing more damage based on the number of stacks consumed.",
+     "clarity": "Melee Hits grant 1 Stack of Armor Charge. (Each damage instance is counted separately)\nHaving active Armor Charges grants Melee Damage Resistance against Combatants. Receiving a Melee Attack consumes all Armor Charges and emits a Jolting Arc Burst in a ? meter radius.\nBenefits with 1|2|…|6 Armor Charges:\n• Arc Burst Damage: 90|130|170|200|225|245\n• Melee Damage Resistance against Combatants: 23.3% | 46.7% | 70% | 73.3% | 76.7% | 80%",
+     "compendium": "Melee Hits grant a stack of Armor Charge.\nWhile Armor Charge is active:\nGrants Melee Damage Resist against Combatants.\nBeing struck by a Melee Attack triggers an Arc Burst, consuming all Armor Charges.\nArc Burst inflicts Jolt and deals Arc Damage in a ? radius.\nArc Burst:\n90 | 130 | 170 | 200 | 225 | 245 Arc Damage\n23.3% | 46.7% | 70% | 73.3% | 76.7% | 80% Melee Damage Resist against Combatants"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:actiumwarrig",
+  "n": "Actium War Rig",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   458095281
+  ],
+  "perks": [
+   {
+    "n": "Auto-Loading Link",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Steadily reloads a portion of your equipped Auto Rifle or Machine Gun's magazine from reserves. Final blows with Auto Rifles or Machine Guns boost their stability, ammo generation, and damage. Provides a moderate benefit to their airborne effectiveness.",
+     "clarity": "Passively grants 30 Airborne Effectiveness to Auto Rifles and Machine Guns.\nRefills 10% of readied Auto Rifles' and Machine Guns' magazines (rounded up) every 1.5 seconds.\nScoring Auto Rifle or Machine Gun kills grants stacks of Auto-Loading Link. Maximum of 10 stacks. Stacks expire one at a time.\nAuto-Loading Link grants 1.5% increased damage, ? Stability, and 5 Ammo Generation per stack.\nThe 1st stack lasts 7 seconds, with each subsequent stack having a 0.5 second shorter duration. The 10th stack lasts 2.5 seconds.",
+     "compendium": "Passively grants +30 Airborne Effectiveness to Auto Rifles and Machine Guns.\nReadied Auto Rifles and Machine Guns refill 10% of their Magazine every 1.5 seconds.\nOn Auto Rifle or Machine Gun Kill:\nGrants a stack of Auto-Loading Link for a varying duration, up to a maximum of 10 stacks.\nLoses 1 Auto-Loading Link stack upon expiring, rather than all of them.\nStacks can also be gained by destroying \"destroyable entities\" as well as Constructs.\nAuto-Loading Link:\nUp to 15% increased Damage, +? Stability, and +50 Ammo Generation at 10 stacks.\n1.5% | 3% | 4.5% | 6% | 7.5% | 9% | 10.5% | 12% | 13.5% | 15% Increased Damage\n+? | | +? | +? | +? | +? | +? | +? | +? | +? Stability\n+5 | +10 | +15 | +20 | +25 | +30 | +35 | +40 | +45 | +50 Ammo Generation.\n7s | 6.5s | 6s | 5.5s | 5s | 4.5s | 4s | 3.5s | 3s | 2.5s Stack Duration"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:aninsurmountableskullfort",
+  "n": "An Insurmountable Skullfort",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "head",
+  "hashes": [
+   197761153
+  ],
+  "perks": [
+   {
+    "n": "Transfusion Matrix",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Final blows with Arc melees trigger health regeneration and fully restore a melee charge. Melee hits grant Arc melee energy.",
+     "clarity": "Powered Arc Melee kills refund a Melee Ability Charge and start Health Regeneration.\nMelee Hits grant Melee ability energy:\n• 50%: Powered Melee Hits\n• 15%: Melee Hits with Knockout active\n• 5%: Unpowered Melee and Glaive Melee Hits",
+     "compendium": "On Powered Arc Melee Kill:\nGrants 100% Melee Ability Energy and begins Health Regeneration.\nMelee Hits grant Arc Melee Ability Energy, up to once per melee.\n50% Melee Ability Energy on Powered Melee Hit.\n15% Melee Ability Energy on Non-Glaive Melee Hit while Knockout is active.\n5% Melee Ability Energy on Basic/Glaive Melee Hit."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:antaeuswards",
+  "n": "Antaeus Wards",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   81398002
+  ],
+  "perks": [
+   {
+    "n": "Reflective Vents",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While sliding with full class ability energy, you gain a frontal shield that reflects incoming damage. After reflecting damage, your class ability energy is depleted based on the amount of damage reflected.",
+     "clarity": "Upon sliding after sprinting for at least 1.5 seconds with your Class Ability fully charged:\nProjects a 180° frontal shield that reflects all incoming projectiles for 0.45 seconds.\nReflected projectiles deal 50% increased damage.\nAfter shield deactivation, 2% Class Ability energy is drained for every point of damage reflected.\nCurrently partially bugged and does not drain Class Ability Energy for projectiles reflected at the end of your slide.",
+     "compendium": "During a slide, after sprinting for at least 1.5 seconds, while Class Ability Energy is full: \nProjects a 180° frontal shield that reflects damage and projectiles for 0.45 seconds.\nReflected Projectiles deal 50% increased damage.\nDrains 2% Class Ability Energy per 1 damage reflected."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:arborwarden",
+  "n": "Arbor Warden",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   90009855
+  ],
+  "perks": [
+   {
+    "n": "Barri-nade",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Using your class ability channels defensive Light inward, providing a grenade that creates a barricade on impact. Picking up Orbs of Power enhances your next Barri-nade, spawning more barricades on impact.",
+     "clarity": "Passively grants 45% faster Base Class Ability Regeneration (does not function with Thruster).\nReplaces Grenade Ability with Barri-Nade on Class Ability usage. Barri-Nade is lost if Class Ability fully recharges.\nBarri-Nade spawns your selected Barricade type on the impact location and inherits the benefits of Aspects such as Bastion and Drengr's Lash. Non-barricade class abilities default to Towering Barricade and match its cooldown.\nEnemies within 5? meters of the Barri-Nade's impact location are disoriented. Spawned Barricade deals no Contact damage within 2 seconds of its creation.\nCollecting three Orbs of Power grants 'Enhanced Barri-Nade', causing the next Barri-Nade to spawn three Barricades in a circular formation on impact.\nAspect effects of barricades stack outside of the Storm's Keep's Bolt Charge generation.\nBarri-Nade has no collision with enemies.",
+     "compendium": "Overwrites Barricade Cooldown to pre-EoF versions, resulting in ~1.45x Class Ability Regeneration Speed.\nTowering = 101s -> 70s | Rally = 55s -> 38s\nOn Class Ability Usage:\nReplaces Grenade Ability with Barri-Nade. \nBarri-Nade is lost if Class Ability fully recharges.\nBarri-Nade spawns a Barricade on impact. \nEnemies that are within 5 metres of impact are disoriented. \nBarricade does not deal Contact Damage within 2 seconds of it being created.\nBarricade Type uses selected Barricade and inherits Aspects such as Bastion and Lash.\nNon-Barricades default to Towering Barricade and its respective cooldown.\nAfter picking up 3 [?] Orbs of Power:\nEnhances Barri-Nade, creating 3 Barricades in a ◯ formation, spread out 120 degrees.\nRally are placed close together, while Towering are placed spread out."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:armamentarium",
+  "n": "Armamentarium",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   2829609851
+  ],
+  "perks": [
+   {
+    "n": "And Another Thing",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Gain an additional grenade charge. Grenade final blows spawn an Orb of Power. Weapon final blows grant grenade energy. Activating your grenade ability reloads your equipped weapon from reserves.",
+     "clarity": "Grants an extra Grenade Ability Charge and a passive copy of Firepower.\nWeapon Kills grant 10% Grenade Ability Energy, and using a Grenade Ability refills your weapon's magazine.",
+     "compendium": "Passively grants a copy of Firepower and an extra Grenade Ability Charge.\nWeapon Kills grant 10% Grenade Ability Energy.\nOn Grenade Ability Usage:\nRefills Magazine / Dissipates 100% Heat."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:ashenwake",
+  "n": "Ashen Wake",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   809007410
+  ],
+  "perks": [
+   {
+    "n": "Bring the Heat",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Fusion Grenades gain increased throw speed, explode on impact, and stun Unstoppable Champions. Final blows with Fusion Grenades grant grenade energy.",
+     "clarity": "Fusion Grenades have Fastball intrinsically and detonate on impact, stunning Unstoppable Champions on hit.\nFusion Grenade Kills refund Grenade Energy based on Enemy Rank:\n• Minors: 25%\n• Elites: 50%\n• Players, Minibosses, and Bosses: 100%\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Enhances Fusion Grenades:\nGrants Fastball intrinsically.\nGrenades detonate on impact\nStuns Unstoppable Champions on hit.\nKills with Fusion Grenades grant Fixed Grenade Ability Energy. \nRank-and-File = 25% | Elites = 50% | Minibosses and Bosses = 100% | Guardians = 100%"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:blastwavestriders",
+  "n": "Blastwave Striders",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   1188437342
+  ],
+  "perks": [
+   {
+    "n": "Blastwave Striders",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Gain resistance to your explosives. Defeat targets to charge this armor. Once charged, land a Shiver Strike melee attack or deal explosive self-damage to rocket jump backward and release a blast wave with deadly shrapnel projectiles. The wave freezes combatants and slows Guardians. Charged rocket jumps grant Frost Armor.",
+     "clarity": "Passively grants 75% Damage Resistance against explosive self-damage.\nThe following actions charge up Blastwave Striders:\n• Minor PVE Combatant Kills: 10%\n• Elite or higher tier PVE Combatant Kills: 25%\n• Enemy Guardians: 20%\n• Collecting Alethonym's Vestiges: 10%\nWhile at 100% charge, deal damage with Shiver Strike, Howl of The Storm, or explosive self-damage to propel yourself backwards in an explosive jump, releasing 8 Stasis Shrapnel Projectiles and granting 5 Frost Armor Stacks. Each Projectile deals 623 [?] damage and spawns a Stasis Crystal on impact.\nThis explosive jump also releases an expanding ? meter radius Stasis Wave that Freezes enemies on contact [Slows for ? seconds].\nShrapnel Kills do not charge Blastwave Striders.",
+     "compendium": "75% Damage Resist against Explosive Self-Damage.\nKills charge up Blastwave Striders:\nRank-and-File = 10% | Elite+ = 25% | Guardians = 20%\nAlethonym's Vestiges = 10% \nUpon either dealing Shiver Strike or Howl of the Storm Damage, or receiving Explosive Self-Damage while at 100% Charge:\nPropels the wearer 25 meters backwards, granting x5 Frost Armor.\nReleases an expanding Stasis Wave that inflicts Freeze [x? Slow for ? seconds] over 15 meters.\nShoots out 8 Tracking Shrapnel, each dealing 623 [?] Stasis Damage over 8 meters on impact.\nSelf Damage = Arcing Trajectory | Shiver/Howl Damage = Straight ahead.\nShrapnel kills do not charge up Blastwave Striders.\nExplosive Head, Explosive Payload, and Timed Payload can trigger Blastwave Striders despite not dealing self-damage."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:cadmusridgelancecap",
+  "n": "Cadmus Ridge Lancecap",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "head",
+  "hashes": [
+   2851385306
+  ],
+  "perks": [
+   {
+    "n": "Lancer's Vigil",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While a Stasis Super is equipped, rapid Stasis weapon damage or damage from behind your Rally Barricade will create a Diamond Lance near you. Thrown Diamond Lances create Stasis crystals. Your Diamond Lances deal more damage based on how much Frost Armor you have.",
+     "clarity": "Diamond Lance creates a Stasis Crystal on impact. Hitting an Elite or higher tier Combatant creates 3 additional Stasis Crystals.\nWith a Stasis Super Ability equipped, spawn a Diamond Lance next to you by performing one of three actions:\n• Stand behind a Rally Barricade and score a Kill or 3 Precision Hits within ? seconds of each\nOR\n• Reach 100% progress by landing hits with Stasis Weapons. Bodyshots grant 5% progress, and precision damage grants 12% progress\nOR\n• Score two Stasis Weapon kills\nDiamond Lance damage is increased by 144%|253%|333%|389%|428%|455%|475% at 1|2|3... stacks of Frost Armor.\nSlamming the Diamond Lance gives Frost Armor first, therefore always benefitting from the damage buff.\nThis exotic shares the cooldown of the Diamond Lance Aspect, but using the Aspect is not required.",
+     "compendium": "Diamond Lance creates a Stasis Crystal on impact. \nScoring a hit against a non-Rank-and-File Combatant creates 3 Stasis Crystals.\nDiamond Lance damage is increased by Frost Armor stacks.\nx1 = 144% | x2 = 253% | x3 = 333% | x4 = 389% | x5 = 428% | x6 = 455% | x7 = 475% Increased Damage.\nDiamond Lance Slam first grants Frost Armor before dealing damage, always getting damage buffed.\nWhile a Stasis Super Ability is equipped:\nUpon scoring 3 Precision Hits within 3 seconds of each while behind a Rally Barricade OR\nUpon reaching 100% Counter by scoring Stasis Weapon Hits within 3 seconds of each\nStasis Bodyshot = 5% | Stasis Precision Hit = 12% OR \nUpon scoring 2 Stasis Weapon Kill:\nSpawns a Diamond Lance beside you.\nIncurs a ? [8] second cooldown that is shared with the Diamond Lance Aspect."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:citansramparts",
+  "n": "Citan's Ramparts",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1190497097
+  ],
+  "perks": [
+   {
+    "n": "Assault Barricade",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "You and allies can shoot through your Towering Barricade. Your Towering Barricade takes increased damage from Guardians.",
+     "clarity": "Replaces Towering Barricade with an Assault Barricade that allows the caster and their allies to shoot through it.\nAssault Barricades take 60% increased damage from Enemy Players, effectively decreasing its HP from 500 to 312.5 in PvP.",
+     "compendium": "Modifies Towering Barricade into Assault Barricade.\nAssault Barricade enables the user and their allies to shoot through it.\nGuardians deal 60% increased damage towards Assault Barricade (312.5 eHP)"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:crestofalphalupi",
+  "n": "Crest of Alpha Lupi",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   458095280
+  ],
+  "perks": [
+   {
+    "n": "Survival Well",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Generates an additional Orb of Power from Supers. Generating a Barricade, or dealing sustained damage or defeating targets from behind one creates a healing pulse. Healing your allies grants Barricade energy.",
+     "clarity": "Class Ability usage heals you and allies within 12 meters as long as they have line of sight to you.\nCasting a Barricade restores 70 Health and 110 Shield HP. Using Thruster restores 60 Health.\nScoring multiple Direct Hits within 3 seconds of each while behind a Barricade triggers an additional healing pulse that restores 30 HP in a 12 meter radius.\nActivation progress granted by weapon type:\n• Submachine Guns, Trace Rifles: 7.14%\n• Auto Rifles, Machine Guns: 8.33%\n• Pulse Rifles: 9.1%\n• Sidearms: 12.5%\n• Hand Cannons, Scout Rifles: 16.7%\n• Swords: 20%\n• Bows, Glaives, Grenade Launchers, Shotguns, Sniper Rifles: 34%\nAdditional hits provide no activation progress for 2 seconds after a Healing Pulse is triggered. 5 second cooldown between healing pulse activations. (why are these separate)\nSuper Abilities generate an extra Orb of Power that grants 7.14% Super Energy (regular Super Orb).\nSpecific Interactions:\n• Roaming Supers generate an Orb with the first Kill instead of needing at least 2 Kills\n• Ward of Dawn generates 4 Orbs with each granting 3.57% Super Energy (up from 3 Orbs granting 2.3% each for a ~2x increase)",
+     "compendium": "On Class Ability Usage:\nInstantly restores Health and Shields to the wielder and allies in Line of Sight within 12 metres, centered on the wielder.\nHealing is based on the equipped Class Ability.\nBarricade restores 160 Health and 110 Shields. Thruster restores 60 Health.\nHealing Allies grants ?% Barricade Energy up to once every 1? second.\nScoring direct hits within 3 seconds of each while behind a Barricade progresses a Counter System that triggers an additional healing pulse that restores 30 HP over 12 meters upon reaching 100%.\nSMG, Trace = 7.14% || Auto, MG = 8.33% || Pulse = 9.1% || Sidearm = 12.5% || HC, Scout = 16.7%\nSword = 20% | Bow, Glaive, GL, Shotgun, Snipers = 34%\nIncurs a 2 second cooldown upon triggering before additional hits count.\nIncurs a 5 second cooldown upon triggering a healing pulse before other pulses will restore health again.\nYes, it is desynced from the hit counter cooldown. Why? Dunno\nSuper Abilities generate an extra Orb of Power that grants 7.14% Super Energy.\nWard of Dawn generates a total of 4 Orbs, each granting 3.57% Super Energy, for a total of 14.3% Super Energy."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:cuirassofthefallingstar",
+  "n": "Cuirass of the Falling Star",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   2321120637
+  ],
+  "perks": [
+   {
+    "n": "Glorious Charge",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Greatly increases your Thundercrash damage and grants you damage resistance after impact. Melee final blows while amplified grant you Super energy.",
+     "clarity": "Melee Kills while Amplified grant additional Super Energy:\n• Tier 1 (T1) Minors: 2.5?%\n• T2 Minors, T1 Elites: 2.5%\n• T3 Minors, T2 Elites: ?%\n• T4 Minors, T3 Elites, and higher: 3%\n• Players: ?%\nThundercrash deals 55% increased damage.\nThundercrash deactivation grants 50% [10%] Damage Resistance for ? seconds.",
+     "compendium": "Thundercrash deals 55% increased damage.\nOn Thundercrash Deactivation:\n50% [10%] Damage Resist (Resist x4) for 5 seconds.\nOn Melee Kill, while Amplified:\nGrants additional Super Energy based on the Enemy Tier.\nTier 1 Combatant = 2.5?% | T2 = 2.5% | T3 = ?% | T4 = 3% | Guardian = ?%\nWorks with any Super Ability."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:doomfangpauldron",
+  "n": "Doom Fang Pauldron",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   241462141
+  ],
+  "perks": [
+   {
+    "n": "Horns of Doom",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Defeating targets with Void damage has a chance to grant an escalating bonus to damage with Void weapons. Defeating targets with Void melee grants Super energy.\n\nWhile Sentinel Shield is active, defeating targets with melee attacks recharges Shield Throw, which extends your Super on hitting a target.",
+     "clarity": "Scoring 2 to 3 Void Kills within 10 seconds of each grants 1 Stack of Void Weapon Surge for 11 [6] seconds. Maximum of 4 Stacks. Void Kills while at 4 Stacks refresh the buff's duration.\nElemental Void Melee Kills grant the following:\n• 20% [10%] Super Energy once per ability usage\n• All 4 Stacks of Void Weapon Surge\nSentinel Shield's Shield Throw Hits grant 10% Super Energy, extending the Super's Duration. Sentinel Shield Light Attacks grant 100% Shield Throw energy.",
+     "compendium": "Scoring 2–3 Void Kills within 10 seconds of each grants a stack of Void Weapon Surge for 11 [6] seconds, up to a maximum of x4 Void Weapon Surge.\nAdditional Void Kills while at x4 Weapon Surge refresh the buff duration.\nOn Powered Void Melee Kill:\nGrants 20% [10%] Super Energy. Can only trigger once per Melee Activation.\nGrants x4 Void Weapon Surge for 11 [6] seconds.\nSentinel Shield's Shield Throw Hits grant 10% Super Energy, extending Super Duration.\nSentinel Shield Light Attack Kills grant 100% Shield Throw Energy."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:dunemarchers",
+  "n": "Dunemarchers",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   1160559849
+  ],
+  "perks": [
+   {
+    "n": "Linear Actuators",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases sprint speed. Sprinting builds up a static charge. After melee-attacking a combatant, that charge will chain damage to nearby foes. Gain Bolt Charge per target hit by the chain.",
+     "clarity": "Passively increases Sprint Speed by 6.25% and Slide Distance by 33%.\nSprinting for 1.5 seconds grants 'Linear Actuators' for 7 seconds. Melee or Glaive Hits with Linear Actuators active apply the 'Shocked' debuff to the target.\nShocked enemies chain 220 [50] Arc Damage to targets within 12 meters and spread the 'Shocked' debuff. Each chain grants two stacks of Bolt Charge per instance.\nShocked lasts 2 seconds and its duration is refreshed when it chains to other targets. Shocked Players are immune to further chains for 2 seconds.",
+     "compendium": "Increases Sprint Speed from 8m/s to 8.5m/s.\nIncreases Slide Distance from 6.5 meters to 8.5 meters.\nAfter sprinting for 1.5 seconds:\nGrants Linear Actuators for 7 seconds.\nOn Direct Melee Hit while Linear Actuations is active:\nConsumes Linear Actuations to inflict Shocked for 2 seconds.\nShocked Enemies release a Static Charge to non-Shocked Enemies within 12 meters.\nStatic Charge deals 220 [50] damage and inflicts Shocked.\nShocked refreshes when spreading to other enemies up to 6 times per Linear Actuations trigger.\nGrants x2 Bolt Charge per Shocked inflicted.\nGuardians are immune to additional chain damage for 2 seconds while Shocked."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:eternalwarrior",
+  "n": "Eternal Warrior",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "head",
+  "hashes": [
+   1643575148
+  ],
+  "perks": [
+   {
+    "n": "Resolute",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "[Arc]Arc final blows grant an escalating damage bonus with Arc weapons. While using Fist of Havoc, activating your Super grants an overshield; final blows extend its duration. When it ends, gain a damage bonus to your Arc weapons.",
+     "clarity": "Scoring 2 to 3 Arc Kills within 10 seconds of each grants 1 Stack of Arc Weapon Surge for 11 [6] seconds. Maximum of 4 Stacks. Arc Kills while at 4 Stacks refresh the buff's duration.\nGrants a 75 HP Overshield upon casting the Fists of Havoc Super that negates Precision Damage. As long as it does not get fully destroyed, the overshield regenerates over 7 seconds after not receiving damage for 5 seconds.\nScoring Kills with Fists of Havoc refunds ?% Super Energy.\nOnce Fists of Havoc ends, it grants 4 Stacks of Arc Weapon Surge for 30 [6] seconds.",
+     "compendium": "Scoring 2–3 Arc Kills within 10 seconds of each grants a stack of Arc Weapon Surge for 11 [6] seconds, up to a maximum of x4 Arc Weapon Surge.\nAdditional Arc Kills while at x4 Weapon Surge refresh the buff duration.\nOn Fists of Havoc Cast: \nGrants a 75 HP Overshield that negates Precision Damage.\nRegenerates over 7 second after 5 seconds of not receiving damage if Overshield is active.\nFists of Havoc Kills grant ?% Super Ability Energy.\nOn Fists of Havoc End:\nGrants x4 Arc Weapon Surge for 30 [6] seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:hallowfireheart",
+  "n": "Hallowfire Heart",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   458095282
+  ],
+  "perks": [
+   {
+    "n": "Sunfire Furnace",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While your Solar Super is charged, ability final blows cure you and give stacks of Sunfire Furnace.\n\nWhile Sunfire Furnace is active, grenade and Shieldburst final blows trigger an ignition. Each stack increases grenade regeneration, class ability regeneration, and Super damage. Upon exiting your Super, all stacks are converted into Super energy.",
+     "clarity": "While a Solar Super is equipped and fully charged, ability kills (including Unpowered Melees) grant Cure x2 and stacks of 'Sunfire Furnace' based on Enemy Rank. Minor Tier enemies grant 1 stack, while Elite and Higher tier enemies grant 2. Stacks last for 20 seconds. Maximum of 10 stacks.\nWhile Sunfire Furnace is active, kills with Shieldburst or ANY Grenade triggers an Ignition (even Forerunner's 'The Rock').\nSunfire Furnace also grants Increased Super Damage and Additional Base Grenade and Class Ability Regneration rate at 1|2|3... stacks.\n• 6.5%|13.6%|22%|32%|43%|57%|73%|93%|118%|150%| Increased Super Damage\n• ?|?|?|?|?|?|?|?|?|250% Base Grenade and Class Ability Regeneration\nCasting your Super locks all stacks. Refund 8%|20%|26%|33%|45% Super Energy at 1|2|3|4|5+ stacks of Sunfire Furnace after your super ends.",
+     "compendium": "While a Solar Super Ability is equipped and charged:\nAbility Kills grant x2 Cure and grant stacks of Sunfire Furnace, up to 10 stacks for 20 seconds.\nRank-and-File = 1 Stack | Elite = 2 | \nUnpowered Melee Kills also grant Cure and stacks. Glaive Melees do not.\nSunfire Furnace:\nGrenade and Shieldburst Barricade Kills trigger ignitions. Grenade Element doesn't matter.\nUp to 250% Additional Base Grenade and Class Ability Regeneration Rate.\n6.5% | 13.6% | 22% | 32% | 43% | 57% | 73% | 93% | 118% | 150% Increased Super Damage.\n?% | ?% | ?% | ?% | ?% | ?% | ?% | ?% | ?% | 250% Additional Base Grenade/Class Regeneration Rate.\nOn Super Cast | Sunfire Furnace stacks are frozen. Cannot gain nor lose stacks.\nOn Super End | Consumes all Sunfire stacks to refunds Super Energy based on the stack amount.\nx1 = 8% | x2 = 20% | x3 = 26% | x4 = 33% | x5 = 45%."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:hazardouspropulsion",
+  "n": "Hazardous Propulsion",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1909305643
+  ],
+  "perks": [
+   {
+    "n": "Danger Close",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Weapon precision hits or final blows have a chance to load a Kinetic Exodus micro-missile. Activating your class ability fires loaded Exodus micro-missiles. Damaging targets with Exodus micro-missiles temporarily increases the damage you deal with other micro-missiles and Rocket Launchers.",
+     "clarity": "Scoring a Precision Kill, 4 Weapon Kills, or scoring multiple Precision Hits grants a Stack of 'Exodus Rockets'. Maximum of 6 Stacks.\nClass Ability usage consumes all Stacks to launch a homing rocket per Stack consumed. Rockets deal up to 540 [28] Kinetic Damage in a ? meter radius.\nHits with each rocket grant a Stack of 'Enhanced Rockets' for 10 seconds, increasing \"rocket-type\" damage (Empowering Buff).\nDamage increase at 1|2|…|6 Stacks:\n10% | 17% | 24% | 30% | 33% | 35%\nRocket-type damage includes: Rocket Launchers, Wolfpack Rounds (both Sword and Rocket versions), Rocket-Assisted Sidearms, Nanotech Tracer Rockets, Grand Overture's Missile Volley, Quicksilver Storm's Tracer Rocket\n'Exodus Rockets' Stack acquisition progress on Precision Hits by weapon type:\n• Trace Rifles and Vex Mythoclast: 10%\n• Auto Rifles and Machine Guns: 15%\n• Pulse Rifles, Sidearms, and Crimson: 20%\n• Hand Cannons, Scout Rifles, and Shotguns: 40%\n• Bows, Linear Fusion Rifles, Rocket Sidearms, and Sniper Rifles: 67%\nStack acquisition progress doesn't reset upon gaining a Stack, all progress is kept until reaching 600% (max Stacks).",
+     "compendium": "Scoring a Precision Kill, 4 Weapon Kills, or filling up a counter through Precision Hits grants a stack of Exodus Rocket, up to a maximum 6 Exodus Rocket stacks. \nPrecision Hit Counter:\nTrace Rifles, and Vex Mythoclast: 10%\nAuto Rifle and Machine Gun: 15%\nPulse Rifles, Sidearms, and Crimson: 20%\nHand Cannons, Scout Rifles, and Shotguns: 40%\nBows, Linear Fusion Rifles, Rocket Sidearms, and Sniper Rifles: 67%\nPrecision Counter doesn't reset upon loading a rocket, leading to alternating shots in some cases. (3 -> 2 -> 3 HC shots, for example)\nOn Barricade Placement or Thruster Usage:\nConsumes all stacks, firing a homing Kinetic Micro-Missile per stack, each dealing up to 540 [28] Kinetic Damage over ? meters and granting a stack of Exodus Rocket for 10 seconds per hit scored.\nExodus Rocket grant increased Rocket and Micromissile Weapon Damage, up to 35% at x6 stacks.\nx1 = 10% | x2 = 17% | x3 = 24% | x4 = 30% | x5 = 33% | x6 = 35%"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:heartofinmostlight",
+  "n": "Heart of Inmost Light",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   502173648
+  ],
+  "perks": [
+   {
+    "n": "Overflowing Light",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Using an ability (grenade, melee, or Barricade) empowers the other two abilities. Empowered means abilities have faster regen, melees and grenades do more damage, and Barricades have more hit points.",
+     "clarity": "Grenade or Class Ability usage and dealing Elemental Melee damage grants the 'Empowered Abilities' buff to the other two abilities for 5 seconds (e.g.: Barricade usage 🠚 Empowered Grenade and Melee Abilities). Casting your super removes all stacks.\nBuff display on the HUD is nonsensical and does not accurately represent the buff's behavior when chaining multiple abilities together.\nEmpowered Melee x1|x2 benefits:\n• 10% | 50% increased Melee damage\n• 400% [100%] | 800% [200%] Additional Base Melee Regeneration Rate\nEmpowered Grenade x1|x2 benefits:\n• 20% [10%] | 35% [20%] increased Grenade damage\n• 400% [100%] | 800% [200%] Additional Base Grenade Regeneration Rate\nEmpowered Class Ability x1|x2 benefits:\n• 25%|50% Additional Base Class Ability Regeneration Rate\n• Does not grant any measurable benefit to Barricade HP despite stating it does",
+     "compendium": "On Grenade or Class Ability Usage, or upon dealing Powered Melee Damage:\nGrants a stack of Empowered Abilities for the other two abilities for 5 seconds, up to 2 stacks. \nSuper Ability Cast removes all stacks.\ne.g.: Dealing Thunderclap damage -> Increased Grenade and Class Ability Regeneration.\nx1 = 400% [100%] | x2 = 800% [200%] Additional Base Grenade and Melee Regeneration Rate. \nx1 = 25% | x2 = 50% Additional Base Class Ability Regeneration Rate.\nx1 = 20% [10%] | x2 = 35% [20%] Increased Grenade Damage.\nx1 = 25% | x2 = 50% Increased Melee Damage.\nBuff display is NOT accurate to the active ability regen. \nWith the example in mind, Class Ability Usage before Empowered x1 from Melee runs out will do the following:\nGrenade Empower will go to x2 and will have its duration refreshed. Melee will receive Empower x1 for 5 seconds, and Class Empower x1 won't be refreshed, despite the UI saying Empowered x2."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:helmofsaint14",
+  "n": "Helm of Saint-14",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "head",
+  "hashes": [
+   106575079
+  ],
+  "perks": [
+   {
+    "n": "Starless Night",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Weapons of Light persists after exiting Ward of Dawn. While Weapons of Light is active, final blows or sustained damage grant stacks of The Saint; Void and Kinetic damage sources also trigger a suppressing burst.\n \nPicking up Ward of Dawn consumes all stacks of The Saint and extends its duration based on how many stacks were consumed.",
+     "clarity": "Weapons of Light from Ward of Dawn can now persist outside the bubble for 15 seconds.\nWhile Weapons of Light is active:\nGain stacks of 'The Saint' by dealing damage or scoring kills against enemies. Maximum of 14 stacks. Stack duration is equal to the remaining duration of your currently active Ward of Dawn.\nStacks granted by kill are based off Enemy Rank, with Minor|Elite|Miniboss Tier enemies granting 1|2|3 stacks. Stacks granted by hit are granted after dealing an average of ~500-700 damage, with higher damage instances requiring at minimum 2 hits. Hit requirement stays the same across all difficulties (ignores power-deltas).\nGaining a stack of 'The Saint' through Kinetic or Void damage triggers a Suppressing Blast in a 6? meter radius around the target, applying Suppression for 6 [?] seconds.\nPicking up your Ward of Dawn consumes all stacks of The Saint and extends its active timer by ? seconds per stack consumed. Maximum of two extensions per super.",
+     "compendium": "Weapons of Light from Ward of Dawn can now persist outside of the bubble for 15 seconds.\nAll of the following only applies while Weapons of Light is active:\nDealing an average of 600 of damage and scoring kills grant stacks of The Saint, up to a maximum of 14 stacks.\nDamage = 1 stack | Rank-and-File = 1 stack | Elite = 2 | Miniboss+ = 3 | Guardians = 3\nThe Saint's buff duration is equal to the remaining duration of the current Ward of Dawn.\nDamage requirement IGNORES Power-Delta (Requires the same \"hits\" regardless of difficulty)\nThe minimum damage needed x hits for a \"The Saint\" Stack is based on thresholds:\n>2,445 x 2 | >767 x 3 | >135 x 4 | >109 x 5 | >108 x 6 | >89 x 7 | >77 x 8 and so on, averaging 600 damage per stack\nUpon fulfilling the same conditions as gaining a stack of The Saint through scoring Kinetic or Void Damage/Kills:\nInflicts Suppression for 6 [?] seconds in a 7 meter radius around the target.\nPicking up a Ward of Dawn Core consumes all stacks of The Saint. up to twice per Super Cast to its maximum on-cast duration.\nSuper Duration is initially extended by (The Saint Stacks + 1) seconds, up to +20 seconds at 14 stacks.\nExtending it a second time reduces the gains to 1 second per stack, up to +10 seconds at 10 stacks."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:hoarfrostz",
+  "n": "Hoarfrost-Z",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1322544481
+  ],
+  "perks": [
+   {
+    "n": "Glacial Fortification",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While you have a Stasis Super equipped, your Barricade becomes a wall of Stasis crystals that slows nearby targets when created. Standing behind this barricade will grant you and your allies increased weapon reload speed, stability, and range.",
+     "clarity": "While a Stasis Super Ability is equipped:\nClass Abilities are replaced by a Stasis Crystal formation.\nWhen used with Rally or Towering Barricade:\n• Spawns a Stasis Crystal Wall made of a Small Crystal in the middle and 2 Medium Crystals on either side of it\n• Grants Rally Barricade benefits to players standing behind the middle Crystal for 14 seconds, even if destroyed.\n• Overrides Class Ability cooldown with Towering Barricade's\nWhen used with Thruster:\n• Spawns 2 Medium Crystals diagonally forward to either side of you",
+     "compendium": "While a Stasis Super Ability is equipped:\nClass Abilities now spawn Stasis Crystals.\nRally and Towering Barricades are replaced by Glacial Fortification.\nGlacial Fortification is composed of 4 medium crystals, and a small crystal in the middle.\nGlacial Fortification Inherits Rally Barricade Bonuses, even if no crystals remain.\nOverrides Barricade Cooldown with Towering Barricade's.\nOn Thruster Usage:\nSpawns 2 Stasis Crystals in a V formation ahead of the user.\nDoes not receive Rally Barricade bonuses, nor does it override the cooldown."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:icefallmantle",
+  "n": "Icefall Mantle",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1467044898
+  ],
+  "perks": [
+   {
+    "n": "Glacial Guard",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While you have a Stasis Super equipped, rapid Stasis final blows grant Frost Armor. You heal a small amount whenever you gain Frost Armor. Replaces your class ability with a burst of Stasis energy that freezes nearby combatants, slows nearby opponents, and grants you increased Frost Armor.",
+     "clarity": "Requires a Stasis Super Ability to be equipped. Overwrites Barricade Cooldown to a unique, faster, 70 second Base Cooldown class ability (~30 seconds at 100 Class Stat).\nScoring 2 Stasis Kills within 3 seconds of each grants a Stack of Frost Armor.\nRestores 10 HP for each Stack of Frost Armor you gain from any source.\nReplaces Barricade with Glacial Guard which has a cooldown matching Towering Barricade's. Does not work with Thruster.\nOn Glacial Guard Cast:\n• Grants you maximum Frost Armor Stacks (restoring HP for each Stack gained)\n• Applies 100 [40] Slow to enemies within ? meters",
+     "compendium": "While a Stasis Super Ability is equipped:\nRestores 10 HP per stack of Frost Armor gained.\nScoring 2 Stasis Kills within 3 seconds of each grants a stack of Frost Armor. \nReplaces Barricade Class Abilities with Glacial Guard. \nOverwrites Barricade Cooldown to 70 seconds.\nOn Glacial Guard Cast:\nGrants maximum Frost Armor stacks to the user.\nInflicts x100 [x40] Slow to enemies within ? meters."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:kheprishorn",
+  "n": "Khepri's Horn",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "head",
+  "hashes": [
+   510504540
+  ],
+  "perks": [
+   {
+    "n": "Solar Rampart",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Solar final blows recharge your Barricade. While you have a Solar Super equipped, casting your Barricade unleashes waves of Solar energy that damage and scorch targets. Combatants damaged and Guardians defeated by these waves are enveloped in a Sunspot.",
+     "clarity": "Solar Kills grant 15% Class Ability Energy. 1? second cooldown between activations.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.\nUpon casting a Barricade Class Ability with a Solar Super equipped:\nUnleashes 3 Solar Waves from the front of the barricade that travel 18.5 meters and have tracking capabilities.\nThe Waves deal 480 [100] damage and apply 60 [30] Scorch Stacks (90 [45] with Ember of Ashes).\nEnemies Hit [Killed] by the Waves leave behind a Sunspot at their location.\nSolar Wave does not trigger nor is affected by Roaring Flames.",
+     "compendium": "Solar Kills grant 15% Class Ability Energy.\nIncurs a 1? second cooldown between Solar Kills granting Class Ability Energy.\nOn Barricade Placement, while a Solar Super Ability is equipped:\nUnleashes 3 Tracking Solar Wave up to 18.5 metres away.\nSolar Waves:\nEach deals 480 [100] damage and inflicts x60+30 [x30+15] Scorch. Damage cannot overlap.\nSolar Waves spawn a Sunspot under the enemies on hit [kill].\nSolar Wave do not benefit from, nor trigger Roaring Flames.\nSolar Effects triggered by Khepri's Solar Waves lose their 3x PVE bonus.\nThis means Ignitions deal 66.7% decreased damage.\nAlso, due to some wonkiness regarding Sunspot scorch, it takes ~5.3 seconds to ignite without Ashes, and ~1 second with Ashes."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:lionrampant",
+  "n": "Lion Rampant",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   53126581
+  ],
+  "perks": [
+   {
+    "n": "Jump Jets",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases hip-fire range and accuracy for Primary ammo weapons. Grants additional aerial maneuverability and enables airborne firing during Lift. Increases the airborne effectiveness stat of all weapons.",
+     "clarity": "Enables hipfiring and aim down sights while in Lift and passively grants 50 Airborne Effectiveness.\nIncreases Lift Duration to 4 seconds:\n• High Lift: 2.6🠚4 (54% increase)\n• Strafe Lift: 2.2🠚4 (82% increase)\n• Catapult Lift: 1🠚4 (300% increase)\nGrants the following benefits while a Primary Weapon is readied and not Aiming Down Sights:\n• 5 Range and 30? Stability\n• 70% decreased Accuracy Cone Size\n• 2 degrees increased Precision Aim Cone Angle\n• 20% increased Aim Assist and Damage Falloff Distance\nDMT, Last Word, and Tommy's Matchbook are uniquely tuned and do not receive as significant of a benefit.",
+     "compendium": "Enables hipfiring and ADS while in Lift, and passively grants +50 Airborne Effectiveness.\nIncreases Lift Duration to 4 seconds.\nLift Duration in seconds:\nHigh Lift: 2.6 -> 4 (54% increase)\nStrafe Lift: 2.2 -> 4 (82% increase)\nCatapult Lift: 1 -> 4 (300% increase)\nFor Primary Weapons while hipfiring:\n+5 Range, +30 Stability,\n-30% Accuracy Cone Size, +2?° Precision Angle Threshold,\n20% Increased Aim Assist and Damage Falloff Distance.\n DMT, Last Word, and Tommy's Matchbook do not receive the Falloff bonuses, and receive uniquely tweaked Accuracy values."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:loreleysplendorhelm",
+  "n": "Loreley Splendor Helm",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "head",
+  "hashes": [
+   3316517958
+  ],
+  "perks": [
+   {
+    "n": "Cauterizing Flame",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While you have a Solar Super equipped, casting your Barricade or becoming critically wounded with full class ability energy creates a Sunspot at your location.",
+     "clarity": "Only works with a Solar Super Ability equipped.\nReaching Critical Health consumes your Class Ability to spawn a Sunspot under you.\nManually casting your Class Ability also spawns a Sunspot under you.\nThe spawned Sunspot grants the Sol Invictus buff even without having the Aspect equipped. (The Aspect is still required to extend the sunspot's duration)",
+     "compendium": "While a Solar Super Ability is equipped:\nUpon either reaching Critical Health if Class Ability is charged or on Class Ability Usage while Rally or Towering Barricade is equipped:\nSpawns a Sunspot under the user. \nConsumes a Class Ability Charge if it's triggered by Critical Health.\nThe Sunspot spawned grants Sol Invictus even without the Aspect equipped. \nHowever, the Sunspot duration cannot be extended without it."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:maskofthequietone",
+  "n": "Mask of the Quiet One",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "head",
+  "hashes": [
+   197761152
+  ],
+  "perks": [
+   {
+    "n": "Dreaded Visage",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Grants ability energy when you are damaged. While you have a Void super equipped, rapid final blows and final blows while critically wounded grant Devour.",
+     "clarity": "Taking damage from enemies grants 5% Grenade, Melee, and Class Ability Energy. 1 second cooldown between activations.\nIf a Void Super Ability is equipped:\nScoring a Kill at Critical Health or 3 Kills within 5 seconds of each grants you Devour for 5 seconds (7.5 seconds with Echo of Persistance).\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Upon receiving damage from an enemy:\nGrants 5% Grenade, Melee, and Class Ability Energy.\nIncurs a 1 second cooldown between activations.\nWhile a Void Super Ability is equipped:\nUpon scoring 3 kills within 5 seconds of each, or a kill while at Critical Health:\nGrants Devour for 5+2.5 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:melaspanoplia",
+  "n": "Melas Panoplia",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   2867399974
+  ],
+  "perks": [
+   {
+    "n": "Forge Master",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Collecting a Firesprite or rapid Solar final blows make you a Forge Master, allowing you to recall your Throwing Hammer. After impacting a target, recall your hammer at full intensity to perform a Perfect Recall, causing an explosion of forge slag. Perfect Recalls and collecting Firesprites extend your time as a Forge Master.",
+     "clarity": "Collecting a Firesprite or scoring 3 Solar Kills within 3? seconds of each grants 'Forge Master' for 12 seconds. Buff timer starts once Throwing Hammer is used.\nUpon initially gaining Forge Master, generate ~11.7% Melee Ability Energy per second for 8 seconds.\nWhile Forge Master is active, Throwing Hammer is granted improved tracking and can be recalled by pressing your melee input. Recalling your Throwing Hammer guarantees a full refund of the ability, regardless of your Melee Stat.\nRecalling after ~2? seconds of scoring a Throwing Hammer hit performs a Perfect Recall. Perfect Recall triggers an explosion at the Hammer's location that deals up to 290 [?] Damage in a ~5 meter radius.\nPerforming Perfect Recalls and picking up additional Firesprites extends the buff duration by 3 seconds, up to 12 seconds.",
+     "compendium": "Upon collecting a Firesprite, or scoring 3 Solar Kills within 3 seconds of each:\nGrants Forge Master for 12 seconds. Buff timer begins ticking once a Throwing Hammer is used.\nInitially activating Forge Master grants 11.7% Fixed Melee Energy for 8 seconds.\nWhile Forge Master is active:\nAllows recalling the Throwing Hammer by pressing [Melee], fully refunding it.\nThrowing Hammer tracking is improved.\nRecalling after 2? seconds of scoring a Throwing Hammer hit performs a Perfect Recall.\nPerfect Recall triggers an explosion that deals up to 290 [?] Damage over ~5 meters.\nPerforming Perfect Recalls and picking up additional Firesprites extends the buff duration by 3 seconds, up to 12 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:mk44standasides",
+  "n": "Mk. 44 Stand Asides",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   136355432
+  ],
+  "perks": [
+   {
+    "n": "Seriously, Watch Out",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While your Juggernaut shield is active, you slowly gain Bolt Charge stacks over time and increased weapon ready speed. Sprinting while amplified creates an energizing field behind you that grants close by allies speed boost.",
+     "clarity": "Grants one stack of Bolt Charge every 1.5 seconds while Juggernaut's Shield is active.\nWhile Speed Booster is active, allies in a \"\"certain\"\" area behind you receive Speed Booster.\n...We have no idea what they were cooking with this rework, but it's here to stay I guess.",
+     "compendium": "While Juggernaut's Shield is active:\nGrants a stack of Bolt Charge every 1.5 seconds.\nWhile Speed Booster is active:\nCreates an area behind the user that grants allies Speed Booster."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:nobackupplans",
+  "n": "No Backup Plans",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   730200061
+  ],
+  "perks": [
+   {
+    "n": "Force Multiplier",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Shotgun and melee final blows start your health regeneration. While you have a defensive buff (Void Overshield, Amplified, Restoration, Frost Armor, Woven Mail), your Shotguns and melees deal additional damage and final blows with either extend the duration of those buffs. Provides a moderate benefit to Shotgun airborne effectiveness and reload speed.",
+     "clarity": "Passively grants ? Reload Speed and 30 Airborne Effectiveness to Shotguns.\nScoring Shotgun or Melee Kills begins Health Regeneration after reaching 100% Progress. Minor Combatants grant 34% progress, while Elites and Guardians grant 50%.\nWhile Void Overshield, Amplified, Restoration, Frost Armor, or Woven Mail is active:\n• Shotguns deal 35% [10%] increased damage (Empowering Buff)\n• Melees are granted 30% [?%] increased damage\n• Shotgun or Melee kills extend the duration of any the above effects by 5 seconds, up to their respective maximum.\n• If a Void Overshield is active, it also recieves 15 HP.\nThe following Super 'Melee' Abilities are also granted the damage bonus if the above conditions are met:\n• Fist of Havoc's Light Attack\n• Hammer of Sol's Shrapnel\n• Sentinel Shield's Light Attack\n• Glacial Quake's Light Attacks\n• Glacial Quake's Howl of The Storm\nThe ability damage bonus stacks additively with the Shieldcrush Artifact Mod.",
+     "compendium": "Passively grants +? Reload Speed and +30 Airborne Effectiveness to Shotguns.\nUpon reaching 100% Counter Progress by scoring multiple Shotgun or Melee Kills: \nRank-And-File = 34% | Elite+ and Guardians = 50%\n Begins Health Regeneration.\nWhile Amplified, Restoration, Void Overshield, Frost Armor, or Woven Mail is active:\n35% [10%] increased Shotgun damage.\n+30% [+?%] Increased Melee Damage.\nShotgun and Melee Kills extend the buff duration effect by 5 seconds, up to their usual maximum.\nVoid Overshield also receives +22.5 HP if active.\nIncreases Super Melee Damage by 30% as well, additive to Shieldcrush's +50%. \nIncludes: Fist of Havoc Light Attack | Hammer of Sol Shrapnel | Sentinel Shield Light Attack\nGlacial Quake Light Attacks + Howl during Glacial Quake"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:oneeyedmask",
+  "n": "One-Eyed Mask",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "head",
+  "hashes": [
+   1249787553
+  ],
+  "perks": [
+   {
+    "n": "Vengeance",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Highlights the target who dares to damage you. Track down and destroy them for an overshield.",
+     "clarity": "Receiving damage highlights the enemy that dealt it for 8 seconds. Highlighting cannot be transfered to a different target before it expires.\nKilling the highlighted enemy grants the Vengeance buff for 6 seconds, providing a 95 HP Overshield.\nHighlighting is disabled while Vengeance is active.",
+     "compendium": "Upon receiving damage:\nHighlights the first enemy that dealt damage for 8 seconds.\nOnly one enemy can be highlight at once.\nKilling the highlighted enemy grants Vengeance, which is a 95 HP Overshield, for 6 seconds.\nEnemies cannot be highlighted while Vengeance is active."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:peacekeepers",
+  "n": "Peacekeepers",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   53126580
+  ],
+  "perks": [
+   {
+    "n": "Mecha Holster",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While wielding a Submachine Gun, handling, airborne effectiveness, and movement are all improved, and damage against combatants will increase the longer you remain on target. Submachine Guns are reloaded when stowed.",
+     "clarity": "Passively grants 40 Airborne Effectiveness, 50 Handling, and a 0.8x Ready/Stow Duration Multiplier to Submachine Guns (SMGs).\nGrants the following while holding an SMG:\n• 30 Mobility\n• 6.25% increased Sprint Speed\n• 33% increased Slide Distance\n• 33% decreased ADS Movement Speed Penalty (25%⁠🠚⁠16.75%)\nRefills the Magazine of SMGs 1 second after they are stowed, even if the SMG is re-equipped within this window.\nScoring SMG Hits on PVE Combatants grants a Stack of 'Damage Buff' for 1 second. Maximum of 20 stacks. Damage Buff grants 5% increased SMG damage per stack, capping out at 100%.\nBoss-Tier Enemies take 33% decreased damage from Peacekeeper-buffed shots.",
+     "compendium": "Passively grants +40 Airborne Effectiveness to Submachine Guns.\nStowed Submachine Guns are refilled after 1.25 seconds.\nWhile a Submachine Gun is readied:\n+25 Mobility\n+50 Handling with a 0.8?x Ready/Stow Duration Multiplier\n33% Decreased ADS Movement Speed Penalty\nIncreases Sprint Speed from 8m/s to 8.5m/s.\nIncreases Slide Distance from 6.5 meters to 8.5 meters.\nUpon scoring a Submachine Gun Hit against a Combatant:\nGrants a stack of Damage Buff for 1 second, up to a maximum of 20 stacks.\nDamage Buff grants 5% increased Submachine Gun Impact Damage against Combatants per stack.\nAdditional Submachine Gun Hits refresh the Damage Buff duration.\nBosses take 33% decreased damage from Peacekeepers buffed shots."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:peregrinegreaves",
+  "n": "Peregrine Greaves",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   2255796155
+  ],
+  "perks": [
+   {
+    "n": "Peregrine Strike",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "All shoulder charge abilities (Seismic Strike, Hammer Strike, or Shield Bash) deal bonus damage when activated in the air. Damaging mini-bosses, Tormentors, or Champions with your shoulder charge refunds your melee. Provides a small benefit to the airborne effectiveness stat of all weapons.",
+     "clarity": "Passively grants 20 Airborne Effectiveness.\nGrants Peregrine Strike after sprinting for 2 seconds and being airborne for 0.5 seconds. Buff is removed upon touching the ground.\nPeregrine Strike increases the impact damage of Shoulder Charge Melee Abilities by 250%.\nAgainst Minibosses, the buff is increased to 550% and refunds your Melee Ability charge on hit.\nShoulder Charge abilities: Seismic Strike, Hammer Strike, and Shield Bash\nProvides no benefits when hitting Frozen enemies.",
+     "compendium": "Passively grants +20 Airborne Effectiveness.\nAfter sprinting for 2 seconds, and after being airborne for 0.5 seconds:\nGrants Peregrine Strike until the floor is touched. \nPeregrine Strike:\nShoulder Charge Abilities deal 250% increased impact damage.\nChampions, Tormentors, and Minibosses instead take 550% Increased Impact Damage and grant 100% Fixed Melee Ability Energy on hit.\nShoulder Charge includes Seismic Strike, Hammer Strike, and Shield Bash.\nFrozen enemies will not take increased Melee Damage from Peregrine Strike."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:phoenixcradle",
+  "n": "Phoenix Cradle",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   1537074069
+  ],
+  "perks": [
+   {
+    "n": "Beacons of Empowerment",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Sol Invictus lasts twice as long. Allies who pass through your Sunspot are granted Sol Invictus and Restoration. Dealing sustained [Solar]Solar damage in a Sunspot extends the duration of the Sunspot. Applying Solar buffs to allies has a chance to create a Sunspot at your feet.",
+     "clarity": "The Sol Invictus buff you receive from Sunspots lasts twice as long (5⁠🠚⁠10 seconds).\nSunspots you create gain new visuals and now benefit allies, granting them the Sol Invictus buff for 10 seconds.\nSunspots can be extended by up to 2? seconds by dealing sustained Solar Weapon Damage (seems to not work without the Aspect, and only extends by 2 seconds).\nGranting Solar Buffs to allies 3-5 times spawns a Sunspot under the user.",
+     "compendium": "Sunspots can affect allies and be extended by dealing sustained Solar Weapon Damage. \nSeems to not work properly without the Aspect, and only getting a maximum of 2 second extension?\nPhoenix Cradle Sunspots have a white ring around them.\nWhile the Sol Invictus Aspect is equipped:\nSol Invictus from Sunspots lasts twice as long (5 -> 10 seconds).\nUpon granting 3–5 Solar Buffs to allies:\nSpawns a Sunspot under the user.\nSimultaneous Solar Buffs (such as throwing a Healing Grenade at 2 allies) will count as multiple Solar Buff applications."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:pointcontactcannonbrace",
+  "n": "Point-Contact Cannon Brace",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   308767728
+  ],
+  "perks": [
+   {
+    "n": "Hammer of the Gods",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Defeating targets with your Thunderclap melee restores melee energy. Targets near you when you use your Thunderclap suffer lightning strikes and become jolted; being amplified increases the damage of these lightning strikes.",
+     "clarity": "Casting Thunderclap refunds Melee Ability Energy after use. Refund amount is FPS-based, granting 10|18|32|41|77% Melee Ability Energy at 30|60|120|144|300 frames.\nKills with Thunderclap and this exotic's Lightning Strikes refund additional melee energy per kill, up to a maximum of 50%.\nUpon activating and upon discharging Thunderclap, summon Jolting Lightning strikes in a 15 meter radius around you, dealing 181 [50] damage. Lightning Strikes instantly trigger their Jolt chains during both events, and their damage is doubled while Amplified.\nLightning Damage can be further increased by up to 200% by fully charging Thunderclap, which stacks multiplicatively with the damage bonus from being Amplified.\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Thunderclap and Lightning Strike Kills refund up to 50% Melee Ability Energy.\nOn Thunderclap Usage: Refunds an additional FPS-based Melee Ability Energy.\nFPS Scaling: 30FPS = 10% Melee | 60 = 18% | 120 = 32% | 144 = 41% | 300 = ~77%\nOn Thunderclap Activation and Discharge:\nStrikes enemies within 15 metres with lightning, dealing 181 [50] Arc Damage and inflicting Jolt.\nAlso instantly triggers Jolt Chain Damage.\nLightning Damage is increased by 100% (360 [100?]) while Amplified.\nLightning Damage can be increased by up to 200% by fully charging Thunderclap. \nStacks multiplicatively with the Amplified bonus, totalling 1080 [?] lightning damage.\nA single fully charged Thunderclap deals 2365 damage.\nWhile Amplified, this goes up to 3085 damage per usage."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:praxicvestment",
+  "n": "Praxic Vestment",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   4184605701
+  ],
+  "perks": [
+   {
+    "n": "Praxic Lift",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "You gain an air move jetpack. Weapon and Arc powered melee final blows build up Jetpack Fuel.\n\nWhile airborne, [Air Dodge] : Charge your jetpack.\n\nOn release, activate your jetpack with a forceful blast of exhausting Arc energy then fly forward a short distance based on the amount charged. Collide with a combatant to unleash a blinding blast of energy and gain a temporary bonus to your melee stat.",
+     "clarity": "Scoring Weapon and Arc-Powered Melee Kills build up 'Jetpack Fuel'. Weapon kills grant 20% energy, and Arc-Melee kills grant 50% energy. Jetpack Fuel additionally builds at a passive rate of 3.5% per second.\nOnce Jetpack Fuel is fully charged, pressing [Air Move] input while airborne thrusts you forward in a jet-propelled flight for 30 meters for 1.5 seconds. Holding down the input results in a 100% longer flight duration, traveling 50 meters over 3 seconds.\nJetpack Activation deals 168 [69] Arc Damage in a 6 meter radius and applies Exhaust.\nColliding with an enemy while flying triggers a Melee Strike for 1509 [?] Arc Damage, Blinds targets in a ? meter radius for 10 seconds, and grants 40 Melee stat for 7 seconds.",
+     "compendium": "Jetpack Fuel: Passively charges 3.5%/s Jetpack Fuel.\nWeapon Kills grant 20% Jetpack Fuel. \nArc Powered Melee Kills grant 50% Jetpack Fuel.\nUse [Air Move] while Airborne to activate Jetpack once it is charged.\nJetpack Fuel is always emptied after usage.\nOn Jetpack Activation | Deals up to 168 [69] Arc Damage over 6 meters and inflicts exhaust.\nJetpack Duration varies depending on whether Air Move is tapped or held.\n[Air Move Tap] travels 30 meters over 1.5 seconds.\n[Air Move Hold] travels 50 meters over 3 seconds.\nExhaust reduces Combatant Damage Output by 25%\nColliding with an enemy while flying triggers a Praxic Knee that deals 1509 [?] Arc Damage, blinds over ? meters, and grants +40 Melee Stat for 7 seconds.\nPraxic Knee benefits from Melee Damage Buffs."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:preciousscars",
+  "n": "Precious Scars",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "head",
+  "hashes": [
+   1978467312
+  ],
+  "perks": [
+   {
+    "n": "Kintsugi",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Final blows from weapons with a damage type matching your Super create a burst of healing around you that grants allies restoration. After reviving or being revived, you gain an aura that provides overshields to you and nearby allies.",
+     "clarity": "Kills with a Weapon matching the element of your Super Ability grant Restoration x1 to you and allies within 15 meters for 3 seconds (4.5 with Ember of Solace). 3 second cooldown between activations.\nReviving allies or being revived projects a 15-meter field around the wearer for 10 seconds that grants the wearer and allies inside it the Shielded buff.\nShielded grants a 100 HP Overshield that regenerates in 1 second as long as it remains active after not receiving damage for 2 seconds.\nShielded is removed if the Overshield is destroyed and you cannot regain it by leaving and reentering the field. If the wearer's Overshield is destroyed, the field granting it to allies is removed as well.",
+     "compendium": "Upon reviving an ally, or being revived: \nProjects a 15 meter field for 10 seconds that grants Wearer and Allies Shielded.\nAllies that leave the radius temporarily lose Shielded.\nShielded:\nOvershield with 100 HP. \nRegenerates over 1 second after 2 seconds of not receiving damage if Shielded is active.\nShielded is removed and cannot be regained if Overshield gets destroyed.\nShielded is removed from Allies if wearer's Overshield is destroyed.\nUpon scoring a Super-Matching Weapon Kill:\nGrants x1 Restoration for 3+1.5 seconds to the wearer and allies within 15 metres.\nIncurs a 3 second cooldown between activations, displayed with the \"Healing\" buff."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:pyrogalegauntlets",
+  "n": "Pyrogale Gauntlets",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   864224653
+  ],
+  "perks": [
+   {
+    "n": "Percussive Flames",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Modifies Burning Maul into a single, high-damage slam of your hammer that creates several cyclones of flame. Consecration's second slam creates a cyclone of flame.",
+     "clarity": "Modifies Burning Maul into a single-use slam that deals 650% increased damage and releases 3 tracking Waves. Waves create Cyclones on impact which also track enemies.\nWaves apply 20 (60 with Ember of Ashes equipped) Scorch on Impact. The released Cyclones last 7.5 seconds and track enemies, dealing 19 [16] damage every 0.2 seconds, while applying 3 (5 with Ember of Ashes) Scorch every 0.56 seconds.\nConsecration's center wave creates a weaker Cyclone that deals 7 [3] damage and does not have tracking; though, it still retains the Scorching capability.\nDamage from multiple Cyclones can overlap.\nBurning Maul no longer receives faster active super generation as a roaming-class super.",
+     "compendium": "Modifies Burning Maul into a single-use slam that deals 650% increased damage, releases 3 tracking waves, but no longer counts as a Roaming Super for Super Ability Generation. \nWaves inflict x20+40 Scorch and create a Cyclone on impact. \nBurning Maul's Cyclones deal 19 [16] damage every 0.2 seconds, inflict x?+? Scorch every 0.56 seconds for 7.5 seconds, and track enemies.\nDamage from multiple Cyclones can now overlap. \nConsecration's second slam's middle wave creates a Cyclone, which deals 7 [3] damage every 0.2 seconds, and inflicts x3+2 Scorch every 0.56 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:secondchance",
+  "n": "Second Chance",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1443166262
+  ],
+  "perks": [
+   {
+    "n": "Myrmidon's Reach",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Gain a second charge of your Shield Throw melee. Your Shield Throws now weaken targets, create a Void Breach on final blows, and become shield-piercing, stunning [Shield-Piercing] Barrier Champions and refunding a Shield Throw charge when you do. Picking up a Void Breach grants you Shield Throw energy.",
+     "clarity": "Grants an additional Shield Throw Melee Ability Charge.\nShield Throw gains Shield-Piercing properties and Weakens targets for 10 seconds on hit.\nStunning a Barrier Champion with Shield Throw grants a Melee Ability Charge.\nKills with Shield Throw spawns a Void Breach. This ignores the global Void Breach spawning cooldown.\nCollecting a Void Breach grants 20%? Shield Throw Ability Energy.\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Grants an additional Shield Throw Melee Ability Charge.\nSentinel Shield's Shield Throw inflicts Weaken for 10 seconds.\nEnhanced Shield Throw:\n Becomes Shield-Piercing and inflicts weakens for 10 seconds on hit. \n Stunning a Barrier Champion grants a Melee Ability Charge. \nShield Throw Kills spawn a Void Breach without cooldown.\nOn Void Breach Pickup:\nGrants 11.25% Shield Throw Ability Energy."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:severanceenclosure",
+  "n": "Severance Enclosure",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1429817243
+  ],
+  "perks": [
+   {
+    "n": "Spheromatik Trigger",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Powered melee final blows unleash a damaging explosion. Finishers and final blows against more powerful targets increase the radius and damage of the explosion.",
+     "clarity": "Powered Melee Kills and Finishers trigger a Kinetic Explosion at the target's location, knocking nearby enemies into the air and Disorienting them. 1 second cooldown between activations.\nExplosion Damage and radius based on Enemy Rank:\n• Minors: 439 Damage, 15m Radius\n• Elites: 598 Damage, 15m Radius\n• Minibosses and higher: 717 Damage, 20m Radius\n• Players: ?\nExplosions have up to 20% decreased damage at the edge of the radius. Finishers upgrade the explosion to the one triggered by a Powered Melee on a one rank higher target.\nExplosions triggered can chain on Kills and will trigger weaker explosions that deal up to 242 [?] damage in a 8? meter radius. Chain Explosions don't have a cooldown.",
+     "compendium": "On Powered Melee Kill or Finisher:\nEnemy triggers a Kinetic Explosion, dealing variable damage in a wide radius with falloff, knocking enemies upwards, and disorienting them.\nFalloff decreases damage by up to 20%.\nExplosion Damage and Radius scale on Enemy Rank (Finisher). \nIncurs a 1 second cooldown between non-chaining explosions. \nSeverance Explosion Damage | Radius\nRank-and-File: 439 (598) Kinetic Damage over 15 meters.\nElite: 598 (717) Kinetic Damage over 20 meters\nMiniboss+: 717 Kinetic Damage over 20 meters.\nSeverance Explosions triggered by Powered Melee Kills can chain, triggering a weaker explosion that only deals up to 242 [?] damage in a 8 meter radius. \nChaining Explosions do not have a cooldown but cannot simultaneously trigger multiple of them."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:stoicism",
+  "n": "Stoicism",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "class",
+  "hashes": [
+   266021826
+  ],
+  "perks": [
+   {
+    "n": "Spirit of Severance",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Powered melee or finisher final blows unleash a damaging explosion.",
+     "compendium": "On Powered Melee Kill or Finisher:\nEnemy triggers a Kinetic Explosion, dealing up to 400 [?] damage over ? meters\nIncurs a 1 second cooldown between non-chaining explosions. \nSeverance Explosions from Powered Melee Kills can chain, creating weaker explosions that only deal up to 268 [?] damage in a ? meter radius. \nChaining Explosions do not have a cooldown."
+    }
+   },
+   {
+    "n": "Spirit of Contact",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Damaging a target with a powered melee causes all nearby targets to suffer lightning strikes and become jolted.",
+     "compendium": "Upon scoring a Powered Melee Hit: \nEnemies within 15 meters of the struck enemy are hit by lightning.\nLightning deals 181 [50] Arc Damage and inflicts Jolt."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:stronghold",
+  "n": "Stronghold",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   512777670
+  ],
+  "perks": [
+   {
+    "n": "Clenched Fist",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Maximizes guard stats on equipped Heavy ammo Swords. You take reduced damage while blocking with a Sword. Rapidly damaging targets after blocking shots with a Sword grants Restoration for a duration determined by the number of shots blocked.",
+     "clarity": "Passively grants 100 Guard Resistance and Guard Endurance to Swords.\nWhile Guarding:\n• Grants 50% [10%] Damage Resistance (Stacks multiplicatively with the Damage Resistance provided by Sword Guard against blocked attacks)\n• Blocking a hit grants 2 Stacks of Perfect Guard. Maximum of 100 Stacks. (Cannot gain stacks while you have the Restoration buff)\n• Heavy Ammo Sword Energy does not decay from holding guard\nAll Stacks are removed if no hits have been blocked in the last 10 seconds.\nDealing Sword Damage with active Perfect Guard Stacks grants Restoration x2:\n4 [3] second duration at 1 Stack, scaling up to 16 [6] seconds at 100 Stacks. (Ember of Solace increases this by 50%, up to 24 [9] seconds)",
+     "compendium": "Passively grants +100 Guard Resistance and +100 Guard Endurance. \nWhile Blocking:\n50% [10%] Damage Resistance.\nBlocking a hit grants x2 Perfect Guard, up to x100.\nHaving any Restoration effect disables stack accumulation. \nNot blocking any hits for 10 seconds removes all Perfect Guard Stacks.\nUpon dealing Sword damage while having Perfect Guard Stacks:\nGrants Restoration x2 for a varying amount of time.\nRestoration x2 lasts 4 [3] seconds at x1, increasing up to 16+8 [6+3] seconds at x100.\nStronghold Guarding:\nSword Block now grants ?% [68%] Damage Resist.\nSword Energy does not decay from blocking damage or holding guard on Heavy Ammo Swords."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:synthoceps",
+  "n": "Synthoceps",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   241462142
+  ],
+  "perks": [
+   {
+    "n": "Biotic Enhancements",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "When you're surrounded, gain increased melee and Super damage, as well as improved weapon handling and reload speed.",
+     "clarity": "Being within 15 meters of 3+ enemies grants the 'Biotic Enhancements' buff for 5 seconds.\nBiotic Enhancements benefits:\n• 35 Handling and 35 Reload Speed\n• 50% increased Super damage\n• 165% [100%] increased Melee damage\n• 100% increased Glaive Melee damage",
+     "compendium": "While within 15 metres of 3 enemies: \nGrants Biotic Enhancements.\nBuff lingers for 5 seconds.\nBiotic Enhancements:\n50% Increased Super Damage.\n165% [100%] Increased Melee Damage.\n+35? Handling and +35 Reload Speed."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:thepathofburningsteps",
+  "n": "The Path of Burning Steps",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "legs",
+  "hashes": [
+   1453120846
+  ],
+  "perks": [
+   {
+    "n": "Firewalker",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increase the damage of Solar weapons and Solar Ignitions based on the amount of Roaring Flames stacks you have. You are harder to suspend, slow, or freeze, and when you break out, you take no damage from doing so, creating a burst of Solar energy around yourself.",
+     "clarity": "Increases Solar Weapon and Ignition damage while Roaring Flames currently active.\nBenefits at Roaring Flames x1|x2|x3:\n• 6%|9.2%|12.4% increased Weapon Damage\n• 15%|20%|24.9% increased Ignition Damage\nThe number Slow stacks and their duration, as well as the duration of Suspend applied to you are halved. Damage from Stasis Breakout is removed.\nStasis or Suspend Breakout creates a burst of Solar Energy, dealing up to 105 damage in a 9 meter radius.",
+     "compendium": "Roaring Flame stacks grant increased Solar Weapon and Ignition Damage.\nRoaring Flame x1 | 6% Increased Weapon Damage and 15% Increased Ignition Damage.\nRoaring Flame x2 | 9.2% Increased Weapon Damage and 20% Increased Ignition Damage.\nRoaring Flame x3 | 12.4% Increased Weapon Damage and 24.9% Increased Ignition Damage.\nHalves Slow Stacks received (rounded up) and they last half as long. \nFreeze, and Suspend debuffs last half as long.\nStasis Breakout deals no self-damage.\nBreaking out of Freeze or Suspend triggers a Solar Blast that deals up to 105 Solar Damage in a 9 metre radius"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:ursafuriosa",
+  "n": "Ursa Furiosa",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1484674161
+  ],
+  "perks": [
+   {
+    "n": "Ursine Guard",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Move faster while guarding with Sentinel Shield or the Unbreakable shield. Damage blocked with Sentinel Shield is converted to Super energy, and damage blocked with Unbreakable is converted to grenade energy.",
+     "clarity": "Increases movement speed by 15% while guarding with Unbreakable or Sentinel Shield.\nBlocking damage with Sentinel Shield refunds Super Energy after it ends. Maximum of a 50% refund.\nDamage Blocked with an active Overshield does not count towards the Super Energy Refund.\nBlocking damage Unbreakable refunds 15% [?%] Grenade energy after recieving ? [?] damage. Blocking additional damage can refund up to 60% [?%] Grenade energy.",
+     "compendium": "While guarding with Unbreakable or Sentinel Shield:\n15% Increased Movement Speed.\nConverts guarded damage into Super Energy after Super ends, up to 50% Super Ability Energy.\nUnbreakable grants up to 60% Grenade Ability Energy once it ends.\nScales from 15% Grenade Energy, up to 60% Grenade Energy after maxing out Unbreakable."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:wishfulignorance",
+  "n": "Wishful Ignorance",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   3717431477
+  ],
+  "perks": [
+   {
+    "n": "Wish-Dragon's Talons",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Gain an additional Frenzied Blade charge. Frenzied Blade and Flechette Storm briefly increase their damage with each strike. Pulses from your Banner of War return melee energy based on the number of allies healed.",
+     "clarity": "Grants an additional Frenzied Blade Ability Charge.\nFrenzied Blade or Flechette Storm Hits grant a Stack of 'Wish-Dragon's Talons' for 2.75 seconds. Maximum of 3 Stacks.\nCan only grant 1 Stack per ability usage.\n'Wish-Dragon's Talons' grants 25%|60%|120% increased Frenzied Blade and Flechette Storm damage at 1|2|3 stacks.\nBanner of War's Pulses grant 5% Frenzied Blade Ability Energy and an additional 5% for each ally within 10 meters.\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Grants an additional Frenzied Blade Melee Ability Charge.\nUpon scoring a Frenzied Blade or Flechette Storm hit:\nGrants a stack of Wish-Dragon's Talons for 2.75 seconds, up to 3 stacks.\nCan only grant 1 stack per Ability Usage.\nWish-Dragon's Talons:\n25% | 60% | 120% Increased Flechette Storm and Frenzied Blade damage.\nBanner of War's Pulses grant 5% Frenzied Blade Melee Ability Energy per ally within 10 meters.\nWearer counts as an ally."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:wormgodcaress",
+  "n": "Wormgod Caress",
+  "kind": "exoticArmor",
+  "cls": [
+   "titan"
+  ],
+  "slot": "arms",
+  "hashes": [
+   809007411
+  ],
+  "perks": [
+   {
+    "n": "Burning Fists",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Defeating a target with melee or a finisher grants escalating melee damage, which decays over time. Higher levels of Burning Fists grant increased weapon damage.",
+     "clarity": "Finisher and (Glaive) Melee Kills grant a Stack of Burning Fists. Maximum of 5 Stacks.\nAfter not having scored further Finisher or (Glaive) Melee Kills for 2 seconds, your Stacks start decaying one at a time over 9.5|10|4|4|3 seconds for the 1st|...|5th Stacks.\nDamage Buff at 1|2|3|4|5 Stacks:\n• Additional Base Melee Damage: 80%|160%|240%|320%|400%\n• Additional Base Glaive Melee Damage: 40%|80%|120%|160%|200%\n• Weapon, PVE: 0%|20%|25%|30%|35%\n• Weapon, PVP: 0%|0%|20%|25%|25%\nWeapon damage increases are Empowering Buffs.",
+     "compendium": "On Melee, Glaive Melee, or Finisher Kill:\nGrants a stack of Burning Fists, up to 5 stacks, increasing Melee and Weapon Damage per stack.\nLoses 1 Burning Fists stack upon expiring, rather than all of them.\nBurning Fist stack timer begins decaying after 2 seconds of gaining a stack.\nBurning Fists:\nx1 = 80% increased Melee Damage for 9.5 seconds.\nx2 = 160% Melee Damage, and 20% Increased Weapon Damage for 10 seconds.\nx3 = 240% Melee Damage, and 25% [20%] Weapon Damage for 4 seconds.\nx4 = 320% Melee Damage, and 30% [25%] Weapon Damage for 4 seconds.\nx5 = 400% Melee Damage, and 35% [25%] Weapon Damage for 3 seconds."
+    }
+   }
+  ]
+ }
+]

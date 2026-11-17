@@ -1,0 +1,2814 @@
+[
+ {
+  "id": "xa:abeyantleap",
+  "n": "Abeyant Leap",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "barricade",
+    "perk": "Puppeteer's Control",
+    "if": [
+     {
+      "piece": "Drengr's Lash"
+     }
+    ],
+    "q": "Improves Drengr's Lash and spawns additional projectiles.",
+    "s": "bungie",
+    "note": "Drengr's Lash fires extra, farther-reaching, harder-tracking lashes that suspend longer."
+   },
+   {
+    "do": "applies",
+    "t": "suspend",
+    "perk": "Puppeteer's Control",
+    "if": [
+     {
+      "piece": "Drengr's Lash"
+     }
+    ],
+    "q": "These projectiles track targets more aggressively, travel farther, and suspend stronger.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "perk": "Puppeteer's Control",
+    "q": "Gain Woven Mail when you suspend a target.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "wovenmail",
+    "perk": "Puppeteer's Control",
+    "on": "suspending a target",
+    "q": "Gain Woven Mail when you suspend a target.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suspend",
+    "perk": "Puppeteer's Control",
+    "if": [
+     {
+      "piece": "Drengr's Lash"
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Thruster"
+      ]
+     }
+    ],
+    "q": "Created Strand Knot is launched towards nearby enemies with some tracking. Detonates and Suspends nearby targets on contact.",
+    "s": "clarity",
+    "note": "Thruster version of Drengr's Lash: the Strand knot seeks enemies."
+   }
+  ],
+  "note": "Built around Drengr's Lash; Woven Mail comes from any suspend you apply."
+ },
+ {
+  "id": "xa:acd0feedbackfence",
+  "n": "ACD/0 Feedback Fence",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Fury Conductors",
+    "q": "Melee hits grant Armor Charge",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "armorcharge",
+    "perk": "Fury Conductors",
+    "on": "melee hits",
+    "q": "Melee hits grant Armor Charge",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "armorcharge",
+    "perk": "Fury Conductors",
+    "q": "you take less melee damage from combatants while you have Armor Charge",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "perk": "Fury Conductors",
+    "if": [
+     {
+      "has": "armorcharge"
+     }
+    ],
+    "q": "you take less melee damage from combatants while you have Armor Charge",
+    "s": "bungie",
+    "note": "Melee damage resistance vs combatants only."
+   },
+   {
+    "do": "consumes",
+    "t": "armorcharge",
+    "perk": "Fury Conductors",
+    "on": "taking melee damage",
+    "q": "consuming your Armor Charge and dealing more damage based on the number of stacks consumed",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "perk": "Fury Conductors",
+    "q": "Taking melee damage causes you to emit a burst of damaging Arc energy that jolts targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:actiumwarrig",
+  "n": "Actium War Rig",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "autorifle",
+    "perk": "Auto-Loading Link",
+    "q": "Steadily reloads a portion of your equipped Auto Rifle or Machine Gun's magazine from reserves.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "machinegun",
+    "perk": "Auto-Loading Link",
+    "q": "Steadily reloads a portion of your equipped Auto Rifle or Machine Gun's magazine from reserves.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "perk": "Auto-Loading Link",
+    "q": "Steadily reloads a portion of your equipped Auto Rifle or Machine Gun's magazine from reserves.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "perk": "Auto-Loading Link",
+    "on": "Auto Rifle or Machine Gun final blows",
+    "q": "Final blows with Auto Rifles or Machine Guns boost their stability, ammo generation, and damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Auto-Loading Link",
+    "q": "Provides a moderate benefit to their airborne effectiveness.",
+    "s": "bungie",
+    "note": "Auto Rifles and Machine Guns only."
+   }
+  ]
+ },
+ {
+  "id": "xa:aninsurmountableskullfort",
+  "n": "An Insurmountable Skullfort",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Transfusion Matrix",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Ballistic Slam",
+       "Seismic Strike",
+       "Thunderclap"
+      ]
+     }
+    ],
+    "q": "Final blows with Arc melees trigger health regeneration and fully restore a melee charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Transfusion Matrix",
+    "on": "Arc melee final blows",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Ballistic Slam",
+       "Seismic Strike",
+       "Thunderclap"
+      ]
+     }
+    ],
+    "q": "Final blows with Arc melees trigger health regeneration and fully restore a melee charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Transfusion Matrix",
+    "on": "Arc melee final blows",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Ballistic Slam",
+       "Seismic Strike",
+       "Thunderclap"
+      ]
+     }
+    ],
+    "q": "Final blows with Arc melees trigger health regeneration and fully restore a melee charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Transfusion Matrix",
+    "on": "melee hits",
+    "q": "Melee hits grant Arc melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "knockout",
+    "perk": "Transfusion Matrix",
+    "if": [
+     {
+      "piece": "Knockout"
+     }
+    ],
+    "q": "15% Melee Ability Energy on Non-Glaive Melee Hit while Knockout is active.",
+    "s": "compendium",
+    "note": "Uncharged melee hits refund 15% with Knockout active (5% without)."
+   }
+  ],
+  "note": "Clarity/Compendium: the full refund needs a powered Arc melee kill."
+ },
+ {
+  "id": "xa:antaeuswards",
+  "n": "Antaeus Wards",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sliding",
+    "perk": "Reflective Vents",
+    "q": "While sliding with full class ability energy, you gain a frontal shield that reflects incoming damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "classenergy",
+    "perk": "Reflective Vents",
+    "q": "While sliding with full class ability energy, you gain a frontal shield that reflects incoming damage.",
+    "s": "bungie",
+    "note": "Needs full class ability energy."
+   },
+   {
+    "do": "uses",
+    "t": "sprinting",
+    "perk": "Reflective Vents",
+    "q": "Upon sliding after sprinting for at least 1.5 seconds with your Class Ability fully charged:",
+    "s": "clarity"
+   },
+   {
+    "do": "consumes",
+    "t": "classenergy",
+    "perk": "Reflective Vents",
+    "q": "After reflecting damage, your class ability energy is depleted based on the amount of damage reflected.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Reflecting slide shield (not Juggernaut's frontal shield). Clarity: partially bugged; projectiles reflected at the end of the slide don't drain energy."
+ },
+ {
+  "id": "xa:arborwarden",
+  "n": "Arbor Warden",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "classability",
+    "perk": "Barri-nade",
+    "q": "Using your class ability channels defensive Light inward, providing a grenade that creates a barricade on impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "perk": "Barri-nade",
+    "q": "Using your class ability channels defensive Light inward, providing a grenade that creates a barricade on impact.",
+    "s": "bungie",
+    "note": "Grenade is replaced by Barri-nade until the class ability fully recharges."
+   },
+   {
+    "do": "modifies",
+    "t": "barricade",
+    "perk": "Barri-nade",
+    "q": "Barri-Nade spawns your selected Barricade type on the impact location and inherits the benefits of Aspects such as Bastion and Drengr's Lash.",
+    "s": "clarity",
+    "note": "Barricade aspects (Bastion, Drengr's Lash) trigger from Barri-nade barricades; non-barricade class abilities default to Towering Barricade."
+   },
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "perk": "Barri-nade",
+    "q": "Picking up Orbs of Power enhances your next Barri-nade, spawning more barricades on impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "disorient",
+    "perk": "Barri-nade",
+    "q": "Enemies that are within 5 metres of impact are disoriented.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "perk": "Barri-nade",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Passively grants 45% faster Base Class Ability Regeneration (does not function with Thruster).",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "xa:armamentarium",
+  "n": "Armamentarium",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "perk": "And Another Thing",
+    "q": "Gain an additional grenade charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "perk": "And Another Thing",
+    "q": "Grenade final blows spawn an Orb of Power.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "perk": "And Another Thing",
+    "on": "grenade final blows",
+    "q": "Grenade final blows spawn an Orb of Power.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "And Another Thing",
+    "on": "weapon final blows",
+    "q": "Weapon final blows grant grenade energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "perk": "And Another Thing",
+    "on": "using your grenade",
+    "q": "Activating your grenade ability reloads your equipped weapon from reserves.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity/Compendium: includes a passive copy of the Firepower mod (the grenade-kill Orb)."
+ },
+ {
+  "id": "xa:ashenwake",
+  "n": "Ashen Wake",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "perk": "Bring the Heat",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Fusion Grenade"
+      ]
+     }
+    ],
+    "q": "Fusion Grenades gain increased throw speed, explode on impact, and stun Unstoppable Champions.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Bring the Heat",
+    "on": "Fusion Grenade final blows",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Fusion Grenade"
+      ]
+     }
+    ],
+    "q": "Final blows with Fusion Grenades grant grenade energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:blastwavestriders",
+  "n": "Blastwave Striders",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "perk": "Blastwave Striders",
+    "q": "Gain resistance to your explosives.",
+    "s": "bungie",
+    "note": "Explosive self-damage only."
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Blastwave Striders",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "melee",
+        "is": [
+         "Shiver Strike"
+        ]
+       },
+       {
+        "piece": "Howl of the Storm"
+       }
+      ]
+     }
+    ],
+    "q": "deal damage with Shiver Strike, Howl of The Storm, or explosive self-damage",
+    "s": "clarity",
+    "note": "Charged by kills; Shiver Strike or Howl of the Storm damage (or explosive self-damage) launches the blast. Compendium: Explosive Head/Payload perks also trigger it."
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "perk": "Blastwave Striders",
+    "q": "The wave freezes combatants and slows Guardians.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Blastwave Striders",
+    "q": "The wave freezes combatants and slows Guardians.",
+    "s": "bungie",
+    "note": "Guardians only (PvP)."
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "perk": "Blastwave Striders",
+    "q": "Charged rocket jumps grant Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "perk": "Blastwave Striders",
+    "q": "Each Projectile deals 623 [?] damage and spawns a Stasis Crystal on impact.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "xa:cadmusridgelancecap",
+  "n": "Cadmus Ridge Lancecap",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "diamondlance",
+    "perk": "Lancer's Vigil",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "any": [
+       {
+        "weapon": "stasis"
+       },
+       {
+        "slot": "classAbility",
+        "is": [
+         "Rally Barricade"
+        ]
+       }
+      ]
+     }
+    ],
+    "q": "While a Stasis Super is equipped, rapid Stasis weapon damage or damage from behind your Rally Barricade will create a Diamond Lance near you.",
+    "s": "bungie",
+    "note": "Works without the Diamond Lance aspect but shares its cooldown."
+   },
+   {
+    "do": "uses",
+    "t": "barricade",
+    "perk": "Lancer's Vigil",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade"
+      ]
+     }
+    ],
+    "q": "While a Stasis Super is equipped, rapid Stasis weapon damage or damage from behind your Rally Barricade will create a Diamond Lance near you.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "diamondlance",
+    "perk": "Lancer's Vigil",
+    "q": "Thrown Diamond Lances create Stasis crystals.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "perk": "Lancer's Vigil",
+    "by": "diamondlance",
+    "q": "Thrown Diamond Lances create Stasis crystals.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "perk": "Lancer's Vigil",
+    "q": "Your Diamond Lances deal more damage based on how much Frost Armor you have.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Compendium: hitting a non-rank-and-file combatant with a lance makes 3 crystals; slamming grants Frost Armor first."
+ },
+ {
+  "id": "xa:citansramparts",
+  "n": "Citan's Ramparts",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "barricade",
+    "perk": "Assault Barricade",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "You and allies can shoot through your Towering Barricade.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:crestofalphalupi",
+  "n": "Crest of Alpha Lupi",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "super",
+    "perk": "Survival Well",
+    "q": "Generates an additional Orb of Power from Supers.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "perk": "Survival Well",
+    "on": "casting your Super",
+    "q": "Generates an additional Orb of Power from Supers.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "barricade",
+    "perk": "Survival Well",
+    "q": "Generating a Barricade, or dealing sustained damage or defeating targets from behind one creates a healing pulse.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Survival Well",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Generating a Barricade, or dealing sustained damage or defeating targets from behind one creates a healing pulse.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Survival Well",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Thruster"
+      ]
+     }
+    ],
+    "q": "Using Thruster restores 60 Health.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "perk": "Survival Well",
+    "on": "healing allies",
+    "q": "Healing your allies grants Barricade energy.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity: Ward of Dawn makes 4 Orbs; roaming Supers make the extra Orb on the first kill."
+ },
+ {
+  "id": "xa:cuirassofthefallingstar",
+  "n": "Cuirass of the Falling Star",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "perk": "Glorious Charge",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Thundercrash"
+      ]
+     }
+    ],
+    "q": "Greatly increases your Thundercrash damage and grants you damage resistance after impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superdamage",
+    "perk": "Glorious Charge",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Thundercrash"
+      ]
+     }
+    ],
+    "q": "Greatly increases your Thundercrash damage",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "perk": "Glorious Charge",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Thundercrash"
+      ]
+     }
+    ],
+    "q": "grants you damage resistance after impact",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Glorious Charge",
+    "q": "Melee final blows while amplified grant you Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Glorious Charge",
+    "q": "Melee final blows while amplified grant you Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "perk": "Glorious Charge",
+    "on": "melee final blows while amplified",
+    "if": [
+     {
+      "has": "amplified"
+     }
+    ],
+    "q": "Melee final blows while amplified grant you Super energy.",
+    "s": "bungie",
+    "note": "Compendium: works with any Super."
+   }
+  ]
+ },
+ {
+  "id": "xa:doomfangpauldron",
+  "n": "Doom Fang Pauldron",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "perk": "Horns of Doom",
+    "on": "Void final blows",
+    "q": "Defeating targets with Void damage has a chance to grant an escalating bonus to damage with Void weapons.",
+    "s": "bungie",
+    "note": "Void Weapon Surge (Void weapons)."
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Horns of Doom",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Shield Bash",
+       "Shield Throw"
+      ]
+     }
+    ],
+    "q": "Defeating targets with Void melee grants Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "perk": "Horns of Doom",
+    "on": "Void melee final blows",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Shield Bash",
+       "Shield Throw"
+      ]
+     }
+    ],
+    "q": "Defeating targets with Void melee grants Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "perk": "Horns of Doom",
+    "on": "Void melee final blows",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Shield Bash",
+       "Shield Throw"
+      ]
+     }
+    ],
+    "q": "All 4 Stacks of Void Weapon Surge",
+    "s": "clarity"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "perk": "Horns of Doom",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Sentinel Shield"
+      ]
+     }
+    ],
+    "q": "While Sentinel Shield is active, defeating targets with melee attacks recharges Shield Throw, which extends your Super on hitting a target.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:dunemarchers",
+  "n": "Dunemarchers",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sprinting",
+    "perk": "Linear Actuators",
+    "q": "Sprinting builds up a static charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Linear Actuators",
+    "q": "After melee-attacking a combatant, that charge will chain damage to nearby foes.",
+    "s": "bungie",
+    "note": "Clarity: Glaive melee hits also trigger it."
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Linear Actuators",
+    "on": "each target hit by the chain",
+    "q": "Gain Bolt Charge per target hit by the chain.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:eternalwarrior",
+  "n": "Eternal Warrior",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "perk": "Resolute",
+    "on": "rapid Arc final blows",
+    "q": "Scoring 2 to 3 Arc Kills within 10 seconds of each grants 1 Stack of Arc Weapon Surge",
+    "s": "clarity",
+    "note": "Arc Weapon Surge (Arc weapons)."
+   },
+   {
+    "do": "grants",
+    "t": "overshieldgeneric",
+    "perk": "Resolute",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Fists of Havoc"
+      ]
+     }
+    ],
+    "q": "While using Fist of Havoc, activating your Super grants an overshield; final blows extend its duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "perk": "Resolute",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Fists of Havoc"
+      ]
+     }
+    ],
+    "q": "Scoring Kills with Fists of Havoc refunds ?% Super Energy.",
+    "s": "clarity",
+    "note": "Bungie says kills extend the overshield; Clarity/Compendium say kills refund Super energy."
+   },
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "perk": "Resolute",
+    "on": "Fists of Havoc ends",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Fists of Havoc"
+      ]
+     }
+    ],
+    "q": "When it ends, gain a damage bonus to your Arc weapons.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:hallowfireheart",
+  "n": "Hallowfire Heart",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "superenergy",
+    "perk": "Sunfire Furnace",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "While your Solar Super is charged, ability final blows cure you and give stacks of Sunfire Furnace.",
+    "s": "bungie",
+    "note": "Needs a full Super bar."
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "perk": "Sunfire Furnace",
+    "on": "ability final blows with Super charged",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "While your Solar Super is charged, ability final blows cure you and give stacks of Sunfire Furnace.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "perk": "Sunfire Furnace",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "While Sunfire Furnace is active, grenade and Shieldburst final blows trigger an ignition.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "perk": "Sunfire Furnace",
+    "on": "grenade final blows",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "While Sunfire Furnace is active, grenade and Shieldburst final blows trigger an ignition.",
+    "s": "bungie",
+    "note": "Compendium: grenade element doesn't matter."
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "perk": "Sunfire Furnace",
+    "on": "Shieldburst barricade final blows",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     },
+     {
+      "piece": "Shieldburst"
+     }
+    ],
+    "q": "While Sunfire Furnace is active, grenade and Shieldburst final blows trigger an ignition.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Sunfire Furnace",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "Each stack increases grenade regeneration, class ability regeneration, and Super damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "perk": "Sunfire Furnace",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "Each stack increases grenade regeneration, class ability regeneration, and Super damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superdamage",
+    "perk": "Sunfire Furnace",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "Each stack increases grenade regeneration, class ability regeneration, and Super damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "perk": "Sunfire Furnace",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "Upon exiting your Super, all stacks are converted into Super energy.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity: unpowered melee kills count as ability kills here; glaive melees do not."
+ },
+ {
+  "id": "xa:hazardouspropulsion",
+  "n": "Hazardous Propulsion",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "classability",
+    "perk": "Danger Close",
+    "q": "Activating your class ability fires loaded Exodus micro-missiles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "rocketlauncher",
+    "perk": "Danger Close",
+    "q": "Damaging targets with Exodus micro-missiles temporarily increases the damage you deal with other micro-missiles and Rocket Launchers.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "perk": "Danger Close",
+    "q": "Damaging targets with Exodus micro-missiles temporarily increases the damage you deal with other micro-missiles and Rocket Launchers.",
+    "s": "bungie",
+    "note": "Rocket Launchers and other rocket/micro-missile weapons only."
+   }
+  ],
+  "note": "Missiles are loaded by weapon precision hits and final blows."
+ },
+ {
+  "id": "xa:heartofinmostlight",
+  "n": "Heart of Inmost Light",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "perk": "Overflowing Light",
+    "q": "Using an ability (grenade, melee, or Barricade) empowers the other two abilities.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Overflowing Light",
+    "q": "Using an ability (grenade, melee, or Barricade) empowers the other two abilities.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "barricade",
+    "perk": "Overflowing Light",
+    "q": "Using an ability (grenade, melee, or Barricade) empowers the other two abilities.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Overflowing Light",
+    "on": "using your melee or class ability",
+    "q": "Empowered means abilities have faster regen, melees and grenades do more damage, and Barricades have more hit points.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Overflowing Light",
+    "on": "using your grenade or class ability",
+    "q": "Empowered means abilities have faster regen, melees and grenades do more damage, and Barricades have more hit points.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "perk": "Overflowing Light",
+    "on": "using your grenade or melee",
+    "q": "Empowered means abilities have faster regen, melees and grenades do more damage, and Barricades have more hit points.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleedamage",
+    "perk": "Overflowing Light",
+    "q": "Empowered means abilities have faster regen, melees and grenades do more damage, and Barricades have more hit points.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity: the melee must deal elemental (powered) damage; any class ability counts; Super cast clears all stacks; the Barricade HP bonus is not measurable."
+ },
+ {
+  "id": "xa:helmofsaint14",
+  "n": "Helm of Saint-14",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "perk": "Starless Night",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Ward of Dawn"
+      ]
+     }
+    ],
+    "q": "Weapons of Light persists after exiting Ward of Dawn.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suppress",
+    "perk": "Starless Night",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Ward of Dawn"
+      ]
+     }
+    ],
+    "q": "Void and Kinetic damage sources also trigger a suppressing burst.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "perk": "Starless Night",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Ward of Dawn"
+      ]
+     }
+    ],
+    "q": "Picking up Ward of Dawn consumes all stacks of The Saint and extends its duration based on how many stacks were consumed.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity: Weapons of Light lasts 15 s outside the bubble; Saint stacks come from damage and kills while it's active."
+ },
+ {
+  "id": "xa:hoarfrostz",
+  "n": "Hoarfrost-Z",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "barricade",
+    "perk": "Glacial Fortification",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "While you have a Stasis Super equipped, your Barricade becomes a wall of Stasis crystals that slows nearby targets when created.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "perk": "Glacial Fortification",
+    "on": "casting your Barricade",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "While you have a Stasis Super equipped, your Barricade becomes a wall of Stasis crystals that slows nearby targets when created.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Glacial Fortification",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "While you have a Stasis Super equipped, your Barricade becomes a wall of Stasis crystals that slows nearby targets when created.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "perk": "Glacial Fortification",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Standing behind this barricade will grant you and your allies increased weapon reload speed, stability, and range.",
+    "s": "bungie",
+    "note": "Rally Barricade bonuses even with Towering Barricade; cooldown becomes Towering's."
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "perk": "Glacial Fortification",
+    "on": "casting Thruster",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Thruster"
+      ]
+     }
+    ],
+    "q": "Spawns 2 Medium Crystals diagonally forward to either side of you",
+    "s": "clarity"
+   }
+  ],
+  "note": "The crystals can be shattered (Shiver Strike, Howl of the Storm, Diamond Lance), e.g. for Tectonic Harvest shards."
+ },
+ {
+  "id": "xa:icefallmantle",
+  "n": "Icefall Mantle",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "perk": "Glacial Guard",
+    "on": "rapid Stasis final blows",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     }
+    ],
+    "q": "While you have a Stasis Super equipped, rapid Stasis final blows grant Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "perk": "Glacial Guard",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     }
+    ],
+    "q": "You heal a small amount whenever you gain Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Glacial Guard",
+    "on": "gaining Frost Armor from any source",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     }
+    ],
+    "q": "You heal a small amount whenever you gain Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "barricade",
+    "perk": "Glacial Guard",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Replaces your class ability with a burst of Stasis energy that freezes nearby combatants, slows nearby opponents, and grants you increased Frost Armor.",
+    "s": "bungie",
+    "note": "Clarity: does not work with Thruster."
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "perk": "Glacial Guard",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Replaces your class ability with a burst of Stasis energy that freezes nearby combatants, slows nearby opponents, and grants you increased Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Glacial Guard",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Replaces your class ability with a burst of Stasis energy that freezes nearby combatants, slows nearby opponents, and grants you increased Frost Armor.",
+    "s": "bungie",
+    "note": "Bungie: slows opponents (PvP); Clarity/Compendium list Slow on all enemies."
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "perk": "Glacial Guard",
+    "on": "casting Glacial Guard",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Replaces your class ability with a burst of Stasis energy that freezes nearby combatants, slows nearby opponents, and grants you increased Frost Armor.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:kheprishorn",
+  "n": "Khepri's Horn",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "perk": "Solar Rampart",
+    "on": "Solar final blows",
+    "q": "Solar final blows recharge your Barricade.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "barricade",
+    "perk": "Solar Rampart",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "casting your Barricade unleashes waves of Solar energy that damage and scorch targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Solar Rampart",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "casting your Barricade unleashes waves of Solar energy that damage and scorch targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "sunspot",
+    "perk": "Solar Rampart",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Combatants damaged and Guardians defeated by these waves are enveloped in a Sunspot.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity/Compendium: the waves neither trigger nor benefit from Roaring Flames; Ember of Ashes raises their scorch."
+ },
+ {
+  "id": "xa:lionrampant",
+  "n": "Lion Rampant",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "movement",
+    "perk": "Jump Jets",
+    "if": [
+     {
+      "slot": "movement",
+      "is": [
+       "High Lift",
+       "Strafe Lift",
+       "Catapult Lift"
+      ]
+     }
+    ],
+    "q": "Grants additional aerial maneuverability and enables airborne firing during Lift.",
+    "s": "bungie",
+    "note": "Clarity: every Lift lasts 4 s."
+   },
+   {
+    "do": "uses",
+    "t": "airborne",
+    "perk": "Jump Jets",
+    "q": "Grants additional aerial maneuverability and enables airborne firing during Lift.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Jump Jets",
+    "q": "Increases the airborne effectiveness stat of all weapons.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:loreleysplendorhelm",
+  "n": "Loreley Splendor Helm",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "sunspot",
+    "perk": "Cauterizing Flame",
+    "on": "casting your Barricade or becoming critically wounded",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "While you have a Solar Super equipped, casting your Barricade or becoming critically wounded with full class ability energy creates a Sunspot at your location.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "barricade",
+    "perk": "Cauterizing Flame",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "While you have a Solar Super equipped, casting your Barricade or becoming critically wounded with full class ability energy creates a Sunspot at your location.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "perk": "Cauterizing Flame",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "While you have a Solar Super equipped, casting your Barricade or becoming critically wounded with full class ability energy creates a Sunspot at your location.",
+    "s": "bungie"
+   },
+   {
+    "do": "consumes",
+    "t": "classenergy",
+    "perk": "Cauterizing Flame",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul",
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "Reaching Critical Health consumes your Class Ability to spawn a Sunspot under you.",
+    "s": "clarity"
+   }
+  ],
+  "note": "Clarity: the Sunspot grants the Sol Invictus buff even without the aspect, but only the Sol Invictus aspect extends its duration."
+ },
+ {
+  "id": "xa:maskofthequietone",
+  "n": "Mask of the Quiet One",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Dreaded Visage",
+    "on": "taking damage",
+    "q": "Grants 5% Grenade, Melee, and Class Ability Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Dreaded Visage",
+    "on": "taking damage",
+    "q": "Grants 5% Grenade, Melee, and Class Ability Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "perk": "Dreaded Visage",
+    "on": "taking damage",
+    "q": "Grants 5% Grenade, Melee, and Class Ability Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "devour",
+    "perk": "Dreaded Visage",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Sentinel Shield",
+       "Ward of Dawn",
+       "Twilight Arsenal"
+      ]
+     }
+    ],
+    "q": "While you have a Void super equipped, rapid final blows and final blows while critically wounded grant Devour.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "perk": "Dreaded Visage",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Sentinel Shield",
+       "Ward of Dawn",
+       "Twilight Arsenal"
+      ]
+     }
+    ],
+    "q": "While you have a Void super equipped, rapid final blows and final blows while critically wounded grant Devour.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:melaspanoplia",
+  "n": "Melas Panoplia",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "perk": "Forge Master",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Throwing Hammer"
+      ]
+     }
+    ],
+    "q": "Collecting a Firesprite or rapid Solar final blows make you a Forge Master, allowing you to recall your Throwing Hammer.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Forge Master",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Throwing Hammer"
+      ]
+     }
+    ],
+    "q": "Collecting a Firesprite or rapid Solar final blows make you a Forge Master, allowing you to recall your Throwing Hammer.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Forge Master",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Throwing Hammer"
+      ]
+     }
+    ],
+    "q": "Recalling your Throwing Hammer guarantees a full refund of the ability, regardless of your Melee Stat.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "perk": "Forge Master",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Throwing Hammer"
+      ]
+     }
+    ],
+    "q": "Perfect Recalls and collecting Firesprites extend your time as a Forge Master.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:mk44standasides",
+  "n": "Mk. 44 Stand Asides",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "frontalshield",
+    "perk": "Seriously, Watch Out",
+    "if": [
+     {
+      "piece": "Juggernaut"
+     }
+    ],
+    "q": "While your Juggernaut shield is active, you slowly gain Bolt Charge stacks over time and increased weapon ready speed.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Seriously, Watch Out",
+    "on": "while the Juggernaut shield is up",
+    "if": [
+     {
+      "piece": "Juggernaut"
+     }
+    ],
+    "q": "While your Juggernaut shield is active, you slowly gain Bolt Charge stacks over time and increased weapon ready speed.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "handling",
+    "perk": "Seriously, Watch Out",
+    "if": [
+     {
+      "piece": "Juggernaut"
+     }
+    ],
+    "q": "While your Juggernaut shield is active, you slowly gain Bolt Charge stacks over time and increased weapon ready speed.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Seriously, Watch Out",
+    "q": "Sprinting while amplified creates an energizing field behind you that grants close by allies speed boost.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "sprinting",
+    "perk": "Seriously, Watch Out",
+    "q": "Sprinting while amplified creates an energizing field behind you that grants close by allies speed boost.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "speedbooster",
+    "perk": "Seriously, Watch Out",
+    "who": "allies",
+    "if": [
+     {
+      "has": "amplified"
+     }
+    ],
+    "q": "Creates an area behind the user that grants allies Speed Booster.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "xa:nobackupplans",
+  "n": "No Backup Plans",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "shotgun",
+    "perk": "Force Multiplier",
+    "q": "Shotgun and melee final blows start your health regeneration.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Force Multiplier",
+    "q": "Shotgun and melee final blows start your health regeneration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Force Multiplier",
+    "on": "Shotgun or melee final blows",
+    "q": "Shotgun and melee final blows start your health regeneration.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "perk": "Force Multiplier",
+    "q": "While you have a defensive buff (Void Overshield, Amplified, Restoration, Frost Armor, Woven Mail)",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Force Multiplier",
+    "q": "While you have a defensive buff (Void Overshield, Amplified, Restoration, Frost Armor, Woven Mail)",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "restoration",
+    "perk": "Force Multiplier",
+    "q": "While you have a defensive buff (Void Overshield, Amplified, Restoration, Frost Armor, Woven Mail)",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "perk": "Force Multiplier",
+    "q": "While you have a defensive buff (Void Overshield, Amplified, Restoration, Frost Armor, Woven Mail)",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "wovenmail",
+    "perk": "Force Multiplier",
+    "q": "While you have a defensive buff (Void Overshield, Amplified, Restoration, Frost Armor, Woven Mail)",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "perk": "Force Multiplier",
+    "if": [
+     {
+      "any": [
+       {
+        "has": "overshield"
+       },
+       {
+        "has": "amplified"
+       },
+       {
+        "has": "restoration"
+       },
+       {
+        "has": "frostarmor"
+       },
+       {
+        "has": "wovenmail"
+       }
+      ]
+     }
+    ],
+    "q": "your Shotguns and melees deal additional damage and final blows with either extend the duration of those buffs.",
+    "s": "bungie",
+    "note": "Shotguns only."
+   },
+   {
+    "do": "grants",
+    "t": "meleedamage",
+    "perk": "Force Multiplier",
+    "if": [
+     {
+      "any": [
+       {
+        "has": "overshield"
+       },
+       {
+        "has": "amplified"
+       },
+       {
+        "has": "restoration"
+       },
+       {
+        "has": "frostarmor"
+       },
+       {
+        "has": "wovenmail"
+       }
+      ]
+     }
+    ],
+    "q": "your Shotguns and melees deal additional damage and final blows with either extend the duration of those buffs.",
+    "s": "bungie",
+    "note": "Clarity: also Super light attacks (Fists of Havoc, Hammer of Sol shrapnel, Sentinel Shield, Glacial Quake)."
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Force Multiplier",
+    "q": "Provides a moderate benefit to Shotgun airborne effectiveness and reload speed.",
+    "s": "bungie",
+    "note": "Shotguns only."
+   }
+  ],
+  "note": "Shotgun or melee kills extend whichever of those defensive buffs is active by 5 s (a Void Overshield also gains HP)."
+ },
+ {
+  "id": "xa:oneeyedmask",
+  "n": "One-Eyed Mask",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "overshieldgeneric",
+    "perk": "Vengeance",
+    "on": "defeating the highlighted attacker",
+    "q": "Track down and destroy them for an overshield.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:peacekeepers",
+  "n": "Peacekeepers",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "submachinegun",
+    "perk": "Mecha Holster",
+    "q": "While wielding a Submachine Gun, handling, airborne effectiveness, and movement are all improved",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "handling",
+    "perk": "Mecha Holster",
+    "q": "While wielding a Submachine Gun, handling, airborne effectiveness, and movement are all improved",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Mecha Holster",
+    "q": "While wielding a Submachine Gun, handling, airborne effectiveness, and movement are all improved",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "perk": "Mecha Holster",
+    "q": "damage against combatants will increase the longer you remain on target.",
+    "s": "bungie",
+    "note": "SMGs only."
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "perk": "Mecha Holster",
+    "q": "Submachine Guns are reloaded when stowed.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:peregrinegreaves",
+  "n": "Peregrine Greaves",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Peregrine Strike",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Seismic Strike",
+       "Hammer Strike",
+       "Shield Bash"
+      ]
+     }
+    ],
+    "q": "All shoulder charge abilities (Seismic Strike, Hammer Strike, or Shield Bash) deal bonus damage when activated in the air.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "airborne",
+    "perk": "Peregrine Strike",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Seismic Strike",
+       "Hammer Strike",
+       "Shield Bash"
+      ]
+     }
+    ],
+    "q": "All shoulder charge abilities (Seismic Strike, Hammer Strike, or Shield Bash) deal bonus damage when activated in the air.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "sprinting",
+    "perk": "Peregrine Strike",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Seismic Strike",
+       "Hammer Strike",
+       "Shield Bash"
+      ]
+     }
+    ],
+    "q": "Grants Peregrine Strike after sprinting for 2 seconds and being airborne for 0.5 seconds.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Peregrine Strike",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Seismic Strike",
+       "Hammer Strike",
+       "Shield Bash"
+      ]
+     }
+    ],
+    "q": "Damaging mini-bosses, Tormentors, or Champions with your shoulder charge refunds your melee.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Peregrine Strike",
+    "q": "Provides a small benefit to the airborne effectiveness stat of all weapons.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity: no bonus against frozen targets."
+ },
+ {
+  "id": "xa:phoenixcradle",
+  "n": "Phoenix Cradle",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "sunspot",
+    "perk": "Beacons of Empowerment",
+    "q": "Allies who pass through your Sunspot are granted Sol Invictus and Restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "sunspot",
+    "perk": "Beacons of Empowerment",
+    "q": "Allies who pass through your Sunspot are granted Sol Invictus and Restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "perk": "Beacons of Empowerment",
+    "by": "sunspot",
+    "who": "allies",
+    "q": "Allies who pass through your Sunspot are granted Sol Invictus and Restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "sunspot",
+    "perk": "Beacons of Empowerment",
+    "if": [
+     {
+      "piece": "Sol Invictus"
+     }
+    ],
+    "q": "Sol Invictus lasts twice as long.",
+    "s": "bungie",
+    "note": "Compendium: the doubling needs the Sol Invictus aspect."
+   },
+   {
+    "do": "creates",
+    "t": "sunspot",
+    "perk": "Beacons of Empowerment",
+    "on": "granting Solar buffs to allies",
+    "q": "Applying Solar buffs to allies has a chance to create a Sunspot at your feet.",
+    "s": "bungie",
+    "note": "Clarity: every 3-5 Solar buffs (Cure, Restoration, Radiant...) given to allies."
+   }
+  ],
+  "note": "Sources: sustained Solar damage extending Sunspots seems not to work without the aspect (Clarity/Compendium)."
+ },
+ {
+  "id": "xa:pointcontactcannonbrace",
+  "n": "Point-Contact Cannon Brace",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Hammer of the Gods",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Thunderclap"
+      ]
+     }
+    ],
+    "q": "Targets near you when you use your Thunderclap suffer lightning strikes and become jolted",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "perk": "Hammer of the Gods",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Thunderclap"
+      ]
+     }
+    ],
+    "q": "Targets near you when you use your Thunderclap suffer lightning strikes and become jolted",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Hammer of the Gods",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Thunderclap"
+      ]
+     }
+    ],
+    "q": "being amplified increases the damage of these lightning strikes.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Hammer of the Gods",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Thunderclap"
+      ]
+     }
+    ],
+    "q": "Defeating targets with your Thunderclap melee restores melee energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:praxicvestment",
+  "n": "Praxic Vestment",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "movement",
+    "perk": "Praxic Lift",
+    "q": "You gain an air move jetpack.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Praxic Lift",
+    "q": "Weapon and Arc powered melee final blows build up Jetpack Fuel.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "perk": "Praxic Lift",
+    "q": "Collide with a combatant to unleash a blinding blast of energy and gain a temporary bonus to your melee stat.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Compendium: the collision (Praxic Knee) benefits from melee damage buffs; activation also inflicts Exhaust."
+ },
+ {
+  "id": "xa:preciousscars",
+  "n": "Precious Scars",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Kintsugi",
+    "on": "weapon final blows matching your Super's element",
+    "who": "allies",
+    "q": "Final blows from weapons with a damage type matching your Super create a burst of healing around you that grants allies restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "perk": "Kintsugi",
+    "on": "weapon final blows matching your Super's element",
+    "who": "allies",
+    "q": "Final blows from weapons with a damage type matching your Super create a burst of healing around you that grants allies restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshieldgeneric",
+    "perk": "Kintsugi",
+    "who": "allies",
+    "q": "After reviving or being revived, you gain an aura that provides overshields to you and nearby allies.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Needs weapons of the same element as the equipped Super."
+ },
+ {
+  "id": "xa:pyrogalegauntlets",
+  "n": "Pyrogale Gauntlets",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "perk": "Percussive Flames",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul"
+      ]
+     }
+    ],
+    "q": "Modifies Burning Maul into a single, high-damage slam of your hammer that creates several cyclones of flame.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Percussive Flames",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Burning Maul"
+      ]
+     }
+    ],
+    "q": "Waves apply 20 (60 with Ember of Ashes equipped) Scorch on Impact.",
+    "s": "clarity"
+   },
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Percussive Flames",
+    "if": [
+     {
+      "piece": "Consecration"
+     }
+    ],
+    "q": "Consecration's second slam creates a cyclone of flame.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Percussive Flames",
+    "if": [
+     {
+      "piece": "Consecration"
+     }
+    ],
+    "q": "though, it still retains the Scorching capability.",
+    "s": "clarity"
+   }
+  ],
+  "note": "Compendium: the slam no longer counts as a roaming Super for Super regeneration."
+ },
+ {
+  "id": "xa:secondchance",
+  "n": "Second Chance",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Myrmidon's Reach",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Shield Throw"
+      ]
+     }
+    ],
+    "q": "Gain a second charge of your Shield Throw melee.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Myrmidon's Reach",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Shield Throw"
+      ]
+     }
+    ],
+    "q": "Your Shield Throws now weaken targets, create a Void Breach on final blows, and become shield-piercing",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "voidbreach",
+    "perk": "Myrmidon's Reach",
+    "on": "Shield Throw final blows",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Shield Throw"
+      ]
+     }
+    ],
+    "q": "Your Shield Throws now weaken targets, create a Void Breach on final blows, and become shield-piercing",
+    "s": "bungie",
+    "note": "Clarity: ignores the global Void Breach cooldown."
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "perk": "Myrmidon's Reach",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Shield Throw"
+      ]
+     }
+    ],
+    "q": "Picking up a Void Breach grants you Shield Throw energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Myrmidon's Reach",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Shield Throw"
+      ]
+     }
+    ],
+    "q": "Picking up a Void Breach grants you Shield Throw energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:severanceenclosure",
+  "n": "Severance Enclosure",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Spheromatik Trigger",
+    "q": "Powered melee final blows unleash a damaging explosion.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "finisher",
+    "perk": "Spheromatik Trigger",
+    "q": "Finishers and final blows against more powerful targets increase the radius and damage of the explosion.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "disorient",
+    "perk": "Spheromatik Trigger",
+    "q": "knocking nearby enemies into the air and Disorienting them.",
+    "s": "clarity"
+   }
+  ],
+  "note": "Kinetic explosion; kills from it chain weaker explosions."
+ },
+ {
+  "id": "xa:stoicism",
+  "n": "Stoicism",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Spirit of Severance",
+    "q": "Powered melee or finisher final blows unleash a damaging explosion.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "finisher",
+    "perk": "Spirit of Severance",
+    "q": "Powered melee or finisher final blows unleash a damaging explosion.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Spirit of Contact",
+    "q": "Damaging a target with a powered melee causes all nearby targets to suffer lightning strikes and become jolted.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "perk": "Spirit of Contact",
+    "q": "Damaging a target with a powered melee causes all nearby targets to suffer lightning strikes and become jolted.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Exotic class item; these two perks echo Severance Enclosure and Point-Contact Cannon Brace."
+ },
+ {
+  "id": "xa:stronghold",
+  "n": "Stronghold",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sword",
+    "perk": "Clenched Fist",
+    "q": "Maximizes guard stats on equipped Heavy ammo Swords.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "perk": "Clenched Fist",
+    "on": "guarding with a Sword",
+    "q": "You take reduced damage while blocking with a Sword.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "perk": "Clenched Fist",
+    "q": "Rapidly damaging targets after blocking shots with a Sword grants Restoration for a duration determined by the number of shots blocked.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity: Ember of Solace extends the Restoration by 50%."
+ },
+ {
+  "id": "xa:synthoceps",
+  "n": "Synthoceps",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleedamage",
+    "perk": "Biotic Enhancements",
+    "on": "surrounded (3+ enemies within 15 m)",
+    "q": "When you're surrounded, gain increased melee and Super damage, as well as improved weapon handling and reload speed.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superdamage",
+    "perk": "Biotic Enhancements",
+    "on": "surrounded (3+ enemies within 15 m)",
+    "q": "When you're surrounded, gain increased melee and Super damage, as well as improved weapon handling and reload speed.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "handling",
+    "perk": "Biotic Enhancements",
+    "on": "surrounded (3+ enemies within 15 m)",
+    "q": "When you're surrounded, gain increased melee and Super damage, as well as improved weapon handling and reload speed.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "perk": "Biotic Enhancements",
+    "on": "surrounded (3+ enemies within 15 m)",
+    "q": "When you're surrounded, gain increased melee and Super damage, as well as improved weapon handling and reload speed.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:thepathofburningsteps",
+  "n": "The Path of Burning Steps",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "solarweapon",
+    "perk": "Firewalker",
+    "if": [
+     {
+      "piece": "Roaring Flames"
+     }
+    ],
+    "q": "Increase the damage of Solar weapons and Solar Ignitions based on the amount of Roaring Flames stacks you have.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "perk": "Firewalker",
+    "if": [
+     {
+      "piece": "Roaring Flames"
+     },
+     {
+      "weapon": "solar"
+     }
+    ],
+    "q": "Increase the damage of Solar weapons and Solar Ignitions based on the amount of Roaring Flames stacks you have.",
+    "s": "bungie",
+    "note": "Solar weapons only; scales with Roaring Flames stacks."
+   },
+   {
+    "do": "modifies",
+    "t": "ignition",
+    "perk": "Firewalker",
+    "if": [
+     {
+      "piece": "Roaring Flames"
+     }
+    ],
+    "q": "Increase the damage of Solar weapons and Solar Ignitions based on the amount of Roaring Flames stacks you have.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Also halves Slow/Freeze/Suspend on you, and breaking out releases a Solar burst."
+ },
+ {
+  "id": "xa:ursafuriosa",
+  "n": "Ursa Furiosa",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "perk": "Ursine Guard",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Sentinel Shield"
+      ]
+     }
+    ],
+    "q": "Move faster while guarding with Sentinel Shield or the Unbreakable shield.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "perk": "Ursine Guard",
+    "if": [
+     {
+      "piece": "Unbreakable"
+     }
+    ],
+    "q": "Move faster while guarding with Sentinel Shield or the Unbreakable shield.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "perk": "Ursine Guard",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Sentinel Shield"
+      ]
+     }
+    ],
+    "q": "Damage blocked with Sentinel Shield is converted to Super energy",
+    "s": "bungie",
+    "note": "Refunded when the Super ends, up to 50%."
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Ursine Guard",
+    "if": [
+     {
+      "piece": "Unbreakable"
+     }
+    ],
+    "q": "damage blocked with Unbreakable is converted to grenade energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:wishfulignorance",
+  "n": "Wishful Ignorance",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Wish-Dragon's Talons",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Frenzied Blade"
+      ]
+     }
+    ],
+    "q": "Gain an additional Frenzied Blade charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Wish-Dragon's Talons",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "melee",
+        "is": [
+         "Frenzied Blade"
+        ]
+       },
+       {
+        "piece": "Flechette Storm"
+       }
+      ]
+     }
+    ],
+    "q": "Frenzied Blade and Flechette Storm briefly increase their damage with each strike.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "bannerofwar",
+    "perk": "Wish-Dragon's Talons",
+    "if": [
+     {
+      "piece": "Banner of War"
+     }
+    ],
+    "q": "Pulses from your Banner of War return melee energy based on the number of allies healed.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Wish-Dragon's Talons",
+    "if": [
+     {
+      "piece": "Banner of War"
+     },
+     {
+      "slot": "melee",
+      "is": [
+       "Frenzied Blade"
+      ]
+     }
+    ],
+    "q": "Pulses from your Banner of War return melee energy based on the number of allies healed.",
+    "s": "bungie",
+    "note": "Compendium: Frenzied Blade energy; the wearer counts as an ally."
+   }
+  ]
+ },
+ {
+  "id": "xa:wormgodcaress",
+  "n": "Wormgod Caress",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Burning Fists",
+    "q": "Defeating a target with melee or a finisher grants escalating melee damage, which decays over time.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "finisher",
+    "perk": "Burning Fists",
+    "q": "Defeating a target with melee or a finisher grants escalating melee damage, which decays over time.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleedamage",
+    "perk": "Burning Fists",
+    "on": "melee or finisher final blows",
+    "q": "Defeating a target with melee or a finisher grants escalating melee damage, which decays over time.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "perk": "Burning Fists",
+    "q": "Higher levels of Burning Fists grant increased weapon damage.",
+    "s": "bungie",
+    "note": "From 2 stacks."
+   }
+  ],
+  "note": "Clarity: glaive melee kills also build stacks."
+ }
+]

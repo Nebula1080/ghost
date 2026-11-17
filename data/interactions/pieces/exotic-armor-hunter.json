@@ -1,0 +1,329 @@
+[
+ { "id": "xa:assassinscowl", "n": "Assassin's Cowl",
+  "fx": [
+   { "do": "grants", "t": "invisibility", "perk": "Vanishing Execution", "on": "powered melee final blows", "q": "Powered melee final blows grant invisibility and restore a portion of health and shields.", "s": "bungie" },
+   { "do": "grants", "t": "healing", "perk": "Vanishing Execution", "on": "powered melee final blows", "q": "Powered melee final blows grant invisibility and restore a portion of health and shields.", "s": "bungie" },
+   { "do": "uses", "t": "melee", "perk": "Vanishing Execution", "q": "Powered melee final blows grant invisibility and restore a portion of health and shields.", "s": "bungie" },
+   { "do": "uses", "t": "finisher", "perk": "Vanishing Execution", "q": "Powered Melee Kills and Finishers grant Invisibility and restore 67 HP.", "s": "clarity", "note": "finishers give 3 s longer invisibility; Echo of Persistence extends it further" }
+  ] },
+ { "id": "xa:athryssembrace", "n": "Athrys's Embrace",
+  "fx": [
+   { "do": "modifies", "t": "melee", "perk": "Skittering Stinger", "if": [{ "slot": "melee", "is": ["Weighted Throwing Knife"] }], "q": "Weighted Knife gains a second bounce.", "s": "bungie" },
+   { "do": "uses", "t": "weapon", "perk": "Skittering Stinger", "if": [{ "slot": "melee", "is": ["Weighted Throwing Knife"] }], "on": "3 rapid weapon precision hits", "q": "Rapid precision hits with your weapons grant Weighted Knife a significant damage bonus, bonus melee, and the ability to stun unshielded combatants for a short time.", "s": "bungie" },
+   { "do": "grants", "t": "meleedamage", "perk": "Skittering Stinger", "if": [{ "slot": "melee", "is": ["Weighted Throwing Knife"] }], "q": "Rapid precision hits with your weapons grant Weighted Knife a significant damage bonus, bonus melee, and the ability to stun unshielded combatants for a short time.", "s": "bungie", "note": "Strengthened Throwing Knife: +300% knife damage, +50 Melee stat, stuns Unstoppable Champions; consumed on knife hit. Requires Weighted Throwing Knife." }
+  ] },
+ { "id": "xa:balanceofpower", "n": "Balance of Power",
+  "fx": [
+   { "do": "modifies", "t": "specterdecoy", "perk": "Double Down", "if": [{ "piece": "Threaded Specter" }], "q": "Your Threaded Specter has increased duration and durability, and damaging it releases additional Threadlings.", "s": "bungie", "note": "duration +34% (Clarity) vs +67% (Compendium); class ability regeneration halved for 19 s after use" },
+   { "do": "creates", "t": "perchedthreadling", "by": "specterdecoy", "perk": "Double Down", "if": [{ "piece": "Threaded Specter" }], "q": "Perched Threadlings are released when the Specter takes 40 damage.", "s": "compendium" },
+   { "do": "creates", "t": "threadling", "by": "specterdecoy", "perk": "Double Down", "if": [{ "piece": "Threaded Specter" }], "q": "damaging it releases additional Threadlings", "s": "bungie" }
+  ] },
+ { "id": "xa:blightranger", "n": "Blight Ranger",
+  "fx": [
+   { "do": "modifies", "t": "super", "perk": "Voltaic Mirror", "if": [{ "slot": "super", "is": ["Arc Staff"] }], "q": "Guarding with your Arc Staff does not consume extra Super energy.", "s": "bungie", "note": "Arc Staff can be cancelled early, refunding 50-75% of unspent Super energy" },
+   { "do": "applies", "t": "blind", "perk": "Voltaic Mirror", "if": [{ "slot": "super", "is": ["Arc Staff"] }], "on": "cancelling Arc Staff", "q": "Cancel Arc Staff early, temporarily increasing Arc weapon damage and creating a blinding burst.", "s": "bungie" },
+   { "do": "grants", "t": "weaponsurge", "perk": "Voltaic Mirror", "if": [{ "slot": "super", "is": ["Arc Staff"] }, { "weapon": "arc" }], "on": "cancelling Arc Staff", "q": "Grants 4 Stacks of Arc Weapon Surge for 21 [16] seconds", "s": "clarity" },
+   { "do": "grants", "t": "superenergy", "perk": "Voltaic Mirror", "if": [{ "slot": "super", "is": ["Arc Staff"] }], "on": "reflecting projectiles", "q": "Reflecting projectiles refunds Super Energy", "s": "clarity" }
+  ] },
+ { "id": "xa:calibanshand", "n": "Caliban's Hand",
+  "fx": [
+   { "do": "applies", "t": "scorch", "perk": "Roast 'Em", "if": [{ "slot": "melee", "is": ["Proximity Explosive Knife"] }], "q": "Your Proximity Knife scorches targets it damages with its explosions, or ignites targets on final blow.", "s": "bungie" },
+   { "do": "applies", "t": "ignition", "perk": "Roast 'Em", "if": [{ "slot": "melee", "is": ["Proximity Explosive Knife"] }], "q": "Your Proximity Knife scorches targets it damages with its explosions, or ignites targets on final blow.", "s": "bungie" },
+   { "do": "modifies", "t": "melee", "perk": "Roast 'Em", "if": [{ "slot": "melee", "is": ["Proximity Explosive Knife"] }], "q": "After throwing a Proximity Knife, you gain increased melee regeneration until the knife explodes.", "s": "bungie" },
+   { "do": "uses", "t": "scorch", "perk": "Roast 'Em", "q": "Gain a small amount of melee energy when your Scorch damages a target", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "perk": "Roast 'Em", "on": "your Scorch damaging a target", "q": "Gain a small amount of melee energy when your Scorch damages a target", "s": "bungie" },
+   { "do": "uses", "t": "ignition", "perk": "Roast 'Em", "q": "Ignition final blows fully refund melee energy and can overflow into an additional knife charge.", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "perk": "Roast 'Em", "on": "Ignition final blows", "q": "Ignition kills (on any subclass) grant a full Melee Ability Charge.", "s": "clarity", "note": "works with any Ignition source; overflow charge works for Solar knives, Withering Blade, and Knife Trick on Prismatic" }
+  ] },
+ { "id": "xa:celestialnighthawk", "n": "Celestial Nighthawk",
+  "fx": [
+   { "do": "modifies", "t": "super", "perk": "Hawkeye Hack", "if": [{ "slot": "super", "is": ["Golden Gun: Marksman", "Golden Gun: Deadshot"] }], "q": "Modifies Golden Gun to fire a single, high-damage shot.", "s": "bungie", "note": "Golden Gun loses roaming-Super regeneration; Clarity recommends Marksman in PvE" },
+   { "do": "applies", "t": "ignition", "perk": "Hawkeye Hack", "if": [{ "slot": "super", "is": ["Golden Gun: Marksman", "Golden Gun: Deadshot"] }], "q": "triggers an immediate Ignition", "s": "clarity" },
+   { "do": "grants", "t": "superenergy", "perk": "Hawkeye Hack", "if": [{ "slot": "super", "is": ["Golden Gun: Marksman", "Golden Gun: Deadshot"] }], "on": "Golden Gun kills", "q": "Targets defeated by that shot give you Super energy and explode.", "s": "bungie" },
+   { "do": "grants", "t": "superenergy", "perk": "Hawkeye Hack", "on": "precision final blows", "q": "Precision final blows reduce the cooldown of your Super.", "s": "bungie" }
+  ] },
+ { "id": "xa:cyrtarachnesfacade", "n": "Cyrtarachne's Facade",
+  "fx": [
+   { "do": "uses", "t": "grapple", "perk": "Acrobat's Focus", "q": "Activating Grapple grants Woven Mail.", "s": "bungie" },
+   { "do": "grants", "t": "wovenmail", "perk": "Acrobat's Focus", "if": [{ "slot": "grenade", "is": ["Grapple"] }], "on": "grappling", "q": "Activating Grapple grants Woven Mail.", "s": "bungie" },
+   { "do": "grants", "t": "healing", "perk": "Acrobat's Focus", "if": [{ "has": "wovenmail" }], "on": "kills while Woven Mail is active", "q": "While active, Woven Mail provides flinch resistance and health when defeating targets.", "s": "bungie", "note": "works with Woven Mail from any source" },
+   { "do": "uses", "t": "wovenmail", "perk": "Acrobat's Focus", "q": "While active, Woven Mail provides flinch resistance and health when defeating targets.", "s": "bungie" }
+  ] },
+ { "id": "xa:foetracer", "n": "Foetracer",
+  "fx": [
+   { "do": "grants", "t": "weaponsurge", "perk": "Relentless Tracker", "on": "ability damage to a powerful combatant or Guardian", "q": "Damaging a powerful combatant or Guardian with an ability temporarily increases weapon damage of the same type.", "s": "bungie", "note": "surge matches the ability's element" },
+   { "do": "creates", "t": "firesprite", "perk": "Relentless Tracker", "if": [{ "weapon": "solar" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity", "note": "the pickup matches the element of the ability that marked the target" },
+   { "do": "creates", "t": "ionictrace", "perk": "Relentless Tracker", "if": [{ "weapon": "arc" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity" },
+   { "do": "creates", "t": "stasisshard", "perk": "Relentless Tracker", "if": [{ "weapon": "stasis" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity" },
+   { "do": "creates", "t": "tangle", "perk": "Relentless Tracker", "if": [{ "weapon": "strand" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity" },
+   { "do": "creates", "t": "voidbreach", "perk": "Relentless Tracker", "if": [{ "weapon": "void" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity" }
+  ] },
+ { "id": "xa:fortunesfavor", "n": "Fortune's Favor",
+  "fx": [
+   { "do": "grants", "t": "overshield", "perk": "Kismet", "on": "final blows at full health, or out of combat", "q": "After landing a final blow while at full health, or when out of combat for an extended duration, your shields will slowly recharge into an overshield.", "s": "bungie" },
+   { "do": "uses", "t": "overshield", "perk": "Kismet", "q": "When you have an overshield, your weapons gain increased accuracy, stability, handling, and damage against combatants", "s": "bungie", "note": "any Overshield source counts" },
+   { "do": "grants", "t": "weapondamage", "perk": "Kismet", "if": [{ "has": "overshield" }], "q": "15% increased weapon damage against Combatants (20% for Heat-Based weapons)", "s": "clarity" },
+   { "do": "grants", "t": "handling", "perk": "Kismet", "if": [{ "has": "overshield" }], "q": "When you have an overshield, your weapons gain increased accuracy, stability, handling, and damage against combatants", "s": "bungie" }
+  ] },
+ { "id": "xa:fr0stee5", "n": "Fr0st-EE5",
+  "fx": [
+   { "do": "uses", "t": "sprinting", "perk": "Rapid Cooldown", "q": "Increases grenade, melee, and dodge regeneration while sprinting.", "s": "bungie" },
+   { "do": "grants", "t": "grenadeenergy", "perk": "Rapid Cooldown", "on": "while sprinting", "q": "Increases grenade, melee, and dodge regeneration while sprinting.", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "perk": "Rapid Cooldown", "on": "while sprinting", "q": "Increases grenade, melee, and dodge regeneration while sprinting.", "s": "bungie" },
+   { "do": "grants", "t": "classenergy", "perk": "Rapid Cooldown", "on": "while sprinting", "q": "Increases grenade, melee, and dodge regeneration while sprinting.", "s": "bungie" },
+   { "do": "grants", "t": "frostarmor", "perk": "Rapid Cooldown", "on": "while sprinting", "q": "Gain stacks of Frost Armor while sprinting.", "s": "bungie" },
+   { "do": "uses", "t": "frostarmor", "perk": "Rapid Cooldown", "q": "When you have Frost Armor, Stasis weapons deal additional damage.", "s": "bungie", "note": "any Frost Armor source counts" },
+   { "do": "grants", "t": "weaponsurge", "perk": "Rapid Cooldown", "if": [{ "has": "frostarmor" }, { "weapon": "stasis" }], "q": "For as long as Frost Armor is active, you are granted x3 [x1] Stasis Weapon Surge.", "s": "clarity" }
+  ] },
+ { "id": "xa:geminijester", "n": "Gemini Jester",
+  "fx": [
+   { "do": "uses", "t": "dodge", "perk": "Misdirection", "q": "Dodging disorients nearby enemies and temporarily removes their radar.", "s": "bungie", "note": "Clarity: triggers on any class ability use" },
+   { "do": "applies", "t": "disorient", "perk": "Misdirection", "on": "dodging", "q": "Dodging disorients nearby enemies and temporarily removes their radar.", "s": "bungie", "note": "PvE: minors and elites only" }
+  ] },
+ { "id": "xa:giftedconviction", "n": "Gifted Conviction",
+  "fx": [
+   { "do": "applies", "t": "jolt", "perk": "The Gift of Certainty", "if": [{ "any": [{ "piece": "Ascension" }, { "piece": "Tempest Strike" }] }], "on": "activating Ascension or Tempest Strike", "q": "Activating Ascension or Tempest Strike throws bouncing explosives at nearby targets that jolt and damage them.", "s": "bungie" },
+   { "do": "uses", "t": "jolt", "perk": "The Gift of Certainty", "q": "Jolting nearby targets grants you damage resistance.", "s": "bungie", "note": "any Jolt you apply within ~15 m counts, not only the exotic's projectiles" },
+   { "do": "grants", "t": "damageresistance", "perk": "The Gift of Certainty", "on": "jolting nearby targets", "q": "Jolting nearby targets grants you damage resistance.", "s": "bungie", "note": "Compendium: the Arc projectiles count toward Sword on-hit effects while a Sword is readied" }
+  ] },
+ { "id": "xa:gravitonforfeit", "n": "Graviton Forfeit",
+  "fx": [
+   { "do": "modifies", "t": "invisibility", "perk": "Vanishing Shadow", "q": "Increases the duration of any invisibility effects.", "s": "bungie" },
+   { "do": "uses", "t": "invisibility", "perk": "Vanishing Shadow", "q": "When you gain invisibility, your grenade, melee and class abilities recharge faster.", "s": "bungie" },
+   { "do": "grants", "t": "grenadeenergy", "perk": "Vanishing Shadow", "on": "gaining invisibility", "q": "When you gain invisibility, your grenade, melee and class abilities recharge faster.", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "perk": "Vanishing Shadow", "on": "gaining invisibility", "q": "When you gain invisibility, your grenade, melee and class abilities recharge faster.", "s": "bungie" },
+   { "do": "grants", "t": "classenergy", "perk": "Vanishing Shadow", "on": "gaining invisibility", "q": "When you gain invisibility, your grenade, melee and class abilities recharge faster.", "s": "bungie" },
+   { "do": "grants", "t": "overshield", "perk": "Vanishing Shadow", "on": "reaching 3 stacks", "q": "At maximum stacks, you gain a Void Overshield as well.", "s": "bungie" }
+  ] },
+ { "id": "xa:gwisinvest", "n": "Gwisin Vest",
+  "fx": [
+   { "do": "modifies", "t": "super", "perk": "Roving Assassin", "if": [{ "slot": "super", "is": ["Spectral Blades"] }], "q": "Each Spectral Blades hit or final blow you make before becoming invisible will restore more of your Super energy.", "s": "bungie" },
+   { "do": "grants", "t": "superenergy", "perk": "Roving Assassin", "if": [{ "slot": "super", "is": ["Spectral Blades"] }], "on": "Spectral Blades heavy attack after hits and kills", "q": "Each Spectral Blades hit or final blow you make before becoming invisible will restore more of your Super energy.", "s": "bungie" },
+   { "do": "uses", "t": "invisibility", "perk": "Roving Assassin", "q": "Exiting invisibility while near a target creates a cloud of weakening smoke around you.", "s": "bungie" },
+   { "do": "creates", "t": "voidsmoke", "perk": "Roving Assassin", "on": "exiting invisibility near an enemy", "q": "Exiting invisibility while near a target creates a cloud of weakening smoke around you.", "s": "bungie", "note": "5 s cooldown; Compendium: it is a Snare Bomb and does not interact with Trapper's Ambush" },
+   { "do": "applies", "t": "weaken", "by": "voidsmoke", "perk": "Roving Assassin", "q": "Exiting invisibility while near a target creates a cloud of weakening smoke around you.", "s": "bungie" }
+  ] },
+ { "id": "xa:gyrfalconshauberk", "n": "Gyrfalcon's Hauberk",
+  "fx": [
+   { "do": "uses", "t": "invisibility", "perk": "See Me, Feel Me", "q": "Your Void weapons gain Volatile Rounds after you emerge from being invisible.", "s": "bungie" },
+   { "do": "grants", "t": "volatilerounds", "perk": "See Me, Feel Me", "if": [{ "weapon": "void" }], "on": "exiting invisibility", "q": "Your Void weapons gain Volatile Rounds after you emerge from being invisible.", "s": "bungie" },
+   { "do": "uses", "t": "finisher", "perk": "See Me, Feel Me", "q": "When you are invisible and defeat a combatant while using a finisher, all of your weapons gain bonus damage; you and your nearby allies gain a reserve overshield and improved class ability regeneration.", "s": "bungie" },
+   { "do": "grants", "t": "weapondamage", "perk": "See Me, Feel Me", "if": [{ "has": "invisibility" }], "on": "finisher while invisible", "q": "When you are invisible and defeat a combatant while using a finisher, all of your weapons gain bonus damage", "s": "bungie", "note": "35% Empowering buff; does not stack with other Empowering buffs" },
+   { "do": "grants", "t": "classenergy", "perk": "See Me, Feel Me", "who": "allies", "if": [{ "has": "invisibility" }], "on": "finisher while invisible", "q": "you and your nearby allies gain a reserve overshield and improved class ability regeneration", "s": "bungie" },
+   { "do": "grants", "t": "overshield", "perk": "See Me, Feel Me", "who": "allies", "if": [{ "has": "invisibility" }], "on": "using your class ability while holding a reserve overshield", "q": "These reserve overshields can be deployed by using a class ability.", "s": "bungie" },
+   { "do": "uses", "t": "classability", "perk": "See Me, Feel Me", "q": "These reserve overshields can be deployed by using a class ability.", "s": "bungie" }
+  ] },
+ { "id": "xa:kheprissting", "n": "Khepri's Sting",
+  "fx": [
+   { "do": "uses", "t": "weaken", "perk": "Touch of Venom", "if": [{ "slot": "melee", "is": ["Snare Bomb", "Phantom Surge"] }], "q": "Defeating a weakened target releases a burst of weakening smoke and refunds Void melee ability energy.", "s": "bungie", "note": "requires a Void melee equipped; any Weaken source counts" },
+   { "do": "creates", "t": "voidsmoke", "perk": "Touch of Venom", "if": [{ "slot": "melee", "is": ["Snare Bomb", "Phantom Surge"] }], "on": "killing weakened targets", "q": "Defeating a weakened target releases a burst of weakening smoke and refunds Void melee ability energy.", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "by": "voidsmoke", "perk": "Touch of Venom", "if": [{ "slot": "melee", "is": ["Snare Bomb", "Phantom Surge"] }], "q": "Defeating a weakened target releases a burst of weakening smoke and refunds Void melee ability energy.", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "perk": "Touch of Venom", "if": [{ "slot": "melee", "is": ["Snare Bomb", "Phantom Surge"] }], "on": "killing weakened targets", "q": "Killing Weakened enemies grants 30% Void Melee Energy", "s": "clarity" },
+   { "do": "counts", "t": "voidsmoke", "as": "melee", "perk": "Touch of Venom", "q": "Void Smoke is functionally identical to Smoke Bomb and triggers melee-associated effects.", "s": "clarity" }
+  ] },
+ { "id": "xa:liarshandshake", "n": "Liar's Handshake",
+  "fx": [
+   { "do": "uses", "t": "melee", "perk": "Cross Counter", "if": [{ "slot": "melee", "is": ["Combination Blow", "Disorienting Blow"] }], "q": "Using your Arc melee ability or being hit by a melee attack will allow you to follow up with an extremely powerful melee counterpunch that will heal you.", "s": "bungie", "note": "requires an Arc melee equipped" },
+   { "do": "grants", "t": "meleedamage", "perk": "Cross Counter", "if": [{ "slot": "melee", "is": ["Combination Blow", "Disorienting Blow"] }], "on": "Arc melee hits or taking melee damage", "q": "Cross Counter grants 400% additional base Melee damage and restores 40 HP on Melee Hits.", "s": "clarity" },
+   { "do": "grants", "t": "healing", "perk": "Cross Counter", "if": [{ "slot": "melee", "is": ["Combination Blow", "Disorienting Blow"] }], "on": "Cross Counter melee hits", "q": "Cross Counter grants 400% additional base Melee damage and restores 40 HP on Melee Hits.", "s": "clarity" }
+  ] },
+ { "id": "xa:luckypants", "n": "Lucky Pants",
+  "fx": [
+   { "do": "uses", "t": "handcannon", "perk": "Illegally Modded Holster", "q": "Improves sprint, slide, and airborne effectiveness while a Hand Cannon is equipped.", "s": "bungie" },
+   { "do": "grants", "t": "handling", "perk": "Illegally Modded Holster", "on": "readying a Hand Cannon", "q": "For a short time after being drawn, Hand Cannons ready faster, are more accurate, and each hit against a combatant increases Hand Cannon damage.", "s": "bungie" },
+   { "do": "grants", "t": "weapondamage", "perk": "Illegally Modded Holster", "on": "Hand Cannon hits after readying", "q": "For a short time after being drawn, Hand Cannons ready faster, are more accurate, and each hit against a combatant increases Hand Cannon damage.", "s": "bungie", "note": "up to +450% direct impact damage vs combatants (bosses take 33% less); not an Empowering buff" }
+  ] },
+ { "id": "xa:luckyraspberry", "n": "Lucky Raspberry",
+  "fx": [
+   { "do": "modifies", "t": "grenade", "perk": "Probability Matrix", "if": [{ "slot": "grenade", "is": ["Arcbolt Grenade"] }], "q": "Arcbolt Grenades have increased chaining capabilities and jolt targets hit.", "s": "bungie" },
+   { "do": "applies", "t": "jolt", "perk": "Probability Matrix", "if": [{ "slot": "grenade", "is": ["Arcbolt Grenade"] }], "q": "Arcbolt Grenades have increased chaining capabilities and jolt targets hit.", "s": "bungie" },
+   { "do": "uses", "t": "jolt", "perk": "Probability Matrix", "q": "Damaging combatants with jolt or applying jolt to targets grants additional Arcbolt Grenade energy.", "s": "bungie", "note": "any Jolt source counts" },
+   { "do": "grants", "t": "grenadeenergy", "perk": "Probability Matrix", "if": [{ "slot": "grenade", "is": ["Arcbolt Grenade"] }], "on": "applying Jolt or Jolt chain damage", "q": "Damaging combatants with jolt or applying jolt to targets grants additional Arcbolt Grenade energy.", "s": "bungie" }
+  ] },
+ { "id": "xa:maskofbakris", "n": "Mask of Bakris",
+  "fx": [
+   { "do": "modifies", "t": "dodge", "perk": "Light Shift", "if": [{ "slot": "super", "is": ["Arc Staff", "Gathering Storm", "Storm's Edge", "Silence and Squall"] }], "q": "While you have a Stasis or Arc Super equipped, your Dodge becomes a longer range, faster moving shift that partially cloaks you during use.", "s": "bungie", "note": "does not replace Acrobat's Dodge; uses Marksman's Dodge cooldown" },
+   { "do": "grants", "t": "weapondamage", "perk": "Light Shift", "if": [{ "slot": "super", "is": ["Arc Staff", "Gathering Storm", "Storm's Edge", "Silence and Squall"] }, { "any": [{ "weapon": "arc" }, { "weapon": "stasis" }] }], "on": "shifting", "q": "After shifting, your Stasis and Arc weapons gain a stacking damage bonus for a short time.", "s": "bungie", "note": "stacks with other buffs; also +10% weapon damage vs Stasis-debuffed enemies" },
+   { "do": "uses", "t": "slow", "perk": "Light Shift", "q": "Light Shift additionally grants 10% increased Weapon Damage against Stasis-debuffed enemies.", "s": "clarity" },
+   { "do": "uses", "t": "freeze", "perk": "Light Shift", "q": "Light Shift additionally grants 10% increased Weapon Damage against Stasis-debuffed enemies.", "s": "clarity" },
+   { "do": "grants", "t": "classenergy", "perk": "Light Shift", "if": [{ "slot": "super", "is": ["Arc Staff", "Gathering Storm", "Storm's Edge", "Silence and Squall"] }], "on": "weapon final blows while Light Shift is active", "q": "Final blows with this bonus active refund class ability energy.", "s": "bungie", "note": "passive class ability regeneration is disabled while Light Shift is active" }
+  ] },
+ { "id": "xa:maskoffealty", "n": "Mask of Fealty",
+  "fx": [
+   { "do": "creates", "t": "stasiscrystal", "perk": "Null Factor", "if": [{ "slot": "melee", "is": ["Withering Blade"] }], "on": "Withering Blade hits and bounces", "q": "Withering Blade hits and bounces create a small Stasis crystal and refund a portion of melee energy.", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "perk": "Null Factor", "if": [{ "slot": "melee", "is": ["Withering Blade"] }], "on": "Withering Blade hits and bounces", "q": "Withering Blade hits and bounces create a small Stasis crystal and refund a portion of melee energy.", "s": "bungie" },
+   { "do": "uses", "t": "stasiscrystal", "perk": "Null Factor", "if": [{ "slot": "melee", "is": ["Withering Blade"] }], "q": "Using Withering Blade to shatter crystals or frozen targets releases a spread of Withering Blades.", "s": "bungie" },
+   { "do": "uses", "t": "freeze", "perk": "Null Factor", "if": [{ "slot": "melee", "is": ["Withering Blade"] }], "q": "Using Withering Blade to shatter crystals or frozen targets releases a spread of Withering Blades.", "s": "bungie" },
+   { "do": "modifies", "t": "melee", "perk": "Null Factor", "if": [{ "slot": "melee", "is": ["Withering Blade"] }], "q": "Using Withering Blade to shatter crystals or frozen targets releases a spread of Withering Blades.", "s": "bungie" }
+  ] },
+ { "id": "xa:mechaneerstricksleeves", "n": "Mechaneer's Tricksleeves",
+  "fx": [
+   { "do": "uses", "t": "sidearm", "perk": "Spring-Loaded Mounting", "q": "Increases Sidearm airborne effectiveness, ready speed, and reload speed.", "s": "bungie" },
+   { "do": "uses", "t": "criticalhealth", "perk": "Spring-Loaded Mounting", "q": "While you're critically wounded, swapping to a Sidearm reloads it and increases its damage.", "s": "bungie" },
+   { "do": "grants", "t": "reload", "perk": "Spring-Loaded Mounting", "if": [{ "has": "criticalhealth" }], "on": "readying a Sidearm while critically wounded", "q": "While you're critically wounded, swapping to a Sidearm reloads it and increases its damage.", "s": "bungie" },
+   { "do": "grants", "t": "weapondamage", "perk": "Spring-Loaded Mounting", "if": [{ "has": "criticalhealth" }], "on": "readying a Sidearm while critically wounded", "q": "While you're critically wounded, swapping to a Sidearm reloads it and increases its damage.", "s": "bungie", "note": "Sidearm only; +100% PvE" }
+  ] },
+ { "id": "xa:moirai", "n": "Moirai",
+  "fx": [
+   { "do": "modifies", "t": "melee", "perk": "Webcatcher", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "q": "Threaded Spike can bounce to Tangles, detonating them and returning immediately.", "s": "bungie" },
+   { "do": "uses", "t": "tangle", "perk": "Webcatcher", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "q": "Threaded Spike can bounce to Tangles, detonating them and returning immediately.", "s": "bungie" },
+   { "do": "creates", "t": "tangle", "perk": "Webcatcher", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "on": "catching a Spike that detonated a Tangle", "q": "Tangles detonated by Threaded Spike are rewoven and retrieved by it.", "s": "bungie", "note": "Compendium: picking it up this way counts for Elemental Pickup effects" },
+   { "do": "grants", "t": "meleeenergy", "perk": "Webcatcher", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "on": "catching a Spike that hit no Tangle", "q": "Catches without a Tangle refund extra melee energy.", "s": "bungie", "note": "missing the catch after a Tangle detonation causes a Strand explosion that counts as powered melee damage" }
+  ] },
+ { "id": "xa:mothkeeperswraps", "n": "Mothkeeper's Wraps",
+  "fx": [
+   { "do": "modifies", "t": "grenade", "perk": "Winged Eclipse", "on": "kills charge the moth cage", "q": "Defeat targets to charge up cages of loyal moths that fly toward nearby targets or allies.", "s": "bungie", "note": "temporarily replaces your grenade with two moth-cage charges" },
+   { "do": "applies", "t": "blind", "perk": "Winged Eclipse", "q": "Upon reaching targets, moths detonate in a blinding explosion", "s": "bungie", "note": "Clarity: Arc Moths count as Arc grenade damage" },
+   { "do": "grants", "t": "overshield", "perk": "Winged Eclipse", "who": "allies", "q": "upon reaching allies, moths provide a Void overshield.", "s": "bungie" }
+  ] },
+ { "id": "xa:oathkeeper", "n": "Oathkeeper",
+  "fx": [
+   { "do": "uses", "t": "bow", "perk": "Adamantine Brace", "q": "Bow perfect draw can be held indefinitely.", "s": "bungie" },
+   { "do": "grants", "t": "weapondamage", "perk": "Adamantine Brace", "on": "holding a perfect draw", "q": "Gain a bonus to the Bow's damage when released, based on how long perfect draw was held.", "s": "bungie", "note": "Bow impact damage only, up to +200% vs combatants" }
+  ] },
+ { "id": "xa:omnioculus", "n": "Omnioculus",
+  "fx": [
+   { "do": "modifies", "t": "melee", "perk": "Beyond The Veil", "if": [{ "slot": "melee", "is": ["Snare Bomb"] }], "q": "You gain a second Smoke Bomb charge", "s": "bungie" },
+   { "do": "uses", "t": "invisibility", "perk": "Beyond The Veil", "q": "have damage resistance while invisible", "s": "bungie" },
+   { "do": "grants", "t": "damageresistance", "perk": "Beyond The Veil", "if": [{ "has": "invisibility" }], "on": "while invisible", "q": "You gain a second Smoke Bomb charge and have damage resistance while invisible.", "s": "bungie", "note": "not while in Super" },
+   { "do": "grants", "t": "meleeenergy", "perk": "Beyond The Veil", "on": "making an ally invisible", "q": "When you make an ally invisible, they gain damage resistance while invisible and you gain melee energy.", "s": "bungie" },
+   { "do": "grants", "t": "damageresistance", "perk": "Beyond The Veil", "who": "allies", "on": "allies you make invisible", "q": "When you make an ally invisible, they gain damage resistance while invisible and you gain melee energy.", "s": "bungie" }
+  ] },
+ { "id": "xa:ophidiaspathe", "n": "Ophidia Spathe",
+  "fx": [
+   { "do": "modifies", "t": "melee", "perk": "Scissor Fingers", "if": [{ "slot": "melee", "is": ["Knife Trick", "Lightweight Knife", "Proximity Explosive Knife", "Weighted Throwing Knife"] }], "q": "Grants an extra Solar Melee Ability charge.", "s": "clarity", "note": "both charges recharge together (e.g. on Gambler's Dodge)" },
+   { "do": "grants", "t": "meleedamage", "perk": "Scissor Fingers", "if": [{ "slot": "melee", "is": ["Knife Trick", "Lightweight Knife", "Proximity Explosive Knife", "Weighted Throwing Knife"] }], "on": "throwing knife final blows", "q": "Getting a final blow with a throwing knife grants consecutive knives a temporary stacking damage bonus.", "s": "bungie" },
+   { "do": "uses", "t": "dodge", "perk": "Scissor Fingers", "if": [{ "slot": "classAbility", "is": ["Gambler's Dodge"] }], "q": "Gambler's Dodge refreshes the bonus timer.", "s": "bungie" },
+   { "do": "uses", "t": "radiant", "perk": "Scissor Fingers", "if": [{ "piece": "Knock 'Em Down" }], "q": "Interaction with the Knock 'Em Down Aspect while Radiant:", "s": "clarity", "note": "with Knock 'Em Down while Radiant, knife kills restore charges" }
+  ] },
+ { "id": "xa:orpheusrig", "n": "Orpheus Rig",
+  "fx": [
+   { "do": "grants", "t": "superenergy", "perk": "Uncanny Arrows", "if": [{ "slot": "super", "is": ["Shadowshot: Deadfall"] }], "on": "each enemy tethered", "q": "Refunds X% Super Energy, up to a maximum of 50% Super Energy.", "s": "compendium" },
+   { "do": "grants", "t": "grenadeenergy", "perk": "Uncanny Arrows", "if": [{ "slot": "super", "is": ["Shadowshot: Deadfall"] }], "on": "each enemy tethered", "q": "For each enemy that gets tethered to a Deadfall anchor: Grants 10% Grenade, Melee, and Class Ability Energy.", "s": "compendium" },
+   { "do": "grants", "t": "meleeenergy", "perk": "Uncanny Arrows", "if": [{ "slot": "super", "is": ["Shadowshot: Deadfall"] }], "on": "each enemy tethered", "q": "For each enemy that gets tethered to a Deadfall anchor: Grants 10% Grenade, Melee, and Class Ability Energy.", "s": "compendium" },
+   { "do": "grants", "t": "classenergy", "perk": "Uncanny Arrows", "if": [{ "slot": "super", "is": ["Shadowshot: Deadfall"] }], "on": "each enemy tethered", "q": "For each enemy that gets tethered to a Deadfall anchor: Grants 10% Grenade, Melee, and Class Ability Energy.", "s": "compendium" },
+   { "do": "modifies", "t": "super", "perk": "Uncanny Arrows", "if": [{ "slot": "super", "is": ["Shadowshot: Moebius Quiver"] }], "q": "Moebius Quiver has an additional shot.", "s": "bungie", "note": "Moebius Quiver also lasts 4 s longer" }
+  ] },
+ { "id": "xa:radiantdancemachines", "n": "Radiant Dance Machines",
+  "fx": [
+   { "do": "uses", "t": "primaryweapon", "perk": "The Dance", "q": "Final blows with Primary ammo weapons return dodge energy, which can overflow to create additional charges when full.", "s": "bungie" },
+   { "do": "grants", "t": "classenergy", "perk": "The Dance", "on": "Primary weapon final blows", "q": "Final blows with Primary ammo weapons return dodge energy, which can overflow to create additional charges when full.", "s": "bungie" },
+   { "do": "modifies", "t": "dodge", "perk": "The Dance", "q": "At full Class Ability energy, scoring multiple Primary Weapon Kills within 6 seconds of each grants an additional Class Ability Charge.", "s": "clarity", "note": "up to 2 extra class ability charges" }
+  ] },
+ { "id": "xa:raidenflux", "n": "Raiden Flux",
+  "fx": [
+   { "do": "modifies", "t": "super", "perk": "Synapse Junctions", "if": [{ "slot": "super", "is": ["Arc Staff"] }], "q": "Quick successive attacks with Arc Staff increase its damage output, duration and jolt targets hit.", "s": "bungie" },
+   { "do": "applies", "t": "jolt", "perk": "Synapse Junctions", "if": [{ "slot": "super", "is": ["Arc Staff"] }], "q": "Arc Staff hits now apply Jolt.", "s": "clarity" }
+  ] },
+ { "id": "xa:raijusharness", "n": "Raiju's Harness",
+  "fx": [
+   { "do": "applies", "t": "jolt", "perk": "Mobius Conduit", "if": [{ "slot": "super", "is": ["Gathering Storm"] }], "on": "casting Gathering Storm", "q": "Activating Gathering Storm calls down lightning on all nearby targets, jolting them while also amplifying allies.", "s": "bungie" },
+   { "do": "grants", "t": "amplified", "perk": "Mobius Conduit", "who": "allies", "if": [{ "slot": "super", "is": ["Gathering Storm"] }], "on": "casting Gathering Storm", "q": "Activating Gathering Storm calls down lightning on all nearby targets, jolting them while also amplifying allies.", "s": "bungie", "note": "Clarity: you are Amplified too" },
+   { "do": "uses", "t": "jolt", "perk": "Mobius Conduit", "q": "Defeating Arc debuffed targets grants a small amount of Gathering Storm energy.", "s": "bungie", "note": "any Arc debuff (Jolt, Blind) counts" },
+   { "do": "uses", "t": "blind", "perk": "Mobius Conduit", "q": "Defeating Arc debuffed targets grants a small amount of Gathering Storm energy.", "s": "bungie" },
+   { "do": "grants", "t": "superenergy", "perk": "Mobius Conduit", "if": [{ "slot": "super", "is": ["Gathering Storm"] }], "on": "killing Arc-debuffed targets", "q": "Defeating Arc debuffed targets grants a small amount of Gathering Storm energy.", "s": "bungie" }
+  ] },
+ { "id": "xa:relativism", "n": "Relativism",
+  "fx": [
+   { "do": "uses", "t": "classability", "perk": "Spirit of the Dragon", "q": "Using your class ability temporarily increases this benefit and reloads your equipped weapon from reserves.", "s": "bungie" },
+   { "do": "grants", "t": "reload", "perk": "Spirit of the Dragon", "on": "using your class ability", "q": "Using your class ability temporarily increases this benefit and reloads your equipped weapon from reserves.", "s": "bungie", "note": "Compendium: reloads all weapons, picks up nearby Ammo Bricks and activates on-reload perks" },
+   { "do": "grants", "t": "handling", "perk": "Spirit of the Dragon", "on": "using your class ability", "q": "Wraithmetal Mail: +35 Stability and +? Handling.", "s": "compendium" },
+   { "do": "uses", "t": "grenade", "perk": "Spirit of the Cyrtarachne", "q": "Gain Woven Mail when you use your grenade.", "s": "bungie" },
+   { "do": "grants", "t": "wovenmail", "perk": "Spirit of the Cyrtarachne", "on": "using your grenade", "q": "Gain Woven Mail when you use your grenade.", "s": "bungie" }
+  ] },
+ { "id": "xa:renewalgrasps", "n": "Renewal Grasps",
+  "fx": [
+   { "do": "modifies", "t": "grenade", "perk": "Depths of Duskfield", "if": [{ "slot": "grenade", "is": ["Duskfield Grenade"] }], "q": "Your Duskfield grenades have a much larger effect radius.", "s": "bungie" },
+   { "do": "grants", "t": "frostarmor", "perk": "Depths of Duskfield", "who": "allies", "if": [{ "slot": "grenade", "is": ["Duskfield Grenade"] }], "on": "standing in your Duskfield", "q": "Allies inside the Duskfield gain Frost Armor and targets inside the area deal reduced damage.", "s": "bungie" },
+   { "do": "creates", "t": "stasiscrystal", "perk": "Depths of Duskfield", "if": [{ "slot": "grenade", "is": ["Duskfield Grenade"] }], "q": "spawns a Medium Stasis Crystal in its center", "s": "clarity" },
+   { "do": "modifies", "t": "grenade", "perk": "Depths of Duskfield", "if": [{ "slot": "grenade", "is": ["Duskfield Grenade"] }, { "piece": "Touch of Winter" }], "q": "When combined with Touch of Winter: Stasis Crystal Size increases from Medium to Large.", "s": "compendium", "note": "with Touch of Winter the radius bonus totals 75%" }
+  ] },
+ { "id": "xa:sealedahamkaragrasps", "n": "Sealed Ahamkara Grasps",
+  "fx": [
+   { "do": "uses", "t": "melee", "perk": "Nightmare Fuel", "q": "Powered melee and finisher final blows grant Nightmare Fuel, increasing handling and airborne effectiveness.", "s": "bungie" },
+   { "do": "uses", "t": "finisher", "perk": "Nightmare Fuel", "q": "Powered melee and finisher final blows grant Nightmare Fuel, increasing handling and airborne effectiveness.", "s": "bungie" },
+   { "do": "uses", "t": "grapplemelee", "perk": "Nightmare Fuel", "q": "On Powered Melee/Grapple Melee Kill or Finisher: Grants Nightmare Fuel for 7 seconds.", "s": "compendium" },
+   { "do": "grants", "t": "handling", "perk": "Nightmare Fuel", "on": "powered melee or finisher final blows", "q": "Powered melee and finisher final blows grant Nightmare Fuel, increasing handling and airborne effectiveness.", "s": "bungie" },
+   { "do": "grants", "t": "weapondamage", "perk": "Nightmare Fuel", "on": "readying a weapon with Nightmare Fuel", "q": "While active, freshly drawn weapons deal additional damage and grant Nightmare Fuel on final blows.", "s": "bungie", "note": "35% Empowering buff; does not stack with other Empowering buffs" },
+   { "do": "grants", "t": "reload", "perk": "Nightmare Fuel", "on": "gaining Nightmare Fuel", "q": "Gaining Nightmare Fuel reloads all holstered weapons.", "s": "bungie" }
+  ] },
+ { "id": "xa:shardsofgalanor", "n": "Shards of Galanor",
+  "fx": [
+   { "do": "grants", "t": "superenergy", "perk": "Sharp Edges", "if": [{ "slot": "melee", "is": ["Knife Trick", "Lightweight Knife", "Proximity Explosive Knife", "Weighted Throwing Knife"] }], "on": "throwing knife final blows", "q": "Throwing Knife final blows decrease the cooldown of your Super.", "s": "bungie", "note": "Compendium: any Solar melee kill, energy goes to Blade Barrage" },
+   { "do": "modifies", "t": "super", "perk": "Sharp Edges", "if": [{ "slot": "super", "is": ["Blade Barrage"] }], "q": "Hitting a single target with most Blade Barrage knives in a volley causes them to release a violent Solar explosion; releasing scorching Solar shrapnel.", "s": "bungie" },
+   { "do": "applies", "t": "scorch", "perk": "Sharp Edges", "if": [{ "slot": "super", "is": ["Blade Barrage"] }], "q": "releasing scorching Solar shrapnel", "s": "bungie" },
+   { "do": "grants", "t": "superenergy", "perk": "Sharp Edges", "if": [{ "slot": "super", "is": ["Blade Barrage"] }], "on": "Blade Barrage hits and kills", "q": "Hits and final blows with Blade Barrage will return Super energy after the Super ends.", "s": "bungie" }
+  ] },
+ { "id": "xa:shinobusvow", "n": "Shinobu's Vow",
+  "fx": [
+   { "do": "modifies", "t": "grenade", "perk": "New Tricks", "if": [{ "slot": "grenade", "is": ["Skip Grenade"] }], "q": "Gain an additional Skip Grenade charge.", "s": "bungie" },
+   { "do": "grants", "t": "boltcharge", "perk": "New Tricks", "if": [{ "slot": "grenade", "is": ["Skip Grenade"] }], "on": "Skip Grenade damage", "q": "Skip Grenade damage grants Bolt Charge", "s": "bungie" },
+   { "do": "uses", "t": "boltcharge", "perk": "New Tricks", "q": "gaining Bolt Charge grants Skip Grenade energy", "s": "bungie", "note": "Bolt Charge from any source counts" },
+   { "do": "grants", "t": "grenadeenergy", "perk": "New Tricks", "if": [{ "slot": "grenade", "is": ["Skip Grenade"] }], "on": "gaining Bolt Charge", "q": "gaining Bolt Charge grants Skip Grenade energy", "s": "bungie" },
+   { "do": "grants", "t": "healing", "perk": "New Tricks", "who": "allies", "if": [{ "slot": "grenade", "is": ["Skip Grenade"] }], "on": "reaching full Bolt Charge", "q": "When Bolt Charge is ready, you heal nearby allies and enhance your next Skip Grenade.", "s": "bungie" }
+  ] },
+ { "id": "xa:speedloaderslacks", "n": "Speedloader Slacks",
+  "fx": [
+   { "do": "uses", "t": "dodge", "perk": "Tight Fit", "q": "Dodging instantly reloads all your weapons and grants increased reload and handling to you and nearby allies.", "s": "bungie", "note": "Compendium: any class ability use" },
+   { "do": "grants", "t": "reload", "perk": "Tight Fit", "on": "dodging", "q": "Dodging instantly reloads all your weapons and grants increased reload and handling to you and nearby allies.", "s": "bungie", "note": "counts as a manual reload (activates on-reload perks) and collects nearby ammo bricks" },
+   { "do": "grants", "t": "reloadspeed", "perk": "Tight Fit", "who": "allies", "on": "dodging", "q": "Dodging instantly reloads all your weapons and grants increased reload and handling to you and nearby allies.", "s": "bungie" },
+   { "do": "grants", "t": "handling", "perk": "Tight Fit", "who": "allies", "on": "dodging", "q": "Dodging instantly reloads all your weapons and grants increased reload and handling to you and nearby allies.", "s": "bungie" },
+   { "do": "grants", "t": "classenergy", "perk": "Tight Fit", "on": "sustained weapon hits", "q": "Dealing sustained damage grants class ability energy.", "s": "bungie" },
+   { "do": "uses", "t": "weapon", "perk": "Tight Fit", "q": "Scoring multiple Direct Weapon Hits within 3? seconds of each grants ~20% Class Ability Energy.", "s": "clarity" }
+  ] },
+ { "id": "xa:st0mpee5", "n": "St0mp-EE5",
+  "fx": [
+   { "do": "modifies", "t": "movement", "perk": "Hydraulic Boosters", "q": "Increases slide distance and improves High Jump, Strafe Jump, and Triple Jump.", "s": "bungie" },
+   { "do": "uses", "t": "airborne", "perk": "Hydraulic Boosters", "q": "Take less damage from targets when airborne.", "s": "bungie" },
+   { "do": "grants", "t": "damageresistance", "perk": "Hydraulic Boosters", "on": "while airborne", "q": "Take less damage from targets when airborne.", "s": "bungie", "note": "30% vs PvE combatants" }
+  ] },
+ { "id": "xa:stareaterscales", "n": "Star-Eater Scales",
+  "fx": [
+   { "do": "uses", "t": "orbofpower", "perk": "Feast of Light", "q": "You gain additional Super energy from Orbs of Power you pick up.", "s": "bungie" },
+   { "do": "grants", "t": "superenergy", "perk": "Feast of Light", "on": "picking up Orbs of Power", "q": "You gain additional Super energy from Orbs of Power you pick up.", "s": "bungie", "note": "reduced to 0.5% with Golden Gun: Marksman" },
+   { "do": "modifies", "t": "super", "perk": "Feast of Light", "on": "orbs picked up at full Super", "q": "While your Super energy is full, picking up an Orb of Power overcharges your Super, causing you to gain a burst of healing when cast and a bonus to your Super damage.", "s": "bungie" },
+   { "do": "grants", "t": "healing", "perk": "Feast of Light", "on": "casting an overcharged Super", "q": "causing you to gain a burst of healing when cast and a bonus to your Super damage", "s": "bungie" },
+   { "do": "grants", "t": "overshield", "perk": "Feast of Light", "on": "casting at maximum overcharge", "q": "At maximum overcharge, you also gain an overshield.", "s": "bungie" }
+  ] },
+ { "id": "xa:thebombardiers", "n": "The Bombardiers",
+  "fx": [
+   { "do": "uses", "t": "dodge", "perk": "Parting Gift", "q": "Dodging leaves behind an explosive that detonates after a short delay", "s": "bungie", "note": "Clarity: any class ability use" },
+   { "do": "applies", "t": "blind", "perk": "Parting Gift", "if": [{ "slot": "super", "is": ["Arc Staff", "Gathering Storm", "Storm's Edge"] }], "q": "Arc: Blind for 10 [3] seconds", "s": "clarity" },
+   { "do": "applies", "t": "scorch", "perk": "Parting Gift", "if": [{ "slot": "super", "is": ["Blade Barrage", "Golden Gun: Deadshot", "Golden Gun: Marksman"] }], "q": "Solar: 40 Scorch (60 with Ember of Ashes)", "s": "clarity" },
+   { "do": "applies", "t": "suppress", "perk": "Parting Gift", "if": [{ "slot": "super", "is": ["Shadowshot: Deadfall", "Shadowshot: Moebius Quiver", "Spectral Blades"] }], "q": "Void: Suppression for 10 seconds", "s": "clarity" },
+   { "do": "applies", "t": "slow", "perk": "Parting Gift", "if": [{ "slot": "super", "is": ["Silence and Squall"] }], "q": "Stasis: 40 [20] Slow Stacks for 4 [1.5] seconds", "s": "clarity" },
+   { "do": "applies", "t": "sever", "perk": "Parting Gift", "if": [{ "slot": "super", "is": ["Silkstrike"] }], "q": "Strand: Sever for 10 [5] seconds", "s": "clarity" }
+  ] },
+ { "id": "xa:thedragonsshadow", "n": "The Dragon's Shadow",
+  "fx": [
+   { "do": "uses", "t": "dodge", "perk": "Wraithmetal Mail", "q": "Dodging temporarily increases this benefit, reloads your equipped weapon from reserves, grants improved movement speed, and increases your class ability stat.", "s": "bungie", "note": "Clarity/Compendium: no Class stat is actually granted; triggers on any class ability" },
+   { "do": "grants", "t": "reload", "perk": "Wraithmetal Mail", "on": "dodging", "q": "Dodging temporarily increases this benefit, reloads your equipped weapon from reserves", "s": "bungie", "note": "counts as a manual reload and collects nearby ammo bricks" },
+   { "do": "grants", "t": "handling", "perk": "Wraithmetal Mail", "on": "dodging", "q": "Wraithmetal Mail: +35 Stability and +? Handling.", "s": "compendium" }
+  ] },
+ { "id": "xa:thesixthcoyote", "n": "The Sixth Coyote",
+  "fx": [
+   { "do": "modifies", "t": "dodge", "perk": "Double Dodge", "q": "Gain a second dodge charge.", "s": "bungie" },
+   { "do": "uses", "t": "dodge", "perk": "Double Dodge", "q": "Shortly after dodging, your next weapon final blow spawns an Orb of Power.", "s": "bungie" },
+   { "do": "creates", "t": "orbofpower", "perk": "Double Dodge", "on": "weapon final blow shortly after dodging", "q": "Shortly after dodging, your next weapon final blow spawns an Orb of Power.", "s": "bungie", "note": "acts as a copy of the Reaper mod" }
+  ] },
+ { "id": "xa:tritonvice", "n": "Triton Vice",
+  "fx": [
+   { "do": "uses", "t": "glaive", "perk": "Halberdier's Reach", "q": "Increases Glaive reload speed and melee damage when surrounded.", "s": "bungie" },
+   { "do": "grants", "t": "reloadspeed", "perk": "Halberdier's Reach", "on": "when surrounded", "q": "Increases Glaive reload speed and melee damage when surrounded.", "s": "bungie", "note": "Glaive only; also Glaive melee kills overflow the magazine and projectile kills explode" }
+  ] },
+ { "id": "xa:wormhuskcrown", "n": "Wormhusk Crown",
+  "fx": [
+   { "do": "uses", "t": "classability", "perk": "Burning Souls", "q": "Activating your class ability grants Cure.", "s": "bungie" },
+   { "do": "grants", "t": "cure", "perk": "Burning Souls", "on": "using your class ability", "q": "Activating your class ability grants Cure.", "s": "bungie" },
+   { "do": "modifies", "t": "dodge", "perk": "Burning Souls", "on": "rapid Solar final blows", "q": "increase the potency of Dodge's healing, and spreads the healing to nearby allies.", "s": "bungie" },
+   { "do": "grants", "t": "cure", "perk": "Burning Souls", "who": "allies", "on": "class ability with Burning Souls stacks", "q": "Class Ability Healing is enhanced and granted to allies within 15 meters of cast.", "s": "clarity" },
+   { "do": "grants", "t": "restoration", "perk": "Burning Souls", "who": "allies", "on": "class ability at 2-3 Burning Souls stacks", "q": "Cure x1 + Restoration x1 for 3 seconds", "s": "clarity", "note": "Burning Souls also gives +15% Solar ability damage; Ember of Solace extends the Restoration" }
+  ] },
+ { "id": "xa:youngahamkarasspine", "n": "Young Ahamkara's Spine",
+  "fx": [
+   { "do": "modifies", "t": "grenade", "perk": "Wish-Dragon Teeth", "if": [{ "slot": "grenade", "is": ["Tripmine Grenade"] }], "q": "Increases Tripmine Grenade duration and blast radius.", "s": "bungie", "note": "also grants Fastball to all grenades" },
+   { "do": "grants", "t": "grenadeenergy", "perk": "Wish-Dragon Teeth", "if": [{ "slot": "grenade", "is": ["Tripmine Grenade"] }], "on": "ability damage", "q": "Ability damage grants Tripmine Grenade energy.", "s": "bungie" },
+   { "do": "uses", "t": "solarability", "perk": "Wish-Dragon Teeth", "q": "Solar Ability Hits grant 30% [8%] Tripmine Grenade Energy.", "s": "clarity", "note": "sources disagree: Bungie says ability damage, Clarity says Solar ability hits, Compendium says grenade and melee hits; first Scorch tick from your abilities also counts" }
+  ] },
+ { "id": "_skipped", "ids": ["xa:knuckleheadradar"] }
+]

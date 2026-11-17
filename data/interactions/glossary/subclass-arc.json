@@ -1,0 +1,139 @@
+{
+ "terms": {
+  "ionicsentry": {
+   "l": "Ionic Sentry",
+   "kind": "object",
+   "el": "arc",
+   "aka": [
+    "arc turret"
+   ],
+   "def": "A throwable Arc turret, charged by Arc and Kinetic kills, that blinds on landing and periodically chains lightning to nearby targets. It replaces your grenade while ready and counts as a grenade ability.",
+   "q": "charge up an Arc turret that periodically chains lightning between nearby targets",
+   "src": "sub:ionicsentry"
+  },
+  "knockout": {
+   "l": "Knockout",
+   "kind": "buff",
+   "el": "arc",
+   "aka": [],
+   "def": "A short buff from breaking a shield or damaging a low-health target that boosts melee damage and lunge range and makes basic melees count as Arc-powered melees.",
+   "q": "Breaking a combatant or player shield, or dealing damage to a target below 30% HP, grants 'Knockout' for 6 seconds.",
+   "src": "sub:knockout"
+  },
+  "combinationblow": {
+   "l": "Combination Blow",
+   "kind": "buff",
+   "el": "arc",
+   "aka": [
+    "combination blow stacks"
+   ],
+   "def": "Stacking buff from melee kills with the Combination Blow melee that increases melee damage (up to three stacks).",
+   "q": "grants a stack of Combination Blow for 20 seconds, up to 3 stacks.",
+   "src": "sub:combinationblow"
+  },
+  "lethalcurrent": {
+   "l": "Lethal Current",
+   "kind": "buff",
+   "el": "arc",
+   "aka": [],
+   "def": "A buff from casting your class ability with the Lethal Current aspect: your next melee hit lunges farther, jolts and triggers a damaging aftershock.",
+   "q": "Casting your Class Ability grants 'Lethal Current' for 10 seconds, which is consumed on your next melee hit.",
+   "src": "sub:lethalcurrent"
+  },
+  "frontalshield": {
+   "l": "Frontal Shield",
+   "kind": "buff",
+   "el": "arc",
+   "aka": [
+    "juggernaut shield",
+    "frontal overshield"
+   ],
+   "def": "A forward-facing overshield from Juggernaut, raised while sprinting with full class ability energy; it absorbs incoming damage and drains your class energy when it breaks.",
+   "q": "you gain a frontal shield that blocks incoming damage",
+   "src": "sub:juggernaut"
+  },
+  "arcability": {
+   "l": "Arc ability damage",
+   "kind": "damage",
+   "el": "arc",
+   "aka": [
+    "arc abilities",
+    "arc ability kills"
+   ],
+   "def": "Damage and kills from your Arc abilities (grenade, melee, super and Arc ability objects). Some Arc aspects and fragments pay off on Arc ability kills.",
+   "q": "Defeating targets with Arc abilities or defeating jolted or blinded targets creates an Ionic Trace.",
+   "src": "sub:electrostaticmind"
+  },
+  "sprinting": {
+   "l": "Sprinting",
+   "kind": "state",
+   "el": "",
+   "aka": [
+    "sprint",
+    "after sprinting"
+   ],
+   "def": "Sprinting, often for a short minimum time. Several abilities and fragments activate only while or after sprinting.",
+   "q": "After sprinting for a short time, your class ability regeneration is increased.",
+   "src": "sub:sparkoffocus"
+  },
+  "sliding": {
+   "l": "Sliding",
+   "kind": "state",
+   "el": "",
+   "aka": [
+    "slide",
+    "while sliding"
+   ],
+   "def": "Sliding along the ground. Some abilities replace your melee or pick up effects while sliding.",
+   "q": "While sliding, activate your charged melee ability to blink forward",
+   "src": "sub:lightningsurge"
+  },
+  "reloadspeed": {
+   "l": "Reload speed",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "faster reload",
+    "reload speed buff"
+   ],
+   "def": "A buff that increases your weapons' reload speed (sometimes with stability or handling).",
+   "q": "Melee hits increase your equipped weapon's reload speed and stability for a short duration.",
+   "src": "sub:sparkoffrequency"
+  },
+  "meleedamage": {
+   "l": "Melee damage buff",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "increased melee damage",
+    "melee damage"
+   ],
+   "def": "A temporary increase to your outgoing melee damage.",
+   "q": "Taking melee damage briefly increases your outgoing melee damage.",
+   "src": "sub:sparkoffeedback"
+  },
+  "healthstat": {
+   "l": "Health stat bonus",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "increased health stat"
+   ],
+   "def": "A temporary bonus to the Health stat (faster shield and health recovery).",
+   "q": "While sprinting, you have greatly increased health stat.",
+   "src": "sub:sparkofhaste"
+  },
+  "ammobrick": {
+   "l": "Ammo brick",
+   "kind": "object",
+   "el": "",
+   "aka": [
+    "ammo bricks",
+    "ammo pickups"
+   ],
+   "def": "Special or Heavy ammo pickups dropped in the world. Some effects trigger when you collect them.",
+   "q": "Sliding over ammo bricks reloads your equipped weapon",
+   "src": "sub:sparkofmomentum"
+  }
+ }
+}

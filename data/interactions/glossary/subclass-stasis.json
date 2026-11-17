@@ -1,0 +1,49 @@
+{
+ "terms": {
+  "stasisturret": {
+   "l": "Stasis Turret",
+   "kind": "object",
+   "el": "stasis",
+   "aka": ["bleak watcher turret", "stasis turrets"],
+   "def": "A throwable turret made from your charged grenade (Bleak Watcher) that fires seeking, slowing projectiles at nearby enemies. It counts as a grenade ability.",
+   "q": "Hold to convert your grenade into a [Stasis] Stasis turret that fires slowing projectiles at nearby targets.",
+   "src": "sub:bleakwatcher"
+  },
+  "diamondlance": {
+   "l": "Diamond Lance",
+   "kind": "object",
+   "el": "stasis",
+   "aka": ["stasis lance", "lance"],
+   "def": "A single-use Stasis lance (Titan aspect) that appears after Stasis or shatter kills; throw it or slam it to freeze enemies and shatter crystals.",
+   "q": "Shatter or defeat targets with [Stasis] Stasis abilities or weapons to create a Stasis lance.",
+   "src": "sub:diamondlance"
+  },
+  "handling": {
+   "l": "Weapon handling",
+   "kind": "buff",
+   "el": "",
+   "aka": ["handling", "ready speed"],
+   "def": "A temporary boost to how fast your weapons ready, stow and aim.",
+   "q": "Increases weapon handling and health after freezing a target with [Stasis] Stasis.",
+   "src": "sub:whisperofhedrons"
+  },
+  "reload": {
+   "l": "Weapon reload",
+   "kind": "buff",
+   "el": "",
+   "aka": ["reloads your weapons", "refill"],
+   "def": "Instantly reloads your weapons' magazines from reserves.",
+   "q": "Damaging targets with a [Stasis] Stasis melee reloads your weapons",
+   "src": "sub:whisperofimpetus"
+  },
+  "howlcrystal": {
+   "l": "Howl of the Storm crystal",
+   "kind": "object",
+   "el": "stasis",
+   "aka": ["howl crystals"],
+   "def": "The Stasis crystals spawned by Howl of the Storm's sliding uppercut. Unlike other Stasis crystals, their damage counts as powered melee damage.",
+   "q": "Howl's Crystal Damage counts as Powered Stasis Melee Damage",
+   "src": "sub:howlofthestorm"
+  }
+ }
+}

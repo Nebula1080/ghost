@@ -103,6 +103,29 @@ if TARGET == 'hosted':
 else:
     s = s.replace('/*__BUNGIE__*/', '').replace('/*__BUNGIECFG__*/null', 'null').replace('/*__APIDEFS__*/null', 'null')
 
+# curated build interactions (data/interactions, see its README): glossary terms + per-piece effects, plus the ids
+# of pieces not curated yet. Both targets get them.
+assert '/*__IX__*/null' in s
+ixd = root / 'data/interactions'
+if (ixd / 'glossary.json').exists():
+    ix = {'t': {}, 'p': {}, 'pending': []}
+    gfiles = [ixd / 'glossary.json'] + sorted((ixd / 'glossary').glob('*.json')) if (ixd / 'glossary').exists() else [ixd / 'glossary.json']
+    for f in gfiles:
+        for tid, t in json.loads(f.read_text(encoding='utf-8')).get('terms', {}).items():
+            ix['t'].setdefault(tid, {k: t[k] for k in ('l', 'kind', 'el', 'def') if t.get(k) is not None})
+    done = set()
+    for f in sorted((ixd / 'pieces').glob('*.json')) if (ixd / 'pieces').exists() else []:
+        for r in json.loads(f.read_text(encoding='utf-8')):
+            if r.get('id') == '_skipped': done.update(r.get('ids', [])); continue
+            ix['p'][r['id']] = r.get('fx', []); done.add(r['id'])
+    for f in sorted((ixd / 'src').glob('*.json')):
+        if f.name == 'glossary-sources.json': continue
+        ix['pending'] += [r['id'] for r in json.loads(f.read_text(encoding='utf-8')) if r['id'] not in done]
+    s = s.replace('/*__IX__*/null', page_json(ix))
+    print(f'[{TARGET}] interactions: {len(ix["p"])} curated pieces, {len(ix["t"])} terms, {len(ix["pending"])} pending')
+else:
+    s = s.replace('/*__IX__*/null', 'null')
+
 # reference data (icons, breakers, Clarity + Data Compendium); run tools/build-defs.mjs to refresh
 OUT.mkdir(exist_ok=True)
 defs_path = root / 'data/defs.json'

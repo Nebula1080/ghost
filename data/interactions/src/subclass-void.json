@@ -1,0 +1,1060 @@
+[
+ {
+  "id": "sub:axionbolt",
+  "n": "Axion Bolt",
+  "kind": "grenade",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3232422679
+  ],
+  "src": {
+   "bungie": "A bolt of Void Light that forks on impact into smaller bolts that seek out targets.",
+   "compendium": "Heavy Trajectory | Scan\nScans up to 2 enemies in Line of Sight within 10 metres upon impact, releasing a slow-moving Axion Bolt towards scanned enemies after a 1 second delay.\nAxion Bolts deal 575 [65] damage and travel at a speed of ? m/s for up to ? seconds. Bolts have 10 HP and can be destroyed."
+  }
+ },
+ {
+  "id": "sub:bastion",
+  "n": "Bastion",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   1602994569
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Cast your Super to grant Overshield to nearby allies. \n\nCasting your Barricade grants Overshield to yourself and nearby allies and empowers it, enabling it to slowly regenerate the Overshield of allies bunkering behind it and extend their Overshield duration.",
+   "clarity": "Casting your Super Ability grants a 45 HP Void Overshield to allies within a 15 meter radius.\nCasting your Barricade grants a 45 HP Void Overshield to both you and allies within 15 meters, and allows the Barricade to constantly grant Void Overshield at a rate of 11 HP per second.\nIn PvP Only:\nBastion Barricades take 20% increased damage from other players, and equipping this aspect overrides your Base Class Ability Cooldown to 100 seconds for Towering Barricade and 80 seconds for Rally Barricade.",
+   "compendium": "On Super Cast:\nGrants allies within 15 metres a 45 HP Void Overshield.\nOn Enhanced Barricade Cast:\nGrants a 45 HP Overshield for the user and allies within 15? metres \nEnhanced Barricade takes 20% increased damage from Guardians.\nWhile behind the Enhanced Barricade:\nGenerates 11 Void Overshield HP per second.\nCrucible-Only:\nOverrides Towering Barricade Cooldown to 100 seconds at base.\nOverrides Rally Barricade Cooldown to 80 seconds at base."
+  }
+ },
+ {
+  "id": "sub:chaosaccelerant",
+  "n": "Chaos Accelerant",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2321824285
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "[Grenade]  : Overcharge your grenade, making it deadlier and more effective.\n\nVortex Grenade: Increases the size, linger duration, and pull of the vortex.\n\nAxion Bolt: Detonates twice and has enhanced seekers.\n\nScatter Grenade: Submunitions track to nearby targets.\n\nMagnetic Grenade, Spike Grenade, Voidwall Grenade, and Suppressor Grenade: Releases a short-range Void blast. Cooldown is reduced.\n\nGrants an additional grenade charge.",
+   "clarity": "Grants an additional Grenade Charge.\nHolding [Grenade] charges your grenade ability over the span of ? seconds and enhances it once thrown.\nEnhanced Behaviors:\n• Axion Bolt gains 2 additional seekers, travels ?% further, deals 25% increased damage, and retriggers again 1 second after landing\n• Scatter Grenade gains 4 additional submunitions, aggressively seeks targets within 5 meters, and deals 25% increased damage against Combatants\n• Vortex Grenade gains 70% increased radius, 7.5% increased duration, pulls targets in and begins its damage 0.2 seconds sooner, and continously retriggers its pull every ? seconds\n• Magnetic, Spike, Suppressor, and Voidwall Grenade become a 'Handheld Supernova' and release a short-range blast of 9 high damage projectiles. Projectiles travel up to 12.5 meters away and apply Volatile on hit. Passively grants 15% increased Grenade Regeneration Speed",
+   "compendium": "Scans up to ↑4 enemies within 12 meters. Axion Bolts travel ↑?% faster and deal 25% increased damage. Triggers again after 1 second of landing."
+  }
+ },
+ {
+  "id": "sub:childoftheoldgods",
+  "n": "Child of the Old Gods",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2321824287
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Cast your rift to create a Void Soul. When you damage a target with a weapon, your Void Soul flies to them and drains them, doing damage and weakening them. Combatants affected by the Soul are also briefly suppressed.\n\nWhen a target is being drained, you are granted grenade and melee energy (if running Healing Rift) or health (if running Empowering Rift).\n\nDefeating a target who is being drained by your Void Soul grants class ability energy.\n\nThe Void Soul's damage is scaled by the enhanced benefit of the Grenade stat.",
+   "clarity": "Casting your Rift grants a 'Void Soul' for 25 seconds.\nWeapon Hits send the Void Soul towards the target's location, projecting a 10 meter radius Weakening field upon arrival that lasts for 9.25 seconds. Void Soul continously deals damage and applies Weaken every 0.7 seconds. The Weaken lasts for 4 [2.5] seconds after its last application. For the first 4 [?] seconds of being tethered, targets are Suppressed as well.\nIf you have Healing Rift equipped, the Void Soul grants 4% Grenade and Melee Energy every other tick. If you have Empowering Rift equipped, the Void Soul grants 25 HP every other tick.\nDefeating targets within Void Soul's radius grant Class Ability Energy based on Combatant Tier:\n• Tier 1: 10%\n• Tier 2: 15%\n• Tier 3: 20%\n• Tier 4 or 5: 50%\n• Players: 33.3%\nVoid Soul counts as a Grenade Ability and is buffed by, and triggers, grenade-specific effects.",
+   "compendium": "On Rift Cast:\nGrants Void Soul Ready for 25 seconds. Can stack up to 2 Void Souls.\nScoring a Weapon Hit on an enemy launches the Void Buddy to fly towards them, projecting a Draining Field upon arriving.\nThe Draining Field deals 41 [10] Void Grenade Ability Damage and inflicts weaken for 4 [2.5] seconds every 0.7 seconds for up to 9.25 seconds to enemies within 10 meters. \nCombatants within the Draining Field are additionally suppressed.\nThe Void Friend has 150 HP and can be, unfortunately, destroyed. Has ?% Damage Resist until it is actively draining.\nGrants different bonuses while the Void Soul is dealing damage, depending on the selected Class Ability:\nHealing Rift: Grants 4% Grenade and Melee Energy every 1.4 seconds.\nEmpowering Rift: Restores 25 HP every 1.4 seconds.\nEnemies killed within its Draining Field grant Class Ability Energy based on their Enemy Rank:\nTier 1 Combatant = 10% | T2 = 15% | T3 = 20% | T4+ = 50% | Guardian = 33.4%"
+  }
+ },
+ {
+  "id": "sub:controlleddemolition",
+  "n": "Controlled Demolition",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   1602994568
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Hitting a target with a Void ability or Volatile explosion makes them volatile. Further damage to a volatile target causes them to explode. Grants you and nearby allies health when volatile targets explode near you.",
+   "clarity": "Dealing damage with a Void Ability or Volatile Detonation applies Volatile to the target for 10 [6] seconds.\nTriggering a Volatile Detonation heals you and allies within a 40 meter radius for 90 HP.\nHealing pulse incurs a 1? second cooldown between activations.",
+   "compendium": "Void Ability Damage inflicts Volatile.\nVolatile Explosions also count as Void Ability Damage.\nVolatile Explosions restore 90 HP to the user and allies within 40 meters of the user."
+  }
+ },
+ {
+  "id": "sub:echoofcessation",
+  "n": "Echo of Cessation",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3854948620
+  ],
+  "src": {
+   "bungie": "Finisher final blows create a burst of Void damage that causes nearby combatants to become volatile.\n\nDefeating volatile targets creates a Void Breach.",
+   "clarity": "Finishers make enemies within ? meters Volatile.\nKilling Volatile enemies spawns a Void Breach."
+  }
+ },
+ {
+  "id": "sub:echoofdilation",
+  "n": "Echo of Dilation",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984656
+  ],
+  "stats": {
+   "Weapons": 10,
+   "Super": 10
+  },
+  "src": {
+   "bungie": "While crouched, you sneak faster and gain enhanced radar resolution.",
+   "clarity": "Grants the following benefits while Crouching:\n• Doubles Radar Resolution (6🠚12 Sectors)\n• Prevents Crouch Speed from being decreased below 4 meters per second"
+  }
+ },
+ {
+  "id": "sub:echoofdomineering",
+  "n": "Echo of Domineering",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984657
+  ],
+  "stats": {
+   "Grenade": 10
+  },
+  "src": {
+   "bungie": "After suppressing a target, you gain increased weapon stat for a short duration, and your equipped weapon is reloaded from reserves.\n\nDefeating suppressed targets creates a Void Breach.",
+   "clarity": "Upon Suppressing an enemy:\n• Refills readied weapon from reserves\n• Grants 30 Weapons stat for 10 seconds\n• Increases Forward Movement Speed by 4% for 10s\n10 second cooldown between activations.\nKilling Suppressed enemies spawns a Void Breach."
+  }
+ },
+ {
+  "id": "sub:echoofexchange",
+  "n": "Echo of Exchange",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984667
+  ],
+  "stats": {
+   "Melee": 10
+  },
+  "src": {
+   "bungie": "Melee final blows grant grenade energy.",
+   "clarity": "Melee Kills grant Grenade Energy based on the Enemy Rank of the killed target:\n• Tier 1 (T1) Minors: 7.5%\n• T2 Minors, T1 Elites: 11%\n• T3 Minors, T2 Elites, and Players: 16.25%\n• T4 Minors, T3 Elites, and higher: 25%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website."
+  }
+ },
+ {
+  "id": "sub:echoofexpulsion",
+  "n": "Echo of Expulsion",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984665
+  ],
+  "stats": {
+   "Super": 10
+  },
+  "src": {
+   "bungie": "Void ability final blows cause targets to explode.",
+   "clarity": "Void Ability Kills cause enemies to explode, dealing up to 160 [130] damage in a 7 meter radius."
+  }
+ },
+ {
+  "id": "sub:echoofharvest",
+  "n": "Echo of Harvest",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2661180601
+  ],
+  "src": {
+   "bungie": "Defeating weakened targets creates an Orb of Power and a Void Breach.",
+   "clarity": "Killing Weakened enemies spawns a Void Breach and an Orb of Power that grants 2.5% Super Energy.\n10 second cooldown between activations."
+  }
+ },
+ {
+  "id": "sub:echoofinstability",
+  "n": "Echo of Instability",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2661180600
+  ],
+  "stats": {
+   "Melee": 10
+  },
+  "src": {
+   "bungie": "Defeating targets with grenades grants Volatile Rounds to your Void weapons.",
+   "clarity": "Grenade Kills grant you Volatile Rounds for 11 seconds, making Void Weapons apply Volatile on Hit. Does not require Void Grenade Kills.\n(Volatile explosions do not count as damage originating from your weapon)"
+  }
+ },
+ {
+  "id": "sub:echoofleeching",
+  "n": "Echo of Leeching",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984670
+  ],
+  "stats": {
+   "Health": 10
+  },
+  "src": {
+   "bungie": "Melee final blows start health regeneration for you and nearby allies.",
+   "clarity": "Melee Kills start Health Regeneration for you and allies within ? meters."
+  }
+ },
+ {
+  "id": "sub:echoofobscurity",
+  "n": "Echo of Obscurity",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2661180602
+  ],
+  "stats": {
+   "Class": 10
+  },
+  "src": {
+   "bungie": "Finisher final blows grant Invisibility.",
+   "clarity": "Finishers grant Void Invisibility for 5 seconds (7 with Echo of Peristence)."
+  }
+ },
+ {
+  "id": "sub:echoofpersistence",
+  "n": "Echo of Persistence",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984671
+  ],
+  "stats": {
+   "Class": -10,
+   "Weapons": -10,
+   "Health": -10
+  },
+  "src": {
+   "bungie": "Void buffs applied to you (Invisibility, Overshield, and Devour) have increased duration.",
+   "clarity": "Void Buffs applied to you last longer.\nDevour and Void Overshield: 50% increased duration\nInvisibility: 40% increased duration\nSpecific increases from Echo of Persistence for Void Buff sources can be found in their descriptions."
+  }
+ },
+ {
+  "id": "sub:echoofprovision",
+  "n": "Echo of Provision",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984664
+  ],
+  "stats": {
+   "Grenade": 10
+  },
+  "src": {
+   "bungie": "Damaging targets with grenades grants melee energy.",
+   "clarity": "Grenade Ability Damage grants Melee Energy once per Damage Instance.\n'Damage Over Time' grenades only provide Melee Energy once per damage tick regardless of the number of enemies damaged. Other grenades only grant Melee Energy once per submunition.\nMelee Energy granted per Damage Instance:\n• 3%: Void Spike, Void Wall, Scatter Grenade, and Vortex Grenade\n• 8%: Axion Bolt, Suppressor Grenade, and Magnetic Grenade (including when used with the Chaos Accelerant aspect)\nDoes not work with Unbreakable.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website."
+  }
+ },
+ {
+  "id": "sub:echoofremnants",
+  "n": "Echo of Remnants",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984666
+  ],
+  "src": {
+   "bungie": "Your lingering grenade effects (Vortex Grenade, Void Wall, Void Spike, and Axion Bolt) have increased duration.",
+   "clarity": "Improves lingering Void Grenade Abilities:\n• Axion Bolt: tracks enemies for ?% longer\n• Void Spike: lasts 40% longer and starts dealing damage 0.1 seconds earlier\n• Void Wall: lasts 60% longer\n• Vortex Grenade: lasts 25% longer (55% longer when overcharged by Chaos Accelerant) and starts dealing damage 0.13 seconds earlier"
+  }
+ },
+ {
+  "id": "sub:echoofreprisal",
+  "n": "Echo of Reprisal",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984669
+  ],
+  "src": {
+   "bungie": "Final blows when surrounded by combatants grant Super energy.",
+   "clarity": "Kills grant an additional Super Energy while surrounded by at least 3 enemies within 8 meters.\nGain 0.3%|0.65%|1%|1.6%|2.3% additional Super Energy per kill when surrounded by 3|4|5|6|7+ enemies.\n1 second cooldown between activations."
+  }
+ },
+ {
+  "id": "sub:echoofstarvation",
+  "n": "Echo of Starvation",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2661180603
+  ],
+  "stats": {
+   "Class": -10
+  },
+  "src": {
+   "bungie": "Picking up a Void Breach or an Orb of Power grants Devour.",
+   "clarity": "Picking up an Orb of Power or Void Breach grants Devour for 5 seconds (7.5 with Echo of Persistence)."
+  }
+ },
+ {
+  "id": "sub:echoofundermining",
+  "n": "Echo of Undermining",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2272984668
+  ],
+  "stats": {
+   "Grenade": -10
+  },
+  "src": {
+   "bungie": "Your Void grenades weaken targets.",
+   "clarity": "Void Grenades apply Weaken on hit for 6 [2.5] seconds."
+  }
+ },
+ {
+  "id": "sub:echoofvigilance",
+  "n": "Echo of Vigilance",
+  "kind": "fragments",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3854948621
+  ],
+  "src": {
+   "bungie": "Defeating a target while your shields are depleted grants you a temporary Void overshield.",
+   "clarity": "Killing an enemy while at Critical Health grants a 45 HP Void Overshield for 5 seconds (7.5 with Echo of Persistence).\n8 second cooldown between activations."
+  }
+ },
+ {
+  "id": "sub:feedthevoid",
+  "n": "Feed the Void",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2321824284,
+   790664815
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Defeat a target with a Void ability to activate Devour.\n\nYour Devour effects are improved, restoring additional health and grenade energy.",
+   "clarity": "Ability kills grant Devour for 10 seconds (15 with Echo of Persistence). (Prismatic Only: Kills with Shatter, Volatile Explosions, and Tangles also grant Devour).\nYour Devour is enhanced, granting twice as much HP (70HP🠚140 HP) and Grenade Ability Energy.\nKills while Devour is active add 5 seconds to the timer (8 with Echo of Persistence).\nEnhanced Devour Grenade Energy granted is based on Combatant Tier:\n• Tier 1: 15%\n• Tier 2: 23.2%\n• Tier 3: 27.5%\n• Tier 4 or Players: 40%",
+   "compendium": "Void Ability Kills grant Devour. \nDevour becomes Enhanced Devour.\nEnhanced Devour:\nRestores 140 HP on activation and grants Enhanced Devour for 10+5 seconds. Reactivating Enhanced Devour restores 140 HP and refreshes 5+3 seconds.\nScoring a kill while Enhanced Devour is active restores 140 HP, grants doubled Grenade Ability Energy, and refreshes 5+3 seconds of its duration.\nGrenade Ability Energy on Kill:\nTier 1 Combatant = 15% | T2 = 23.2% | T3 = 27.5% | T4 = 40% | Guardians = 40%"
+  }
+ },
+ {
+  "id": "sub:magneticgrenade",
+  "n": "Magnetic Grenade",
+  "kind": "grenade",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1547656727,
+   886607940
+  ],
+  "src": {
+   "bungie": "A grenade that attaches to targets and explodes twice.",
+   "compendium": "Light Trajectory | Slightly Homing | Sticky | Fast\nAttaches to enemies or surfaces, initially exploding after 1.2 seconds of being attached, followed by a secondary explosion after 0.6 seconds.\nEach explosion deals up to 472 [75] damage over 5 meters on detonation.\nDeals up to 946 [150] damage with both explosions."
+  }
+ },
+ {
+  "id": "sub:novabombcataclysm",
+  "n": "Nova Bomb: Cataclysm",
+  "kind": "super",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   1656118682,
+   1869939004
+  ],
+  "src": {
+   "bungie": "Hurl an explosive bolt of Void Light at a target, disintegrating those caught within its blast.\n\nNova Bomb travels slowly and seeks targets. Detonations shatter into smaller seeker projectiles.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [49%]\nReleases a slowly moving, tracking Nova Bomb that detonates on impact, or upon being detonated, dealing up to 3,241 [?] damage in a 12 meter radius.\nNova Bomb has 400 Construct HP. Caster deals 300% increased damage towards their own Nova Bomb.\nReleases 6 seekers on detonation, which slowly track enemies, each dealing up to 649 [?] damage in a ~4 meter radius.\nSeekers have 100 Construct HP.\nNova Bomb and its Seekers can be detonated mid-air by dealing damage towards it. Caster deals significantly more damage against it."
+  }
+ },
+ {
+  "id": "sub:novabombvortex",
+  "n": "Nova Bomb: Vortex",
+  "kind": "super",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   1656118681
+  ],
+  "src": {
+   "bungie": "Hurl an explosive bolt of Void Light at a target, disintegrating those caught within its blast.\n\nNova Bomb creates a singularity that pulls targets inward and continually damages those trapped inside."
+  }
+ },
+ {
+  "id": "sub:novawarp",
+  "n": "Nova Warp",
+  "kind": "super",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   1656118680
+  ],
+  "src": {
+   "bungie": "Step between dimensions to subvert the laws of physics.\n\n[Super Secondary]  : Teleport a short distance and release weakening seekers.\n\n[Super Primary]  : Unleash a deadly Void eruption. A fully charged attack makes targets volatile.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [58%]\nBase Duration: 24.5 seconds, or 4.1% Super Drain per second.\nLight Attack\nDrains 5% Super Energy.\nDeals up to 964 [200] damage, and inflicting Volatile in a 6 metre radius. Maximum Damage Falloff reduces damage by up to 50%.\nCan be charged by holding [Fire] for 0.6 seconds, pulling enemies within ~14 meters towards the user and linearly increasing its damage and radius by 120%.\nDecreases Movement Speed by ?% while charging.\nHeavy Attack / Sprint\nPerforms a Dark Blink, draining 3.5% Super Energy to rapidly accelerate towards the currently input direction and release 4 Weakening Seekers, one in each cardinal direction.\nWeakening Seekers target enemies within 8 meters, dealing 193 [?] Damage and inflicting Weaken on impact."
+  }
+ },
+ {
+  "id": "sub:offensivebulwark",
+  "n": "Offensive Bulwark",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   1602994570
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "While you have an Overshield or are inside Ward of Dawn, final blows grant grenade and melee energy, you have increased melee range and damage, and melee final blows restore a small portion of your Overshield and extend its duration.\n\nYou gain an additional Shield Throw while in Sentinel Shield.",
+   "clarity": "Grants an additional Shield Throw during your Sentinel Shield Super.\nWhile Void Overshield is active or inside Ward of Dawn:\n• Kills grant ?% Melee Ability Energy and ?% Grenade Ability Energy\n• 160% [20%] Increased Melee Damage\n• Increases Melee Lunge Range to 5.5 Meters\n• Melee Kills grant 10HP of Void Overshield\n• Unpowered Melees count as Void-Powered Melee Abilities (does not trigger Doomfang Pauldrons)",
+   "compendium": "Grants an additional Shield Throw to Sentinel Shield Super.\nWhile Void Overshield is active or while within a Ward of Dawn:\nKills grant 9% Grenade and 9% Melee Ability Energy.\n160% [20%] increased Melee Damage, and increases Melee Lunge Range to 5.5 metres.\nMelee Kills generate 10 HP Void Overshield.\nBasic Melee Hits count as Void Powered Melee Hits. \nDoes not count as Powered Melee for the effects of Doomfang Pauldrons and Severance Enclosure."
+  }
+ },
+ {
+  "id": "sub:ontheprowl",
+  "n": "On the Prowl",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   187655375
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Periodically marks a nearby combatant as a priority target for you and your team. Entering invisibility immediately marks a target.\n\nDefeating priority targets creates a weakening cloud of smoke that makes you and allies invisible when passing through it. \n\nWhen priority targets are defeated, you and nearby allies gain increased weapon reload speed and stability for a short duration and are granted grenade, melee, and class ability energy.",
+   "clarity": "Entering Void Invisibility, or going 12 seconds without having marked a combatant in PvE, marks a Non-Boss target within 45 [25] meters of you, prioritizing Minor combatants close to your reticle. Target remains marked indefinitely [15 seconds] until killed.\nDefeating the marked target triggers a Void Smoke explosion at their death location and grants one stack of 'Successful Hunt' for 7 seconds. Maximum of 3 stacks.\nSuccessful Hunt instantly grants ?% Grenade, Melee, and Class Ability energy upon being earned, and additionally provides ? Stability, ? Reload Speed, and ?% decreased Reload Animation Speed for its duration.\nVoid Smoke lasts for 7 seconds, deals damage over time, and can trigger melee-associated effects. Enemies within are Disoriented and Weakened, while allies that enter are granted Void Invisibility for 5 seconds (7 seconds with Echo of Persistence).",
+   "compendium": "Upon gaining Void Invisibility, or after 10 seconds of not having marked a Combatant:\nMarks [Highlights] a Non-Boss Enemy within 45 [25] meters as a Priority Target.\nGrants On The Prowl buff while a Priority Target is alive. Priority Target receives the Pursuit Predation debuff indefinitely [for 15 seconds].\nPrioritizes marking Rank-and-File Combatants closer to the reticle.\nUpon killing a Priority Target:\nReleases a weakening cloud of smoke on Enemy Death Location.\nGrants a stack of Succesful Hunt for ? seconds, up to a maximum of 3 stacks, as well as ?% Grenade, Melee, and Class Ability Energy.\nSuccesful Hunt x1 | +? Stability, +? Reload Speed, and 0.?x Reload Duration Multiplier\nSuccesful Hunt x2 | +? Stability, +? Reload Speed, and 0.?x Reload Duration Multiplier\nSuccesful Hunt x3 | +? Stability, +? Reload Speed, and 0.?x Reload Duration Multiplier\nCloud of smoke:\nInstantly deals up to 133 [?] Void Melee Damage over 5 meters.\nEnemies that come in contact with the smoke are weakened for 6? seconds and disoriented while inside the cloud. The user and allies gain Void Invisibility for 5+2 seconds.\nLingers for 7? seconds over ? meters, dealing scaling DoT every 0.6 seconds.\nDeals DoT after 0.87 seconds, starting at 12.65 [?] damage, increasing by ?% per tick, up to 24.8 [?] damage on the 9th tick, dealing up to ? [?] damage over 7 seconds.\nFunctionally, the cloud of smoke is a Snare Bomb that is instantly detonated, with a larger radius and duration. It even procs melee-related effects."
+  }
+ },
+ {
+  "id": "sub:phantomsurge",
+  "n": "Phantom Surge",
+  "kind": "melee",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   1139822080
+  ],
+  "src": {
+   "bungie": "Dash forward, slashing combatants as you pass through them. Deals significantly increased damage to Void-debuffed targets, or targets marked by On The Prowl.\n \nGenerate Void Overshield for each combatant hit. Defeating at least one combatant grants additional Overshield and refunds melee ability energy.",
+   "compendium": "Slashes forward up to 12 meters away, dealing 595 [?] Damage to enemies within 2 meters while phasing through them.\nGrants +10 Void Overshield per enemy hit.\nAgainst either Void-Debuffed Enemies OR On The Prowl's Marked Enemy:\nDamage is increased by 100% [?%].\nScoring a kill grants an additional +45 Void Overshield and refunds 60% Melee Ability Energy."
+  }
+ },
+ {
+  "id": "sub:pocketsingularity",
+  "n": "Pocket Singularity",
+  "kind": "melee",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2299867342,
+   3644045870
+  ],
+  "src": {
+   "bungie": "Launch an unstable ball of Void energy that detonates when it nears a target, pushing them away from the blast and making them volatile.  \n\nProvides multiple charges.",
+   "compendium": "Innately has 2 Melee Ability Charges.\nLaunches an unstable ball of Void Energy that lasts for 2 seconds.\nUsing Auto-Melee will consume a charge to perform a Melee Lunge. \nUsed this way, it will still inflict knockback and Volatile, but its damage will be reduced by 65% to 50%, with closer distances dealing less damage.\nSingularity homes in towards the closest enemy within 2? meters, exploding on contact.\nExplosion knocks enemies within 3.75 meters away from the blast, dealing 527 [60] damage and inflicting Volatile.\nGuardians hit by Pocket Singularity cannot perform Melee Lunges for 0.5 second, and interrupts active slides."
+  }
+ },
+ {
+  "id": "sub:scattergrenade",
+  "n": "Scatter Grenade",
+  "kind": "grenade",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1514173218
+  ],
+  "src": {
+   "bungie": "A grenade that splits into many submunitions and covers a large area with multiple explosions.",
+   "compendium": "Heavy Trajectory\nExplodes on impact, dealing 5 [1] damage and releasing 8 submunitions over 4 meters.\nSubmunitions explode twice, each dealing up to 70 [16] damage over 4 meters on their first explosion.\nAfter 0.5 seconds of exploding, each submunition detonates again, dealing up to 115 [20] damage over 4 meters on their second explosion.\nDeals up to 1,480 [288] damage with all 8 submunitions dealing their maximum damage."
+  }
+ },
+ {
+  "id": "sub:sentinelshield",
+  "n": "Sentinel Shield",
+  "kind": "super",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   4260353952
+  ],
+  "src": {
+   "bungie": "[Super]  : Summon a shield of Void Light. \nWhile Sentinel Shield is active:\n[Light Attack]  : Attack.\n[Block]  : Block.\n[Grenade]  : Perform a Shield Throw.\n\nGuard with Sentinel Shield to create a defensive wall that draws hostile fire. Allies behind the shield have increased survivability, weapon damage, and passive reload.\n\nGuarding allies and blocking damage makes the shield last longer and increases your Shield Throw damage.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [53%]\nBase Duration: 17 seconds or 5.88% Super Drain per second.\nLight Attack | Drains 4.5% Super Energy per Attack. The Final Hit in the combo drains 2% Super Energy.\nGrounded 3-Hit Combo, dealing 797 [?] and 856 [?] damage. \nAirborne 2-Hit Combo, dealing 797 [?] damage\nCombo Finisher deals 1,516 [?] damage in a ? metre cone.\nHeavy Attack\nGenerates an impenetrable barrier that allies can shoot through, at the cost of 20% Decreased Movement Speed.\nCaster is granted damage immunity from all frontal damage, including Enemy Guardians.\nEnemies that touch the barrier receive 7 [?] Damage every 0.05 seconds.\nBlocking ? [any] damage generates an Orb of Power that grants 2.5?% Super Energy. Incurs a 1.5 second cooldown between Orb of Power spawns.\nEnhances Shield Throw Damage as more damage is blocked or while allies are behind the barrier, up to 1787% increased damage.\nFully maxes damage after 14 seconds with 1 ally, scaling down to 7 seconds with 5 allies.\nExtends Super Duration by continuously blocking damage.\nGuardian Damage is completely nullified and do not proc on-hit related effects on the Impenetrable Barrier. \nAbility Damage removes Super Energy but partially extends it at the same time as it deals damage.\nAllies standing within 5m behind the barrier are granted 25% Increased Damage, a 45 HP Void Overshield, +50 Handling, and +50 Reload Speed. \nAdditionally, all of their weapons are refilled every 2.5 seconds.\nAllied Guardian's Void Overshield begins regenerating at a rate of 9HP/s after not receiving damage for 3 seconds.\nPassive Super Energy Drain while Blocking can be decreased by having allies behind the shield.\nx1 = 20% | x2 = 35% | x3 = ?% | x4 = ?% | x5 = 50%\nGrenade Ability | Does not drain Super Energy. Incurs a 3 second cooldown between Shield Throws.\nPerforms a Shield Throw, tossing the Sentinel Shield towards enemies.\nSentinel Shield deals 723 [?] damage, and can ricochet on impact, up to ? times. Ricochets are aimed towards enemies within ? meters."
+  }
+ },
+ {
+  "id": "sub:shadowshotdeadfall",
+  "n": "Shadowshot: Deadfall",
+  "kind": "super",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   2722573683,
+   2370269389
+  ],
+  "src": {
+   "bungie": "Tether foes to a Void Anchor, dramatically weakening and suppressing them for you and your allies.\n\nThe Void Anchors fired from Shadowshot pull targets toward the impact point, which then become traps and wait for prey. Void Anchors have increased range and last longer."
+  }
+ },
+ {
+  "id": "sub:shadowshotmoebiusquiver",
+  "n": "Shadowshot: Moebius Quiver",
+  "kind": "super",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   2722573681
+  ],
+  "src": {
+   "bungie": "Tether foes to a Void Anchor, dramatically weakening and suppressing them for you and your allies.\n\nFire two volleys of three Void Arrows that seek nearby targets. Shadowshot makes targets volatile and deals increased damage to tethered targets. Defeating tethered targets creates Orbs of Power.\n\nWhile the Super is active, dealing damage increases the damage of your Void Arrows and Bow weapons."
+  }
+ },
+ {
+  "id": "sub:shieldbash",
+  "n": "Shield Bash",
+  "kind": "melee",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   4220332375
+  ],
+  "src": {
+   "bungie": "After sprinting for a short time, use this melee ability to unleash a devastating Shield Bash that suppresses the target. Final blows with Shield Bash grant an Overshield.",
+   "compendium": "Shared with other Shoulder Charge Abilities:\nRequires sprinting for 1.25 seconds. Drains 15% Melee Ability Energy if no enemy is hit. Unable to use during slide if user shoots. \nGuardians directly hit by Shoulder Charge have their Melee Lunge disabled for 0.5 seconds\nLunges forward 6.8 meters, automatically targeting enemies in range.\nHitting an enemy deals 1,073 [110] impact damage, as well as dealing 391 [40] radial damage to enemies up to 7 meters behind the struck target.\nInflicts Suppression to enemies within 2 meters of the struck target.\nScoring a kill with Shield Bash grants 45 HP Void Overshield for 10+5 seconds."
+  }
+ },
+ {
+  "id": "sub:shieldthrow",
+  "n": "Shield Throw",
+  "kind": "melee",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   4220332374,
+   1980796560
+  ],
+  "src": {
+   "bungie": "Hurl your Void Shield toward a target. The shield can ricochet off targets and surfaces, granting Overshield for each target hit.",
+   "compendium": "Hurls a Void Shield forward. Ricochets up to 4 times per throw, attempts to home in towards enemies, and is affected by gravity.\nShield deals 400 [70] impact damage on hit, and grants 15 HP Void Overshield per hit."
+  }
+ },
+ {
+  "id": "sub:snarebomb",
+  "n": "Snare Bomb",
+  "kind": "melee",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   1139822081,
+   2657901007
+  ],
+  "src": {
+   "bungie": "Throw a Smoke Bomb that attaches to surfaces and pings enemy radar, then detonates into a disorienting smoke cloud, weakening nearby targets. Targets within the smoke cloud take damage over time.\n\nUpon deployment, makes nearby allies invisible.",
+   "compendium": "Smoke Bomb that attaches to surfaces for up to 9 seconds. Pings Enemy Radar while attached.\nSmoke Bombs grant Invisibility to allies within 6 meters of its impact for 5+2 seconds.\nBomb explodes upon detecting an enemy within ? meters of it, or upon directly striking an enemy, creating a cloud of smoke.\nSnare Bomb deals 33 [10] impact damage, and up to 120 + 24 [40 + ?] explosion damage over ? meters. Impact and explosion weaken and disorient for 8 [2.5] seconds.\nSmoke Cloud\nLasts for 5 [2] seconds on detonation, dealing DoT every 0.6 seconds and disorienting enemies.\nDeals DoT after 0.87 seconds, starting at 12.65 [?] damage, increasing by 13% per tick, up to 24.8 [?] damage on its last 9th tick, dealing up to 156.7 [?] damage over 5 seconds."
+  }
+ },
+ {
+  "id": "sub:soulsiphon",
+  "n": "Soul Siphon",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2321824286
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Ready this aspect by striking a foe with your powered melee ability.\n\nOnce readied, press your melee ability to begin siphoning energy from all combatants in front of you, dealing damage and gathering Overshield and class ability energy from each target.\n\nSoul Siphon's damage is scaled by the enhanced benefit of the Melee stat.",
+   "clarity": "Dealing damage with Pocket Singularity grants 'Soul Siphon Ready' for 20 seconds, replacing your melee ability with Soul Siphon.\n[Melee Input] while Soul Siphon is readied to tether up to four enemies within 20 meters in front of you, granting 15 HP of Void Overshield for 15 seconds (23 seconds with Echo of Persistence) per tick of damage.\nSoul Siphon deals 8 ticks of increasingly higher melee damage over 3.2 seconds and restores ?% Class Ability energy per tick.\nAt the end of the drain, Soul Siphon triggers a final burst of damage that staggers any surviving combatants.",
+   "compendium": "On Powered Melee Hit:\nReplaces Melee Ability with Soul Siphon for 20 seconds.\nOn Soul Siphon Usage:\nTethers up to 4 enemies within 20 meters, dealing increasingly higher Melee Damage Ticks every 0.2 seconds and pulling enemies towards the user over 3.2 seconds.\nThe final pull (after 0.6 seconds from the first tick) is guaranteed to stagger enemies.\nGrants +15 Void Overshield for 15+7.5 seconds and ?% Class Ability Energy per enemy per tick.\nWith Echo of Persistence equipped, the Overshield Duration cannot be refreshed to 22.5s unless it is ≤15 seconds.\nSoul Siphon Damage is slightly randomized but averages ~1,320 Melee Damage per cast per enemy.\n2 | 11 | 26 | 62 | 100 | 137 Ticks + 879 Finish\n? | ?? | ?? | ?? | ?? | ?? Ticks + ? Finish"
+  }
+ },
+ {
+  "id": "sub:spectralblades",
+  "n": "Spectral Blades",
+  "kind": "super",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   2722573682
+  ],
+  "src": {
+   "bungie": "Summon a pair of deadly Void blades and stalk the battlefield in a veil of shadows.\n\n[Light Attack]  : Perform a quick melee attack.\n\n[Heavy Attack]  : Perform a heavy attack that weakens your target, and once again vanish from sight.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [59?% Invisible | 58% Visible]\nBase Duration: 23.5 seconds or 4.25% Super Drain per second. Drains 50% faster if not invisible.\nLight Attack | Drains 5?% Super Energy.\nDeals 1,107 [?] damage and removes Void Invisibility.\nAttacks ? times per second. Uninterrupted hits against enemies grants up to 25?% Increased Melee Attack Speed\nHeavy Attack | Drains 15?% Super Energy.\n[Heavy Attack] performs an uppercut, dealing 1,620 [?] damage and applying Weaken and granting Invisibility.\nAllows unlimited Trapper's Ambush usage, at the cost of 15%? Super Energy."
+  }
+ },
+ {
+  "id": "sub:stylishexecutioner",
+  "n": "Stylish Executioner",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   187655374,
+   2835214900
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Defeating a weakened, suppressed, or volatile target grants Invisibility and Truesight.\n\nAfter performing a Stylish Execution, your next melee attack while invisible weakens targets.",
+   "clarity": "Defeating a Void-Debuffed (Prismatic Only: Any Elementally Debuffed) target grants Void Invisibility for 8 seconds (11 with Echo of Persistence) and Truesight for 4 seconds.\nActivating Stylish Executioner incurs a 2 [12] second cooldown.\nWhile under the effect of Void Invisibility granted by Stylish Executioner, gain the following benefits for 0.? seconds after leaving Invisibility:\n• 300% [20%] Increased Melee Damage\n• Melee applies Weaken for 5 [2] seconds\n• Melee Lunge Range is extended by ? meters\nPowered Melee Abilities may benefit from this effect if they deal damage within the exit window.",
+   "compendium": "Killing Void-Debuffed Enemies grants Invisibility for 8+3.2 seconds, and Truesight for 4 seconds.\nWhile invisible from activating Stylish Execution:\nMelee Attacks deal 300% [20%] increased damage, weaken enemies for 5 [2.5] seconds, and have their Melee Lunge Range extended to ? metres.\nApplies \"Too Stylish\" after Stylish Executioner is triggered, preventing additional Stylish Execution activations for 2 [12] seconds."
+  }
+ },
+ {
+  "id": "sub:suppressorgrenade",
+  "n": "Suppressor Grenade",
+  "kind": "grenade",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2265076177,
+   3923577992
+  ],
+  "src": {
+   "bungie": "An explosive grenade that suppresses, preventing targets from using abilities for a short time.",
+   "compendium": "Medium Trajectory\nExplodes after its speed is sufficiently reduced. Has a brief delay before it can explode.\nExplosion deals up to 863 [150] damage and inflicts Suppression for 10 [5] seconds over 9 meters on detonation.\nThe user is immune to self-suppression."
+  }
+ },
+ {
+  "id": "sub:trappersambush",
+  "n": "Trapper's Ambush",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   187655372
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Activate your air move to consume your class ability energy and dive to the ground, damaging targets on impact. Damage is greatly increased if striking while you have any Void status effect.\n\nDamaging opponents with this ability heals you. Defeating combatants with this ability grants Devour.\n\nThis ability's damage increases with your Class stat when your Class stat is 100 or higher.",
+   "clarity": "While Airborne with full Class Ability Energy, activate [Air Move] to consume your Class Ability and quickly slam to the ground, dealing damage to all enemies within a 6? meter radius. Deals 50% increased damage in a 33?% bigger radius if you have a Void Buff (Devour, Overshield, Invisibility) active.\nGrants 5 seconds (7 with Echo of Persistence) of Void Invisibility if cast while already Invisible.\nHits heal for ?HP, and kills grant Devour for 10 seconds (15 with Echo of Persistence).\nWhen paired Vanishing Step Aspect:\nTrapper's Ambush adopts its former functionality and drops a Void Smoke Cloud upon landing. Enemies hit by the detonation of the Smoke Cloud are Weakened for 10 [5] seconds, while allies are granted Void Invisibility for 6.5 seconds.\nTrapper's Ambush triggers the effects of your equipped dodge upon consumption. Damage scales up to 65% increased damage at 200 Class Stat.",
+   "compendium": "[Air Move] triggers Quickfall, consuming a Class Ability Charge.\nTriggers the effects of the equipped Class Ability on usage. Quickfall retriggers Invisibility if said buff is active.\nQuickfall:\nPerforms a slam, dealing up to 630 [71 Guardians | 700 Constructs] Void Damage over ? meters.\nDamage is increased by 50% while a Void Buff is active.\nRestores ? HP upon dealing damage.\nKills grant Devour for 10+5 seconds.\n–––––\nWhile Vanishing Step is also equipped:\nQuickfall inflicts disorient and weaken to enemies and grants invisibility to the user and allies within 10 meters.\nAspect's damage scales with Class Stat above 100, up to 65% [?%] at 200 Stat."
+  }
+ },
+ {
+  "id": "sub:twilightarsenal",
+  "n": "Twilight Arsenal",
+  "kind": "super",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   4260353955,
+   2529942646
+  ],
+  "src": {
+   "bungie": "[Super]  : Summon three Void axes and throw them at your foes one after another. On impact, the axes pull in nearby targets and detonate in a weakening explosion. After exploding, the axes can be picked up by you or your allies and used as a weapon for a short time.\n\nWhile carrying a Void axe:\n[Light Attack]  : Slash forward with your axe, dealing damage and weakening targets.\n[Heavy Attack]  : Throw the axe, consuming all remaining ammo.",
+   "compendium": "General Super Information\nDamage Resistance while in Cast Animation: ?% [%]\nSummons 3 Void Axes and throws them towards the reticle.\nAxes deal up to 1,250 [?] damage over ? meters on impact, pulling enemies inwards, and explode after 0.6 seconds, dealing up to 1,750 [?] damage and weakening over ? meters.\nAfter exploding, axes become carriable weapons, lingering up to 20 seconds on the ground.\nCarriable Axes:\nMelee Weapons with 10 Ammo that can be held for up to 15 seconds.\nLight Attack swings deal 581 [175] damage and weaken, consuming 1 Ammo.\nHeavy Attacks throws the axe as an explosive projectile, consuming all ammo, dealing 1,337 [?] damage on impact, and up to 830 [250] damage over ? meters with its explosion, weakening damaged enemies.\nAxe damage can only be increased through the Void Surge modifier and debuffs."
+  }
+ },
+ {
+  "id": "sub:unbreakable",
+  "n": "Unbreakable",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   1602994571,
+   1262901521
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "[Grenade]  : Hold to summon a [Void] Void shield that draws hostile fire and blocks a portion of incoming damage, gradually draining your grenade energy and granting an Overshield over time.\n\nReleasing the grenade input or running out of energy releases a frontal blast from your shield that disorients combatants and deals increased damage based on how much damage was blocked. Final blows with the frontal blast grant you Devour.\n\nCombatants that come in contact with your shield are temporarily disoriented.",
+   "clarity": "Base Grenade Cooldown is set to 152 seconds while equipped.\nHolding [Grenade] summons a frontal Void Shield that grants 95% [75%?] Damage Resistance against blocked shots. Combatants in front of you are taunted, and enemies that contact the shield become Disoriented.\nVoid Shield drains 50% your Grenade Energy over 1 second, then 25% per second after that, in exchange for continuously granting you ? HP Void Overshield every second. Void Overshield lasts for 5 seconds (7.5 with Echo of Persistence).\nBlocking damage reduces your movement speed by 50% for 0.5 seconds and grants ?% Grenade Energy per hit absorbed. Energy granted is reduced over time. If you have Sentinel Shield equipped, blocking damage also spawns an Orb of Power for your allies every 4.5 seconds.\nReleasing [Grenade] unleashes a blast of Void Energy 11? meters in front of you, consuming your Grenade Charge and dealing damage proportional to the amount of damage you blocked.\nKill with this blast grant Devour for ? seconds (? with Echo of Persistence).",
+   "compendium": "Hold [Grenade] to summon a Void Shield.\nOverrides Grenade Ability Cooldown to 152 seconds at base while equipped.\nVoid Shield:\nGrants 95?% [64%] Damage Resist against blocked damage, and taunts Combatants in front of the user. Combatants that come into contact with the shield become disoriented.\nGenerates 10 Void Overshield HP/s that lasts 5+2.5 seconds while draining 7.5% Grenade Energy/s.\nBlocking damage decreases Forward Movement Speed by 50?% for 0.5? seconds.\nBlocking damage grants Grenade Energy. Energy gains are progressively reduced (over time) OR (as Unbreakable gains damage)?, down to ?% Energy after ? seconds.\nVoid Shield has no Movement Speed Penalties, only restricting mantling. Sprinting cancels Void Shield.\nWhile Sentinel Shield Super Ability is equipped:\nGuarding against any damage spawns an Orb of Power that grants 2.5% Super Energy to allies.\nIncurs a 4.5 second cooldown between Orb of Power spawns.\nReleasing [Grenade] or running out of Grenade Energy releases a frontal blast, consuming 50% Grenade Energy and dealing damage up to 11 meters away.\nDeals a minimum of 430 [64?] Grenade Damage for not blocking any damage, scaling to 1584 [178?] damage after receiving a lot [?] blocked damage.\nUnbreakable Kills grant Devour for 10+5 seconds."
+  }
+ },
+ {
+  "id": "sub:vanishingstep",
+  "n": "Vanishing Step",
+  "kind": "aspects",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   187655373
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Dodging makes you invisible.",
+   "clarity": "Replaces your Dodge Animation with a longer range, faster traveling side-step that grants Void Invisibility for 5 seconds (7 with Echo of Persistence).\nThis aspects grants additional functionality to Trapper's Ambush upon casting the air move (see Trapper's Ambush description).",
+   "compendium": "Replaces Dodge Animation with a faster, farther traveling Dodge Animation that grants Invisibility for 5+2 seconds."
+  }
+ },
+ {
+  "id": "sub:voidspike",
+  "n": "Void Spike",
+  "kind": "grenade",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1255073825
+  ],
+  "src": {
+   "bungie": "A grenade that attaches to any surface and emits a torrent of damaging Void Light.",
+   "compendium": "Medium Trajectory | Wall-Mounted\nAttaches to surfaces and enemies, projecting a torrent of Void Light after 0.67-0.1 seconds.\nVoid Light deals 80 [28] damage every 0.217 seconds up to 16+9 times over 3.5+1.75 seconds.\nVoid Light deals up to 1,280 [2,000] [448 [700]] over its duration."
+  }
+ },
+ {
+  "id": "sub:voidwall",
+  "n": "Void Wall",
+  "kind": "grenade",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2809141585
+  ],
+  "src": {
+   "bungie": "A grenade that creates a horizontal wall of burning Void Light.",
+   "compendium": "Medium Trajectory | DoT Field\nExplodes on impact, creating a perpendicular wall of Void Light over ? meters that deals up to 173 [46] damage as it spreads.\nAfter 0.85 seconds of being created, Void Light deals 120 [35] damage every 0.2 seconds up to 18+9 times over its 3.75+1.875 second duration\nVoid Light deals up to 2,160 [3,240] [630 [945]] damage over its duration."
+  }
+ },
+ {
+  "id": "sub:vortexgrenade",
+  "n": "Vortex Grenade",
+  "kind": "grenade",
+  "el": "void",
+  "subclasses": [
+   "void",
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1016030582,
+   1048847436
+  ],
+  "src": {
+   "bungie": "A grenade that creates a Vortex that pulls targets inward and continually damages those trapped inside.",
+   "compendium": "Medium Trajectory | DoT Field\nDeals up to 195 [25] damage over 5 metres on impact, as well as creating a Void Vortex. \nVoid Vortex\nPulls enemies within 5? meters after 0.833 seconds of impacting.\nAfter 1.45-0.13 seconds of being created, deals 78 [20] damage every 0.267 seconds up to 12+7 times over its 4+1 second duration to enemies within its 4 meter radius.\nThe 13th 20th tick has falloff and deals up to 54 [?] damage.\nDeals up to 990 [1,536] [240 [380]] damage with the Void Vortex field."
+  }
+ },
+ {
+  "id": "sub:wardofdawn",
+  "n": "Ward of Dawn",
+  "kind": "super",
+  "el": "void",
+  "subclasses": [
+   "void"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   4260353953
+  ],
+  "src": {
+   "bungie": "Create a protective dome for you and your allies.\n\nWhile inside Ward of Dawn, allies gain Void overshield and increased weapon damage, while targets inside the Ward are weakened.\n\nThe Ward's owner also gains increased melee damage while inside and can pick up and throw the Ward's core to reposition the Ward up to two times.",
+   "compendium": "General Super Information\nDamage Resistance while in Cast Animation: ?% [26.5%]\nGrants 1 Grenade Ability Charge and creates 3 Orbs of Power that each grant 2.3% Super Energy on Super Cast.\nWard of Dawn:\nProjects a 8,000 Construct HP Protective Dome with 75??% NEEDS TESTING Damage Resistance against Combatants alongside an internal core with 200 HP.\nGuardians deal 50% increased damage to the Protective Dome itself. Ability Damage scales uniquely.\nProtective Dome covers an 8 meter radius centered around its internal core for 30 seconds. Destroying the core destroys the Ward of Dawn.\nThe Ward of Dawn prevents all projectiles from entering or leaving the dome unless an enemy is within it.\nWhile a Combatant is inside the dome: The caster and their allies are able to shoot through the dome.\nDeploying or redeploying the Ward of Dawn pulls Combatants within 15 meters inwards.\nSuper Stat scales its duration by up to +10 seconds at 200 Super Stat.\nWhile inside the Ward of Dawn Dome:\nWard of Dawn Caster receives +50% Increased Melee Damage. Scoring a Melee Kill as the Caster generates an Orb of Power up to 5 times per Super cast.\nEnemies are constantly weakened. Combatants up to ? meters away are taunted towards Guardians inside the dome.\nArmor of Light | Constantly generates 15 Void Overshield/s and grants 40% [?%] Damage Resist, +50 Handling, and +50 Reload Speed.\nWeapons of Light | 25% Damage Increase that lingers for 0.3 seconds. Helm of Saint-14 allows it to linger for 15 seconds.\nRedeployement:\nThe Ward of Dawn Core can be picked up by the caster after 3 seconds of being deployed, up to twice per cast. Swirling orbs represent the amount of pickups left.\nWhile picked up: Remaining Ward of Dawn duration is decreased by 1 second every (77 / Armor of Light seconds left on pickup).\nThe Core can be thrown to redeploy by the caster up to 2 times per cast."
+  }
+ }
+]

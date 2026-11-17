@@ -1,0 +1,89 @@
+{
+ "terms": {
+  "superdamage": {
+   "l": "Super damage buff",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "increased super damage"
+   ],
+   "def": "A temporary or conditional increase to your Super's damage.",
+   "q": "50% Increased Super Damage.",
+   "src": "xa:synthoceps"
+  },
+  "overshieldgeneric": {
+   "l": "Overshield",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "overshield",
+    "vengeance",
+    "shielded"
+   ],
+   "def": "An overshield that isn't the Void Overshield buff (e.g. from exotic armor); extra health on top of your shields.",
+   "q": "Killing the highlighted enemy grants Vengeance, which is a 95 HP Overshield, for 6 seconds.",
+   "src": "xa:oneeyedmask"
+  },
+  "shotgun": {
+   "l": "Shotgun",
+   "kind": "damage",
+   "el": "",
+   "aka": [
+    "shotguns",
+    "shotgun kills"
+   ],
+   "def": "Shotgun weapons; some pieces trigger on shotgun kills or boost shotgun damage.",
+   "q": "Shotgun and melee final blows start your health regeneration.",
+   "src": "xa:nobackupplans"
+  },
+  "submachinegun": {
+   "l": "Submachine Gun",
+   "kind": "damage",
+   "el": "",
+   "aka": [
+    "smg",
+    "smgs",
+    "submachine guns"
+   ],
+   "def": "Submachine Gun weapons; some pieces buff them or trigger on them.",
+   "q": "While wielding a Submachine Gun, handling, airborne effectiveness, and movement are all improved",
+   "src": "xa:peacekeepers"
+  },
+  "autorifle": {
+   "l": "Auto Rifle",
+   "kind": "damage",
+   "el": "",
+   "aka": [
+    "auto rifles"
+   ],
+   "def": "Auto Rifle weapons; some pieces buff them or trigger on their kills.",
+   "q": "Steadily reloads a portion of your equipped Auto Rifle or Machine Gun's magazine from reserves.",
+   "src": "xa:actiumwarrig"
+  },
+  "machinegun": {
+   "l": "Machine Gun",
+   "kind": "damage",
+   "el": "",
+   "aka": [
+    "machine guns",
+    "mg"
+   ],
+   "def": "Machine Gun weapons; some pieces buff them or trigger on their kills.",
+   "q": "Steadily reloads a portion of your equipped Auto Rifle or Machine Gun's magazine from reserves.",
+   "src": "xa:actiumwarrig"
+  },
+  "rocketlauncher": {
+   "l": "Rocket Launcher",
+   "kind": "damage",
+   "el": "",
+   "aka": [
+    "rocket launchers",
+    "rockets",
+    "micro-missiles"
+   ],
+   "def": "Rocket Launchers and other rocket/micro-missile weapons; some pieces boost their damage.",
+   "q": "Damaging targets with Exodus micro-missiles temporarily increases the damage you deal with other micro-missiles and Rocket Launchers.",
+   "src": "xa:hazardouspropulsion"
+  }
+ }
+}

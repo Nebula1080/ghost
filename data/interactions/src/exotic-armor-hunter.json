@@ -1,0 +1,1067 @@
+[
+ {
+  "id": "xa:assassinscowl",
+  "n": "Assassin's Cowl",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   2203146422
+  ],
+  "perks": [
+   {
+    "n": "Vanishing Execution",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Powered melee final blows grant invisibility and restore a portion of health and shields. Finishers and final blows against more powerful targets increase the duration of the invisibility and the amount of health and shields restored.",
+     "clarity": "Powered Melee Kills and Finishers grant Invisibility and restore 67 HP.\nInvisibility Duration is based on Enemy Rank:\n• Minors: 7 seconds\n• Elites, Enemy Players: 10 seconds\n• Minibosses and Bosses: 13 seconds\nThe duration of Invisibility granted by Finishers is 3 seconds longer. Echo of Persistence increases Invisibility duration by 41.5%.",
+     "compendium": "On Powered Melee Kill or Finisher:\nGrants Void Invisibility and restores 67 Health.\n(Finishers) increase the duration of the Void Invisibility by +3 seconds.\nInvisibility Duration \nMinor = 7 seconds (10)\nElite | Guardian = 10 seconds (13)\nMiniboss+ = 13 seconds (16)"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:athryssembrace",
+  "n": "Athrys's Embrace",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   89619507
+  ],
+  "perks": [
+   {
+    "n": "Skittering Stinger",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Weighted Knife gains a second bounce. Rapid precision hits with your weapons grant Weighted Knife a significant damage bonus, bonus melee, and the ability to stun unshielded combatants for a short time.\n\nEmpowered Weighted Knife is strong against [Stagger] Unstoppable Champions.",
+     "clarity": "Requires Weighted Throwing Knife to be equipped in order to function.\nGrants Weighted Throwing Knifes a second bounce with greatly increased tracking and velocity.\nScoring 3 Precision Hits within 2.5 seconds of each grants the 'Strengthened Throwing Knife' buff for 10 seconds. Precision Hits extend the buff duration by 5 seconds up to the maximum of 30 seconds.\nStrengthened Throwing Knife:\n• Grants 50 Strength while the buff is active\n• Deals 300% [100%] Increased Damage\n• Stuns Unstoppable Champions\n• Buff is consumed on Knife Hit",
+     "compendium": "While Weighted Throwing Knives are equipped:\nWeighted Throwing Knives gain a second bounce with greatly increased tracking.\nUpon scoring 3 Precision Hits within 2.5 seconds of each:\n Grants Strengthened Throwing Knife for 10 seconds.\nScoring additional Precision Hits extends the buff duration by 5 seconds, up to 30 seconds.\nStrengthened Throwing Knife:\n300% [100%] increased Weighted Throwing Knife damage and +50 Melee Stat while active.\nStuns Unstoppable Champions on hit.\n Buff is consumed on hit."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:balanceofpower",
+  "n": "Balance of Power",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   2340803152
+  ],
+  "perks": [
+   {
+    "n": "Double Down",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your Threaded Specter has increased duration and durability, and damaging it releases additional Threadlings. While near your Threaded Specter, you do not appear on radar.",
+     "clarity": "Decreases Class Ability Regeneration Speed by 50% for 19 seconds upon Class Ability usage.\nGrants the following to Threaded Specters:\n• 50% [25%] Damage Resistance (bypassed by damage from you)\n• 34% increased duration\n• 2 Perched Threadlings\nPerched Threadlings are released when the Specter takes 40 damage. Destroying the Specter releases both Threadlings.\nBeing within 15 meters of your own Specter grants the 'Hidden' buff which removes you from enemy radar.",
+     "compendium": "Enhances Threaded Specter\n Specter has 50% [25%] Damage Resist, 67% increased Duration, and 2 Perched Threadlings.\nPerched Threadlings are released when the Specter takes 40 damage.\nDestroying the Specter releases all Perched Threadlings.\nDamage Resist does not apply to damage from the user.\nBeing within 15 meters of the user's Threaded Specter removes the user from radar.\nSignified by the Hidden buff.\n0.5x Class Ability Regeneration Speed for 19 seconds upon Class Ability usage."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:blightranger",
+  "n": "Blight Ranger",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   863908533
+  ],
+  "perks": [
+   {
+    "n": "Voltaic Mirror",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Guarding with your Arc Staff does not consume extra Super energy. [Super]  : Cancel Arc Staff early, temporarily increasing Arc weapon damage and creating a blinding burst. Reflected attacks increase the damage of the burst, extend your Super, and deal additional damage.",
+     "clarity": "While in Arc Staff Super:\n• Blocking doesn't consume Super Energy\n• Reflected projectiles deal 400% increased damage\n• Reflecting projectiles refunds Super Energy\nArc Staff can be deactivated at any time to preserve a portion of unspent Super Energy: 75% refund at 100% Super Energy and linearly scaling down to a 50% refund at 0% Super Energy.\nOn Arc Staff deactivation:\n• Triggers a Blinding explosion in a 10 meter radius around you that deals 675 to 2700 [? to ?] damage with no falloff based the the number of projectiles reflected\n• Grants 4 Stacks of Arc Weapon Surge for 21 [16] seconds",
+     "compendium": "While in Arc Staff Super:\nBlocking doesn't consume any extra Super Energy.\nReflected Projectiles deal 400% increased damage. (10x base damage against Combatants)\nReflecting Projectiles grants ?% Super Energy.\nCan deactivate Arc Staff at any time to preserve a portion of unspent Super Energy.\nDeactivation refunds up to 75% of unspent Super Energy at 100% Super Energy, down to 50% of unspent Super Energy at 0% Super Energy.\nOn Arc Staff deactivation:\nTriggers an Arc Explosion, dealing scaling damage based on the amount of reflected projectiles and blinding enemies within 10 meters.\nDeals 675 [?] damage at base, up to 2,700 [?] damage after reflecting MANY projectiles.\nGrants x4 Arc Weapon Surge for 21 [16] seconds.\nBlinding Burst Damage has no falloff."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:calibanshand",
+  "n": "Caliban's Hand",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   327385975
+  ],
+  "perks": [
+   {
+    "n": "Roast 'Em",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your Proximity Knife scorches targets it damages with its explosions, or ignites targets on final blow.\n\nAfter throwing a Proximity Knife, you gain increased melee regeneration until the knife explodes. Gain a small amount of melee energy when your Scorch damages a target, and Ignition final blows fully refund melee energy and can overflow into an additional knife charge.",
+     "clarity": "Grants 625% Additional Base Melee Recharge Rate while Proximity Knife remains unexploded.\nProximity Explosive Knife applies 60 Scorch on detonation. (Unaffected by Ember of Ashes). Proximity Explosive Knife kills trigger an Ignition.\nIgnition kills (on any subclass) grant a full Melee Ability Charge. This can overflow into one additional Solar Knife charge (any knife) or one additional Withering Blade charge beyond capacity.\nOn Prismatic, this can overflow into two additional Knife Tricks or Withering Blades beyond capacity.\nScorch grants 7% Melee Ability Energy per tick. (Due to chunk ability scaling, this grants ~5% energy to Proximity Knife).",
+     "compendium": "Proximity Explosive Knife inflicts x60+0 Scorch on detonation. \nProximity Explosive Knife kills trigger an ignition.\n625%? Additional Base Melee Recharge Rate while Proximity Knife remains unexploded.\nScorch grants 7% [?%] Melee Ability Energy per tick.\nReminder that Proximity Knife has a 0.7x Chunk Scalar.\nIgnitions Kills grant a Melee Ability Charge.\nCan overflow up to +1 Melee Charges for Solar Knives and Withering Blades.\nWhile on Prismatic, can overflow up to +2 for Knife Trick and Withering Blades."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:celestialnighthawk",
+  "n": "Celestial Nighthawk",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   1321354573
+  ],
+  "perks": [
+   {
+    "n": "Hawkeye Hack",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Precision final blows reduce the cooldown of your Super. Modifies Golden Gun to fire a single, high-damage shot. Targets defeated by that shot give you Super energy and explode.",
+     "clarity": "Modifies Golden Gun to only fire a single shot that deals 650% increased damage and triggers an immediate Ignition.\nThe triggered Ignition overrides base Scorch sources and solely benefits from damage increases to the Golden Gun.\n(A Celestial Nighthawk Precision Hit is ~85% more damage compared to 3 Precision Hits with Marksman Golden Gun. Also, please only use it with Marksman Golden Gun in PvE)\nScoring a Golden Gun Kill refunds 33% Super Energy and causes the enemy to explode, dealing up to 400 [?] damage in a ? meter radius.\nPrecision Kills grant 1.5-4.5% Super Energy depending on Enemy Rank.\nGolden Gun no longer receives faster active super generation as a roaming-class super.",
+     "compendium": "Replaces Golden Gun with a modified single high-damage shot version.\nGolden Gun Supers no longer receive Roaming Super Ability Regeneration.\nModified Golden Gun:\nDeals 12,984 [?] Damage with a 2x Precision Multiplier. Triggers an ignition on hit.\nIgnition damage overrides other sources, always dealing 10% increased damage.\n(85% more damage on Precision Hit compared to 3 Precision Hits+Ignition from Base Marksman Golden Gun).\nOn Golden Gun Kill:\nRefunds 33% Super Energy \nEnemy explodes, dealing up to 400 [?] Damage to enemies within ? metres.\nOn Precision Kill:\nGrants additional Golden Gun Super Energy, ranging between 1.5% to 4.5%.\n Actual amount varies by Enemy Rank."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:cyrtarachnesfacade",
+  "n": "Cyrtarachne's Facade",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   192896783
+  ],
+  "perks": [
+   {
+    "n": "Acrobat's Focus",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Activating Grapple grants Woven Mail. While active, Woven Mail provides flinch resistance and health when defeating targets.",
+     "clarity": "Using a Grapple grants Woven Mail for 10 seconds and restores 7 HP.\nWoven Mail grants %? Flinch Resistance and kills with it active restore 17 HP.",
+     "compendium": "Upon Grappling:\nGrants Woven Mail for 10 seconds.\nRestores 7 HP.\nWhile Woven Mail is active:\n?% Flinch Resistance.\nKills restore 17 HP."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:foetracer",
+  "n": "Foetracer",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   671504994
+  ],
+  "perks": [
+   {
+    "n": "Relentless Tracker",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Damaging a powerful combatant or Guardian with an ability temporarily increases weapon damage of the same type. Defeating that marked target with damage that matches the element creates an Elemental pickup.",
+     "clarity": "Dealing ability damage to unhighlighted Elite, Miniboss, Boss, or Player targets highlights them for 10 seconds and grants 4 Stacks of Weapon Surge matching the element of the used ability for 16 [11] seconds.\nHighlight duration is not refreshable.\nKilling highlighted targets with weapons matching the element of the highlighting ability spawns an Elemental Pickup corresponding to the element in question.\nElemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.",
+     "compendium": "Upon dealing Ability Damage to an Elite, Miniboss, Champion, Boss, or Guardian: \nGrants x4 Ability Element-Matching Weapon Surge and highlights the enemy for 16 [11] seconds.\nBuff is not refreshable.\nKilling highlighted enemies spawns a Subclass-Matching Elemental Pickup."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:fortunesfavor",
+  "n": "Fortune's Favor",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   4010324161
+  ],
+  "perks": [
+   {
+    "n": "Kismet",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "After landing a final blow while at full health, or when out of combat for an extended duration, your shields will slowly recharge into an overshield. \n\nWhen you have an overshield, your weapons gain increased accuracy, stability, handling, and damage against combatants, and final blows will grant a short period of increased mobility once the overshield is depleted.",
+     "clarity": "While at Full HP, scoring a Weapon Kill or not taking damage for 4.5 [15] seconds continuously generates 6.6 [1.1] Void Overshield HP per second until you take damage again.\nGrants the following while any Overshield is active:\n• 15% increased weapon damage against Combatants (20% for Heat-Based weapons)\n• 25 Stability\n• 25 Handling\n• 5% Decreased Accuracy Cone Size\nDamage bonus stacks with other Empowering weapon buffs.\nWhile any Overshield is active, scoring a kill enables 'Hasty Escape'. Hasty Escape activates upon the depletion of your Overshield, granting 30 Mobility for 5 seconds.",
+     "compendium": "While at Full Health | Upon scoring a kill, or upon being not receiving damage for 4.5 [15] seconds:\nGrants 6.6 [1.1] Void Overshield HP per second until taking damage again.\nContinuously refreshes Overshield duration.\nWhile any kind of Overshield is active:\n+25 Stability, +25? Handling, and -5% Accuracy Cone Size.\nWeapons receive 15% increased damage against Combatants.\nHeat Weapons are instead granted 20% increased damage against Combatants.\nDamage buff stacks with everything.\nScoring a kill while an Overshield is active prepares Hasty Escape.\nHasty Escape grants +30? Mobility for 5 seconds when Overshield is depleted."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:fr0stee5",
+  "n": "Fr0st-EE5",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   574694189
+  ],
+  "perks": [
+   {
+    "n": "Rapid Cooldown",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases grenade, melee, and dodge regeneration while sprinting.\n\nGain stacks of Frost Armor while sprinting. When you have Frost Armor, Stasis weapons deal additional damage.",
+     "clarity": "Class Ability usage grants 6.25% increased Sprint Speed for 10 seconds. Duration is not refreshable.\nSprinting grants the following benefits:\n• 1 stack of Frost Armor every 3 [6] seconds\n• 100% [200%] Additional Base Class Ability Regeneration Rate\n• Doubled [100% Additional] Base Grenade and Melee Ability Regeneration Rate\nFor as long as Frost Armor is active, you are granted x3 [x1] Stasis Weapon Surge.\nMultiplicative Ability Regeneration Rate increase in PVE is applied after all additive Ability Regeneration Rate modifiers.",
+     "compendium": "While Sprinting: \n2x Grenade and Melee Regeneration Speed | 100% Additional Base Grenade/Melee Regeneration Rate\n100% [200%] Additional Base Class Ability Regeneration Rate.\nGrants a stack of Frost Armor every 3 [6] seconds.\nCannot stack beyond x1 Frost Armor without Whisper of Rime in PvP.\nWhile Frost Armor is active:\nx3 [x1] Stasis Weapon Surge."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:geminijester",
+  "n": "Gemini Jester",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   1163283805
+  ],
+  "perks": [
+   {
+    "n": "Misdirection",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Dodging disorients nearby enemies and temporarily removes their radar.",
+     "clarity": "Class Ability usage applies Misdirection to enemies within 10 [22] meters.\nMisdirection:\n• Deals ~0 damage but counts as a Hit\n• PVE: Disorients Minors and Elites for 5 seconds\n• PVP: briefly distorts audio, Disorients, and disables Radar for 5 seconds",
+     "compendium": "On Class Ability Usage:\nInflicts Misdirection to enemies within 10 metres.\n Misdirection:\nRank-and-File and Elite Combatants become disoriented for 5 seconds.\n Audio becomes briefly distorted, briefly applies disorient, and radar is removed for 5 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:giftedconviction",
+  "n": "Gifted Conviction",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1446374842
+  ],
+  "perks": [
+   {
+    "n": "The Gift of Certainty",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Activating Ascension or Tempest Strike throws bouncing explosives at nearby targets that jolt and damage them. Jolting nearby targets grants you damage resistance.",
+     "clarity": "Casting Ascension or Tempest Strike releases 3 tracking Arc Projectiles that each deal up to 200 [40] Arc damage and apply Jolt on Hit.\nApplying Jolt to enemies within 15? meters grants you a Damage Resist buff for 10 seconds that can stack 3 times.\nDamage Resist granted with 1|2|3 Jolt applications (Resist x2|x3|x4):\n25% [5%] | 40% [7.5%] | 50% [10%]\nApplying Jolt to multiple targets with a single activation of a Jolt source still only counts as a single application.",
+     "compendium": "Upon using Ascension or Tempest Strike:\nReleases 3 tracking Arc projectiles forward.\nArc Projectiles deal up to 200 [40] damage and inflict jolt.\nArc Projectiles count towards Sword on-hit effects while a Sword is readied.\nUpon inflicting Jolt to enemies within 15? meters:\nGrants a stack of Resist for 10 seconds, up to a maximum of 4 stacks.\nAdditional Jolt Applications to enemies within 15? meters refreshes the buff duration.\nDamage Resist Scaling:\n1 Jolt Applications = 25% [5%] Damage Resist (Resist x2)\n2 Jolt Applications = 40% [7.5%] Damage Resist (Resist x3)\n3 Jolt Applications = 50% [10%] Damage Resist (Resist x4)"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:gravitonforfeit",
+  "n": "Graviton Forfeit",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   407148246
+  ],
+  "perks": [
+   {
+    "n": "Vanishing Shadow",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases the duration of any invisibility effects. When you gain invisibility, your grenade, melee and class abilities recharge faster. At maximum stacks, you gain a Void Overshield as well.",
+     "clarity": "Void Invisibility lasts 2 seconds longer.\nEntering Void Invisibility grants one stack of “Vanishing Shadow” for 7 seconds. Vanishing Shadow's timer does not decrease while Invisibile. Vanishing Shadow stacks up to 3 times. Additional stacks can only be gained after exiting Invisibility.\nEach stack of Vanishing Shadow grants improved base ability regeneration rate at 1|2|3 stacks.\n• Class Ability: 67%|133%|200%\n• Grenade: 166%|333%|500%\n• Melee: 166%|333%|500%\nReaching Vanishing Shadow x3 or gaining Void Invisibility while at Vanishing Shadow x3 grants you a 15HP Void Overshield for 7 seconds (10 seconds with Echo of Persistence).",
+     "compendium": "Void Invisibility effects last 2 seconds longer.\nUpon gaining Void Invisibility:\nGrants Vanishing Shadow for 7 seconds, up to a maximum of 3 stacks.\nVanishing Shadow duration does not decrease while Invisible.\nx1 = 166.6% Additional Base Grenade and Melee, and 67% Class Ability Regeneration Rate.\nx2 = 333.3% Additional Base Grenade and Melee, and 134% Class Ability Regeneration Rate.\nx3 = 500% Additional Base Grenade and Melee, and 200% Class Ability Regeneration Rate.\nUpon reaching x3 Vanishing Shadow or gaining Void Invisibility while at x3 Vanishing Shadow:\n+15 Void Overshield HP for 7+3? seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:gwisinvest",
+  "n": "Gwisin Vest",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1168370783
+  ],
+  "perks": [
+   {
+    "n": "Roving Assassin",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Each Spectral Blades hit or final blow you make before becoming invisible will restore more of your Super energy.\n\nExiting invisibility while near a target creates a cloud of weakening smoke around you.",
+     "clarity": "Leaving Void Invisibility while within 15 meters of an enemy releases a cloud of smoke that lasts 7 seconds and Weakens enemies. 5 second cooldown between uses.\nWhile in Spectral Blades:\nRefunds Super Energy on Heavy Attack based on the number of Spectral Blade Hits and Kills scored before doing so.",
+     "compendium": "Upon Void Invisibility ending, while within 15 meters of an enemy:\nTriggers a Snare Bomb on the user.\nIncurs a 5 second cooldown between activations.\nDoes not interact with Trapper's Ambush.\nWhile in Spectral Blades:\nRestores Super Energy on Heavy Attack based on the amount of Spectral Blade Kills and Hits.\nSuper Energy % Extension gains based on hits and kills\n?%\n?%"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:gyrfalconshauberk",
+  "n": "Gyrfalcon's Hauberk",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   461841403
+  ],
+  "perks": [
+   {
+    "n": "See Me, Feel Me",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your Void weapons gain Volatile Rounds after you emerge from being invisible. When you are invisible and defeat a combatant while using a finisher, all of your weapons gain bonus damage; you and your nearby allies gain a reserve overshield and improved class ability regeneration. These reserve overshields can be deployed by using a class ability.",
+     "clarity": "Grants Volatile Rounds for 9 [3] seconds upon exiting Void Invisibility, making hits with Void Weapons apply Volatile.\nOn Finishers while affected by Void Invisibility:\n• Grants a 35% Weapon Damage Empowering Buff for 6 seconds\n• Grants you and allies within 24 meters the Reserve Overshield buff\nReserve Overshield:\n• Grants 500% Additional Base Class Ability Regeneration Rate\n• Consumed on Class Ability usage, granting the user a 40 HP Void Overshield for 10 seconds\n(Letting the timer run out with Echo of Persistence equipped will not grant you Volatile Rounds. Volatile explosions do not count as damage originating from your weapon.)",
+     "compendium": "Upon Void Invisibility ending:\nVolatile Rounds for 9 [3] seconds.\nUpon performing a Finisher while affected by Void Invisibility:\n35% increased damage for 6 seconds. Doesn't stack with Empowering Buffs.\nThe user and their allies within 24 metres receive a Reserve Overshield \nReserve Overshield:\n500% Additional Base Class Ability Regeneration Rate until Class Ability Usage.\nConsumed on Class Ability Usage, granting a 40 HP Void Overshield for 10 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:kheprissting",
+  "n": "Khepri's Sting",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   146629029
+  ],
+  "perks": [
+   {
+    "n": "Touch of Venom",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Defeating a weakened target releases a burst of weakening smoke and refunds Void melee ability energy.",
+     "clarity": "Requires a Void Melee to be equipped in order to function.\nKilling Weakened enemies grants 30% Void Melee Energy and releases a Weakening puff of Void Smoke at their location.\nVoid Smoke is functionally identical to Smoke Bomb and triggers melee-associated effects.",
+     "compendium": "Upon killing a Weakened Enemy while a Void Melee Ability is equipped:\nReleases a weakening cloud of smoke on Enemy Death Location.\nGrants 30% Void Melee Ability Energy.\nFunctionally, the cloud of smoke is a Snare Bomb that is instantly detonated."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:knuckleheadradar",
+  "n": "Knucklehead Radar",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   1321354572
+  ],
+  "perks": [
+   {
+    "n": "Upgraded Sensor Pack",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Provides radar while you're aiming. Enhances your radar resolution while crouched. Visually marks targets. Deals more damage to low-health marked targets. Provides a small benefit to the airborne effectiveness stat of all weapons.",
+     "clarity": "Passively grants 20 Airborne Effectiveness and Radar remains active while Aiming Down Sights.\nCrouching grants Enhanced Radar (6⁠🠚⁠12 sectors).\nDamaging a PVE Combatant or breaking a Player's Shields marks them for 3 seconds. Marks are visible through walls.\nIf an Enemy is below 30% Health:\nIncreases all outgoing damage against them by 1% for every percentage point below 30%.\n(10% Health left 🠚 20% increased damage)\nPVE Combatant and Player Shields do not count as Health.",
+     "compendium": "Passively grants +20 Airborne Effectiveness and radar remains active while ADS.\nWhile crouched: \nGrants Enhanced Radar.\n (Has 12 sectors instead of 6)\nUpon dealing damage to a Combatant, or upon breaking a Guardian's Shield:\nMarks enemies for 3 seconds.\nMark persists through walls.\nIf Enemy is below 30% Health: \n1% increased Weapon and Ability Damage per percent below 30%.\n10% HP left -> 20% Increased Damage. Shields do not count as Health."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:liarshandshake",
+  "n": "Liar's Handshake",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   2749457084
+  ],
+  "perks": [
+   {
+    "n": "Cross Counter",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Using your Arc melee ability or being hit by a melee attack will allow you to follow up with an extremely powerful melee counterpunch that will heal you.",
+     "clarity": "While you have an Arc Melee Ability equipped:\nReceiving Melee damage or scoring an Arc Elemental Melee Hit grants the 'Cross Counter' buff for your next Melee Attack within 3 seconds.\nCross Counter grants 400% additional base Melee damage and restores 40 HP on Melee Hits. Cross Counter's Melee deals Arc Damage.",
+     "compendium": "While an Arc Melee is equipped:\nReceiving Melee Damage, or scoring a Powered Melee Hit grants Cross Counter for the next Melee Hit within 3 seconds.\nCross Counter grants 400% increased Melee Damage and restores 40 HP on Melee Hit.\nCross Counter's Melee deals Arc Damage."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:luckypants",
+  "n": "Lucky Pants",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   193869522
+  ],
+  "perks": [
+   {
+    "n": "Illegally Modded Holster",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Improves sprint, slide, and airborne effectiveness while a Hand Cannon is equipped. For a short time after being drawn, Hand Cannons ready faster, are more accurate, and each hit against a combatant increases Hand Cannon damage.",
+     "clarity": "Passively grants the following benefits while a Hand Cannon is readied:\n• 20 Airborne Effectiveness\n• 6.25% increased Sprint Speed\n• 33% increased Slide Distance\nReadying a Hand Cannon grants 'Illegally Modded Holster' for 6 seconds (for the PVE-only benefits of the perk, consider this the 0th Stack).\n'Illegally Modded Holster' grants the following benefits to Hand Cannons:\n• 100 Ready Speed Handling\n• 0.6x Ready Animation Duration Multiplier\n• 30% decreased Accuracy Cone Size\n• PVE ONLY: Direct Hits grant a Stack of 'Illegally Modded Holster'. Maximum of 10 Stacks.\n'Illegally Modded Holster' grants 45% increased Direct Impact damage per Stack, maxing out at 450%. Boss-Tier Enemies take 33% decreased damage from Lucky Pants shots.\n• Uncivil Discourse only recieves 30% increased damage per stack.\n• Sturm's Overcharged Rounds only receive 11% increased damage per Stack (110%).\n• Hawkmoon's Paracausal Shot receives 5% increased damage per stack upon being fired (50%).\n• Malfeasance's Explosive Shadow is unaffected by the buff.\nWhile at 'Illegally Modded Holster x7' or higher:\nSwapping to a non-Hand Cannon weapon or the buff expiring grants you the 'Out of Luck' debuff. 'Out of Luck' prevents you from reacquiring 'Illegally Modded Holster' for 10 seconds.",
+     "compendium": "While a Hand Cannon is readied:\n +20 Airborne Effectiveness, and increases Slide Distance from 6.5m to 8.5m.\nUpon readying a Hand Cannon:\nGrants Illegally Modded Holster for 6 seconds.\nDirect Hits against Combatants grant stacks of Illegally Modded Holster, up to a maximum of 10 stacks.\nIllegally Modded Holster is removed upon readying a non-Hand Cannon.\nIllegally Modded Holster:\n+100 Ready Speed Handling, 0.6x Ready Duration Multiplier, and -30% Accuracy Cone Size.\n45% increased Direct Impact damage against Combatants per stack, up to 450% at 10 stacks.\nUncivil Discourse receives 30% increased Direct Impact Damage per stack.\nSturm's Overcharged Rounds, Hawkmoon's Paracausal Shot, and all other non-direct damage is not increased.\nBosses take 33% decreased damage from Lucky Pants buffed shots.\nAfter Illegally Modded Holster expires, or upon stowing, if Illegally Modded Holster stacks were at x7 or higher:\nApplies Out of Luck for 10 seconds, preventing Illegally Modded Holster from being activated."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:luckyraspberry",
+  "n": "Lucky Raspberry",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   419976111
+  ],
+  "perks": [
+   {
+    "n": "Probability Matrix",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Arcbolt Grenades have increased chaining capabilities and jolt targets hit. Damaging combatants with jolt or applying jolt to targets grants additional Arcbolt Grenade energy.",
+     "clarity": "Arcbolt Grenades Jolt and Disrupt targets on hit and can chain an additional time (4🠚5).\nApplying Jolt or triggering a Jolt chain grant 15% and 7.5% Arcbolt Grenade energy, respectively. (Due to the nature of Jolt, these events can often happen simultaneously)\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Arcbolt Grenades are now able to chain an additional time, damaging up to 5 enemies.\nArcbolt Grenades inflict Jolt to the first target hit.\nUpon inflicting Jolt:\nGrants 15% Arcbolt Grenade Ability Energy. \nUpon triggering Jolt chain damage:\nGrants 7.5% Arcbolt Grenade Ability Energy."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:maskofbakris",
+  "n": "Mask of Bakris",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   508515818
+  ],
+  "perks": [
+   {
+    "n": "Light Shift",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While you have a Stasis or Arc Super equipped, your Dodge becomes a longer range, faster moving shift that partially cloaks you during use. After shifting, your Stasis and Arc weapons gain a stacking damage bonus for a short time. Final blows with this bonus active refund class ability energy.",
+     "clarity": "Replaces Dodge with Shift if you have a Stasis or Arc Super equipped (does not work with Acrobat's Dodge), and overrides base cooldown to that of Marksman's Dodge.\nShift effectively acts as a fast horizontal teleport with a travel distance of 10 meters. Shift renders you completely invisible (except for a trail) and invulnerable for the duration of the animation.\nCasting Shift grants one stack of 'Light Shift' for 11 seconds. Maximum of 3 stacks.\nLight Shift grants 10%|21%|33% increased Arc, Stasis, and Lord of Wolves Weapon Damage at 1|2|3 Stacks.\nLight Shift additionally grants 10% increased Weapon Damage against Stasis-debuffed enemies.\nLight Shift's buff stacks with all other buff sources.\nPassive Class Ability regeneration is disabled for the duration of Light Shift. Instead, Weapon Kills grant 60% Class Ability Energy while Light Shift is active.",
+     "compendium": "While an Arc or Stasis Super Ability is equipped:\nReplaces Dodge with Shift.\nDoes not replace Acrobat's Dodge. Overrides Cooldown and Chunk Scalar to Marksman's Dodge.\nOn Class Ability Usage:\nPerforms a quick shift that moves the user up to 12 meters away, rendering them invisible and invulnerable for the duration of the shift.\nGrants a stack of Light Shift for 11 seconds, up to a maximum of 3 stacks.\nLight Shift:\nx1 = 10% | x2 = 21% | x3 = 33% increased Arc, Stasis, and Lord of Wolves Weapon Damage.\n 10% Increased Weapon Damage against Stasis Debuffed Enemies.\nWeapon Kills grant 60% Class Ability Energy while active.\nDamage buffs stack with other buffs. Does not buff Riskrunner or Trinity Ghoul Chain Lightning."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:maskoffealty",
+  "n": "Mask of Fealty",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   322173891
+  ],
+  "perks": [
+   {
+    "n": "Null Factor",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Withering Blade hits and bounces create a small Stasis crystal and refund a portion of melee energy. Using Withering Blade to shatter crystals or frozen targets releases a spread of Withering Blades.",
+     "clarity": "Withering Blade hits and bounces grant 7.5% Melee Ability Energy. Additionally, the 1st and 3rd bounces spawn a Small Stasis Crystal.\nShattering a Stasis Crystal or Frozen Enemy with Withering Blade releases a spread of 3 Withering Blades.\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "On Withering Blade hits and bounces:\nSpawns a Small Stasis Crystal on the 1st and 3rd bounce.\nGrants 7.5% Fixed Melee Ability Energy.\nUpon shattering a Stasis Crystal with a Withering Blade:\nReleases 3 Stasis Projectiles spread out 120° near the Stasis Crystal.\nStasis Projectiles spawn a Small Crystal on impact."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:mechaneerstricksleeves",
+  "n": "Mechaneer's Tricksleeves",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1734144409
+  ],
+  "perks": [
+   {
+    "n": "Spring-Loaded Mounting",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases Sidearm airborne effectiveness, ready speed, and reload speed. While you're critically wounded, swapping to a Sidearm reloads it and increases its damage. While this effect is active, Sidearm final blows reload the weapon and extend the effect's duration.",
+     "clarity": "Passively grants 50 Airborne Effectiveness, 100 Handling and 100 Reload Speed to Sidearms.\nUpon readying a Sidearm while at Critical Health:\n• Refills the Magazine of the Sidearm from reserves\n• Grants 100% [10%] increased damage until your shield are fully recharged, after which it has a 5 second duration\nSidearm Kills extend the buff duration by 3 seconds (capped at 5 seconds) and refill your Magazine from reserves.",
+     "compendium": "Passively grants +50 Airborne Effectiveness, +100 Handling and +100 Reload Speed to Sidearms.\nUpon readying a sidearm while at Critical Health:\nGrants Damage Buff and refills Sidearm ammo.\nDamage Buff:\nGrants 100% [10%] increased Sidearm damage.\nSidearm Kills refill Magazine.\nDamage Buff has no timer while at Critical Health. \nDamage Buff has a 5 second timer upon Shields recovering.\nSidearm Kills refresh 3 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:moirai",
+  "n": "Moirai",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   2647299044
+  ],
+  "perks": [
+   {
+    "n": "Webcatcher",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Threaded Spike can bounce to Tangles, detonating them and returning immediately. Tangles detonated by Threaded Spike are rewoven and retrieved by it. Catches without a Tangle refund extra melee energy.",
+     "clarity": "Threaded Spike can now target and bounce to Tangles, detonating them on impact and immediately returning to the user.\nCatching the Threaded Spike after it detonates a Tangle equips you with a second throwable Tangle. Alternatively, failing to catch the Threaded Spike triggers a 9 meter Strand Detonation around you, dealing 727 [?] damage with no falloff.\nThis detonation counts as Powered Melee damage, scaling with the Melee stat and triggering melee-effects.\nCatching a Threaded Spike that didn't detonate a Tangle refunds an additional fixed 25% Melee Ability Energy.",
+     "compendium": "Threaded Spike can now bounce to Tangles, detonating them and immediately returning.\nDetonating a Tangle with Threaded Spike and catching it automatically picks up a Tangle.\nCollecting the Tangle this way counts for Elemental Pickup interactions.\nFailing to catch the aforementioned Threaded Spike triggers a Strand Explosion around the user.\nStrand Explosion deals 727 [?] Strand Melee Damage over 9 meters with no falloff.\nFailure Explosion scales with Melee Damage Buffs and triggers Melee Interactions.\nFailure Explosion does NOT count as Tangle damage.\nCatching a Threaded Spike that doesn't hit a Tangle refunds an additional 25% Melee Ability Energy, unaffected by Melee Stat."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:mothkeeperswraps",
+  "n": "Mothkeeper's Wraps",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   3534173884
+  ],
+  "perks": [
+   {
+    "n": "Winged Eclipse",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Defeat targets to charge up cages of loyal moths that fly toward nearby targets or allies.\n \n[Grenade]  : Throw the cage of loyal moths, which are released on impact. Upon reaching targets, moths detonate in a blinding explosion; upon reaching allies, moths provide a Void overshield.",
+     "clarity": "Kills charge up 'Winged Eclipse', with progress granted based on Enemy Rank.\n• Minor Enemies: 1\n• Elite Enemies: 2\n• Miniboss+ and Guardians: 3\nAt six charges, replaces your grenade abilty with two charges of Loyal Moths. Incurs a six second cooldown upon spending both charges before progress can be gained.\nMoth Grenades explode on impact, releasing 2 Loyal Moths that fly to their nearest target. Moths that spawn closer to allies turn into Void Moths, while Moths that spawn closer to enemies turn into Arc Moths.\nLoyal Moth variants:\n• Arc Moths: slower-flying, offensive role. They seek out targets at 10m/s and detonate on contact, dealing up to 526 [31 to Players, 201 to Objects] damage in a 4 meter radius and Blinding targets. Counts as Arc Grenade Damage.\n• Void Moths: faster-flying, support role. They seek out allies at 25m/s and grant them a 22.5 HP Void Overshield on contact.",
+     "compendium": "Kills grant charges of Winged Eclipse Ready, up to a maximum of 6.\nRank-and-File = 1 | Elite = 2 | Miniboss+ and Guardians = 3\nWhen fully charged, grants 2 Grenade Charges of Winged Eclipse.\nIncurs a 6 second cooldown upon throwing the last moth cage before Winged Eclipse can be charged.\nWinged Eclipse:\nReleases 2 Moths on impact. Moth Element changes depending on the closest 2 targets within 20 meters.\nIf there are no targets within 20 meters, they default to Void Moths.\nReleases an Arc Moth if the closest target is an enemy, pursuing at ~10m/s and detonating on contact.\nArc Moths deal up to 473 [31 Guardians | 201 Constructs] Arc Grenade Damage and blind over a 4 meter radius.\nReleases a Void Moth if the closest target is an allied Guardian.\nVoid Moths chase their allies at ~25m/s, bestowing 22.5 Void Overshield HP on contact."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:oathkeeper",
+  "n": "Oathkeeper",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   691578978
+  ],
+  "perks": [
+   {
+    "n": "Adamantine Brace",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Bow perfect draw can be held indefinitely. Gain a bonus to the Bow's damage when released, based on how long perfect draw was held. Provides a moderate benefit to the airborne effectiveness stat of Bows.",
+     "clarity": "Passively grants 40 Airborne Effectiveness and 10 Draw Time Stat (equivalent of a Draw Time Masterwork) to Bows.\nFull Draws grant 'Adamantine Brace':\n• Allows Perfect Draws to be held indefinitely\n• Grants 37.5% increased damage against PVE Combatants for every 0.5 seconds you hold a perfect draw, up to a 200% increase\nPVE damage buff only affects the initial Impact damage (e.g. Wish Ender's overpenetration is unaffected) and expires after 4 seconds of Adamantine Brace being active.\nLeviathan's Breath does not receive the damage increase.",
+     "compendium": "Passively grants +40 Airborne Effectiveness and +10 Draw Time to Bows.\n+10 Draw Time is equivalent to Draw Time Masterwork.\nBows can hold perfect draws indefinitely.\nAfter 0.35 seconds of reaching full draw on a Primary Ammo Bow:\nGrants increased damage every 0.5 seconds, up to 200% increased impact damage against Combatants after 2 seconds.\nBroadhead, Poison, Stasis Crystals, Dragonfly/Explosive Head, and others are not affected.\nDamage Buff disappears after holding full draw for 4 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:omnioculus",
+  "n": "Omnioculus",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1935198785
+  ],
+  "perks": [
+   {
+    "n": "Beyond The Veil",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "You gain a second Smoke Bomb charge and have damage resistance while invisible. When you make an ally invisible, they gain damage resistance while invisible and you gain melee energy.",
+     "clarity": "Grants an extra Smoke Bomb Melee Ability Charge.\nInvisibility now grants 50% [10%] Damage Resistance (Resist x4).\nCloaking allies starts their health regeneration, grants them the same Damage Resist benefits, and refunds 50% Melee Ability Energy per ally made invisible.\nDamage Resistance does not apply while in Super.\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Grants an extra Smoke Bomb Melee Ability Charge.\nVoid Invisibility grants 50% [10%] Damage Resist (Resist x4).\nUpon bestowing an ally with Void Invisibility:\nGrants 50% Melee Ability Energy per ally made invisible, up to 200% with 4 allies.\nAllies begin Health Regeneration.\nAllies share the Damage Resist Effect if made invisible by the Omnioculus Wielder.\nDamage Resistance does not apply in Super."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:ophidiaspathe",
+  "n": "Ophidia Spathe",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   978537162
+  ],
+  "perks": [
+   {
+    "n": "Scissor Fingers",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Gain a second knife per charge. Getting a final blow with a throwing knife grants consecutive knives a temporary stacking damage bonus. Gambler's Dodge refreshes the bonus timer.",
+     "clarity": "Grants an extra Solar Melee Ability charge.\nAll Melee charges are recharged simultaneously.\n(e.g.: both are recharged on Gambler's Dodge)\nThrowing Knife Kills increase Throwing Knife damage by 30%|60%|200% after 1|2|3 Kills for 5 seconds. Casting Gambler's Dodge refreshes the buff's duration.\nInteraction with the Knock 'Em Down Aspect while Radiant:\n• Knife Kills restore 1 charge\n• Knife Trick Precision Kills and Direct Ignition Kills in which Knife Trick applied the initial Scorch restore both charges",
+     "compendium": "Grants an extra Melee Charge to Solar Melee Abilities.\nAll Melee Charges are recharged simultaneously.\nDoes NOT recharge all Melee Charges if Melee Abilities have been used in the last ? seconds.\n(Eg: Both are recharged on Gambler's Dodge)\nOn Throwing Knife Kill:\n67% | 133% | 200% Increased Throwing Knife Damage for 5 seconds.\nGambler's Dodge Usage refreshes the duration."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:orpheusrig",
+  "n": "Orpheus Rig",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   193869523
+  ],
+  "perks": [
+   {
+    "n": "Uncanny Arrows",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Provides ability energy for each target tethered by Deadfall anchors. Moebius Quiver has an additional shot.",
+     "clarity": "Deadfall returns Ability Energy per Enemy Tethered:\n• X% Super Energy up to the maximum of 50%\n• 10% Grenade, Melee, and Class Ability Energy\nMoebius Quiver can fire an additional volley per Super Activation and lasts 4 additional seconds (16🠚20 Seconds)\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website. (Super Energy is unaffected)",
+     "compendium": "For each enemy that gets tethered to a Deadfall anchor:\nGrants 10% Grenade, Melee, and Class Ability Energy. \nRefunds X% Super Energy, up to a maximum of 50% Super Energy.\nMoebius Quiver can fire an additional volley per Super Activation and lasts 4 seconds longer."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:radiantdancemachines",
+  "n": "Radiant Dance Machines",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   1702288800
+  ],
+  "perks": [
+   {
+    "n": "The Dance",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Moderately increases airborne effectiveness and hip fire mobility, range, and accuracy for weapons that use Primary ammo.\n\nFinal blows with Primary ammo weapons return dodge energy, which can overflow to create additional charges when full.",
+     "clarity": "Passively grants 20 Airborne Effectiveness to Primary Weapons.\nGrants the following benefits while a Primary Weapon is readied and not Aiming Down Sights:\n• 30 Mobility\n• 5 Range and 30? Stability\n• 70% decreased Accuracy Cone Size\n• 2 degrees increased Precision Aim Cone Angle\n• 20% increased Aim Assist and Damage Falloff Distance\nDMT, Last Word, and Tommy's Matchbook are uniquely tuned and do not receive as significant of a benefit.\nPrimary Weapon Kills grant Class Ability Energy based on Enemy Rank:\nMinors: 34% | Elites and higher: 100% | Players: 20%\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.\nAt full Class Ability energy, scoring multiple Primary Weapon Kills within 6 seconds of each grants an additional Class Ability Charge. Maximum of 2 extra charges.\nActivation progress granted by Enemy Rank:\nMinors: 34% | Elites and higher: 100% | Players: 100%",
+     "compendium": "Passively grants +20 Airborne Effectiveness to Primary Weapons.\nFor Primary Weapons while hipfiring:\n+30 Mobility, +5 Range, +30 Stability,\n-30?% Accuracy Cone Size, +2?° Precision Angle Threshold,\n20% Increased Aim Assist and Damage Falloff Distance.\n DMT, Last Word, and Tommy's Matchbook do not receive the Falloff bonuses, and receive uniquely tweaked Accuracy values. \nAccuracy Cone values aren't testable but are high enough to effectively remove any accuracy cone growth.\nPrimary Weapon Kills grant Class Ability Energy.\nRank-And-File = 34% | Elite+ = 100% | Guardians = 20%\nUpon reaching 100% Counter Progress by scoring multiple Primary Weapon Kills within 6 seconds of each while at Full Class Ability Energy: \nRank-And-File = 34% | Elite+ = 100% | Guardians = 100%\nGrants an additional Class Ability Charge, up to a maximum of 2 additional Class Ability Charges."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:raidenflux",
+  "n": "Raiden Flux",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   368733543
+  ],
+  "perks": [
+   {
+    "n": "Synapse Junctions",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Quick successive attacks with Arc Staff increase its damage output, duration and jolt targets hit.",
+     "clarity": "Arc Staff hits now apply Jolt.\nHits with Arc Staff grant a Stack of 'Synapse Junctions' for 5 seconds. Maximum of 3 Stacks.\nDamage increases | Passive Super Drain decreases:\n• Synapse Junctions x1: 27% | 20%\n• Synapse Junctions x2: 61% | 40%\n• Synapse Junctions x3: 105% | 60%\nArc Staff's Heavy Palm Blast (Light->Light->Heavy) recieves a higher damage bonus, dealing 40%|96%|174% increased damage at 1|2|3 stacks of Synapse Junctions.",
+     "compendium": "Arc Staff Hits grant a stack of Synapse Junctions for 5 seconds, up to a maximum of 3 Stacks.\nArc Staff damage inflict Jolt. \nPalm Blast (L-L-H) receives 1.5x the damage increase.\nSynapse Junction x1 = 27% (40%) Increased damage and 20% Slower Passive Super Drain.\nSynapse Junction x2 = 61% (96%) Increased damage and 40% Slower Passive Super Drain.\nSynapse Junction x3 = 105% (174%) Increased damage and 60% Slower Passive Super Drain."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:raijusharness",
+  "n": "Raiju's Harness",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   2268523867
+  ],
+  "perks": [
+   {
+    "n": "Mobius Conduit",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Activating Gathering Storm calls down lightning on all nearby targets, jolting them while also amplifying allies. Defeating Arc debuffed targets grants a small amount of Gathering Storm energy.",
+     "clarity": "Upon casting Gathering Storm:\n• Releases lightning at enemies within ? meters of you, dealing 650 [?] damage and Jolting them\n• You and allies within ? meters become Amplified\nLightning strikes (inconsistently) refund up to 50% Super Energy on Arc-Debuffed enemy Hits or Kills based on Enemy Rank:\n• Tier 1 (T1) Minors: ?% on Hits | ? on Kills\n• T2 Minors, T1 Elites: ?% | ?%\n• T3 Minors, T2 Elites: ?% | ?%\n• T4 Minors, T3 Elites, and higher: 25?% | ?%\nArc-Debuffed enemy Kills (inconsistently) grant additional Gathering Storm Super Energy:\n• Minors: 1%\n• Elites: 2.5%\n• Players, Minibosses and higher: 4%\nInconsistencies are only(?) observed with Jolted enemies. Possibly due to killing enemies too fast after triggering Jolt's damage.",
+     "compendium": "Upon casting Gathering Storm:\nEnemies within ? meters are struck by lightning, receiving 650 [?] damage and becoming jolted.\nCaster and allies within ? meters are granted Amplified.\nLightning Strikes refund Super Energy per Arc-Debuffed Enemy Hits and Kills.\nHits: T1 = ?% | T2 = ?% | T3 = ?% | T4 = 25?%\nKills: T1 = ?% | T2 = ?% | T3 = ?% | T4 = ?%\nRefunds up to a maximum of 50% Super Energy.\nOn Arc-Debuffed Enemy Kill:\nGrants additional Gathering Storm Super Energy.\nRank-and-File = 1% | Elite = 2.5% | Miniboss+ = 4% | Guardian = 4%"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:relativism",
+  "n": "Relativism",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "class",
+  "hashes": [
+   2809120022
+  ],
+  "perks": [
+   {
+    "n": "Spirit of the Dragon",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your weapons ready quicker and are more stable. Using your class ability temporarily increases this benefit and reloads your equipped weapon from reserves.",
+     "compendium": "Passively grants +10 Stability and 0.?x Ready Duration Multiplier.\nOn Class Ability Usage:\nGrants Wraithmetal Mail for 9 seconds.\nReloads all weapons and picks up Ammo Bricks within 15 meters. Activates On-Reload Perks.\nWraithmetal Mail:\n+35 Stability and +? Handling."
+    }
+   },
+   {
+    "n": "Spirit of the Cyrtarachne",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Gain Woven Mail when you use your grenade.",
+     "compendium": "On Grenade Ability Usage:\nGrants Woven Mail for 10 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:renewalgrasps",
+  "n": "Renewal Grasps",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   2169905051
+  ],
+  "perks": [
+   {
+    "n": "Depths of Duskfield",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your Duskfield grenades have a much larger effect radius. Allies inside the Duskfield gain Frost Armor and targets inside the area deal reduced damage.",
+     "clarity": "Increases Duskfield Grenade radius by 25% and spawns a Medium Stasis Crystal in its center.\nEnemies inside a Duskfield Grenade's Slowing Field deal 50% [20%] decreased damage.\nYou and allies immediately receive 1 Stack of Frost Armor upon entering the Slowing Field and receive additional Stacks for every 0.5 seconds they stay in the field.\nWhen combined with the Touch of Winter aspect:\n• Increases Crystal size from Medium to Large\n• Radius increase stacks additively for a total of 75%",
+     "compendium": "Enhances Duskfield Grenades:\nSlowing Field is granted 25% Increased Radius.\nCreates a Medium Stasis Crytstal.\nWhile inside a Duskfield Grenade's Slowing Field:\nEnemies deal 50% [20%] decreased damage.\nUser and allies are immediately granted x1 Frost Armor.\nGrants an additional Frost Armor stack every 0.5 seconds.\nWhen combined with Touch of Winter:\nStasis Crystal Size increases from Medium to Large.\nSlowing Field radius is increased by +50%, to a total of 75% Increased Radius."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:sealedahamkaragrasps",
+  "n": "Sealed Ahamkara Grasps",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1688602431
+  ],
+  "perks": [
+   {
+    "n": "Nightmare Fuel",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Powered melee and finisher final blows grant Nightmare Fuel, increasing handling and airborne effectiveness. While active, freshly drawn weapons deal additional damage and grant Nightmare Fuel on final blows. Gaining Nightmare Fuel reloads all holstered weapons.",
+     "clarity": "Powered Melee Kills and Finishers grant Nightmare Fuel for 7 seconds.\nGaining Nightmare Fuel grants 35% [20%] increased weapon damage (Empowering Buff), ? Handling, 50 Airborne Effectiveness, and refills the magazine of all stowed weapons from reserves.\nReadying a different weapon after gaining Nightmare Fuel refreshes its duration. Swapping weapons again removes the buff.\nScoring a kill with a weapon currently benefitting from Nightmare Fuel grants you a fresh instance of the buff (as if you scored another Powered Melee Kill), allowing you to switch weapons again.",
+     "compendium": "On Powered Melee/Grapple Melee Kill or Finisher:\nGrants Nightmare Fuel for 7 seconds.\nNightmare Fuel | 35% [20%] increased damage, +? Handling and +50 Airborne Effectiveness.\nRefills Stowed Weapons.\nDoes not stack with Empowering Buffs.\nUpon readying a different weapon after gaining Nightmare Fuel:\nRefreshes Nightmare Fuel duration.\nScoring a Weapon Kill while Nightmare Fuel is active retriggers Nightmare Fuel, allowing the next weapon switch to benefit from the aforementioned bonuses."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:shardsofgalanor",
+  "n": "Shards of Galanor",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   691578979
+  ],
+  "perks": [
+   {
+    "n": "Sharp Edges",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Throwing Knife final blows decrease the cooldown of your Super. Hitting a single target with most Blade Barrage knives in a volley causes them to release a violent Solar explosion; releasing scorching Solar shrapnel. Hits and final blows with Blade Barrage will return Super energy after the Super ends.",
+     "clarity": "Throwing Knife Kills grant 2.5-5% Super Energy depending on Enemy Rank.\nPassively increases Blade Barrage impact and explosive damage by 25%.\nLanding 5 Blade Barrage knives triggers a Solar Detonation, up to a maximum of 2 Solar Detonations per cast.\nEach Solar Detonation deals significant damage across a 10 meter radius with no falloff and releases 4 Scorching Shrapnel, which apply 20 Scorch each (unaffected? by Ember of Ashes). Detonation and shrapnel deal ~35% reduced damage to Boss-Tier combatants and are not buffed by the Super Stat.\nBlade Barrage Hits and Kills refund Super Energy depending on Enemy Rank, up to a maximum of 50%.\nOverall increase to Blade Barrage damage (against Boss Combatants) is roughly ~140%.",
+     "compendium": "Solar Melee Ability Kills grant 2.5% to 5% Blade Barrage Super Energy, depending on Enemy Rank.\nBlade Barrage Hits and Kills refund up to 50% Super Energy. Refund is unaffected by Super Stat.\nRefund Amount depends on Kills and Hits, as well as Enemy Rank.\nElite = ~20% | Boss = 50%\nBlade Barrage Impact and Explosion Damage is increased by 25%.\nTriggers a delayed Solar Explosion for each 5 knives landed, up to 2 per Blade Barrage usage.\nEach Explosion deals damage without falloff over 10 meters and releases 4 Shrapnel.\n1st Explosion = 5852 (3804 Boss) Damage | 2nd Explosion = 6437 (4184 Boss) Damage.\nShrapnel deals up to 290 (190 Boss) Damage over ? meters and inflicts x20+0? Scorch.\nSuper Damage Increases ONLY affect the initial knife impact, explosion, and ignition damage.\nResults in ~140% increased damage on Bosses with zero investment.\nKnock 'Em Down increases Blade Barrage damage vs Boss from ~21K to ~26K (~+25%)"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:shinobusvow",
+  "n": "Shinobu's Vow",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1053737370
+  ],
+  "perks": [
+   {
+    "n": "New Tricks",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Gain an additional Skip Grenade charge. Skip Grenade damage grants Bolt Chargeand gaining Bolt Charge grants Skip Grenade energy. When Bolt Charge is ready, you heal nearby allies and enhance your next Skip Grenade.",
+     "clarity": "Grants an extra Skip Grenade Charge. Skip Grenade drones chase enemies much more aggressively.\nDrone Hits grant 4.2% [1.4%] Grenade Ability Energy and x1 Bolt Charge. Each drone can hit enemies 2-3 times.\nGaining Bolt Charge gives ?% grenade energy per stack.\nUpon reaching x10 Bolt Charge:\n• Gain 40?% Grenade Ability Energy\n• Heal allies within ? meters for ?HP\n• Grants 'New Tricks', which enhances the next thrown Skip Grenade by adding 2 additional seekers on the first bounce.\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Grants an extra Skip Grenade Charge.\nGrants ?% Skip Grenade Ability Energy per Bolt Charge stack gained.\nSkip Grenades' drones chase enemies much more aggressively.\nSkip Grenades hits grant 4.2% [1.4%] Grenade Ability Energy and x1 Bolt Charge.\nCounts each impact and explosion damage instances as hits.\nUpon reaching x10 Bolt Charge:\nRestores ? HP to the user and allies within ? meters.\nGrants ~40% Grenade Ability Energy.\nThe next Skip Grenade thrown is enhanced and bounces one additional time.\nEnhanced Skip Grenades release 5 additional seekers on the 1st and 2nd bounce."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:speedloaderslacks",
+  "n": "Speedloader Slacks",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   1793346751
+  ],
+  "perks": [
+   {
+    "n": "Tight Fit",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Dodging instantly reloads all your weapons and grants increased reload and handling to you and nearby allies. While the buff is active, additional dodges increase the buff strength and refresh the timer, maxing out at 5 stacks. Dealing sustained damage grants class ability energy.",
+     "clarity": "Scoring multiple Direct Weapon Hits within 3? seconds of each grants ~20% Class Ability Energy. There is no cooldown on hits or activation procs (Hint: Use DoT Weapons).\nActivation progress granted by weapon type:\n• Submachine Guns, Trace Rifles: 7.14%\n• Auto Rifles, Machine Guns: 8.33%\n• Pulse Rifles: 9.1%\n• Sidearms: 12.5%\n• Hand Cannons, Scout Rifles: 16.7%\n• Swords, Shotguns: 20%\n• Fusion Rifles, Bows, Glaives, Grenade Launchers, Sniper Rifles: 34%\nCasting Dodge reloads all equipped weapons, collects all nearby ammo bricks within 15 meters, and grants you 1 Stack of 'Tight Fit' for 15 seconds. Maximum of 5 stacks. Counts as a manual reload and will activate reload-triggered perks such as Kill Clip.\nAllies within 15 meters receive the same number of stacks as you have after the Dodge.\nStat Bonuses at 1|2|3|4|5 Stacks:\n• 40|40|45|50|55 Reload Speed\n• 0%|7.5%|8.5%|9%|11% decreased Reload Animation Duration\n• 40?|40?|45?|50?|55? Handling",
+     "compendium": "On Class Ability Usage:\nReloads all weapons and picks up Ammo Bricks within 15 meters. Activates On-Reload Perks.\nGrants x1 Tight Fit for the wearer and allies within 15 meters for 15 seconds.\nWhile Tight Fit is active:\n Dodges grant an additional stack, up to a maximum of x5 Tight Fit and refresh the duration of the buff.\nAllies within range match the stack amount of the wearer's Tight Fit when the buff is refreshed.\n+40 | +40 | +45 | +50 | +55 Reload Speed\n- | 0.925x | 0.915x | 0.91x | 0.89x Reload Duration Multiplier\n+40? | +40? | +45? | +50? | +55? Handling\nScoring direct hits within 3 seconds of each while Tight Fit is active progresses a Counter System that grants 20% Class Ability Energy upon reaching 100%.\nSMG, Trace = 7.14% || Auto, MG = 8.33% || Pulse = 9.1% || Sidearm = 12.5% || HC, Scout = 16.7%\nSword = 20% | Bow, Glaive, GL, Shotgun, Snipers = 34%"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:st0mpee5",
+  "n": "St0mp-EE5",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   193869520
+  ],
+  "perks": [
+   {
+    "n": "Hydraulic Boosters",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases slide distance and improves High Jump, Strafe Jump, and Triple Jump. Take less damage from targets when airborne.",
+     "clarity": "Passively grants 30% Damage Resistance against PVE Combatants while Airborne.\nIncreases Sprint Speed by 6.25% and Slide Distance by 33%. Greatly increases the initial momentum of all Jump Abilities.",
+     "compendium": "30% Damage Resist against Combatants while Airborne.\nIncreases Slide Distance from 6.5 meters to 8.5 meters.\nGreatly enhances all Jumps."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:stareaterscales",
+  "n": "Star-Eater Scales",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   1001356380
+  ],
+  "perks": [
+   {
+    "n": "Feast of Light",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "You gain additional Super energy from Orbs of Power you pick up. While your Super energy is full, picking up an Orb of Power overcharges your Super, causing you to gain a burst of healing when cast and a bonus to your Super damage. At maximum overcharge, you also gain an overshield.",
+     "clarity": "Orbs of Power grant an additional 2% Super Energy.\nThis is decreased to 0.5% if Golden Gun: Marksman is the selected Super Ability.\nPicking up an Orb of Power with a charged Super Ability grants a Stack of 'Feast of Light'. Maximum of 6 Stacks.\nCasting your Super while at 1|2|3|4|5|6 Stacks consumes all Stacks and grants the following benefits:\n• 18.2%|36.4%|54.6%|59.7%|64.8%|70% increased Super damage for 14 seconds\n• Restores ?|?|?|?|?|200 HP\n• 100 HP Overshield for 16 seconds if cast at 6 Stacks",
+     "compendium": "Orbs of Power grant an additional 2% Super Energy.\nAdditional Super Energy is decreased to 0.5% while 3-Shot Golden Gun is the selected Super ability.\nPicking up an Orb of Power while Super is charged grants a stack of Feast of Light. \nOn Super Cast:\nConsumes all Feast of Light stacks, restoring HP and increasing Super Damage for 14 seconds.\n18.2% | 36.4% | 54.6% | 59.7% | 64.8% | 70% increased Super Damage.\nRestores ? | ? | ? | ? | ? | 200 HP.\nOn Super Cast while at x6 Feast of Light Stacks:\n 100HP Overshield for 16 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:thebombardiers",
+  "n": "The Bombardiers",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "legs",
+  "hashes": [
+   1219761634
+  ],
+  "perks": [
+   {
+    "n": "Parting Gift",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Dodging leaves behind an explosive that detonates after a short delay, damaging targets around it and creating a secondary effect based on your Super's element:\n• [Arc] Blinds targets.\n• [Solar] Scorches targets.\n• [Void] Suppresses targets.\n• [Stasis] Slows targets.\n• [Strand] Severs targets.",
+     "clarity": "Class Ability usage drops a Parting Gift that explodes after 1.5 seconds, dealing 440 [121] damage over a 7.5 meter radius.\nParting Gift applies an additional effect based on the element of your equipped Super Ability:\n• Arc: Blind for 10 [3] seconds\n• Solar: 40 Scorch (60 with Ember of Ashes)\n• Stasis: 40 [20] Slow Stacks for 4 [1.5] seconds (8 [2] seconds with Whisper of Durance)\n• Void: Suppression for 10 seconds [Does not apply to Guardians in their Super]\n• Strand: Sever for 10 [5] seconds (15 [7] with Thread of Continuity)\nDetonates instantly on contact with a surface or an enemy (for instant detonations, try the 4pc Dark Age Set Bonus from Warlord's Ruin).",
+     "compendium": "On Class Ability Usage:\nDrops a Parting Gift that explodes after 1.5 seconds, dealing 440 [120] damage over 7.5 metres. Detonates instantly on contact with surface or enemy.\nParting Gift has an additional effect based on the equipped Super:\nArc: Blind for 10 [3] seconds.\nSolar: x40+20 Scorch.\nVoid: Suppress for 10 seconds [Does not apply to Guardians in Super]\nStasis: x40 [x20] Slow for 4+4 [1.5+0.5] seconds.\nStrand: Severs for ? seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:thedragonsshadow",
+  "n": "The Dragon's Shadow",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   368733541
+  ],
+  "perks": [
+   {
+    "n": "Wraithmetal Mail",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your weapons ready quicker and are more stable. Dodging temporarily increases this benefit, reloads your equipped weapon from reserves, grants improved movement speed, and increases your class ability stat.",
+     "clarity": "Passively grants 10 Stability and ?% decreased Ready Animation Duration.\nCasting your Class Ability grants 'Wraithmetal Mail' for 15 seconds, collects all ammo bricks within 15 meters, and reloads your currently equipped weapon. Counts as a manual reload and will activate reload-triggered perks such as Kill Clip.\nWraithmetal Mail grants the following benefits:\n• 35 Stability\n• ? Handling\n• 12.5% increased Sprint Speed\n• 33% increased Slide Distance\n• ? Decreased ADS Movement Speed Penalty\nDoes not grant any benefit to the Class stat, despite what the game says.",
+     "compendium": "Passively grants +10 Stability and 0.?x Ready Duration Multiplier.\nOn Class Ability Usage:\nGrants Wraithmetal Mail for 15 seconds.\nReloads all weapons and picks up Ammo Bricks within 15 meters. Activates On-Reload Perks.\nWraithmetal Mail:\n+35 Stability and +? Handling.\nIncreases Sprint Speed from 8.5m/s to 9m/s.\nIncreases Slide Distance from 6.5 meters to 8.5 meters.\n?% Decreased ADS Movement Speed Penalty.\nDoes not grant any Class Stat, contrary to description."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:thesixthcoyote",
+  "n": "The Sixth Coyote",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1168370782
+  ],
+  "perks": [
+   {
+    "n": "Double Dodge",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Gain a second dodge charge. Shortly after dodging, your next weapon final blow spawns an Orb of Power.",
+     "clarity": "Grants an extra Class Ability Charge.\nActs as a copy of the Reaper armor mod.",
+     "compendium": "Grants an extra Class Ability Charge.\nPassively grants a copy of Reaper."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:tritonvice",
+  "n": "Triton Vice",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1304266146
+  ],
+  "perks": [
+   {
+    "n": "Halberdier's Reach",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases Glaive reload speed and melee damage when surrounded. Glaive melee final blows overflow a round to the magazine. Glaive projectile final blows detonate in an explosion.",
+     "clarity": "Glaive Melee Kills load 1 Ammo into the Magazine from reserves. Can overfill the Magazine up to double the normal capacity.\nWhile within 15 meters of 3 enemies:\nGrants 50 Reload Speed and 200% increased Glaive Melee Damage.\nGlaive Projectile Kills cause enemies to explode, dealing up to 350 [101] weapon-matching elemental damage in a 4? meter radius.",
+     "compendium": "On Glaive Melee Kill:\nOverflows 1 Ammo to Magazine, up to 100% Increased Magazine Capacity.\nWhile within 15 meters of 3 enemies:\n+50 Reload Speed and 200% Increased Glaive Melee Damage.\nLingers for 5 seconds.\nOn Glaive Projectile Kill:\nEnemies explode, dealing up to 350 [101] Weapon-Matching Damage in a 4? metre radius."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:wormhuskcrown",
+  "n": "Wormhusk Crown",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "head",
+  "hashes": [
+   2600992433
+  ],
+  "perks": [
+   {
+    "n": "Burning Souls",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Activating your class ability grants Cure. Rapid [Solar]Solar final blows grant stacks of Burning Souls that increase Solar ability damage, increase the potency of Dodge's healing, and spreads the healing to nearby allies.",
+     "clarity": "Casting your Class Ability grants Cure x2.\nUpon scoring multiple Solar kills within 3 seconds of each, grants one stack of 'Burning Souls' for 10 seconds. Maximum of 3 stacks.\nProgress is granted based on Enemy Rank:\nMinor Enemies: 34%\nElites, Players, and higher: 50%\nBurning Souls grants the following benefits while active:\n• 15% Increased Solar Ability Damage\n• Class Ability Healing is enhanced and granted to allies within 15 meters of cast.\nHealing granted at 1|2|3 stacks of Burning Souls:\n• Cure x3\n• Cure x1 + Restoration x1 for 3 seconds\n• Cure x2 + Restoration x1 for 5 seconds\nRestoration duration is increased by 50% with Ember of Solace.",
+     "compendium": "On Class Ability Usage:\nGrants x2 Cure.\nUpon reaching 100% Counter Progress by scoring multiple Solar Kills within 3 seconds of each: \nRank-And-File = 34% | Elite+ and Guardians = 50%\nGrants a stack of Burning Souls for 10 seconds, up to a maximum of 3 stacks.\nAll stacks expire at once. Retriggering Burning Souls refreshes the buff duration.\nBurning Souls:\n15% increased Solar Grenade, Melee, Class, and Super Ability Damage. Works on Prismatic for Solar too!\nClass Ability Usage healing is enhanced and spreads to allies within 15? meters:\nx1 = x3 Cure.\nx2 = x1 Cure + Restoration x1 for 3+1.5 seconds.\n x3 = x2 Cure + Restoration x1 for 5+2.5 seconds.\nIf Restoration is active, then it will extend its duration by the corresponding duration."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:youngahamkarasspine",
+  "n": "Young Ahamkara's Spine",
+  "kind": "exoticArmor",
+  "cls": [
+   "hunter"
+  ],
+  "slot": "arms",
+  "hashes": [
+   405059572
+  ],
+  "perks": [
+   {
+    "n": "Wish-Dragon Teeth",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases Tripmine Grenade duration and blast radius. Ability damage grants Tripmine Grenade energy.",
+     "clarity": "Intrinsically grants Fastball to all grenades.\nEnhances Tripmine Grenades:\n• 14% increased Explosion damage\n• Explosion Length and Width are increased to 14 meters\n• Explosions don't have any damage falloff\n• Explosion no longer deals self-damage\n• Last 20 seconds longer (10s🠚30s)\n• Grants Tripmine Grenades 70 HP\nSolar Ability Hits grant 30% [8%] Tripmine Grenade Energy. Crackshot's Golden Gun shots grant 10% [?] per hit (30% per full salvo). The first Scorch tick from your abilities will also trigger the energy gains.\n0.3 second cooldown between energy gains.\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Intrinsically grants Fastball to all Grenades, including non-Tripmine Grenades.\nEnhanced Tripmine Grenades\n14% Increased Explosion Damage. Explosion Length and Width are increased to 14 metres.\n Explosions no longer deal self-damage and have no falloff.\nTripmines now lasts 30 seconds and have 70 HP.\nGrenade and Melee Ability Hits grant 30% [7%] Tripmine Grenade Ability Energy.\nThe first Scorch tick from Grenade/Melee enemy will also trigger the Grenade Ability Gains.\nIncurs a 0.3 second cooldown between Grenade Ability Gains.\nCrackshot Hits each grant 10% [?%] Tripmine Grenade Ability Energy."
+    }
+   }
+  ]
+ }
+]

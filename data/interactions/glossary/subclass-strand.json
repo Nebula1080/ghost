@@ -1,0 +1,96 @@
+{
+ "terms": {
+  "grapple": {
+   "l": "Grapple",
+   "kind": "ability",
+   "el": "strand",
+   "aka": [
+    "grappling hook",
+    "grapple grenade"
+   ],
+   "def": "The Strand grappling hook grenade (also available as Silkstrike's grenade input) that pulls you forward; grappling a Tangle refunds it.",
+   "q": "Weave a grappling hook, and quickly pull yourself forward.",
+   "src": "sub:grapple"
+  },
+  "grapplemelee": {
+   "l": "Grapple Melee",
+   "kind": "ability",
+   "el": "strand",
+   "aka": [
+    "grapple melee"
+   ],
+   "def": "A melee performed during or just after a grapple that deals area damage and unravels; it counts as both a grenade and a melee ability.",
+   "q": "Grapple Melee counts as both a Grenade and Melee Ability.",
+   "src": "sub:grapple"
+  },
+  "perchedthreadling": {
+   "l": "Perched Threadling",
+   "kind": "object",
+   "el": "strand",
+   "aka": [
+    "perched threadlings",
+    "perched"
+   ],
+   "def": "A Threadling waiting on you instead of attacking; it is sent out when you deal damage or deployed by your class ability with Weaver's Call.",
+   "q": "Threadlings you create will return to you and perch if they can't find any nearby targets.",
+   "src": "sub:needlestorm"
+  },
+  "bannerofwar": {
+   "l": "Banner of War",
+   "kind": "buff",
+   "el": "strand",
+   "aka": [
+    "banner"
+   ],
+   "def": "A Titan buff raised by melee, finisher or sword kills that pulses healing to nearby allies and boosts melee and sword damage; kills nearby strengthen it.",
+   "q": "raise a Banner of War that pulses with energy, periodically healing nearby allies and increasing melee and Sword damage",
+   "src": "sub:bannerofwar"
+  },
+  "weaverstrance": {
+   "l": "Weaver's Trance",
+   "kind": "buff",
+   "el": "strand",
+   "aka": [],
+   "def": "A Warlock buff from consuming a Shackle Grenade with Mindspun Invocation; final blows while it is active cause suspending detonations.",
+   "q": "Hold to consume your Shackle Grenade and activate Weaver's Trance. Final blows while Weaver's Trance is active create a suspending detonation.",
+   "src": "sub:mindspuninvocation"
+  },
+  "specterdecoy": {
+   "l": "Threaded Specter decoy",
+   "kind": "object",
+   "el": "strand",
+   "aka": [
+    "decoy",
+    "threaded specter"
+   ],
+   "def": "A Strand decoy left by your class ability that draws enemy fire, then detonates and releases Threadlings.",
+   "q": "Activating your class ability leaves behind a decoy woven from [Strand] Strand matter that draws the attention of nearby combatants.",
+   "src": "sub:threadedspecter"
+  },
+  "whirlingtangle": {
+   "l": "Whirling Maelstrom",
+   "kind": "object",
+   "el": "strand",
+   "aka": [
+    "whirling tangle",
+    "strand mass"
+   ],
+   "def": "A seeking mass of Strand fibers created when a Tangle is destroyed with Whirling Maelstrom; it damages targets and fires unraveling projectiles on kills.",
+   "q": "Destroying a Tangle will weave a violent, writhing mass of [Strand] Strand fibers.",
+   "src": "sub:whirlingmaelstrom"
+  },
+  "sword": {
+   "l": "Sword",
+   "kind": "damage",
+   "el": "",
+   "aka": [
+    "swords",
+    "sword damage",
+    "sword kills"
+   ],
+   "def": "Sword weapons; some pieces trigger on sword kills or boost sword damage.",
+   "q": "Defeat a target with a melee attack, finisher, or Sword to raise a Banner of War",
+   "src": "sub:bannerofwar"
+  }
+ }
+}

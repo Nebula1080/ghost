@@ -1,0 +1,1503 @@
+[
+ {
+  "id": "xw:agersscepter",
+  "n": "Ager's Scepter",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Ager's Call",
+    "on": "final blows",
+    "q": "Final blows with this weapon generate a slowing burst around the defeated target.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "perk": "Ager's Call",
+    "q": "Hits inflict x20 [x0] Slow Stacks for 4+0 seconds",
+    "s": "compendium",
+    "note": "catalyst (Will Given Form mode)"
+   },
+   {
+    "do": "consumes",
+    "t": "superenergy",
+    "perk": "Ager's Call",
+    "on": "activating Will Given Form at full Super",
+    "q": "Immediately drains 20% Super Energy, then constantly drains 4% Super Energy per Second.",
+    "s": "compendium",
+    "note": "catalyst; requires full Super energy to activate"
+   },
+   {
+    "do": "uses",
+    "t": "stasisdamage",
+    "perk": "Rega's Refrain",
+    "q": "Stasis final blows transfer ammo to this weapon's magazine from reserves.",
+    "s": "bungie",
+    "note": "Stasis kills from any source"
+   }
+  ]
+ },
+ {
+  "id": "xw:anarchy",
+  "n": "Anarchy",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "jolt",
+    "perk": "Arc Traps",
+    "q": "Jolts on the 4th damage instance, 3 if Amplified.",
+    "s": "compendium",
+    "note": "catalyst (Jolting Feedback)"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Arc Traps",
+    "q": "Jolts on the 4th damage instance, 3 if Amplified.",
+    "s": "compendium",
+    "note": "catalyst; Amplified jolts one hit sooner"
+   }
+  ]
+ },
+ {
+  "id": "xw:badjuju",
+  "n": "Bad Juju",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "perk": "String of Curses",
+    "on": "weapon kills",
+    "q": "grant Super energy based on the strength of String of Curses",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:bastion",
+  "n": "Bastion",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Saint's Fists",
+    "on": "melee hits",
+    "q": "After a successful melee hit, this weapon gains increased damage, reduced charge time, and improved reload speed for a short duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Saint's Fists",
+    "q": "Hitting a target with most of the pellets in a burst increases melee damage for a short duration.",
+    "s": "bungie",
+    "note": "next melee within 3 s deals bonus damage"
+   }
+  ]
+ },
+ {
+  "id": "xw:blacktalon",
+  "n": "Black Talon",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suppress",
+    "perk": "Crow's Wings",
+    "on": "heavy projectile hits",
+    "q": "Fire a Heavy projectile attack that suppresses targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "perk": "Crow's Wings",
+    "q": "Hitting a target already suppressed spreads the effect to nearby targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:borealis",
+  "n": "Borealis",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "radiant",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   }
+  ]
+ },
+ {
+  "id": "xw:buriedbloodline",
+  "n": "Buried Bloodline",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Hungering Quarrel",
+    "on": "bolt hits",
+    "q": "Landing bolts leeches health from the target.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "devour",
+    "perk": "Violent Reanimation",
+    "on": "multiple final blows",
+    "q": "Multiple final blows with this weapon grant Devour to the wielder.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Hungering Quarrel",
+    "if": [
+     {
+      "has": "devour"
+     }
+    ],
+    "q": "While Devour is active: Hits inflict Weaken for 5 [?] seconds.",
+    "s": "compendium",
+    "note": "catalyst (Splitvein Lineage)"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "perk": "Hungering Quarrel",
+    "q": "While Devour is active: Hits inflict Weaken for 5 [?] seconds.",
+    "s": "compendium",
+    "note": "catalyst; Devour from any source enables weakening hits"
+   }
+  ]
+ },
+ {
+  "id": "xw:centrifuse",
+  "n": "Centrifuse",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blind",
+    "perk": "Overcharge Capacitor",
+    "on": "kills at high charge",
+    "q": "Final blows with high charge cause explosions, and maximum charge explosions blind targets.",
+    "s": "bungie",
+    "note": "Clarity/Compendium: blinding explosions already from 40% charge"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Overcharge Capacitor",
+    "q": "Passively generates 7% Charge per second and removes Passive Decay while Amplified.",
+    "s": "compendium",
+    "note": "catalyst (Static Buildup)"
+   }
+  ]
+ },
+ {
+  "id": "xw:cloudstrike",
+  "n": "Cloudstrike",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Mortal Polarity",
+    "on": "precision final blows",
+    "q": "Precision final blows generate a lightning bolt at the target's location and grant a moderate amount of Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "perk": "Stormbringer",
+    "on": "rapid precision hits",
+    "q": "Rapid precision hits create a lightning storm at the point of impact and grant a stack of Bolt Charge.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:coldheart",
+  "n": "Coldheart",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "ionictrace",
+    "perk": "Longest Winter",
+    "on": "hits at maximum beam energy",
+    "q": "Periodically generates Ionic Traces while in its high-damage state.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "perk": "Cold Fusion",
+    "on": "collecting an Ionic Trace",
+    "q": "Collecting an Ionic Trace grants 50% energy over 0.5 seconds",
+    "s": "clarity",
+    "note": "Ionic Traces from any source charge the beam"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Coldheart Catalyst",
+    "q": "Refills 5% of the magazine (rounded up) every 1.5 seconds while Amplified.",
+    "s": "clarity",
+    "note": "catalyst; Speed Booster makes the refill faster and overfills the magazine"
+   }
+  ]
+ },
+ {
+  "id": "xw:collectiveobligation",
+  "n": "Collective Obligation",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "volatile",
+    "perk": "Void Leech",
+    "on": "hitting debuffed targets",
+    "q": "leeching them directly when the target is suppressed, weakened, or volatile",
+    "s": "bungie",
+    "note": "also leeches debuffs applied to you by enemies; self-applied debuffs do not count"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "perk": "Void Leech",
+    "on": "hitting debuffed targets",
+    "q": "leeching them directly when the target is suppressed, weakened, or volatile",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "perk": "Void Leech",
+    "on": "hitting debuffed targets",
+    "q": "leeching them directly when the target is suppressed, weakened, or volatile",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "volatile",
+    "perk": "Void Leech",
+    "on": "hits in Void Leech mode",
+    "q": "Void Leech mode grants 20% increased damage and appplies all stored Void Debuffs on hit.",
+    "s": "clarity",
+    "note": "applies whichever Void debuffs were stored (volatile, weaken, suppression)"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Void Leech",
+    "on": "hits in Void Leech mode",
+    "q": "Void Leech mode grants 20% increased damage and appplies all stored Void Debuffs on hit.",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "suppress",
+    "perk": "Void Leech",
+    "on": "hits in Void Leech mode",
+    "q": "Void Leech mode grants 20% increased damage and appplies all stored Void Debuffs on hit.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "perk": "Umbral Sustenance",
+    "on": "gaining the buff (refills magazine)",
+    "q": "This weapon's magazine is automatically reloaded when you gain Devour, a Void overshield, or become invisible.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "perk": "Umbral Sustenance",
+    "on": "gaining the buff (refills magazine)",
+    "q": "This weapon's magazine is automatically reloaded when you gain Devour, a Void overshield, or become invisible.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "perk": "Umbral Sustenance",
+    "on": "gaining the buff (refills magazine)",
+    "q": "This weapon's magazine is automatically reloaded when you gain Devour, a Void overshield, or become invisible.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:conditionalfinality",
+  "n": "Conditional Finality",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "perk": "Paracausal Pellets",
+    "on": "landing nearly all Stasis pellets",
+    "q": "landing nearly all Stasis pellets will freeze targets",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "perk": "Paracausal Pellets",
+    "on": "landing nearly all Solar pellets",
+    "q": "landing nearly all Solar pellets will ignite targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:crimson",
+  "n": "Crimson",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Cruel Remedy",
+    "on": "kills",
+    "q": "Kills with this weapon heal the wielder.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:cryosthesia77k",
+  "n": "Cryosthesia 77K",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "perk": "Liquid Cooling",
+    "on": "charged shot hits",
+    "q": "Direct hits by a charged shot instantly freeze the target. Indirect hits freeze combatants and slow opposing Guardians.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "perk": "LN2 Burst",
+    "on": "killing frozen targets",
+    "q": "Scoring a Frozen Enemy Kill refills the Magazine.",
+    "s": "compendium",
+    "note": "catalyst (Cold Efficiency); frozen targets from any source"
+   }
+  ]
+ },
+ {
+  "id": "xw:cullsshadow",
+  "n": "Cull's Shadow",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Blades of Unmaking",
+    "q": "Replaces your melee ability with a 2-hit combo blade attack.",
+    "s": "clarity",
+    "note": "while readied; scales with Melee stat and melee damage buffs, not a glaive melee"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Soulburn",
+    "on": "frontal blade final blows or rapid hits",
+    "q": "Final blows or rapid hits with this weapon's frontal blades heal you",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:darci",
+  "n": "D.A.R.C.I.",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "jolt",
+    "perk": "Personal Assistant",
+    "on": "dealing damage",
+    "q": "Jolts targets when dealing damage.",
+    "s": "bungie",
+    "note": "Compendium: only hits while Target Acquired is active"
+   }
+  ]
+ },
+ {
+  "id": "xw:deadmessenger",
+  "n": "Dead Messenger",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "radiant",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   }
+  ]
+ },
+ {
+  "id": "xw:delicatetomb",
+  "n": "Delicate Tomb",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "ionictrace",
+    "perk": "Traitor's Vessel",
+    "on": "final blows (always on powerful foes)",
+    "q": "Final blows with this weapon have a chance to generate Ionic Traces. Powerful foes and opposing Guardians always generate Ionic Traces.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "perk": "Tempest Cascade",
+    "on": "collecting an Ionic Trace",
+    "q": "Collecting an Ionic Trace overcharges this weapon's next shot, jolting targets on hit.",
+    "s": "bungie",
+    "note": "Ionic Traces from any source work, even while stowed"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "perk": "Tempest Cascade",
+    "on": "overcharged shot hits",
+    "q": "Collecting an Ionic Trace overcharges this weapon's next shot, jolting targets on hit.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:deterministicchaos",
+  "n": "Deterministic Chaos",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "volatile",
+    "perk": "Heavy Metal",
+    "on": "every fourth bullet",
+    "q": "every fourth bullet becomes a heavy projectile that makes targets volatile on impact",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Vexadecimal",
+    "on": "sustained fire",
+    "q": "every fourth Heavy Metal projectile also weakenstargets on impact",
+    "s": "bungie",
+    "note": "Clarity: bugged, only weakens after 32 uninterrupted rounds"
+   }
+  ]
+ },
+ {
+  "id": "xw:devilsruin",
+  "n": "Devil's Ruin",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "firesprite",
+    "perk": "Close the Gap",
+    "on": "final blows",
+    "q": "Final blows create Firesprites.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "perk": "Close the Gap",
+    "on": "picking up a Firesprite (enables laser mode)",
+    "q": "After picking up a Firesprite, [Alternate Weapon Action]  to enable a high-powered Solar laser beam mode.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Pyrogenesis",
+    "on": "laser hits",
+    "q": "Solar laser scorches targets hit and ignites them when defeated.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "perk": "Pyrogenesis",
+    "on": "laser kills",
+    "q": "Solar laser scorches targets hit and ignites them when defeated.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "perk": "Close the Gap",
+    "on": "hitting suspended targets",
+    "q": "Hits against Suspended enemies inflicts 20 Scorch (30 with Ember of Ashes).",
+    "s": "clarity",
+    "note": "Compendium: killing a suspended enemy also ignites; Ember of Ashes raises scorch stacks"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Close the Gap",
+    "if": [
+     {
+      "has": "suspend"
+     }
+    ],
+    "q": "Hits against Suspended enemies inflicts 20 Scorch (30 with Ember of Ashes).",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "xw:divinity",
+  "n": "Divinity",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Judgment",
+    "on": "sustained damage",
+    "q": "Sustained damage with this weapon envelops the target in a field that weakens and stuns them.",
+    "s": "bungie",
+    "note": "the cage turns hits from other precision-capable weapons into precision hits"
+   }
+  ]
+ },
+ {
+  "id": "xw:dragonsbreath",
+  "n": "Dragon's Breath",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Composite Propellant",
+    "on": "embedded rocket fuel",
+    "q": "periodically eject incendiary fuel that inflicts Scorch",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ignition",
+    "perk": "High Octane",
+    "on": "nearby ignitions (any source)",
+    "q": "Igniting nearby targets partially replenishes fuel.",
+    "s": "bungie",
+    "note": "Clarity: ignitions within 70 m of you"
+   },
+   {
+    "do": "creates",
+    "t": "firesprite",
+    "perk": "Composite Propellant",
+    "on": "kills",
+    "q": "Kills spawn Firesprites without any cooldown between each pickup.",
+    "s": "compendium",
+    "note": "catalyst (Pyromancer)"
+   }
+  ]
+ },
+ {
+  "id": "xw:edgeofaction",
+  "n": "Edge of Action",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "volatile",
+    "perk": "Edge of Action",
+    "on": "projectile kills",
+    "q": "Weapon Kills apply Volatile to enemies in a 7 meter radius around the target and grant Volatile Rounds for 3 seconds.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "volatilerounds",
+    "perk": "Edge of Action",
+    "on": "projectile final blows",
+    "q": "Projectile final blows create a volatile detonation and grant Volatile Rounds.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "on": "passing through the Remote Shield dome",
+    "who": "allies",
+    "perk": "Remote Shield",
+    "q": "Passing through the protective shield provides a Void Overshield",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suppress",
+    "perk": "Remote Shield",
+    "if": [
+     {
+      "item": "Helm of Saint-14"
+     }
+    ],
+    "q": "Helm of Saint-14 Interaction | Remote Shield allows triggering The Saint's Suppression Burst with the same conditionals.",
+    "s": "compendium",
+    "note": "the dome lets Helm of Saint-14 trigger its suppressing burst"
+   }
+  ]
+ },
+ {
+  "id": "xw:edgeofconcurrence",
+  "n": "Edge of Concurrence",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "jolt",
+    "perk": "Edge of Concurrence",
+    "on": "sustained projectile damage",
+    "q": "Sustained projectile damage causes targets to become jolted.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Edge of Concurrence",
+    "q": "Being Amplified decreases the number of Hits required by 1.",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "perk": "Lightning Seeker",
+    "on": "charged Lightning Seeker shot",
+    "q": "jolting them and unleashing chain lightning on impact",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:edgeofintent",
+  "n": "Edge of Intent",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Edge of Intent",
+    "on": "projectile final blows",
+    "q": "Projectile final blows scorch nearby targets.",
+    "s": "bungie",
+    "note": "Clarity: Ember of Ashes raises scorch stacks"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "perk": "Restorative Turret",
+    "who": "allies",
+    "on": "healing turret",
+    "q": "deploy a healing turret on impact that provides Cure and Restoration to nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "on": "healing turret",
+    "who": "allies",
+    "perk": "Restorative Turret",
+    "q": "deploy a healing turret on impact that provides Cure and Restoration to nearby allies",
+    "s": "bungie",
+    "note": "Ember of Solace extends the duration"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "self",
+    "perk": "Restorative Turret",
+    "if": [
+     {
+      "piece": "Touch of Flame"
+     }
+    ],
+    "q": "If Touch of Flame is equipped, the turret grants Cure x2 and Restoration x2 for 6 seconds (9 with Ember of Solace) to the caster.",
+    "s": "clarity",
+    "note": "x2 Cure and Restoration for the caster"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "who": "self",
+    "perk": "Restorative Turret",
+    "if": [
+     {
+      "piece": "Touch of Flame"
+     }
+    ],
+    "q": "If Touch of Flame is equipped, the turret grants Cure x2 and Restoration x2 for 6 seconds (9 with Ember of Solace) to the caster.",
+    "s": "clarity",
+    "note": "x2 Cure and Restoration for the caster"
+   }
+  ]
+ },
+ {
+  "id": "xw:ergosum",
+  "n": "Ergo Sum",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Gathering Light",
+    "on": "stowing / consuming Gathering Light stacks",
+    "q": "Stowing this weapon consumes all stacks, granting melee, grenade, and class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Gathering Light",
+    "on": "stowing / consuming Gathering Light stacks",
+    "q": "Stowing this weapon consumes all stacks, granting melee, grenade, and class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "perk": "Gathering Light",
+    "on": "stowing / consuming Gathering Light stacks",
+    "q": "Stowing this weapon consumes all stacks, granting melee, grenade, and class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "perk": "Transcendent Duelist",
+    "q": "Deals increased damage while Transcendent; defeating targets lengthens Transcendence.",
+    "s": "bungie",
+    "note": "Prismatic; kills also build Light and Darkness meters. Transcendent Duelist is one of several rolled Ergo Sum traits"
+   },
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "perk": "Transcendent Duelist",
+    "q": "Kills grant an additional 2.5% energy to both Light and Dark Transcendence bars.",
+    "s": "clarity",
+    "note": "Transcendent Duelist is one rolled Ergo Sum trait"
+   }
+  ]
+ },
+ {
+  "id": "xw:erianasvow",
+  "n": "Eriana's Vow",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "ignition",
+    "perk": "Looks Can Kill",
+    "on": "breaking a Solar shield or a Barrier Champion shield",
+    "q": "Breaking a matched shield or piercing a Champion's barrier will cause the target to ignite.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:euphony",
+  "n": "Euphony",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "threadling",
+    "perk": "Unwound",
+    "on": "sustained damage and precision kills",
+    "q": "Dealing sustained damage with this weapon spawns Threadlings at your target's location.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "threadling",
+    "perk": "Spindle",
+    "on": "Threadling damage (any source)",
+    "q": "Threadling damage increases this weapon's damage.",
+    "s": "bungie",
+    "note": "Clarity: damage from any Threadling counts"
+   }
+  ]
+ },
+ {
+  "id": "xw:exdiris",
+  "n": "Ex Diris",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blind",
+    "on": "moth detonation",
+    "perk": "Loyal Moths",
+    "q": "The moth will seek out nearby targets and detonate, damaging and blinding them.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "who": "allies",
+    "perk": "Loyal Moths",
+    "if": [
+     {
+      "item": "Mothkeeper's Wraps"
+     }
+    ],
+    "q": "Wearing Mothkeeper's Wraps spawns an additional Hive Moth that grants 22.5 HP Void Overshield to the nearest ally.",
+    "s": "clarity",
+    "note": "an extra Void moth gives the nearest ally a Void overshield"
+   },
+   {
+    "do": "grants",
+    "t": "amplified",
+    "perk": "Corrupted Nucleosynthesis",
+    "on": "kills",
+    "q": "Grants Amplified on kill.",
+    "s": "compendium",
+    "note": "catalyst (Berserk Rush)"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Corrupted Nucleosynthesis",
+    "q": "Hits while Amplified grant 50% Enrage on hit.",
+    "s": "compendium",
+    "note": "catalyst"
+   }
+  ]
+ },
+ {
+  "id": "xw:fafnir",
+  "n": "Fafnir",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Quantum Nova",
+    "on": "hits during Quantum Nova",
+    "q": "causing it to dramatically Weaken targets for a short time",
+    "s": "bungie",
+    "note": "strong 30% weaken; activation also weakens in a 10 m radius"
+   }
+  ]
+ },
+ {
+  "id": "xw:fightinglion",
+  "n": "Fighting Lion",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "volatile",
+    "perk": "Thin the Herd",
+    "on": "direct hits",
+    "q": "Direct Hits apply Volatile to the target and enemies in a 7.5 meter radius.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "perk": "Thin the Herd",
+    "q": "Rapid final blows against grenade-damaged combatants refill the magazine.",
+    "s": "bungie",
+    "note": "Clarity/Compendium: the refill is a kill with any other weapon or source within 6 s of Fighting Lion damage, not grenades specifically"
+   }
+  ]
+ },
+ {
+  "id": "xw:finalwarning",
+  "n": "Final Warning",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "unravel",
+    "perk": "All at Once",
+    "on": "fully charged burst hits on marked targets",
+    "q": "Hitting a marked target with a fully charged burst will unravel them.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:forerunner",
+  "n": "Forerunner",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "perk": "Full Stop",
+    "on": "hold reload within 4 s of a weapon kill",
+    "q": "replaces Grenade Ability with a Kinetic-Damage Fragmentation Grenade.",
+    "s": "compendium",
+    "note": "catalyst (The Rock); the frag counts as a Grenade Ability for grenade-kill and grenade-use effects"
+   }
+  ]
+ },
+ {
+  "id": "xw:grandoverture",
+  "n": "Grand Overture",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blind",
+    "perk": "Omega Strike",
+    "on": "missile hits",
+    "q": "Missiles blind Combatants on hit.",
+    "s": "compendium",
+    "note": "catalyst"
+   }
+  ]
+ },
+ {
+  "id": "xw:gravitonlance",
+  "n": "Graviton Lance",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "overshield",
+    "perk": "Graviton Lance Catalyst",
+    "q": "Grants a 30 HP Overshield for 10 seconds.",
+    "s": "clarity",
+    "note": "catalyst (Turnabout): on breaking a combatant's elemental shield"
+   }
+  ]
+ },
+ {
+  "id": "xw:gravitonspike",
+  "n": "Graviton Spike",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "perk": "Temporal Anomaly",
+    "on": "kills/precision hits in Stasis mode while overcharged",
+    "q": "Stasis mode creates an explosion and a formation of Stasis crystals.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "perk": "Temporal Anomaly",
+    "on": "hitting Stasis crystals in Arc mode while overcharged",
+    "q": "Hitting Stasis Crystals will consume 34% Arc Overcharge to call down a lightning strike on them.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "xw:hardlight",
+  "n": "Hard Light",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "radiant",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "perk": "The Fundamentals",
+    "on": "applying or gaining a buff/debuff matching the selected element",
+    "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
+    "s": "bungie",
+    "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Hard Light Catalyst",
+    "q": "While Amplified, Radiant, or Devour is active:",
+    "s": "clarity",
+    "note": "catalyst; handling and reload bonuses"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "perk": "Hard Light Catalyst",
+    "q": "While Amplified, Radiant, or Devour is active:",
+    "s": "clarity",
+    "note": "catalyst"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "perk": "Hard Light Catalyst",
+    "q": "While Amplified, Radiant, or Devour is active:",
+    "s": "clarity",
+    "note": "catalyst"
+   }
+  ]
+ },
+ {
+  "id": "xw:heartshadow",
+  "n": "Heartshadow",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "invisibility",
+    "perk": "Exhumation",
+    "on": "full-energy heavy attacks",
+    "q": "Heavy attacks made with full Sword energy turn you invisible and fire exploding Void projectiles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "perk": "Shot in the Dark",
+    "q": "Remaining invisible grants this weapon increased damage for a brief duration.",
+    "s": "bungie",
+    "note": "Clarity: entering Void invisibility from any source grants Shot in the Dark"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "perk": "Shot in the Dark",
+    "on": "projectile hits during Shot in the Dark",
+    "q": "Hitting a target with this weapon's projectiles while Shot in the Dark is active weakens them.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "invisibility",
+    "perk": "Shot in the Dark",
+    "on": "kills during Shot in the Dark",
+    "q": "Defeating a target with this weapon while Shot in the Dark is active turns you invisible once more.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:heirloom",
+  "n": "Heirloom",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Bolt Thrower",
+    "on": "charged shot direct hits",
+    "q": "Direct Hits with charged shots inflict x20 Scorch per Charge Level.",
+    "s": "compendium",
+    "note": "catalyst"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "perk": "Bolt Thrower",
+    "q": "Deals 10% increased damage against Scorched Enemies.",
+    "s": "compendium",
+    "note": "catalyst; also grants Incandescent"
+   }
+  ]
+ },
+ {
+  "id": "xw:hierarchyofneeds",
+  "n": "Hierarchy of Needs",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Apollonic Tangent",
+    "on": "Guidance Ring seekers",
+    "q": "Arrows fired through a Guidance Ring release seeking projectiles, which scorch targets",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "volatilerounds",
+    "perk": "Guidance Ring",
+    "q": "Seekers can benefit from Volatile Rounds, Unraveling Rounds, and more!",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "unravelingrounds",
+    "perk": "Guidance Ring",
+    "q": "Seekers can benefit from Volatile Rounds, Unraveling Rounds, and more!",
+    "s": "compendium"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "perk": "Apollonic Tangent",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Shadowshot: Deadfall",
+       "Shadowshot: Moebius Quiver"
+      ]
+     }
+    ],
+    "q": "Guidance Rings grant their benefits to any Combat Bow, including Legendaries, Exotics, Heavy Crossbows, Shadowshot, and also Buried Bloodline.",
+    "s": "clarity",
+    "note": "Shadowshot arrows through a ring release seekers (Deadfall: 6); those seekers count as Void Super damage"
+   }
+  ]
+ },
+ {
+  "id": "xw:icebreaker",
+  "n": "Ice Breaker",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "ignition",
+    "perk": "Ice Breaker",
+    "on": "precision kills or shattering a frozen target",
+    "q": "Precision final blows or shattering a frozen target instead triggers an ignition.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "perk": "Ice Breaker",
+    "on": "shattering frozen targets",
+    "q": "Precision final blows or shattering a frozen target instead triggers an ignition.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "shatter",
+    "perk": "Ice Breaker",
+    "q": "Precision Kills or Shattering a Frozen target triggers a Solar Ignition.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "perk": "Ice Breaker",
+    "on": "shattering a Stasis crystal",
+    "q": "Bodyshot Kills or Shattering a Stasis Crystal triggers a Solar Explosion",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "perk": "No Backpack",
+    "on": "hitting Stasis-debuffed targets",
+    "q": "Hits against enemies affected by Stasis Debuffs generates +1 Ammo",
+    "s": "compendium",
+    "note": "catalyst (Icing Breaker)"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "perk": "No Backpack",
+    "on": "hitting Stasis-debuffed targets",
+    "q": "Hits against enemies affected by Stasis Debuffs generates +1 Ammo",
+    "s": "compendium",
+    "note": "catalyst (Icing Breaker)"
+   }
+  ]
+ },
+ {
+  "id": "xw:khvostov7g0x",
+  "n": "Khvostov 7G-0X",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "perk": "Eyes Up, Guardian",
+    "on": "collecting Orbs of Power",
+    "q": "Collecting Orbs of Power strengthens this weapon's next several ricochet shots",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "perk": "Shoot to Loot",
+    "on": "shooting Orbs of Power picks them up",
+    "q": "Shooting an Orb of Power picks it up.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:leviathansbreath",
+  "n": "Leviathan's Breath",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "volatile",
+    "perk": "Leviathan's Sigh",
+    "on": "fully drawn shots",
+    "q": "When fully drawn, the bolt creates a large concussive blast that knocks combatants back and makes them volatile.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xw:lodestar",
+  "n": "Lodestar",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "jolt",
+    "on": "hip-fire hits during Arc Alignment",
+    "perk": "Arc Alignment",
+    "q": "enable hip-fired Starlight Beam to apply Jolt to any targets damaged for a short time",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "arcdamage",
+    "perk": "Arc Alignment",
+    "q": "Dealing Arc damage from any source aligns the battery's coils.",
+    "s": "bungie",
+    "note": "Arc damage from any source (abilities included) charges Arc Alignment"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "perk": "Starlight Beam",
+    "q": "30% increased damage against Arc-Debuffed Enemies.",
+    "s": "compendium",
+    "note": "any Arc debuff (jolt, blind)"
+   },
+   {
+    "do": "uses",
+    "t": "blind",
+    "perk": "Starlight Beam",
+    "q": "30% increased damage against Arc-Debuffed Enemies.",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "perk": "Starlight Beam",
+    "on": "killing Arc-debuffed targets",
+    "q": "Killing an Arc-Debuffed Enemy causes them to explode on death, dealing up to 100 [?] Arc Damage, down to 0% damage, and inflicting blind over 8 meters.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Starlight Beam",
+    "q": "While Amplified:",
+    "s": "compendium",
+    "note": "catalyst (Supercharged Matrix): reload, aim assist and ADS movement bonuses"
+   }
+  ]
+ },
+ {
+  "id": "xw:lordofwolves",
+  "n": "Lord of Wolves",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Shrapnel Launcher",
+    "on": "hip-fire hits; ADS kills explode",
+    "q": "Hipfire | Shots inflict x10+5 Scorch upon dealing damage.",
+    "s": "compendium",
+    "note": "catalyst (Fang and Claw); its scorch/ignitions deal 53% more damage"
+   }
+  ]
+ },
+ {
+  "id": "xw:lumina",
+  "n": "Lumina",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "Noble Round hits an ally",
+    "who": "allies",
+    "perk": "Blessing of the Sky",
+    "q": "Using a Noble Round on an ally heals them",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "rift",
+    "perk": "Noble Rounds",
+    "if": [
+     {
+      "item": "Boots of the Assembler"
+     }
+    ],
+    "q": "Receiving a 'Noble Seeker' from a rift empowered by Boots Of The Assembler also grants one Noble Round.",
+    "s": "clarity",
+    "note": "Boots of the Assembler's Noble Seekers grant Noble Rounds"
+   }
+  ]
+ },
+ {
+  "id": "_skipped",
+  "ids": [
+   "xw:aceofspades",
+   "xw:alethonym",
+   "xw:arbalest",
+   "xw:barrowdyad",
+   "xw:cerberus1",
+   "xw:choirofone",
+   "xw:deadmanstale",
+   "xw:deathbringer",
+   "xw:duality",
+   "xw:eyesoftomorrow",
+   "xw:finalitysauger",
+   "xw:gjallarhorn",
+   "xw:hawkmoon",
+   "xw:heirapparent",
+   "xw:izanagisburden",
+   "xw:jtunn",
+   "xw:lemonarque",
+   "xw:legendofacrius",
+   "xw:lorentzdriver"
+  ]
+ }
+]

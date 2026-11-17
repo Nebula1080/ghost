@@ -1,0 +1,737 @@
+{
+ "terms": {
+  "scorch": {
+   "l": "Scorch",
+   "kind": "debuff",
+   "el": "solar",
+   "aka": [
+    "scorched",
+    "scorching",
+    "scorches",
+    "scorch stacks"
+   ],
+   "def": "A stacking Solar burn on enemies that deals damage over time; reaching 100 stacks triggers an Ignition.",
+   "q": "All Scorch is removed upon reaching x100 Scorch to trigger an Ignition.",
+   "src": "compendium:solar"
+  },
+  "ignition": {
+   "l": "Ignition",
+   "kind": "debuff",
+   "el": "solar",
+   "aka": [
+    "ignite",
+    "ignites",
+    "ignited",
+    "ignitions"
+   ],
+   "def": "A large Solar explosion, usually triggered by maxing out Scorch on an enemy, that clears the Scorch it consumed.",
+   "q": "Explosion that deals 676 [120 Guardians | 250 Construct] Solar Damage in a 8 meter radius",
+   "src": "compendium:solar"
+  },
+  "radiant": {
+   "l": "Radiant",
+   "kind": "buff",
+   "el": "solar",
+   "aka": [
+    "radiance"
+   ],
+   "def": "A Solar buff that increases your weapon damage (20% in PvE) for a short time.",
+   "q": "Increases Weapon Damage by 20% [10%] for 10 seconds and can be extended up to 15 seconds by default.",
+   "src": "compendium:solar"
+  },
+  "restoration": {
+   "l": "Restoration",
+   "kind": "buff",
+   "el": "solar",
+   "aka": [
+    "restore",
+    "restoring"
+   ],
+   "def": "A Solar buff that continuously heals you over time without being interrupted by damage.",
+   "q": "Continuously restores health. Effect is uninterruptible and can be extended up to 15 seconds by default.",
+   "src": "compendium:solar"
+  },
+  "cure": {
+   "l": "Cure",
+   "kind": "buff",
+   "el": "solar",
+   "aka": [
+    "cured",
+    "cures",
+    "curing"
+   ],
+   "def": "A Solar buff that instantly heals a chunk of health per stack.",
+   "q": "Restores 60 [30] HP per stack of Cure over 0.1 seconds.",
+   "src": "compendium:solar"
+  },
+  "firesprite": {
+   "l": "Firesprite",
+   "kind": "object",
+   "el": "solar",
+   "aka": [
+    "firesprites"
+   ],
+   "def": "A Solar elemental pickup that grants grenade energy when collected.",
+   "q": "Solar Elemental Pickup Grants 11.25% Grenade Ability Energy on Pickup.",
+   "src": "compendium:solar"
+  },
+  "sunspot": {
+   "l": "Sunspot",
+   "kind": "object",
+   "el": "solar",
+   "aka": [
+    "sunspots"
+   ],
+   "def": "A Solar zone on the ground that scorches enemies inside it and gives you Restoration and Sol Invictus while you stand in it.",
+   "q": "Sunspots grant Sol Invictus for 5 seconds and Restoration x1 for 5+2.5 seconds.",
+   "src": "sub:solinvictus"
+  },
+  "jolt": {
+   "l": "Jolt",
+   "kind": "debuff",
+   "el": "arc",
+   "aka": [
+    "jolted",
+    "jolts",
+    "jolting"
+   ],
+   "def": "An Arc debuff that makes the enemy release chain lightning to nearby enemies after taking damage.",
+   "q": "Jolted Enemies will release chain lightning for 10 [5] seconds",
+   "src": "compendium:arc"
+  },
+  "blind": {
+   "l": "Blind",
+   "kind": "debuff",
+   "el": "arc",
+   "aka": [
+    "blinded",
+    "blinding",
+    "blinds"
+   ],
+   "def": "An Arc debuff that disorients enemies so they cannot attack or use abilities.",
+   "q": "Blinded Combatants are disoriented, rendering them unable to attack or use abilities for 10 seconds.",
+   "src": "compendium:arc"
+  },
+  "amplified": {
+   "l": "Amplified",
+   "kind": "buff",
+   "el": "arc",
+   "aka": [
+    "amplify",
+    "amplifies"
+   ],
+   "def": "An Arc buff earned through rapid Arc kills or aspects that boosts mobility, handling and slide, and gives some damage resistance.",
+   "q": "Intrinsic Arc Subclass Buff Obtained by reaching 100% Counter Progress through Arc Kills within 6 seconds of each, or through Aspects.",
+   "src": "compendium:arc"
+  },
+  "ionictrace": {
+   "l": "Ionic Trace",
+   "kind": "object",
+   "el": "arc",
+   "aka": [
+    "ionic traces",
+    "ionic"
+   ],
+   "def": "An Arc elemental pickup that seeks you out and grants grenade, melee and class ability energy.",
+   "q": "Grants 11.25% Grenade, and Melee Ability Energy, and 13.5% Class Ability Energy on pickup.",
+   "src": "compendium:arc"
+  },
+  "boltcharge": {
+   "l": "Bolt Charge",
+   "kind": "buff",
+   "el": "arc",
+   "aka": [
+    "bolt charges",
+    "bolt charge stacks",
+    "discharge"
+   ],
+   "def": "A stacking Arc buff built by weapon damage; at 10 stacks your next ability hit or melee calls down an Arc bolt on the target.",
+   "q": "Discharges an Arc Bolt over the damaged enemy",
+   "src": "compendium:arc"
+  },
+  "volatile": {
+   "l": "Volatile",
+   "kind": "debuff",
+   "el": "void",
+   "aka": [
+    "volatility"
+   ],
+   "def": "A Void debuff that makes an enemy explode after taking enough damage or when it dies.",
+   "q": "Volatile Enemies trigger an explosion after being dealt 190 [200] damage or upon dying",
+   "src": "compendium:void"
+  },
+  "weaken": {
+   "l": "Weaken",
+   "kind": "debuff",
+   "el": "void",
+   "aka": [
+    "weakened",
+    "weakens",
+    "weakening"
+   ],
+   "def": "A Void debuff that makes enemies take more damage and move slower.",
+   "q": "Weakened Enemies receive 15% [7.5%] increased damage and 20% Decreased Movement Speed for 6 [2.5] seconds.",
+   "src": "compendium:void"
+  },
+  "suppress": {
+   "l": "Suppression",
+   "kind": "debuff",
+   "el": "void",
+   "aka": [
+    "suppressed",
+    "suppression",
+    "suppresses",
+    "suppressing"
+   ],
+   "def": "A Void debuff that cancels active abilities and prevents the enemy from using abilities for a while.",
+   "q": "Suppressed Enemies are removed from active abilities and are unable to use abilities for 10 [5] seconds.",
+   "src": "compendium:void"
+  },
+  "devour": {
+   "l": "Devour",
+   "kind": "buff",
+   "el": "void",
+   "aka": [
+    "devouring"
+   ],
+   "def": "A Void buff that heals you on activation and on each kill, and grants grenade energy on kills.",
+   "q": "Scoring a kill while Devour is active restores 70 HP, grants Grenade Ability Energy, and refreshes 5+3 seconds of its duration.",
+   "src": "compendium:void"
+  },
+  "overshield": {
+   "l": "Void Overshield",
+   "kind": "buff",
+   "el": "void",
+   "aka": [
+    "void overshield",
+    "overshields"
+   ],
+   "def": "A Void buff that adds a layer of extra health on top of your shields.",
+   "q": "Void Overshield with up to 45 HP for 10+5 seconds.",
+   "src": "compendium:void"
+  },
+  "invisibility": {
+   "l": "Invisibility",
+   "kind": "buff",
+   "el": "void",
+   "aka": [
+    "invisible",
+    "invis",
+    "cloak",
+    "cloaked"
+   ],
+   "def": "A Void buff that hides you from enemies until you take an offensive action.",
+   "q": "Cloaks the user, granting various benefits, while lowering Maximum Radar Range to 24 meters for 5+2 seconds. Immediately ends upon performing an Offensive Action.",
+   "src": "compendium:void"
+  },
+  "voidbreach": {
+   "l": "Void Breach",
+   "kind": "object",
+   "el": "void",
+   "aka": [
+    "void breaches",
+    "breach",
+    "breaches"
+   ],
+   "def": "A Void elemental pickup that grants class ability energy when collected.",
+   "q": "Void Elemental Pickup. Grants 11.25% Class Ability Energy on Pickup.",
+   "src": "compendium:void"
+  },
+  "voidsoul": {
+   "l": "Void Soul",
+   "kind": "object",
+   "el": "void",
+   "aka": [
+    "void souls"
+   ],
+   "def": "A seeking soul summoned from your rift that drains, weakens and suppresses a target.",
+   "q": "Cast your rift to create a Void Soul.",
+   "src": "sub:childoftheoldgods"
+  },
+  "slow": {
+   "l": "Slow",
+   "kind": "debuff",
+   "el": "stasis",
+   "aka": [
+    "slowed",
+    "slows",
+    "slowing",
+    "slow stacks"
+   ],
+   "def": "A stacking Stasis debuff that reduces enemy movement and accuracy; 100 stacks freezes the target.",
+   "q": "Freeze occurs upon reaching x100 Slow.",
+   "src": "compendium:stasis"
+  },
+  "freeze": {
+   "l": "Freeze",
+   "kind": "debuff",
+   "el": "stasis",
+   "aka": [
+    "frozen",
+    "freezes",
+    "freezing"
+   ],
+   "def": "A Stasis debuff that fully immobilizes enemies until they are shattered or it wears off.",
+   "q": "Frozen Enemies are completely immobilized, rendering them unable to shoot, use abilities, or move.",
+   "src": "compendium:stasis"
+  },
+  "shatter": {
+   "l": "Shatter",
+   "kind": "state",
+   "el": "stasis",
+   "aka": [
+    "shattered",
+    "shatters",
+    "shattering"
+   ],
+   "def": "Breaking a frozen enemy or Stasis crystal, which deals area Stasis damage.",
+   "q": "Frozen Enemies can be shattered through damage or directly through specific Stasis Aspects",
+   "src": "compendium:stasis"
+  },
+  "stasiscrystal": {
+   "l": "Stasis crystal",
+   "kind": "object",
+   "el": "stasis",
+   "aka": [
+    "stasis crystals",
+    "crystal",
+    "crystals"
+   ],
+   "def": "A Stasis pillar created on surfaces that freezes nearby enemies when formed and deals damage when shattered.",
+   "q": "Crystals, upon being created, inflict freeze [x15 Slow Stacks for 1.5+0.5 seconds] to enemies within 2.6 metres.",
+   "src": "compendium:stasis"
+  },
+  "stasisshard": {
+   "l": "Stasis shard",
+   "kind": "object",
+   "el": "stasis",
+   "aka": [
+    "stasis shards",
+    "shard",
+    "shards"
+   ],
+   "def": "A Stasis elemental pickup created by shattering or killing slowed/frozen enemies; it grants melee energy.",
+   "q": "Stasis Elemental Pickup: Stasis Shards grant Melee Ability Energy on pickup.",
+   "src": "compendium:stasis"
+  },
+  "frostarmor": {
+   "l": "Frost Armor",
+   "kind": "buff",
+   "el": "stasis",
+   "aka": [
+    "frost armour"
+   ],
+   "def": "A stacking Stasis buff that grants damage resistance per stack and decays over time.",
+   "q": "Grants 7% [2%] Damage Resist per stack, up to 31.25% [10%] Damage Resist at x5 stacks",
+   "src": "compendium:stasis"
+  },
+  "sever": {
+   "l": "Sever",
+   "kind": "debuff",
+   "el": "strand",
+   "aka": [
+    "severed",
+    "severs",
+    "severing"
+   ],
+   "def": "A Strand debuff that reduces the damage an enemy deals.",
+   "q": "Decreases the enemy's outgoing damage dealt by 40% [15%] for 10+5 [5+2.5] seconds.",
+   "src": "compendium:strand"
+  },
+  "suspend": {
+   "l": "Suspend",
+   "kind": "debuff",
+   "el": "strand",
+   "aka": [
+    "suspended",
+    "suspends",
+    "suspending",
+    "suspension"
+   ],
+   "def": "A Strand debuff that lifts enemies into the air, leaving them unable to move, shoot or use abilities.",
+   "q": "Suspended Combatants are unable to move, shoot, or use abilities.",
+   "src": "compendium:strand"
+  },
+  "unravel": {
+   "l": "Unravel",
+   "kind": "debuff",
+   "el": "strand",
+   "aka": [
+    "unraveling",
+    "unraveled",
+    "unravels",
+    "unravelled"
+   ],
+   "def": "A Strand debuff that makes damaged enemies fire seeking threads that spread Unravel to others.",
+   "q": "Unraveled Enemies release 3 seeking threads towards enemies",
+   "src": "compendium:strand"
+  },
+  "wovenmail": {
+   "l": "Woven Mail",
+   "kind": "buff",
+   "el": "strand",
+   "aka": [
+    "woven mail"
+   ],
+   "def": "A Strand buff that grants high damage resistance for a short time.",
+   "q": "Grants 45% [25%] Damage Resist for 10 seconds.",
+   "src": "compendium:strand"
+  },
+  "threadling": {
+   "l": "Threadling",
+   "kind": "object",
+   "el": "strand",
+   "aka": [
+    "threadlings",
+    "perched threadlings",
+    "perched threadling"
+   ],
+   "def": "A small Strand minion that chases enemies and explodes on contact.",
+   "q": "Strand minions that chase enemies within 20? metres, leaping towards the targeted enemy upon being within ? metres.",
+   "src": "compendium:strand"
+  },
+  "tangle": {
+   "l": "Tangle",
+   "kind": "object",
+   "el": "strand",
+   "aka": [
+    "tangles"
+   ],
+   "def": "A Strand elemental pickup left by killing Strand-debuffed enemies; it can be thrown or shot to explode, or grappled for grenade energy.",
+   "q": "Killing an enemy affected by a Strand Debuff (Sever, Suspend, Unravel) spawns a Tangle",
+   "src": "compendium:strand"
+  },
+  "transcendence": {
+   "l": "Transcendence",
+   "kind": "state",
+   "el": "prismatic",
+   "aka": [
+    "transcendent",
+    "transcend"
+   ],
+   "def": "A Prismatic state charged by dealing Light and Darkness damage; it refills grenade and melee, swaps in a Prismatic grenade and grants buffs.",
+   "q": "Instantly recharges 2 Grenade and Melee Ability Charges on activation.",
+   "src": "compendium:prismatic"
+  },
+  "orbofpower": {
+   "l": "Orb of Power",
+   "kind": "object",
+   "el": "",
+   "aka": [
+    "orbs of power",
+    "orb of power",
+    "orbs",
+    "orb"
+   ],
+   "def": "A pickup created by kills and mods that grants Super energy (and Armor Charge with Armor Charge mods).",
+   "q": "creates an Orb of Power that grants 2.5% Super Energy",
+   "src": "compendium:arc"
+  },
+  "armorcharge": {
+   "l": "Armor Charge",
+   "kind": "resource",
+   "el": "",
+   "aka": [
+    "armor charges",
+    "armour charge"
+   ],
+   "def": "A stacking resource (3 stacks by default) used by Armor Charge mods, mainly gained by picking up Orbs of Power.",
+   "q": "Armor Charges are a resource used by Armor Charge Mods",
+   "src": "compendium:game-mechanics"
+  },
+  "healing": {
+   "l": "Healing",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "heal",
+    "heals",
+    "healed",
+    "restores health",
+    "health regeneration"
+   ],
+   "def": "Restoring your or allies' health, from any source.",
+   "q": "Melee Kills begin health regeneration for the user and allies",
+   "src": "compendium:void"
+  },
+  "grenadeenergy": {
+   "l": "Grenade energy",
+   "kind": "energy",
+   "el": "",
+   "aka": [
+    "grenade ability energy",
+    "grenade energy"
+   ],
+   "def": "Energy that recharges your grenade ability.",
+   "q": "Melee Kills grant Grenade Energy based on Enemy Rank.",
+   "src": "compendium:void"
+  },
+  "meleeenergy": {
+   "l": "Melee energy",
+   "kind": "energy",
+   "el": "",
+   "aka": [
+    "melee ability energy",
+    "melee energy"
+   ],
+   "def": "Energy that recharges your melee ability.",
+   "q": "Grenade Ability Damage grants Melee Energy.",
+   "src": "compendium:void"
+  },
+  "classenergy": {
+   "l": "Class ability energy",
+   "kind": "energy",
+   "el": "",
+   "aka": [
+    "class ability energy",
+    "class energy"
+   ],
+   "def": "Energy that recharges your class ability.",
+   "q": "Grants 11.25% Class Ability Energy on Pickup.",
+   "src": "compendium:void"
+  },
+  "superenergy": {
+   "l": "Super energy",
+   "kind": "energy",
+   "el": "",
+   "aka": [
+    "super energy",
+    "super ability energy"
+   ],
+   "def": "Energy that charges your Super ability, earned through damage, kills and Orbs of Power.",
+   "q": "Dealing and receiving damage, as well as Kills and Assist all directly contribute to charging your Super Ability.",
+   "src": "compendium:game-mechanics"
+  },
+  "grenade": {
+   "l": "Grenade ability",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "grenades",
+    "grenade ability"
+   ],
+   "def": "Your grenade ability slot.",
+   "q": "Ability Chunk Energy Gains are generally defined by the base cooldowns of all Abilities, including Class, Grenade, Melee, and Super Abilities.",
+   "src": "compendium:game-mechanics"
+  },
+  "melee": {
+   "l": "Melee ability",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "melees",
+    "melee ability",
+    "powered melee"
+   ],
+   "def": "Your charged (powered) melee ability slot.",
+   "q": "Ability Chunk Energy Gains are generally defined by the base cooldowns of all Abilities, including Class, Grenade, Melee, and Super Abilities.",
+   "src": "compendium:game-mechanics"
+  },
+  "classability": {
+   "l": "Class ability",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "class abilities"
+   ],
+   "def": "Your class ability slot (dodge, barricade, rift, Thruster and similar).",
+   "q": "Ability Chunk Energy Gains are generally defined by the base cooldowns of all Abilities, including Class, Grenade, Melee, and Super Abilities.",
+   "src": "compendium:game-mechanics"
+  },
+  "super": {
+   "l": "Super ability",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "supers",
+    "super ability"
+   ],
+   "def": "Your Super ability.",
+   "q": "Dealing and receiving damage, as well as Kills and Assist all directly contribute to charging your Super Ability.",
+   "src": "compendium:game-mechanics"
+  },
+  "movement": {
+   "l": "Movement ability",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "movement ability",
+    "jump",
+    "glide",
+    "lift"
+   ],
+   "def": "Your jump, glide or lift ability.",
+   "q": "While airborne, jump a second time to reach greater heights.",
+   "src": "sub:highjump"
+  },
+  "finisher": {
+   "l": "Finisher",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "finishers",
+    "finishing move"
+   ],
+   "def": "A close-range execution on a low-health enemy; many fragments and mods trigger on it.",
+   "q": "Finishers grant Invisibility for 5+2 seconds.",
+   "src": "compendium:void"
+  },
+  "rift": {
+   "l": "Rift",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "rifts",
+    "healing rift",
+    "empowering rift"
+   ],
+   "def": "The Warlock class ability that conjures a zone on the ground that heals or empowers those inside.",
+   "q": "Conjures an Empowering Rift beneath the caster for 15 seconds.",
+   "src": "compendium:class-abilities"
+  },
+  "barricade": {
+   "l": "Barricade",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "barricades",
+    "rally barricade",
+    "towering barricade"
+   ],
+   "def": "The Titan class ability that raises a protective wall in front of you.",
+   "q": "Creates a short, curved barricade construct in front of the caster that blocks all damage dealt to it.",
+   "src": "compendium:class-abilities"
+  },
+  "dodge": {
+   "l": "Dodge",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "dodges",
+    "dodging"
+   ],
+   "def": "The Hunter class ability: a quick evasive roll or leap.",
+   "q": "Removes Combatant Projectile Tracking, as well as Aim Assist against Guardians during the Dodge Animation.",
+   "src": "compendium:class-abilities"
+  },
+  "solinvictus": {
+   "l": "Sol Invictus",
+   "kind": "buff",
+   "el": "solar",
+   "aka": [],
+   "def": "A Solar buff from standing in a Sunspot that speeds up grenade and melee regeneration and slows Super drain.",
+   "q": "Sol Invictus grants 100% Increased Base Grenade and Melee Regeneration Rate, and 40% Decreased Passive Super Drain.",
+   "src": "sub:solinvictus"
+  },
+  "speedbooster": {
+   "l": "Speed Booster",
+   "kind": "buff",
+   "el": "arc",
+   "aka": [
+    "speed boost"
+   ],
+   "def": "An Arc buff gained by sprinting while Amplified that maximizes movement speed and adds damage resistance.",
+   "q": "While Amplified, sprinting for 2.5 seconds grants Speed Booster.",
+   "src": "compendium:arc"
+  },
+  "arcsoul": {
+   "l": "Arc Soul",
+   "kind": "object",
+   "el": "arc",
+   "aka": [
+    "arc souls"
+   ],
+   "def": "A floating Arc turret summoned from your rift that fires at nearby enemies.",
+   "q": "Cast your Rift to create an Arc Soul that fires at targets in front of you.",
+   "src": "sub:arcsoul"
+  },
+  "volatilerounds": {
+   "l": "Volatile Rounds",
+   "kind": "buff",
+   "el": "void",
+   "aka": [
+    "volatile round"
+   ],
+   "def": "A Void buff that makes your Void weapons apply Volatile on hit.",
+   "q": "Void Weapons inflict Volatile upon dealing damage",
+   "src": "compendium:void"
+  },
+  "unravelingrounds": {
+   "l": "Unraveling Rounds",
+   "kind": "buff",
+   "el": "strand",
+   "aka": [
+    "unravelling rounds"
+   ],
+   "def": "A Strand buff that makes your Strand weapons apply Unravel on hit.",
+   "q": "Strand Weapons inflict Unravel upon dealing damage.",
+   "src": "compendium:strand"
+  },
+  "grappletangle": {
+   "l": "Grapple Tangle",
+   "kind": "object",
+   "el": "strand",
+   "aka": [
+    "grapple tangles",
+    "grapple point"
+   ],
+   "def": "A Strand anchor that can only be grappled; it cannot be picked up or destroyed.",
+   "q": "Tangle Equivalent that exclusively interacts with Grapple, behaving identically to a Tangle for Grappling.",
+   "src": "compendium:strand"
+  },
+  "elementalpickup": {
+   "l": "Elemental pickup",
+   "kind": "object",
+   "el": "",
+   "aka": [
+    "elemental pickups",
+    "elemental well",
+    "elemental wells"
+   ],
+   "def": "Any subclass pickup: Firesprites, Ionic Traces, Void Breaches, Stasis Shards or Tangles.",
+   "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.",
+   "src": "xa:foetracer"
+  },
+  "stun": {
+   "l": "Champion stun",
+   "kind": "debuff",
+   "el": "",
+   "aka": [
+    "stuns",
+    "stunned",
+    "stunning",
+    "anti-barrier",
+    "unstoppable",
+    "overload"
+   ],
+   "def": "Interrupting a Champion so it briefly cannot attack, move or use abilities; certain verbs stun specific Champion types.",
+   "q": "Stunning prevents the Champion from attacking, moving, or using any abilities.",
+   "src": "compendium:game-mechanics"
+  },
+  "airborne": {
+   "l": "Airborne",
+   "kind": "state",
+   "el": "",
+   "aka": [
+    "in the air",
+    "midair",
+    "mid-air"
+   ],
+   "def": "Being off the ground (jumping, gliding or lifting); some pieces require or reward it.",
+   "q": "While airborne, jump a second time to reach greater heights.",
+   "src": "sub:highjump"
+  },
+  "criticalhealth": {
+   "l": "Critical health",
+   "kind": "state",
+   "el": "",
+   "aka": [
+    "critically wounded",
+    "low health"
+   ],
+   "def": "Being at very low health; several fragments and exotics trigger on it.",
+   "q": "Upon reaching Critical Health: 400% [200%] Additional Base Grenade and Melee Ability Regeneration Rate.",
+   "src": "compendium:arc"
+  }
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "terms": {
+  "voidability": {
+   "l": "Void ability damage", "kind": "damage", "el": "void", "aka": ["void ability", "void abilities", "void ability damage", "void ability final blows"],
+   "def": "Damage or final blows from your Void abilities (grenade, melee, super, aspect abilities). Several Void pieces key off it, and Volatile explosions count as it.",
+   "q": "Hitting a target with a Void ability or Volatile explosion makes them volatile.", "src": "sub:controlleddemolition"
+  },
+  "truesight": {
+   "l": "Truesight", "kind": "buff", "el": "void", "aka": [],
+   "def": "A short buff that highlights nearby enemies through walls, granted alongside invisibility by Stylish Executioner.",
+   "q": "grants Invisibility and Truesight", "src": "sub:stylishexecutioner"
+  },
+  "disorient": {
+   "l": "Disorient", "kind": "debuff", "el": "", "aka": ["disoriented", "disorienting"],
+   "def": "Disoriented combatants lose track of you and struggle to attack. Applied by Snare Bomb and On the Prowl smoke and Unbreakable's shield and blast.",
+   "q": "detonates into a disorienting smoke cloud", "src": "sub:snarebomb"
+  },
+  "voidsmoke": {
+   "l": "Void Smoke cloud", "kind": "object", "el": "void", "aka": ["smoke cloud", "cloud of smoke", "void smoke"],
+   "def": "A lingering Hunter smoke cloud that damages, weakens and disorients enemies inside it and makes allies who pass through invisible. It can trigger melee effects.",
+   "q": "Defeating priority targets creates a weakening cloud of smoke that makes you and allies invisible when passing through it.", "src": "sub:ontheprowl"
+  },
+  "prioritytarget": {
+   "l": "Priority target", "kind": "debuff", "el": "void", "aka": ["marked target", "pursuit predation"],
+   "def": "A combatant marked by On the Prowl. Defeating it releases a weakening smoke cloud and grants ability energy; Phantom Surge hits it harder.",
+   "q": "Periodically marks a nearby combatant as a priority target for you and your team.", "src": "sub:ontheprowl"
+  }
+ }
+}

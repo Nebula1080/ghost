@@ -1,0 +1,25 @@
+{
+ "terms": {
+  "weaponsurge": { "l": "Weapon Surge", "kind": "buff", "el": "", "aka": ["weapon surge", "arc weapon surge", "stasis weapon surge", "surge"],
+    "def": "A stacking damage buff for weapons of one damage type (Arc, Solar, Void, Stasis or Strand).",
+    "q": "grants 4 Stacks of Weapon Surge matching the element of the used ability", "src": "xa:foetracer" },
+  "weapondamage": { "l": "Weapon damage buff", "kind": "buff", "el": "", "aka": ["empowering buff", "increased weapon damage", "weapon damage bonus"],
+    "def": "A temporary increase to your outgoing weapon damage (Empowering buffs and exotic stacking bonuses).",
+    "q": "35% [20%] increased weapon damage (Empowering Buff)", "src": "xa:sealedahamkaragrasps" },
+  "handcannon": { "l": "Hand Cannon", "kind": "damage", "el": "", "aka": ["hand cannons"],
+    "def": "Hand Cannon weapons; some exotics only work while one is equipped or readied.",
+    "q": "while a Hand Cannon is equipped", "src": "xa:luckypants" },
+  "sidearm": { "l": "Sidearm", "kind": "damage", "el": "", "aka": ["sidearms"],
+    "def": "Sidearm weapons; some exotics buff them or trigger on readying one.",
+    "q": "Increases Sidearm airborne effectiveness, ready speed, and reload speed.", "src": "xa:mechaneerstricksleeves" },
+  "bow": { "l": "Bow", "kind": "damage", "el": "", "aka": ["bows"],
+    "def": "Bow weapons; some exotics change how their draw works or boost their damage.",
+    "q": "Bow perfect draw can be held indefinitely.", "src": "xa:oathkeeper" },
+  "glaive": { "l": "Glaive", "kind": "damage", "el": "", "aka": ["glaives", "glaive melee"],
+    "def": "Glaive weapons, with both a projectile and a melee attack; some exotics buff either.",
+    "q": "Increases Glaive reload speed and melee damage when surrounded.", "src": "xa:tritonvice" },
+  "primaryweapon": { "l": "Primary weapon", "kind": "damage", "el": "", "aka": ["primary ammo weapons", "primary weapons", "primary weapon kills"],
+    "def": "Weapons that use Primary ammo; some exotics trigger on their final blows.",
+    "q": "Final blows with Primary ammo weapons return dodge energy", "src": "xa:radiantdancemachines" }
+ }
+}
