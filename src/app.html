@@ -570,7 +570,7 @@ nav.views svg{display:none}
 <div id="intro" aria-hidden="true"><svg class="sig" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-ghost"/></svg><span>GHOST</span></div>
 <input type="file" id="file" accept=".csv,text/csv" multiple hidden>
 
-<script>window.VS_DEFS = /*__DEFS__*/null;window.VS_ART = /*__ART__*/null;window.VS_ISPR = /*__ISPR__*/null;window.VS_APIDEFS = /*__APIDEFS__*/null;window.VS_BUNGIE_CFG = /*__BUNGIECFG__*/null;</script>
+<script>window.VS_DEFS = /*__DEFS__*/null;window.VS_ART = /*__ART__*/null;window.VS_ISPR = /*__ISPR__*/null;window.VS_APIDEFS = /*__APIDEFS__*/null;window.VS_BUNGIE_CFG = /*__BUNGIECFG__*/null;window.VS_IX = /*__IX__*/null;</script>
 <script>
 /*__CORE__*/
 /*__BUNGIE__*/
@@ -1968,8 +1968,12 @@ function showSubDetail() {
 // ---------- Builds: subclass + weapons + armor + mods, with element keyword synergies ----------
 // A build stores references only (subclass plug hashes, item {id, hash, name}, mod names), per profile through
 // PK()/PP(). Items come from the vault; refs keep hash + name so a later theorycrafting mode can show items the
-// player doesn't own. The synergy engine (Core.buildPieces / synergy / *Score) reads every piece's own text.
+// player doesn't own. Interactions come only from curated data (window.VS_IX, data/interactions): Core.ixEval checks
+// each effect's conditions against the build; the *Score functions rank picker choices with it.
 const BLD = { list: [], cur: null };
+const IX = window.VS_IX || null;   // curated interactions (data/interactions)
+const IX_EL = t => EL_COL[IX?.t?.[t]?.el === 'prismatic' ? 'prism' : IX?.t?.[t]?.el] || '';
+const VERB = { creates: 'creates', applies: 'applies', grants: 'grants', uses: 'uses', modifies: 'changes', consumes: 'spends', counts: 'counts as' };
 const BLD_MAX = 60;
 const B_CLASSES = [['warlock', 'Warlock'], ['titan', 'Titan'], ['hunter', 'Hunter']];
 const W_LABEL = { kinetic: 'Kinetic', energy: 'Energy', power: 'Power' };
@@ -2031,8 +2035,16 @@ const statChips = st => Object.entries(st || {}).map(([k, v]) => `<span class="b
 const whyHtml = why => {
   const by = new Map();
   for (const w of why) { const id = w.k + w.role; if (!by.has(id)) by.set(id, { ...w, others: [] }); if (w.other && !by.get(id).others.includes(w.other)) by.get(id).others.push(w.other); }
-  return [...by.values()].slice(0, 4).map(w => `<span class="why ${w.role}" style="--ec:${EL_COL[Core.SYN_BY[w.k]?.el] || (w.k === 'el' ? 'var(--light)' : 'var(--dim)')}">${w.role === 'p' ? 'makes' : w.role === 'u' ? 'uses' : 'mentions'} <b>${esc(w.l)}</b>${w.others.length ? ' · ' + esc(w.others.slice(0, 2).join(', ')) + (w.others.length > 2 ? '…' : '') : ''}</span>`).join('');
+  return [...by.values()].slice(0, 4).map(w => `<span class="why ${w.role}" style="--ec:${IX_EL(w.k) || 'var(--dim)'}">${w.role === 'p' ? 'provides' : w.role === 'u' ? 'uses' : 'turns on'} <b>${esc(w.l)}</b>${w.others.length ? ' · ' + esc(w.others.slice(0, 2).join(', ')) + (w.others.length > 2 ? '…' : '') : ''}</span>`).join('');
 };
+// evidence for one effect: the quote, its source, trigger, conditions and the curator's note
+function fxHtml(pc, f, extra = '') {
+  if (!f || f.implicit) return `<b>${esc(pc.n)}</b> <small>your chosen ${esc(pc.label.toLowerCase())}</small>${extra}`;
+  const e = f.e; const src = { bungie: 'Bungie', clarity: 'Clarity', clarityEnhanced: 'Clarity (enhanced)', compendium: 'Data Compendium' }[e.s] || '';
+  const condTxt = c => c.any ? c.any.map(condTxt).join(' or ') : c.subclass ? `a ${c.subclass} subclass` : c.piece ? c.piece : c.item ? c.item : c.slot ? c.is.join(' or ') : c.weapon ? (['super', 'grenade', 'melee'].includes(c.weapon) ? `a weapon matching your ${c.weapon}` : `a ${c.weapon} weapon`) : (IX?.t?.[c.has]?.l || c.has);
+  const conds = (e.if || []).map(condTxt);
+  return `<b>${esc(pc.n)}</b> <small>${esc(VERB[e.do] || e.do)} ${esc(IX?.t?.[e.t]?.l || e.t)}${e.by ? ' through ' + esc(IX?.t?.[e.by]?.l || e.by) : ''}${e.perk ? ' · ' + esc(e.perk) : ''} · ${esc(src)}</small>${e.on ? `<span class="son">${esc(e.on)}</span>` : ''}${conds.length ? `<span class="son">only with ${esc(conds.join(' + '))}</span>` : ''}<q>${esc(e.q)}</q>${e.note ? `<span class="snote2">${esc(e.note)}</span>` : ''}${extra}`;
+}
 
 function renderBuilds() {
   const v = $('#builds');
@@ -2047,9 +2059,9 @@ function renderBuilds() {
   Core.normBuild(b, D);
   const sc = scAll(b);
   const pieces = Core.buildPieces(b, D, S.byId);
-  const syn = Core.synergy(pieces);
+  const syn = Core.synergy(pieces, IX, D, b.el);
   const st = Core.buildStats(b, D, S.byId);
-  const nLinks = syn.keys.filter(k => k.p.length && k.u.length).length + new Set(syn.links.filter(l => l.k === 'el').map(l => l.l)).size;
+  const nLinks = syn.keys.length;
   // subclass
   const slot = (sec, i, a) => `<button class="bslot${a ? ' on' : ''}" data-sub="${sec}" data-i="${i}" title="${a ? esc(a.n) : 'Choose ' + SUB_L[sec].toLowerCase()}">${a ? plugIcon(a.n, 'sq', a.i) : '<span class="ic sq ph0">+</span>'}<span class="bl">${SUB_L[sec]}</span><span class="bn">${a ? esc(a.n) : 'Choose'}</span>${a?.st ? `<span class="bsts">${statChips(a.st)}</span>` : ''}</button>`;
   const nFrag = Core.fragSlots(b, D);
@@ -2079,17 +2091,19 @@ function renderBuilds() {
     }
     return `<div class="bcard"><div class="bcl">${label}</div><div class="bcrow"><button class="bpick" data-${g}="${s}">${body}</button>${ref ? `<button class="x" data-clr${g}="${s}" title="Remove" aria-label="Remove ${label}">×</button>` : ''}</div>${mods}</div>`;
   };
-  // synergy panel: one card per keyword with sources and payoffs; tap a piece to read the sentence it comes from
-  const pchip = (i, k, role) => { const pc = pieces[i]; return `<button class="schip" data-ev="${k}|${i}|${role}">${pieceIcon(pc, b)}<span class="pn">${esc(pc.n)}<small>${esc(pc.label)}</small></span></button>`; };
-  const cards = [];
-  for (const e of syn.keys.filter(k => k.p.length && k.u.length)) cards.push(`<div class="skey" style="--ec:${EL_COL[e.el] || 'var(--light)'}"><div class="skh"><i></i><b>${esc(e.l)}</b><small>${e.p.length} source${e.p.length === 1 ? '' : 's'} · ${e.u.length} payoff${e.u.length === 1 ? '' : 's'}</small></div><div class="srow"><span class="sl">Made by</span>${e.p.map(i => pchip(i, e.k, 'p')).join('')}</div><div class="srow"><span class="sl">Pays off</span>${e.u.map(i => pchip(i, e.k, 'u')).join('')}</div><div class="sev"></div></div>`);
-  const elGroups = {}; for (const l of syn.links.filter(x => x.k === 'el')) { const g = (elGroups[l.l] ||= { p: new Set(), u: new Set() }); g.p.add(l.from); g.u.add(l.to); }
-  for (const [l, g] of Object.entries(elGroups)) cards.push(`<div class="skey" style="--ec:${EL_COL[Core.norm(l.split(' ')[0])] || 'var(--light)'}"><div class="skh"><i></i><b>${esc(l)}</b><small>element match</small></div><div class="srow"><span class="sl">Weapon</span>${[...g.p].map(i => pchip(i, 'el:' + l, 'p')).join('')}</div><div class="srow"><span class="sl">Pays off</span>${[...g.u].map(i => pchip(i, 'el:' + l, 'u')).join('')}</div><div class="sev"></div></div>`);
-  const needs = syn.keys.filter(k => k.u.length && !k.p.length), spare = syn.keys.filter(k => k.p.length && !k.u.length);
-  const synHtml = `${cards.join('') || `<div class="stat-pill">${pieces.length ? 'No interactions yet. Add pieces that make and use the same keyword: e.g. a melee that scorches and a fragment that pays off on scorched targets.' : 'Choose subclass pieces, weapons and armor to see how they work together.'}</div>`}
-    ${needs.length ? `<div class="sgap"><b>Nothing here makes</b> ${needs.map(k => `<button class="schip sm" data-ev="${k.k}|${k.u[0]}|u"><span class="pn">${esc(k.l)}<small>${esc(pieces[k.u[0]].n)} uses it</small></span></button>`).join('')}<div class="sev"></div></div>` : ''}
-    ${spare.length ? `<div class="sgap dim"><b>Made but not used</b> ${spare.map(k => `<span class="tchip">${esc(k.l)}</span>`).join('')}</div>` : ''}
-    <p class="snote">From Bungie’s and Clarity’s descriptions of each piece. Tap a piece to read the sentence behind it.</p>`;
+  // interactions panel (curated data only): one card per term with what provides it and what uses / changes it.
+  // Tap a piece to read the quote, conditions and notes behind it.
+  const pchip = (i, t, role) => { const pc = pieces[i]; return `<button class="schip" data-ev="${esc(t)}|${i}|${role}">${pieceIcon(pc, b)}<span class="pn">${esc(pc.n)}<small>${esc(pc.label)}</small></span></button>`; };
+  const cards = syn.keys.map(k => `<div class="skey" style="--ec:${IX_EL(k.t) || 'var(--light)'}"><div class="skh"><i></i><b>${esc(k.l)}</b><small>${esc(k.kind)} · ${k.p.length} source${k.p.length === 1 ? '' : 's'} · ${k.u.length} payoff${k.u.length === 1 ? '' : 's'}</small></div><div class="srow"><span class="sl">From</span>${k.p.map(i => pchip(i, k.t, 'p')).join('')}</div><div class="srow"><span class="sl">Used by</span>${k.u.map(i => pchip(i, k.t, 'u')).join('')}</div><div class="sev"></div></div>`);
+  const inact = syn.inactive.filter(f => ['creates', 'applies', 'grants', 'uses', 'modifies', 'consumes'].includes(f.e.do));
+  const pend = syn.pending.map(i => pieces[i].n);
+  const synHtml = !IX ? '<div class="stat-pill">Interaction data isn’t in this build of Ghost.</div>' : `${cards.join('') || `<div class="stat-pill">${pieces.length ? 'No interactions between the reviewed pieces yet.' : 'Choose subclass pieces, weapons and armor to see how they work together.'}</div>`}
+    ${(() => { const rows = pieces.map((pc, i) => [pc, i, syn.fx.filter(f => f.i === i && f.ok && !f.implicit && f.e.do !== 'counts')]).filter(r => r[2].length);
+      return rows.length ? `<details class="sfx" open><summary>What each piece does in this build</summary>${rows.map(([pc, i, fs]) => `<div class="sfxr"><span class="sfxn">${pieceIcon(pc, b)}<b>${esc(pc.n)}</b></span><span class="sfxl">${fs.map(f => `<button class="schip sm" data-fx="${esc(f.key)}|${i}"><span class="pn">${esc(VERB[f.e.do])} ${esc(IX.t[f.e.t]?.l || f.e.t)}${(f.e.if || []).length ? '<small>condition met</small>' : ''}</span></button>`).join('')}</span><div class="sev"></div></div>`).join('')}</details>` : ''; })()}
+    ${inact.length ? `<div class="sgap inact"><b>Not active in this build</b>${inact.map((f, n) => `<button class="schip sm" data-in="${n}"><span class="pn">${esc(pieces[f.i].n)}<small>${esc(VERB[f.e.do])} ${esc(IX.t[f.e.t]?.l || f.e.t)}: ${esc(f.why.join('; '))}</small></span></button>`).join('')}<div class="sev"></div></div>` : ''}
+    ${syn.gaps.length ? `<div class="sgap"><b>Nothing here provides</b>${syn.gaps.map(f => `<button class="schip sm" data-gap="${esc(f.key)}|${f.i}"><span class="pn">${esc(IX.t[f.e.t]?.l || f.e.t)}<small>${esc(pieces[f.i].n)} uses it</small></span></button>`).join('')}<div class="sev"></div></div>` : ''}
+    ${pend.length ? `<p class="snote">Not reviewed yet: ${esc(pend.join(', '))}. Their interactions appear once they’re curated.</p>` : ''}
+    <p class="snote">Curated from each piece’s Bungie, Clarity and Data Compendium text. Tap a piece to read the quote and any conditions behind it.</p>`;
   // stats
   const statHtml = Core.ARMOR3.map(k => { const s = st.stats[k]; const w = x => Math.max(0, Math.min(100, x / 2)); return `<div class="bstat"><span class="sn">${esc(k)}</span><b>${s.total}</b><span class="tr" title="Armor ${s.armor}, fragments ${s.frag}, mods ${s.mods}"><i style="width:${w(s.armor)}%"></i>${s.mods > 0 ? `<i class="mod" style="width:${w(s.mods)}%"></i>` : ''}${s.frag > 0 ? `<i class="frag" style="width:${w(s.frag)}%"></i>` : ''}</span><small>${s.frag ? `<span class="${s.frag > 0 ? 'up' : 'dn'}">${s.frag > 0 ? '+' : ''}${s.frag} frag</span>` : ''}${s.mods ? ` <span class="up">+${s.mods} mods</span>` : ''}</small></div>`; }).join('');
   const subName = sc?.n || '';
@@ -2146,17 +2160,28 @@ function bindBuild(v, b, pieces, syn) {
   v.querySelectorAll('[data-clra]').forEach(x => x.onclick = () => { delete b.a[x.dataset.clra]; saveBuilds(); renderBuilds(); });
   v.querySelectorAll('[data-mod]').forEach(x => x.onclick = () => pickMod(b, x.dataset.mod, +x.dataset.mi, pieces));
   v.querySelectorAll('.bpk [data-pk]').forEach(x => x.onclick = e => { e.stopPropagation(); modal(`<div class="pdet" style="margin:0">${infoHtml(x.dataset.pk)}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); });
-  // evidence: the sentence that made a piece a source / payoff of the keyword
+  // evidence: the curated effect (quote, conditions, note) that made a piece a source / user of the term
+  const showEv = (x, html) => {
+    const box = x.closest('.skey,.sgap,.sfxr')?.querySelector('.sev'); if (!box) return;
+    const id = x.dataset.ev || x.dataset.in || x.dataset.gap || x.dataset.fx; const was = box.dataset.for === id;
+    v.querySelectorAll('.schip.on').forEach(y => y.classList.remove('on'));
+    if (was || !html) { box.innerHTML = ''; box.dataset.for = ''; return; }
+    x.classList.add('on'); box.dataset.for = id; box.innerHTML = html;
+  };
   v.querySelectorAll('[data-ev]').forEach(x => x.onclick = () => {
-    const [k, i, role] = x.dataset.ev.split('|'); const pc = pieces[+i]; const box = x.closest('.skey,.sgap')?.querySelector('.sev'); if (!pc || !box) return;
-    let ev;
-    if (k.startsWith('el:')) { const l = syn.links.find(y => y.k === 'el' && 'el:' + y.l === k && (role === 'p' ? y.from : y.to) === +i); ev = l && (role === 'p' ? l.ef : l.et); }
-    else ev = pc.tags[k]?.[role] || syn.links.find(y => y.k === k && y.to === +i)?.et;
-    const was = box.dataset.for === x.dataset.ev; v.querySelectorAll('.schip.on').forEach(y => y.classList.remove('on'));
-    if (was || !ev) { box.innerHTML = ''; box.dataset.for = ''; return; }
-    x.classList.add('on'); box.dataset.for = x.dataset.ev;
-    box.innerHTML = `<b>${esc(pc.n)}</b> <small>${esc(ev.src)}</small><q>${esc(ev.text)}</q>`;
+    const [t, si, role] = x.dataset.ev.split('|'); const i = +si; const pc = pieces[i]; if (!pc) return;
+    const ls = syn.links.filter(l => l.t === t && (role === 'p' ? l.from === i : l.to === i));
+    const l = ls[0]; if (!l) return;
+    const f = role === 'p' ? l.pf : l.cf;
+    const via = role === 'p' && l.via ? `<span class="son">${esc(IX.t[l.via.e.t]?.l || l.via.e.t)} counts as ${esc(IX.t[l.via.e.as]?.l || l.via.e.as)} (${esc(pieces[l.via.i].n)})</span><q>${esc(l.via.e.q)}</q>` : '';
+    const others = [...new Set(ls.map(y => pieces[role === 'p' ? y.to : y.from].n))];
+    showEv(x, fxHtml(pc, f, `${via}<span class="son">${role === 'p' ? 'Used by' : 'From'}: ${esc(others.join(', '))}</span>`));
   });
+  const inact = syn.inactive.filter(f => ['creates', 'applies', 'grants', 'uses', 'modifies', 'consumes'].includes(f.e.do));
+  v.querySelectorAll('[data-in]').forEach(x => x.onclick = () => { const f = inact[+x.dataset.in]; if (f) showEv(x, fxHtml(pieces[f.i], f, `<span class="son warn">${esc(f.why.join('; '))}</span>`)); });
+  v.querySelectorAll('[data-fx]').forEach(x => x.onclick = () => { const [key, si] = x.dataset.fx.split('|'); const f = syn.fx.find(g => g.key === key && g.i === +si); if (f) showEv(x, fxHtml(pieces[f.i], f)); });
+  v.querySelectorAll('[data-gap]').forEach(x => x.onclick = () => { const [key, si] = x.dataset.gap.split('|'); const f = syn.gaps.find(g => g.key === key && g.i === +si); if (f) showEv(x, fxHtml(pieces[f.i], f)); });
+
 }
 // DIM loadout link: opens the build on DIM's Loadouts page, where it can be saved, equipped or shared from DIM
 function openDimLink(b) {
@@ -2184,7 +2209,7 @@ function openPicker(title, rows, onPick, opt = {}) {
 function pickSub(b, sec, i, pieces) {
   const list = Core.subList(scAll(b), sec); const many = sec === 'aspects' || sec === 'fragments';
   const cur = many ? b.sub[sec][i] : b.sub[sec];
-  const rows = list.map(a => { const r = Core.subScore(b, D, sec, a.h, pieces); const used = many && b.sub[sec].includes(a.h) && a.h !== cur;
+  const rows = list.map(a => { const r = Core.subScore(b, D, sec, a.h, pieces, IX); const used = many && b.sub[sec].includes(a.h) && a.h !== cur;
     return { k: String(a.h), n: a.n, icon: plugIcon(a.n, 'sq', a.i), sub: `${esc(a.d.replace(/\[[^\]]*\]\s*/g, '').slice(0, 160))}${a.d.length > 160 ? '…' : ''}${a.fc ? ` <span class="bst">${a.fc} fragment slots</span>` : ''}${statChips(a.st)}`, s: a.n + ' ' + a.d, score: r.score, why: r.why, on: a.h === cur, off: used }; })
     .sort((x, y) => (y.score - x.score) || x.n.localeCompare(y.n));
   rows.forEach(r => { if (r.off) r.n += ' (in build)'; });
@@ -2200,7 +2225,7 @@ function pickItem(b, g, slot, pieces) {
   const cls = B_CLASSES.find(c => c[0] === b.cls)?.[1];
   const pool = g === 'w' ? S.weapons.filter(it => Core.weaponSlot(it) === slot) : S.armor.filter(it => Core.armorSlot(it) === slot && (!it.equippable || it.equippable === 'Any' || it.equippable === cls));
   const cur = (g === 'w' ? b.w : b.a)[slot]?.id;
-  const rows = pool.map(it => { const r = Core.synScore(it, pieces, D, slot);
+  const rows = pool.map(it => { const r = Core.synScore(it, pieces, D, slot, IX);
     const sub = (g === 'w' ? [it.type, it.element, it.power != null ? '◆ ' + it.power : '', it.rating != null ? 'rating ' + it.rating : ''] : [it.type, it.frame, it.set ? '◈ ' + it.set : '', it.stats.Total != null ? 'Total ' + it.stats.Total : '', it.tertiary ? '+' + it.tertiary : '']).filter(Boolean).map(esc).join(' · ') + (it.tag === 'junk' ? ' · <span class="warn">junk</span>' : '');
     return { k: it.id, n: it.name, icon: iIcon(it, 40), sub, s: [it.name, it.type, it.frame, it.element, it.set, ...it.perks.filter(p => p.s).map(p => p.n)].join(' '), score: r.score, why: r.why, on: it.id === cur, it }; })
     .sort((x, y) => (y.score - x.score) || ((x.it.tag === 'junk') - (y.it.tag === 'junk')) || ((y.it.rating ?? y.it.stats.Total ?? -1) - (x.it.rating ?? x.it.stats.Total ?? -1)) || ((y.it.power ?? 0) - (x.it.power ?? 0))).slice(0, 400);
@@ -2215,7 +2240,7 @@ function pickItem(b, g, slot, pieces) {
 }
 function pickMod(b, slot, i, pieces) {
   const ms = b.mods[slot] || []; const cur = ms[i];
-  const rows = Core.modsFor(slot, D).map(([n, cost, st]) => { const r = Core.modScore(n, slot, D, pieces); const bd = Core.plugOf(n, D, 'armor')?.[2] || '';
+  const rows = Core.modsFor(slot, D).map(([n, cost, st]) => { const r = Core.modScore(n, slot, D, pieces, IX); const bd = Core.plugOf(n, D, 'armor')?.[2] || '';
     return { k: n, n, icon: plugIcon(n, 'sq', pIdx(n, 'armor')), sub: `<span class="bst">${cost} energy</span>${statChips(st)} ${esc(bd.slice(0, 140))}${bd.length > 140 ? '…' : ''}`, s: n + ' ' + bd, score: r.score, why: r.why, on: n === cur }; })
     .sort((x, y) => (y.score - x.score) || x.n.localeCompare(y.n));
   openPicker(`${A_LABEL[slot]} mod ${i + 1}`, rows, n => {

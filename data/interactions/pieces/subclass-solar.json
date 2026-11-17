@@ -1,0 +1,1949 @@
+[
+ {
+  "id": "sub:acrobatsdodge",
+  "n": "Acrobat's Dodge",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "radiant",
+    "on": "landing from the dodge",
+    "who": "allies",
+    "q": "Upon landing, make yourself and nearby allies radiant.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:balancedglide",
+  "n": "Balanced Glide",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Jump while airborne to activate Glide",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:bladebarrage",
+  "n": "Blade Barrage",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "unleash a volley of Solar-charged knives that explode and scorch targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:burningmaul",
+  "n": "Burning Maul",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "on": "Heavy Attack cyclone",
+    "q": "create a cyclone of flames that seeks targets, dealing damage and scorching them",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "sunspot",
+    "if": [
+     {
+      "piece": "Sol Invictus"
+     }
+    ],
+    "q": "Sol Invictus creates a Sunspot on cast if grounded",
+    "s": "compendium",
+    "note": "Sol Invictus also cuts the Super drain."
+   }
+  ]
+ },
+ {
+  "id": "sub:burstglide",
+  "n": "Burst Glide",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Jump while airborne to activate Glide",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:catapultlift",
+  "n": "Catapult Lift",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Jump while airborne to activate Lift",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:celestialfire",
+  "n": "Celestial Fire",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "scorching targets with each hit",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:consecration",
+  "n": "Consecration",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sliding",
+    "q": "While sliding, activate your charged melee ability",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "While sliding, activate your charged melee ability",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "launch a wave of [Solar] Solar energy forward, damaging and scorching targets in front of you",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "If the wave hits a scorched target, they ignite.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "on": "second (slam) wave hits a scorched target",
+    "q": "If the wave hits a scorched target, they ignite.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "deals damage, and shatters Stasis Crystals",
+    "s": "clarity",
+    "note": "The slam wave shatters Stasis crystals (relevant on Prismatic)."
+   }
+  ]
+ },
+ {
+  "id": "sub:crackshot",
+  "n": "Crackshot",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "classability",
+    "q": "Activate your class ability to fire up to three scorching shots",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "dodge",
+    "q": "triggers the effects of your equipped dodge when activated",
+    "s": "clarity",
+    "note": "Replaces your dodge but still triggers its effects (e.g. Acrobat's Dodge radiant, Gambler's Dodge energy)."
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "fire up to three scorching shots at combatants you've marked",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "self",
+    "q": "Landing all three shots cures you.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "Benefits from Radiant, which grants the shots 20% [0%] increased damage.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Acrobat's Dodge"
+      ]
+     }
+    ],
+    "q": "Pairing Crackshot with Acrobat's Dodge always applies the damage bonus.",
+    "s": "clarity",
+    "note": "Acrobat's Dodge radiant applies before the shots fire."
+   }
+  ]
+ },
+ {
+  "id": "sub:daybreak",
+  "n": "Daybreak",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Your Daybreak projectiles scorch targets on impact.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofashes",
+  "n": "Ember of Ashes",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "scorch",
+    "q": "You apply more scorch stacks to targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofbeams",
+  "n": "Ember of Beams",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Blade Barrage",
+       "Daybreak",
+       "Song of Flame"
+      ]
+     }
+    ],
+    "q": "Your Solar Super projectiles have stronger target acquisition.",
+    "s": "bungie",
+    "note": "Only affects Blade Barrage, Daybreak and Song of Flame projectiles."
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofbenevolence",
+  "n": "Ember of Benevolence",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "restoration",
+    "q": "Applying restoration, cure, or radiant to allies",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "cure",
+    "q": "Applying restoration, cure, or radiant to allies",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "Applying restoration, cure, or radiant to allies",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "healing",
+    "q": "Healing (from most sources), or reviving allies",
+    "s": "clarity",
+    "note": "Does NOT trigger from Empowering Rift, mods, Crest of Alpha Lupi, Mothkeeper's Wraps or non-Solar Support Frame autos."
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "who": "self",
+    "q": "grants increased grenade, melee, and class ability regeneration for a short duration",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "who": "self",
+    "q": "grants increased grenade, melee, and class ability regeneration for a short duration",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "who": "self",
+    "q": "grants increased grenade, melee, and class ability regeneration for a short duration",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofblistering",
+  "n": "Ember of Blistering",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "ignition",
+    "q": "Defeating targets with Solar ignitions grants grenade energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "ignition kills",
+    "q": "Defeating targets with Solar ignitions grants grenade energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofchar",
+  "n": "Ember of Char",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "ignition",
+    "q": "Your Solar ignitions spread scorch to affected targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "by": "ignition",
+    "q": "Your Solar ignitions spread scorch to affected targets.",
+    "s": "bungie",
+    "note": "Not to the ignited target itself."
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofcombustion",
+  "n": "Ember of Combustion",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "super",
+    "q": "Final blows with a Solar Super causes targets to ignite and creates a Firesprite.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "on": "Solar Super kills",
+    "q": "Final blows with a Solar Super causes targets to ignite",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "firesprite",
+    "on": "Solar Super kills",
+    "q": "Final blows with a Solar Super causes targets to ignite and creates a Firesprite.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "weapon",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "q": "Well of Radiance makes all of the caster's Weapon Damage count as Super Ability Damage so Solar Weapons Kills will also count as Solar Super Kills.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofempyrean",
+  "n": "Ember of Empyrean",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "solarweapon",
+    "q": "Solar weapon or ability final blows extend the duration",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "solarability",
+    "q": "Solar weapon or ability final blows extend the duration",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "restoration",
+    "q": "extend the duration of restoration and radiant effects applied to you",
+    "s": "bungie",
+    "note": "Capped at 15 seconds."
+   },
+   {
+    "do": "modifies",
+    "t": "radiant",
+    "q": "extend the duration of restoration and radiant effects applied to you",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberoferuption",
+  "n": "Ember of Eruption",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "ignition",
+    "q": "Your Solar ignitions have increased area of effect.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofmercy",
+  "n": "Ember of Mercy",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "restoration",
+    "on": "reviving an ally",
+    "who": "allies",
+    "q": "When you revive an ally, you and other nearby allies gain restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "q": "Picking up a Firesprite grants restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "by": "firesprite",
+    "q": "Picking up a Firesprite grants restoration.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofresolve",
+  "n": "Ember of Resolve",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Solar grenade final blows cure you.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "on": "grenade kills",
+    "who": "self",
+    "q": "Solar grenade final blows cure you.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofsearing",
+  "n": "Ember of Searing",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "Defeating scorched targets grants melee energy and creates a Firesprite.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "killing scorched targets",
+    "q": "Defeating scorched targets grants melee energy",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "firesprite",
+    "on": "killing scorched targets",
+    "q": "Defeating scorched targets grants melee energy and creates a Firesprite.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofsingeing",
+  "n": "Ember of Singeing",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "Your class ability recharges faster when you scorch targets.",
+    "s": "bungie",
+    "note": "Only when scorching a target that is not already scorched."
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "q": "Your class ability recharges faster when you scorch targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofsolace",
+  "n": "Ember of Solace",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "radiant",
+    "q": "Radiant and restoration effects applied to you have increased duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "restoration",
+    "q": "Radiant and restoration effects applied to you have increased duration.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberoftempering",
+  "n": "Ember of Tempering",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healthstat",
+    "who": "allies",
+    "if": [
+     {
+      "weapon": "solar"
+     }
+    ],
+    "q": "Solar weapon final blows grant you and your allies increased health for a short duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "solarweapon",
+    "q": "Solar weapon final blows grant you and your allies increased health for a short duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "firesprite",
+    "on": "Solar weapon kills while Ember of Tempering is active",
+    "if": [
+     {
+      "weapon": "solar"
+     }
+    ],
+    "q": "your Solar weapon final blows create a Firesprite",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberoftorches",
+  "n": "Ember of Torches",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Powered melee attacks against combatants make you and nearby allies radiant.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "radiant",
+    "on": "powered melee hits",
+    "who": "allies",
+    "q": "Powered melee attacks against combatants make you and nearby allies radiant.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:emberofwonder",
+  "n": "Ember of Wonder",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "ignition",
+    "q": "Rapidly defeating multiple targets with Solar ignitions generates an Orb of Power.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "two quick ignition kills",
+    "q": "Rapidly defeating multiple targets with Solar ignitions generates an Orb of Power.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:empoweringrift",
+  "n": "Empowering Rift",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "who": "allies",
+    "q": "increases weapon damage and ability energy regeneration for those inside it",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "who": "allies",
+    "q": "increases weapon damage and ability energy regeneration for those inside it",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "who": "allies",
+    "q": "increases weapon damage and ability energy regeneration for those inside it",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "rift",
+    "q": "Conjure a well of power that increases weapon damage",
+    "s": "bungie",
+    "note": "Does not trigger Ember of Benevolence."
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "on": "standing in the rift",
+    "q": "Conjure a well of power that increases weapon damage",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:fireboltgrenade",
+  "n": "Firebolt Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "slightly scorches them",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:fusiongrenade",
+  "n": "Fusion Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "damaging and moderately scorching them on detonation",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:gamblersdodge",
+  "n": "Gambler's Dodge",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "who": "self",
+    "q": "avoiding combatant attacks and generating melee ability energy",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:goldengundeadshot",
+  "n": "Golden Gun: Deadshot",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "scorches and disintegrates targets with Solar Light",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "Benefits from being radiant.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:goldengunmarksman",
+  "n": "Golden Gun: Marksman",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "scorches and disintegrates targets with Solar Light",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "precision hits",
+    "q": "creates Orbs of Power on precision hits",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "Benefits from being radiant.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:gunpowdergamble",
+  "n": "Gunpowder Gamble",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "improvisedexplosive",
+    "on": "kills charge it up",
+    "q": "Defeat targets to charge up an improvised Solar explosive.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "q": "replaces your Grenade Ability with a thrown explosive",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "by": "improvisedexplosive",
+    "q": "Throw a Solar explosive that can be shot in mid-air to cause an ignition.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ignition",
+    "q": "Ignition and Scorch: 3 [4] charges",
+    "s": "clarity",
+    "note": "Ignition and scorch kills charge it faster than weapon kills."
+   },
+   {
+    "do": "counts",
+    "t": "improvisedexplosive",
+    "as": "ignition",
+    "q": "Gunpowder Gamble counts both as an Ignition and a Grenade Ability.",
+    "s": "clarity"
+   },
+   {
+    "do": "counts",
+    "t": "improvisedexplosive",
+    "as": "grenade",
+    "q": "Gunpowder Gamble counts both as an Ignition and a Grenade Ability.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:hammerofsol",
+  "n": "Hammer of Sol",
+  "fx": []
+ },
+ {
+  "id": "sub:hammerstrike",
+  "n": "Hammer Strike",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sprinting",
+    "q": "After sprinting for a short time, use this melee ability",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "swing a blazing hammer that scorches your target",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "on": "Hammer Strike kills",
+    "q": "If your target is defeated by Hammer Strike, they ignite.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:healinggrenade",
+  "n": "Healing Grenade",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "allies",
+    "q": "A grenade that cures allies on impact",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "who": "allies",
+    "q": "granting restoration to allies when picked up",
+    "s": "bungie",
+    "note": "From a Restoration Orb (not an Orb of Power) the grenade leaves behind."
+   }
+  ]
+ },
+ {
+  "id": "sub:healingrift",
+  "n": "Healing Rift",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "who": "allies",
+    "q": "Conjure a well of power that continuously heals those inside it.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "q": "Standing in a friendly Healing Rift makes the game count you as having an active Overshield at all times.",
+    "s": "clarity",
+    "note": "A generic (non-Void) overshield; counts as having an overshield for perk interactions."
+   },
+   {
+    "do": "uses",
+    "t": "rift",
+    "q": "Conjure a well of power that continuously heals those inside it.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:heatrises",
+  "n": "Heat Rises",
+  "fx": [
+   {
+    "do": "consumes",
+    "t": "grenade",
+    "q": "Hold to consume your grenade, gaining Heat Rises",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "heatrises",
+    "who": "self",
+    "q": "Hold to consume your grenade, gaining Heat Rises",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "allies",
+    "q": "releasing a burst of healing energy that cures nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "q": "Consuming a Healing Grenade grants Cure x3.",
+    "s": "clarity",
+    "note": "Stronger cure (x3 instead of x2)."
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     },
+     {
+      "piece": "Touch of Flame"
+     }
+    ],
+    "q": "Consuming a Healing Grenade grants Cure x3. If Touch of Flame is equipped, this also grants Restoration x1 for 4 seconds.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Song of Flame"
+      ]
+     }
+    ],
+    "q": "Consuming a Song of Flame Wisp grants Cure x3 and Restoration x2 for 4 seconds.",
+    "s": "clarity",
+    "note": "Consuming the Song of Flame wisp grenade during the Super."
+   },
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Final blows while airborne increase the duration of Heat Rises and grant melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "airborne kills",
+    "q": "Final blows while airborne increase the duration of Heat Rises and grant melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "movement",
+    "q": "You can fire weapons, melee, and throw grenades while gliding.",
+    "s": "bungie",
+    "note": "Heat Rises also gives near-infinite glide."
+   }
+  ]
+ },
+ {
+  "id": "sub:hellion",
+  "n": "Hellion",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "classability",
+    "q": "Activate your class ability to summon a [Solar] Solar mortar",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "hellion",
+    "q": "Activate your class ability to summon a [Solar] Solar mortar that lobs flaming projectiles at distant targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "by": "hellion",
+    "q": "Targets damaged by the mortar are scorched.",
+    "s": "bungie"
+   },
+   {
+    "do": "counts",
+    "t": "hellion",
+    "as": "grenade",
+    "q": "Hellion projectiles count as a Grenade Ability and are buffed by, and trigger, grenade-specific effects.",
+    "s": "clarity",
+    "note": "Its scorch and ignitions are not scaled by grenade effects."
+   }
+  ]
+ },
+ {
+  "id": "sub:highjump",
+  "n": "High Jump",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "While airborne, jump a second time",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:highlift",
+  "n": "High Lift",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Jump while airborne to activate Lift",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:icarusdash",
+  "n": "Icarus Dash",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "[Air Dodge]  : Dodge quickly while airborne.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "heatrises",
+    "q": "While Heat Rises is active, you have an additional dodge.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Song of Flame"
+      ]
+     },
+     {
+      "slot": "melee",
+      "is": [
+       "Incinerator Snap"
+      ]
+     }
+    ],
+    "q": "While Heat Rises is active, or during the Song of Flame Super Ability while the Incinerator Snap Melee Ability is equipped:",
+    "s": "compendium",
+    "note": "Extra dash charge in Song of Flame only with Incinerator Snap, not Celestial Fire."
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak"
+      ]
+     }
+    ],
+    "q": "Icarus Dash can be used infinitely during Daybreak at the cost of 4.2% super energy per use.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "on": "rapid airborne weapon or Super kills",
+    "who": "self",
+    "q": "While airborne, rapidly defeating targets with your Super or weapons cures you.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:incendiarygrenade",
+  "n": "Incendiary Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "heavily scorches nearby targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:incineratorsnap",
+  "n": "Incinerator Snap",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "create a fan of burning sparks that explode and scorch targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:knifetrick",
+  "n": "Knife Trick",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Throw a fan of flaming knives that scorch targets on hit.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:knockemdown",
+  "n": "Knock 'Em Down",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "While radiant, final blows with your equipped Throwing Knife fully refund your melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "knife kills while radiant",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Knife Trick",
+       "Lightweight Knife",
+       "Proximity Explosive Knife",
+       "Weighted Throwing Knife"
+      ]
+     },
+     {
+      "has": "radiant"
+     }
+    ],
+    "q": "While radiant, final blows with your equipped Throwing Knife fully refund your melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Golden Gun: Deadshot"
+      ]
+     }
+    ],
+    "q": "Deadshot Golden Gun has damage resistance",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Golden Gun: Marksman"
+      ]
+     }
+    ],
+    "q": "Marksman Golden Gun has increased duration",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Blade Barrage"
+      ]
+     }
+    ],
+    "q": "Blade Barrage launches more projectiles",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "on": "casting your Super",
+    "who": "self",
+    "q": "Casting your super grants Cure x1.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "q": "Casting your super grants Cure x1.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:lightweightknife",
+  "n": "Lightweight Knife",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "radiant",
+    "on": "precision hits",
+    "who": "self",
+    "q": "Precision hits with this knife make you radiant for a short duration.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:marksmansdodge",
+  "n": "Marksman's Dodge",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "ammobrick",
+    "q": "Dodging automatically collects nearby ammo boxes",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "who": "self",
+    "q": "Dodging automatically collects nearby ammo boxes and reloads all weapons.",
+    "s": "bungie",
+    "note": "Counts as a manual reload for reload-triggered perks."
+   }
+  ]
+ },
+ {
+  "id": "sub:onyourmark",
+  "n": "On Your Mark",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "who": "allies",
+    "q": "grants you and nearby allies increased reload speed and Weapons stat for a short duration",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "classability",
+    "q": "Activating your class ability or landing precision hits grants you and nearby allies increased reload speed and Weapons stat",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "self",
+    "q": "Final blows while at ten stacks cure you.",
+    "s": "bungie",
+    "note": "Clarity and the Compendium say Restoration x1 instead."
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "who": "self",
+    "q": "At 10 stacks, kills grant Restoration x1 for 3 seconds (4.5 with Ember of Solace).",
+    "s": "clarity",
+    "note": "Bungie text says cure; sources disagree."
+   }
+  ]
+ },
+ {
+  "id": "sub:phoenixdive",
+  "n": "Phoenix Dive",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Only usable while airborne.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "allies",
+    "q": "Dive to the ground and create a burst of Solar Light that cures nearby allies.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "heatrises",
+    "q": "While Heat Rises is active, you gain restoration while diving and scorch targets upon landing.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "who": "self",
+    "if": [
+     {
+      "has": "heatrises"
+     }
+    ],
+    "q": "While Heat Rises is active, you gain restoration while diving",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "if": [
+     {
+      "has": "heatrises"
+     }
+    ],
+    "q": "While Heat Rises is active, you gain restoration while diving and scorch targets upon landing.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:proximityexplosiveknife",
+  "n": "Proximity Explosive Knife",
+  "fx": []
+ },
+ {
+  "id": "sub:rallybarricade",
+  "n": "Rally Barricade",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "on": "standing behind it",
+    "who": "allies",
+    "q": "increases weapon reload speed, stability, and range",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "barricade",
+    "q": "Creates a small barrier that you can peek over while aiming down sights",
+    "s": "bungie",
+    "note": "Behind it: faster reload, stability, range."
+   }
+  ]
+ },
+ {
+  "id": "sub:roaringflames",
+  "n": "Roaring Flames",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "solarability",
+    "q": "Final blows with [Solar] Solar abilities or ignitions increase the damage of your Solar abilities.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ignition",
+    "q": "Final blows with [Solar] Solar abilities or ignitions increase the damage of your Solar abilities.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "q": "increase the damage of your Solar abilities. Stacks 3 times.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "melee",
+    "q": "increase the damage of your Solar abilities. Stacks 3 times.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "q": "increase the damage of your Solar abilities. Stacks 3 times.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "on": "uncharged melee hits while active",
+    "q": "While Roaring Flames is active, Unpowered Melee Hits apply 30 Scorch (40 with Ember of Ashes) and count as Powered Melee Hits.",
+    "s": "clarity",
+    "note": "Uncharged melee hits also count as powered melee hits (e.g. for Ember of Torches)."
+   }
+  ]
+ },
+ {
+  "id": "sub:shieldburst",
+  "n": "Shieldburst",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "barricade",
+    "q": "Enhances your equipped barricade with [Solar] Solar capabilities.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "barricade",
+    "q": "Enhances your equipped barricade with [Solar] Solar capabilities.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "activate your class ability again to remotely detonate it, scorching combatants caught in the detonation",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "scorchingrounds",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade"
+      ]
+     },
+     {
+      "any": [
+       {
+        "weapon": "solar"
+       },
+       {
+        "weapon": "kinetic"
+       }
+      ]
+     }
+    ],
+    "q": "Standing behind your barricade grants scorching rounds to your allies' Solar and Kinetic weapons.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "on": "sliding barricade contact",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Enemies that come into contact with your barricade take a burst of damage and recieve 20 Scorch",
+    "s": "clarity"
+   },
+   {
+    "do": "counts",
+    "t": "barricade",
+    "as": "classability",
+    "q": "Shieldburst counts as 'casting your class ability' both on cast and on remote detonation for the purposes of exotic armor.",
+    "s": "clarity",
+    "note": "The remote detonation is a second class ability cast for exotic armor."
+   }
+  ]
+ },
+ {
+  "id": "sub:solinvictus",
+  "n": "Sol Invictus",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "solarability",
+    "q": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "sunspot",
+    "on": "Solar ability kills or killing scorched targets",
+    "q": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "sunspot",
+    "on": "Hammer of Sol impacts",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Hammer of Sol"
+      ]
+     }
+    ],
+    "q": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "by": "sunspot",
+    "q": "Sunspots apply scorch and deal damage to targets inside.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "by": "sunspot",
+    "who": "self",
+    "q": "Entering a Sunspot applies restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "by": "sunspot",
+    "who": "self",
+    "q": "Sol Invictus grants 100% Increased Base Grenade and Melee Regeneration Rate",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "by": "sunspot",
+    "who": "self",
+    "q": "Sol Invictus grants 100% Increased Base Grenade and Melee Regeneration Rate",
+    "s": "clarity"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "by": "sunspot",
+    "q": "your Super drains more slowly while standing in a Sunspot",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:solargrenade",
+  "n": "Solar Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "continuously damages and scorches targets trapped inside",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:songofflame",
+  "n": "Song of Flame",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "radiant",
+    "who": "self",
+    "q": "Caster is granted +100 Grenade, +100 Melee, +100 Class, Radiant and Scorching Rounds.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "scorchingrounds",
+    "who": "allies",
+    "q": "Allies within 15 metres are granted 30% [?%] Damage Resist, Scorching Rounds",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "by": "scorchingrounds",
+    "if": [
+     {
+      "any": [
+       {
+        "weapon": "solar"
+       },
+       {
+        "weapon": "kinetic"
+       }
+      ]
+     }
+    ],
+    "q": "your [Solar] Solar and Kinetic weapons scorch targets",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "who": "allies",
+    "q": "you and nearby allies regenerate abilities more quickly",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "who": "allies",
+    "q": "you and nearby allies regenerate abilities more quickly",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "who": "allies",
+    "q": "you and nearby allies regenerate abilities more quickly",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "who": "allies",
+    "q": "are more resistant to incoming damage",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "q": "Create a sentient flame wisp that seeks out targets and detonates in a scorching explosion",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Create a sentient flame wisp that seeks out targets and detonates in a scorching explosion",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "melee",
+    "q": "Release a supercharged melee attack that launches additional projectiles.",
+    "s": "bungie"
+   },
+   {
+    "do": "counts",
+    "t": "weapon",
+    "as": "super",
+    "q": "Weapon Kills by the Caster count as Super Kills. Weapon damage does not count as Ability damage.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "on": "consuming a Solar Wisp with Heat Rises",
+    "if": [
+     {
+      "piece": "Heat Rises"
+     }
+    ],
+    "q": "Consuming a Solar Wisp while Heat Rises is equipped grants Cure x3 and Restoration x2 for 4+2 seconds",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "on": "consuming a Solar Wisp with Heat Rises",
+    "if": [
+     {
+      "piece": "Heat Rises"
+     }
+    ],
+    "q": "Consuming a Solar Wisp while Heat Rises is equipped grants Cure x3 and Restoration x2 for 4+2 seconds",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "sub:strafeglide",
+  "n": "Strafe Glide",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Jump while airborne to activate Glide",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:strafejump",
+  "n": "Strafe Jump",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "While airborne, jump a second time",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:strafelift",
+  "n": "Strafe Lift",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Jump while airborne to activate Lift",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:swarmgrenade",
+  "n": "Swarm Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Each drone slightly scorches affected targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:thermitegrenade",
+  "n": "Thermite Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "dealing damage and scorching targets in its path",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:throwinghammer",
+  "n": "Throwing Hammer",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "who": "self",
+    "q": "Picking up a thrown hammer grants melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "self",
+    "q": "If the hammer struck a target, picking it up grants cure.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:touchofflame",
+  "n": "Touch of Flame",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "q": "Healing Grenade: Improves the strength of cure and restoration effects applied.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "q": "Healing Grenades grant Cure x2 and Restoration x2 for 4 seconds (6 with Ember of Solace)",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     },
+     {
+      "piece": "Heat Rises"
+     }
+    ],
+    "q": "Consuming a Healing Grenade with Heat Rises also applies restoration to nearby allies.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Solar Grenade"
+      ]
+     }
+    ],
+    "q": "Solar Grenade: Increases linger duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Firebolt Grenade"
+      ]
+     }
+    ],
+    "q": "Firebolt Grenade: Increases target search radius and maximum target count.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Fusion Grenade"
+      ]
+     }
+    ],
+    "q": "Fusion Grenade: Explodes twice.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:toweringbarricade",
+  "n": "Towering Barricade",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "barricade",
+    "q": "Creates a large barrier that can be used to reinforce a position with cover",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:triplejump",
+  "n": "Triple Jump",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "While airborne, sustain your air control",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:tripminegrenade",
+  "n": "Tripmine Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "dealing damage and moderately scorching them",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:weightedthrowingknife",
+  "n": "Weighted Throwing Knife",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "causes scorched targets to ignite",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "on": "hitting a scorched target",
+    "q": "causes scorched targets to ignite",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "precision kills",
+    "who": "self",
+    "q": "Precision final blows with this knife immediately recharge your class ability.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:wellofradiance",
+  "n": "Well of Radiance",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "damaging and scorching nearby targets",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "radiant",
+    "who": "allies",
+    "q": "granting radiant effects and restoration to nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "who": "allies",
+    "q": "granting radiant effects and restoration to nearby allies",
+    "s": "bungie",
+    "note": "Compendium says the Well removes active Restoration and heals 50 HP/s instead; sources disagree."
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "who": "allies",
+    "q": "restores 50HP/s",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "who": "allies",
+    "q": "20% Damage Resist against Combatants (10% vs Boss Combatants)",
+    "s": "compendium"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "q": "Creates 3 Orbs of Power, each granting 3.6% Super Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "counts",
+    "t": "weapon",
+    "as": "super",
+    "q": "Weapon Damage dealt by the Caster is counted as Super Ability Damage.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "on": "standing in the Well",
+    "q": "25% Increased Weapon Damage",
+    "s": "compendium"
+   }
+  ]
+ }
+]

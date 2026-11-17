@@ -1,0 +1,43 @@
+{
+ "terms": {
+  "corruption": {
+   "l": "Corruption",
+   "kind": "debuff",
+   "el": "",
+   "aka": [
+    "potent corruption",
+    "poison",
+    "corrupted"
+   ],
+   "def": "A kinetic poison damage-over-time inflicted by Weapons of Sorrow and Necrotic Grip; potent corruption ramps up with each tick.",
+   "q": "Damaging a target with a melee inflicts potent corruption that deals increasing damage over time.",
+   "src": "xa:necroticgrip"
+  },
+  "blight": {
+   "l": "Blight (Witherhoard)",
+   "kind": "debuff",
+   "el": "kinetic",
+   "aka": [
+    "blighted",
+    "blighted pool",
+    "witherhoard blight"
+   ],
+   "def": "Witherhoard's Taken damage-over-time on a target or a pool on the ground; Malfeasance, Wish-Ender and One Thousand Voices deal extra damage to blighted targets.",
+   "q": "Projectiles fired by this weapon blight the target or nearby area on impact.",
+   "src": "xw:witherhoard"
+  },
+  "sivananite": {
+   "l": "SIVA nanites",
+   "kind": "object",
+   "el": "kinetic",
+   "aka": [
+    "nanites",
+    "siva nanite swarms",
+    "outbreak nanites"
+   ],
+   "def": "Seeking SIVA nanites from Outbreak Perfected that attach to enemies; Outbreak and Wolfsbane deal more damage to nanite-covered targets.",
+   "q": "This weapon creates SIVA nanite swarms on rapid hits and precision kills.",
+   "src": "xw:outbreakperfected"
+  }
+ }
+}

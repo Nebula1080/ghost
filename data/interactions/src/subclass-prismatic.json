@@ -1,0 +1,562 @@
+[
+ {
+  "id": "sub:electrifiedsnare",
+  "n": "Electrified Snare",
+  "kind": "grenade",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   275534325
+  ],
+  "src": {
+   "bungie": "[Grenade]  : Throw an explosive device energized with [Strand] Strand matter and [Arc] Arc energy that detonates in a supercharged suspending burst. The suspended target takes heavy damage over time and chains jolting lightning to any nearby targets.",
+   "compendium": "Prismatic Grenade\nExplosive charged with Arc and Strand energy.\nExplodes in a supercharged suspending burst, dealing up to 105 [?] damage, and inflicting Suspension to enemies within ? meters.\nSuspended Enemies are dealt ? damage every ? seconds for ? seconds, and are inflicted Jolt."
+  }
+ },
+ {
+  "id": "sub:facetofawakening",
+  "n": "Facet of Awakening",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726505
+  ],
+  "stats": {
+   "Health": 10
+  },
+  "src": {
+   "bungie": "Rapidly defeating targets with Light or Darkness damage or Super final blows generates an Elemental pickup of the matching damage type.",
+   "clarity": "Scoring a Super Kill or Killing 3 enemies with Elemental Damage within 6 seconds of each spawns an Elemental Pickup.\nThe type of Elemental Pickup is determined by the Damage Type of the final Kill.\n5 second cooldown between spawning the same Pickup again. Spawned Tangles share the 12 second global spawn cooldown with the Fragment.\nKills with the element of the spawned Pickup while the cooldown is active do not count towards spawning another Elemental Pickup.\nElemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches."
+  }
+ },
+ {
+  "id": "sub:facetofbalance",
+  "n": "Facet of Balance",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922114
+  ],
+  "src": {
+   "bungie": "Rapidly defeating targets with Light damage grants melee energy. Rapidly defeating targets with Darkness damage grants grenade energy.",
+   "clarity": "Scoring 3 Kills within 3? seconds of each with Light-aligned damage grants 10% Melee energy.\nScoring 3 Kills within 3? seconds of each with Dark-aligned damage grants 10% Grenade energy.\nLight Alignment: Arc, Solar, Void\nDarkness Alignment: Stasis, Strand"
+  }
+ },
+ {
+  "id": "sub:facetofblessing",
+  "n": "Facet of Blessing",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726496
+  ],
+  "src": {
+   "bungie": "Melee final blows start health regeneration. While transcendent, melee final blows start health regeneration for you and nearby allies.",
+   "clarity": "Melee Kills start health regeneration.\nWhile Transcendent, this also applies to allies within ? meters."
+  }
+ },
+ {
+  "id": "sub:facetofbravery",
+  "n": "Facet of Bravery",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726503
+  ],
+  "src": {
+   "bungie": "Defeating targets with grenade final blows grants Volatile Rounds to your [Void] Void weapons. Defeating targets with powered melee final blows grants Unraveling Rounds to your [Strand] Strand weapons.",
+   "clarity": "Grenade Kills grant Volatile Rounds to Void Weapons for 11 [7.5] seconds.\nPowered Melee Kills (including Knockout) grant Unraveling Rounds to Strand Weapons for 11 [7.5] seconds."
+  }
+ },
+ {
+  "id": "sub:facetofcommand",
+  "n": "Facet of Command",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726497
+  ],
+  "src": {
+   "bungie": "Freezing or suppressing a target reloads your equipped weapons and increases weapon stability, aim assist, and airborne effectiveness.\n\nDefeating frozen or suppressed targets creates a Stasis Shard or Void Breach.",
+   "clarity": "Freezing or Suppressing an enemy refills your readied weapon's magazine from reserves and grants 20? Stability, ? Aim Assist, and 40 Airborne Effectiveness for 11 seconds.\n4 second cooldown between activations.\nKilling Frozen or Suppressed Enemies spawns a Stasis Shard or Void Breach respectively."
+  }
+ },
+ {
+  "id": "sub:facetofcourage",
+  "n": "Facet of Courage",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922124
+  ],
+  "stats": {
+   "Grenade": 10
+  },
+  "src": {
+   "bungie": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
+   "clarity": "Light abilities deal 10% increased damage to enemies affected by Stasis or Strand elemental debuffs.\nLight Melee Abilities in PVE instead deal an additional 50% of their base damage."
+  }
+ },
+ {
+  "id": "sub:facetofdawn",
+  "n": "Facet of Dawn",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922126
+  ],
+  "stats": {
+   "Melee": -10
+  },
+  "src": {
+   "bungie": "Powered melee hits against targets makes you radiant. Powered melee final blows make you and nearby allies radiant.",
+   "clarity": "Elemental Melee Hits grant you Radiant for 5 seconds.\nElemental Melee Kills grant you and allies within ? meters Radiant for 5 seconds."
+  }
+ },
+ {
+  "id": "sub:facetofdefiance",
+  "n": "Facet of Defiance",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   74393640
+  ],
+  "stats": {
+   "Class": 10
+  },
+  "src": {
+   "bungie": "Finishers create a detonation that either jolts, scorches, slows, severs, or makes targets volatile based on the damage type of your equipped Super.",
+   "clarity": "Finishers trigger an Elemental explosion that deals up to 135 Super-Matching Elemental Damage and applies a Super-Matching Elemental Debuff in a ? meter radius.\nElemental Debuffs applied:\n• Arc: Jolt\n• Solar: x40 Scorch\n• Void: Volatile\n• Stasis: x? Slow for ? seconds\n• Strand: Sever for ? seconds"
+  }
+ },
+ {
+  "id": "sub:facetofdevotion",
+  "n": "Facet of Devotion",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922125
+  ],
+  "stats": {
+   "Melee": 10
+  },
+  "src": {
+   "bungie": "Defeating targets afflicted with [Stasis] Stasis or [Strand] Strand debuffs grants bonus Light Transcendence energy.",
+   "clarity": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy:\n• Minors: 1%\n• Elites: 3%\n• Minibosses and higher: 5%\n• Players: ?%"
+  }
+ },
+ {
+  "id": "sub:facetofdominance",
+  "n": "Facet of Dominance",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726504
+  ],
+  "stats": {
+   "Grenade": -10
+  },
+  "src": {
+   "bungie": "Your Void grenades weaken targets, and your Arc grenades jolt targets.",
+   "clarity": "Void Grenade Ability damage applies Weaken for 6 [?] seconds.\nArc Grenade Ability damage applies Jolt."
+  }
+ },
+ {
+  "id": "sub:facetofgenerosity",
+  "n": "Facet of Generosity",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922127
+  ],
+  "src": {
+   "bungie": "Defeating targets while transcendent creates Orbs of Power for your allies.",
+   "clarity": "Kills while Transcendent spawn up to 4 Orbs of Power for allies that grant 7.15?% Super Energy.\nOrbs spawn upon passing specific point thresholds: 30, 50, 70, and 100 points for each orb.\nPoints gained per Kill by Enemy Rank:\n• Tier 1 (T1) Minors: 10 points\n• T2 Minors, T1 Elites: 15 points\n• T3 Minors, T2 Elites: 20 points\n• T4 Minors, T3 Elites: 34 points\n• T4 Elites, Minibosses: 40 points\n• Bosses: 50 points\n• Players: ? points"
+  }
+ },
+ {
+  "id": "sub:facetofgrace",
+  "n": "Facet of Grace",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922121
+  ],
+  "stats": {
+   "Health": -10
+  },
+  "src": {
+   "bungie": "Defeating targets with Kinetic weapons grants you bonus Transcendence energy. Defeating targets with your Super grants you and nearby allies bonus Transcendence energy.",
+   "clarity": "Kinetic Weapon Kills grant an additional 2% [?%] Light and Darkness Transcendence energy.\nSuper Kills grant an additional 2% [?%] Light and Darkness Transcendence Energy to you and allies within ? metres."
+  }
+ },
+ {
+  "id": "sub:facetofhonor",
+  "n": "Facet of Honor",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726501
+  ],
+  "stats": {
+   "Melee": 10
+  },
+  "src": {
+   "bungie": "Collecting an Elemental pickup or destroying a Tangle grants Transcendence energy of the same type.",
+   "clarity": "Collecting Elemental Pickups or destroying a Tangle grants additional Transcendence Energy of the matching alignment:\n• Ionic Traces, Firesprites, Void Breaches: 7.5% Light Transcendence Energy\n• Stasis Shards: 5% Darkness Transcendence Energy\n• Tangles: 10% Darkness Transcendence Energy"
+  }
+ },
+ {
+  "id": "sub:facetofhope",
+  "n": "Facet of Hope",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922122
+  ],
+  "src": {
+   "bungie": "While you have an elemental buff, your class ability regenerates more quickly.",
+   "clarity": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.\nHaving 2+ active elemental buffs grants an additional 60% instead."
+  }
+ },
+ {
+  "id": "sub:facetofjustice",
+  "n": "Facet of Justice",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922115
+  ],
+  "stats": {
+   "Super": 10
+  },
+  "src": {
+   "bungie": "While transcendent, your ability final blows explode.",
+   "clarity": "Ability Kills while Transcendent trigger an explosion that deals up to 130 [?] Ability-Matching Elemental damage in a ? meter radius."
+  }
+ },
+ {
+  "id": "sub:facetofmending",
+  "n": "Facet of Mending",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726500
+  ],
+  "src": {
+   "bungie": "Grenade final blows cure you. Transcendence grenade final blows increase the strength of the effect.",
+   "clarity": "Grenade Ability Kills grant you Cure x1.\nPrismatic Grenade Kills grant you Cure x2."
+  }
+ },
+ {
+  "id": "sub:facetofprotection",
+  "n": "Facet of Protection",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922120
+  ],
+  "stats": {
+   "Melee": 10
+  },
+  "src": {
+   "bungie": "While surrounded by combatants, you are more resistant to incoming damage. While transcendent, the effect is increased.",
+   "clarity": "Grants 15% [?%] Damage Resistance while within 15 meters of 3 enemies.\nThe Damage Resistance is NOT increased while Transcendent, it simply stacks with Transcendence's 20% Damage Resistance for a total of 32%."
+  }
+ },
+ {
+  "id": "sub:facetofpurpose",
+  "n": "Facet of Purpose",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726498
+  ],
+  "stats": {
+   "Class": -10
+  },
+  "src": {
+   "bungie": "Picking up an Orb of Power grants either Bolt Charge, Restoration, Frost Armor, Woven Mail, or Overshield based on the damage type of your equipped Super.",
+   "clarity": "Collecting Orbs of Power grants Elemental buffs based on your equipped Super's element:\n• Arc: 1 Bolt Charge Stack\n• Solar: Restoration x1 for 5 seconds\n• Void: 22.5 HP Overshield for 5 seconds\n• Stasis: 2 Frost Armor Stacks for 9 seconds\n• Strand: Woven Mail for 5 seconds"
+  }
+ },
+ {
+  "id": "sub:facetofruin",
+  "n": "Facet of Ruin",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726499
+  ],
+  "stats": {
+   "Weapons": 10
+  },
+  "src": {
+   "bungie": "Increases the size and damage of the burst when you shatter a Stasis crystal or frozen target, and increases the area of effect of Solar ignitions.",
+   "clarity": "Ignitions have a 25% increased blast radius.\nShattering enemies or destroying Crystals creates an additional damage instance, dealing up to 25 [9] damage in a 10 [8] meter radius.\nDamage falls off to 17 [4] damage at the edge of the radius."
+  }
+ },
+ {
+  "id": "sub:facetofsacrifice",
+  "n": "Facet of Sacrifice",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   124726502
+  ],
+  "stats": {
+   "Grenade": 10
+  },
+  "src": {
+   "bungie": "While you have an Arc, Solar, or Void buff, ability final blows grant bonus Darkness Transcendence energy.",
+   "clarity": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy."
+  }
+ },
+ {
+  "id": "sub:facetofsolitude",
+  "n": "Facet of Solitude",
+  "kind": "fragments",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2626922123
+  ],
+  "src": {
+   "bungie": "Landing rapid precision hits emits a severing blast from the target. While transcendent, the severing blast is bigger.",
+   "clarity": "Scoring multiple Precision Hits within 3 seconds of each causes your next damage instance within 3 seconds (from any source) to trigger a Severing Burst.\nSevering Burst applies Sever to enemies in a 3 meter radius. Radius is increased to 6 meters while Transcendent.\nFurther Precision Hits within 4 seconds of an activation provide no activation progress.\nPrecision Hits required to prepare the Severing Burst:\n• 20% of magazine size rounded down + 1\n• Bows require 2 hits"
+  }
+ },
+ {
+  "id": "sub:freezingsingularity",
+  "n": "Freezing Singularity",
+  "kind": "grenade",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   1324853482
+  ],
+  "src": {
+   "bungie": "[Grenade]  : Throw a mass of [Void] Void energy and [Stasis] Stasis matter. On impact, deploys a miniature black hole orbited by a slowing field. After a short duration, the black hole implodes, suppressing and dealing heavy damage to all nearby targets.",
+   "compendium": "Prismatic Grenade\nDeals up to 70 [26] Void Damage on impact, pulling enemies within 12 meters towards it, and creating a miniature black hole orbited by a halo of slowing ice.\nThe slowing field deals 18 [4] Stasis Damage and inflicts x13? Slow every 0.25 seconds for 3.65 seconds to enemies within 6 meters.\nAfter 5 seconds of impacting, the black hole implodes, infliction suppression and dealing up to 570 [150] Void Damage to enemies within 7 meters."
+  }
+ },
+ {
+  "id": "sub:hailfirespike",
+  "n": "Hailfire Spike",
+  "kind": "grenade",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   1005476557
+  ],
+  "src": {
+   "bungie": "[Grenade]  : Throw a device charged with [Stasis] Stasis matter and [Solar] Solar energy that attaches to surfaces or targets, then erupts into a slowing storm. After a short duration, the device ignites, creating a deadly scorching cyclone.",
+   "compendium": "Prismatic Grenade\nAttaches to surfaces or enemies, releasing a torrent of Stasis and Solar energy in a cone up to ? meters away.\nErupts into a slowing storm, dealing up to 78 [?] damage upon erupting.\nSlowing storm deals 15.6 [?] Stasis Damage and inflicts x13? Slow every 0.25 seconds for 3.45 seconds.\nAfter 3.45 seconds of attaching, it releases a scorching cyclone that deals 39 [?] Solar Damage and inflicts x10 Scorch every 0.25 seconds for 4 seconds."
+  }
+ },
+ {
+  "id": "sub:transcendence",
+  "n": "Transcendence",
+  "kind": "transcendence",
+  "el": "prism",
+  "subclasses": [
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1396318109,
+   1190101211,
+   3696633656
+  ],
+  "src": {
+   "bungie": "Achieve harmony by dealing damage with Light and Dark damage types in equal measure or by applying subclass buffs to your allies. Kinetic damage generates both Light and Dark energy.\n\nWhile Transcendence is active, your grenade is replaced by a unique Prismatic grenade that deals both Light and Dark damage. Dealing melee damage while transcendent greatly increases your grenade energy regeneration, and vice versa. Defeating targets while transcendent extends its duration.",
+   "compendium": "Unique ability obtained upon utilizing enough Light and Darkness damage types.\nKinetic Damage fills both Light and Darkness bars at 50% decreased rate. Overkill Damage isn't counted for Transcendence gains.\nHaving one full Alignment bar makes Kinetic Damage fill the remaining bar with at 40% decreased rate.\nDealing damage, alongside applying Elemental Effects grants Transcendence Energy. \nApplying Elemental Effects, both buffs and debuffs, grant Transcendence Energy to their corresponding alignment.\nTranscendence:\nInstantly recharges 2 Grenade and Melee Ability Charges on activation.\nReplaces Grenade Ability with an unique class-specific Prismatic Grenade Ability with Light and Darkness damage types.\nGrants 5% Increased Weapon Damage, an additional 10% Grenade and Melee Regeneration Speed, and 20% [5%] Damage Resist for 20 seconds.\nDamage Increase stacks with everything.\nDealing Grenade Ability Damage while Transcendent increases the Melee Regeneration Speed to 35% Fixed Melee Ability Energy per second for 2 seconds.\nDealing Melee Ability Damage while Transcendent increases the Prismatic Grenade Regeneration Speed to 35% Prismatic Grenade Ability Energy per second for 2 seconds.\nKills while Transcendent extend its duration, with the amount extended decreasing as more kills are scored.\nTier 1 and T2 Combatants = 5% | T3 and T4 = 10% | T3 Elites, Minibosses and Bosses = 15% | Guardians = ?%\nEach kill after the first gets a cumulative 0.9?x penalty to the duration extension."
+  }
+ }
+]

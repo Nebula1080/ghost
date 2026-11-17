@@ -1,0 +1,382 @@
+[
+ { "id": "sub:childoftheoldgods", "n": "Child of the Old Gods",
+  "fx": [
+   { "do": "creates", "t": "voidsoul", "on": "when you cast your rift", "q": "Cast your rift to create a Void Soul.", "s": "bungie" },
+   { "do": "uses", "t": "rift", "q": "Cast your rift to create a Void Soul.", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "by": "voidsoul", "q": "doing damage and weakening them", "s": "bungie" },
+   { "do": "applies", "t": "suppress", "by": "voidsoul", "q": "Combatants affected by the Soul are also briefly suppressed.", "s": "bungie" },
+   { "do": "grants", "t": "grenadeenergy", "by": "voidsoul", "if": [{ "slot": "classAbility", "is": ["Healing Rift"] }], "q": "you are granted grenade and melee energy (if running Healing Rift)", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "by": "voidsoul", "if": [{ "slot": "classAbility", "is": ["Healing Rift"] }], "q": "you are granted grenade and melee energy (if running Healing Rift)", "s": "bungie" },
+   { "do": "grants", "t": "healing", "by": "voidsoul", "if": [{ "slot": "classAbility", "is": ["Empowering Rift"] }], "q": "or health (if running Empowering Rift)", "s": "bungie" },
+   { "do": "grants", "t": "classenergy", "on": "defeating a target the Void Soul is draining", "q": "Defeating a target who is being drained by your Void Soul grants class ability energy.", "s": "bungie" },
+   { "do": "counts", "t": "voidsoul", "as": "grenade", "q": "Void Soul counts as a Grenade Ability and is buffed by, and triggers, grenade-specific effects.", "s": "clarity" },
+   { "do": "uses", "t": "weapon", "on": "weapon hits send the soul", "q": "When you damage a target with a weapon, your Void Soul flies to them", "s": "bungie" },
+   { "do": "counts", "t": "voidsoul", "as": "voidability", "q": "Void Grenade Ability Damage", "s": "compendium" }
+  ],
+  "note": "Healing Rift: grenade+melee energy while it drains; Empowering Rift: health instead. Its damage is Void grenade damage, so it feeds grenade-damage effects (Echo of Provision, Echo of Undermining)." },
+
+ { "id": "sub:axionbolt", "n": "Axion Bolt", "fx": [],
+  "note": "Seeking damage grenade with a lingering seeker. Links come from pieces that key off grenades or name it (Chaos Accelerant, Echo of Remnants, Echo of Provision)." },
+ { "id": "sub:magneticgrenade", "n": "Magnetic Grenade", "fx": [],
+  "note": "Sticky double-explosion damage grenade. Chaos Accelerant turns it into a Volatile-applying handheld blast." },
+ { "id": "sub:scattergrenade", "n": "Scatter Grenade", "fx": [],
+  "note": "Submunition damage grenade; Chaos Accelerant makes submunitions track." },
+ { "id": "sub:voidspike", "n": "Void Spike", "fx": [],
+  "note": "Lingering damage grenade (extended by Echo of Remnants); Chaos Accelerant turns it into a Volatile-applying handheld blast." },
+ { "id": "sub:voidwall", "n": "Void Wall", "fx": [],
+  "note": "Lingering damage-over-time wall (extended by Echo of Remnants); Chaos Accelerant turns it into a Volatile-applying handheld blast." },
+ { "id": "sub:vortexgrenade", "n": "Vortex Grenade", "fx": [],
+  "note": "Lingering pull-and-damage field (extended by Echo of Remnants, more with Chaos Accelerant)." },
+ { "id": "sub:suppressorgrenade", "n": "Suppressor Grenade",
+  "fx": [
+   { "do": "applies", "t": "suppress", "q": "An explosive grenade that suppresses, preventing targets from using abilities for a short time.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:bastion", "n": "Bastion",
+  "fx": [
+   { "do": "uses", "t": "super", "q": "Cast your Super to grant Overshield to nearby allies.", "s": "bungie" },
+   { "do": "grants", "t": "overshield", "who": "allies", "on": "when you cast your Super", "q": "Cast your Super to grant Overshield to nearby allies.", "s": "bungie" },
+   { "do": "uses", "t": "barricade", "q": "Casting your Barricade grants Overshield to yourself and nearby allies", "s": "bungie" },
+   { "do": "grants", "t": "overshield", "on": "when you cast your Barricade", "q": "Casting your Barricade grants Overshield to yourself and nearby allies", "s": "bungie" },
+   { "do": "modifies", "t": "barricade", "q": "empowers it, enabling it to slowly regenerate the Overshield of allies bunkering behind it and extend their Overshield duration", "s": "bungie" }
+  ],
+  "note": "PvP only: overrides Towering Barricade cooldown to 100s and Rally Barricade to 80s." },
+
+ { "id": "sub:chaosaccelerant", "n": "Chaos Accelerant",
+  "fx": [
+   { "do": "uses", "t": "grenade", "q": "Overcharge your grenade, making it deadlier and more effective.", "s": "bungie" },
+   { "do": "modifies", "t": "grenade", "q": "Overcharge your grenade, making it deadlier and more effective.", "s": "bungie" },
+   { "do": "modifies", "t": "grenade", "if": [{ "slot": "grenade", "is": ["Vortex Grenade"] }], "q": "Vortex Grenade: Increases the size, linger duration, and pull of the vortex.", "s": "bungie" },
+   { "do": "modifies", "t": "grenade", "if": [{ "slot": "grenade", "is": ["Axion Bolt"] }], "q": "Axion Bolt: Detonates twice and has enhanced seekers.", "s": "bungie" },
+   { "do": "modifies", "t": "grenade", "if": [{ "slot": "grenade", "is": ["Scatter Grenade"] }], "q": "Scatter Grenade: Submunitions track to nearby targets.", "s": "bungie" },
+   { "do": "applies", "t": "volatile", "if": [{ "slot": "grenade", "is": ["Magnetic Grenade", "Void Spike", "Void Wall", "Suppressor Grenade"] }], "q": "release a short-range blast of 9 high damage projectiles. Projectiles travel up to 12.5 meters away and apply Volatile on hit.", "s": "clarity" },
+   { "do": "grants", "t": "grenadeenergy", "q": "Cooldown is reduced. Grants an additional grenade charge.", "s": "bungie" }
+  ],
+  "note": "Magnetic, Void Spike, Void Wall and Suppressor become a short-range 'Handheld Supernova' (loses their normal effect, e.g. Suppressor's suppress, per the Bungie text)." },
+
+ { "id": "sub:controlleddemolition", "n": "Controlled Demolition",
+  "fx": [
+   { "do": "uses", "t": "voidability", "q": "Hitting a target with a Void ability or Volatile explosion makes them volatile.", "s": "bungie" },
+   { "do": "applies", "t": "volatile", "on": "Void ability or Volatile explosion damage", "q": "Hitting a target with a Void ability or Volatile explosion makes them volatile.", "s": "bungie" },
+   { "do": "uses", "t": "volatile", "q": "Grants you and nearby allies health when volatile targets explode near you.", "s": "bungie" },
+   { "do": "grants", "t": "healing", "who": "allies", "on": "when volatile targets explode near you", "q": "Grants you and nearby allies health when volatile targets explode near you.", "s": "bungie" },
+   { "do": "counts", "t": "volatile", "as": "voidability", "q": "Volatile Explosions also count as Void Ability Damage.", "s": "compendium" }
+  ],
+  "note": "Volatile explosions re-apply Volatile, so it chains. Heals you and allies within 40 m (Clarity)." },
+
+ { "id": "sub:feedthevoid", "n": "Feed the Void",
+  "fx": [
+   { "do": "uses", "t": "voidability", "q": "Defeat a target with a Void ability to activate Devour.", "s": "bungie" },
+   { "do": "grants", "t": "devour", "on": "Void ability final blows", "q": "Defeat a target with a Void ability to activate Devour.", "s": "bungie" },
+   { "do": "modifies", "t": "devour", "q": "Your Devour effects are improved, restoring additional health and grenade energy.", "s": "bungie" },
+   { "do": "grants", "t": "healing", "by": "devour", "q": "Your Devour effects are improved, restoring additional health and grenade energy.", "s": "bungie" },
+   { "do": "grants", "t": "grenadeenergy", "by": "devour", "q": "Your Devour effects are improved, restoring additional health and grenade energy.", "s": "bungie" },
+   { "do": "uses", "t": "shatter", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Kills with Shatter, Volatile Explosions, and Tangles also grant Devour)", "s": "clarity" },
+   { "do": "uses", "t": "volatile", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Kills with Shatter, Volatile Explosions, and Tangles also grant Devour)", "s": "clarity" },
+   { "do": "uses", "t": "tangle", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Kills with Shatter, Volatile Explosions, and Tangles also grant Devour)", "s": "clarity" },
+   { "do": "grants", "t": "devour", "on": "Shatter, Volatile explosion and Tangle kills", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Kills with Shatter, Volatile Explosions, and Tangles also grant Devour)", "s": "clarity" }
+  ],
+  "note": "Enhances Devour from any source (Echo of Starvation, Trapper's Ambush, Unbreakable)." },
+
+ { "id": "sub:offensivebulwark", "n": "Offensive Bulwark",
+  "fx": [
+   { "do": "uses", "t": "overshield", "q": "While you have an Overshield or are inside Ward of Dawn, final blows grant grenade and melee energy", "s": "bungie" },
+   { "do": "uses", "t": "super", "if": [{ "slot": "super", "is": ["Ward of Dawn"] }], "q": "While you have an Overshield or are inside Ward of Dawn, final blows grant grenade and melee energy", "s": "bungie" },
+   { "do": "grants", "t": "grenadeenergy", "on": "final blows while you have an Overshield or are inside Ward of Dawn", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "q": "While you have an Overshield or are inside Ward of Dawn, final blows grant grenade and melee energy", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "on": "final blows while you have an Overshield or are inside Ward of Dawn", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "q": "While you have an Overshield or are inside Ward of Dawn, final blows grant grenade and melee energy", "s": "bungie" },
+   { "do": "modifies", "t": "melee", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "q": "you have increased melee range and damage", "s": "bungie" },
+   { "do": "grants", "t": "overshield", "on": "melee final blows while overshielded", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "q": "melee final blows restore a small portion of your Overshield and extend its duration", "s": "bungie" },
+   { "do": "modifies", "t": "super", "if": [{ "slot": "super", "is": ["Sentinel Shield"] }], "q": "You gain an additional Shield Throw while in Sentinel Shield.", "s": "bungie" },
+   { "do": "counts", "t": "melee", "as": "voidability", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "q": "Unpowered Melees count as Void-Powered Melee Abilities", "s": "clarity" }
+  ],
+  "note": "Unpowered melee counting as Void-powered does not trigger Doomfang Pauldrons or Severance Enclosure." },
+
+ { "id": "sub:ontheprowl", "n": "On the Prowl",
+  "fx": [
+   { "do": "applies", "t": "prioritytarget", "q": "Periodically marks a nearby combatant as a priority target for you and your team.", "s": "bungie" },
+   { "do": "uses", "t": "invisibility", "q": "Entering invisibility immediately marks a target.", "s": "bungie" },
+   { "do": "uses", "t": "prioritytarget", "q": "Defeating priority targets creates a weakening cloud of smoke", "s": "bungie" },
+   { "do": "creates", "t": "voidsmoke", "on": "defeating a priority target", "q": "Defeating priority targets creates a weakening cloud of smoke that makes you and allies invisible when passing through it.", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "by": "voidsmoke", "q": "creates a weakening cloud of smoke", "s": "bungie" },
+   { "do": "applies", "t": "disorient", "by": "voidsmoke", "q": "Enemies within are Disoriented and Weakened", "s": "clarity" },
+   { "do": "grants", "t": "invisibility", "by": "voidsmoke", "who": "allies", "q": "makes you and allies invisible when passing through it", "s": "bungie" },
+   { "do": "grants", "t": "reload", "who": "allies", "on": "defeating a priority target", "q": "you and nearby allies gain increased weapon reload speed and stability for a short duration", "s": "bungie" },
+   { "do": "grants", "t": "grenadeenergy", "who": "allies", "on": "defeating a priority target", "q": "are granted grenade, melee, and class ability energy", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "who": "allies", "on": "defeating a priority target", "q": "are granted grenade, melee, and class ability energy", "s": "bungie" },
+   { "do": "grants", "t": "classenergy", "who": "allies", "on": "defeating a priority target", "q": "are granted grenade, melee, and class ability energy", "s": "bungie" },
+   { "do": "counts", "t": "voidsmoke", "as": "melee", "q": "Void Smoke lasts for 7 seconds, deals damage over time, and can trigger melee-associated effects.", "s": "clarity" }
+  ],
+  "note": "Invisibility sources (Vanishing Step, Stylish Executioner, Snare Bomb, Echo of Obscurity) mark a target instantly. The smoke is functionally a detonated Snare Bomb (Compendium)." },
+
+ { "id": "sub:soulsiphon", "n": "Soul Siphon",
+  "fx": [
+   { "do": "uses", "t": "melee", "q": "Ready this aspect by striking a foe with your powered melee ability.", "s": "bungie" },
+   { "do": "modifies", "t": "melee", "q": "replacing your melee ability with Soul Siphon", "s": "clarity" },
+   { "do": "grants", "t": "overshield", "on": "each Soul Siphon damage tick", "q": "gathering Overshield and class ability energy from each target", "s": "bungie" },
+   { "do": "grants", "t": "classenergy", "on": "each Soul Siphon damage tick", "q": "gathering Overshield and class ability energy from each target", "s": "bungie" }
+  ],
+  "note": "Clarity names Pocket Singularity as the readying melee (Void Warlock's only melee); Bungie says any powered melee, which matters on Prismatic. Soul Siphon deals melee damage." },
+
+ { "id": "sub:stylishexecutioner", "n": "Stylish Executioner",
+  "fx": [
+   { "do": "uses", "t": "weaken", "q": "Defeating a weakened, suppressed, or volatile target grants Invisibility and Truesight.", "s": "bungie" },
+   { "do": "uses", "t": "suppress", "q": "Defeating a weakened, suppressed, or volatile target grants Invisibility and Truesight.", "s": "bungie" },
+   { "do": "uses", "t": "volatile", "q": "Defeating a weakened, suppressed, or volatile target grants Invisibility and Truesight.", "s": "bungie" },
+   { "do": "grants", "t": "invisibility", "on": "defeating a Void-debuffed target", "q": "Defeating a weakened, suppressed, or volatile target grants Invisibility and Truesight.", "s": "bungie" },
+   { "do": "grants", "t": "truesight", "on": "defeating a Void-debuffed target", "q": "Defeating a weakened, suppressed, or volatile target grants Invisibility and Truesight.", "s": "bungie" },
+   { "do": "uses", "t": "melee", "q": "your next melee attack while invisible weakens targets", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "on": "your next melee while invisible from a Stylish Execution", "q": "your next melee attack while invisible weakens targets", "s": "bungie" },
+   { "do": "uses", "t": "scorch", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Any Elementally Debuffed)", "s": "clarity" },
+   { "do": "uses", "t": "jolt", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Any Elementally Debuffed)", "s": "clarity" },
+   { "do": "uses", "t": "blind", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Any Elementally Debuffed)", "s": "clarity" },
+   { "do": "uses", "t": "slow", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Any Elementally Debuffed)", "s": "clarity" },
+   { "do": "uses", "t": "freeze", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Any Elementally Debuffed)", "s": "clarity" },
+   { "do": "uses", "t": "sever", "if": [{ "subclass": "prismatic" }], "q": "(Prismatic Only: Any Elementally Debuffed)", "s": "clarity" }
+  ],
+  "note": "2s [12s PvP] cooldown. The weakening melee then feeds the next execution. On Prismatic any elemental debuff counts." },
+
+ { "id": "sub:trappersambush", "n": "Trapper's Ambush",
+  "fx": [
+   { "do": "uses", "t": "movement", "q": "Activate your air move to consume your class ability energy and dive to the ground", "s": "bungie" },
+   { "do": "uses", "t": "airborne", "q": "While Airborne with full Class Ability Energy, activate [Air Move] to consume your Class Ability", "s": "clarity" },
+   { "do": "consumes", "t": "classenergy", "q": "Activate your air move to consume your class ability energy and dive to the ground", "s": "bungie" },
+   { "do": "uses", "t": "dodge", "q": "Trapper's Ambush triggers the effects of your equipped dodge upon consumption.", "s": "clarity" },
+   { "do": "uses", "t": "devour", "q": "Deals 50% increased damage in a 33?% bigger radius if you have a Void Buff (Devour, Overshield, Invisibility) active.", "s": "clarity" },
+   { "do": "uses", "t": "overshield", "q": "Deals 50% increased damage in a 33?% bigger radius if you have a Void Buff (Devour, Overshield, Invisibility) active.", "s": "clarity" },
+   { "do": "uses", "t": "invisibility", "q": "Deals 50% increased damage in a 33?% bigger radius if you have a Void Buff (Devour, Overshield, Invisibility) active.", "s": "clarity" },
+   { "do": "grants", "t": "healing", "q": "Damaging opponents with this ability heals you.", "s": "bungie" },
+   { "do": "grants", "t": "devour", "on": "Trapper's Ambush final blows", "q": "Defeating combatants with this ability grants Devour.", "s": "bungie" },
+   { "do": "grants", "t": "invisibility", "if": [{ "has": "invisibility" }], "q": "Grants 5 seconds (7 with Echo of Persistence) of Void Invisibility if cast while already Invisible.", "s": "clarity" },
+   { "do": "creates", "t": "voidsmoke", "if": [{ "piece": "Vanishing Step" }], "q": "drops a Void Smoke Cloud upon landing", "s": "clarity" },
+   { "do": "applies", "t": "weaken", "by": "voidsmoke", "if": [{ "piece": "Vanishing Step" }], "q": "Enemies hit by the detonation of the Smoke Cloud are Weakened for 10 [5] seconds", "s": "clarity" },
+   { "do": "grants", "t": "invisibility", "by": "voidsmoke", "who": "allies", "if": [{ "piece": "Vanishing Step" }], "q": "while allies are granted Void Invisibility for 6.5 seconds", "s": "clarity" },
+   { "do": "applies", "t": "disorient", "if": [{ "piece": "Vanishing Step" }], "q": "Quickfall inflicts disorient and weaken to enemies and grants invisibility to the user and allies within 10 meters.", "s": "compendium" }
+  ],
+  "note": "Needs full class ability energy (a dodge charge). Spectral Blades allows unlimited uses for Super energy (Compendium). Damage scales with Class stat above 100." },
+
+ { "id": "sub:vanishingstep", "n": "Vanishing Step",
+  "fx": [
+   { "do": "uses", "t": "dodge", "q": "Dodging makes you invisible.", "s": "bungie" },
+   { "do": "grants", "t": "invisibility", "on": "when you dodge", "q": "Dodging makes you invisible.", "s": "bungie" }
+  ],
+  "note": "Paired with Trapper's Ambush, the air-move slam also drops a weakening smoke cloud that makes allies invisible." },
+
+ { "id": "sub:echoofcessation", "n": "Echo of Cessation",
+  "fx": [
+   { "do": "uses", "t": "finisher", "q": "Finisher final blows create a burst of Void damage that causes nearby combatants to become volatile.", "s": "bungie" },
+   { "do": "applies", "t": "volatile", "on": "finisher final blows", "q": "Finisher final blows create a burst of Void damage that causes nearby combatants to become volatile.", "s": "bungie" },
+   { "do": "uses", "t": "volatile", "q": "Defeating volatile targets creates a Void Breach.", "s": "bungie" },
+   { "do": "creates", "t": "voidbreach", "on": "defeating volatile targets", "q": "Defeating volatile targets creates a Void Breach.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:echoofdilation", "n": "Echo of Dilation", "fx": [],
+  "note": "While crouched: faster sneak speed and doubled radar resolution. No interaction with other pieces." },
+
+ { "id": "sub:echoofdomineering", "n": "Echo of Domineering",
+  "fx": [
+   { "do": "uses", "t": "suppress", "q": "After suppressing a target, you gain increased weapon stat for a short duration, and your equipped weapon is reloaded from reserves.", "s": "bungie" },
+   { "do": "grants", "t": "reload", "on": "suppressing a target", "q": "your equipped weapon is reloaded from reserves", "s": "bungie" },
+   { "do": "creates", "t": "voidbreach", "on": "defeating suppressed targets", "q": "Defeating suppressed targets creates a Void Breach.", "s": "bungie" }
+  ],
+  "note": "Also +30 Weapons stat and 4% move speed for 10 s; 10 s cooldown (Clarity)." },
+
+ { "id": "sub:echoofexchange", "n": "Echo of Exchange",
+  "fx": [
+   { "do": "uses", "t": "melee", "q": "Melee final blows grant grenade energy.", "s": "bungie" },
+   { "do": "grants", "t": "grenadeenergy", "on": "melee final blows", "q": "Melee final blows grant grenade energy.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:echoofexpulsion", "n": "Echo of Expulsion",
+  "fx": [
+   { "do": "uses", "t": "voidability", "q": "Void ability final blows cause targets to explode.", "s": "bungie" }
+  ],
+  "note": "The explosion is up to 160 damage in 7 m (Clarity)." },
+
+ { "id": "sub:echoofharvest", "n": "Echo of Harvest",
+  "fx": [
+   { "do": "uses", "t": "weaken", "q": "Defeating weakened targets creates an Orb of Power and a Void Breach.", "s": "bungie" },
+   { "do": "creates", "t": "orbofpower", "on": "defeating weakened targets", "q": "Defeating weakened targets creates an Orb of Power and a Void Breach.", "s": "bungie" },
+   { "do": "creates", "t": "voidbreach", "on": "defeating weakened targets", "q": "Defeating weakened targets creates an Orb of Power and a Void Breach.", "s": "bungie" }
+  ],
+  "note": "10 s cooldown (Clarity)." },
+
+ { "id": "sub:echoofinstability", "n": "Echo of Instability",
+  "fx": [
+   { "do": "uses", "t": "grenade", "q": "Defeating targets with grenades grants Volatile Rounds to your Void weapons.", "s": "bungie" },
+   { "do": "grants", "t": "volatilerounds", "on": "grenade final blows", "if": [{ "weapon": "void" }], "q": "Defeating targets with grenades grants Volatile Rounds to your Void weapons.", "s": "bungie" },
+   { "do": "applies", "t": "volatile", "by": "volatilerounds", "if": [{ "weapon": "void" }], "q": "making Void Weapons apply Volatile on Hit", "s": "clarity" }
+  ],
+  "note": "Any grenade kill counts, not just Void grenades (Clarity)." },
+
+ { "id": "sub:echoofleeching", "n": "Echo of Leeching",
+  "fx": [
+   { "do": "uses", "t": "melee", "q": "Melee final blows start health regeneration for you and nearby allies.", "s": "bungie" },
+   { "do": "grants", "t": "healing", "who": "allies", "on": "melee final blows", "q": "Melee final blows start health regeneration for you and nearby allies.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:echoofobscurity", "n": "Echo of Obscurity",
+  "fx": [
+   { "do": "uses", "t": "finisher", "q": "Finisher final blows grant Invisibility.", "s": "bungie" },
+   { "do": "grants", "t": "invisibility", "on": "finisher final blows", "q": "Finisher final blows grant Invisibility.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:echoofpersistence", "n": "Echo of Persistence",
+  "fx": [
+   { "do": "modifies", "t": "invisibility", "q": "Void buffs applied to you (Invisibility, Overshield, and Devour) have increased duration.", "s": "bungie" },
+   { "do": "modifies", "t": "overshield", "q": "Void buffs applied to you (Invisibility, Overshield, and Devour) have increased duration.", "s": "bungie" },
+   { "do": "modifies", "t": "devour", "q": "Void buffs applied to you (Invisibility, Overshield, and Devour) have increased duration.", "s": "bungie" }
+  ],
+  "note": "Devour and Overshield +50%, Invisibility +40% (Clarity)." },
+
+ { "id": "sub:echoofprovision", "n": "Echo of Provision",
+  "fx": [
+   { "do": "uses", "t": "grenade", "q": "Damaging targets with grenades grants melee energy.", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "on": "grenade damage", "q": "Damaging targets with grenades grants melee energy.", "s": "bungie" }
+  ],
+  "note": "Does not work with Unbreakable (Clarity). Void Soul counts as grenade damage, so it triggers this." },
+
+ { "id": "sub:echoofremnants", "n": "Echo of Remnants",
+  "fx": [
+   { "do": "uses", "t": "grenade", "if": [{ "slot": "grenade", "is": ["Vortex Grenade", "Void Wall", "Void Spike", "Axion Bolt"] }], "q": "Your lingering grenade effects (Vortex Grenade, Void Wall, Void Spike, and Axion Bolt) have increased duration.", "s": "bungie" },
+   { "do": "modifies", "t": "grenade", "if": [{ "slot": "grenade", "is": ["Vortex Grenade", "Void Wall", "Void Spike", "Axion Bolt"] }], "q": "Your lingering grenade effects (Vortex Grenade, Void Wall, Void Spike, and Axion Bolt) have increased duration.", "s": "bungie" },
+   { "do": "modifies", "t": "grenade", "if": [{ "slot": "grenade", "is": ["Vortex Grenade"] }, { "piece": "Chaos Accelerant" }], "q": "lasts 25% longer (55% longer when overcharged by Chaos Accelerant)", "s": "clarity" }
+  ] },
+
+ { "id": "sub:echoofreprisal", "n": "Echo of Reprisal",
+  "fx": [
+   { "do": "grants", "t": "superenergy", "on": "final blows while surrounded", "q": "Final blows when surrounded by combatants grant Super energy.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:echoofstarvation", "n": "Echo of Starvation",
+  "fx": [
+   { "do": "uses", "t": "voidbreach", "q": "Picking up a Void Breach or an Orb of Power grants Devour.", "s": "bungie" },
+   { "do": "uses", "t": "orbofpower", "q": "Picking up a Void Breach or an Orb of Power grants Devour.", "s": "bungie" },
+   { "do": "grants", "t": "devour", "on": "picking up a Void Breach or Orb of Power", "q": "Picking up a Void Breach or an Orb of Power grants Devour.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:echoofundermining", "n": "Echo of Undermining",
+  "fx": [
+   { "do": "uses", "t": "grenade", "q": "Your Void grenades weaken targets.", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "on": "Void grenade hits", "q": "Your Void grenades weaken targets.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:echoofvigilance", "n": "Echo of Vigilance",
+  "fx": [
+   { "do": "grants", "t": "overshield", "on": "final blows while your shields are depleted", "q": "Defeating a target while your shields are depleted grants you a temporary Void overshield.", "s": "bungie" }
+  ],
+  "note": "8 s cooldown (Clarity)." },
+
+ { "id": "sub:phantomsurge", "n": "Phantom Surge",
+  "fx": [
+   { "do": "uses", "t": "weaken", "q": "Deals significantly increased damage to Void-debuffed targets, or targets marked by On The Prowl.", "s": "bungie" },
+   { "do": "uses", "t": "suppress", "q": "Deals significantly increased damage to Void-debuffed targets, or targets marked by On The Prowl.", "s": "bungie" },
+   { "do": "uses", "t": "volatile", "q": "Deals significantly increased damage to Void-debuffed targets, or targets marked by On The Prowl.", "s": "bungie" },
+   { "do": "uses", "t": "prioritytarget", "q": "Deals significantly increased damage to Void-debuffed targets, or targets marked by On The Prowl.", "s": "bungie" },
+   { "do": "grants", "t": "overshield", "on": "each combatant hit", "q": "Generate Void Overshield for each combatant hit.", "s": "bungie" },
+   { "do": "grants", "t": "meleeenergy", "on": "defeating at least one combatant", "q": "Defeating at least one combatant grants additional Overshield and refunds melee ability energy.", "s": "bungie" }
+  ],
+  "note": "'Void-debuffed' read as weaken, suppress or volatile." },
+
+ { "id": "sub:pocketsingularity", "n": "Pocket Singularity",
+  "fx": [
+   { "do": "applies", "t": "volatile", "q": "pushing them away from the blast and making them volatile", "s": "bungie" }
+  ],
+  "note": "Two charges. A powered melee hit, so it readies Soul Siphon." },
+
+ { "id": "sub:shieldbash", "n": "Shield Bash",
+  "fx": [
+   { "do": "applies", "t": "suppress", "q": "unleash a devastating Shield Bash that suppresses the target", "s": "bungie" },
+   { "do": "grants", "t": "overshield", "on": "Shield Bash final blows", "q": "Final blows with Shield Bash grant an Overshield.", "s": "bungie" }
+  ],
+  "note": "Needs 1.25 s of sprinting first." },
+
+ { "id": "sub:shieldthrow", "n": "Shield Throw",
+  "fx": [
+   { "do": "grants", "t": "overshield", "on": "each target hit", "q": "granting Overshield for each target hit", "s": "bungie" }
+  ] },
+
+ { "id": "sub:snarebomb", "n": "Snare Bomb",
+  "fx": [
+   { "do": "creates", "t": "voidsmoke", "q": "detonates into a disorienting smoke cloud", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "q": "detonates into a disorienting smoke cloud, weakening nearby targets", "s": "bungie" },
+   { "do": "applies", "t": "disorient", "q": "detonates into a disorienting smoke cloud", "s": "bungie" },
+   { "do": "grants", "t": "invisibility", "who": "allies", "on": "when deployed", "q": "Upon deployment, makes nearby allies invisible.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:novabombcataclysm", "n": "Nova Bomb: Cataclysm", "fx": [],
+  "note": "Slow seeking bomb that splits into seekers; pure damage, no Void keyword in its text." },
+ { "id": "sub:novabombvortex", "n": "Nova Bomb: Vortex", "fx": [],
+  "note": "Bomb that leaves a pulling, damaging singularity; no Void keyword in its text." },
+
+ { "id": "sub:novawarp", "n": "Nova Warp",
+  "fx": [
+   { "do": "applies", "t": "weaken", "q": "Teleport a short distance and release weakening seekers.", "s": "bungie" },
+   { "do": "applies", "t": "volatile", "on": "fully charged eruption", "q": "A fully charged attack makes targets volatile.", "s": "bungie" }
+  ] },
+
+ { "id": "sub:sentinelshield", "n": "Sentinel Shield",
+  "fx": [
+   { "do": "grants", "t": "overshield", "who": "allies", "on": "allies behind the guarding shield", "q": "Allies standing within 5m behind the barrier are granted 25% Increased Damage, a 45 HP Void Overshield", "s": "compendium" },
+   { "do": "grants", "t": "reload", "who": "allies", "on": "allies behind the guarding shield", "q": "Allies behind the shield have increased survivability, weapon damage, and passive reload.", "s": "bungie" },
+   { "do": "creates", "t": "orbofpower", "on": "blocking damage while guarding", "q": "Blocking ? [any] damage generates an Orb of Power", "s": "compendium" },
+   { "do": "grants", "t": "weapondamage", "on": "allies behind the guarding shield", "q": "Allies behind the shield have increased survivability, weapon damage, and passive reload.", "s": "bungie" }
+  ],
+  "note": "Shield Throw replaces the grenade during the Super. Offensive Bulwark adds one more Shield Throw; Unbreakable spawns Orbs when Sentinel Shield is equipped." },
+
+ { "id": "sub:shadowshotdeadfall", "n": "Shadowshot: Deadfall",
+  "fx": [
+   { "do": "applies", "t": "weaken", "q": "dramatically weakening and suppressing them for you and your allies", "s": "bungie" },
+   { "do": "applies", "t": "suppress", "q": "dramatically weakening and suppressing them for you and your allies", "s": "bungie" }
+  ],
+  "note": "Anchors become lingering traps." },
+
+ { "id": "sub:shadowshotmoebiusquiver", "n": "Shadowshot: Moebius Quiver",
+  "fx": [
+   { "do": "applies", "t": "weaken", "q": "dramatically weakening and suppressing them for you and your allies", "s": "bungie" },
+   { "do": "applies", "t": "suppress", "q": "dramatically weakening and suppressing them for you and your allies", "s": "bungie" },
+   { "do": "applies", "t": "volatile", "q": "Shadowshot makes targets volatile", "s": "bungie" },
+   { "do": "creates", "t": "orbofpower", "on": "defeating tethered targets", "q": "Defeating tethered targets creates Orbs of Power.", "s": "bungie" }
+  ],
+  "note": "While active, damage also boosts its arrows and Bow weapons." },
+
+ { "id": "sub:spectralblades", "n": "Spectral Blades",
+  "fx": [
+   { "do": "applies", "t": "weaken", "on": "heavy attack", "q": "Perform a heavy attack that weakens your target, and once again vanish from sight.", "s": "bungie" },
+   { "do": "grants", "t": "invisibility", "on": "heavy attack", "q": "Perform a heavy attack that weakens your target, and once again vanish from sight.", "s": "bungie" },
+   { "do": "modifies", "t": "movement", "if": [{ "piece": "Trapper's Ambush" }], "q": "Allows unlimited Trapper's Ambush usage, at the cost of 15%? Super Energy.", "s": "compendium" }
+  ],
+  "note": "Light attacks remove invisibility." },
+
+ { "id": "sub:twilightarsenal", "n": "Twilight Arsenal",
+  "fx": [
+   { "do": "applies", "t": "weaken", "q": "detonate in a weakening explosion", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "on": "carried axe slashes", "q": "Slash forward with your axe, dealing damage and weakening targets.", "s": "bungie" }
+  ],
+  "note": "Thrown axes can be picked up by you or allies as temporary melee weapons." },
+
+ { "id": "sub:wardofdawn", "n": "Ward of Dawn",
+  "fx": [
+   { "do": "grants", "t": "overshield", "who": "allies", "on": "while inside the Ward", "q": "While inside Ward of Dawn, allies gain Void overshield and increased weapon damage", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "on": "enemies inside the Ward", "q": "while targets inside the Ward are weakened", "s": "bungie" },
+   { "do": "grants", "t": "grenadeenergy", "on": "Super cast", "q": "Grants 1 Grenade Ability Charge and creates 3 Orbs of Power", "s": "compendium" },
+   { "do": "creates", "t": "orbofpower", "on": "Super cast", "q": "Grants 1 Grenade Ability Charge and creates 3 Orbs of Power", "s": "compendium" },
+   { "do": "uses", "t": "melee", "q": "Scoring a Melee Kill as the Caster generates an Orb of Power up to 5 times per Super cast.", "s": "compendium" },
+   { "do": "creates", "t": "orbofpower", "on": "caster melee final blows inside the Ward", "q": "Scoring a Melee Kill as the Caster generates an Orb of Power up to 5 times per Super cast.", "s": "compendium" },
+   { "do": "modifies", "t": "melee", "q": "The Ward's owner also gains increased melee damage while inside", "s": "bungie" },
+   { "do": "grants", "t": "weapondamage", "on": "while inside the Ward", "q": "allies gain Void overshield and increased weapon damage", "s": "bungie" }
+  ],
+  "note": "Offensive Bulwark treats being inside the Ward like having an Overshield." },
+
+ { "id": "sub:unbreakable", "n": "Unbreakable",
+  "fx": [
+   { "do": "uses", "t": "grenade", "q": "Hold to summon a [Void] Void shield", "s": "bungie" },
+   { "do": "modifies", "t": "grenade", "q": "Hold to summon a [Void] Void shield that draws hostile fire and blocks a portion of incoming damage", "s": "bungie" },
+   { "do": "consumes", "t": "grenadeenergy", "q": "gradually draining your grenade energy and granting an Overshield over time", "s": "bungie" },
+   { "do": "grants", "t": "overshield", "on": "while holding the shield", "q": "gradually draining your grenade energy and granting an Overshield over time", "s": "bungie" },
+   { "do": "grants", "t": "grenadeenergy", "on": "blocking damage", "q": "grants ?% Grenade Energy per hit absorbed", "s": "clarity" },
+   { "do": "applies", "t": "disorient", "q": "releases a frontal blast from your shield that disorients combatants", "s": "bungie" },
+   { "do": "grants", "t": "devour", "on": "frontal blast final blows", "q": "Final blows with the frontal blast grant you Devour.", "s": "bungie" },
+   { "do": "creates", "t": "orbofpower", "if": [{ "slot": "super", "is": ["Sentinel Shield"] }], "q": "If you have Sentinel Shield equipped, blocking damage also spawns an Orb of Power for your allies every 4.5 seconds.", "s": "clarity" }
+  ],
+  "note": "Replaces your grenade throw; base grenade cooldown becomes 152 s. Does not trigger Echo of Provision (Clarity)." }
+]

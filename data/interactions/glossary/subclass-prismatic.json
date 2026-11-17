@@ -1,0 +1,77 @@
+{
+ "terms": {
+  "lightdamage": {
+   "l": "Light damage",
+   "kind": "damage",
+   "el": "prismatic",
+   "aka": [
+    "light-aligned damage",
+    "light damage"
+   ],
+   "def": "Arc, Solar or Void damage. Prismatic fragments and Transcendence track it separately from Darkness damage.",
+   "q": "Light Alignment: Arc, Solar, Void",
+   "src": "sub:facetofbalance"
+  },
+  "darknessdamage": {
+   "l": "Darkness damage",
+   "kind": "damage",
+   "el": "prismatic",
+   "aka": [
+    "dark-aligned damage",
+    "darkness damage",
+    "dark damage"
+   ],
+   "def": "Stasis or Strand damage. Prismatic fragments and Transcendence track it separately from Light damage.",
+   "q": "Darkness Alignment: Stasis, Strand",
+   "src": "sub:facetofbalance"
+  },
+  "lightability": {
+   "l": "Light ability",
+   "kind": "ability",
+   "el": "prismatic",
+   "aka": [
+    "light abilities",
+    "arc, solar, and void abilities"
+   ],
+   "def": "Any Arc, Solar or Void grenade, melee, class ability or Super.",
+   "q": "Light abilities deal 10% increased damage to enemies affected by Stasis or Strand elemental debuffs.",
+   "src": "sub:facetofcourage"
+  },
+  "transcendenceenergy": {
+   "l": "Transcendence energy",
+   "kind": "energy",
+   "el": "prismatic",
+   "aka": [
+    "light transcendence energy",
+    "darkness transcendence energy"
+   ],
+   "def": "The Light and Darkness meters that fill as you deal damage and apply elemental effects; when both are full you can become Transcendent.",
+   "q": "Dealing damage, alongside applying Elemental Effects grants Transcendence Energy.",
+   "src": "compendium:prismatic"
+  },
+  "prismaticgrenade": {
+   "l": "Prismatic grenade",
+   "kind": "ability",
+   "el": "prismatic",
+   "aka": [
+    "transcendence grenade",
+    "transcendence grenades"
+   ],
+   "def": "The class-specific grenade that replaces your grenade while Transcendent, dealing both Light and Darkness damage (Electrified Snare, Hailfire Spike, Freezing Singularity).",
+   "q": "Replaces Grenade Ability with an unique class-specific Prismatic Grenade Ability with Light and Darkness damage types.",
+   "src": "sub:transcendence"
+  },
+  "damageresistance": {
+   "l": "Damage resistance",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "damage resist",
+    "damage reduction"
+   ],
+   "def": "Reduces the damage you take from enemies.",
+   "q": "Grants 15% [?%] Damage Resistance while within 15 meters of 3 enemies.",
+   "src": "sub:facetofprotection"
+  }
+ }
+}

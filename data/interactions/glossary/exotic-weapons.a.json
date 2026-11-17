@@ -1,0 +1,16 @@
+{
+ "terms": {
+  "goldengunmode": {
+   "l": "Golden Gun Mode (Still Hunt)",
+   "kind": "state",
+   "el": "solar",
+   "aka": [
+    "cayde's retribution",
+    "golden gun mode"
+   ],
+   "def": "Still Hunt's charged Golden Gun shots; it is not a Super for any purpose, and Celestial Nighthawk turns it into one high-powered shot.",
+   "q": "Golden Gun Mode is NOT a Super Ability for any purposes.",
+   "src": "xw:stillhunt"
+  }
+ }
+}

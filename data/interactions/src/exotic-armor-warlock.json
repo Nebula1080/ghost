@@ -1,0 +1,1067 @@
+[
+ {
+  "id": "xa:apotheosisveil",
+  "n": "Apotheosis Veil",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   132452792
+  ],
+  "perks": [
+   {
+    "n": "Insatiable",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Immediately regenerate health, melee, grenade, and Rift energy for you and your nearby allies upon activating your Super. After your Super ends, temporarily gain greatly increased melee and grenade regen.",
+     "clarity": "Super Ability activation fully restores Health, Grenade, Melee, and Class Ability Energy for you and allies within ? meters.\nGrants 66% Grenade and Melee Ability Energy per second for 8 seconds after your Super ends.",
+     "compendium": "On Super Cast, for the Caster and Allies within ? meters.\nFully restores Health, Grenade, Melee, and Class Ability Energy.\nOn Super End:\nGrants 66% Fixed Bonus Grenade and Melee Ability Energy per second for 8 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:astrocyteverse",
+  "n": "Astrocyte Verse",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   866590993
+  ],
+  "perks": [
+   {
+    "n": "Move to Survive",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "With Blink equipped, use [Air Dodge]  while airborne to perform a Dark Blink.\n\nUsing Blink or Dark Blink grants Volatile Rounds. Blink travels farther, causes nearby targets to become volatile, and has a shorter cooldown. While your Nova Warp Super is active, Dark Blink does not cost Super energy. Provides a moderate benefit to airborne effectiveness for all weapons.",
+     "clarity": "Passive grants the following benefits:\n• 30 Airborne Effectiveness\n• 25% increased Blink distance\n• 20% decreased Blink cooldown (3.55s⁠🠚⁠2.85s)\n• 30% decreased Blink activation delay (1.65s⁠🠚⁠1.15s)\n• Removes Super Energy cost of Nova Warp's Dark Blink\nWhile Blink is equipped, gain a horizontal 'Dark Blink' bound to your [Air Move]. Movement is identical to Nova Warp's Dark Blink, which spawns 4 [2] Weakening Seekers that scale with the Super stat. Incurs a 6 [8] second cooldown on use.\nBlinking or casting Dark Blink grants 100 Handling for 2 seconds, Volatile Rounds for 9 [5] seconds, and the Radar remains active during the animation.\nEnemies within 10? meters become Volatile when initiating Blink.",
+     "compendium": "Passively grants +30 Airborne Effectiveness and enhances Blink.\nWhile Blink is equipped, either on Void or Prismatic Subclasses:\nGrants a free horizontal Dark Blink usage with [Air Move] every 6 [8] seconds.\nDark Blink releases 4 [2] Seekers that are functionally identical to Nova Warp's and scale with Super Damage.\n25% Increased Blink Distance.\n20% Decreased Cooldown for Blink Charges. (3.55 -> 2.85 seconds for both charges)\nTime between blinks is decreased by 30% (1.65 -> 1.15 seconds) \nOn Blink/Dark Blink Activation:\nInflicts Volatile to enemies within 10 metres.\nGrants Volatile Rounds for 9 [5] seconds.\n+100 Handling for 2 seconds. Stowing cancels the effect.\nRadar remains active.\nDuring Nova Warp Super:\nDark Blink does not consume Super Energy."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:ballidorsewrathweavers",
+  "n": "Ballidorse Wrathweavers",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   2109877638
+  ],
+  "perks": [
+   {
+    "n": "Hearts of Ice",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Targets frozen by your Winter's Wrath Super take increased Shatter damage. Allies in range of your Winter's Wrath shockwave and Frostpulse gain Frost Armor and deal increased damage with Stasis weapons. Granting these buffs to allies grants you Super energy.",
+     "clarity": "Enemies frozen by Winter's Wrath receive 150% increased Shatter damage.\nUpon performing Winter's Wrath's heavy attack:\n• Allies within 30 meters receive the maximum Frost Armor Stacks and 4 Stacks of Stasis Weapon Surge for 11 [6] seconds\n• Refunds ?% Super Energy per ally buffed. (Only works once per ally?)\nGrants maximum Frost Armor Stacks to you once Winter's Wrath ends.\nOn Rift Cast with the Frostpulse Aspect equipped:\n• You and allies within ? meters receive 2 Stacks of Stasis Weapon Surge for 11 [6] seconds alongside maximum Frost Armor Stacks\n• Grants 2% Winter's Wrath Super Energy for each ally that received the above benefits",
+     "compendium": "Enemies frozen by Winter's Wrath receive 150% increased Shatter Damage.\n3453 + 360 (3813) -> 4144 + 1081 (5225) vs Elites | 2302 + 360 (2662) -> 2302 + 901 (3203) vs Bosses\nUpon performing Winter's Wrath's Shatter Attack:\nAllies within 30? meters receive x4 Stasis Weapon Surge for 15 [6] seconds and maximum Frost Armor stacks. \nRefunds ?% Super Energy per Ally buffed. \n Buff is refreshable. Refund only works once per ally?.\nOn Rift Cast while the Frostpulse Aspect is equipped:\nUser and Allies within ? meters receive x2 Stasis Weapon Surge for 11 [6] seconds and maximum Frost Armor.\nGrants 2% Super Energy per ally that receives Frost Armor through Frostpulse.\nOn Winter's Wrath End:\nGrants maximum Frost Armor stacks to the user."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:bootsoftheassembler",
+  "n": "Boots of the Assembler",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "legs",
+  "hashes": [
+   597039524
+  ],
+  "perks": [
+   {
+    "n": "Blessing of Order",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Standing in a rift creates Noble Seekers that seek out allies and heal them. Standing in an empowering rift creates Noble Seekers that grant both you and your ally a damage bonus. When a Noble Seeker finds an ally, you gain class ability energy. Increases the airborne effectiveness stat of the Hand Cannon Lumina.",
+     "clarity": "Passively grants 30 Airborne Effectiveness to Lumina and Noble Seekers grant Noble Rounds to it.\nStanding in a Rift or Well of Radiance creates Noble Seekers that seek out allies within 40 meters and apply buffs to them:\n• Healing Rift Seeker: restores 70 Health, 60 Shields, and starts Health Regeneration\n• Empowering Rift Seeker: grants 100 Class Stat and 35% [15%] increased damage for 5 seconds (Empowering Buff)\nNoble seekers spawn at a constant rate based on your Fireteam size.\nBuffing allies with Noble Seekers grants ?|25%|?|?|? Class Ability energy based when your fireteam has 2|3|4|5|6 members.\nSeekers prioritize allies who have not been healed in the last 8 seconds followed by nearby allies. Seekers will not target an ally more than once every 4 seconds.",
+     "compendium": "Passively grants +30 Airborne Effectiveness to Lumina. Noble Seekers grant Noble Rounds to Lumina.\nWhile standing in a Rift or Well of Radiance:\nSpawns Noble Seekers at an average rate of 1 per Fireteam-member every 8 seconds.\nNoble Seekers:\nTrack allies within 40 metres and bestow a buff on close proximity.\nPrioritize allies who have not been healed in the last 8s and won't target an ally more than once every 4s.\nHealing Rift | Seekers restore 70 Health, 60 Shield, and begin Health Regeneration.\nEmpowering Rift | Seekers grant 35% [15%] increased damage and +100 Class for 5 seconds.\nWell of Radiance Seekers grant both effects.\nGrants Fireteam-Based Class Ability Energy upon buffing an ally with a Seeker.\n2 Allies = ?% Class Ability Energy | 3 = 25?% | 4 = ?% | 5 = ?%"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:briarbinds",
+  "n": "Briarbinds",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   768145972
+  ],
+  "perks": [
+   {
+    "n": "One with the Void",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your Void Souls have a longer duration. They also gain escalating damage and durability as they defeat targets. You can retrieve your Void Souls by interacting with them, allowing them to be redeployed.",
+     "clarity": "Void Souls last 5 seconds longer and can be retrieved by interacting with them. Retrieving them grants 'Void Soul Ready' for 25 seconds, allowing it to be redeployed while keeping its Kill Bonuses.\nVoid Soul Kills permanently increase their damage and Damage Resistance, maxing out after 4 Kills:\n• 25%|50%|75%|100% increased Void Soul damage\n• 12.5%|25%|37.5%|50% increased Void Soul Damage Resistance\nWhile tethered to targets, Void Souls' damage ramps up to a 30% increase over 10 seconds. This damage bonus resets once no targets are tethered.\nIf multiple Void Souls tether the same enemy, they will each deal the damage of the first Soul to do so.",
+     "compendium": "Void Souls last 55% longer, deal up to 30% increased damage after 10 seconds, and can be retrieved by interacting with them.\nGrants Void Soul Ready for 25 seconds after interaction, allowing redeployment.\nOn Void Soul Kill:\nGrants increased Void Soul damage and Damage Resist. \nBonuses can be maintained by redeploying.\nVoid Soul Benefits:\n25% | 50% | 75% | 100% increased damage.\n12.5% | 25% | 37.5% | 50% Damage Resist."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:cenotaphmask",
+  "n": "Cenotaph Mask",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   2374129871
+  ],
+  "perks": [
+   {
+    "n": "High Priority",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Steadily reloads a portion of your equipped Trace Rifle's magazine from reserves. Damaging a vehicle, boss, or Champion with a Trace Rifle marks them as the target. When an ally defeats the marked target, Special ammo is generated for you and Heavy ammo for your allies.",
+     "clarity": "Refills 4% of the magazine of Trace Rifles (rounded up) from reserves every 0.7 seconds. Works even while stowed.\nRapidly scoring 5 Trace Rifle hits on a Miniboss, Champion, Boss, or Vehicle marks them for you and allies for 10 seconds.\nAdditional hits refresh the mark duration. Does not require Direct Hits. Multiple people cannot mark the same enemy.\nOnly one target can be marked at a time and the mark cannot be transferred to a different target before the duration runs out or the enemy is defeated.\nAlly kills on Marked Enemies spawn a Heavy Ammo Brick for allies and a Special Ammo Brick for you.\nSpawned Ammo Bricks grant 10.33% of your total reserves (rounded up).",
+     "compendium": "Trace Rifles refill 4% of their Magazine every 0.7 seconds. \nWorks while stowed.\nUpon scoring 5 Trace Rifle hits within ? seconds of each on a Miniboss, Champion, Boss, or Vehicle:\nCombatant is marked for 10 seconds.\nAdditional Trace Rifle Hits refresh the duration of the mark.\nOn Marked Enemy Death by Ally:\nGenerates Heavy Ammo for allies.\nGenerates Special Ammo for wearer.\nCenotaph Ammo Bricks grant 10% of Total Reserves and are affected by Scavenger mods."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:chromaticfire",
+  "n": "Chromatic Fire",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   3488362706
+  ],
+  "perks": [
+   {
+    "n": "Crystalline Transistor",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Final blows from Kinetic weapons create an explosion in the element of your equipped Super that deals damage and applies a matching elemental effect:\n• [Arc] Blinds targets.\n• [Solar] Scorches targets.\n• [Void] Weakens targets.\n• [Stasis] Slows targets.\n• [Strand] Severs targets.\nElemental final blows temporarily increase the explosion's size. Precision final blows always maximum the explosion's size.",
+     "clarity": "Kinetic Weapon Kills cause enemies to explode, dealing up to 252 [100] elemental damage matching your equipped Super in a 4 meter radius. Precision Kills increase the radius to 8 meters.\nElemental Kills grant one stack of 'Crystalline Transitor' for 11 seconds. Maximum of 2 stacks. Stacks expire one at a time.\nCrystalline Transitor increases the radius of the explosion to 6|8 Meters, at 1|2 stacks.\nEnemies hit by the explosion receive an elemental debuff corresponding to your equipped Super:\n• Arc: Blinds for ? [1] seconds\n• Solar: Applies 15 Scorch (20 with Ember of Ashes)\n• Stasis: Applies 30 Slow Stacks for 7 seconds (8 with Whisper of Durance)\n• Strand: Severs for 6 seconds (8 with Thread of Continuity)\n• Void: Weakens for 4 seconds",
+     "compendium": "On Kinetic Weapon Kill: \nEnemy explodes in a Super-Matching Explosion that inflicts an Elemental-Matching Debuff.\nGrants a stack of Crystalline Transistor for 11 seconds, up to a maximum of 2 stacks.\nLoses 1 Crystalline Transistor stack upon expiring, rather than all of them.\nElemental Explosion:\nDeals up to 252 [100] Elemental Damage and inflicts an Elemental Debuff based on the equipped Super.\nRadius is based on the amount of Crystalline Transistor stacks.\nBase = 4 meters | x1 = 6 meters | x2 OR Kinetic Precision Kill = 8 meters. \nArc: Blind for ? [1] seconds.\nSolar: x15+5 Scorch.\nVoid: Weaken for 4 seconds.\nStasis: x30 Slow for 7+1 seconds.\nStrand: Sever for 6+2 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:clawsofahamkara",
+  "n": "Claws of Ahamkara",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   171695625
+  ],
+  "perks": [
+   {
+    "n": "The Whispers",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Gain an additional melee charge. Powered melee final blows spawn an Orb of Power.",
+     "clarity": "Grants an extra Melee Ability Charge.\nActs as a copy of the Heavy Handed armor mod.",
+     "compendium": "Grants an extra Melee Ability Charge.\nPassively grants a copy of Heavy Handed."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:contraversehold",
+  "n": "Contraverse Hold",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   1906093346
+  ],
+  "perks": [
+   {
+    "n": "Chaotic Exchanger",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Resist incoming damage while charging your Void grenade with Chaos Accelerant. Charged Void grenades return grenade energy on a hit and apply Weaken.",
+     "clarity": "Grants 20% Damage Resistance while overcharging a Void Grenade with Chaos Accelerant.\nOvercharged Grenade Hits apply Weaken for 6 seconds and grant additional base grenade Regeneration Rate depending on the equipped grenade for 1.75 seconds.\n• Axion: 5000% [4000%]\n• Scatter: 3700% [2700%]\n• Vortex: 3400% [2400%]\n• Handheld Supernova: 2500% [2000%]\n4 second cooldown between activations, which is removed on grenade usage. Grants between 50-60% Grenade energy per activation.\nVortex Grenades can proc twice if enemies get hit by the initial explosion and the last few ticks.",
+     "compendium": "Overcharged Grenades inflict Weaken for 6? [2.5?] seconds.\nWhile overcharging a Void Grenade with Chaos Accelerant:\nGrants 20% Damage Resist.\nUpon dealing Overcharged Void Grenade Damage:\nTriggers Chaotic Exchange for 1.75 seconds.\nChaotic Exchange grants Additional Base Grenade Regeneration Rate.\nAxion: 5000% [4000%] Additional Base Grenade Regeneration Rate.\nScatter: 3700% [2700%] Additional Base Grenade Regeneration Rate.\nVortex: 3400% [2400%] Additional Base Grenade Regeneration Rate.\nHHSN: 2500%? [2000%] Additional Base Grenade Regeneration Rate.\nIncurs a 4 second cooldown between activations which is removed on Grenade Usage."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:crownoftempests",
+  "n": "Crown of Tempests",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   925466718
+  ],
+  "perks": [
+   {
+    "n": "Conduction Tines",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While you have an Arc ability equipped, Arc ability or Jolt final blows increase the recharge rate of your abilities and extend the duration of Stormtrance.\n\nWhile you have Conduction Tines, Ionic Sentry creates a Storm Grenade when it deploys.",
+     "clarity": "While you have at least 1 Arc Ability equipped:\nArc Ability and Jolt Kills grant a Stack of Conduction Tines for 10 [4] seconds. Maximum of 3 Stacks.\nThere is a very short cooldown for acquiring Stacks.\nConduction Tines 1|2|3 grant the following:\n• 167.5%|335%|502.5% additional Base Grenade, Melee, and Super Regeneration Rate\n• 22%|44%|66% decreased Passive Stormtrance Super Drain\n• Casting Ionic Sentry spawns a Storm Grenade on its point of impact",
+     "compendium": "While at least 1 Arc Ability is equipped:\nUpon scoring an Arc Ability Kill or a Jolt Kill:\n Grants a stack of Conduction Tines for 10 [4] seconds, up to a maximum of 3 stacks.\n All stacks disappear simultaneously. Very short cooldown between gaining stacks.\nConduction Tines:\n168% | 335% | 503% Additional Base Grenade, Melee, and Super Regeneration Rate.\n22% | 44% | 65% Decreased Stormtrance Passive Super Drain.\nIonic Sentry Placement triggers a Storm Grenade on its position."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:dawnchorus",
+  "n": "Dawn Chorus",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   2316914168
+  ],
+  "perks": [
+   {
+    "n": "Rites of Ember",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your Daybreak projectiles ignite targets on impact. Your Scorch deals additional damage, and builds to more powerful Ignitions. Dealing damage with Scorch or Ignitions grants melee energy.",
+     "clarity": "Daybreak Projectiles trigger a Solar Ignition on hit. Ignitions from any source deal 100% increased damage.\nEach enemy damaged by an Ignition grants 40% Melee Ability Energy. Scorched enemies grant 5% Melee Ability Energy per tick.\nSolar Fulmination from the Hunter's Journal Artifact doubles the Melee Ability Energy gained, and has its own damage doubled as well.\nDoes not increase Scorch tick damage.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Daybreak Projectiles trigger an Ignition on hit.\nScorch ticks grant 5?% Melee Ability Energy per tick. \nIgnitions deal 100% increased damage. \nEach enemy damaged by an ignition grants 40% Melee Ability Energy.\nSolar Fulmination (Hunter's Journal) doubles the Melee Ability Gained and has its damage doubled."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:deimosuffusion",
+  "n": "Deimosuffusion",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   1479082657
+  ],
+  "perks": [
+   {
+    "n": "Malevolent Grasp",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While a Strand Super is equipped, casting Rift will suspend nearby combatants. Suspend deals damage over time, which heals you in the process. Targets who break free from suspension suffer additional damage. Defeating suspended targets heals you a moderate amount.",
+     "clarity": "Only works while a Strand Super is equipped.\nCasting a Rift Suspends all combatants within 6 meters. Killing Suspended Enemies restores 15 HP.\nTargets you Suspend take ticks of damage every 0.467 [0.3] seconds. Each damage tick restores 5 HP.\nDamage over time starts at 23 [9] damage, increasing by ~5.5% [?%] per tick.\nEnemies breaking free from Suspension take an additional 64 [34?] damage.\nTargets Suspended with a Rift cast take ~112.5% increased damage from the the above sources.",
+     "compendium": "While a Strand Super Ability is equipped:\nCasting a Rift suspends combatants within 6 meters.\nSuspension inflicted by the user is enhanced.\nKilling Suspended Enemies restores 15 Health.\nMalevolent Grasp:\nSuspended Enemies are dealt increasingly higher Kinetic Damage every 0.467 [0.3] seconds.\nRestores 5 HP every time a Suspended Enemy takes damage from Enhanced Suspension DoT.\nDamage begins at 23 [9], increasing by ~5.5% [?%] per tick on average. Longer Suspend = Bigger Damage\nSuspended Enemies are dealt 64 [34?] Damage once Suspension expires.\nDeals a total of ~380 Kinetic Damage on an Elite Combatant. Thread of Continuity increases it to ~550.\nMalevolent Grasp inflicted through Rift Cast deals 112.5% increased damage. Numbers above do NOT include this."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:eunoia",
+  "n": "Eunoia",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   3481695565
+  ],
+  "perks": [
+   {
+    "n": "Consul's Pitch",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Hellion projectiles deal increased damage the further they travel eventually fracturing into scorching shrapnel.",
+     "clarity": "Hellion projectiles deal up to 20% increased damage after traveling 17 meters.\nHellion projectiles that have been in flight for 1 second release 4 pieces of Shrapnel with tracking capabilities.\nShrapnel projectiles deal 18 [?] Solar Damage and apply 5? stacks of Scorch each.",
+     "compendium": "Hellion Projectiles deal 20% increased damage after travelling 17 meters.\nHellion Projectiles that have been in the air for 1 second release 4 pieces of Shrapnel.\nShrapnel deals 18 [?] Solar Damage and inflicts x5+0 Scorch.\nShrapnel projectiles have tracking."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:eyeofanotherworld",
+  "n": "Eye of Another World",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   925466717
+  ],
+  "perks": [
+   {
+    "n": "Cerebral Uplink",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Highlights priority targets and improves the regeneration speed of your grenade, melee, and Rift abilities. Provides a small benefit to the airborne effectiveness stat of all weapons.",
+     "clarity": "Passively grants 15 Airborne Effectiveness and 45% Additional Base Grenade, Melee, and Class Ability Regeneration Rate.\nHighlights enemies below 50% HP in a red outline, and Enemy Players with fully-charged Supers in a yellow outline. Highlighting bypasses invisibility.",
+     "compendium": "Passively grants 45% Additional Base Grenade, Melee, and Class Regeneration Rate, and +15 Airborne Effectiveness.\nHighlights enemies below 50% HP enemies in a red outline.\nHighlights Enemy Guardians with Fully-charged Supers in a yellow outline.\nInvisible enemies that are below 50% HP or have a fully-charged Super will also be highlighted."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:fallensunstar",
+  "n": "Fallen Sunstar",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   1849149215
+  ],
+  "perks": [
+   {
+    "n": "Ionic Conductor",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Ionic traces you create move faster and grant you additional ability energy. Nearby allies also gain ability energy when you collect an ionic trace.",
+     "clarity": "Ionic Traces move 66% faster and grant increased Ability Energy.\nTotal ability energy gained per Ionic Trace:\nGrenade: 25% | Melee: 25% | Class Ability: 30%\nIonic Trace pickups grant 10% Grenade, Melee, and Class Ability energy to allies within 15 meters.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Ionic Traces move 66% faster and grant increased Ability Energy.\nTotal Ability Energy Gained per Ionic Trace:\nGrenade: 25% | Melee: 25% | Class Ability: 30%\nOn Ionic Trace Pickup:\nAllies within 15 metres receive 10% Grenade, Melee, and Class Ability Energy."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:felwintershelm",
+  "n": "Felwinter's Helm",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   728668916
+  ],
+  "perks": [
+   {
+    "n": "Warlord's End",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Powered melee hits weaken targets. Powered melee final blows create a burst of energy that dramatically weakens nearby targets. Finishers and final blows against more powerful targets increase the radius of the burst and the length of the weakening effect.",
+     "clarity": "Does not work with Grapple melee or Song of Flame melees.\nPowered Melee damage Weakens targets for 6 seconds (15% debuff).\nPowered Melee and Finisher Kills disorient and apply a stronger (30%) Weaken debuff to enemies in a given radius around the target.\nThe debuff Duration and application radius are dependent on Enemy Rank:\n• Minors: 15 meter radius, 10 second duration\n• Elites, Players: 20m radius, 15s duration\n• Minibosses, Bosses: 25m radius, 20s duration\nFinishers increase the debuff duration by 5 seconds and the application radius by 5 meters. Both duration and radius are capped at the values provided by killing (Mini)Bosses.\nAdditional PvP effects of on-kill debuffs: screen is blackened for 7.5 seconds before gradually fading away over the following 7.5 seconds. (HUD remains unobstructed)\nApplying Weaken to the target extends the debuff's duration.",
+     "compendium": "Powered Melee Damage inflicts regular weaken for 6 seconds.\n Does not work with Grapple Melee nor Song of Flame.\nOn Powered Melee Kill or Finisher:\nEnemy triggers a Highly Weakening Burst centered on the Enemy Death Location, disorienting and increasing damage by 30% for a variable duration.\nWeakening Burst Duration and Range are dependent on Enemy Rank (Finisher).\nScreen becomes blackened for 7.5 seconds, progressively getting clearer as the debuff reaches its 15 second duration. HUD does not disappear.\nWarlord's End.\nRank-and-File: Debuffs in a 15 (20) meter radius for 10 (15) seconds.\nElite: Debuffs in a 20 (25) meter radius for 15 (20) seconds.\nMiniboss+: Debuffs in a 25 (25) meter radius for 20 (20) seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:geomagstabilizers",
+  "n": "Geomag Stabilizers",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "legs",
+  "hashes": [
+   121305948
+  ],
+  "perks": [
+   {
+    "n": "Close Enough",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Damaging targets with Chaos Reach extends its duration. Collecting Ionic Traces grants you energy for Chaos Reach. Sprinting while near max Bolt Charge will grant stacks over time.",
+     "clarity": "Collecting Ionic Traces grants 4% Chaos Reach Super Energy.\nWhile at 5 Stacks of Bolt Charge or higher, after having sprinted for at least 1.5 seconds, maintaining sprint grants you a Stack of Bolt Charge every 0.33 seconds.\nChaos Reach refunds 10% Super Energy on hit.\n0.75 second cooldown between refunds. This can increase Chaos Reach duration by up to ~120%.",
+     "compendium": "After sprinting for 1.5 seconds and maintaining the sprint, while having at least x5 Bolt Charge:\nGrants a stack of Bolt Charge every 0.33 seconds.\nOn Ionic Trace Pickup:\n+4% Chaos Reach Super Ability Energy.\nChaos Reach grants 10% Super Ability Energy on hit.\nIncurs a 0.75 seconds cooldown between activation. \n Chaos Reach's Total Damage is increased by up to 120%"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:getawayartist",
+  "n": "Getaway Artist",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   3070357340
+  ],
+  "perks": [
+   {
+    "n": "Dynamic Duo",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "[Grenade]  : Convert your Arc grenade into a Arc Soul and become amplified. The Arc Soul functions as an autonomous turret.",
+     "clarity": "Holding [Grenade] consumes your Arc Grenade to make you Amplified and summon a 'Sentient Arc Soul' for 20 seconds.\nSentient Arc Soul information:\n• Counts as Arc Grenade Ability damage\n• Grants 5% Grenade Energy once per burst if it damages an enemy (this does not work if you have Devour active)\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Arc Soul Hits grant 5% Grenade Energy up to once per burst.\nDoes not grant Grenade Energy on hit while Devour is active.\nWhile an Arc Grenade Ability is equipped:\nHolding [Grenade] summons an Arc Soul for 20 seconds and grants Amplified.\nArc Soul Rifts refresh Arc Soul duration to 20 seconds instead of 15 seconds while active."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:karnsteinarmlets",
+  "n": "Karnstein Armlets",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   900910759
+  ],
+  "perks": [
+   {
+    "n": "Vampire's Caress",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Melee and finisher final blows instantly grant cure and provide restoration for a short duration.",
+     "clarity": "Melee Kills grant Cure x3 and Restoration x1.\nFinishers grant Cure x3 and Restoration x2.\nRestoration lasts 8 seconds (12 with Ember of Solace) in both cases.",
+     "compendium": "On Melee Kill:\nx3 Cure and Restoration x1 for 8+4 seconds.\nOn Finisher:\nx3 Cure and Restoration x2 for 8+4 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:lunafactionboots",
+  "n": "Lunafaction Boots",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "legs",
+  "hashes": [
+   418363297
+  ],
+  "perks": [
+   {
+    "n": "Alchemical Etchings",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases hip-fire range and accuracy for Primary ammo weapons. Your Rifts gain the additional ability to increase weapon reload speeds. Empowering Rift makes weapons effective at longer ranges.",
+     "clarity": "Rifts and Wells of Radiance you cast grant 100 Reload Speed and a 0.9x Reload Duration Multiplier to all weapons for you and allies inside them. Effect is tied to the rift, even if the exotic is removed.\nEmpowering Rifts and Wells of Radiance you cast also grant 50% increased Damage Falloff Distance to Weapons.\n Primary Weapons receive the following bonuses while hipfiring:\n• 5 Range and 30? Stability\n• 70% decreased Accuracy Cone Size\n• 2 degrees increased Precision Aim Cone Angle\n• 20% increased Aim Assist and Damage Falloff Distance\nDMT, Last Word, and Tommy's Matchbook are uniquely tuned and do not receive as significant of a benefit.",
+     "compendium": "For wearer and allies standing on Rifts and Well of Radiances cast by the wearer:\n+100 Reload Speed and 0.9x Reload Duration Multiplier.\nEmpowering Rifts and Well of Radiances grant 100% [50%] Increased Damage Falloff Distance.\nEffect persists even after swapping off of the Exotic.\nFor Primary Weapons while hipfiring:\n+5 Range, +30 Stability,\n-30% Accuracy Cone Size, +2?° Precision Angle Threshold,\n20% Increased Aim Assist and Damage Falloff Distance.\n DMT, Last Word, and Tommy's Matchbook do not receive the Falloff bonuses, and receive uniquely tweaked Accuracy values."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:mantleofbattleharmony",
+  "n": "Mantle of Battle Harmony",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   2732820041
+  ],
+  "perks": [
+   {
+    "n": "Absorption Cells",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Final blows or sustained damage with weapons matching your equipped Super damage type grant you Super energy. When your Super energy is full, you instead gain a temporary bonus to weapon damage of that type. When you've exhausted your Super, matching elemental weapons' damage temporarily causes explosions around the target.",
+     "clarity": "Kills or scoring 5 hits with Weapons matching your Super Element grant Super Energy based on Enemy Rank:\n• Tier 1 (T1) Minors: 1.5%\n• T2 Minors, T1 Elites: 2%\n• T3 Minors, T2 Elites: ?%\n• T4 Minors, T3 Elites, and higher: 2.5%\n• Players: 2.5?%\nWhile your Super is charged:\nKills with Weapons matching your Super's Element grant 4 Stacks of Subclass-Matching Weapon Surge for 11 [6] seconds.\nAfter casting your Super Ability, gain x4 Arc, Solar, Void, Stasis, and Strand Weapon Surge for 10 seconds, and 'Harmonic Munitions' for 15 seconds.\nHarmonic Munitions causes weapons that are the same element as your super to trigger an element-matching explosion on hit. Explosions deal 180 [?] damage in a 6 meter radius and can trigger once per second.",
+     "compendium": "Upon scoring a Super-Element Matching Weapon Kill or 5 Super-Element Matching Weapon Damage Instances within 3 seconds of each, up to once per second:\nTriggers Energy Siphon, granting additional Super Energy up to once every ? seconds.\nEnergy Siphon grants x4 Super-Matching Weapon Surge for 11 [6] seconds if Super Ability is charged.\nEnergy Siphon will, at times, fail to trigger on Solar Supers if they're charged.\nBy Kills: Tier 1 Combatant = 1.5% | T2 = 2% | T3 = ?% | T4 = 2.5% | Guardian = 2.5?%\nBy Damage: ?% Super Ability Energy\nOn Super Ability End:\nx4 Arc, Solar, Void, Stasis, and Strand Weapon Surge for 10 seconds.\nGrants Harmonic Munitions for 15 seconds.\nHarmonic Munitions:\nDealing Super-Matching Weapon Damage triggers a Super-Matching Explosion on the target.\nDetonation deals up to 180 [?] Damage over 6 meters, down to a minimum of 50% damage.\nCan only trigger up to one detonation per second. Harmonic Munition Kills trigger Energy Siphon."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:mataiodoxa",
+  "n": "Mataiodoxía",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1003391927
+  ],
+  "perks": [
+   {
+    "n": "Stylostixis",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Targets damaged by Arcane Needle emit a suspending detonation when defeated. Landing multiple Arcane Needles or Needlestorm on the same target immediately triggers a larger, more powerful detonation. Defeating suspended targets grants melee energy. Your Arcane Needles are strong against [Shield-Piercing]Barrier Champions.",
+     "clarity": "Grants Arcane Needles Shield-Piercing properties.\nScoring an Arcane Needle hit on an enemy marks them with a vertical mark for 10 seconds. Marked Enemies explode on death, releasing a Suspending Blast that Suspends and damages targets in a 10 meter radius.\nSuspending Blast damage by Enemy Rank:\nPlayers: 40, Minors: 80, Elites: 120, Minibosses: 160, Bosses: 200\nLanding 2 Arcane Needle hits on a Marked Enemy triggers Suspending Blast that deals 2x damage.\nLanding 5 Needlestorm Hits on a single enemy triggers a Suspending Blast that deals 11x damage and inherits Super damage buffs.\nArcane Needle Kills and Killing Suspended targets grant Melee Energy based on Enemy Rank:\n• Tier 1 (T1) Minors: 15%\n• T2 Minors, T1 Elites: 22.2%\n• T3 Minors, T2 Elites, Enemy Players: 33%\n• T4 Minors, T3 Elites, and higher: 100%\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Arcane Needles become Shield-Piercing. \nScoring an Arcane Needle hit on an enemy applies a ♢mark for 10 seconds.\nGrants Melee Ability Energy upon scoring an Arcane Needle Kill or Suspended Enemy Kill.\nT1 Combatant = 15% | T2 = 22.2% | T3 = 33% | T4 = 100% | Guardian = 33%\nOn Marked Enemy Death:\nTarget triggers a Suspending Burst.\nDeals 269 [40] Strand Melee Ability Damage and inflicts Suspension to enemies within 6 meters.\nUpon scoring 2 Arcane Needle hits on a Marked Enemy:\nTarget triggers a stronger Suspending Explosion. \nDeals 538 [?] Strand Melee Ability Damage and inflicts Suspension to enemies within 10 meters.\nUpon scoring 5 Needlestorm Hits against a single enemy:\nTarget triggers a larger and more damaging Suspending Explosion.\nDeals 5,040 [?] Strand Super Ability Damage and inflicts Suspension to enemies within 10 meters."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:necroticgrip",
+  "n": "Necrotic Grip",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   124786972
+  ],
+  "perks": [
+   {
+    "n": "Grasp of the Devourer",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Damaging a target with a melee inflicts potent corruption that deals increasing damage over time. Defeating targets afflicted by corruption spreads the condition.\n\nProvides a moderate benefit to the airborne effectiveness stat of all Weapons of Sorrow.",
+     "clarity": "Passively grants 30 Airborne Effectiveness to Weapons of Sorrow: Thorn, Osteo Striga, Touch of Malice, Cull's Shadow, and Necrochasm.\nMelee Hits apply Potent Corruption, which deals Kinetic damage. Defeated enemies spread Potent Corruption on death in a 5 meter radius.\nKills with the following also spread the Potent Corruption:\n• Thorn's Bullets\n• Osteo Striga's Corruption Effect\n• Touch of Malice's Blight's Corruption Effect\n• Necrochasm's Corruption and Cursed Thrall Explosions\n• Cull's Shadow Corruption Effect\nPotent Corruption ticks every 0.52 [0.7] seconds for a total of 19 [?] ticks over 10 [?] seconds. Deals a total of 1366 [?] damage over the entire duration.\nCorruption's first tick deals 32.35 [5?] damage.\nExclusive to 'Potent Corruption': DoT ramps up every tick, with the damage increases compounding together. For the first 14 ticks, each tick deals 11% more damage than the last. For the last 5 ticks, the damage increases by an average of 41% per tick.",
+     "compendium": "Passively grants +30 Airborne Effectiveness to Weapons of Sorrow.\nMelee Hits inflict Potent Corruption.\nCorrupted enemies spread Potent Corruption on death in a 5 metre radius.\nPotent Corrupted Damage ticks every 0.52 [0.7] seconds up to 19 [?] times over 10 [?] seconds, dealing 32 [5?] Kinetic Damage every tick, totalling 1366 [?] damage over its duration.\nPotent Corruption Damage deals more damage every tick, increasing by 11% per tick for the first 14 ticks, then increasing by an average of 41% per tick for the last 5 ticks.\nReapplying Potent Corruption will reset the ramping damage."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:nezarecssin",
+  "n": "Nezarec's Sin",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   925466716
+  ],
+  "perks": [
+   {
+    "n": "Abyssal Extractors",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Void final blows increase ability energy recharge rate. Combatants affected by Soul Siphon are suppressed. Defeating suppressed targets grants more time to Abyssal Extractors.",
+     "clarity": "Void Kills grant 'Abyssal Extractors' for 2.5 seconds. While active, kills with Soul Siphon and Void Kills on Suppressed enemies grant 4 seconds. Duration can be extended up to 20 seconds.\nSoul Siphon hits inflict Suppression for 10 [?] seconds.\nAbyssal Extractor grants the following benefits:\n• 300% additional Base Grenade and Melee Ability Recharge Rate\n• 200% additional Base Super and Class Ability Recharge Rate",
+     "compendium": "Void Damage Kills grant Abyssal Extractors for 2.5 seconds, up to a maximum of 20 seconds.\nSoul Siphon Kills and Suppressed Enemy Kills with Void Damage extend Abyssal Extractors duration by +1.5 seconds.\nSoul Siphon hits inflict Suppression for 10 [5] seconds. \nWhile Abyssal Extractor is active:\n300% Additional Base Grenade and Melee Regeneration Rate.\n200% Additional Base Class and Super Regeneration Rate."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:nothingmanacles",
+  "n": "Nothing Manacles",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   300502917
+  ],
+  "perks": [
+   {
+    "n": "Scatter Charge",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "You gain an additional Scatter Grenade charge. Enables tracking for Scatter Grenade projectiles. Scatter Grenade final blows create additional Scatter Grenade projectiles.",
+     "clarity": "Grants an extra Scatter Grenade Ability Charge. Stacks with Chaos Accelerant's additional grenade charge.\nKills with Scatter Grenade spawn 3 additional scatter submunitions. Submunition kills cannot chain.\nScatter Grenades are faster and receive Chaos Accelerant's Tracking Bonus. This does not stack with Chaos Accelerant.",
+     "compendium": "Grants an extra Scatter Grenade Ability Charge.\nScatter Grenades Submunitions receive drastically improved tracking and speed.\nScatter Grenade Kills spawn 3 additional Scatter Submunitions.\nAdditional Scatter Submunitions cannot trigger more explosions."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:ophidianaspect",
+  "n": "Ophidian Aspect",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   68357813
+  ],
+  "perks": [
+   {
+    "n": "Cobra Totemic",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Improves melee range as well as ready speed and reload for weapons. Provides a small benefit to airborne effectiveness for all weapons.",
+     "clarity": "Passively grants 10 Airborne Effectiveness, 35 Reload Speed, and 35 Handling to all weapons.",
+     "compendium": "Passively grants +35 Handling, +35 Reload Speed, and +10 Airborne Effectiveness."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:osmiomancygloves",
+  "n": "Osmiomancy Gloves",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   2555349547
+  ],
+  "perks": [
+   {
+    "n": "Fervid Coldsnap",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your Coldsnap grenades have an additional charge that recharges quicker on hits. The seeker spawned from Coldsnap grenades travels farther.",
+     "clarity": "Grants Coldsnap Grenades an extra Ability Charge, better tracking, and travel 17.5% farther and faster.\nDamaging an enemy with Coldsnap Grenades grants Grenade Ability Energy.\nGrenade Energy gains based on Enemy Rank:\n• Enemy Players: 7%\n• Tier 1 (T1) Minors: 10%\n• T2 Minors, T1 Elites: 22%\n• T3 Minors, T2 Elites: 34%\n• T4 Minors, T3 Elites, and higher: 50%\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Grants an extra Coldsnap Grenade Ability Charge.\nEnhanced Coldsnap Grenades:\nStronger tracking.\nTravel 17.5% further and faster.\nGrant Grenade Ability Energy upon dealing damage. \nColdsnap Grenade Ability Energy:\nTier 1 Combatant = 10% | T2 = 22% | T3 = 34% | T4 = 50% | Guardian = 7%"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:phoenixprotocol",
+  "n": "Phoenix Protocol",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   3488362707
+  ],
+  "perks": [
+   {
+    "n": "Battle-Hearth",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Kills and assists you make while standing in your Well of Radiance return Super energy.",
+     "clarity": "Grants additional Super Energy on Kills (by either you or allies) while inside your Well of Radiance and below 50% Super Energy.\nAmount of Super Energy gained is decreased by 1.5% for each successive Kill, down to a minimum of 4% Super Energy per Kill:\n10% 🠚 8.5% 🠚 7% 🠚 5.5% 🠚 4% 🠚 4% ...",
+     "compendium": "While inside your Well of Radiance, while under 50% Super Energy, and if your Super Ability is Well of Radiance: \nGrants 10% Super Energy per kill. \nAmount of Super Energy gained is decreased by 1.5% for each successive kill, down to a minimum of 4% Super Energy per kill.\n10% -> 8.5% -> 7% -> 5% -> 4.5% -> 4% -> 4%..."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:promethiumspur",
+  "n": "Promethium Spur",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "legs",
+  "hashes": [
+   235591051
+  ],
+  "perks": [
+   {
+    "n": "Embers of Light",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While a Solar Super is equipped, weapon final blows grant class ability energy. Defeating targets with your weapon while standing in a healing rift creates a pulse that grants Radiant to you and nearby allies; an empowering rift instead grants Cure to you and nearby allies. Daybreak final blows grant both effects.",
+     "clarity": "Requires a Solar Super to be equipped to function.\nWeapon Kills grant Class Ability Energy based on Enemy Rank:\n• Tier 1 (T1) Minors: 18%\n• T2 Minors, T1 Elites: 26%\n• T3 Minors, T2 Elites: 40%\n• T4 Minors, T3 Elites: 60%\n• T4 Elites, Minibosses: 80%\n• Bosses: 100%\n• Players: 30%\nWeapon Kills while standing in a Healing Rift grant 7 seconds (10 with Ember of Solace) of Radiant to you and allies within a 10 meter radius.\nWeapon Kills while standing in an Empowering Rift grant Cure x1 to you and allies within a 10 meter radius.\nDaybreak Kills grant Cure x2 and 10 seconds (15 with Ember of Solace) of Radiant to you and allies within a 10 meter radius.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "While a Solar Super Ability is equipped:\nWeapon Kills grant Class Ability Energy, based on the Enemy Rank.\nTier 1 Combatant = 18% | T2 = 26% | T3 = 40% | T4 = 60% | Miniboss = 80% | Boss = 100% \nGuardians = 30%\nUpon scoring a Weapon Kills while in Rift:\nHealing Rift | Grants Radiant for 6.5 seconds to the user and allies within 10 meters.\nEmpowering Rift | Grants Cure x1 to the user and allies within 10 meters.\nWell of Radiance and Daybreak Kills grant Radiant and Cure x2 to the user and allies within 10 meters."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:rainoffire",
+  "n": "Rain of Fire",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "legs",
+  "hashes": [
+   511709874
+  ],
+  "perks": [
+   {
+    "n": "Soaring Fusilier",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Air dodge reloads all of your weapons and improves the airborne effectiveness of Fusion Rifles and Linear Fusion Rifles; final blows with these weapons make you radiant. Provides a moderate benefit to the airborne effectiveness stat of Fusion Rifles and Linear Fusion Rifles.",
+     "clarity": "Passively grants 30 Airborne Effectiveness to Fusion Rifles and Linear Fusion Rifles.\nFusion Rifle and Linear Fusion Rifle Kills grant Radiant for 7.5 seconds (11.25 with Ember of Solace).\nAir Dodges refill all equipped weapons from reserves. Air Dodges include both Icarus Dash and Weavewalk.",
+     "compendium": "Passively grants +30 Airborne Effectiveness to Fusion Rifles and Linear Fusion Rifles.\nFusion Rifle and Linear Fusion Rifle Kills grant Radiant for 7.5+3.75 seconds.\nAir Moves refill all weapons.\nAir Moves include Icarus Dash and Weavewalk."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:rimecoatraiment",
+  "n": "Rime-coat Raiment",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   888791258
+  ],
+  "perks": [
+   {
+    "n": "Bleak Domain",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your Bleak Watcher turrets are enhanced with extended range and are surrounded by Stasis crystals and a storm. While standing in the storm, you are granted icicles over time. Icicles activate when you fire your weapons, applying Slow to targets they hit.",
+     "clarity": "Enhances Bleak Watcher:\n• Targeting Range is increased to 50 meters\n• Creates 4 outward-tilted Medium Stasis Crystals around where it spawns (these respawn after 15 seconds)\n• Releases a Stasis Storm in a 3 meter radius\nStanding in the Stasis Storm grants a Stack of 'Icicle' every second. Maximum of 5 Stacks.\nShooting consumes a Stack of Icicle, releasing a Stasis Projectile that deals 50 [?] damage and applies 50 [20] Slow Stacks for ? seconds.\nIcicle can fire every 0.2 seconds. Icicle Stacks expire if you leave the Stasis Storm for more than 2 seconds.",
+     "compendium": "Enhances Bleak Watcher:\nTargeting Range is increased to 50 meters.\nCreates 4 Medium Stasis Crystals diagonally to where it spawns.\nBleak Watcher emits a Stasis Storm that covers 6 meters.\nThe 4 Stasis Crystals respawn after 15 seconds.\nStasis Crystals count as Super Ability Damage.\nWhile standing in the Stasis Storm:\nGrants a stack of Icicle every second, up to a maximum of 5 stacks.\nShooting triggers the Icicle to attack, releasing a Stasis Projectile that deals 50 [?] Stasis Damage and inflicts x50 [x20] Slow for ?+? seconds.\nIcicle can fire every 0.2 seconds.\nIcicle persists for 2 seconds while not in the Stasis Storm."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:sanguinealchemy",
+  "n": "Sanguine Alchemy",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   2422973183
+  ],
+  "perks": [
+   {
+    "n": "Blood Magic",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While standing in any rift, damaging a target will mark it. You deal extra damage to marked targets, and gain additional bonus damage with weapons that have a damage type matching your equipped Super. Weapon final blows while standing in any rift pause the rift's countdown, extending its duration.",
+     "clarity": "While standing in a Rift or a Well of Radiance:\n• Grants 4 Stacks of Super-Matching Weapon Surge\n• Damaging enemies marks them for 5 seconds, increasing your damage against them by 10% (stacks with everything, does not buff teammates' damage)\n• Kills grant 'Blood Magic' for 5 seconds. Maximum of 15 seconds.\nBlood Magic pauses the duration of Rifts for as long as it is active. Doesn't apply to Well of Radiance.\nSwapping to Sanguine Alchemy in combat disables its effects for 10 seconds.",
+     "compendium": "While in a Rift or Well of Radiance:\nx4 Super-Matching Weapon Surge.\nDamaging an enemy applies a mark for 5 seconds.\nMarked Enemies receive 10% increased damage from the user.\nKills grant Blood Magic for 5 seconds, up to a maximum of 15 seconds.\nBlood Magic pauses the duration of the Rift for as long as it is active.\nWell of Radiance will not be extended by Blood Magic.\nSwapping to Sanguine Alchemy while in combat will disable all of its effects for 10 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:secantfilaments",
+  "n": "Secant Filaments",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "legs",
+  "hashes": [
+   511888814
+  ],
+  "perks": [
+   {
+    "n": "Devouring Rift",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While using a Void Super, casting an Empowering Rift will grant you Devour. Damage dealt by you and your allies from within your Empowering Rift will [Disruption] disrupt combatants. Defeating a target while Devour is active grants you class ability energy.",
+     "clarity": "Casting your Empowering Rift with a Void Super equipped grants Devour for 11 seconds (17 seconds with Echo of Persistence), and kills with Devour active grant you 10% Class Ability energy.\nEmpowering Rifts cast by you have additional behaviors:\n• Standing in the Rift grants you Devour for 11 seconds (17 seconds with Echo of Persistence)\n• Exiting and re-entering the Rift refreshes the duration of Devour without needing a kill.\nLegacy (Non-Functional) Perk:\nEmpowering Rifts you cast grant Overload Shot to you and allies. Previously, this allowed non-intrinsic weapons to gain Disruption, with the exception that it could not overwrite pre-existing intrinsics.\nHowever, now that all weapons have an intrinsic Breaker-type, Secants can no longer overwrite any of them. This breaks the UI in your weapons tray and leaves this portion of the exotic non-functional.",
+     "compendium": "While a Void Super Ability is equipped, for the user only:\nStanding on Empowering Rifts created by the user grant Devour for 11+0 seconds.\nExiting, and then re-entering the same Empowering Rift refreshes the duration of Devour.\nSecant Filaments' Devour can be refreshed to 11+11 seconds.\nWhile Devour is active:\nKills grant 10% Class Ability Energy.\nNo longer grants Overload Shots as Breaker Functionality is now intrinsic to intrinsics :^)"
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:skullofdireahamkara",
+  "n": "Skull of Dire Ahamkara",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   1030017949
+  ],
+  "perks": [
+   {
+    "n": "Actual Grandeur",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "After casting a Nova Bomb, briefly gain a free cast of a fast-moving but weaker Nova Bomb: Lance. Your Nova Bomb: Cataclysm is empowered if detonated with another Nova Bomb. \nNova Bomb final blows and weapon final blows while you have Devour grant Super energy.",
+     "clarity": "Scoring weapon Kills while Devour is active grants additional Super Energy, ranging between 1% to 4.5% depending on Enemy Rank. Works with any Super.\nMassively increases Damage Resist during Nova Bomb cast: starts at 99.5% and drops down to 75% near the end.\nCasting Nova Bomb grants the ability to cast 'Nova Bomb: Lance' for 5 seconds. Destroying a Nova Bomb: Cataclysm with the Lance triggers a Nova Vortex alongside the original Nova Bomb, effectively granting the effects of both Nova Bombs. Requires a minimum distance of 20 meters to trigger.\nNova Bomb returns ~5% Super Energy per kill, up to 50% Super Energy.",
+     "compendium": "Massively Increases Damage Resist during Nova Bomb.\nBegins at 99.5%, and sharply falls down to 75% near the end.\nOn Nova Bomb Cast:\nGrants the ability to cast Nova Bomb: Lance for 5 seconds.\nNova: Lance deals up to 2269 [?] Damage over 8 meters. Deals up to 2950 damage against Bosses.\nDestroying a Nova: Cataclysm with the Lance triggers a Nova Vortex alongside the Cataclysmic seekers.\nNova Vortex is functionally identical to the Super version.\nRequires a minimum of 20 meters of distance to trigger.\nA single cast of Nova Bomb deals up to ~14,500 damage against a Boss.\nNova Bomb Kills refund 5?% Super Energy, up to 50% Super Energy.\nUpon scoring a Weapon Kill, while Devour is active:\nGrants additional Super Energy based on the Enemy Tier.\nTier 1 Combatant = ?% | T2 = ?% | T3 = ?% | T4 = ?% | Guardian = ?%\nActual amount varies by Enemy Rank. Works with any Super Ability."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:solipsism",
+  "n": "Solipsism",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "class",
+  "hashes": [
+   2273643087
+  ],
+  "perks": [
+   {
+    "n": "Spirit of the Necrotic",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Damaging a target with a melee inflicts potent corruption. Defeating targets afflicted by corruption spreads the condition.",
+     "compendium": "Melee Hits inflict Potent Corruption.\nCorrupted enemies spread Potent Corruption on death in a 5 metre radius.\nPotent Corrupted Damage ticks every 0.52 [0.7] seconds up to 19 [?] times over 10 [?] seconds, dealing 32 [5?] Kinetic Damage every tick, totalling 640 [?] damage over its duration."
+    }
+   },
+   {
+    "n": "Spirit of the Swarm",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Destroying a Tangle spawns Threadlings.",
+     "compendium": "Upon destroying a Tangle:\nSpawns 2 Threadlings."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:speakerssight",
+  "n": "Speaker's Sight",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   50291571
+  ],
+  "perks": [
+   {
+    "n": "The Lost Voice",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Healing grenades spawn a Restorative Turret. Healing allies occasionally spawns an Orb of Power.",
+     "clarity": "Replaces Healing Grenades' Restoration Orb with a Healing Turret. Consuming a Healing Grenade will spawn a Healing Turret in front of you.\nPassively highlights low-health allies with a soft, flashing, red glow.\nHealing Turret information:\n• Lasts 9 seconds and has 100? Construct HP\n• Releases Healing Seekers every 3 seconds towards the user and allies within 30 meters\n• Healing Seekers apply Cure x1 and Restoration x1 for 4 [3] seconds in a 7.5 meter radius (strength of both buffs is increased to x2, for the wearer only, while Touch of Flame equipped).\nRestoring health to damaged allies [6 times] spawns an Orb of Power that grants 2.5% Super Energy at their position.\n10 second cooldown between activations.",
+     "compendium": "Healing Grenades' Restoration Orb is replaced with a Healing Turret.\nConsuming a Healing Grenade will spawn a Healing Turret in front of the user.\nHealing Turret\nLasts 9 seconds and has 100? Construct HP.\nReleases Healing Seekers every 3 seconds towards the user and allies within 30 meters.\nHealing Seekers bestow Cure x1 and Restoration x1 for 4+2 [3+1.5] seconds over a 7.5m radius.\nIf Touch of Flame is equipped and only for the wearer: Cure and Restoration are increased to x2.\nUpon restoring Health once [six times] to a damaged Ally:\nSpawns an Orb of Power that grants 2.5% Super Energy on the ally's position.\n Incurs a 10 second cooldown between Orb spawns."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:starfireprotocol",
+  "n": "Starfire Protocol",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   599049453
+  ],
+  "perks": [
+   {
+    "n": "Fusion Harness",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Fusion Grenades have an additional charge and recharge from empowered weapon damage, with empowered weapon final blows granting more energy. Defeating targets with Fusion Grenades grant Rift energy.",
+     "clarity": "Grants the following with Fusion Grenades equipped:\n• An extra Grenade Charge\n• 100% Class Ability Energy on Fusion Grenade Kills\n• Passive 20% Additional Base Grenade Ability Recharge Rate\nWhile Radiant, in an Empowering Rift, or in a Well of Radiance:\n• Weapon Kills grant 15% Fusion Grenade energy\n• Weapon Hits grant 5% Fusion Grenade energy (0.4 second cooldown between activations)\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Grants an extra Fusion Grenade Ability Charge.\nPassively grants 20% Additional Base Fusion Grenade Regeneration Rate\nWhile Radiant, or in either a Well of Radiance or Empowering Rift:\n5% Fusion Grenade Ability Energy per Weapon Hit up to once every 0.4 seconds.\n15% Fusion Grenade Ability Energy on Weapon Kill.\nOn Fusion Grenade Kill:\nGrants 100% Class Ability Energy."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:stormdancersbrace",
+  "n": "Stormdancer's Brace",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1747063685
+  ],
+  "perks": [
+   {
+    "n": "Ascending Amplitude",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Stormtrance hits and final blows increase the damage it deals. Refunds Super energy when it ends. While Stormtrance is equipped, ability damage while amplified grants Bolt Charge.",
+     "clarity": "Requires Stormtrance to be equipped to function.\nCasting your Super grants Amplified.\nWhile Amplified, Arc Ability Hits grant x1 Bolt Charge. 0.6 second cooldown between activations.\nHits and Kills during Stormtrance grant a Stack of 'Ascending Amplitude' for 8 seconds. Maximum of 30 Stacks.\nAscending Amplitude:\n• Decreases the Super Energy cost of Stormtrance's Ionic Blink by 50% (6.25%🠚3.125%).\n• Increases Stormtrance's damage by 6.7% per Stack, up to 200% bonus damage at maximum stacks.\nRefunds up to 30% of Super Energy based on the number of enemies killed with your Super.",
+     "compendium": "On Super Cast:\nGrants Amplified for 15 seconds.\nWhile Stormtrance Super Ability is equipped:\nStormtrance Hits and Kills grant a stack of Ascending Amplitude, up to 30 stacks.\nDecreases the Super Cost of Stormtrance's Ionic Blink by 50%, to 3.125%.\nAscending Amplitude:\n 6.7?% Increased Stormtrance Damage per stack, up to 200% at 30 Stacks.\nRefunds up to 30% Stormdancer Super Energy based on the amount of Enemy Kills.\nWhile Amplified:\nArc Ability Hits grant x1 Bolt Charge up to once every 0.6 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:sunbracers",
+  "n": "Sunbracers",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   950745251
+  ],
+  "perks": [
+   {
+    "n": "Helium Spirals",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Increases the duration of Solar Grenades. Solar melee kills grant unlimited Solar Grenade energy for a brief time.",
+     "clarity": "Only works with the Solar Element Grenades named Solar Grenade equipped.\nSolar Grenades have Fastball intrinsically and last 2 seconds longer (4🠚6s normally, 6🠚8s with Touch of Flame equipped).\nPowered Melee Kills grant 5 seconds of Sunbracers Ready. Using your Grenade Ability while Sunbracers Ready is active grants the Sunbracers buff.\n'Sunbracers' grants 20,000% Additional Base 'Solar Grenade' Regeneration Rate for 4 seconds. (Effectively recharges ~132% of a 'Solar Grenade' charge per second)",
+     "compendium": "The Solar-Element Grenades named \"Solar Grenades\" have Fastball intrinsically and last 2 seconds longer.\nPowered Melee Kills grant 5 seconds of Sunbracers Ready.\nOn Grenade Ability Usage while Sunbracers Ready is active:\nGrants Sunbracers buff for 4 seconds.\nSunbracers grants 20,000% Additional Base \"Solar Grenade\" Grenade Regeneration Rate."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:swarmers",
+  "n": "Swarmers",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "legs",
+  "hashes": [
+   2100136540
+  ],
+  "perks": [
+   {
+    "n": "Swarmers",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Destroying a Tangle spawns a Threadling. Your Threadlings unravel targets that they damage.",
+     "clarity": "Spawns 2 Threadlings upon destroying a Tangle.\nThreadlings apply Unravel for ? [5] seconds on hit (? [7.5] seconds with Thread of Continuity).",
+     "compendium": "Upon destroying a Tangle:\nSpawns 2 Threadlings.\nThreadlings inflict Unravel on hit."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:thestag",
+  "n": "The Stag",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   994038265
+  ],
+  "perks": [
+   {
+    "n": "Dearly Departed",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Your Rift provides damage reduction to allied Guardians standing in it. Grants Rift energy when you are critically wounded. On your death, creates a healing rift on your corpse.",
+     "clarity": "Grants 25% [5%] Damage Resistance (Resist x2) to you and allies inside Rifts you create. (Well of Radiance does not count but you can cast a Rift inside it for the benefits)\nReaching Critical Health grants the Dearly Departed buff, granting 50% [25%] Class Ability Energy.\nBuff lasts until you are no longer at Critical Health, essentially serving as a cooldown.\nDying spawns a Healing Rift at your location.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+     "compendium": "Grants 25% [5%] Damage Resist (Resist x2) to Guardians inside Rifts created by the wielder. \nStanding in a Rift that overlaps or is inside a Well of Radiance allows the Damage Resist to work in it.\nUpon reaching Critical Health:\nDearly Departed grants 50% [25%] Class Ability Energy.\nBuff lasts until the user is no longer at Critical Health, essentially serving as a Cooldown.\nOn Death:\n Spawns a Healing Rift for 15 seconds."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:transversivesteps",
+  "n": "Transversive Steps",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "legs",
+  "hashes": [
+   138282166
+  ],
+  "perks": [
+   {
+    "n": "Strange Protractor",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Sprint speed increased. After a short time sprinting, your currently equipped weapon is automatically reloaded.",
+     "clarity": "Refills held weapon from reserves after sprinting for 1.5 seconds.\nIncreases Sprint Speed by 6.25% and Slide Distance by 33%.\nPrevents Crouch Speed from being decreased below 4 meters per second.",
+     "compendium": "Upon sprinting for 1.5 seconds:\nRefills 100% of Magazine/Dissipates 100% Heat of Readied Weapon.\nIncreases Sprint Speed from 8m/s to 8.5m/s.\nIncreases Slide Distance from 6.5 meters to 8.5 meters.\nCrouch Speed cannot be decreased below 4m/s."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:veritysbrow",
+  "n": "Verity's Brow",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "head",
+  "hashes": [
+   2428181146
+  ],
+  "perks": [
+   {
+    "n": "The Fourth Magic",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Weapon final blows with a damage type matching your grenade grant Death Throes, which provide a grenade damage bonus and grant you grenade energy. When you have Death Throes and throw a grenade, nearby allies gain greatly increased grenade regeneration for a short time.",
+     "clarity": "Kills with Weapons matching your Grenade Element grant a Stack of Death Throes. Maximum of 5 Stacks.\nStacks decay one at a time over 8|7|6|5|4 seconds for the 1st|...|5th Stacks.\nDeath Throes benefits at 1|2|3|4|5 Stacks:\n• 0.5%|1%|1.5%|2%|2.5% Grenade Energy per second\n• PVE: 40%|55%|70%|85%|100% increased Grenade damage\n• PVP: 20%|40%|60%|80%|100% increased Grenade damage\nGrapple Grenade is uniquely tuned and receives an additive buff instead (170% at maximum stacks).\nOn Grenade Ability usage with active Death Throes Stacks, for 5 seconds:\nAllies receive 'Feel The Flames' while within 20 meters of you.\n'Feel the Flames' grants 10x Grenade Recharge Rate.\n(Grenade Regeneration Rate Multiplier is applied after all additive Grenade Recharge Rate modifiers.)",
+     "compendium": "Upon scoring a Grenade-Element Matching Weapon Kill: \nGrants a stack of Death Throes, up to 5 stacks, increasing Grenade Ability Damage and granting Bonus Grenade Ability Energy per second per stack.\nLoses 1 Death Throes stack upon expiring, rather than all of them.\nDeath Throes stack timer begins decaying after 2 seconds of gaining a stack.\nDeath Throes:\nx1 | 40% [20%] increased Grenade Damage, ?% Increased Grapple Melee Damage, and +0.5% Bonus Grenade Energy/s for 8 seconds.\nx2 | 55% [40%] increased Grenade Damage, ?% Increased Grapple Melee Damage, and +1% Bonus Grenade Energy/s for 7 seconds.\nx3 | 70% [60%] increased Grenade Damage, ?% Increased Grapple Melee Damage, and +1.5% Bonus Grenade Energy/s for 6 seconds.\nx4 | 85% [80%] increased Grenade Damage, ?% Increased Grapple Melee Damage, and +2% Bonus Grenade Energy/s for 5 seconds.\nx5 | 100% increased Grenade Damage, 170% Increased Grapple Melee Damage, and +2.5% Bonus Grenade Energy/s for 4 seconds.\nOn Grenade Ability Usage while Death Throes is active, for 5 seconds: \n Allies receive Feel The Flame while within 20 metres.\nFeel The Flame grants 10x Grenade Regeneration Speed."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:vesperofradius",
+  "n": "Vesper of Radius",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   1725917554
+  ],
+  "perks": [
+   {
+    "n": "Planetary Torrent",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Rifts periodically release Arc shockwaves. Final blows with these shockwaves create an Arc explosion. While an Arc Super is equipped, the shockwaves and subsequent explosions blind nearby targets. Rift energy recharges faster when you are surrounded by targets.",
+     "clarity": "Increases Class Ability Regeneration Rate while 3 enemies are within 15 meters:\n250%|666%|1085%|1500% Additional Base Class Ability Regeneration Rate with 3|4|5|6+ enemies\n1 second after casting a Rift:\nThe Rift releases an Arc Shockwave that deals 400 [100] damage and knocks back enemies in a 7.5 meter radius. Additional Arc Shockwaves are released every 5 seconds.\nEnemies killed by Shockwaves explode, dealing up to 200 [100?] Arc damage.\nWhile you have an Arc Super equipped, Shockwaves and explosions Blind nearby targets.",
+     "compendium": "While within 15 meters of at least 3 enemies:\n Grants Additional Base Class Ability Regeneration Rate, scaling with enemy amount.\n3 Enemies = 250% | 4 = 666% | 5 = 1085% | 6 = 1500%\nAfter 1 second of placing a Rift:\nTriggers an Arc Shockwave that deals 360 [100] Arc Damage and staggers over 7.5 meters. \nAdditional shockwaves occur every 5 seconds, until the Rift expires.\nEnemies killed by the Shockwaves explode, dealing 180 [100?] Arc Damage.\nWhile an Arc Super Ability is equipped, explosions and shockwaves blind."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:wingsofsacreddawn",
+  "n": "Wings of Sacred Dawn",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "chest",
+  "hashes": [
+   370930766
+  ],
+  "perks": [
+   {
+    "n": "Tome of Dawn",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "While you have a [Solar]Solar Super equipped, aiming weapons while you're midair suspends you there for a short time. While this effect is active, you are more resistant to incoming damage and combatants are less accurate. Weapon hits extend this effect's duration, and [Solar]Solar weapon final blows provide Restoration and reload your other weapons from reserves. Provides a large benefit to the airborne effectiveness stat of all weapons.",
+     "clarity": "While a Solar Super Ability is equipped:\n• Grants 50 Airborne Effectiveness while airborne\n• Aiming Down Sights while airborne grants 'Tome of Dawn'\nTome of Dawn lasts 2.8 seconds and holds you in place midair. Weapon Hits add ? seconds to its duration.\nTome of Dawn grants the following benefits:\n• 15% Damage Resistance\n• 25% Flinch Resistance\n• Enemies are less accurate when targeting you\n• Weapon Kills grant Restoration x1 and refill the magazines of stowed weapons from reserves",
+     "compendium": "While a Solar Super Ability is equipped:\n ADS while Airborne grants Tome of Dawn. \nPassively grants +50 Airborne Effectiveness while airborne.\nTome of Dawn: \nHolds the user in place midair for 2.8 seconds. \nCombatants are less accurate at targeting the wearer\nScoring additional hits extends the buff duration by +? seconds, up to ? seconds.\nGrants 15% Damage Resist and 25% Flinch Resist while active.\nSolar Weapon Kills grant Restoration x1 for ? seconds and refill stowed weapons."
+    }
+   }
+  ]
+ },
+ {
+  "id": "xa:wintersguile",
+  "n": "Winter's Guile",
+  "kind": "exoticArmor",
+  "cls": [
+   "warlock"
+  ],
+  "slot": "arms",
+  "hashes": [
+   900910756
+  ],
+  "perks": [
+   {
+    "n": "Warlord's Sigil",
+    "role": "exoticPerk",
+    "src": {
+     "bungie": "Melee and finisher final blows increase melee damage. With maximum stacks, you gain vastly increased melee regeneration speed for a short time.",
+     "clarity": "Melee/Glaive Melee Kills grant a stack of 'Warlord's Sigil'. Maximum of 10 stacks. Finishers grant 3 stacks (as soon as their animation starts).\nWarlord's Sigil stacks decay one at a time every 4.75 seconds.\nWarlord's Sigil grants the following Melee Damage increases at 1|2|3|...|10 stacks:\n67.5% | 122% | 166% | 202% | 228% | 249% | 265% | 278% | 289% | 300% Additional Base Melee Damage.\nReaching or refreshing the duration of the 10th stack grants 1 Melee Ability Charge and 'Warlord's Fury Ready' for 8 seconds. The 10th stack's duration cannot be refreshed by Finishers.\nUsing any Melee while Warlord's Fury Ready is active will grant 'Warlord's Fury' for 10 seconds, granting the following benefits:\n• 400% Additional Base Melee Damage\n• 0.8x Melee animation duration\n• 38.4x Melee ability regeneration speed\nWarlord's Sigil's stack count is reset to 0 once Warlord's Fury ends. While Warlord's Fury is active, gaining stacks of Warlord's Sigil is not possible.\nNot triggering Warlord's Fury will return the buff to Warlord's Sigil x10.",
+     "compendium": "Melee Kills and Glaive Melee Kills grant a stack of Warlord's Sigil for 4.75 seconds, up to a maximum of 10 stacks.\n Finishers grant 3 Warlord's Sigil stacks. Scorch DoT Kills do not grant stacks.\nWarlord's Sigil stacks decay one at a time. Finishers refresh the stack duration on animation start.\nWarlord's Sigil grants increased Melee Damage per stack.\nx1 = 67.5% | x2 = 122% | x3 = 166% | x4 = 202% | x5 = 228%\nx6 = 249% | x7 = 265% | x8 = 278% | x9 = 289% | x10 = 300%\nUpon reaching or refreshing x10 Warlord's Sigil:\nGain a Melee Ability Charge.\n Grants Warlord's Fury Ready for 8 seconds and cannot be refreshed by Finishers.\nNot triggering Warlord's Fury will return the buff to Warlord's Sigil x10.\nOn Melee/Glaive Melee Usage while Warlord's Fury Ready is active:\n400% increased Melee Damage, 0.8x Melee Duration, and 38.4x👀 Melee Regeneration Speed for 10 seconds.\nCannot gain Warlord's Sigil while Warlord's Fury is active. Resets Warlord's Sigil to x0 stacks on buff end."
+    }
+   }
+  ]
+ }
+]

@@ -1,0 +1,50 @@
+{
+ "terms": {
+  "airborneeffectiveness": {
+   "l": "Airborne Effectiveness",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "airborne effectiveness",
+    "airborne aim"
+   ],
+   "def": "A weapon stat bonus that improves accuracy and aim assist while you are in the air.",
+   "q": "Provides a small benefit to the airborne effectiveness stat of all weapons.",
+   "src": "xa:eyeofanotherworld"
+  },
+  "nobleseeker": {
+   "l": "Noble Seeker",
+   "kind": "object",
+   "el": "solar",
+   "aka": [
+    "noble seekers"
+   ],
+   "def": "A seeker released while you stand in your rift (Boots of the Assembler) that flies to allies and heals them, or buffs their damage from an Empowering Rift.",
+   "q": "Standing in a rift creates Noble Seekers that seek out allies and heal them.",
+   "src": "xa:bootsoftheassembler"
+  },
+  "deaththroes": {
+   "l": "Death Throes",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "death throes"
+   ],
+   "def": "Stacks from weapon kills matching your grenade's element (Verity's Brow) that raise grenade damage and give grenade energy over time.",
+   "q": "Weapon final blows with a damage type matching your grenade grant Death Throes, which provide a grenade damage bonus and grant you grenade energy.",
+   "src": "xa:veritysbrow"
+  },
+  "healingturret": {
+   "l": "Healing Turret",
+   "kind": "object",
+   "el": "solar",
+   "aka": [
+    "restorative turret",
+    "healing turret"
+   ],
+   "def": "A turret made by picking up a Healing Grenade (Speaker's Sight) that sends healing seekers granting Cure and Restoration to you and allies.",
+   "q": "Healing grenades spawn a Restorative Turret.",
+   "src": "xa:speakerssight"
+  }
+ }
+}

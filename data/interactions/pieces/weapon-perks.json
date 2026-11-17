@@ -1,0 +1,3107 @@
+[
+ {
+  "id": "wp:aggregatecharge",
+  "n": "Aggregate Charge",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "blind",
+    "on": "more damage per unique elemental debuff on the target",
+    "note": "Bonus scales with the number of unique elemental debuffs on the target (10/20/30% at 1/2/3 debuffs).",
+    "q": "Blind - Jolt",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "q": "Blind - Jolt",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "Scorch - Ignition",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "q": "Suppression - Volatile - Weaken",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "q": "Suppression - Volatile - Weaken",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Suppression - Volatile - Weaken",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Slow - Freeze - Shatter",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Slow - Freeze - Shatter",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Sever - Suspend - Unravel",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "Sever - Suspend - Unravel",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "Sever - Suspend - Unravel",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:amalgamationrounds",
+  "n": "Amalgamation Rounds",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "invisibility",
+    "q": "Defeating a marked target or landing a precision final blow with an Amalgamation Round grants invisibility and truesight.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "truesight",
+    "q": "Defeating a marked target or landing a precision final blow with an Amalgamation Round grants invisibility and truesight.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "on": "Amalgamation Round precision kill",
+    "note": "Catalyst (Aberrant Combustion) only.",
+    "q": "inflicting weaken over 8 meters",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:ancillaryordinance",
+  "n": "Ancillary Ordinance",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "blind",
+    "note": "Any elemental debuff counts; kills of debuffed targets build micro-missile stacks (Clarity: kills of debuffed targets with this weapon spawn a missile instantly).",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "final blows on targets affected by elemental debuffs",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:apollonictangent",
+  "n": "Apollonic Tangent",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "note": "Guidance Ring seekers scorch and deal weapon-element-matching explosive damage; any bow firing through the ring benefits.",
+    "q": "which scorch targets",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "volatilerounds",
+    "q": "Seekers can benefit from Volatile Rounds, Unraveling Rounds, and more!",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "unravelingrounds",
+    "q": "Seekers can benefit from Volatile Rounds, Unraveling Rounds, and more!",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:arcalignment",
+  "n": "Arc Alignment",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "arcdamage",
+    "note": "Arc damage from any source (abilities included) charges Arc Alignment.",
+    "q": "Dealing Arc damage from any source aligns the battery's coils.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "q": "enable hip-fired Starlight Beam to apply Jolt to any targets damaged for a short time",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "note": "Weapon intrinsic: bonus damage against Arc-debuffed (jolted or blinded) targets.",
+    "q": "30% increased damage against Arc-Debuffed Enemies.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "blind",
+    "q": "30% increased damage against Arc-Debuffed Enemies.",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "on": "killing an Arc-debuffed target",
+    "q": "inflicting blind over 8 meters",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "note": "Catalyst (Supercharged Matrix): handling bonuses while amplified.",
+    "q": "While Amplified:",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:attritionorbs",
+  "n": "Attrition Orbs",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "q": "Dealing sustained damage creates an Orb of Power.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:binaryorbit",
+  "n": "Binary Orbit",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "darknessdamage",
+    "if": [
+     {
+      "any": [
+       {
+        "weapon": "arc"
+       },
+       {
+        "weapon": "solar"
+       },
+       {
+        "weapon": "void"
+       }
+      ]
+     }
+    ],
+    "q": "Darkness final blows boost Arc, Solar, and Void weapons.",
+    "s": "bungie",
+    "note": "On Arc/Solar/Void versions of the weapon; kills from any source count (Clarity: Kinetic kills count too)."
+   },
+   {
+    "do": "uses",
+    "t": "lightdamage",
+    "if": [
+     {
+      "any": [
+       {
+        "weapon": "stasis"
+       },
+       {
+        "weapon": "strand"
+       },
+       {
+        "weapon": "kinetic"
+       }
+      ]
+     }
+    ],
+    "q": "Light final blows boost Stasis, Strand, and Kinetic weapons.",
+    "s": "bungie",
+    "note": "On Stasis/Strand/Kinetic versions of the weapon; kills from any source count."
+   }
+  ]
+ },
+ {
+  "id": "wp:bladesofunmaking",
+  "n": "Blades of Unmaking",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "q": "Replaces your melee ability with a 2-hit combo blade attack.",
+    "s": "clarity",
+    "note": "Cull's Shadow; scales with Melee stat and melee damage buffs, not a glaive melee"
+   }
+  ]
+ },
+ {
+  "id": "wp:blessingofthesky",
+  "n": "Blessing of the Sky",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "who": "allies",
+    "q": "Using a Noble Round on an ally heals them",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:bottomlessappetite",
+  "n": "Bottomless Appetite",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "scorch",
+    "note": "Tarrabah intrinsic: hits on scorched targets charge Ravenous Beast faster.",
+    "q": "Hits against Scorched Enemies grant 3% [6.7%] Power.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:brayinheritance",
+  "n": "Bray Inheritance",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "q": "Weapon Hits grant Grenade, Melee, and Class Ability Energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "q": "Weapon Hits grant Grenade, Melee, and Class Ability Energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "q": "Weapon Hits grant Grenade, Melee, and Class Ability Energy.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:builttoblast",
+  "n": "Built to Blast",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "wovenmail",
+    "q": "while you have Woven Mail, Frost Armor, or Void Overshield",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "while you have Woven Mail, Frost Armor, or Void Overshield",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "q": "while you have Woven Mail, Frost Armor, or Void Overshield",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:bullwhacker",
+  "n": "Bullwhacker",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "note": "Catalyst only (also grants Incandescent).",
+    "q": "Direct Hits with charged shots inflict x20 Scorch per Charge Level.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "note": "Catalyst only.",
+    "q": "Deals 10% increased damage against Scorched Enemies.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:burningambition",
+  "n": "Burning Ambition",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Dealing sustained damage scorches the target.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "Dealing damage to a scorched target inflicts scorch.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:chargedwithblight",
+  "n": "Charged with Blight",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blind",
+    "q": "temporarily blind them",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "corruption",
+    "q": "shrouding combatants in Darkness to temporarily blind them and inflict corruption.",
+    "s": "bungie",
+    "note": "Weapon of Sorrow; targets hit take 50% more damage from Weapons of Sorrow"
+   }
+  ]
+ },
+ {
+  "id": "wp:chillclip",
+  "n": "Chill Clip",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "note": "Only while the magazine is at or above 50%.",
+    "q": "cause a detonation that slows nearby targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:classycontender",
+  "n": "Classy Contender",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "q": "Final blows with this weapon grant class ability energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:coldsteel",
+  "n": "Cold Steel",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "q": "Powered Sword hits slow targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:collectiveaction",
+  "n": "Collective Action",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie",
+    "note": "Clarity: shards from Facet of Awakening or Facet of Command do not trigger it."
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "q": "or destroying a Tangle",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:collectivedemolition",
+  "n": "Collective Demolition",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "q": "or destroying a Tangle",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "q": "grants this weapon a stacking period of grenade energy generation on hit",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:collectivepugilism",
+  "n": "Collective Pugilism",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "q": "or destroying a Tangle",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "q": "grants this weapon a stacking period of melee energy generation on hit",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:coolingbaubles",
+  "n": "Cooling Baubles",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "q": "or destroying a Tangle",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "collecting an Orb of Power",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:cormorantcombo",
+  "n": "Cormorant Combo",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "on": "blade melee hits (Impact Core)",
+    "if": [
+     {
+      "subclass": "arc"
+     }
+    ],
+    "q": "Grants x1 Bolt Charge",
+    "s": "clarity",
+    "note": "Requires Impact Core; the effect follows your subclass element."
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "if": [
+     {
+      "subclass": "solar"
+     }
+    ],
+    "q": "25? Scorch",
+    "s": "clarity",
+    "note": "Requires Impact Core; the effect follows your subclass element."
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "if": [
+     {
+      "subclass": "void"
+     }
+    ],
+    "q": "Weakens for 6 seconds",
+    "s": "clarity",
+    "note": "Requires Impact Core; the effect follows your subclass element."
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "if": [
+     {
+      "subclass": "stasis"
+     }
+    ],
+    "q": "40 Slow for 1? second",
+    "s": "clarity",
+    "note": "Requires Impact Core; the effect follows your subclass element."
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "if": [
+     {
+      "subclass": "strand"
+     }
+    ],
+    "q": "Severs for 10 seconds",
+    "s": "clarity",
+    "note": "Requires Impact Core; the effect follows your subclass element."
+   },
+   {
+    "do": "consumes",
+    "t": "boltcharge",
+    "q": "Melee Attacks can discharge Bolt Charge.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:cormorantreversal",
+  "n": "Cormorant Reversal",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "on": "reflected blaster bolt hits (Refraction Core)",
+    "if": [
+     {
+      "subclass": "arc"
+     }
+    ],
+    "q": "Grants x1 Bolt Charge",
+    "s": "clarity",
+    "note": "Requires Refraction Core; the effect follows your subclass element."
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "if": [
+     {
+      "subclass": "solar"
+     }
+    ],
+    "q": "10? Scorch",
+    "s": "clarity",
+    "note": "Requires Refraction Core; the effect follows your subclass element."
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "if": [
+     {
+      "subclass": "void"
+     }
+    ],
+    "q": "Weakens for 6 seconds",
+    "s": "clarity",
+    "note": "Requires Refraction Core; the effect follows your subclass element."
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "if": [
+     {
+      "subclass": "stasis"
+     }
+    ],
+    "q": "20 Slow for 1? second",
+    "s": "clarity",
+    "note": "Requires Refraction Core; the effect follows your subclass element."
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "if": [
+     {
+      "subclass": "strand"
+     }
+    ],
+    "q": "Severs for 10 seconds",
+    "s": "clarity",
+    "note": "Requires Refraction Core; the effect follows your subclass element."
+   }
+  ]
+ },
+ {
+  "id": "wp:cruelremedy",
+  "n": "Cruel Remedy",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "q": "Kills with this weapon heal the wielder.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:crystallinecorpsebloom",
+  "n": "Crystalline Corpsebloom",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "q": "Rapid final blows spawn a [Stasis] Stasis crystal near the victim's location.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:dawningsurprise",
+  "n": "Dawning Surprise",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "who": "allies",
+    "note": "Gifts spawn for you and allies after multiple kills.",
+    "q": "Picking up Dawning Gifts grants 10% Grenade, Melee, and Class Ability Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "who": "allies",
+    "q": "Picking up Dawning Gifts grants 10% Grenade, Melee, and Class Ability Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "who": "allies",
+    "q": "Picking up Dawning Gifts grants 10% Grenade, Melee, and Class Ability Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "q": "restores 22 HP, and starts Health Regeneration",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:dealerschoice",
+  "n": "Dealer's Choice",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "note": "More with additional Pale Heart weapons equipped.",
+    "q": "Final blows with this weapon grant a small amount of Super energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:deathatfirstglance",
+  "n": "Death at First Glance",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "ignition",
+    "note": "From the exotic hand cannon's intrinsic in the Compendium, not the trait line itself.",
+    "q": "Breaking a Solar Shield or Barrier Champion's Shield triggers an Ignition.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:demolitionist",
+  "n": "Demolitionist",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "q": "Kills with this weapon generate grenade energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Activating your grenade ability reloads this weapon from reserves.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:demoralize",
+  "n": "Demoralize",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "q": "Precision final blows cause nearby targets to become weakened.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:destabilizingrounds",
+  "n": "Destabilizing Rounds",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "volatile",
+    "q": "hitting other targets with this burst makes them volatile",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "volatilerounds",
+    "q": "grants you Volatile Rounds for a short duration",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:dimensionalshift",
+  "n": "Dimensional Shift",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Collecting a Void Breach causes final blows to provide a Void Overshield.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "q": "Collecting a Void Breach causes final blows to provide a Void Overshield.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:dynamiccharge",
+  "n": "Dynamic Charge",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "q": "Charged Arc Seeker hits grant, and can spend, Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "consumes",
+    "t": "boltcharge",
+    "note": "Arc Seeker discharges count as weapon damage; unaffected by Spark of Frequency.",
+    "q": "Charged Arc Seeker hits grant, and can spend, Bolt Charge.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:eddycurrent",
+  "n": "Eddy Current",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "Temporarily increases reload speed and handling after sprinting or while amplified.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:energytransfer",
+  "n": "Energy Transfer",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "q": "Guarding while receiving damage generates class ability energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:evolution",
+  "n": "Evolution",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suppress",
+    "on": "sphere heavy attack",
+    "q": "Suppress enemies in a 5 meter radius",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "disorient",
+    "q": "disorient combatants",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "volatilerounds",
+    "note": "Spheres count as generic Void weapons; they do not trigger Void ability or melee effects.",
+    "q": "They are also able to inflict Volatile through Volatile Rounds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:explosivelight",
+  "n": "Explosive Light",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "Picking up an Orb of Power increases the next projectile's blast radius and damage.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:explosivepact",
+  "n": "Explosive Pact",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "This weapon gains bonus stability and reload speed when activating a grenade ability.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "note": "Each Healing Grenade orb pickup (by anyone) grants a stack.",
+    "q": "Healing grenades and grenade final blows grant additional stacks of the bonus.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:eyesupguardian",
+  "n": "Eyes Up, Guardian",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "Collecting Orbs of Power strengthens this weapon's next several ricochet shots",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:flamerefraction",
+  "n": "Flame Refraction",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "note": "Prometheus Lens intrinsic (Compendium); catalyst adds Incandescent.",
+    "q": "Inflicts x20+10 Scorch.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:fortheempire",
+  "n": "For the Empire",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "note": "Intrinsic splash (Compendium); catalyst adds Incandescent and Burning Ambition.",
+    "q": "inflicting x5+5 Scorch over a 3.5 meter radius",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:gearshift",
+  "n": "Gear Shift",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "Reloading after a final blow or becoming amplified grants a period of increased damage.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:giftofthetraveler",
+  "n": "Gift of the Traveler",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "special reload consuming Gathering Light",
+    "q": "Grants 10% Grenade, Melee, and Class Ability Energy per Gathering Light stack",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "special reload consuming Gathering Light",
+    "q": "Grants 10% Grenade, Melee, and Class Ability Energy per Gathering Light stack",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "special reload consuming Gathering Light",
+    "q": "Grants 10% Grenade, Melee, and Class Ability Energy per Gathering Light stack",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:grenadechaser",
+  "n": "Grenade Chaser",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "tangle",
+    "note": "Catalyst (Nano-entanglement) only.",
+    "q": "Grenade Launcher Mode Kills create a Tangle.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:hailstorm",
+  "n": "Hail Storm",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "q": "Direct hits with Stasis arrows freeze combatants",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "note": "PvP only; combatants are frozen instead.",
+    "q": "slow opposing Guardians",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "q": "Stasis arrows that impact the environment create Stasis crystals.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "This weapon deals 50% increased damage to Frozen enemies and Stasis Crystals",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "This weapon deals 50% increased damage to Frozen enemies and Stasis Crystals",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:harbingerspulse",
+  "n": "Harbinger's Pulse",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "voiddamage",
+    "note": "Void kills from any source count.",
+    "q": "Multikills with Void damage immediately reload this weapon from reserves.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:hatchling",
+  "n": "Hatchling",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "threadling",
+    "q": "spawns a Threadling at the target's location",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:headstone",
+  "n": "Headstone",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "q": "Precision final blows spawn a [Stasis] Stasis crystal at the victim's location.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:healclip",
+  "n": "Heal Clip",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "allies",
+    "q": "Reloading shortly after dealing a final blow grants Cure to you and your nearby allies.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:heartpiercer",
+  "n": "Heart Piercer",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "note": "Exotic shotgun intrinsic (Compendium), not the Heart Piercer line.",
+    "q": "Scoring a kill or picking up a Void Breach grants Nightsworn Sight",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "note": "Only while Nightsworn Sight is active.",
+    "q": "Submunition inflict Weaken",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:heavymetal",
+  "n": "Heavy Metal",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "volatile",
+    "q": "every fourth bullet becomes a heavy projectile that makes targets volatile on impact",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "q": "Every 2nd Vexadecimal Projectile (32nd shot) inflicts Weaken.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:highoctane",
+  "n": "High Octane",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "ignition",
+    "note": "Ignitions from any source nearby count.",
+    "q": "Igniting nearby targets partially replenishes fuel.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Incendiary Pools deal 41 [74] damage and inflicts x40+20 Scorch",
+    "s": "compendium"
+   },
+   {
+    "do": "creates",
+    "t": "firesprite",
+    "note": "Catalyst (Pyromancer) only.",
+    "q": "Kills spawn Firesprites without any cooldown between each pickup.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:icebreaker",
+  "n": "Ice Breaker",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "ignition",
+    "q": "Precision final blows or shattering a frozen target instead triggers an ignition.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Precision final blows or shattering a frozen target instead triggers an ignition.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "Bodyshot Kills or Shattering a Stasis Crystal triggers a Solar Explosion",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "shatter",
+    "q": "Precision Kills or Shattering a Frozen target triggers a Solar Ignition.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:incandescent",
+  "n": "Incandescent",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Defeating a target spreads scorch to those nearby.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:indomitability",
+  "n": "Indomitability",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Arc Staff",
+       "Chaos Reach",
+       "Fists of Havoc",
+       "Gathering Storm",
+       "Storm's Edge",
+       "Stormtrance",
+       "Thundercrash",
+       "Blade Barrage",
+       "Burning Maul",
+       "Daybreak",
+       "Golden Gun: Deadshot",
+       "Golden Gun: Marksman",
+       "Hammer of Sol",
+       "Song of Flame",
+       "Well of Radiance",
+       "Nova Bomb: Cataclysm",
+       "Nova Bomb: Vortex",
+       "Nova Warp",
+       "Sentinel Shield",
+       "Shadowshot: Deadfall",
+       "Shadowshot: Moebius Quiver",
+       "Spectral Blades",
+       "Twilight Arsenal",
+       "Ward of Dawn"
+      ]
+     }
+    ],
+    "note": "Keyed to your Super's alignment (Clarity): Arc/Solar/Void Super gives grenade energy.",
+    "q": "Final blows grant grenade energy when playing a Light subclass",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake",
+       "Silence and Squall",
+       "Winter's Wrath",
+       "Bladefury",
+       "Needlestorm",
+       "Silkstrike"
+      ]
+     }
+    ],
+    "note": "Stasis/Strand Super gives melee energy.",
+    "q": "or melee energy when playing a Darkness subclass",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:inverserelationship",
+  "n": "Inverse Relationship",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "cure",
+    "note": "Red Death Reformed intrinsic (Compendium), on weapon kill.",
+    "q": "Grants Cure x2, +100 Reload Speed",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "note": "Catalyst (Helping Hand) only.",
+    "q": "Restoration Orb grants Restoration x2",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:joltingfeedback",
+  "n": "Jolting Feedback",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "jolt",
+    "q": "Dealing repeated damage with this weapon inflicts Jolt.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "While amplified, Jolt is applied faster.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:leadfromlight",
+  "n": "Lead From Light",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "Picking up an Orb of Power causes your next final blow with this weapon to grant bonus Special ammo meter progress.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:leviathanssigh",
+  "n": "Leviathan's Sigh",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "volatile",
+    "on": "fully drawn shots",
+    "q": "makes them volatile",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:lighttouch",
+  "n": "Light Touch",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "when you are amplified, radiant, or have Devour",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "when you are amplified, radiant, or have Devour",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "q": "when you are amplified, radiant, or have Devour",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:lightningrounds",
+  "n": "Lightning Rounds",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "q": "Summons a Lightning Strike after 10 hits and grants x1 Bolt Charge.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:lightningseeker",
+  "n": "Lightning Seeker",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "jolt",
+    "q": "jolting them and unleashing chain lightning on impact",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:liquidcooling",
+  "n": "Liquid Cooling",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "q": "Direct hits by a charged shot instantly freeze the target.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "q": "Indirect hits freeze combatants",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "note": "PvP only.",
+    "q": "slow opposing Guardians",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:longestwinter",
+  "n": "Longest Winter",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "ionictrace",
+    "q": "Periodically generates Ionic Traces while in its high-damage state.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "note": "Picking up a trace builds beam energy.",
+    "q": "Upon picking up an Ionic Trace:",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:loyalmoths",
+  "n": "Loyal Moths",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blind",
+    "q": "damaging and blinding them",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "who": "allies",
+    "if": [
+     {
+      "item": "Mothkeeper's Wraps"
+     }
+    ],
+    "q": "Wearing Mothkeeper's Wraps spawns an additional Hive Moth that grants 22.5 HP Void Overshield to the nearest ally.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "amplified",
+    "note": "Catalyst (Berserk Rush) only.",
+    "q": "Grants Amplified on kill.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:markovchain",
+  "n": "Markov Chain",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "q": "Hits grant 2% Melee Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Melee kills grant ammo for this weapon.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:meaningmaking",
+  "n": "Meaning-Making",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "threadling",
+    "q": "Final blows with this weapon create a Threadling nest that periodically spawns Threadlings.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "threadling",
+    "q": "Final blows with this weapon near an existing Threadling nest create a Threadling instead.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "tangle",
+    "note": "Catalyst (Disorganized Attachment) only.",
+    "q": "Harvesting a Nest destroys it to grant a Throwable Tangle.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:mechanizedautoloader",
+  "n": "Mechanized Autoloader",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "who": "allies",
+    "note": "Exotic rocket launcher intrinsic (Compendium).",
+    "q": "Grants x1 Bolt Charge to the user and allies within ? meters for every 2 Rockets fired.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:omegastrike",
+  "n": "Omega Strike",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blind",
+    "note": "Catalyst (Grand Overture) only.",
+    "q": "Missiles blind Combatants on hit.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:onetwopunch",
+  "n": "One-Two Punch",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "q": "Hitting an enemy with every pellet in a shot increases melee damage for a short duration.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:osmosis",
+  "n": "Osmosis",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "note": "Grenade replacements (Transcendence grenades) also trigger it; Kinetic weapons lose their combatant damage bonus.",
+    "q": "Using your grenade ability partially refills the magazine and changes this weapon's damage type to match your grenade until you stow it.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:paceyourself",
+  "n": "Pace Yourself",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "q": "replaces Grenade Ability with a Kinetic-Damage Fragmentation Grenade.",
+    "s": "compendium",
+    "note": "Forerunner catalyst (The Rock); the frag counts as a Grenade Ability for grenade-kill and grenade-use effects"
+   }
+  ]
+ },
+ {
+  "id": "wp:paracausalaffinity",
+  "n": "Paracausal Affinity",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "lightdamage",
+    "if": [
+     {
+      "any": [
+       {
+        "weapon": "arc"
+       },
+       {
+        "weapon": "solar"
+       },
+       {
+        "weapon": "void"
+       }
+      ]
+     }
+    ],
+    "q": "Light final blows boost Arc, Solar, and Void weapons.",
+    "s": "bungie",
+    "note": "On Arc/Solar/Void versions; kills from any source count."
+   },
+   {
+    "do": "uses",
+    "t": "darknessdamage",
+    "if": [
+     {
+      "any": [
+       {
+        "weapon": "stasis"
+       },
+       {
+        "weapon": "strand"
+       }
+      ]
+     }
+    ],
+    "q": "Darkness final blows boost Stasis and Strand weapons.",
+    "s": "bungie",
+    "note": "On Stasis/Strand versions; kills from any source count."
+   }
+  ]
+ },
+ {
+  "id": "wp:paracausalimbuement",
+  "n": "Paracausal Imbuement",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "q": "Final blows with this weapon grant Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "q": "This weapon gains bonus damage once your Super expires.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:paracausalpellets",
+  "n": "Paracausal Pellets",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "q": "landing nearly all Stasis pellets will freeze targets",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "q": "landing nearly all Solar pellets will ignite targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:penance",
+  "n": "Penance",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "note": "Divinity intrinsic (Compendium).",
+    "q": "Scoring 10 [5] hits within 0.15 seconds of each weakens",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:perpetualloophole",
+  "n": "Perpetual Loophole",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "overshield",
+    "q": "Deal additional melee damage while protected by an overshield.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "on": "glaive melee kills while overshielded",
+    "q": "fully refill Void Overshield Health",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "who": "allies",
+    "note": "Glaive intrinsic: blocking with weapon energy.",
+    "q": "Gradually grants Void Overshield at a rate of 14 Overshield HP per second to the user and allies within 15 metres.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:photoinhibition",
+  "n": "Photoinhibition",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "disorient",
+    "q": "Breaking a combatant's shield disorients them",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:physic",
+  "n": "Physic",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "restoration",
+    "if": [
+     {
+      "weapon": "solar"
+     }
+    ],
+    "who": "allies",
+    "note": "Element follows the weapon's own damage type; granted to you and the healed ally on Support Frame Boost.",
+    "q": "Solar: Restoration x1 for 4 seconds",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "amplified",
+    "if": [
+     {
+      "weapon": "arc"
+     }
+    ],
+    "who": "allies",
+    "q": "Arc: Amplified for 5 seconds",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "if": [
+     {
+      "weapon": "stasis"
+     }
+    ],
+    "who": "allies",
+    "q": "Stasis: x2 Frost Armor for 5 seconds",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "if": [
+     {
+      "weapon": "void"
+     }
+    ],
+    "who": "allies",
+    "note": "Strand versions release 4 Unraveling Threads instead.",
+    "q": "Void: Grants a ?HP Void Overshield",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:pickyourpoison",
+  "n": "Pick Your Poison",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "unravel",
+    "q": "Fully-Charged Burst Hits inflict Unravel to marked enemies.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:playwithyourprey",
+  "n": "Play with Your Prey",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suppress",
+    "q": "The Void rocket suppresses combatants.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "The Solar rocket scorches.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "note": "Catalyst (Third Tail) adds an Arc rocket.",
+    "q": "and inflicts Jolt.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:powersurge",
+  "n": "Power Surge",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "note": "Only during Unleashed Power.",
+    "q": "Inflicts Weaken for 6 [?] seconds on hit.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "note": "Catalyst (Void Mastery): when Unleashed Power ends.",
+    "q": "Void Overshield for 10+5 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:propertyirreducible",
+  "n": "Property: Irreducible",
+  "fx": [
+   {
+    "do": "consumes",
+    "t": "grenade",
+    "note": "The shot's element always matches your equipped grenade.",
+    "q": "Consume your grenade to load a large",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "prismaticgrenade",
+    "q": "Can consume both Transcendence Grenades and Song of Flame Wisps.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "q": "deals increased damage while Transcendence is active",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "q": "Kills grant 20% Grenade Energy",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "q": "an additional 2.5% Light Transcendent Energy and 2.5% Dark Transcendent Energy",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Flux Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Skip Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ],
+    "q": "Arc = Blind",
+    "s": "compendium",
+    "note": "Catalyst (Property: Unavoidable): the debuff follows your grenade's element."
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Firebolt Grenade",
+       "Fusion Grenade",
+       "Healing Grenade",
+       "Incendiary Grenade",
+       "Solar Grenade",
+       "Swarm Grenade",
+       "Thermite Grenade",
+       "Tripmine Grenade"
+      ]
+     }
+    ],
+    "q": "Solar = x70+10 Scorch",
+    "s": "compendium",
+    "note": "Catalyst (Property: Unavoidable): the debuff follows your grenade's element."
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Magnetic Grenade",
+       "Scatter Grenade",
+       "Suppressor Grenade",
+       "Void Spike",
+       "Void Wall",
+       "Vortex Grenade"
+      ]
+     }
+    ],
+    "q": "Void = Weaken for 6 [2.5] seconds",
+    "s": "compendium",
+    "note": "Catalyst (Property: Unavoidable): the debuff follows your grenade's element."
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Coldsnap Grenade",
+       "Duskfield Grenade",
+       "Glacier Grenade",
+       "Shatter Grenade"
+      ]
+     }
+    ],
+    "q": "Stasis = x80 Slow",
+    "s": "compendium",
+    "note": "Catalyst (Property: Unavoidable): the debuff follows your grenade's element."
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Grapple",
+       "Shackle Grenade",
+       "Slicewire Grenade",
+       "Threadling Grenade"
+      ]
+     }
+    ],
+    "q": "Strand = Sever for 5+2.5",
+    "s": "compendium",
+    "note": "Catalyst (Property: Unavoidable): the debuff follows your grenade's element."
+   }
+  ]
+ },
+ {
+  "id": "wp:pugilist",
+  "n": "Pugilist",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "q": "Final blows with this weapon generate melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Dealing melee damage briefly improves this weapon's handling.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:pyrogenesis",
+  "n": "Pyrogenesis",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Solar laser scorches targets hit",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "q": "and ignites them when defeated",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "firesprite",
+    "q": "Non-Suspended Regular Mode Enemy Kills spawn a Firesprite.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "q": "Picking up a Firesprite grants Pyrogenesis Available.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "Hits against Suspended Enemies inflict x20+10 Scorch.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "Killing a Suspended Enemy triggers an ignition.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:rapidhit",
+  "n": "Rapid Hit",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Triggers on any yellow damage number, such as bodyshots on Weakened Enemies.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:regasrefrain",
+  "n": "Rega's Refrain",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stasisdamage",
+    "note": "Stasis kills from any source.",
+    "q": "Stasis final blows transfer ammo to this weapon's magazine from reserves.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "q": "Kills trigger a Stasis Burst, inflicting x100 [x50] Slow Stacks to enemies within 10 meters.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:regenerativemotion",
+  "n": "Regenerative Motion",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "blind",
+    "on": "kills at 40%+ charge",
+    "q": "blind enemies for 10 seconds in a 7 meter radius",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "note": "Catalyst (Static Buildup) only.",
+    "q": "removes Passive Decay while Amplified",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:releasethewolves",
+  "n": "Release the Wolves",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "note": "Catalyst (Fang and Claw) only.",
+    "q": "Hipfire | Shots inflict x10+5 Scorch upon dealing damage.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:remoteshield",
+  "n": "Remote Shield",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "overshield",
+    "who": "allies",
+    "q": "Passing through the protective shield provides a Void Overshield",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suppress",
+    "if": [
+     {
+      "item": "Helm of Saint-14"
+     }
+    ],
+    "q": "Helm of Saint-14 Interaction | Remote Shield allows triggering The Saint's Suppression Burst with the same conditionals.",
+    "s": "compendium",
+    "note": "Edge of Action's dome lets Helm of Saint-14 trigger its suppressing burst"
+   }
+  ]
+ },
+ {
+  "id": "wp:repulsorbrace",
+  "n": "Repulsor Brace",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "volatile",
+    "note": "Any Void debuff (volatile, weaken, suppression) on the target.",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:restorationritual",
+  "n": "Restoration Ritual",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Reviving allies or defeating combatants with finishers reloads this weapon",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:restorativeturret",
+  "n": "Restorative Turret",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "allies",
+    "q": "provides Cure and Restoration to nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "who": "allies",
+    "q": "provides Cure and Restoration to nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "self",
+    "if": [
+     {
+      "piece": "Touch of Flame"
+     }
+    ],
+    "q": "If Touch of Flame is equipped, the turret grants Cure x2 and Restoration x2 for 6 seconds (9 with Ember of Solace) to the caster.",
+    "s": "clarity",
+    "note": "x2 Cure and Restoration for the caster"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "who": "self",
+    "if": [
+     {
+      "piece": "Touch of Flame"
+     }
+    ],
+    "q": "If Touch of Flame is equipped, the turret grants Cure x2 and Restoration x2 for 6 seconds (9 with Ember of Solace) to the caster.",
+    "s": "clarity",
+    "note": "x2 Cure and Restoration for the caster"
+   }
+  ]
+ },
+ {
+  "id": "wp:revvedconsumption",
+  "n": "Revved Consumption",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "note": "Catalyst (Burning Ambition) only.",
+    "q": "Allows Scorch to be inflicted from a single Revved Light/Heavy Attack.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "q": "Damaging a combatant heals the wielder.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:rimestealer",
+  "n": "Rimestealer",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:rollingstorm",
+  "n": "Rolling Storm",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "q": "Final blows grant Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "While amplified, final blows grant additional Bolt Charge.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:sharpshooter",
+  "n": "Sharpshooter",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "note": "Golden Gun Mode is not a Super for any purpose.",
+    "q": "Scoring Precision Hits and picking up Orbs of Power charge up Golden Gun Mode.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:shattershot",
+  "n": "Shatter Shot",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "Rapidly destroying multiple Stasis crystals reloads this weapon from reserves.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "deal bonus damage to Stasis crystals and frozen targets",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "note": "Weapon intrinsic (charged shots).",
+    "q": "Charged Shots create Stasis Crystals",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:shiverquiver",
+  "n": "Shiver Quiver",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Freezing or slowing a target grants this weapon faster draw speed",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Freezing or slowing a target grants this weapon faster draw speed",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:shoottoloot",
+  "n": "Shoot to Loot",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "Shooting an Orb of Power picks it up.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:shotinthedark",
+  "n": "Shot in the Dark",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "q": "Remaining invisible grants this weapon increased damage for a brief duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "q": "weakens them",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "invisibility",
+    "q": "turns you invisible once more",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:silkboundslayer",
+  "n": "Silkbound Slayer",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "This weapon deals bonus damage to suspended targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "when you suspend a target from any source",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suspend",
+    "note": "Weapon intrinsic (Snareweaver arrows).",
+    "q": "Hitting an enemy directly releases a snare underneath them and inflicts suspend.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:slice",
+  "n": "Slice",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "classability",
+    "q": "Casting your class ability allows this weapon to sever targets on hit",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "q": "Casting your class ability allows this weapon to sever targets on hit",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:spindle",
+  "n": "Spindle",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "threadling",
+    "note": "Threadlings from any source.",
+    "q": "Threadling damage increases this weapon's damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "threadling",
+    "note": "Weapon intrinsic.",
+    "q": "Scoring 6 hits within ? seconds of each spawns 3 Threadlings.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:strategist",
+  "n": "Strategist",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "q": "Final blows with this weapon generate class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "classability",
+    "q": "Activating your class ability briefly improves this weapon's stability.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:subatomicdistortion",
+  "n": "Subatomic Distortion",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "q": "applying a Strong Weaken (30%) for 5 seconds",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:sunblast",
+  "n": "Sun Blast",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "scorching other nearby targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:superchargedbattery",
+  "n": "Supercharged Battery",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "Collecting an Orb of Power grants a period of maximum power",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suppress",
+    "q": "Sustained fire in this mode suppresses targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:superchargedmagazine",
+  "n": "Supercharged Magazine",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "While amplified, ammo is gradually transferred from reserves to the magazine.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:superconductor",
+  "n": "Superconductor",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "arcdamage",
+    "note": "Taking Arc damage (Riskrunner intrinsic).",
+    "q": "Receiving Arc Damage activates Arc Conductor for 6 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:suspendingblast",
+  "n": "Suspending Blast",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suspend",
+    "q": "Detonating a large number of rounds embedded in a single target suspends them.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "unravel",
+    "note": "Catalyst (Unraveling Blast) only.",
+    "q": "Explosive Damage from Enemy-Embedded Projectiles now inflicts Unravel.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:swoopingtalons",
+  "n": "Swooping Talons",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Dealing damage while airborne increases this weapon's damage output.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "note": "Catalyst (Flying Monster): airborne kills.",
+    "q": "refills 12 Manticore Ammo and grants a 15HP Void Overshield for 6 seconds",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:targetacquired",
+  "n": "Target Acquired",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "jolt",
+    "q": "Scoring a hit while Target Acquired is active inflicts Jolt.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:tear",
+  "n": "Tear",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "sever",
+    "q": "Precision final blows cause nearby targets to become severed.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:tempestcascade",
+  "n": "Tempest Cascade",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "note": "Ionic Traces from any source.",
+    "q": "Collecting an Ionic Trace overcharges this weapon's next shot",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "q": "jolting targets on hit",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "ionictrace",
+    "q": "Kills have a chance to spawn an Ionic Trace.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:temporalanomaly",
+  "n": "Temporal Anomaly",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "note": "Only while Stasis mode is overcharged.",
+    "q": "Stasis mode creates an explosion and a formation of Stasis crystals.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "Hitting Stasis Crystals will consume 34% Arc Overcharge to call down a lightning strike on them.",
+    "s": "compendium",
+    "note": "Arc mode while overcharged"
+   }
+  ]
+ },
+ {
+  "id": "wp:temporalunlimiter",
+  "n": "Temporal Unlimiter",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "ignition",
+    "q": "cause an ignition on precision final blows",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:thintheherd",
+  "n": "Thin the Herd",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "volatile",
+    "q": "cause a volatile detonation",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "note": "Clarity/Compendium describe the refill as a kill with another weapon or source within 6s of Fighting Lion damage, not grenades specifically.",
+    "q": "Rapid final blows against grenade-damaged combatants refill the magazine.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:thresh",
+  "n": "Thresh",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "q": "Killing combatants with this weapon generates a small amount of Super energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:timelostmagazine",
+  "n": "Timelost Magazine",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "q": "Final blows with this weapon grant bonus Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "q": "When your Super expires",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:tithingharvest",
+  "n": "Tithing Harvest",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "note": "Only while Creeping Attrition is active.",
+    "q": "destroying Stasis crystals or landing precision final blows creates a Stasis shard",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "destroying Stasis crystals or landing precision final blows creates a Stasis shard",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "note": "Shards from any source refill the magazine.",
+    "q": "collecting Stasis shards refills the magazine",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "q": "Precision Hits inflict x40 [x20] Slow for 4+4 [4+2] seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:toxicoverload",
+  "n": "Toxic Overload",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "corruption",
+    "q": "triggers a burst of Potent Corruption (Poison) at the target's location in a 5 meter radius.",
+    "s": "clarity",
+    "note": "Osteo Striga; the poison counts as weapon damage"
+   }
+  ]
+ },
+ {
+  "id": "wp:transcendentduelist",
+  "n": "Transcendent Duelist",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "q": "Deals increased damage while Transcendent; defeating targets lengthens Transcendence.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "q": "Kills grant an additional 2.5% energy to both Light and Dark Transcendence bars.",
+    "s": "clarity"
+   },
+   {
+    "do": "modifies",
+    "t": "prismaticgrenade",
+    "q": "Dealing sword damage increases Transcendence Grenade Regeneration by 35% for 2 seconds",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:transcendentmoment",
+  "n": "Transcendent Moment",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "q": "While Transcendent, this weapon gets both bonuses.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:tricklecharge",
+  "n": "Trickle Charge",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "boltcharge",
+    "q": "Receiving or discharging Bolt Charge partially loads the magazine from reserves.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:turnabout",
+  "n": "Turnabout",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "overshield",
+    "q": "Using this weapon to break the shield of a combatant or a Guardian using their Super will grant you an overshield.",
+    "s": "bungie",
+    "note": "Compendium: stacks with Void and class-stat overshields"
+   }
+  ]
+ },
+ {
+  "id": "wp:umbralsustenance",
+  "n": "Umbral Sustenance",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "devour",
+    "q": "when you gain Devour, a Void overshield, or become invisible",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "q": "when you gain Devour, a Void overshield, or become invisible",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "q": "when you gain Devour, a Void overshield, or become invisible",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "note": "Collider intrinsic (Compendium): leeches Void debuffs from targets (or on you) and reapplies them during Void Leech.",
+    "q": "Scoring 27 hits leeches Void Debuffs in the order of Volatile -> Weaken -> Suppression.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Scoring 27 hits leeches Void Debuffs in the order of Volatile -> Weaken -> Suppression.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "q": "Scoring 27 hits leeches Void Debuffs in the order of Volatile -> Weaken -> Suppression.",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "volatile",
+    "q": "Hits will inflict the Void Debuffs that were leeched",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "q": "Hits will inflict the Void Debuffs that were leeched",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "suppress",
+    "q": "Hits will inflict the Void Debuffs that were leeched",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:unforeseenrepercussions",
+  "n": "Unforeseen Repercussions",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "causing delayed scorching explosions",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:valiantcharge",
+  "n": "Valiant Charge",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "healing",
+    "q": "Guarding while receiving Healing Effects (including healing over time from Restoration) from allies also activates the perk.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "restoration",
+    "q": "Guarding while receiving Healing Effects (including healing over time from Restoration) from allies also activates the perk.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:vermin",
+  "n": "Vermin",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "invisibility",
+    "q": "Reloading immediately after a kill grants a brief period of invisibility.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:violentreanimation",
+  "n": "Violent Reanimation",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "devour",
+    "q": "Multiple final blows with this weapon grant Devour to the wielder.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "note": "Catalyst (Splitvein Lineage): only while Devour is active.",
+    "q": "Hits inflict Weaken for 5 [?] seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:voltshot",
+  "n": "Voltshot",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "jolt",
+    "q": "causing it to jolt on its next hit",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:weftcutter",
+  "n": "Weft Cutter",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "sever",
+    "q": "Dealing sustained damage severs the target.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "wovenmail",
+    "q": "grants you Woven Mail for 10 seconds",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "wovenmail",
+    "note": "Weapon intrinsic: bonus damage while you have Woven Mail.",
+    "q": "While Woven Mail is active:",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "wp:weightededge",
+  "n": "Weighted Edge",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "glaive melee hits",
+    "q": "slow targets when loaded with ammo",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:witheringgaze",
+  "n": "Withering Gaze",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "q": "grants the ability to weaken the next target",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "_skipped",
+  "ids": [
+   "wp:anticipation",
+   "wp:armorofthecolossus",
+   "wp:chaosreshaped",
+   "wp:circleoflife",
+   "wp:darkdescent",
+   "wp:deconstruct",
+   "wp:desperation",
+   "wp:disruptionbreak",
+   "wp:dualspeedreceiver",
+   "wp:emanomaly",
+   "wp:faildeadly",
+   "wp:fanaticallance",
+   "wp:firefly",
+   "wp:frameofreference",
+   "wp:hkkebreacharmaments",
+   "wp:harmonicresonance",
+   "wp:hereticalbehavior",
+   "wp:impetus",
+   "wp:jumpdriver",
+   "wp:nobledeeds",
+   "wp:radiolariatransposer",
+   "wp:reciprocity",
+   "wp:refinedsoul",
+   "wp:ruinscribesbeacon",
+   "wp:souldevourer",
+   "wp:soulforge",
+   "wp:spreadshotpackage",
+   "wp:sundering",
+   "wp:underover"
+  ]
+ }
+]

@@ -1,0 +1,1225 @@
+[
+ {
+  "id": "sub:electrifiedsnare",
+  "n": "Electrified Snare",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suspend",
+    "q": "detonates in a supercharged suspending burst",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "q": "chains jolting lightning to any nearby targets",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "q": "Suspended Enemies are dealt ? damage every ? seconds for ? seconds, and are inflicted Jolt.",
+    "s": "compendium",
+    "note": "Jolt goes on the suspended targets."
+   }
+  ]
+ },
+ {
+  "id": "sub:freezingsingularity",
+  "n": "Freezing Singularity",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "q": "deploys a miniature black hole orbited by a slowing field",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suppress",
+    "q": "the black hole implodes, suppressing and dealing heavy damage to all nearby targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:hailfirespike",
+  "n": "Hailfire Spike",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "q": "erupts into a slowing storm",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "the device ignites, creating a deadly scorching cyclone",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "inflicts x10 Scorch every 0.25 seconds for 4 seconds",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofawakening",
+  "n": "Facet of Awakening",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "firesprite",
+    "on": "3 rapid elemental kills or a Super kill",
+    "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.",
+    "s": "clarity",
+    "note": "The pickup matches the damage type of the final kill (Solar: Firesprite, Arc: Ionic Trace, Stasis: Stasis Shard, Strand: Tangle, Void: Void Breach). Kinetic kills don't count."
+   },
+   {
+    "do": "creates",
+    "t": "ionictrace",
+    "on": "3 rapid elemental kills or a Super kill",
+    "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.",
+    "s": "clarity",
+    "note": "The pickup matches the damage type of the final kill (Solar: Firesprite, Arc: Ionic Trace, Stasis: Stasis Shard, Strand: Tangle, Void: Void Breach). Kinetic kills don't count."
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "on": "3 rapid elemental kills or a Super kill",
+    "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.",
+    "s": "clarity",
+    "note": "The pickup matches the damage type of the final kill (Solar: Firesprite, Arc: Ionic Trace, Stasis: Stasis Shard, Strand: Tangle, Void: Void Breach). Kinetic kills don't count."
+   },
+   {
+    "do": "creates",
+    "t": "tangle",
+    "on": "3 rapid elemental kills or a Super kill",
+    "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.",
+    "s": "clarity",
+    "note": "The pickup matches the damage type of the final kill (Solar: Firesprite, Arc: Ionic Trace, Stasis: Stasis Shard, Strand: Tangle, Void: Void Breach). Kinetic kills don't count."
+   },
+   {
+    "do": "creates",
+    "t": "voidbreach",
+    "on": "3 rapid elemental kills or a Super kill",
+    "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.",
+    "s": "clarity",
+    "note": "The pickup matches the damage type of the final kill (Solar: Firesprite, Arc: Ionic Trace, Stasis: Stasis Shard, Strand: Tangle, Void: Void Breach). Kinetic kills don't count."
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "q": "Scoring a Super Kill or Killing 3 enemies with Elemental Damage within 6 seconds of each spawns an Elemental Pickup.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofbalance",
+  "n": "Facet of Balance",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "3 rapid Light-damage kills",
+    "q": "Rapidly defeating targets with Light damage grants melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "lightdamage",
+    "q": "Scoring 3 Kills within 3? seconds of each with Light-aligned damage grants 10% Melee energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "3 rapid Darkness-damage kills",
+    "q": "Rapidly defeating targets with Darkness damage grants grenade energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "darknessdamage",
+    "q": "Scoring 3 Kills within 3? seconds of each with Dark-aligned damage grants 10% Grenade energy.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofblessing",
+  "n": "Facet of Blessing",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "melee kill",
+    "who": "self",
+    "q": "Melee final blows start health regeneration.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Melee Kills start health regeneration.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "who": "allies",
+    "if": [
+     {
+      "has": "transcendence"
+     }
+    ],
+    "q": "While transcendent, melee final blows start health regeneration for you and nearby allies.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "q": "While Transcendent, this also applies to allies within ? meters.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofbravery",
+  "n": "Facet of Bravery",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "volatilerounds",
+    "on": "grenade kill",
+    "if": [
+     {
+      "weapon": "void"
+     }
+    ],
+    "q": "Defeating targets with grenade final blows grants Volatile Rounds to your [Void] Void weapons.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Grenade Kills grant Volatile Rounds to Void Weapons for 11 [7.5] seconds.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "unravelingrounds",
+    "on": "powered melee kill",
+    "if": [
+     {
+      "weapon": "strand"
+     }
+    ],
+    "q": "Defeating targets with powered melee final blows grants Unraveling Rounds to your [Strand] Strand weapons.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Powered Melee Kills (including Knockout) grant Unraveling Rounds to Strand Weapons for 11 [7.5] seconds.",
+    "s": "clarity",
+    "note": "Powered melee only (Knockout counts)."
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofcommand",
+  "n": "Facet of Command",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Freezing or suppressing a target reloads your equipped weapons and increases weapon stability, aim assist, and airborne effectiveness.",
+    "s": "bungie",
+    "note": "Refills the readied weapon + stability/aim assist/airborne for 11s; 4s cooldown (Clarity)."
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "q": "Freezing or suppressing a target reloads your equipped weapons and increases weapon stability, aim assist, and airborne effectiveness.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "on": "freezing or suppressing a target",
+    "who": "self",
+    "q": "Freezing or Suppressing an enemy refills your readied weapon's magazine from reserves",
+    "s": "clarity"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "on": "killing a frozen target",
+    "q": "Killing Frozen or Suppressed Enemies spawns a Stasis Shard or Void Breach respectively.",
+    "s": "clarity"
+   },
+   {
+    "do": "creates",
+    "t": "voidbreach",
+    "on": "killing a suppressed target",
+    "q": "Killing Frozen or Suppressed Enemies spawns a Stasis Shard or Void Breach respectively.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofcourage",
+  "n": "Facet of Courage",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "arcability",
+    "note": "Light powered melee abilities get a larger bonus in PvE (+50% of base damage).",
+    "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "solarability",
+    "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "voidability",
+    "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
+    "s": "bungie",
+    "note": "Any Stasis or Strand debuff on the target."
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
+    "s": "bungie",
+    "note": "Any Stasis or Strand debuff on the target."
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
+    "s": "bungie",
+    "note": "Any Stasis or Strand debuff on the target."
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
+    "s": "bungie",
+    "note": "Any Stasis or Strand debuff on the target."
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
+    "s": "bungie",
+    "note": "Any Stasis or Strand debuff on the target."
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofdawn",
+  "n": "Facet of Dawn",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "radiant",
+    "on": "powered melee hit",
+    "who": "self",
+    "q": "Powered melee hits against targets makes you radiant.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "radiant",
+    "on": "powered melee kill",
+    "who": "allies",
+    "q": "Powered melee final blows make you and nearby allies radiant.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Elemental Melee Hits grant you Radiant for 5 seconds.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofdefiance",
+  "n": "Facet of Defiance",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Finishers create a detonation that either jolts, scorches, slows, severs, or makes targets volatile based on the damage type of your equipped Super.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "by": "finisher",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Arc Staff",
+       "Chaos Reach",
+       "Fists of Havoc",
+       "Gathering Storm",
+       "Storm's Edge",
+       "Stormtrance",
+       "Thundercrash"
+      ]
+     }
+    ],
+    "q": "Arc: Jolt",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "by": "finisher",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Blade Barrage",
+       "Burning Maul",
+       "Daybreak",
+       "Golden Gun: Deadshot",
+       "Golden Gun: Marksman",
+       "Hammer of Sol",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "q": "Solar: x40 Scorch",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "volatile",
+    "by": "finisher",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Nova Bomb: Cataclysm",
+       "Nova Bomb: Vortex",
+       "Nova Warp",
+       "Sentinel Shield",
+       "Shadowshot: Deadfall",
+       "Shadowshot: Moebius Quiver",
+       "Spectral Blades",
+       "Twilight Arsenal",
+       "Ward of Dawn"
+      ]
+     }
+    ],
+    "q": "Void: Volatile",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "by": "finisher",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake",
+       "Silence and Squall",
+       "Winter's Wrath"
+      ]
+     }
+    ],
+    "q": "Stasis: x? Slow for ? seconds",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "by": "finisher",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Bladefury",
+       "Needlestorm",
+       "Silkstrike"
+      ]
+     }
+    ],
+    "q": "Strand: Sever for ? seconds",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofdevotion",
+  "n": "Facet of Devotion",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "on": "killing a Stasis- or Strand-debuffed target",
+    "q": "Defeating targets afflicted with [Stasis] Stasis or [Strand] Strand debuffs grants bonus Light Transcendence energy.",
+    "s": "bungie",
+    "note": "Light meter only: 1% minors, 3% elites, 5% minibosses+."
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofdominance",
+  "n": "Facet of Dominance",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "by": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Magnetic Grenade",
+       "Scatter Grenade",
+       "Suppressor Grenade",
+       "Void Spike",
+       "Void Wall",
+       "Vortex Grenade"
+      ]
+     }
+    ],
+    "q": "Your Void grenades weaken targets",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "by": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Flux Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Skip Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ],
+    "q": "your Arc grenades jolt targets",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "q": "Void Grenade Ability damage applies Weaken for 6 [?] seconds.",
+    "s": "clarity",
+    "note": "Only Void and Arc grenades are changed.",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Magnetic Grenade",
+       "Scatter Grenade",
+       "Suppressor Grenade",
+       "Void Spike",
+       "Void Wall",
+       "Vortex Grenade",
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Flux Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Skip Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofgenerosity",
+  "n": "Facet of Generosity",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "who": "allies",
+    "if": [
+     {
+      "has": "transcendence"
+     }
+    ],
+    "q": "Defeating targets while transcendent creates Orbs of Power for your allies.",
+    "s": "bungie",
+    "note": "Up to 4 orbs per Transcendence, by kill-point thresholds; orbs are for allies."
+   },
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "q": "Kills while Transcendent spawn up to 4 Orbs of Power for allies",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "by": "orbofpower",
+    "who": "allies",
+    "q": "Kills while Transcendent spawn up to 4 Orbs of Power for allies that grant 7.15?% Super Energy.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofgrace",
+  "n": "Facet of Grace",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "on": "Kinetic weapon kill",
+    "if": [
+     {
+      "weapon": "kinetic"
+     }
+    ],
+    "q": "Defeating targets with Kinetic weapons grants you bonus Transcendence energy.",
+    "s": "bungie",
+    "note": "Both Light and Darkness meters."
+   },
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "on": "Super kill",
+    "who": "allies",
+    "q": "Defeating targets with your Super grants you and nearby allies bonus Transcendence energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "q": "Super Kills grant an additional 2% [?%] Light and Darkness Transcendence Energy to you and allies",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofhonor",
+  "n": "Facet of Honor",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "q": "Collecting an Elemental pickup or destroying a Tangle grants Transcendence energy of the same type.",
+    "s": "bungie",
+    "note": "Firesprite/Ionic Trace/Void Breach: Light 7.5%; Stasis Shard: Darkness 5%; Tangle: Darkness 10%."
+   },
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "q": "Ionic Traces, Firesprites, Void Breaches: 7.5% Light Transcendence Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "q": "Ionic Traces, Firesprites, Void Breaches: 7.5% Light Transcendence Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Ionic Traces, Firesprites, Void Breaches: 7.5% Light Transcendence Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Stasis Shards: 5% Darkness Transcendence Energy",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "q": "Tangles: 10% Darkness Transcendence Energy",
+    "s": "clarity",
+    "note": "Destroying a Tangle, not picking it up."
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofhope",
+  "n": "Facet of Hope",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "q": "While you have an elemental buff, your class ability regenerates more quickly.",
+    "s": "bungie",
+    "note": "+40% base class regen with 1 elemental buff, +60% with 2 or more."
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "boltcharge",
+    "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "restoration",
+    "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "wovenmail",
+    "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofjustice",
+  "n": "Facet of Justice",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "q": "While transcendent, your ability final blows explode.",
+    "s": "bungie",
+    "note": "The explosion deals ability-matching elemental damage; no debuff is stated."
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "if": [
+     {
+      "has": "transcendence"
+     }
+    ],
+    "q": "Ability Kills while Transcendent trigger an explosion",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "if": [
+     {
+      "has": "transcendence"
+     }
+    ],
+    "q": "Ability Kills while Transcendent trigger an explosion",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "classability",
+    "if": [
+     {
+      "has": "transcendence"
+     }
+    ],
+    "q": "Ability Kills while Transcendent trigger an explosion",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofmending",
+  "n": "Facet of Mending",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "cure",
+    "on": "grenade kill",
+    "who": "self",
+    "q": "Grenade final blows cure you.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Grenade Ability Kills grant you Cure x1.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "prismaticgrenade",
+    "q": "Prismatic Grenade Kills grant you Cure x2.",
+    "s": "clarity",
+    "note": "Transcendence grenade kills give the stronger Cure x2."
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofprotection",
+  "n": "Facet of Protection",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "within 15 m of 3+ enemies",
+    "who": "self",
+    "q": "While surrounded by combatants, you are more resistant to incoming damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "q": "While transcendent, the effect is increased.",
+    "s": "bungie",
+    "note": "Clarity: the 15% is NOT increased while Transcendent; it only stacks with Transcendence's own 20% resist (32% total)."
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofpurpose",
+  "n": "Facet of Purpose",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "Picking up an Orb of Power grants either Bolt Charge, Restoration, Frost Armor, Woven Mail, or Overshield based on the damage type of your equipped Super.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "by": "orbofpower",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Arc Staff",
+       "Chaos Reach",
+       "Fists of Havoc",
+       "Gathering Storm",
+       "Storm's Edge",
+       "Stormtrance",
+       "Thundercrash"
+      ]
+     }
+    ],
+    "q": "Arc: 1 Bolt Charge Stack",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "by": "orbofpower",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Blade Barrage",
+       "Burning Maul",
+       "Daybreak",
+       "Golden Gun: Deadshot",
+       "Golden Gun: Marksman",
+       "Hammer of Sol",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "q": "Solar: Restoration x1 for 5 seconds",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "by": "orbofpower",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Nova Bomb: Cataclysm",
+       "Nova Bomb: Vortex",
+       "Nova Warp",
+       "Sentinel Shield",
+       "Shadowshot: Deadfall",
+       "Shadowshot: Moebius Quiver",
+       "Spectral Blades",
+       "Twilight Arsenal",
+       "Ward of Dawn"
+      ]
+     }
+    ],
+    "q": "Void: 22.5 HP Overshield for 5 seconds",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "by": "orbofpower",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake",
+       "Silence and Squall",
+       "Winter's Wrath"
+      ]
+     }
+    ],
+    "q": "Stasis: 2 Frost Armor Stacks for 9 seconds",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "wovenmail",
+    "by": "orbofpower",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Bladefury",
+       "Needlestorm",
+       "Silkstrike"
+      ]
+     }
+    ],
+    "q": "Strand: Woven Mail for 5 seconds",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofruin",
+  "n": "Facet of Ruin",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "ignition",
+    "q": "increases the area of effect of Solar ignitions",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "shatter",
+    "q": "Increases the size and damage of the burst when you shatter a Stasis crystal or frozen target",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "stasiscrystal",
+    "q": "Shattering enemies or destroying Crystals creates an additional damage instance",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Increases the size and damage of the burst when you shatter a Stasis crystal or frozen target",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofsacrifice",
+  "n": "Facet of Sacrifice",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "on": "ability kill",
+    "q": "While you have an Arc, Solar, or Void buff, ability final blows grant bonus Darkness Transcendence energy.",
+    "s": "bungie",
+    "note": "Darkness meter only, +1% per ability kill."
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "boltcharge",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "restoration",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "classability",
+    "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:facetofsolitude",
+  "n": "Facet of Solitude",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "sever",
+    "on": "rapid weapon precision hits",
+    "q": "Landing rapid precision hits emits a severing blast from the target.",
+    "s": "bungie",
+    "note": "Precision hits needed: 20% of magazine +1 (bows: 2); the next damage instance from any source triggers the burst."
+   },
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "q": "While transcendent, the severing blast is bigger.",
+    "s": "bungie",
+    "note": "Radius 3 m to 6 m."
+   }
+  ]
+ },
+ {
+  "id": "sub:transcendence",
+  "n": "Transcendence",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "transcendence",
+    "q": "Achieve harmony by dealing damage with Light and Dark damage types in equal measure or by applying subclass buffs to your allies.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "transcendenceenergy",
+    "q": "Dealing damage, alongside applying Elemental Effects grants Transcendence Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "lightdamage",
+    "q": "Achieve harmony by dealing damage with Light and Dark damage types in equal measure",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "darknessdamage",
+    "q": "Achieve harmony by dealing damage with Light and Dark damage types in equal measure",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "if": [
+     {
+      "weapon": "kinetic"
+     }
+    ],
+    "q": "Kinetic damage generates both Light and Dark energy.",
+    "s": "bungie",
+    "note": "At a 50% lower rate (Compendium)."
+   },
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "q": "Applying Elemental Effects, both buffs and debuffs, grant Transcendence Energy to their corresponding alignment.",
+    "s": "compendium",
+    "note": "Any subclass buff or debuff fills its alignment's meter."
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "activating Transcendence",
+    "q": "Instantly recharges 2 Grenade and Melee Ability Charges on activation.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "activating Transcendence",
+    "q": "Instantly recharges 2 Grenade and Melee Ability Charges on activation.",
+    "s": "compendium"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "q": "your grenade is replaced by a unique Prismatic grenade that deals both Light and Dark damage",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "prismaticgrenade",
+    "q": "Replaces Grenade Ability with an unique class-specific Prismatic Grenade Ability with Light and Darkness damage types.",
+    "s": "compendium"
+   },
+   {
+    "do": "counts",
+    "t": "prismaticgrenade",
+    "as": "grenade",
+    "note": "The Prismatic grenade (Electrified Snare, Hailfire Spike, Freezing Singularity) is your grenade ability while Transcendent, so grenade effects apply to it (e.g. Facet of Mending gives Cure x2 for it).",
+    "q": "Replaces Grenade Ability with an unique class-specific Prismatic Grenade Ability with Light and Darkness damage types.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "q": "20% [5%] Damage Resist for 20 seconds",
+    "s": "compendium",
+    "note": "Also +5% weapon damage and +10% grenade/melee regen."
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "melee damage while Transcendent",
+    "q": "Dealing Melee Ability Damage while Transcendent increases the Prismatic Grenade Regeneration Speed",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Dealing Melee Ability Damage while Transcendent increases the Prismatic Grenade Regeneration Speed",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "grenade damage while Transcendent",
+    "q": "Dealing Grenade Ability Damage while Transcendent increases the Melee Regeneration Speed",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Dealing Grenade Ability Damage while Transcendent increases the Melee Regeneration Speed",
+    "s": "compendium"
+   },
+   {
+    "do": "modifies",
+    "t": "transcendence",
+    "q": "Defeating targets while transcendent extends its duration.",
+    "s": "bungie"
+   }
+  ]
+ }
+]

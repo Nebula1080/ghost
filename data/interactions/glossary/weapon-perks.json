@@ -1,0 +1,11 @@
+{ "terms": {
+  "arcdamage": { "l": "Arc damage", "kind": "damage", "el": "arc", "aka": ["arc final blows", "arc kills"],
+    "def": "Damage of the Arc type from any source (weapons or abilities). Some weapon perks charge or trigger when you deal or receive it.",
+    "q": "Dealing Arc damage from any source aligns the battery's coils.", "src": "wp:arcalignment" },
+  "voiddamage": { "l": "Void damage", "kind": "damage", "el": "void", "aka": ["void final blows", "void kills"],
+    "def": "Damage of the Void type from any source (weapons or abilities). Some weapon perks trigger on Void final blows.",
+    "q": "Multikills with Void damage immediately reload this weapon from reserves.", "src": "wp:harbingerspulse" },
+  "stasisdamage": { "l": "Stasis damage", "kind": "damage", "el": "stasis", "aka": ["stasis final blows", "stasis kills"],
+    "def": "Damage of the Stasis type from any source (weapons or abilities). Some weapon perks trigger on Stasis final blows.",
+    "q": "Stasis final blows transfer ammo to this weapon's magazine from reserves.", "src": "wp:regasrefrain" }
+} }

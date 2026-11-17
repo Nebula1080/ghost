@@ -1,0 +1,2162 @@
+[
+ {
+  "id": "mod:absolution",
+  "n": "Absolution",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   2793473444
+  ],
+  "src": {
+   "bungie": "Reduces all ability cooldowns each time you pick up an Orb of Power.",
+   "clarity": "On Orb of Power Pickups:\nGrants 5%|7.5%|10% Grenade, Melee, and Class Ability Energy with 1|2|3 Mods equipped.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Orb of Power Pickup:\n5% | 7.5% | 10% Grenade Ability Energy\n5% | 7.5% | 10% Melee Ability Energy\n5% | 7.5% | 10% Class Ability Energy"
+  }
+ },
+ {
+  "id": "mod:arcammogeneration",
+  "n": "Arc Ammo Generation",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   450381139
+  ],
+  "src": {
+   "bungie": "Increases the ammo generation of Arc weapons.",
+   "clarity": "Grants 20|40|50 Ammo Generation stat to Arc Weapons with 1|2|3 Mods equipped.\nSwords receive 20|30|35 Ammo Capacity Stat instead (these values are the equivalent of having Hungry Edge, Backup Mag, or Enduring Blade equipped respectively)."
+  }
+ },
+ {
+  "id": "mod:arcdexterity",
+  "n": "Arc Dexterity",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   2059068466
+  ],
+  "src": {
+   "bungie": "Faster ready and stow speed for Arc weapons.",
+   "clarity": "Grants a 0.8x|0.75x|0.7x Ready/Stow Animation Duration Multiplier to Arc Weapons with 1|2|3 Mods equipped.\nStow Animation Duration cannot be decreased below what it would be at 100 Handling."
+  }
+ },
+ {
+  "id": "mod:archolster",
+  "n": "Arc Holster",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 2,
+  "hashes": [
+   4294909663
+  ],
+  "src": {
+   "bungie": "Gradually reloads your stowed Arc weapons over time.",
+   "clarity": "After stowing Arc Weapons:\nBegins to refill 10%|10%|15% of the stowed weapon's magazine (rounded up) from reserves every 2.5|2|2 seconds with 1|2|3 Mods equipped.\nDoes not work with Breech-Loaded Grenades Launchers, Crossbows, and Rocket Launchers."
+  }
+ },
+ {
+  "id": "mod:arcloader",
+  "n": "Arc Loader",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   1125523126
+  ],
+  "src": {
+   "bungie": "Increases reload speed of Arc weapons.",
+   "clarity": "Grants the following to Arc Weapons ~0.5 seconds after readying them:\n• 10|15|18 Reload Speed with 1|2|3 Mods equipped\n• 0.85x Reload Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:arcresistance",
+  "n": "Arc Resistance",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   953234331
+  ],
+  "src": {
+   "bungie": "Reduces incoming Arc damage from combatants.",
+   "clarity": "Reduces Incoming Arc Damage from PVE Combatants by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
+  }
+ },
+ {
+  "id": "mod:arcscavenger",
+  "n": "Arc Scavenger",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   534479613
+  ],
+  "src": {
+   "bungie": "Arc weapons get bonus reserves when picking up ammo used by that weapon.",
+   "clarity": "Only works in PvE game modes.\nAmmo Brick pickups generally grant 1 additional ammo to Arc Weapons matching the Ammo Type.\nMachine Guns receive 7 additional ammo, Trace Rifles receive 10% of their Total Reserves (rounded up) as additional ammo.\nFunctions the same way regardless of what spawned the Ammo Brick.\nContext: normal Ammo Bricks grant 25-33% of your Total Reserves by default."
+  }
+ },
+ {
+  "id": "mod:arcsiphon",
+  "n": "Arc Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2724068510
+  ],
+  "src": {
+   "bungie": "Rapid Arc weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with an Arc Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:arctargeting",
+  "n": "Arc Targeting",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   967052942
+  ],
+  "src": {
+   "bungie": "Improved target acquisition, accuracy, and aim-down-sights speed for Arc weapons.",
+   "clarity": "Grants the following to Arc Weapons 1 second after readying them:\n• 5|8|10 Aim Assist with 1|2|3 Mods equipped\n• 0.9x|0.85x|0.8x Accuracy Cone Size\n• 0.85x|0.75x|0.7x ADS Animation Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:arcweaponsurge",
+  "n": "Arc Weapon Surge",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   1834163303
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Increases Arc Weapon damage while you have active Armor Charges:\n• PVE: 10%|17%|22%|25% increased damage with 1|2|3|4 Mods\n• PVP: 3%|4.5%|5.5%|6% increased damage\nThe 4th tier of the damage buff is only obtainable through Artifact Perks and Exotic Armor.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default."
+  }
+ },
+ {
+  "id": "mod:arcstasisdualsiphon",
+  "n": "Arc/Stasis Dual Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2077016094
+  ],
+  "src": {
+   "bungie": "Rapid Arc weapon final blows create an Orb of Power."
+  }
+ },
+ {
+  "id": "mod:arcstrandsiphoncombo",
+  "n": "Arc/Strand Siphon Combo",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2812559045
+  ],
+  "src": {
+   "bungie": "Rapid Arc weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with an Arc or Strand Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:ashestoassets",
+  "n": "Ashes to Assets",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   856936828
+  ],
+  "src": {
+   "bungie": "Gain bonus Super energy on grenade kills.",
+   "clarity": "Increases Super Energy Gains from Grenade Kills based on Enemy Rank with 1|2|3 Mods equipped:\n• Tier 1 (T1) Minors: 1%|?|?\n• T2 Minors, T1 Elites: ?|?|?\n• T3 Minors, T2 Elites: ?|?|?\n• T4 Minors, T3-T4 Elites, and higher: 5%|?|?\n• Players: ?|?|?\nBonus Super Energy gains from Grapple Melee Kills are reduced by 50%. Kill can only trigger either Ashes to Assets or Hands On but not both.",
+   "compendium": "On Grenade Kill:\nGrants additional Super Energy. \nTier 1: 1%? | ?% | ?%\nTier 2: ?% | ?% | ?%\nTier 3: ?% | ?% | ?%\nTier 4: 5?% | ?% | ?%\nGuardians: ?% | ?% | ?%\nCannot simultaneously benefit with Hands-On.\nGrapple Melee Kills reduce the Super Energy by 50%."
+  }
+ },
+ {
+  "id": "mod:benevolentfinisher",
+  "n": "Benevolent Finisher",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   3064687909
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Finishers consume 3 Stacks of Armor Charge and spawn an Orb of Power for your allies that grants 7.15% Super Energy.",
+   "compendium": "On Finisher:\nConsumes x3 Armor Charge.\nAllies are spawned an Orb of Power that grants 7.15% Super Energy."
+  }
+ },
+ {
+  "id": "mod:betteralready",
+  "n": "Better Already",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 1,
+  "hashes": [
+   2194294579
+  ],
+  "src": {
+   "bungie": "Your health begins to regenerate immediately after picking up an Orb of Power.",
+   "clarity": "Orb of Power Pickups immediately start Health Regeneration.\nEquipping multiple copies provides no benefit.",
+   "compendium": "On Orb of Power Pickup:\nBegins Health Regeneration.\nMod does not stack, despite the in-game tooltip."
+  }
+ },
+ {
+  "id": "mod:bolsteringdetonation",
+  "n": "Bolstering Detonation",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 2,
+  "hashes": [
+   3726719281
+  ],
+  "src": {
+   "bungie": "Grants class ability energy when you cause damage with a grenade.",
+   "clarity": "Grants Class Ability Energy upon dealing Grenade Ability Damage. 7 second cooldown after activation.\nClass Ability Energy Gains with 1|2|3 Mods:\n12% [6%] | 17% [8.5%] | 20% [10%]\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "Upon dealing Grenade Damage:\nGrants Class Ability Energy.\nAbility Energy Gain:\n12% | 17% | 20%\n6% | 8.5% | 10%\nIncurs a 7 second cooldown after activation."
+  }
+ },
+ {
+  "id": "mod:bomber",
+  "n": "Bomber",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   4188291233
+  ],
+  "src": {
+   "bungie": "Reduces grenade cooldown when using your class ability.",
+   "clarity": "Class Ability usage grants Grenade Energy.\nGrenade Energy Gains with 1|2|3 Mods:\n12% [6%] | 17% [8.5%] | 20% [10%]\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Class Ability Usage:\nGrants Grenade Ability Energy.\nGrenade Energy Gains:\n12% | 17% | 20%\n6% | 8.5% | 10%"
+  }
+ },
+ {
+  "id": "mod:bulwarkfinisher",
+  "n": "Bulwark Finisher",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   4004774874
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Finishers consume 3 or more Stacks of Armor Charge and grant a 45 HP Void Overshield.\nOvershield lasts 8|10|12|14 seconds with 3|4|5|6 Stacks of Armor Charge consumed.",
+   "compendium": "On Finisher:\nConsumes x3 or more Armor Charges\nGrants Void Overshield for a varying duration.\nOvershield Duration at x3, x4, x5, and x6 Charges:\n8 | 10 | 12 | 14 seconds."
+  }
+ },
+ {
+  "id": "mod:chargedup",
+  "n": "Charged Up",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   2577472338
+  ],
+  "src": {
+   "bungie": "Increases the maximum number of stacks of Armor Charge you can carry by 1.",
+   "clarity": "Increases the Maximum Number of Armor Charge Stacks you can hold from 3 to 4|5|6 with 1|2|3 Mods equipped.",
+   "compendium": "Increases the Maximum Armor Charge Stacks.\nMaximum Armor Charge Stacks:\n4 | 5 | 6"
+  }
+ },
+ {
+  "id": "mod:classfont",
+  "n": "Class Font",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 3,
+  "hashes": [
+   1193713026
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Grants 20|40|50 Class stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
+   "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Class."
+  }
+ },
+ {
+  "id": "mod:classmod",
+  "n": "Class Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 3,
+  "hashes": [
+   4204488676
+  ],
+  "stats": {
+   "Class": 10
+  },
+  "src": {
+   "bungie": "This mod has been deprecated and no longer functions. You may replace it with another mod."
+  }
+ },
+ {
+  "id": "mod:concussivedampener",
+  "n": "Concussive Dampener",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   3719981603
+  ],
+  "src": {
+   "bungie": "Reduces incoming area-of-effect damage from combatants.",
+   "clarity": "Reduces Incoming AoE Damage from PVE Combatants by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
+  }
+ },
+ {
+  "id": "mod:distribution",
+  "n": "Distribution",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 3,
+  "hashes": [
+   4039026690
+  ],
+  "src": {
+   "bungie": "Reduces all ability cooldowns when using your class ability near targets.",
+   "clarity": "Class Ability usage while within 15 meters of an enemy grants Grenade, Melee, Class Ability, and Super Energy.\nEnergy Gains with 1|2|3 Mods Equipped:\n• Ability Energy: 4% [2%] | 6% [3%] | 7% [3.5%]\n• Super Energy: 2% [1%] | 3% [1.5%] | 4% [2%]\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website. (Super Energy gains are unaffected)",
+   "compendium": "On Class Ability Usage while within 15 metres of an enemy:\nGrants Grenade, Melee, Class, and Super Energy.\n4% | 6% | 7% Grenade, Melee and Class Energy\n2% | 3% | 4% Super Energy\n2% | 3% | 3.5% Grenade, Melee and Class Energy\n1% | 1.5% | 2% Super Energy"
+  }
+ },
+ {
+  "id": "mod:dynamo",
+  "n": "Dynamo",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2414626352
+  ],
+  "src": {
+   "bungie": "Reduces Super cooldown when using your class ability near targets.",
+   "clarity": "Class Ability usage while within 15 meters of an enemy grants Super Ability Energy.\nSuper Energy Gains with 1|2+ Mods:\n2.5% [1.25%] | 4% [2.4%]\nEnergy Multipliers based on Class:\nHunters: 1x | Titans: 1.2x | Warlocks: 2x",
+   "compendium": "On Class Ability Usage while within 15 metres of an enemy:\nGrants Super Ability Energy.\nSuper Energy Gains:\n2.5% | 4%\n1.25% | 2.4%\nSuper Energy Multipliers based on Class:\nHunters: x1 | Titans: x1.2 | Warlocks: x2"
+  }
+ },
+ {
+  "id": "mod:elementalcharge",
+  "n": "Elemental Charge",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   3712696020
+  ],
+  "src": {
+   "bungie": "Collecting an Elemental pickup or destroying a Tangle has an escalating chance to give you Armor Charge.\n\nElemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
+   "clarity": "Collecting Elemental Pickups or destroying Tangles grants 1 Stack of Armor Charge upon reaching 100% Activation Progress.\nActivation Progress with 1|2|3 Mods equipped:\n• Firesprites, Void Breaches, Tangles: 50%|50%|100%\n• Ionic Traces: 34%|50%|50%\n• Stasis Shards: 25%|34%|50%",
+   "compendium": "Picking up Elemental Pickups, or destroying Tangles progresses a counter.\nGrants x1 Armor Charge upon reaching 100% Counter Progress.\nElemental Pickup Counter Progress:\nVoid Breaches, Firesprites, and Tangles: 50% | 50% | 100%\nIonic Traces: 34% | 50% | 50% | Shards: 25% | 34% | 50%"
+  }
+ },
+ {
+  "id": "mod:emergencyreinforcement",
+  "n": "Emergency Reinforcement",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   1024379611
+  ],
+  "src": {
+   "bungie": "When your shields become broken, you gain temporary damage reduction.\n\nConsumes 3 or more stacks of Armor Charge, granting a longer duration to the damage reduction for each charge consumed.",
+   "clarity": "Grants 10% Damage Resist upon reaching Critical Health while at 3 or more Stacks Armor Charge and consumes all Armor Charges.\nBuff lasts 6|9|12|15 seconds with 3|4|5|6 Stack of Armor Charge consumed.",
+   "compendium": "Upon reaching Critical Health while at x3 or more Armor Charges:\nGrants 10% Damage Resist. \nDuration is based on the amount of Armor Charges consumed.\nBuff Duration at x3, x4, and x5 Charges.\n6 | 9 | 12 | 15 seconds."
+  }
+ },
+ {
+  "id": "mod:empoweredfinish",
+  "n": "Empowered Finish",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   84503918
+  ],
+  "src": {
+   "bungie": "Finisher final blows grant you 1 temporary Armor Charge when you have none.",
+   "clarity": "Finishers with no active Armor Charge Stacks grant 1 Stack of Armor Charge.",
+   "compendium": "On Finisher, while at x0 Armor Charge:\nGrants x1 Armor Charge."
+  }
+ },
+ {
+  "id": "mod:athletics",
+  "n": "Enhanced Athletics",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 1,
+  "hashes": [
+   1133590731
+  ],
+  "src": {
+   "bungie": "Increases your base movement speed and jump height.",
+   "clarity": "Passively increases non-sprinting Movement Speed and non-ability Jump Height.\nGrants 30|50|60 Mobility Stat with 1|2|3 Mods equipped.\nMobility as a stat is capped at 130. Warlocks and Titans inherently have 30 mobility, while Hunters have 100 [70].\nForward (including left and right diagonally) Walk Speed with 0|1|2|3 Mods equipped by class:\n• Warlocks and Titans: 5.6|6.2|6.6|6.8 m/s\n• Hunters (PvP): 6.4|7|7.6|7.6 m/s\n• Hunters (PvE): 7|7.6|7.6|7.6 m/s\nStrafing (side-to-side and backwards movement) decreases these speeds by 15%. Strafe speed is capped at 6 m/s.\nADS decreases these speeds by 25% and cannot exceed 6 m/s. Sidearms uniquely only suffer a 15% penalty.\nCrouching decreases these speeds by 45%. Crouch speed is capped at 4 m/s.\nHolding a Machine Gun, Rocket Launcher, Guarding with a Sword, and certain Exotic Heavy Weapons have an additional 15% movement speed penalty.\nSprint speed is set to 8 m/s by default and is capped at 9 m/s. This cap applies to regular Forward Walk Speed as well.",
+   "compendium": "+30 | +50 | +60 Mobility.\nHunters reach maximum Mobility with 1 Mod in PVE."
+  }
+ },
+ {
+  "id": "mod:explosivefinisher",
+  "n": "Explosive Finisher",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   4004774877
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Finisher consume 3 or more Stacks of Armor Charge and grant Grenade Ability Energy.\nEnergy Gains with 3|4|5|6 Stacks Consumed:\n70% | 80% | 90% | 100%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Finisher:\nConsumes x3 or more Armor Charge.\nGrants Grenade Ability Energy.\nx3 = 70% | x4 = 80% | x5 = 90% | x6 = 100%"
+  }
+ },
+ {
+  "id": "mod:fastball",
+  "n": "Fastball",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 1,
+  "hashes": [
+   2649291407
+  ],
+  "src": {
+   "bungie": "Increases grenade throw distance.",
+   "clarity": "Increases velocity of thrown grenade abilities by ~25%.",
+   "compendium": "Grenades travel ~25% faster and farther.\nStrength of the effect varies between grenades."
+  }
+ },
+ {
+  "id": "mod:firepower",
+  "n": "Firepower",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   2485657760
+  ],
+  "src": {
+   "bungie": "Your grenade final blows create Orbs of Power.",
+   "clarity": "Spawns an Orb of Power on Grenade Kills that grants 0.8%|1.1%|1.25%|1.5% Super Energy with 1|2|3|4 Mods equipped. (4 Mods is only achievable through Exotic Armor)\n10|5|1|1? second cooldown between activations.",
+   "compendium": "On Grenade Kill:\nSpawns a Orb of Power.\nOrb of Power:\n0.8% | 1.1% | 1.25% | 1.5% Super Energy.\nIncurs a 10 | 5 | 1 second cooldown between Orbs.\nCan trigger alongside Heavy Handed if equipped before it.\nFrom left to right order."
+  }
+ },
+ {
+  "id": "mod:focusingstrike",
+  "n": "Focusing Strike",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 2,
+  "hashes": [
+   3685945823
+  ],
+  "src": {
+   "bungie": "Grants class ability energy when you cause damage with a powered melee attack.",
+   "clarity": "Grants Class Ability Energy upon dealing Elemental Melee Damage. 7 second cooldown between activations.\nClass Ability Energy Gains with 1|2|3 Mods:\n12% [6%] | 17% [8.5%] | 20% [10%]\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.\nClarity tooltip editor's note: We're replacing the previous Powered Melee term with Elemental Melee. The former is now exclusively used for perks that require the consumption of a Melee Ability Charge. This note is temporary and will be removed in the future.",
+   "compendium": "Upon dealing Powered Melee Damage:\nGrants Class Ability Energy.\nAbility Energy Gain:\n12% | 17% | 20%\n6% | 8.5% | 10%\nIncurs a 7 second cooldown after activation."
+  }
+ },
+ {
+  "id": "mod:grenadefont",
+  "n": "Grenade Font",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   1781551382
+  ],
+  "src": {
+   "bungie": "You gain a bonus to your grenade stat while you have any Armor Charge. Your Armor Charge decays over time.",
+   "clarity": "Grants 20|40|50 Grenade stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
+   "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Grenade."
+  }
+ },
+ {
+  "id": "mod:grenadekickstart",
+  "n": "Grenade Kickstart",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   4182064480
+  ],
+  "src": {
+   "bungie": "When your grenade energy is fully expended, your Armor Charge is consumed and you gain grenade energy for each Armor Charge used.",
+   "clarity": "When a Grenade Ability Charge is fully consumed and you have active Armor Charges:\nConsumes active Armor Charges and grants Grenade Ability Energy.\nEach Mod and Stack of Armor Charge counts as one 'charge' for Grenade Energy refunds.\nGrenade Energy gains with 2|3|etc. 'charges':\n[PVE] 16.2% | 21.7% | 28.4% | 34.4% | 38.4% | 41.3% | 43.4% | 45%\n[PVP] 12.5% | 14.2% | 16.2% | 18.7% | 21.7% | 25% | 28.4% | 31.6%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Grenade Ability Usage while having Armor Charges:\nConsumes all Armor Charges to grant Grenade Ability Energy. \nAbility Energy Gains are based on the sum of number of Armor Charges consumed and Mod copies equipped.\nGrenade Ability Energy:\n16.2% | 21.7% | 28.4% | 34.4% | 38.4% | 41.3% | 43.4% | 45%\n12.5% | 14.2% | 16.2% | 18.7% | 21.7% | 25% | 28.4% | 31.6%"
+  }
+ },
+ {
+  "id": "mod:grenademod",
+  "n": "Grenade Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 3,
+  "hashes": [
+   1435557120
+  ],
+  "stats": {
+   "Grenade": 10
+  },
+  "src": {
+   "bungie": "+10 Grenade ▲"
+  }
+ },
+ {
+  "id": "mod:handson",
+  "n": "Hands-On",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   3938489430
+  ],
+  "src": {
+   "bungie": "Gain bonus Super energy on melee kills.",
+   "clarity": "Melee Kills grant additional Super energy based on Enemy Rank with 1|2|3 mods:\n• Tier 1 (T1) Minors: ?% | ?% | ?%\n• T2 Minors, T1 Elites: 1.33?% | ?% | ?%\n• T3 Minors, T2 Elites: ?% | ?% | ?%\n• T4 Minors, T3-T4 Elites, and higher: 5?% | ?% | ?%\n• Players: ?% | ?% | ?%\nKill can only trigger either Hands On or Ashes to Assets but not both.",
+   "compendium": "On Powered Melee Kill:\nGrants additional Super Energy. \nTier 1: %? | ?% | ?%\nTier 2: 1.33?% | ?% | ?%\nTier 3: ?% | ?% | ?%\nTier 4: 5?% | ?% | ?%\nGuardians: ?% | ?% | ?%\nCannot simultaneously benefit with Ashes to Assets."
+  }
+ },
+ {
+  "id": "mod:harmonicammogeneration",
+  "n": "Harmonic Ammo Generation",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 1,
+  "hashes": [
+   1971149752
+  ],
+  "src": {
+   "bungie": "Increases the ammo generation of Arc weapons."
+  }
+ },
+ {
+  "id": "mod:harmonicdexterity",
+  "n": "Harmonic Dexterity",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 2,
+  "hashes": [
+   1677180919
+  ],
+  "src": {
+   "bungie": "Faster ready and stow speed for Arc weapons.",
+   "clarity": "Grants a 0.8x|0.75x|0.7x Ready/Stow Animation Duration Multiplier to Weapons matching your Super Element with 1|2|3 Mods equipped.\nStow Animation Duration cannot be decreased below what it would be at 100 Handling."
+  }
+ },
+ {
+  "id": "mod:harmonicholster",
+  "n": "Harmonic Holster",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 1,
+  "hashes": [
+   3969361392
+  ],
+  "src": {
+   "bungie": "Gradually reloads your stowed Arc weapons over time.",
+   "clarity": "After stowing a Weapon matching your Super Element:\nBegins to refill 10%|10%|15% of the stowed weapon's magazine (rounded up) from reserves every 2.5|2|2 seconds with 1|2|3 Mods equipped.\nDoes not work with Breech-Loaded Grenades Launchers, Crossbows, and Rocket Launchers."
+  }
+ },
+ {
+  "id": "mod:harmonicloader",
+  "n": "Harmonic Loader",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 2,
+  "hashes": [
+   2657604783
+  ],
+  "src": {
+   "bungie": "Increases reload speed of Arc weapons.",
+   "clarity": "Grants the following to Weapons matching your Super Element ~0.5 seconds after readying them:\n• 10|15|18 Reload Speed with 1|2|3 Mods equipped\n• 0.85x Reload Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:harmonicresistance",
+  "n": "Harmonic Resistance",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 1,
+  "hashes": [
+   1293710444
+  ],
+  "src": {
+   "bungie": "Reduces incoming Arc damage from combatants.",
+   "clarity": "Reduces Incoming PVE Combatant Damage matching your Subclass Element by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
+  }
+ },
+ {
+  "id": "mod:harmonicscavenger",
+  "n": "Harmonic Scavenger",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 2,
+  "hashes": [
+   1301391064
+  ],
+  "src": {
+   "bungie": "Arc weapons get bonus reserves when picking up ammo used by that weapon.",
+   "clarity": "Only works in PvE game modes.\nAmmo Brick pickups generally grant 1 additional ammo to Weapons matching your Super Element and the Ammo Type.\nMachine Guns receive 7 additional ammo, Trace Rifles receive 10% of their Total Reserves (rounded up) as additional ammo.\nFunctions the same way regardless of what spawned the Ammo Brick.\nContext: normal Ammo Bricks grant 25-33% of your Total Reserves by default."
+  }
+ },
+ {
+  "id": "mod:harmonicsiphon",
+  "n": "Harmonic Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 1,
+  "hashes": [
+   3832366019
+  ],
+  "src": {
+   "bungie": "Rapid Arc weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Weapon matching your Super Element.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:harmonictargeting",
+  "n": "Harmonic Targeting",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 2,
+  "hashes": [
+   1305536863
+  ],
+  "src": {
+   "bungie": "Improved target acquisition, accuracy, and aim-down-sights speed for Arc weapons.",
+   "clarity": "Grants the following to Weapons matching your Super Element 1 second after readying them:\n• 5|8|10 Aim Assist with 1|2|3 Mods equipped\n• 0.9x|0.85x|0.8x Accuracy Cone Size\n• 0.85x|0.75x|0.7x ADS Animation Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:healthfont",
+  "n": "Health Font",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   686455429
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Grants 20|40|50 Health stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
+   "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Health."
+  }
+ },
+ {
+  "id": "mod:healthmod",
+  "n": "Health Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 3,
+  "hashes": [
+   1180408010
+  ],
+  "stats": {
+   "Health": 10
+  },
+  "src": {
+   "bungie": "+10 Health ▲"
+  }
+ },
+ {
+  "id": "mod:healthyfinisher",
+  "n": "Healthy Finisher",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   4004774875
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Finishers consume 1 Stack of Armor Charge to fully restore Health and Shields.",
+   "compendium": "On Finisher:\nConsumes x1 Armor Charge.\nInstantly fully restores Health and Shields."
+  }
+ },
+ {
+  "id": "mod:heavyammofinder",
+  "n": "Heavy Ammo Finder",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   554409585
+  ],
+  "src": {
+   "bungie": "Increases the effect of all contributions towards the Heavy ammo meter.",
+   "clarity": "Grants a 1.33x|1.66x|2x multiplier to all Heavy Ammo Meter progress with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:heavyammoscout",
+  "n": "Heavy Ammo Scout",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 1,
+  "hashes": [
+   1274140735
+  ],
+  "src": {
+   "bungie": "When you fill your Heavy ammo meter, it also creates smaller bricks of Heavy ammo for your allies.",
+   "clarity": "Heavy Ammo bricks spawned from your ammo meter now appear for allies as well. These bricks contain 37%|67%|100% of the ammo a regular brick would have at 1|2|3 copies of the mod."
+  }
+ },
+ {
+  "id": "mod:heavyhanded",
+  "n": "Heavy Handed",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   2447449706
+  ],
+  "src": {
+   "bungie": "Your powered melee final blows create Orbs of Power.",
+   "clarity": "Spawns an Orb of Power on Elemental Melee Kills that grants 0.8%|1.1%|1.25%|1.5% Super Energy with 1|2|3|4 Mods equipped. (4 Mods is only achievable through Exotic Armor)\n10|5|1|1? second cooldown between activations.\nClarity tooltip editor's note: We're replacing the previous Powered Melee term with Elemental Melee. The former is now exclusively used for perks that require the consumption of a Melee Ability Charge. This note is temporary and will be removed in the future.",
+   "compendium": "On Powered Melee Kill:\nSpawns an Orb of Power.\nOrb of Power:\n0.8% | 1.1% | 1.25% | 1.5% Super Energy.\nIncurs a 10 | 5 | 1 second cooldown between Orbs.\nCan trigger alongside Firepower if equipped after it.\nFrom left to right order."
+  }
+ },
+ {
+  "id": "mod:impactinduction",
+  "n": "Impact Induction",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 2,
+  "hashes": [
+   377010989
+  ],
+  "src": {
+   "bungie": "Causing damage with a powered melee attack reduces your grenade cooldown.",
+   "clarity": "Grants Grenade Ability Energy upon dealing Elemental Melee Damage. 7 second cooldown between activations.\nGrenade Ability Energy Gains with 1|2|3 Mods:\n12% [6%] | 17% [8.5%] | 20% [10%]\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.\nClarity tooltip editor's note: We're replacing the previous Powered Melee term with Elemental Melee. The former is now exclusively used for perks that require the consumption of a Melee Ability Charge. This note is temporary and will be removed in the future.",
+   "compendium": "Upon dealing Powered Melee Damage:\nGrants Grenade Ability Energy.\nAbility Energy Gain:\n12% | 17% | 20%\n6% | 8.5% | 10%\nIncurs a 7 second cooldown after activation."
+  }
+ },
+ {
+  "id": "mod:inflightcompensator",
+  "n": "In-Flight Compensator",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2899505723
+  ],
+  "src": {
+   "bungie": "Increases the airborne effectiveness of all equipped weapons.",
+   "clarity": "Passively grants all weapons 15|25|30 Airborne Effectiveness with 1|2|3 Mods equipped.",
+   "compendium": "+15 | +25 | +30 Airborne Effectiveness."
+  }
+ },
+ {
+  "id": "mod:innervation",
+  "n": "Innervation",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 1,
+  "hashes": [
+   1750845415
+  ],
+  "src": {
+   "bungie": "Reduces grenade cooldown each time you pick up an Orb of Power.",
+   "clarity": "Grants 10%|13%|15% Grenade Ability Energy on Orb of Power Pickups with 1|2|3 Mods equipped.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Orb of Power Pickup:\n10% | 13% | 15% Grenade Ability Energy."
+  }
+ },
+ {
+  "id": "mod:insulation",
+  "n": "Insulation",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 1,
+  "hashes": [
+   3325390304
+  ],
+  "src": {
+   "bungie": "Reduces class ability cooldown each time you pick up an Orb of Power.",
+   "clarity": "Grants 4%|5%|6% Class Ability Energy on Orb of Power Pickups with 1|2|3 Mods equipped.",
+   "compendium": "On Orb of Power Pickup:\n4% | 5% | 6% Class Ability Energy."
+  }
+ },
+ {
+  "id": "mod:invigoration",
+  "n": "Invigoration",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 1,
+  "hashes": [
+   1848187513
+  ],
+  "src": {
+   "bungie": "Reduces melee cooldown each time you pick up an Orb of Power.",
+   "clarity": "Grants 10%|13%|15% Melee Ability Energy on Orb of Power Pickups with 1|2|3 Mods equipped.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Orb of Power Pickup:\n10% | 13% | 15% Melee Ability Energy."
+  }
+ },
+ {
+  "id": "mod:kineticammogeneration",
+  "n": "Kinetic Ammo Generation",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   2407398462
+  ],
+  "src": {
+   "bungie": "Increases the ammo generation of Kinetic weapons."
+  }
+ },
+ {
+  "id": "mod:kineticchargesiphon",
+  "n": "Kinetic Charge Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2733010662
+  ],
+  "src": {
+   "bungie": "Rapid Kinetic weapon final blows create an Orb of Power."
+  }
+ },
+ {
+  "id": "mod:kineticdexterity",
+  "n": "Kinetic Dexterity",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   2076329105
+  ],
+  "src": {
+   "bungie": "Faster ready and stow speed for Kinetic weapons.",
+   "clarity": "Grants a 0.8x|0.75x|0.7x Ready/Stow Animation Duration Multiplier to Kinetic Weapons with 1|2|3 Mods equipped.\nStow Animation Duration cannot be decreased below what it would be at 100 Handling."
+  }
+ },
+ {
+  "id": "mod:kineticentropysiphon",
+  "n": "Kinetic Entropy Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   1433540272
+  ],
+  "src": {
+   "bungie": "Rapid Kinetic weapon final blows create an Orb of Power."
+  }
+ },
+ {
+  "id": "mod:kineticholster",
+  "n": "Kinetic Holster",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 2,
+  "hashes": [
+   3573031954
+  ],
+  "src": {
+   "bungie": "Gradually reloads your stowed Kinetic weapons over time.",
+   "clarity": "After stowing Kinetic Weapons:\nBegins to refill 10%|10%|15% of the stowed weapon's magazine (rounded up) from reserves every 2.5|2|2 seconds with 1|2|3 Mods equipped.\nDoes not work with Breech-Loaded Grenades Launchers, Crossbows, and Rocket Launchers."
+  }
+ },
+ {
+  "id": "mod:kineticloader",
+  "n": "Kinetic Loader",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   2586562813
+  ],
+  "src": {
+   "bungie": "Increases reload speed of Kinetic weapons.",
+   "clarity": "Grants the following to Kinetic Weapons ~0.5 seconds after readying them:\n• 10|15|18 Reload Speed with 1|2|3 Mods equipped\n• 0.85x Reload Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:kineticscavenger",
+  "n": "Kinetic Scavenger",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   1097608874
+  ],
+  "src": {
+   "bungie": "Kinetic weapons get bonus reserves when picking up ammo used by that weapon.",
+   "clarity": "Only works in PvE game modes.\nAmmo Brick pickups generally grant 1 additional ammo to Kinetic Weapons matching the Ammo Type.\nTrace Rifles receive 10% of their Total Reserves (rounded up) as additional ammo.\nFunctions the same way regardless of what spawned the Ammo Brick.\nContext: normal Ammo Bricks grant 25-33% of your Total Reserves by default."
+  }
+ },
+ {
+  "id": "mod:kineticsiphon",
+  "n": "Kinetic Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 2,
+  "hashes": [
+   1388734897
+  ],
+  "src": {
+   "bungie": "Rapid Kinetic weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Kinetic Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:kinetictargeting",
+  "n": "Kinetic Targeting",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2467203039
+  ],
+  "src": {
+   "bungie": "Improved target acquisition, accuracy, and aim-down-sights speed for Kinetic weapons.",
+   "clarity": "Grants the following to Kinetic Weapons 1 second after readying them:\n• 5|8|10 Aim Assist with 1|2|3 Mods equipped\n• 0.9x|0.85x|0.8x Accuracy Cone Size\n• 0.85x|0.75x|0.7x ADS Animation Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:kineticthermalsiphon",
+  "n": "Kinetic Thermal Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2734970071
+  ],
+  "src": {
+   "bungie": "Rapid Kinetic weapon final blows create an Orb of Power."
+  }
+ },
+ {
+  "id": "mod:kineticweaponsurge",
+  "n": "Kinetic Weapon Surge",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   14520248
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Increases Kinetic Weapon damage while you have active Armor Charges:\n• PVE: 10%|17%|22%|25% increased damage with 1|2|3|4 Mods\n• PVP: 3%|4.5%|5.5%|6% increased damage\nThe 4th tier of the damage buff is only obtainable through Artifact Perks and Exotic Armor.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default."
+  }
+ },
+ {
+  "id": "mod:lucentblades",
+  "n": "Lucent Blades",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   531057500
+  ],
+  "src": {
+   "bungie": "Increases the energy recharge rate of your equipped Swords. Your equipped Glaives gain more energy from dealing damage with their ranged attacks.",
+   "clarity": "Swords are granted 30|50|60 Charge Rate with 1|2|3 Mods equipped.\nGlaive Projectile Hits grant 20%|30%|35% Increased Weapon Energy. (Stacks additively with Immovable Object)",
+   "compendium": "Swords are granted +30 | +50 | +60 Charge Rate.\nGlaive Projectile Hits grant 20% | 30% | 35% Increased Weapon Energy. \nStacks additively with Immovable Object."
+  }
+ },
+ {
+  "id": "mod:meleedamageresistance",
+  "n": "Melee Damage Resistance",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   1763668984
+  ],
+  "src": {
+   "bungie": "Reduces incoming damage from combatants that are at point-blank range.",
+   "clarity": "Reduces Incoming Damage from PVE Combatants less than 4 meters away by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
+  }
+ },
+ {
+  "id": "mod:meleefont",
+  "n": "Melee Font",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   633101315
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Grants 20|40|50 Melee stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
+   "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Melee."
+  }
+ },
+ {
+  "id": "mod:meleekickstart",
+  "n": "Melee Kickstart",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   1763780622
+  ],
+  "src": {
+   "bungie": "When your melee energy is fully expended, your Armor Charge is consumed and you gain melee energy for each Armor Charge used.",
+   "clarity": "When a Melee Ability Charge is fully consumed and you have active Armor Charges:\nConsumes active Armor Charges and grants Melee Ability Energy.\nEach Mod and Stack of Armor Charge counts as one 'charge' for Melee Energy refunds.\nMelee Energy gains with 2|3|etc. 'charges':\n[PVE] 16.2% | 21.7% | 28.4% | 34.4% | 38.4% | 41.3% | 43.4% | 45%\n[PVP] 12.5% | 14.2% | 16.2% | 18.7% | 21.7% | 25% | 28.4% | 31.6%\nBug: Doesn't work if you have more recharged Melee Ability Energy than a single ability charge.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website."
+  }
+ },
+ {
+  "id": "mod:meleemod",
+  "n": "Melee Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 3,
+  "hashes": [
+   4287799666
+  ],
+  "stats": {
+   "Melee": 10
+  },
+  "src": {
+   "bungie": "+10 Melee ▲"
+  }
+ },
+ {
+  "id": "mod:minorclassmod",
+  "n": "Minor Class Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 1,
+  "hashes": [
+   1124184622
+  ],
+  "src": {
+   "bungie": "+5 Class ▲"
+  }
+ },
+ {
+  "id": "mod:minorgrenademod",
+  "n": "Minor Grenade Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 1,
+  "hashes": [
+   4021790309
+  ],
+  "stats": {
+   "Grenade": 5
+  },
+  "src": {
+   "bungie": "+5 Grenade ▲"
+  }
+ },
+ {
+  "id": "mod:minorhealthmod",
+  "n": "Minor Health Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 1,
+  "hashes": [
+   2113881316
+  ],
+  "src": {
+   "bungie": "+5 Health ▲"
+  }
+ },
+ {
+  "id": "mod:minormeleemod",
+  "n": "Minor Melee Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 1,
+  "hashes": [
+   2639422088
+  ],
+  "stats": {
+   "Melee": 5
+  },
+  "src": {
+   "bungie": "+5 Melee ▲"
+  }
+ },
+ {
+  "id": "mod:minorsupermod",
+  "n": "Minor Super Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 1,
+  "hashes": [
+   350061697
+  ],
+  "stats": {
+   "Super": 5
+  },
+  "src": {
+   "bungie": "+5 Super ▲"
+  }
+ },
+ {
+  "id": "mod:minorweaponsmod",
+  "n": "Minor Weapons Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 1,
+  "hashes": [
+   1703647492
+  ],
+  "stats": {
+   "Weapons": 5
+  },
+  "src": {
+   "bungie": "+5 Weapon ▲"
+  }
+ },
+ {
+  "id": "mod:momentumtransfer",
+  "n": "Momentum Transfer",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 2,
+  "hashes": [
+   3599522901
+  ],
+  "src": {
+   "bungie": "Causing damage with a grenade reduces your melee cooldown.",
+   "clarity": "Grants Melee Ability Energy upon dealing Grenade Ability damage. 7 second cooldown between activations.\nMelee Ability Energy Gains with 1|2|3 Mods:\n12% [6%] | 17% [8.5%] | 20% [10%]\nAttaching to targets with a Grapple triggers the mod but Grapple Melees do not.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "Upon dealing Grenade Damage:\nGrants Melee Ability Energy.\nAbility Energy Gain:\n12% | 17% | 20%\n6% | 8.5% | 10%\nIncurs a 7 second cooldown after activation.\nDoes not work with Grapple."
+  }
+ },
+ {
+  "id": "mod:onetwofinisher",
+  "n": "One-Two Finisher",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   4004774873
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Finishers consume 3 or more Stacks of Armor Charge and grant Melee Ability Energy.\nEnergy Gains with 3|4|5|6 Stacks Consumed:\n70% | 80% | 90% | 100%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Finisher:\nConsumes x3 or more Armor Charge.\nGrants Melee Ability Energy.\nx3 = 70% | x4 = 80% | x5 = 90% | x6 = 100%"
+  }
+ },
+ {
+  "id": "mod:orbsofrestoration",
+  "n": "Orbs of Restoration",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 2,
+  "hashes": [
+   1039115606
+  ],
+  "src": {
+   "bungie": "Picking up an Orb of Power grants a small amount of energy to your ability with the least energy.",
+   "clarity": "Grants 10%|13%|15% Ability Energy to the least-charged Ability on Orb of Power pickups.\nAbilities with multiple charges do not receive any energy if they already have a full charge.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Orb of Power Pickup:\n10% | 13% | 15% Ability Energy to the least-charged Ability.\nDoes not grant any Ability Energy to abilities with multiple charges if they have at least 1 charge readied."
+  }
+ },
+ {
+  "id": "mod:outreach",
+  "n": "Outreach",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   4160037471
+  ],
+  "src": {
+   "bungie": "Reduces melee cooldown when using your class ability.",
+   "clarity": "Class Ability usage grants Melee Energy.\nMelee Energy Gains with 1|2|3 Mods:\n12% [6%] | 17% [8.5%] | 20% [10%]\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Class Ability Usage:\nGrants Melee Ability Energy.\nMelee Energy Gains:\n12% | 17% | 20%\n6% | 8.5% | 10%"
+  }
+ },
+ {
+  "id": "mod:powerpreservation",
+  "n": "Power Preservation",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   3149307605
+  ],
+  "src": {
+   "bungie": "Your Super final blows create extra Orbs of Power for your allies.",
+   "clarity": "Super Kills spawn an Orb of Power for allies.\nSpawned Orbs of Power grant 2.5%|3.75%|4.4% Super Energy with 1|2|3 Mods equipped.\n1.5? second cooldown between Orb spawns.",
+   "compendium": "On Super Kill:\nSpawns a Orb of Power for Allies.\nOrb of Power:\n2.5% | 3.75% | 4.4% Super Energy.\nIncurs a 2 seconds cooldown between Orbs."
+  }
+ },
+ {
+  "id": "mod:powerfulattraction",
+  "n": "Powerful Attraction",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 2,
+  "hashes": [
+   11126525
+  ],
+  "src": {
+   "bungie": "Automatically collects nearby Orbs of Power when you activate your class ability.",
+   "clarity": "Class Ability usage collects certain pickups within 12.5|18.5 meters with 1|2+ Mods equipped.\nApplicable pickups:\n• Orbs of Power\n• Motes of Light in Gambit\n• Crests in Supremacy\n• Data Motes in Episode: Echoes activities",
+   "compendium": "On Class Ability Usage:\nCollects Orbs of Power within 12.5 | 18.5 metres.\nWill also pick up Motes and Crests."
+  }
+ },
+ {
+  "id": "mod:powerfulfriends",
+  "n": "Powerful Friends",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 1,
+  "hashes": [
+   2175577211
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes nearby allies with at least one Armor Charge to gain an additional one.",
+   "clarity": "Allies within 18 meters receive 1 Armor Charge on Orb of Power Pickup.",
+   "compendium": "On Orb of Power Pickup:\n Allies within 18 metres receive x1 Armor Charge."
+  }
+ },
+ {
+  "id": "mod:proximityward",
+  "n": "Proximity Ward",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 2,
+  "hashes": [
+   4081595582
+  ],
+  "src": {
+   "bungie": "Gain a powerful overshield while performing your finisher.",
+   "clarity": "Grants a 200 HP Overshield for the duration of your Finisher Animation.",
+   "compendium": "During a Finisher:\nGrants a 200 HP Overshield."
+  }
+ },
+ {
+  "id": "mod:radiantlight",
+  "n": "Radiant Light",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 1,
+  "hashes": [
+   2199590568
+  ],
+  "src": {
+   "bungie": "Casting your Super causes nearby allies with at least one Armor Charge to gain an additional one. Allies that have a different Super element than you gain an additional Armor Charge.",
+   "clarity": "Grants 1 Armor Charges to Allies within 21 meters on Super Cast. Allies on a different Subclass Element are granted 2 Charges.\nCaster receives 1 Armor Charge if already charged.",
+   "compendium": "On Super Cast:\n Grants x1 Armor Charge to Allies within 21 metres.\nCaster receives x1 Armor Charge if already Charged.\nAllies on different Subclasses are granted x2 Armor Charge."
+  }
+ },
+ {
+  "id": "mod:reaper",
+  "n": "Reaper",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 3,
+  "hashes": [
+   40751621
+  ],
+  "src": {
+   "bungie": "Shortly after using your class ability, your next weapon final blow spawns an Orb of Power.",
+   "clarity": "The next Weapon Kill within 10 seconds of using your Class Ability spawns an Orb of Power that grants 0.8%|1.1%|1.25%|1.5% Super Energy with 1|2|3|4 Mods equipped. (4 Mods is only achievable through Exotic Armor)\n10|5|1|1? second cooldown between activations with 1|2|3 Mods equipped.",
+   "compendium": "On Class Ability Usage:\nThe next Weapon Kill within 10 seconds spawns an Orb of Power.\nOrb of Power:\n0.8% | 1.1% | 1.25% | 1.5% Super Energy.\nIncurs a 10 | 5 | 1 second cooldown between Orbs."
+  }
+ },
+ {
+  "id": "mod:recuperation",
+  "n": "Recuperation",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 1,
+  "hashes": [
+   4087056174
+  ],
+  "src": {
+   "bungie": "Replenishes health each time you pick up an Orb of Power.",
+   "clarity": "Orb of Power Pickups immediately restore 15|21|21 HP with 1|2|3 Mods equipped.",
+   "compendium": "On Orb of Power Pickup:\nRestores 16 | 21 | 21 Health."
+  }
+ },
+ {
+  "id": "mod:restorativefinisher",
+  "n": "Restorative Finisher",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   1170405455
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Finishers consume 2 Stacks of Armor Charge and grant 50% Ability Energy to your least-charged Ability.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Finisher:\nConsumes x2 Armor Charge.\n50% Ability Energy to the least-charged Ability."
+  }
+ },
+ {
+  "id": "mod:shieldbreakcharge",
+  "n": "Shield Break Charge",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 4,
+  "hashes": [
+   48578555
+  ],
+  "src": {
+   "bungie": "Breaking a combatant's shield with the matching damage type grants you Armor Charge.",
+   "clarity": "Breaking a Combatant Shield with the matching Elemental Damage Type grants 1 Stack of Armor Charge.",
+   "compendium": "Upon breaking a Combatant Shield with Matching Damage:\nGrants x1 | x2 Armor Charge."
+  }
+ },
+ {
+  "id": "mod:snaploadfinisher",
+  "n": "Snapload Finisher",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   4004774876
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Finishers consume 1 Stack of Armor Charge and refill all your weapons from reserves.",
+   "compendium": "On Finisher:\nConsumes x1 Armor Charge.\nRefills all weapons."
+  }
+ },
+ {
+  "id": "mod:sniperdamageresistance",
+  "n": "Sniper Damage Resistance",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   707237917
+  ],
+  "src": {
+   "bungie": "Reduces incoming damage from combatants that are at long range.",
+   "clarity": "Reduces Incoming Damage from PVE Combatants more than 29 meters away by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
+  }
+ },
+ {
+  "id": "mod:solarammogeneration",
+  "n": "Solar Ammo Generation",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   2526773280
+  ],
+  "src": {
+   "bungie": "Increases the ammo generation of Solar weapons."
+  }
+ },
+ {
+  "id": "mod:solardexterity",
+  "n": "Solar Dexterity",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   3067648983
+  ],
+  "src": {
+   "bungie": "Faster ready and stow speed for Solar weapons.",
+   "clarity": "Grants a 0.8x|0.75x|0.7x Ready/Stow Animation Duration Multiplier to Solar Weapons with 1|2|3 Mods equipped.\nStow Animation Duration cannot be decreased below what it would be at 100 Handling."
+  }
+ },
+ {
+  "id": "mod:solarholster",
+  "n": "Solar Holster",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 2,
+  "hashes": [
+   3775916472
+  ],
+  "src": {
+   "bungie": "Gradually reloads your stowed Solar weapons over time.",
+   "clarity": "After stowing Solar Weapons:\nBegins to refill 10%|10%|15% of the stowed weapon's magazine (rounded up) from reserves every 2.5|2|2 seconds with 1|2|3 Mods equipped.\nDoes not work with Breech-Loaded Grenades Launchers, Crossbows, and Rocket Launchers."
+  }
+ },
+ {
+  "id": "mod:solarloader",
+  "n": "Solar Loader",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   1079896271
+  ],
+  "src": {
+   "bungie": "Increases reload speed of Solar weapons.",
+   "clarity": "Grants the following to Solar Weapons ~0.5 seconds after readying them:\n• 10|15|18 Reload Speed with 1|2|3 Mods equipped\n• 0.85x Reload Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:solarresistance",
+  "n": "Solar Resistance",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   3194530172
+  ],
+  "src": {
+   "bungie": "Reduces incoming Solar damage from combatants.",
+   "clarity": "Reduces Incoming Solar Damage from PVE Combatants by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
+  }
+ },
+ {
+  "id": "mod:solarscavenger",
+  "n": "Solar Scavenger",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   688956976
+  ],
+  "src": {
+   "bungie": "Solar weapons get bonus reserves when picking up ammo used by that weapon.",
+   "clarity": "Only works in PvE game modes.\nAmmo Brick pickups generally grant 1 additional ammo to Solar Weapons matching the Ammo Type.\nMachine Guns receive 7 additional ammo, Trace Rifles receive 10% of their Total Reserves (rounded up) as additional ammo.\nFunctions the same way regardless of what spawned the Ammo Brick.\nContext: normal Ammo Bricks grant 25-33% of your Total Reserves by default."
+  }
+ },
+ {
+  "id": "mod:solarsiphon",
+  "n": "Solar Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   4255093903
+  ],
+  "src": {
+   "bungie": "Rapid Solar weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Solar Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:solartargeting",
+  "n": "Solar Targeting",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2719698929
+  ],
+  "src": {
+   "bungie": "Improved target acquisition, accuracy, and aim-down-sights speed for Solar weapons.",
+   "clarity": "Grants the following to Solar Weapons 1 second after readying them:\n• 5|8|10 Aim Assist with 1|2|3 Mods equipped\n• 0.9x|0.85x|0.8x Accuracy Cone Size\n• 0.85x|0.75x|0.7x ADS Animation Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:solarweaponsurge",
+  "n": "Solar Weapon Surge",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   2319885414
+  ],
+  "src": {
+   "bungie": "Your Solar weapons gain a small bonus to damage while you have any Armor Charge. Your Armor Charge now decays over time.",
+   "clarity": "Increases Solar Weapon damage while you have active Armor Charges:\n• PVE: 10%|17%|22%|25% increased damage with 1|2|3|4 Mods\n• PVP: 3%|4.5%|5.5%|6% increased damage\nThe 4th tier of the damage buff is only obtainable through Artifact Perks and Exotic Armor.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default."
+  }
+ },
+ {
+  "id": "mod:solarstranddualsiphon",
+  "n": "Solar/Strand Dual Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2831374162
+  ],
+  "src": {
+   "bungie": "Rapid Solar weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Solar or Strand Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:specialammofinder",
+  "n": "Special Ammo Finder",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2595839237
+  ],
+  "src": {
+   "bungie": "Increases the effect of all contributions towards the Special ammo meter.",
+   "clarity": "Grants a 1.25x|1.4x|1.5x multiplier to all Special Ammo Meter progress with 1|2|3 Mods equipped.\nThis works in the Crucible as well."
+  }
+ },
+ {
+  "id": "mod:specialammoscout",
+  "n": "Special Ammo Scout",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 1,
+  "hashes": [
+   25154119
+  ],
+  "src": {
+   "bungie": "When you fill your Special ammo meter, it also creates smaller bricks of Special ammo for your allies.",
+   "clarity": "Special Ammo bricks spawned from your ammo meter now appear for allies as well. These bricks contain 37%|67%|100% of the ammo a regular brick would have at 1|2|3 copies of the mod."
+  }
+ },
+ {
+  "id": "mod:specialfinisher",
+  "n": "Special Finisher",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   4004774872
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Finishers consume 3 Stacks of Armor Charge and generate a Special Ammo Brick for you and allies.",
+   "compendium": "On Finisher:\nConsumes x3 Armor Charge.\nGenerates a Special Ammo Brick for the user and allies."
+  }
+ },
+ {
+  "id": "mod:stacksonstacks",
+  "n": "Stacks on Stacks",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 4,
+  "hashes": [
+   3994043492
+  ],
+  "src": {
+   "bungie": "Picking up an Orb of Power grants you 1 additional stack of Armor Charge.",
+   "clarity": "All Armor Charge sources grant an additional Stack.",
+   "compendium": "All sources of Armor Charge now grant an additional stack unless explicitly stated not to."
+  }
+ },
+ {
+  "id": "mod:stasisammogeneration",
+  "n": "Stasis Ammo Generation",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   3462414552
+  ],
+  "src": {
+   "bungie": "Increases the ammo generation of Stasis weapons."
+  }
+ },
+ {
+  "id": "mod:stasisdexterity",
+  "n": "Stasis Dexterity",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   193878019
+  ],
+  "src": {
+   "bungie": "Faster ready and stow speed for Stasis weapons.",
+   "clarity": "Grants a 0.8x|0.75x|0.7x Ready/Stow Animation Duration Multiplier to Stasis Weapons with 1|2|3 Mods equipped.\nStow Animation Duration cannot be decreased below what it would be at 100 Handling."
+  }
+ },
+ {
+  "id": "mod:stasisholster",
+  "n": "Stasis Holster",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 2,
+  "hashes": [
+   335129856
+  ],
+  "src": {
+   "bungie": "Gradually reloads your stowed Stasis weapons over time.",
+   "clarity": "After stowing Stasis Weapons:\nBegins to refill 10%|10%|15% of the stowed weapon's magazine (rounded up) from reserves every 2.5|2|2 seconds with 1|2|3 Mods equipped.\nDoes not work with Breech-Loaded Grenades Launchers, Crossbows, and Rocket Launchers."
+  }
+ },
+ {
+  "id": "mod:stasisloader",
+  "n": "Stasis Loader",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   2793548555
+  ],
+  "src": {
+   "bungie": "Increases reload speed of Stasis weapons.",
+   "clarity": "Grants the following to Stasis Weapons ~0.5 seconds after readying them:\n• 10|15|18 Reload Speed with 1|2|3 Mods equipped\n• 0.85x Reload Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:stasisresistance",
+  "n": "Stasis Resistance",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   638704972
+  ],
+  "src": {
+   "bungie": "Reduces incoming Stasis damage from combatants.",
+   "clarity": "Reduces Incoming Stasis Damage from PVE Combatants by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
+  }
+ },
+ {
+  "id": "mod:stasisscavenger",
+  "n": "Stasis Scavenger",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   2734674728
+  ],
+  "src": {
+   "bungie": "Stasis weapons get bonus reserves when picking up ammo used by that weapon.",
+   "clarity": "Only works in PvE game modes.\nAmmo Brick pickups generally grant 1 additional ammo to Stasis Weapons matching the Ammo Type.\nMachine Guns receive 7 additional ammo, Trace Rifles receive 10% of their Total Reserves (rounded up) as additional ammo.\nFunctions the same way regardless of what spawned the Ammo Brick.\nContext: normal Ammo Bricks grant 25-33% of your Total Reserves by default."
+  }
+ },
+ {
+  "id": "mod:stasissiphon",
+  "n": "Stasis Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   837201397
+  ],
+  "src": {
+   "bungie": "Rapid Stasis weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Stasis Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:stasistargeting",
+  "n": "Stasis Targeting",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   721001747
+  ],
+  "src": {
+   "bungie": "Improved target acquisition, accuracy, and aim-down-sights speed for Stasis weapons.",
+   "clarity": "Grants the following to Stasis Weapons 1 second after readying them:\n• 5|8|10 Aim Assist with 1|2|3 Mods equipped\n• 0.9x|0.85x|0.8x Accuracy Cone Size\n• 0.85x|0.75x|0.7x ADS Animation Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:stasisweaponsurge",
+  "n": "Stasis Weapon Surge",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   2921714558
+  ],
+  "src": {
+   "bungie": "Your Stasis weapons gain a small bonus to damage while you have any Armor Charge. Your Armor Charge now decays over time.",
+   "clarity": "Increases Stasis Weapon damage while you have active Armor Charges:\n• PVE: 10%|17%|22%|25% increased damage with 1|2|3|4 Mods\n• PVP: 3%|4.5%|5.5%|6% increased damage\nThe 4th tier of the damage buff is only obtainable through Artifact Perks and Exotic Armor.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default."
+  }
+ },
+ {
+  "id": "mod:strandammogeneration",
+  "n": "Strand Ammo Generation",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   4287822553
+  ],
+  "src": {
+   "bungie": "Increases the ammo generation of Strand weapons."
+  }
+ },
+ {
+  "id": "mod:stranddexterity",
+  "n": "Strand Dexterity",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   3323910164
+  ],
+  "src": {
+   "bungie": "Faster ready and stow speed for Strand weapons.",
+   "clarity": "Grants a 0.8x|0.75x|0.7x Ready/Stow Animation Duration Multiplier to Strand Weapons with 1|2|3 Mods equipped.\nStow Animation Duration cannot be decreased below what it would be at 100 Handling."
+  }
+ },
+ {
+  "id": "mod:strandholster",
+  "n": "Strand Holster",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 2,
+  "hashes": [
+   3581696649
+  ],
+  "src": {
+   "bungie": "Gradually reloads your stowed Strand weapons over time.",
+   "clarity": "After stowing Strand Weapons:\nBegins to refill 10%|10%|15% of the stowed weapon's magazine (rounded up) from reserves every 2.5|2|2 seconds with 1|2|3 Mods equipped.\nDoes not work with Breech-Loaded Grenades Launchers, Crossbows, and Rocket Launchers."
+  }
+ },
+ {
+  "id": "mod:strandloader",
+  "n": "Strand Loader",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   4244246940
+  ],
+  "src": {
+   "bungie": "Increases reload speed of Strand weapons.",
+   "clarity": "Grants the following to Strand Weapons ~0.5 seconds after readying them:\n• 10|15|18 Reload Speed with 1|2|3 Mods equipped\n• 0.85x Reload Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:strandresistance",
+  "n": "Strand Resistance",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   2959732323
+  ],
+  "src": {
+   "bungie": "Reduces incoming Strand damage from combatants.",
+   "clarity": "Reduces Incoming Strand Damage from PVE Combatants by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
+  }
+ },
+ {
+  "id": "mod:strandscavenger",
+  "n": "Strand Scavenger",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   2257238439
+  ],
+  "src": {
+   "bungie": "Strand weapons get bonus reserves when picking up ammo used by that weapon.",
+   "clarity": "Only works in PvE game modes.\nAmmo Brick pickups generally grant 1 additional ammo to Strand Weapons matching the Ammo Type.\nMachine Guns receive 7 additional ammo, Trace Rifles receive 10% of their Total Reserves (rounded up) as additional ammo.\nFunctions the same way regardless of what spawned the Ammo Brick.\nContext: normal Ammo Bricks grant 25-33% of your Total Reserves by default."
+  }
+ },
+ {
+  "id": "mod:strandsiphon",
+  "n": "Strand Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   3926119246
+  ],
+  "src": {
+   "bungie": "Rapid Strand weapon final blows create Orbs of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with with a Strand Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:strandtargeting",
+  "n": "Strand Targeting",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   3000428062
+  ],
+  "src": {
+   "bungie": "Improved target acquisition, accuracy, and aim-down-sights speed for Strand weapons.",
+   "clarity": "Grants the following to Strand Weapons 1 second after readying them:\n• 5|8|10 Aim Assist with 1|2|3 Mods equipped\n• 0.9x|0.85x|0.8x Accuracy Cone Size\n• 0.85x|0.75x|0.7x ADS Animation Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:strandweaponsurge",
+  "n": "Strand Weapon Surge",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   3112965625
+  ],
+  "src": {
+   "bungie": "Your Strand weapons gain a small bonus to damage while you have any Armor Charge. Your Armor Charge now decays over time.",
+   "clarity": "Increases Strand Weapon damage while you have active Armor Charges:\n• PVE: 10%|17%|22%|25% increased damage with 1|2|3|4 Mods\n• PVP: 3%|4.5%|5.5%|6% increased damage\nThe 4th tier of the damage buff is only obtainable through Artifact Perks and Exotic Armor.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default."
+  }
+ },
+ {
+  "id": "mod:superfont",
+  "n": "Super Font",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   1130820873
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Grants 20|40|50 Super stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
+   "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Super."
+  }
+ },
+ {
+  "id": "mod:supermod",
+  "n": "Super Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 3,
+  "hashes": [
+   2724608735
+  ],
+  "stats": {
+   "Super": 10
+  },
+  "src": {
+   "bungie": "This mod has been deprecated and no longer functions. You may replace it with another mod."
+  }
+ },
+ {
+  "id": "mod:thermodynamicsiphon",
+  "n": "Thermodynamic Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   521530777
+  ],
+  "src": {
+   "bungie": "Rapid Stasis weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Solar or Stasis Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:timedilation",
+  "n": "Time Dilation",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 3,
+  "hashes": [
+   1755737153
+  ],
+  "src": {
+   "bungie": "Your decaying Armor Charge has a longer duration.",
+   "clarity": "Extends Armor Charge decay time to 15|18|20 seconds with 1|2|3 Mods equipped.\nArmor Charge decays at the rate of 1 Stack every 10 seconds by default with Passive Mods equipped.",
+   "compendium": "Armor Charges decay every 15 | 18 | 20 seconds.\nBy default, an Armor Charge stack is removed every 10 seconds if a Passive Mod is equipped."
+  }
+ },
+ {
+  "id": "mod:unflinchingarcaim",
+  "n": "Unflinching Arc Aim",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   319908131
+  ],
+  "src": {
+   "bungie": "Reduces flinching from incoming fire while aiming an Arc weapon.",
+   "clarity": "While Aiming Down Sights with Arc Weapons:\nGrants 25%|30%|35% Flinch Resistance with 1|2|3 Mods equipped.\nStacks multiplicatively with other Flinch Resistance sources."
+  }
+ },
+ {
+  "id": "mod:unflinchingharmonicaim",
+  "n": "Unflinching Harmonic Aim",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   3094620656
+  ],
+  "src": {
+   "bungie": "Reduces flinching from incoming fire while aiming an Arc weapon.",
+   "clarity": "While Aiming Down Sights with Weapons matching your Subclass Element:\nGrants 25%|30%|35% Flinch Resistance with 1|2|3 Mods equipped.\nStacks multiplicatively with other Flinch Resistance sources."
+  }
+ },
+ {
+  "id": "mod:unflinchingkineticaim",
+  "n": "Unflinching Kinetic Aim",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   1262438062
+  ],
+  "src": {
+   "bungie": "Reduces flinching from incoming fire while aiming a Kinetic weapon.",
+   "clarity": "While Aiming Down Sights with Kinetic Weapons:\nGrants 25%|30%|35% Flinch Resistance with 1|2|3 Mods equipped.\nStacks multiplicatively with other Flinch Resistance sources."
+  }
+ },
+ {
+  "id": "mod:unflinchingsolaraim",
+  "n": "Unflinching Solar Aim",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   1553790504
+  ],
+  "src": {
+   "bungie": "Reduces flinching from incoming fire while aiming a Solar weapon.",
+   "clarity": "While Aiming Down Sights with Solar Weapons:\nGrants 25%|30%|35% Flinch Resistance with 1|2|3 Mods equipped.\nStacks multiplicatively with other Flinch Resistance sources."
+  }
+ },
+ {
+  "id": "mod:unflinchingstasisaim",
+  "n": "Unflinching Stasis Aim",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   2959504464
+  ],
+  "src": {
+   "bungie": "Reduces flinching from incoming fire while aiming a Stasis weapon.",
+   "clarity": "While Aiming Down Sights with Stasis Weapons:\nGrants 25%|30%|35% Flinch Resistance with 1|2|3 Mods equipped.\nStacks multiplicatively with other Flinch Resistance sources."
+  }
+ },
+ {
+  "id": "mod:unflinchingstrandaim",
+  "n": "Unflinching Strand Aim",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   3979621113
+  ],
+  "src": {
+   "bungie": "Reduces flinching from incoming fire while aiming a Strand weapon.",
+   "clarity": "While Aiming Down Sights with Strand Weapons:\nGrants 25%|30%|35% Flinch Resistance with 1|2|3 Mods equipped.\nStacks multiplicatively with other Flinch Resistance sources."
+  }
+ },
+ {
+  "id": "mod:unflinchingvoidaim",
+  "n": "Unflinching Void Aim",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 3,
+  "hashes": [
+   3437323171
+  ],
+  "src": {
+   "bungie": "Reduces flinching from incoming fire while aiming a Void weapon.",
+   "clarity": "While Aiming Down Sights with Void Weapons:\nGrants 25%|30%|35% Flinch Resistance with 1|2|3 Mods equipped.\nStacks multiplicatively with other Flinch Resistance sources."
+  }
+ },
+ {
+  "id": "mod:utilityfinisher",
+  "n": "Utility Finisher",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 1,
+  "hashes": [
+   1125986156
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Finisher consume 3 or more Stacks of Armor Charge and grant Class Ability Energy.\nEnergy Gains with 3|4|5|6 Stacks Consumed:\n70% | 80% | 90% | 100%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "On Finisher:\nConsumes x3 or more Armor Charge.\nGrants Class Ability Energy.\nx3 = 70% | x4 = 80% | x5 = 90% | x6 = 100%"
+  }
+ },
+ {
+  "id": "mod:utilitykickstart",
+  "n": "Utility Kickstart",
+  "kind": "armorMod",
+  "slot": "class",
+  "cost": 3,
+  "hashes": [
+   3160387771
+  ],
+  "src": {
+   "bungie": "When your class ability energy is fully expended, your Armor Charge is consumed and you gain class ability energy for each Armor Charge used.",
+   "clarity": "When a Class Ability Charge is fully consumed and you have active Armor Charges:\nConsumes active Armor Charges and grants Class Ability Energy.\nEach Mod and Stack of Armor Charge counts as one 'charge' for Class Ability Energy refunds.\nClass Ability Energy gains with 2|3|etc. 'charges':\n[PVE] 16.2% | 21.7% | 28.4% | 34.4% | 38.4% | 41.3% | 43.4% | 45%\n[PVP] 12.5% | 14.2% | 16.2% | 18.7% | 21.7% | 25% | 28.4% | 31.6%",
+   "compendium": "On Class Ability Usage while having Armor Charges:\nConsumes all Armor Charges to grant Class Ability Energy. \nAbility Energy Gains are based on the sum of number of Armor Charges consumed and Mod copies equipped.\nClass Ability Energy:\n16.2% | 21.7% | 28.4% | 34.4% | 38.4% | 41.3% | 43.4% | 45%\n12.5% | 14.2% | 16.2% | 18.7% | 21.7% | 25% | 28.4% | 31.6%"
+  }
+ },
+ {
+  "id": "mod:voidammogeneration",
+  "n": "Void Ammo Generation",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   1669792723
+  ],
+  "src": {
+   "bungie": "Increases the ammo generation of Void weapons."
+  }
+ },
+ {
+  "id": "mod:voiddexterity",
+  "n": "Void Dexterity",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   467550918
+  ],
+  "src": {
+   "bungie": "Faster ready and stow speed for Void weapons.",
+   "clarity": "Grants a 0.8x|0.75x|0.7x Ready/Stow Animation Duration Multiplier to Void Weapons with 1|2|3 Mods equipped.\nStow Animation Duration cannot be decreased below what it would be at 100 Handling."
+  }
+ },
+ {
+  "id": "mod:voidholster",
+  "n": "Void Holster",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 2,
+  "hashes": [
+   2452545487
+  ],
+  "src": {
+   "bungie": "Gradually reloads your stowed Void weapons over time.",
+   "clarity": "After stowing Void Weapons:\nBegins to refill 10%|10%|15% of the stowed weapon's magazine (rounded up) from reserves every 2.5|2|2 seconds with 1|2|3 Mods equipped.\nDoes not work with Breech-Loaded Grenades Launchers, Crossbows, and Rocket Launchers."
+  }
+ },
+ {
+  "id": "mod:voidloader",
+  "n": "Void Loader",
+  "kind": "armorMod",
+  "slot": "arms",
+  "cost": 3,
+  "hashes": [
+   3980769162
+  ],
+  "src": {
+   "bungie": "Increases reload speed of Void weapons.",
+   "clarity": "Grants the following to Void Weapons ~0.5 seconds after readying them:\n• 10|15|18 Reload Speed with 1|2|3 Mods equipped\n• 0.85x Reload Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:voidresistance",
+  "n": "Void Resistance",
+  "kind": "armorMod",
+  "slot": "chest",
+  "cost": 2,
+  "hashes": [
+   3410844187
+  ],
+  "src": {
+   "bungie": "Reduces incoming Void damage from combatants.",
+   "clarity": "Reduces Incoming Void Damage from PVE Combatants by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
+  }
+ },
+ {
+  "id": "mod:voidscavenger",
+  "n": "Void Scavenger",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   802695661
+  ],
+  "src": {
+   "bungie": "Void weapons get bonus reserves when picking up ammo used by that weapon.",
+   "clarity": "Only works in PvE game modes.\nAmmo Brick pickups generally grant 1 additional ammo to Void Weapons matching the Ammo Type.\nMachine Guns receive 7 additional ammo, Trace Rifles receive 10% of their Total Reserves (rounded up) as additional ammo.\nFunctions the same way regardless of what spawned the Ammo Brick.\nContext: normal Ammo Bricks grant 25-33% of your Total Reserves by default."
+  }
+ },
+ {
+  "id": "mod:voidsiphon",
+  "n": "Void Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   2773358872
+  ],
+  "src": {
+   "bungie": "Rapid Void weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with with a Void Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:voidtargeting",
+  "n": "Void Targeting",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   1589556860
+  ],
+  "src": {
+   "bungie": "Improved target acquisition, accuracy, and aim-down-sights speed for Void weapons.",
+   "clarity": "Grants the following to Void Weapons 1 second after readying them:\n• 5|8|10 Aim Assist with 1|2|3 Mods equipped\n• 0.9x|0.85x|0.8x Accuracy Cone Size\n• 0.85x|0.75x|0.7x ADS Animation Duration Multiplier"
+  }
+ },
+ {
+  "id": "mod:voidweaponsurge",
+  "n": "Void Weapon Surge",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   3467460423
+  ],
+  "src": {
+   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "clarity": "Increases Void Weapon damage while you have active Armor Charges:\n• PVE: 10%|17%|22%|25% increased damage with 1|2|3|4 Mods\n• PVP: 3%|4.5%|5.5%|6% increased damage\nThe 4th tier of the damage buff is only obtainable through Artifact Perks and Exotic Armor.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default."
+  }
+ },
+ {
+  "id": "mod:voidstasisdualsiphon",
+  "n": "Void/Stasis Dual Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   3458160468
+  ],
+  "src": {
+   "bungie": "Rapid Void weapon final blows create an Orb of Power."
+  }
+ },
+ {
+  "id": "mod:voidstranddualsiphon",
+  "n": "Void/Strand Dual Siphon",
+  "kind": "armorMod",
+  "slot": "head",
+  "cost": 3,
+  "hashes": [
+   110793779
+  ],
+  "src": {
+   "bungie": "Rapid Void weapon final blows create an Orb of Power.",
+   "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Void or Strand Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
+  }
+ },
+ {
+  "id": "mod:weaponsfont",
+  "n": "Weapons Font",
+  "kind": "armorMod",
+  "slot": "legs",
+  "cost": 3,
+  "hashes": [
+   4046357305
+  ],
+  "src": {
+   "bungie": "You gain a bonus to your weapons stat while you have any Armor Charge. Your Armor Charge decays over time.",
+   "clarity": "Grants 20|40|50 Weapons stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
+   "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Weapons."
+  }
+ },
+ {
+  "id": "mod:weaponsmod",
+  "n": "Weapons Mod",
+  "kind": "armorMod",
+  "slot": "general",
+  "cost": 3,
+  "hashes": [
+   4183296050
+  ],
+  "stats": {
+   "Weapons": 10
+  },
+  "src": {
+   "bungie": "This mod has been deprecated and no longer functions. You may replace it with another mod."
+  }
+ }
+]

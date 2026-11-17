@@ -1,0 +1,1532 @@
+[
+ {
+  "id": "sub:glacialquake",
+  "n": "Glacial Quake",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "q": "Slam your gauntlet down to create a shockwave that freezes targets",
+    "s": "bungie",
+    "note": "Compendium: Cryoclasm has no cooldown while in Super, and Howl of the Storm can be used during the super (15% super energy per uppercut)."
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "on": "heavy attack slam",
+    "q": "sends out [Stasis] Stasis crystals to freeze additional ones",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "by": "stasiscrystal",
+    "q": "sends out [Stasis] Stasis crystals to freeze additional ones",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "shatter",
+    "on": "sprinting through crystals or frozen targets",
+    "q": "Sprint through [Stasis] Stasis crystals or frozen targets to shatter them instantly.",
+    "s": "bungie"
+   },
+   {
+    "do": "consumes",
+    "t": "stasiscrystal",
+    "q": "Sprint through [Stasis] Stasis crystals or frozen targets to shatter them instantly.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "ALL STASIS DAMAGE (except for Light Attacks and Contact Damage) against Frozen Enemies is increased by 310%",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "on": "casting the super",
+    "q": "On Super Cast: Freezes enemies within 8 [6] meters.",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "light attack (super Shiver Strike)",
+    "q": "Hits attach a delayed Stasis Explosive that deals up to 897 [?] explosive damage, and inflicts x100? [x?] Slow",
+    "s": "compendium"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "kills during the super",
+    "q": "Scoring a kill through any means while Glacial Quake is active spawn an Orbs of Power",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "super ends",
+    "q": "On Super End: Grants 3 Melee Ability Charges.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "sub:silenceandsquall",
+  "n": "Silence and Squall",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "on": "Silence kama",
+    "q": "Silence : Creates a flash-freeze blast that freezes and damages targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "Squall storm",
+    "q": "Squall : Creates a Stasis Storm that slows and damages targets caught inside.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:winterswrath",
+  "n": "Winter's Wrath",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "on": "super primary",
+    "q": "Cast out a barrage of [Stasis] Stasis shards that freeze targets.",
+    "s": "bungie",
+    "note": "The shards in the super primary are projectiles, not collectable Stasis shards. Compendium: frozen enemies take 90% less damage from the primary, so freeze then shatter with the shockwave."
+   },
+   {
+    "do": "applies",
+    "t": "shatter",
+    "on": "super secondary shockwave",
+    "q": "Cast out a shockwave that shatters all frozen targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Cast out a shockwave that shatters all frozen targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "consumes",
+    "t": "stasiscrystal",
+    "q": "Stasis Crystals and Frozen Enemies hit by the shockwave are dealt 3,453 [?] Stasis Damage.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "sub:penumbralblast",
+  "n": "Penumbral Blast",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "q": "Send a blast of [Stasis] Stasis forward to freeze your targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:shiverstrike",
+  "n": "Shiver Strike",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "q": "heavily [moderately] knocking enemies back and inflicting x50 [x40] Slow",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "delayed explosive",
+    "q": "Hits attach a delayed Stasis Explosive that deals up to 219 [?] explosive damage and inflicting x100 [x40] Slow after 1 second",
+    "s": "compendium"
+   },
+   {
+    "do": "applies",
+    "t": "shatter",
+    "q": "Shiver Strike shatters Stasis Crystals on contact.",
+    "s": "compendium"
+   },
+   {
+    "do": "consumes",
+    "t": "stasiscrystal",
+    "q": "Shiver Strike shatters Stasis Crystals on contact.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "missing the strike",
+    "q": "Failing to score a hit will refund 80% [40%] Melee Ability Energy.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "sub:witheringblade",
+  "n": "Withering Blade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "q": "Toss a [Stasis] Stasis Shuriken at targets to damage and slow them.",
+    "s": "bungie",
+    "note": "Two melee charges innately."
+   }
+  ]
+ },
+ {
+  "id": "sub:coldsnapgrenade",
+  "n": "Coldsnap Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "q": "A grenade that freezes on impact and sends another seeker to find and freeze targets.",
+    "s": "bungie",
+    "note": "Compendium: the seeker chains to another target up to 2 times when it freezes one. Touch of Winter makes seekers duplicate and create crystals."
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "direct hit",
+    "q": "Directly hitting an enemy inflicts x50 [x?] Slow Stacks for 4+2 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "sub:duskfieldgrenade",
+  "n": "Duskfield Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "slow",
+    "q": "leaving behind a field that slows targets and freezes those who do not leave the volume",
+    "s": "bungie",
+    "note": "Lingering field: Whisper of Durance extends its duration (Compendium \"7+2 seconds\")."
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "on": "staying in the field",
+    "q": "leaving behind a field that slows targets and freezes those who do not leave the volume",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:glaciergrenade",
+  "n": "Glacier Grenade",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "q": "A grenade that creates walls out of [Stasis] Stasis crystals to block damage and freeze targets",
+    "s": "bungie",
+    "note": "Compendium: 5 crystals in a line; crystals deal Stasis Grenade damage when shattered. Bleak Watcher sets the grenade cooldown to Glacier's."
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "by": "stasiscrystal",
+    "q": "A grenade that creates walls out of [Stasis] Stasis crystals to block damage and freeze targets",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:shattergrenade",
+  "n": "Shatter Grenade",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "freeze",
+    "q": "Attaches to enemies, inflicting Freeze [x? Slow] on direct hits.",
+    "s": "compendium",
+    "note": "Bungie text says sticky shrapnel grenade; only the Compendium says direct hits freeze (slow in PvP)."
+   },
+   {
+    "do": "applies",
+    "t": "shatter",
+    "q": "Hitting a frozen target shatters it instantly and deals bonus damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Hitting a frozen target shatters it instantly and deals bonus damage.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:bleakwatcher",
+  "n": "Bleak Watcher",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Hold to convert your grenade into a [Stasis] Stasis turret",
+    "s": "bungie",
+    "note": "Clarity: base grenade cooldown becomes 121 s while equipped. Whisper of Durance lengthens the turret (30 s) and its slow."
+   },
+   {
+    "do": "consumes",
+    "t": "grenade",
+    "q": "Hold to convert your grenade into a [Stasis] Stasis turret",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasisturret",
+    "on": "holding grenade",
+    "q": "Hold to convert your grenade into a [Stasis] Stasis turret that fires slowing projectiles at nearby targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "by": "stasisturret",
+    "q": "Hold to convert your grenade into a [Stasis] Stasis turret that fires slowing projectiles at nearby targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "counts",
+    "t": "stasisturret",
+    "as": "grenade",
+    "q": "Stasis Turret counts as a Grenade Ability and is buffed by, and triggers, grenade-specific effects.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:cryoclasm",
+  "n": "Cryoclasm",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "shatter",
+    "on": "sliding",
+    "q": "Sliding releases a wave that shatters [Stasis] Stasis crystals or frozen targets on contact, along with any other frozen targets nearby.",
+    "s": "bungie",
+    "note": "Slide is not an ability slot. 2 s cooldown after an extended slide; Glacial Quake removes the cooldown during the super."
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Sliding releases a wave that shatters [Stasis] Stasis crystals or frozen targets on contact",
+    "s": "bungie"
+   },
+   {
+    "do": "consumes",
+    "t": "stasiscrystal",
+    "q": "Sliding releases a wave that shatters [Stasis] Stasis crystals or frozen targets on contact",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "sliding",
+    "q": "Sliding releases a wave that shatters [Stasis] Stasis crystals or frozen targets on contact",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:diamondlance",
+  "n": "Diamond Lance",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "shatter",
+    "q": "Shatter or defeat targets with [Stasis] Stasis abilities or weapons to create a Stasis lance.",
+    "s": "bungie",
+    "note": "Any Stasis weapon (1 kill, 3 in PvP), Stasis ability or shatter kill makes a lance (7 s cooldown). Compendium: lance damage is generic Stasis ability damage, not grenade or melee."
+   },
+   {
+    "do": "creates",
+    "t": "diamondlance",
+    "on": "Stasis ability/weapon or shatter kills",
+    "q": "Shatter or defeat targets with [Stasis] Stasis abilities or weapons to create a Stasis lance.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "by": "diamondlance",
+    "q": "Throw the lance to freeze targets on impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "by": "diamondlance",
+    "q": "Slam the lance to the ground to freeze targets in a small area.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "shatter",
+    "by": "diamondlance",
+    "q": "Diamond Lances instantly shatter Stasis Crystals upon damaging them.",
+    "s": "compendium"
+   },
+   {
+    "do": "consumes",
+    "t": "stasiscrystal",
+    "by": "diamondlance",
+    "q": "Diamond Lances instantly shatter Stasis Crystals upon damaging them.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "by": "diamondlance",
+    "who": "allies",
+    "on": "slamming the lance",
+    "q": "Slamming the Diamond Lance grants you and allies within a ? meter radius x2 Frost Armor.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:frostpulse",
+  "n": "Frostpulse",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "rift",
+    "q": "Casting your Rift generates a shockwave that freezes nearby targets",
+    "s": "bungie",
+    "note": "Clarity: x5 Frost Armor and 11% class energy per enemy frozen; any freeze source refunds the rift."
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "on": "casting your rift",
+    "q": "Casting your Rift generates a shockwave that freezes nearby targets",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "on": "the rift shockwave freezes a target",
+    "q": "granting you Frost Armor when it does so",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Freezing combatants generates class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "freezing any target",
+    "q": "Freezing combatants generates class ability energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:glacialharvest",
+  "n": "Glacial Harvest",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Picking up [Stasis] Stasis shards grants stacks of Frost Armor.",
+    "s": "bungie",
+    "note": "Clarity lists shard creation and the shard melee energy/healing as intrinsic to all Stasis subclasses; recorded here because the packet text sits on the Harvest aspects. Shatter chance grows with Frost Armor stacks (Whisper of Rime raises the cap)."
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "by": "stasisshard",
+    "on": "picking up a shard",
+    "q": "Picking up [Stasis] Stasis shards grants stacks of Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "by": "stasisshard",
+    "q": "Small Stasis Shards grant x1 Frost Armor, 10% Melee Ability Energy, and restore 10 HP.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "by": "stasisshard",
+    "q": "Small Stasis Shards grant x1 Frost Armor, 10% Melee Ability Energy, and restore 10 HP.",
+    "s": "clarity"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "on": "shattering a frozen target or crystal",
+    "q": "Shattering a Frozen target or Stasis Crystal",
+    "s": "clarity"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "on": "defeating a slowed or frozen target",
+    "q": "Defeating a Stasis-Debuffed (Slowed or Frozen) target",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "shatter",
+    "q": "Shattering a Frozen target or Stasis Crystal",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Defeating a Stasis-Debuffed (Slowed or Frozen) target",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Defeating a Stasis-Debuffed (Slowed or Frozen) target",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "While you have Frost Armor, defeating combatants with Stasis or Kinetic weapons may cause them to shatter",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "shatter",
+    "if": [
+     {
+      "has": "frostarmor"
+     },
+     {
+      "any": [
+       {
+        "weapon": "stasis"
+       },
+       {
+        "weapon": "kinetic"
+       }
+      ]
+     }
+    ],
+    "on": "Stasis or Kinetic weapon kills (chance)",
+    "q": "While you have Frost Armor, defeating combatants with Stasis or Kinetic weapons may cause them to shatter",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "if": [
+     {
+      "has": "frostarmor"
+     }
+    ],
+    "on": "taking damage",
+    "q": "Taking damage while you have Frost Armor generates grenade energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:grimharvest",
+  "n": "Grim Harvest",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Picking up [Stasis] Stasis shards grants stacks of Frost Armor.",
+    "s": "bungie",
+    "note": "Clarity lists shard creation and the shard melee energy/healing as intrinsic to all Stasis subclasses; recorded here because the packet text sits on the Harvest aspects. Shatter chance grows with Frost Armor stacks (Whisper of Rime raises the cap)."
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "by": "stasisshard",
+    "on": "picking up a shard",
+    "q": "Picking up [Stasis] Stasis shards grants stacks of Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "by": "stasisshard",
+    "q": "Small Stasis Shards grant x1 Frost Armor, 10% Melee Ability Energy, and restore 10 HP.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "by": "stasisshard",
+    "q": "Small Stasis Shards grant x1 Frost Armor, 10% Melee Ability Energy, and restore 10 HP.",
+    "s": "clarity"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "on": "shattering a frozen target or crystal",
+    "q": "Shattering a Frozen target or Stasis Crystal",
+    "s": "clarity"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "on": "defeating a slowed or frozen target",
+    "q": "Defeating a Stasis-Debuffed (Slowed or Frozen) target",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "shatter",
+    "q": "Shattering a Frozen target or Stasis Crystal",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Defeating a Stasis-Debuffed (Slowed or Frozen) target",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Defeating a Stasis-Debuffed (Slowed or Frozen) target",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "While you have Frost Armor, defeating combatants with Stasis or Kinetic weapons may cause them to shatter",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "shatter",
+    "if": [
+     {
+      "has": "frostarmor"
+     },
+     {
+      "any": [
+       {
+        "weapon": "stasis"
+       },
+       {
+        "weapon": "kinetic"
+       }
+      ]
+     }
+    ],
+    "on": "Stasis or Kinetic weapon kills (chance)",
+    "q": "While you have Frost Armor, defeating combatants with Stasis or Kinetic weapons may cause them to shatter",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "if": [
+     {
+      "has": "frostarmor"
+     }
+    ],
+    "on": "taking damage",
+    "q": "Taking damage while you have Frost Armor generates class ability energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:tectonicharvest",
+  "n": "Tectonic Harvest",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Picking up [Stasis] Stasis shards grants stacks of Frost Armor.",
+    "s": "bungie",
+    "note": "Clarity lists shard creation and the shard melee energy/healing as intrinsic to all Stasis subclasses; recorded here because the packet text sits on the Harvest aspects. Shatter chance grows with Frost Armor stacks (Whisper of Rime raises the cap)."
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "by": "stasisshard",
+    "on": "picking up a shard",
+    "q": "Picking up [Stasis] Stasis shards grants stacks of Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "by": "stasisshard",
+    "q": "Small Stasis Shards grant x1 Frost Armor, 10% Melee Ability Energy, and restore 10 HP.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "by": "stasisshard",
+    "q": "Small Stasis Shards grant x1 Frost Armor, 10% Melee Ability Energy, and restore 10 HP.",
+    "s": "clarity"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "on": "shattering a frozen target or crystal",
+    "q": "Shattering a Frozen target or Stasis Crystal",
+    "s": "clarity"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "on": "defeating a slowed or frozen target",
+    "q": "Defeating a Stasis-Debuffed (Slowed or Frozen) target",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "shatter",
+    "q": "Shattering a Frozen target or Stasis Crystal",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Defeating a Stasis-Debuffed (Slowed or Frozen) target",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Defeating a Stasis-Debuffed (Slowed or Frozen) target",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "While you have Frost Armor, defeating combatants with Stasis or Kinetic weapons may cause them to shatter",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "shatter",
+    "if": [
+     {
+      "has": "frostarmor"
+     },
+     {
+      "any": [
+       {
+        "weapon": "stasis"
+       },
+       {
+        "weapon": "kinetic"
+       }
+      ]
+     }
+    ],
+    "on": "Stasis or Kinetic weapon kills (chance)",
+    "q": "While you have Frost Armor, defeating combatants with Stasis or Kinetic weapons may cause them to shatter",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "if": [
+     {
+      "has": "frostarmor"
+     }
+    ],
+    "on": "taking damage",
+    "q": "Taking damage while you have Frost Armor generates melee energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:howlofthestorm",
+  "n": "Howl of the Storm",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "While sliding, activate your charged melee ability to launch a wave of [Stasis] Stasis energy forward",
+    "s": "bungie",
+    "note": "Only the crystals Howl spawns count as powered melee. Firing during the slide disables it. Compendium: 1.5x vs frozen does not apply with Wormgod Caress (Burning Fists) active."
+   },
+   {
+    "do": "uses",
+    "t": "sliding",
+    "q": "While sliding, activate your charged melee ability",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "melee",
+    "q": "Grants an additional melee charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "on": "sliding melee",
+    "q": "freezes enemy combatants, slows enemy players, and creates [Stasis] Stasis crystals",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "vs players only",
+    "q": "freezes enemy combatants, slows enemy players, and creates [Stasis] Stasis crystals",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "on": "sliding melee",
+    "q": "freezes enemy combatants, slows enemy players, and creates [Stasis] Stasis crystals",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "howlcrystal",
+    "on": "sliding melee",
+    "q": "Howl of the Storm instantly spawns two lines of Stasis Crystals in a (V) Formation in front of you.",
+    "s": "clarity"
+   },
+   {
+    "do": "counts",
+    "t": "howlcrystal",
+    "as": "melee",
+    "note": "Only Howl's own crystals count as powered melee, not every Stasis crystal.",
+    "q": "Howl's Crystal Damage counts as Powered Stasis Melee Damage",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Howl of the Storm deals 1.5x Damage against Frozen Non-Boss Enemies.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Glacial Quake"
+      ]
+     }
+    ],
+    "q": "This attack can also be used during Glacial Quake at the cost of 15% Super Energy per Uppercut.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:iceflarebolts",
+  "n": "Iceflare Bolts",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "shatter",
+    "q": "Shattering a frozen target spawns seekers that track and freeze other nearby targets.",
+    "s": "bungie",
+    "note": "Only shattering frozen enemies counts (not crystals). Self-feeding loop: seekers freeze, next shatter spawns more. 8 s cooldown after 7 seekers (1 in PvP)."
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Shattering a frozen target spawns seekers that track and freeze other nearby targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "on": "seeker from a shattered frozen target",
+    "q": "Shattering a frozen target spawns seekers that track and freeze other nearby targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:shatterdive",
+  "n": "Shatterdive",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "movement",
+    "q": "Activate while midair to quickly descend and shatter nearby targets on impact.",
+    "s": "bungie",
+    "note": "Replaces your air move input; 4 s cooldown. Clarity: x5 Frost Armor in PvE (x7 with Whisper of Rime), x2 in PvP."
+   },
+   {
+    "do": "uses",
+    "t": "airborne",
+    "q": "Activate while midair to quickly descend",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "shatter",
+    "on": "diving (air move)",
+    "q": "Activate while midair to quickly descend and shatter nearby targets on impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "instantly Shattering any Frozen targets or Stasis Crystals in a 8.5 meter radius",
+    "s": "clarity"
+   },
+   {
+    "do": "consumes",
+    "t": "stasiscrystal",
+    "q": "instantly Shattering any Frozen targets or Stasis Crystals in a 8.5 meter radius",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "on": "shattering with the dive",
+    "q": "Shattering targets grants you Frost Armor.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:touchofwinter",
+  "n": "Touch of Winter",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Glacier Grenade"
+      ]
+     }
+    ],
+    "q": "Your Glacier, Duskfield, Coldsnap, and Shatter grenades have enhanced functionality.",
+    "s": "bungie",
+    "note": "Does nothing for Bleak Watcher turrets beyond the grenade underneath; only the four named Stasis grenades are enhanced."
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Duskfield Grenade"
+      ]
+     }
+    ],
+    "q": "Your Glacier, Duskfield, Coldsnap, and Shatter grenades have enhanced functionality.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Coldsnap Grenade"
+      ]
+     }
+    ],
+    "q": "Your Glacier, Duskfield, Coldsnap, and Shatter grenades have enhanced functionality.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Shatter Grenade"
+      ]
+     }
+    ],
+    "q": "Your Glacier, Duskfield, Coldsnap, and Shatter grenades have enhanced functionality.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Glacier Grenade"
+      ]
+     }
+    ],
+    "q": "Glacier Grenade: Adds a [Stasis] Stasis crystal and changes the formation.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "slow",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Duskfield Grenade"
+      ]
+     }
+    ],
+    "q": "Duskfield Grenade: Increases slow-field size and creates a small [Stasis] Stasis crystal on impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Duskfield Grenade"
+      ]
+     }
+    ],
+    "q": "Duskfield Grenade: Increases slow-field size and creates a small [Stasis] Stasis crystal on impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Coldsnap Grenade"
+      ]
+     }
+    ],
+    "on": "duplicated seekers",
+    "q": "Coldsnap Grenade: Seekers duplicate after freezing a target and create a [Stasis] Stasis crystal on detonation.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Coldsnap Grenade"
+      ]
+     }
+    ],
+    "q": "Coldsnap Grenade: Seekers duplicate after freezing a target and create a [Stasis] Stasis crystal on detonation.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Shatter Grenade"
+      ]
+     }
+    ],
+    "q": "Hitting frozen targets with this grenade refunds some grenade energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Shatter Grenade"
+      ]
+     }
+    ],
+    "on": "Shatter Grenade hits a frozen target",
+    "q": "Hitting frozen targets with this grenade refunds some grenade energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:wintersshroud",
+  "n": "Winter's Shroud",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "dodge",
+    "q": "Dodging slows nearby targets.",
+    "s": "bungie",
+    "note": "Any slow source (Withering Blade, Duskfield, turrets) boosts dodge regen, not only the dodge."
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "dodging",
+    "q": "Dodging slows nearby targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Slowing targets briefly increases your class ability regeneration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "slowing any target",
+    "q": "Slowing targets briefly increases your class ability regeneration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "after dodging",
+    "q": "Grants 50% Damage Resistance against Combatants for 4 seconds after the dodge.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofbonds",
+  "n": "Whisper of Bonds",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Defeating frozen targets generates an Orb of Power.",
+    "s": "bungie",
+    "note": "Clarity: 10 s cooldown."
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "defeating a frozen target",
+    "q": "Defeating frozen targets generates an Orb of Power.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofchains",
+  "n": "Whisper of Chains",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "Defeating targets while you have Frost Armor has a chance to create a [Stasis] Stasis shard.",
+    "s": "bungie",
+    "note": "Clarity: progress-based (minor 34%, elite 67%, miniboss+ 100%)."
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "if": [
+     {
+      "has": "frostarmor"
+     }
+    ],
+    "on": "kills",
+    "q": "Defeating targets while you have Frost Armor has a chance to create a [Stasis] Stasis shard.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofchill",
+  "n": "Whisper of Chill",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "if": [
+     {
+      "weapon": "stasis"
+     }
+    ],
+    "on": "Stasis weapon kills",
+    "q": "[Stasis] Stasis weapon final blows have a chance to create a Stasis Shard.",
+    "s": "bungie",
+    "note": "Clarity: progress-based, small shard."
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofconduction",
+  "n": "Whisper of Conduction",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "stasisshard",
+    "q": "Nearby [Stasis] Stasis shards track to your position.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofdurance",
+  "n": "Whisper of Durance",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "slow",
+    "q": "Slow that you apply to targets lasts longer.",
+    "s": "bungie",
+    "note": "Lingering abilities last longer too: see the Bleak Watcher and Duskfield effects."
+   },
+   {
+    "do": "modifies",
+    "t": "stasisturret",
+    "if": [
+     {
+      "piece": "Bleak Watcher"
+     }
+    ],
+    "note": "Bleak Watcher turrets last 30 s instead of 25 s (Bleak Watcher Clarity text).",
+    "q": "For those abilities that linger, their duration will also increase.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Duskfield Grenade"
+      ]
+     }
+    ],
+    "note": "The Duskfield slowing field lasts longer (Duskfield Compendium \"7+2 seconds\").",
+    "q": "For those abilities that linger, their duration will also increase.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperoffissures",
+  "n": "Whisper of Fissures",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "shatter",
+    "q": "Increases the damage and size of the burst of [Stasis] Stasis when you destroy a [Stasis] Stasis crystal or defeat a frozen target.",
+    "s": "bungie",
+    "note": "Clarity: an extra damage instance (25 / 9 PvP) in 10 m on every shatter."
+   },
+   {
+    "do": "modifies",
+    "t": "shatter",
+    "q": "Increases the damage and size of the burst of [Stasis] Stasis when you destroy a [Stasis] Stasis crystal or defeat a frozen target.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "Increases the damage and size of the burst of [Stasis] Stasis when you destroy a [Stasis] Stasis crystal",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "or defeat a frozen target",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperoffractures",
+  "n": "Whisper of Fractures",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Shattering a frozen target with a melee attack grants a stack of Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "shatter",
+    "q": "Shattering a frozen target with a melee attack grants a stack of Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Shattering a frozen target with a melee attack grants a stack of Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "on": "melee shatter of a frozen target",
+    "q": "Shattering a frozen target with a melee attack grants a stack of Frost Armor.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofhedrons",
+  "n": "Whisper of Hedrons",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Increases weapon handling and health after freezing a target with [Stasis] Stasis.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "handling",
+    "on": "freezing a target",
+    "q": "Increases weapon handling and health after freezing a target with [Stasis] Stasis.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healthstat",
+    "on": "freezing a target",
+    "q": "30 Health stat",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofhunger",
+  "n": "Whisper of Hunger",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "stasisshard",
+    "q": "Increases the melee energy gained from picking up [Stasis] Stasis shards.",
+    "s": "bungie",
+    "note": "Clarity: small 10% to 17.5%, large 50% to 75%."
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "by": "stasisshard",
+    "q": "Increases the melee energy gained from picking up [Stasis] Stasis shards.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofimpetus",
+  "n": "Whisper of Impetus",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Damaging targets with a [Stasis] Stasis melee reloads your weapons",
+    "s": "bungie",
+    "note": "Clarity: powered melee hits only; 40 handling for 5 s, not refreshable."
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "on": "Stasis melee hit",
+    "q": "Damaging targets with a [Stasis] Stasis melee reloads your weapons",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "handling",
+    "on": "Stasis melee hit",
+    "q": "grants you a temporary boost to weapon ready speed",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofrefraction",
+  "n": "Whisper of Refraction",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Defeating slowed or frozen targets grants you class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Defeating slowed or frozen targets grants you class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "defeating a slowed or frozen target",
+    "q": "Defeating slowed or frozen targets grants you class ability energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofrending",
+  "n": "Whisper of Rending",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "primaryweapon",
+    "q": "Primary ammo weapons do increased damage to [Stasis] Stasis crystals and frozen targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "Primary ammo weapons do increased damage to [Stasis] Stasis crystals and frozen targets.",
+    "s": "bungie",
+    "note": "Primary ammo weapons only (any element). Clarity: +100% vs crystals, +50% vs frozen (net +42.5% PvE, net -25% PvP)."
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Primary ammo weapons do increased damage to [Stasis] Stasis crystals and frozen targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofreversal",
+  "n": "Whisper of Reversal",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "While you have Frost Armor, melee damage slows your target.",
+    "s": "bungie",
+    "note": "Clarity: physical (non-projectile) melees, dealt or received; glaive melees count."
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "While you have Frost Armor, melee damage slows your target.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "if": [
+     {
+      "has": "frostarmor"
+     }
+    ],
+    "on": "melee damage",
+    "q": "While you have Frost Armor, melee damage slows your target.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "glaive",
+    "note": "Glaive melee hits also slow while you have Frost Armor.",
+    "q": "Glaive Melees also benefit from this.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofrime",
+  "n": "Whisper of Rime",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "frostarmor",
+    "q": "Your Frost Armor has increased duration and maximum stack count.",
+    "s": "bungie",
+    "note": "Clarity: max 7 stacks, 6 s duration. Raises Harvest shatter chance cap and Shatterdive to x7."
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperofshards",
+  "n": "Whisper of Shards",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "Shattering a [Stasis] Stasis crystal temporarily boosts your grenade recharge rate.",
+    "s": "bungie",
+    "note": "Crystals only, not frozen enemies. Clarity: +500% (150% PvP) base grenade regen for 6 s, up to 11 s."
+   },
+   {
+    "do": "uses",
+    "t": "shatter",
+    "q": "Shattering a [Stasis] Stasis crystal temporarily boosts your grenade recharge rate.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "shattering a crystal",
+    "q": "Shattering a [Stasis] Stasis crystal temporarily boosts your grenade recharge rate.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "sub:whisperoftorment",
+  "n": "Whisper of Torment",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "taking damage",
+    "q": "You gain grenade energy each time you take damage from targets.",
+    "s": "bungie",
+    "note": "Clarity: 7%, 12% with Frost Armor, 1 s cooldown."
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "Having Frost Armor increases the amount of energy gained.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "if": [
+     {
+      "has": "frostarmor"
+     }
+    ],
+    "on": "taking damage with Frost Armor",
+    "q": "Having Frost Armor increases the amount of energy gained.",
+    "s": "bungie"
+   }
+  ]
+ }
+]

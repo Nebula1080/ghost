@@ -1,0 +1,1593 @@
+[
+ {
+  "id": "sub:acrobatsdodge",
+  "n": "Acrobat's Dodge",
+  "kind": "classAbility",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   3636300852,
+   2711519343
+  ],
+  "src": {
+   "bungie": "Dodge to perform an acrobatic leap. Upon landing, make yourself and nearby allies radiant.",
+   "clarity": "Only usable while on the ground.\nPerforms a front flip in your movement input's direction and slams down the ground with a Solar Knife.\nUpon landing after using Acrobat's Dodge:\n• Grants you and allies within ? meters Radiant for 10 seconds (15 with Ember of Solace)\n• Deals up to 40 [20] damage to targets in a ? meter radius",
+   "compendium": "Performs an acrobatic leap, that, upon landing, grants the user and their allies within 10 meters Radiant for 10+5 seconds.\nEnemies within 6.5 meters are dealt up to 40 [20] Solar Damage upon landing."
+  }
+ },
+ {
+  "id": "sub:balancedglide",
+  "n": "Balanced Glide",
+  "kind": "movement",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   3686638441,
+   4154539171,
+   1237488985,
+   890263315,
+   2628485818,
+   5333294
+  ],
+  "src": {
+   "bungie": "Jump while airborne to activate Glide and start an airborne drift with both moderate speed and directional control."
+  }
+ },
+ {
+  "id": "sub:bladebarrage",
+  "n": "Blade Barrage",
+  "kind": "super",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   375052471
+  ],
+  "src": {
+   "bungie": "Vault into the air and unleash a volley of Solar-charged knives that explode and scorch targets.",
+   "compendium": "General Super Information\nDamage Resistance: 90?% [49%]\nReleases two volleys of 7 homing knives each, totalling 14 knives.\nKnock 'Em Down adds an additional 3 knives to each fan, totalling 20 knives.\nKnives embed themselves on impact, dealing 99 [not much?] damage and detonate after 0.5 seconds.\nKnife explosions deal up to an additional 560 [generally dead?] damage each and inflict x?+? Scorch over 4.25m.\nDeals a total of 8,512 [death] (12160 [deathx1.43] with Knock'Em Down) damage with all knife hits+explosions"
+  }
+ },
+ {
+  "id": "sub:burningmaul",
+  "n": "Burning Maul",
+  "kind": "super",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2747500760
+  ],
+  "src": {
+   "bungie": "Summon a flaming maul and crush targets with the force of an earthquake.\n\n[Light Attack]  : Spin the maul in a circle around you, damaging nearby targets.\n\n[Heavy Attack]  : Slam the maul to the ground and create a cyclone of flames that seeks targets, dealing damage and scorching them.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [53%]\nBase Duration: 25 seconds, or 4% Super Drain per Second\nSol Invictus creates a Sunspot on cast if grounded, and reduces Passive Drain by 40%, increasing duration to 42 seconds, or 2.4% Super Drain per second.\nLight Attack | Drains 4% Super Energy.\nSpinning attack that deals 111 [?] damage 4 times. Has a 0.67 second delay between light attacks.\nContinously scoring hits grants 40% Increased Attack Speed until no longer scoring hits.\nScoring 10 hits with Light Attacks spawns a Cyclone. Can only spawn 1 Cyclone per Super Activation.\nHeavy Attack | Drains 8% Super Energy\nSlams down, releasing a homing projectile which explodes on impact, dealing 276 [?] damage and creating a Cyclone.\nCyclones deal 24 [16] damage every 0.2 seconds, and apply x3+2 Scorch every 0.56 seconds for 4 seconds."
+  }
+ },
+ {
+  "id": "sub:burstglide",
+  "n": "Burst Glide",
+  "kind": "movement",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   3686638442,
+   4154539168,
+   1237488986,
+   890263312,
+   2628485817,
+   5333293
+  ],
+  "src": {
+   "bungie": "Jump while airborne to activate Glide and start an airborne drift with a strong initial boost of speed."
+  }
+ },
+ {
+  "id": "sub:catapultlift",
+  "n": "Catapult Lift",
+  "kind": "movement",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2225231094,
+   1698387812,
+   1380268164,
+   469281042,
+   3350493951,
+   266130437
+  ],
+  "src": {
+   "bungie": "Jump while airborne to activate Lift and launch into the air with a strong initial burst of momentum."
+  }
+ },
+ {
+  "id": "sub:celestialfire",
+  "n": "Celestial Fire",
+  "kind": "melee",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   1470370539
+  ],
+  "src": {
+   "bungie": "Send out a spiral of three explosive Solar energy blasts, scorching targets with each hit.",
+   "compendium": "Sends out a spiral of 3 homing Solar blasts.\nSolar blasts each deal up to 150 [35] damage and inflict x10+5 Scorch in a ? meter radius.\nCan deal up to 450 [105] damage and inflict x30+15 Scorch by scoring hits with all 3 Solar blasts."
+  }
+ },
+ {
+  "id": "sub:consecration",
+  "n": "Consecration",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2984351206,
+   1262901520
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "While sliding, activate your charged melee ability to launch a wave of [Solar] Solar energy forward, damaging and scorching targets in front of you as you leap into the air.\n\nWhile airborne, activate your charged melee again to slam to the ground and create a second larger wave of damaging [Solar] Solar energy. If the wave hits a scorched target, they ignite.",
+   "clarity": "Using your Charged Melee Ability while sliding launches a Solar Wave that travels 20 meters and applies 40 Scorch (60 Scorch with Ember of Ashes) to all enemies hit. Consumes 50% Melee Energy on use, and grants 25% damage resistance against non-Melee Combatant damage during the animation.\nAfter launching the Solar Wave, active your Melee Ability again to consume the remaining 50% and slam down, sending a second wave that travels the same distance, deals damage, and shatters Stasis Crystals. If this wave hits any Scorched enemies, they instantly Ignite.\nFiring your weapon during the slide disables this ability.",
+   "compendium": "While sliding:\n[Melee Ability] launches a wave of Solar Energy 20 meters forward, dealing 40 [30] damage and inflicting x40+20 Scorch. \nOnly consumes 50% Melee Ability Energy if the slam is not activated. Unable to use during slide if user shoots.\nWhile airborne from the Consecration Melee Ability:\n[Melee Ability] slams the ground, creating a second, wider wave that travels 20 meters forward, shatters crystals, and deals 486 [120] damage to Non-Scorched Enemies.\nHits against Scorched Enemies with the second wave deal 472.5 [50] damage and trigger an ignition.\nGrants 25% Damage Resist against Non-Melee Damage while in the Melee Animation."
+  }
+ },
+ {
+  "id": "sub:crackshot",
+  "n": "Crackshot",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   3066103997
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Activate your class ability to fire up to three scorching shots at combatants you've marked. Aim at targets to mark them.\n\nLanding all three shots cures you.\n\nThis ability's damage increases with your Class stat when your Class stat is 100 or higher.",
+   "clarity": "Sets your Base Class Ability cooldown to that of Marksman's Dodge.\nWith full Class Abililty energy, enemies you look at within 27 meters become visually marked. Mark up to 3 enemies.\nCasting your Class Ability with at least one mark active fires three ~150-180 RPM Scorching Golden Gun rounds equally divided across all marked enemies. Lower frame rates can slow the RPM, though animation duration remains the same.\nEach shot deals 354 [21] damage and applies 20 Scorch (30 with Ember of Ashes). Landing all 3 shots grants Cure x1.\nCan be activated while in the air, and triggers the effects of your equipped dodge when activated.\nBenefits from Radiant, which grants the shots 20% [0%] increased damage. Pairing Crackshot with Acrobat's Dodge always applies the damage bonus.\nCrackshot can further scale up to 65% increased damage at 200 Class Stat.",
+   "compendium": "Hovering the reticle near enemies within 27 meters applies a ◇mark until they leave Line of Sight.\nReplaces Class Ability with Crackshot Dodge and overrides Class Ability Cooldown to Marksman's Dodge.\nTriggers the effects of the equipped Class Ability on usage.\nCrackshot Dodge can be used midair, triggering a burst of speed.\nNo interaction with Celestial Nighthawk :(\nOn Crackshot Dodge:\nFires up to 3 Scorching Shots at an average of 150RPM over 1.2 seconds. RPM varies based on FPS. Lower framerate = Slower RPM at the same animation duration.\nScorching Shots deal 354 [21] Damage and inflict x20+10 Scorch. \nLanding all 3 Scorching Shots grants Cure x1.\nRadiant grants 20% Increased Crackshot Damage against Combatants.\nDamage scales with Class Stat above 100, up to 65% [10%] at 200 Stat. Acrobat Dodge's Radiant applies before Crackshot is fired."
+  }
+ },
+ {
+  "id": "sub:daybreak",
+  "n": "Daybreak",
+  "kind": "super",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2274196886
+  ],
+  "src": {
+   "bungie": "Fashion Solar Light into blades and smite your foes from the sky.\n\nYour Daybreak projectiles scorch targets on impact.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [51%]\nBase Duration: 24 seconds, or 4.167% Super Drain per Second.\nLight Attack | Drains 6.5% Super Energy to launch a Daybreak Projectile.\nDaybreak Projectile deal 426 [?] Impact Damage, exploding on impact, dealing up to 598 [?] Splash Damage, down to 0% damage, inflicting x50+0 Scorch over 5 meters, and launching a streak of flames behind them.\nFlame streaks travel ahead, scaling from ~4m to 9m if the Daybreak Projectile traveled at least 12 meters, dealing up to 292 [?] Damage on hit.\nAllows the usage of an enhanced Icarus Dash without cooldown that drains 4.2% Super Energy per usage.\nPhoenix Dive is enhanced, dealing up to 642 [220?] Damage, down to a minimum of 292 [?] Damage, and inflicting x60+30 Scorch over a 6 meter radius. Deals 45% damage at max falloff.\nPhoenix Dive damage is enhanced by Super Damage Increases."
+  }
+ },
+ {
+  "id": "sub:emberofashes",
+  "n": "Ember of Ashes",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1051276349
+  ],
+  "src": {
+   "bungie": "You apply more scorch stacks to targets.",
+   "clarity": "Increases the number of Scorch Stacks you apply to targets by 50% in MOST cases.\nAlways rounds up: 3 🠚 4.5 🠚 5\nSpecific increases from Ember of Ashes for Scorch sources can be found in their descriptions."
+  }
+ },
+ {
+  "id": "sub:emberofbeams",
+  "n": "Ember of Beams",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132295
+  ],
+  "stats": {
+   "Super": 10
+  },
+  "src": {
+   "bungie": "Your Solar Super projectiles have stronger target acquisition.",
+   "clarity": "Grants Solar Super projectiles stronger tracking.\nOnly affects Blade Barrage, Daybreak, and Song of Flame projectiles."
+  }
+ },
+ {
+  "id": "sub:emberofbenevolence",
+  "n": "Ember of Benevolence",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132292
+  ],
+  "stats": {
+   "Grenade": -10
+  },
+  "src": {
+   "bungie": "Applying restoration, cure, or radiant to allies grants increased grenade, melee, and class ability regeneration for a short duration.",
+   "clarity": "Applying certain buffs to allies grants 300% Additional Base Grenade, Melee, and Class Ability Regeneration Rate for 7 [3.5?] seconds.\nActivation Triggers:\n• Granting the Cure, Radiant, or Restoration Solar subclass buffs to allies\n• Healing (from most sources), or reviving allies\nWill NOT trigger Ember of Benevolence:\nEmpowering Rifts, Mods, Crest of Alpha Lupi's Healing Pulse, Mothkeeper's Wraps Overshield Moth, Non-Solar Support Frame Auto Rifles"
+  }
+ },
+ {
+  "id": "sub:emberofblistering",
+  "n": "Ember of Blistering",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132301
+  ],
+  "src": {
+   "bungie": "Defeating targets with Solar ignitions grants grenade energy.",
+   "clarity": "Ignition Kills grant Grenade Energy based on the Enemy Rank of the killed targets:\n• Tier 1 (T1) Minors: 8%\n• T2 Minors, T1 Elites: 12.25%\n• T3 Minors, T2 Elites: 16.5%\n• Players: 20.75%\n• T4 Minors, T3 Elites, and higher: 25%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website."
+  }
+ },
+ {
+  "id": "sub:emberofchar",
+  "n": "Ember of Char",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132291
+  ],
+  "stats": {
+   "Grenade": 10
+  },
+  "src": {
+   "bungie": "Your Solar ignitions spread scorch to affected targets.",
+   "clarity": "Ignitions apply 40 Scorch Stacks (60 with Ember of Ashes) to enemies damaged by the explosion.\nDoes not apply to the Ignited enemy."
+  }
+ },
+ {
+  "id": "sub:emberofcombustion",
+  "n": "Ember of Combustion",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132289
+  ],
+  "stats": {
+   "Melee": 10
+  },
+  "src": {
+   "bungie": "Final blows with a Solar Super causes targets to ignite and creates a Firesprite.",
+   "clarity": "Targets killed by Solar Supers Ignite and spawn a Firesprite at their location.\nNote: Well of Radiance makes all of the caster's Weapon Damage count as Super Ability Damage so Solar Weapons Kills will also count as Solar Super Kills."
+  }
+ },
+ {
+  "id": "sub:emberofempyrean",
+  "n": "Ember of Empyrean",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132294
+  ],
+  "stats": {
+   "Health": -10
+  },
+  "src": {
+   "bungie": "Solar weapon or ability final blows extend the duration of restoration and radiant effects applied to you.",
+   "clarity": "Solar Kills extend the duration of Restoration and Radiant effects up to the maximum of 15 seconds.\nScoring a Solar Kill while Restoration's or Radiant's timer is above 15 seconds will lower it back down to 15 seconds.\nSeconds added based on Enemy Rank:\n• Tier 1 (T1) Minors: 1.5s\n• T2 Minors, T1 Elites: 2.25s\n• T3 Minors, T2 Elites, Enemy Players: 3s\n• T4 Minors, T3 Elites, and higher: 6s"
+  }
+ },
+ {
+  "id": "sub:emberoferuption",
+  "n": "Ember of Eruption",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1051276348
+  ],
+  "stats": {
+   "Melee": 10
+  },
+  "src": {
+   "bungie": "Your Solar ignitions have increased area of effect.",
+   "clarity": "Ignitions have a 25% increased blast radius (8﻿🠚﻿10 meters)."
+  }
+ },
+ {
+  "id": "sub:emberofmercy",
+  "n": "Ember of Mercy",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   4180586737
+  ],
+  "stats": {
+   "Health": 10
+  },
+  "src": {
+   "bungie": "When you revive an ally, you and other nearby allies gain restoration.\n\nPicking up a Firesprite grants restoration.",
+   "clarity": "Firesprite pickups grant Restoration x1 for 2 seconds (3 with Ember of Solace). Extends Restoration's duration by the same amount if it's already active.\nCollecting a Firesprite while Restoration's timer is above 15 seconds will lower it back down to 15 seconds.\nReviving allies grants you and allies within ? meters Restoration x1 for 5 seconds (7.5 with Ember of Solace)."
+  }
+ },
+ {
+  "id": "sub:emberofresolve",
+  "n": "Ember of Resolve",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   4180586736
+  ],
+  "src": {
+   "bungie": "Solar grenade final blows cure you.",
+   "clarity": "Grenade Kills grant Cure x1."
+  }
+ },
+ {
+  "id": "sub:emberofsearing",
+  "n": "Ember of Searing",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1051276351
+  ],
+  "stats": {
+   "Class": 10
+  },
+  "src": {
+   "bungie": "Defeating scorched targets grants melee energy and creates a Firesprite.",
+   "clarity": "Killing Scorched enemies spawns a Firesprite and grants Melee Ability Energy based on Enemy Rank:\n• Tier 1 (T1) Minors: 8%\n• T2 Minors, T1 Elites: 15%\n• T3 Minors, T2 Elites: 17.5%\n• Players: 20%\n• T4 Minors, T3 Elites, and higher: 25%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website."
+  }
+ },
+ {
+  "id": "sub:emberofsingeing",
+  "n": "Ember of Singeing",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132293
+  ],
+  "src": {
+   "bungie": "Your class ability recharges faster when you scorch targets.",
+   "clarity": "Grants 400% Additional Base Class Ability Regeneration Rate for 3 seconds upon applying Scorch to enemies that are not currently Scorched.\nWill not activate if the enemy dies from the hit that would have applied Scorch."
+  }
+ },
+ {
+  "id": "sub:emberofsolace",
+  "n": "Ember of Solace",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132300
+  ],
+  "src": {
+   "bungie": "Radiant and restoration effects applied to you have increased duration.",
+   "clarity": "Restoration and Radiant effects applied to you last 50% longer.\nSpecific increases from Ember of Solace for Restoration and Radiant sources can be found in their descriptions."
+  }
+ },
+ {
+  "id": "sub:emberoftempering",
+  "n": "Ember of Tempering",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132290
+  ],
+  "stats": {
+   "Class": -10
+  },
+  "src": {
+   "bungie": "Solar weapon final blows grant you and your allies increased health for a short duration. Stacks 3 times.\n\nWhile Ember of Tempering is active, your weapons have increased airborne effectiveness, and your Solar weapon final blows create a Firesprite.",
+   "clarity": "Solar Weapon Kills grant a Stack of Ember of Tempering for 8 seconds to you and allies within 15 meters.\nEmber of Tempering grants the following benefits:\n• 20|40|60 Health stat at 1|2|3 Stacks\n• 20 Airborne Effectiveness\n• Solar Weapon Kills spawn a Firesprite"
+  }
+ },
+ {
+  "id": "sub:emberoftorches",
+  "n": "Ember of Torches",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   362132288
+  ],
+  "stats": {
+   "Grenade": -10
+  },
+  "src": {
+   "bungie": "Powered melee attacks against combatants make you and nearby allies radiant.",
+   "clarity": "Elemental Melee Hits make you and allies within 8 meters Radiant for 8 seconds (12 with Ember of Solace).\nClarity tooltip editor's note: We're replacing the previous Powered Melee term with Elemental Melee. The former is now exclusively used for perks that require the consumption of a Melee Ability Charge. This note is temporary and will be removed in the future."
+  }
+ },
+ {
+  "id": "sub:emberofwonder",
+  "n": "Ember of Wonder",
+  "kind": "fragments",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1051276350
+  ],
+  "stats": {
+   "Health": 10
+  },
+  "src": {
+   "bungie": "Rapidly defeating multiple targets with Solar ignitions generates an Orb of Power.",
+   "clarity": "Killing 2 enemies within ? seconds of each with Ignitions creates an Orb of Power that grants 2.5% Super Energy.\n10 second cooldown between activations."
+  }
+ },
+ {
+  "id": "sub:empoweringrift",
+  "n": "Empowering Rift",
+  "kind": "classAbility",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2979486802,
+   25156514,
+   2209081648,
+   3492047640,
+   383852321,
+   1444664839
+  ],
+  "src": {
+   "bungie": "Conjure a well of power that increases weapon damage and ability energy regeneration for those inside it.\n\nDefeating combatants while standing in the Rift grants additional ammo generation.",
+   "clarity": "Only usable while on the ground. Movement speed is slowed by 50% during the cast animation.\nGrants 20% Damage Resistance during the cast animation. Rift lasts 15 seconds and has a 5 meter radius.\nGrants the following benefits to you and allies within the rift:\n• 20% [15%] Increased Damage (Empowering Buff)\n• 260% [104%] Additional Base Grenade and Melee Regeneration Rate\n• 230% [92%] Additional Base Class Regeneration Rate\n• Kills generate 15% Increased Ammo Meter Progress",
+   "compendium": "Conjures an Empowering Rift beneath the caster for 15 seconds. \nRift grants 20% [15%] increased damage, 260% [104%] Additional Base Grenade and Melee, and 230% [92%] Additional Base Class Regeneration Rate in a 5 meter radius.\nKills while in the Rift grant 1.15x Ammo Generation Multiplier. Ammo Generation Multiplier is additive to Ammo Finder Multipliers.\nGrants 20% Damage Resist and allows movement at a speed of ?m/s while in the Rift Placement animation."
+  }
+ },
+ {
+  "id": "sub:fireboltgrenade",
+  "n": "Firebolt Grenade",
+  "kind": "grenade",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2202441959
+  ],
+  "src": {
+   "bungie": "A grenade that unleashes bolts of damaging Solar Light at nearby targets and slightly scorches them.",
+   "compendium": "Heavy Trajectory | Scan\nScans up to 4 enemies in Line of Sight within 8.5 metres upon impact, firing a bolt of Solar Light towards scanned enemies after a 1 second delay.\nSolar Light Bolts deal 337 [65] damage and inflict x20+10 Scorch."
+  }
+ },
+ {
+  "id": "sub:fusiongrenade",
+  "n": "Fusion Grenade",
+  "kind": "grenade",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1013086087
+  ],
+  "src": {
+   "bungie": "An explosive grenade that attaches to targets, damaging and moderately scorching them on detonation.",
+   "compendium": "Light Trajectory | Slightly Homing | Sticky\nAttaches to enemies or surfaces, exploding after a brief delay.\nExplosion deals up to 738 [130] damage and inflict x40+20 Scorch over 6 meters on detonation."
+  }
+ },
+ {
+  "id": "sub:gamblersdodge",
+  "n": "Gambler's Dodge",
+  "kind": "classAbility",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   3636300855,
+   426473317,
+   2816982785,
+   3933525367,
+   1282157890,
+   2711519340
+  ],
+  "src": {
+   "bungie": "Dodge to perform a deft tumble, avoiding combatant attacks and generating melee ability energy. Energy gain is scaled by your Melee stat. Dodging near enemies increases the energy gain.",
+   "clarity": "Only usable while on the ground.\nPerforms a deft tumble in your movement input's direction.\nRemoves tracking from PVE Combatant projectiles and disables Aim Assist on you for the duration of the animation.\nGrants 1% [0.35%] Fixed Melee Ability Energy per 1 point in the Melee Stat, up to 100% [35%] at 100 Melee Stat.\nMelee Energy is doubled if performed within 15 meters of an enemy, allowing for a maximum refund of 200% [70%] energy.\nAbility energy gained is NOT affected by Chunk Energy Scalars. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "Performs a deft tumble that grants 1% [0.35%] Melee Ability Energy per Melee Stat, up to 100% [35%] Melee Ability Energy at 100 Melee Stat.\nDodging within 15 meters of an enemy doubles the Ability Energy gained. No Chunk or Stat Scalar.\nRemoves Combatant Projectile Tracking, as well as Aim Assist against Guardians during the Dodge Animation."
+  }
+ },
+ {
+  "id": "sub:goldengundeadshot",
+  "n": "Golden Gun: Deadshot",
+  "kind": "super",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   375052469
+  ],
+  "src": {
+   "bungie": "Summon a rapid-fire flaming pistol that scorches and disintegrates targets with Solar Light.\n\nFinal blows with this weapon refund a Golden Gun round and extend your super duration.\n\nBenefits from being radiant."
+  }
+ },
+ {
+  "id": "sub:goldengunmarksman",
+  "n": "Golden Gun: Marksman",
+  "kind": "super",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   375052468,
+   2370269390
+  ],
+  "src": {
+   "bungie": "Summon a precision flaming pistol that scorches and disintegrates targets with Solar Light.\n\nYour Golden Gun deals massively increased precision damage, overpenetrates targets, and creates Orbs of Power on precision hits.\n\nBenefits from being radiant."
+  }
+ },
+ {
+  "id": "sub:gunpowdergamble",
+  "n": "Gunpowder Gamble",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   3066103996,
+   2835214903
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Defeat targets to charge up an improvised Solar explosive.\n\n[Grenade]  : Throw a Solar explosive that can be shot in mid-air to cause an ignition.",
+   "clarity": "Kills charge up an Improvised Explosive (three Tripmines duct-taped together).\nKills grant charges based on the method used:\n• Weapons: 1 [2] charge\n• Ignition and Scorch: 3 [4] charges\n• Abilities: 4 charges\n• Super: 6 charges\nAt 6 charges, replaces your Grenade Ability with a thrown explosive that travels with reduced velocity. Explosive causes an Ignition when detonated, and incurs a 6 second cooldown upon throw.\nShooting the explosive increases its damage by 50% [5%], ignition radius by ?%, and releases 9 homing submunitions from its center. Sticking the explosive directly onto an enemy and then shooting it adds an additional damage instance equal to 67% [?] of the aboved buffed detonation.\nIf not shot, the explosive detonates on its own after 3 seconds.\nGunpowder Gamble counts both as an Ignition and a Grenade Ability. It triggers, and is buffed by, both grenade and ignition-specific effects.",
+   "compendium": "Kills charge up an Improvised Explosive. Readies at 6 Charges.\nWeapon = 1 [2] | Ignition & Scorch = 3 [4] | Abilities = 4 | Super = 6\nReplaces Grenade with an Ignition-on-a-Stick that causes an ignition that deals 50% increased damage upon being shot or after 3 seconds.\nShooting the dynamite increases its damage by 50% [5%], its radius by ?% to ? meters, and releases 9 homing submunitions, with each dealing up to 80 [?] Damage.\nIncurs a 6 second cooldown after activating. Kills while on cooldown don't give charges."
+  }
+ },
+ {
+  "id": "sub:hammerofsol",
+  "n": "Hammer of Sol",
+  "kind": "super",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2747500761,
+   2529942647
+  ],
+  "src": {
+   "bungie": "Summon a flaming hammer and wreak destruction down upon your enemies.\n\n[Light Attack]  : Throw your hammer at foes.\n\nUpon impact, your hammers shatter into explosive molten shards.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [51%]\nBase Duration: 21 seconds, or 4.75% Super Drain per Second\nLight Attack | Drains 12% Super Energy\nThrows a Hammer that explodes on impact, dealing up to 445 [?] damage. Has a 1.5 seconds delay between Hammer Throws.\nImpacts release 4 shrapnel, dealing up to 396 [?] damage each.\nHammers visually flares up after being airborne for 0.7 seconds, increasing Shrapnel amount to 5.\nPhoenix Cradle Interaction:\nReduces Passive Drain by 20%, increasing duration to 26.25 seconds, or 3.81% Super Drain per second.\nLight Attacks drain 7.5% Super Energy and the delay between Hammer Throws is reduced to 1 second.\nLoreley Splendor Helm Interaction:\nReduces Passive Drain by 40%, increasing duration to 35 seconds, or 3.63% Super Drain per second.\nLight Attacks drain 8.2% Super Energy and the delay between Hammer Throws is reduced to 1 second.\nBoth Exotic Interactions assume 100% Sol Invictus buff uptime, which is not always possible."
+  }
+ },
+ {
+  "id": "sub:hammerstrike",
+  "n": "Hammer Strike",
+  "kind": "melee",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   852252788,
+   1980796562
+  ],
+  "src": {
+   "bungie": "After sprinting for a short time, use this melee ability to swing a blazing hammer that scorches your target and deals damage in a cone behind them.\n\nIf your target is defeated by Hammer Strike, they ignite.",
+   "compendium": "Shared with other Shoulder Charge Abilities:\nRequires sprinting for 1.25 seconds. Drains 15% Melee Ability Energy if no enemy is hit. Unable to use during slide if user shoots.\nGuardians directly hit by Shoulder Charge have their Melee Lunge disabled for 0.5 seconds\nLunges forward 6.8 meters, automatically targeting enemies in range.\nHitting an enemy deals 878 [90] impact damage and inflicts x40+20 Scorch, as well as dealing 586 [60] radial damage to enemies up to 7 meters behind the struck target.\nScoring a Hammer Strike kill on the directly struck enemy triggers an ignition."
+  }
+ },
+ {
+  "id": "sub:healinggrenade",
+  "n": "Healing Grenade",
+  "kind": "grenade",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   1841016428,
+   3040080535
+  ],
+  "src": {
+   "bungie": "A grenade that cures allies on impact and creates an Orb of benevolent Solar Light, granting restoration to allies when picked up.",
+   "compendium": "Very Light Trajectory | Strong Ally Homing\nApplies Cure x1 to the user and allies within 7.5 metres of impact, and creates a Restoration Orb that lasts 7.5 seconds.\nRestoration Orb applies Restoration x1 for 4+2 seconds upon being picked up. Orb has a 7.5 meter pickup radius, and 100 HP."
+  }
+ },
+ {
+  "id": "sub:healingrift",
+  "n": "Healing Rift",
+  "kind": "classAbility",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2979486803,
+   25156515,
+   2209081649,
+   3492047641,
+   383852320,
+   1444664838
+  ],
+  "src": {
+   "bungie": "Conjure a well of power that continuously heals those inside it.",
+   "clarity": "Only usable while on the ground. Movement speed is slowed by 50% during the cast animation.\nGrants 20% Damage Resistance during the cast animation. Rift lasts 15 seconds and has a 5 meter radius.\nHeals you and allies in the Rift for 40 [35] HP per second.\nIf at full health, the Rift grants 3 HP of Overshield per second, up to a 15 HP Overshield.\nStanding in a friendly Healing Rift makes the game count you as having an active Overshield at all times.",
+   "compendium": "Conjures a Healing Rift beneath the caster that continuously restores 40 [35] HP per second in a 5 meter radius for 15 seconds.\nWhile at Full Health | Healing Rift generates 3 Overshield HP per second, up to 15 Overshield HP. Having Void Overshield prevents this from happening.\nOvershield can stack with other overshields, such as Turnabout's OS and Class Stat OS. Overshield layers are determined by \"First In, First Out\".\nHealing Rifts cause the users to count as having Overshields for the purpose of perk interactions.\nGrants 20% Damage Resist and allows movement at a speed of ?m/s while in the Rift Placement animation."
+  }
+ },
+ {
+  "id": "sub:heatrises",
+  "n": "Heat Rises",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   83039194
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "You can fire weapons, melee, and throw grenades while gliding.\n\n[Grenade]  : Hold to consume your grenade, gaining Heat Rises and releasing a burst of healing energy that cures nearby allies. The strength of the burst is increased when a Healing Grenade is consumed.\n\nFinal blows while airborne increase the duration of Heat Rises and grant melee energy.",
+   "clarity": "Passively grants 20 Airborne Effectiveness. Allows you to use your weapons and abilities while gliding.\nKills while Airborne grant Melee Energy based on Combatant Rank:\n• Minors: 20%\n• Elites: 25%\n• Minibosses: 35%\n• Bosses and Players: 50%\nHold [Grenade] to consume it, activating 'Heat Rises' for 15 seconds, and grant Healing to you and allies within a 9 meter radius based on what was consumed.\nConsuming a Healing Grenade grants Cure x3. If Touch of Flame is equipped, this also grants Restoration x1 for 4 seconds.\nConsuming a Song of Flame Wisp grants Cure x3 and Restoration x2 for 4 seconds.\nRestoration effects are extended to 6 seconds with Ember of Solace. All other grenades grant Cure x2.\nHeat Rises grants 50 Airborne Effectiveness and effectively infinite Glide flight time, along with improved base movement capabilities of your equipped Glide. Enemy combatants are less accurate while Heat Rises is active.\nScoring kills while Airborne extends Heat Rises, up to a maximum of 30 seconds based off Combatant Rank:\n• Minors and Players: 5 seconds\n• Elites and Minibosses: 10 seconds\n• Bosses: 15 Seconds",
+   "compendium": "Passively grants +20 Airborne Effectiveness, and allows Weapon and Ability Usage while gliding. \nKills while Airborne grant Melee Energy.\nTier 1 Combatant = 20% | T2 = 25% | T3 = 35% | T4 = 50% | Guardians = 50%\nHold [Grenade] to consume a Grenade Ability Charge, granting Heat Rises and releasing a burst of Cure x2 that affects the user and their allies within 9 meters.\nConsuming a Healing Grenade increases Cure to x3. Consuming a Touch of Flame Healing Grenade additionally grants Restoration x1 for 4+2 seconds.\nConsuming a Song of Flame' Wisp releases a burst of Cure x3 and grants Restoration x2 for 4+2 seconds to the user and their allies within 9 meters.\nHeat Rises\nGrants +50 Airborne Effectiveness, and a modified Glide that changes depending on the selected Movement Ability for 15 seconds.\nCombatants are less accurate at targeting the wearer while active.\nModified Glide has -99% Glide Upkeep and Activation cost, extending maximum glide duration by 100 times, and marks the user's location on radar to Guardians within 25 meters.\nBalanced Glide: Strong Directional and Initial Burst | Burst Glide: Strong Directional Control | Strafe Glide: Strong Initial Burst.\nScoring additional Airborne Kills while Heat Rises is active extends the buff duration, up to 30 seconds.\nTier 1 Combatant = +5 seconds | T2 & T3 = +10 seconds | T4 = +15 seconds | Guardians = +5 seconds\nConsuming a Grenade always overwrites the duration to 15 seconds, even if it was previously higher."
+  }
+ },
+ {
+  "id": "sub:hellion",
+  "n": "Hellion",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   83039192,
+   790664814
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Activate your class ability to summon a [Solar] Solar mortar that lobs flaming projectiles at distant targets. Targets damaged by the mortar are scorched.\n\nHellion damage is scaled by the enhanced benefit of the Grenade stat.",
+   "clarity": "Casting your Class Ability grants 'Hellion' for 20 seconds.\nHellion fires Scorching projectiles every 1.35 seconds up to a distance of 32 meters, and inflict 30 Scorch per hit in a 4 meter radius (40 Scorch with Ember of Ashes).\nHellion projectiles count as a Grenade Ability and are buffed by, and trigger, grenade-specific effects. However, Scorch and Ignitions sourced by Hellion itself do not scale.",
+   "compendium": "On Class Ability Usage:\nGrants Hellion for 20 seconds.\nHellion:\nLobs scorching Solar projectiles every 1.35 seconds towards enemies up to 32 meters away.\nSolar projectiles deal up to 217 [38] Solar Grenade Ability Damage and inflict x30+10 Scorch per hit in a 4 meter radius.\nCan trigger Grenade Ability interactions. Hellion-inflicted Solar Effects are not scaled by Grenade Damage."
+  }
+ },
+ {
+  "id": "sub:highjump",
+  "n": "High Jump",
+  "kind": "movement",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   1128768654,
+   95544330,
+   20616658,
+   3531427694,
+   3721022587,
+   1588878499
+  ],
+  "src": {
+   "bungie": "While airborne, jump a second time to reach greater heights."
+  }
+ },
+ {
+  "id": "sub:highlift",
+  "n": "High Lift",
+  "kind": "movement",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2225231092,
+   1698387814,
+   1380268166,
+   469281040,
+   3350493949,
+   266130439
+  ],
+  "src": {
+   "bungie": "Jump while airborne to activate Lift and launch into the air to greater heights."
+  }
+ },
+ {
+  "id": "sub:icarusdash",
+  "n": "Icarus Dash",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   83039195
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "[Air Dodge]  : Dodge quickly while airborne.\n\nWhile Heat Rises is active, you have an additional dodge.\n\nWhile airborne, rapidly defeating targets with your Super or weapons cures you.",
+   "clarity": "While Airborne, pressing [Air Move] performs a horizonal dash that propels you 8 meters towards the input direction before entering a 4 second cooldown.\nWhile Heat Rises or Song of Flame is active, gain an additional charge of Icarus Dash before entering a 5 second cooldown (currently only works in Song of Flame while using Incinerator Snap). Both charges are refilled per cooldown period.\nIcarus Dash can be used infinitely during Daybreak at the cost of 4.2% super energy per use.\nWhile Airborne, Weapon or Super Kills within 5 seconds of each grants Cure x1. Activation Progress is based on Combatant Rank:\n• Minor: 34%\n• Elite: 67%\n• Bosses: 100%\n• Players: 67%",
+   "compendium": "Horizontal dash that travels 8 meters. Distance is increased by 25% while in Daybreak.\nIncurs a 4 second cooldown after usage.\nWhile Heat Rises is active, or during the Song of Flame Super Ability while the Incinerator Snap Melee Ability is equipped:\n Gains an additional charge, and recharges both charges simultaneously, but increases cooldown to 5 seconds.\nDoes not grant 2 charges while in Song of Flame if the Celestial Fire Melee Ability is equipped. ¯\\_(ツ)_/¯\nUpon reaching 100% Counter Progress through Weapon or Super Kills while Airborne within 5 seconds of each:\n Rank-And-File = 34% | Elites = 67% | Bosses = 100% | Guardians = 67%.\nGrants Cure x1."
+  }
+ },
+ {
+  "id": "sub:incendiarygrenade",
+  "n": "Incendiary Grenade",
+  "kind": "grenade",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2581086849
+  ],
+  "src": {
+   "bungie": "A grenade that explodes in a fiery burst and heavily scorches nearby targets.",
+   "compendium": "Medium Trajectory\nExplodes after its speed is sufficiently reduced. Has a brief delay before it can explode.\nExplosion deals up to 814 [130] damage and inflicts x60+30 Scorch over 8 meters on detonation.\nDamage is increased by 31.5% to 1202 [173] damage if the enemy is within 1 meter of the grenade."
+  }
+ },
+ {
+  "id": "sub:incineratorsnap",
+  "n": "Incinerator Snap",
+  "kind": "melee",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   1470370538,
+   3644045869
+  ],
+  "src": {
+   "bungie": "Snap your fingers to create a fan of burning sparks that explode and scorch targets.",
+   "compendium": "Creates a fan of 5 burning sparks.\nSparks explode after ? meters, each dealing up to 90 [27?] damage and apply x20+10 [x10+5] Scorch over a ? meter radius.\nCan deal up to 450 [135?] damage and apply up to x100+50 [x50+25] Scorch by scoring hits with all 5 burning sparks"
+  }
+ },
+ {
+  "id": "sub:knifetrick",
+  "n": "Knife Trick",
+  "kind": "melee",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   4016776972,
+   2657901004
+  ],
+  "src": {
+   "bungie": "Throw a fan of flaming knives that scorch targets on hit.",
+   "compendium": "Throws a fan of 3 Solar Knives.\nEach knife deals 257 [38] damage with a 1.3x Precision Multiplier and inflict x20+10 Scorch per hit.\nCan deal up to 1,002 [147] damage and x60+30 Scorch by scoring all 3 knives as Precision Hits."
+  }
+ },
+ {
+  "id": "sub:knockemdown",
+  "n": "Knock 'Em Down",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   3066103998
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Your Solar Supers are enhanced. Deadshot Golden Gun has damage resistance, Marksman Golden Gun has increased duration, and Blade Barrage launches more projectiles.\n\nWhile radiant, final blows with your equipped Throwing Knife fully refund your melee energy.",
+   "clarity": "While Radiant, Powered Melee kills grant 100% Melee Ability Energy after a 0.2 second delay. Melees that grant Radiant will still trigger a refund if a kill is achieved in the same blow.\nPassively grants benefits to your equipped Solar Super:\n• Marksman Golden Gun duration is increased by 4 seconds\n• Deadshot Golden Gun is granted 15% damage resistance\n• Blade Barrage fires 3 additional knives per wave (14🠚20 Total Knives)\nCasting your super grants Cure x1.",
+   "compendium": "While Radiant:\nPowered Melee Ability Kills grant 100% Fixed Melee Ability after a 0.2 seconds delay.\nActivating Radiant from the same hit that kills will refund Melee Ability.\nEnhances Super Abilities:\nMarksman Golden Gun lasts 4 seconds longer.\nDeadshot Golden Gun has 15% Damage Resist.\nBlade Barrage throws an additional 3 knives per fan.\nGrants x1 Cure on Super Activation."
+  }
+ },
+ {
+  "id": "sub:lightweightknife",
+  "n": "Lightweight Knife",
+  "kind": "melee",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   4016776974
+  ],
+  "src": {
+   "bungie": "Quickly throw a knife that deals moderate damage. Precision hits with this knife make you radiant for a short duration.",
+   "compendium": "Innately has 2 Melee Ability Charges.\nQuickly throws a Lightweight Knife that travels at a speed of 40m/s.\nPrecision Hits grant Radiant for 10 seconds.\nLightweight Knife deals 408 [100] damage with a 1.5x Precision Multiplier."
+  }
+ },
+ {
+  "id": "sub:marksmansdodge",
+  "n": "Marksman's Dodge",
+  "kind": "classAbility",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   3636300854,
+   426473316,
+   2816982784,
+   3933525366,
+   1282157891,
+   2711519341
+  ],
+  "src": {
+   "bungie": "Dodge to perform an evasive maneuver with a steady hand. Dodging automatically collects nearby ammo boxes and reloads all weapons.",
+   "clarity": "Only usable while on the ground.\nPerforms an evasive maneuver in your movement input's direction that instantly reloads all equipped weapons and collects ammo bricks that are on the ground within a 15 meter radius of you.\nRemoves tracking from PVE Combatant projectiles and disables Aim Assist on you for the duration of the animation.\nCounts as a manual reload and will activate reload-triggered perks such as Kill Clip.",
+   "compendium": "Performs an evasive maneuver that reloads all weapons and picks up Ammo Bricks within 15 meters.\nRemoves Combatant Projectile Tracking, as well as Aim Assist against Guardians during the Dodge Animation."
+  }
+ },
+ {
+  "id": "sub:onyourmark",
+  "n": "On Your Mark",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   3066103999
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Activating your class ability or landing precision hits grants you and nearby allies increased reload speed and Weapons stat for a short duration. Stacks ten times.\n\nFinal blows while at ten stacks cure you.",
+   "clarity": "Precision Hits grant you and allies within a 15 meter radius of you one stack of 'On Your Mark'. Precision Kills, and Precision Hits from Hand Cannons, grant 2 stacks. Casting your Class Ability grants one stack to yourself. Stacks last for 12 seconds. Maximum of 10 stacks.\nStacks have no [1 second] cooldown on being earned.\nEach stack of On Your Mark grants 5 Weapons Stat, 5? Reload Speed, and ?% decreased Reload Animation Speed.\nAt 10 stacks, kills grant Restoration x1 for 3 seconds (4.5 with Ember of Solace).\nKills with Red Death Reformed are reduced to Cure x1 (down from x2) while at 10 stacks.",
+   "compendium": "Upon scoring Precision Kills, Precision Hits, or using Class Abilities:\nGrants the user and allies within 15 meters stacks of On Your Mark for 12 seconds, up to a maximum of 10 stacks.\nPrecision Kills and Hand Cannon Precision Hits grant 2 stacks. | Class Ability usage grants 1 stack.\nPrecision Hits grant 1 stacks [and incur a 1 second cooldown between gaining stacks against Guardians.]\nClass Ability Usage grants a stack of On Your Mark to the user.\nOn Your Mark:\nGrants +5 Weapon Stat, +Reload Speed, and Reload Duration Multiplier per stack.\nMaxes out at +50 Weapon Stat, +? Reload Speed, and 0.?x Reload Duration Multiplier.\nWhile at x10 On Your Mark:\nKills while On Your Mark is equipped grant Restoration x1 for 3+1.5 seconds."
+  }
+ },
+ {
+  "id": "sub:phoenixdive",
+  "n": "Phoenix Dive",
+  "kind": "classAbility",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2979486801,
+   1444664836
+  ],
+  "src": {
+   "bungie": "Dive to the ground and create a burst of Solar Light that cures nearby allies.\n\nWhile Heat Rises is active, you gain restoration while diving and scorch targets upon landing.",
+   "clarity": "Only usable while airborne.\nPerforms a dive to the ground in the direction of your movement input. Not inputting a movement direction results in a vertical downward dive.\nApplies Cure x2 to you and allies within 9 meters upon landing.",
+   "compendium": "Dive that applies Cure x2 to the user and their allies within 9 meters.\nWhile Heat Rises is active:\nApplies Restoration x2 for 3+1.5 seconds upon diving.\nDeals 100 damage and inflicts x40+20 Scorch to enemies within 6.5 metres upon landing."
+  }
+ },
+ {
+  "id": "sub:proximityexplosiveknife",
+  "n": "Proximity Explosive Knife",
+  "kind": "melee",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   4016776973
+  ],
+  "src": {
+   "bungie": "Throw a knife that attaches to surfaces upon impact and explodes when it detects a nearby target.",
+   "compendium": "Quickly throws an Explosive Knife that is able to stick to surfaces for up to 14 seconds.\nProximity Knife explodes upon detecting an enemy within 5 meters of it, or upon directly sticking to an enemy.\nExplody Knife deals 306 [20] impact damage with a 1.3x Precision Multiplier, and up to 405 [100] detonation damage over 6 meters."
+  }
+ },
+ {
+  "id": "sub:rallybarricade",
+  "n": "Rally Barricade",
+  "kind": "classAbility",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2495523341,
+   489583097,
+   2722641741,
+   3260056809,
+   2087010644,
+   2868073560
+  ],
+  "src": {
+   "bungie": "Creates a small barrier that you can peek over while aiming down sights; increases weapon reload speed, stability, and range. Draws hostile fire when you stand behind it.",
+   "clarity": "Only usable while on the ground.\nGrants 20% Damage Resistance during the cast animation and keeps you crouched after.\nCreates a short, curved, see-through Barricade that blocks all projectiles fired at it.\nLasts 20 seconds, has 500 HP, has 90% Damage Resistance against non-Boss PVE Combatants, and ?% Damage Resistance against Bosses.\nEnemies that pass through the Barricade continuously receive ? non-lethal damage every ? seconds. PVE Combatants that pass through the Barricade are temporarily disoriented.\nBarricade taunts PVE Combatants that are in front of it and within ? meters.\nGrants the following benefits to you and allies while standing behind it:\n• 10% increased Damage Falloff Distance\n• 50% Flinch Resistance\n• 30 Stability\n• 100 Reload Speed with a 0.9x Reload Duration Multiplier\n• 80% Splash Damage Resistance against PVE Combatants",
+   "compendium": "Creates a short, curved barricade construct in front of the caster that blocks all damage dealt to it.\nGrants 80% [20%] Damage Resist while in the Barricade Placement animation.\nBarricade lasts for 20 seconds, and has 500 Construct HP. Barricades have 90% Damage Resist against Combatants, and ?% against Boss Combatants.\nEnemies that pass through the barricade rapidly receive ? [?] non-lethal damage every ? seconds.\nWhile within ? meters behind the Rally Barricade:\n80% Damage Resist against Splash Damage from Combatants.\nCombatants up to ? meters in front of the barricade are taunted.\n+30 Stability, +100 Reload Speed, 0.9x Reload Duration Multiplier, 10% Increased Damage Falloff Distance, and 50% Flinch Resist."
+  }
+ },
+ {
+  "id": "sub:roaringflames",
+  "n": "Roaring Flames",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2984351204
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Final blows with [Solar] Solar abilities or ignitions increase the damage of your Solar abilities. Stacks 3 times.",
+   "clarity": "Solar Ability and Ignition Kills grant one stack of 'Roaring Flames' for 20 seconds. Maximum of 3 stacks.\nRoaring Flames grants increased Solar Ability damage at 1|2|3 stacks:\n• 20% [13%] | 44% [28%] | 73% [44%] Increased Grenade and Super Damage\n• 67%|133%|200% Increased Base Melee Damage\nWhile Roaring Flames is active, Unpowered Melee Hits apply 30 Scorch (40 with Ember of Ashes) and count as Powered Melee Hits.",
+   "compendium": "Solar Ability Kills and Ignition Kills grant a stack of Roaring Flames for 20 seconds, up to a maximum of 3 stacks.\nAdditional Solar Ability and Ignition Kills refresh the buff duration.\nRoaring Flames grants increased Solar Ability Damage.\n67% | 133% | 200% Increased Melee Damage.\n20% [13%] | 44% [28%] | 73% [44%] increased Grenade and Super Ability Damage.\nUnpowered Melee Hits while Roaring Flames is active inflict x30+10 Scorch and count as Powered Melee Hits."
+  }
+ },
+ {
+  "id": "sub:shieldburst",
+  "n": "Shieldburst",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2984351207
+  ],
+  "fragmentSlots": 3,
+  "src": {
+   "bungie": "Enhances your equipped barricade with [Solar] Solar capabilities.\n\nTowering Barricade: Your barricade slides forward across the ground before stopping, allowing you to advance in safety.\n\nRally Barricade: Standing behind your barricade grants scorching rounds to your allies' Solar and Kinetic weapons.\n\nWhile your barricade is deployed, activate your class ability again to remotely detonate it, scorching combatants caught in the detonation. Dealing damage increases the power of the blast.\n\nThis ability's damage increases with your Class stat when your Class stat is 100 or higher.",
+   "clarity": "After casting your barricade, pressing [Class Ability] again will remotely detonate it. Shieldburst Barricades apply 50 Scorch (75 with Ember of Ashes), deal damage, and blast Solar Shrapnel up to 40 meters in front of them.\nShieldburst Barricades passively grow in strength over time and after dealing damage. At maximum strength, the detonation deals 50% increased damage and releases three 15-meter Solar Waves across the ground.\nTowering Barricade:\nYour barricade slides 20 meters forward upon cast. Enemies that come into contact with your barricade take a burst of damage and recieve 20 Scorch (30 with Ember of Ashes). Contact Damage can only trigger once every 2 seconds on the same enemy, and your barricade loses the ability to disorient. Shieldburst passively charges in strength at a rate of 34% per second.\nRally Barricade:\nYour barricade grants Scorch Rounds to your Solar and Kinetic weapons. Scorch applied and rate of application varies between weapon archetypes. Shieldburst passively charges in strenth at a rate of 10% per second.\nBarricade detonation scales up to 65% increased damage at 200 Class Stat.\nShieldburst counts as 'casting your class ability' both on cast and on remote detonation for the purposes of exotic armor.",
+   "compendium": "On Barricade Placement | Overrides the Class Ability to Remote Detonator.\nRemote Detonator causes the barricade to detonate, triggering an explosion that heavily knocks back and deals damage.\nExplosion counts as destroying a Construct for the purpose of certain effects. \nPerforming a Barricade Boost by getting hit by one's own explosion allows usage of Hammer Strike until landing, even after firing midair.\nRemote Detonator Usage counts as a Class Ability Usage for most effects but will not grant Overshield at >100 Class stat.\nOn Towering Barricade Placement: \nInitially placing the Barricade causes it to slide forward up to 20 meters away, deaccelerating as it moves.\nBarricade Contact Damage is increased to 328 [?] Damage and inflicts x20+10 Scorch. \nContact Damage can only trigger once every 2 seconds on the same enemy.\nWhile behind a Rally Barricade:\nGrants Scorching Rounds to Kinetic and Solar Weapons.\nFor the sake of vertical screen accessibility, go to Song of Flame's section.\nWhile a Barricade is active:\nPassively grants Barricade-dependent (34% Towering | 10% Rally) Shieldbrust progress.\nDealing damage grants additional progress, at a rate of ~100 damage per 1 second charged.\nShieldburst Detonation:\nExplosion deals up to 550 [?] Damage and inflicts x50+25 Scorch over ? meters. Self Damage is reduced to ? Damage.\nSolar Shrapnel is flung towards enemies within 40? meters, dealing 71 [?] Damage and inflicting x5+5 Scorch.\nShieldburst grants increased explosion damage, up to 50% increased damage once fully charged.\nWhile at 100% Shieldburst Progress | Explosion additionally releases 3 Solar Waves spread out in a cone up to 15 meters away.\nSolar Waves deal 141 [?] Solar Damage. \nAspect's Damage scales with Class Stat above 100, up to 65% [?%] at 200 Stat."
+  }
+ },
+ {
+  "id": "sub:solinvictus",
+  "n": "Sol Invictus",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2984351205
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots. Your abilities regenerate faster, and your Super drains more slowly while standing in a Sunspot.\n\nSunspots apply scorch and deal damage to targets inside. Entering a Sunspot applies restoration.",
+   "clarity": "Hammer of Sol impacts, as well as kills with Solar Abilities or killing Scorched targets, create a Sunspot at their location for 5 seconds.\nSunspots deal damage and inflict 5 Scorch (8 with Ember of Ashes) every 0.167 seconds to enemies within them.\nEntering a Sunspot grants Restoration x1 for 5 seconds (7.5 with Ember of Solace) and 'Sol Invictus'. Standing in the Sunspot continuously extends its lifetime up to a maximum 12 seconds.\nBuff remains active until you leave the Sunspot, at which point it lasts for 5 seconds.\nSol Invictus grants 100% Increased Base Grenade and Melee Regeneration Rate, and 40% Decreased Passive Super Drain.",
+   "compendium": "Solar Ability Kills, Scorched Enemy Kills, and Hammer of Sol Impacts create a Sunspot for ? seconds.\nStanding in a Sunspot refreshes its duration, up to a maximum duration of 12 seconds.\nSunspots grant Sol Invictus for 5 seconds and Restoration x1 for 5+2.5 seconds.\nSol Invictus grant 100% Additional Base Grenade and Melee Regeneration Rate, and 40% Decreased Passive Super Drain.\nSunspots deal 60 [22] damage and inflict x5+3 Scorch every 0.167 seconds."
+  }
+ },
+ {
+  "id": "sub:solargrenade",
+  "n": "Solar Grenade",
+  "kind": "grenade",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2216698406
+  ],
+  "src": {
+   "bungie": "A grenade that creates a flare of Solar Light that continuously damages and scorches targets trapped inside.",
+   "compendium": "Medium Trajectory | DoT Field\nDeals up to 63 [20] damage and inflicts x17+4.5 [x10+10] Scorch to enemies within 5 metres on impact, as well as creating a Solar Flare. \nSolar Flare:\nDeals 78 [25] damage every 0.267 seconds up to 13 times over its 4 second duration, for a total of 1,014 [325] damage to enemies within its 4 metre radius.\nDoes not Scorch within its DoT Field, it inflicts up to x17+13 Scorch to Combatants inside the Solar Flare when it expires, although it's inconsistent.\nInflicts x1 Scorch after 0.75 seconds, followed by x7.5+2.5 Scorch every 0.533 seconds, up to x53+27 Scorch over its duration.\nSolar Flare only begin dealing damage or inflicting scorch after 1 second of being created."
+  }
+ },
+ {
+  "id": "sub:songofflame",
+  "n": "Song of Flame",
+  "kind": "super",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2274196884,
+   1869939005
+  ],
+  "src": {
+   "bungie": "Unleash your inner fire, making your equipped weapons radiant and enhancing your abilities.\n\n[Melee]  : Release a supercharged melee attack that launches additional projectiles.\n\n[Grenade]  : Create a sentient flame wisp that seeks out targets and detonates in a scorching explosion, then seeks out other nearby targets.\n\nWhile Song of Flame is active, you and nearby allies regenerate abilities more quickly, are more resistant to incoming damage, and your [Solar] Solar and Kinetic weapons scorch targets.",
+   "compendium": "General Super Information\nDamage Resistance: 90% [~50?%]\nBase Duration: 25 seconds, or 4% Super Drain per Second.\nSong of Flame:\nCaster is granted +100 Grenade, +100 Melee, +100 Class, Radiant and Scorching Rounds. \nWeapon Kills by the Caster count as Super Kills. Weapon damage does not count as Ability damage.\nAllies within 15 metres are granted 30% [?%] Damage Resist, Scorching Rounds, and 15% Fixed Bonus Grenade, Melee, and Class Ability Energy per second.\nGrants full Grenade and Melee Ability Charges on Super End.\nScorching Rounds:\nScoring a Non-DoT Kinetic or Solar Direct/Explosive Weapon Hit inflicts Scorch, with the stack amount and cooldown between Scorching Round triggers varying per Weapon Type.\nx5+0 Scorch every 0.2 seconds = Auto Rifles | Submachine Guns\nx5+5 Scorch every 0.2 seconds = Machine Guns | Trace Rifles\nx10+5 Scorch every 0.3 seconds = Hand Cannon | Pulse Rifle | Scout Rifles | Sidearms\nx15+5 Scorch every 0.4 seconds = Fusion Rifles | Glaive (Melee/Projectile) | Shotgun | Sniper Rifle | Swords\nx20+10 Scorch every 0.6? seconds = Bows | Heavy Grenade Launchers | Special Grenade Launchers | Linear Fusion Rifles (+Arbalest) | Rocket Launchers\nHitting multiple enemies at once only scorches one of them.\nGrenade Ability: Drains 4.8% Super Energy, and has a 2 second cooldown between usages.\nSends forth a homing Solar Wisp that detonates on impact, dealing up to 647 [?] Damage and inflicting x40+20 Scorch. Wisps have ? HP.\nAnother Wisp is spawned on the impact location if an enemy is within 22 meters, seeking the closest enemy it hasn't already damaged.\nEach Grenade Ability Usage can spawn a total of 4 Wisps, with each wisp after the first dealing 10% less damage.\nConsuming a Solar Wisp while Heat Rises is equipped grants Cure x3 and Restoration x2 for 4+2 seconds to the user and their allies within 9 meters.\nMelee Ability: Drains 2.4% Super Energy, and has a 1.75 second cooldown between usages.\nCelestial Fire sends out 5 Solar blasts, each dealing up to 246 [87] Damage and inflicting x10+5 Scorch.\n[Auto Melee] within Melee Lunge Distance instead deals 1,224 [?] Damage and inflicts x60+30 Scorch over a tiny radius, consuming Super Energy and a Melee Ability Charge.\nIncinerator Snap releases a barrage of 7 Solar Sparks, each dealing up to 139 [41] damage and inflicting x20+10 [x10+5] Scorch.\n[Auto Melee] within Melee Lunge Distance performs an Powered Melee, dealing 899 [456] Damage and inflicts x60+30 Scorch over a tiny radius, consuming Super Energy and a Melee Ability Charge.\nClass Ability: Drains 6% Super Energy, and has a 2.85 second cooldown between usages.\nFunctions as the selected Class Ability, recharging quickly at the cost of Super Energy."
+  }
+ },
+ {
+  "id": "sub:strafeglide",
+  "n": "Strafe Glide",
+  "kind": "movement",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   3686638443,
+   4154539169,
+   1237488987,
+   890263313,
+   2628485816,
+   5333292
+  ],
+  "src": {
+   "bungie": "Jump while airborne to activate Glide and start an airborne drift with strong directional control."
+  }
+ },
+ {
+  "id": "sub:strafejump",
+  "n": "Strafe Jump",
+  "kind": "movement",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   1128768655,
+   95544331,
+   20616659,
+   3531427695,
+   3721022586,
+   1588878498
+  ],
+  "src": {
+   "bungie": "While airborne, jump a second time with strong directional control."
+  }
+ },
+ {
+  "id": "sub:strafelift",
+  "n": "Strafe Lift",
+  "kind": "movement",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2225231093,
+   1698387815,
+   1380268167,
+   469281041,
+   3350493948,
+   266130438
+  ],
+  "src": {
+   "bungie": "Jump while airborne to activate Lift and launch into the air with strong directional control."
+  }
+ },
+ {
+  "id": "sub:swarmgrenade",
+  "n": "Swarm Grenade",
+  "kind": "grenade",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3199702642,
+   2842514288
+  ],
+  "src": {
+   "bungie": "A grenade that detonates on impact, releasing multiple drones that seek nearby targets. Each drone slightly scorches affected targets.",
+   "compendium": "Medium Trajectory | Seekers\nReleases 9 seeking drones on impact.\nDrones begin chasing enemies that come within 7 metres, exploding on contact, otherwise self-destructing after 10-11 seconds.\nEach drone deals 58 + 54 [8 + 8] damage and inflicts x5+3 Scorch.\nDeals up to 1,008 [144] damage and inflicts x45+27 Scorch with all 9 drones."
+  }
+ },
+ {
+  "id": "sub:thermitegrenade",
+  "n": "Thermite Grenade",
+  "kind": "grenade",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "prism"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   3969294337,
+   2400634603
+  ],
+  "src": {
+   "bungie": "A grenade that sends forth a burning line of fire, dealing damage and scorching targets in its path.",
+   "compendium": "Medium Trajectory\nSends forth a Solar Wave on impact, repeating every 1.45 seconds up to 3 times. \nSolar Waves travel up to 20 meters away, each dealing up to 246+206 [80 + 50] damage and inflicting x10+10 Scorch.\nDeals up to 1,808 [360] damage and inflicts x40+40 Scorch if all 4 Solar Waves hit without falloff."
+  }
+ },
+ {
+  "id": "sub:throwinghammer",
+  "n": "Throwing Hammer",
+  "kind": "melee",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   852252789
+  ],
+  "src": {
+   "bungie": "Throw a hammer from a distance. Picking up a thrown hammer grants melee energy. Energy generated is scaled by your Melee stat. If the hammer struck a target, picking it up grants cure.",
+   "compendium": "Quickly throws a Solar Hammer that deals 539 [90] damage.\nDeals increased damage based on the distance traveled, up to 36% increased damage at 35+ meters. Multiplicative to everything.\n<2m = Base | 2-4m = 6% | 5-8m = 12% | 9m-16m = 18% | 17-25m = 24% | 26-34m = 30% | 35+m = 36% increased Throwing Hammer Damage. \nHammer is able to be picked up again from the ground, granting 121.5% Melee Ability Energy. \nPicking up the hammer after scoring a hit grants Cure x1.\nAutomatically explodes after being in the ground for 10 seconds, dealing up to 325 [60] damage. Explosion counts as Melee Damage."
+  }
+ },
+ {
+  "id": "sub:touchofflame",
+  "n": "Touch of Flame",
+  "kind": "aspects",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   83039193
+  ],
+  "fragmentSlots": 2,
+  "src": {
+   "bungie": "Your Healing, Solar, Firebolt, and Fusion Grenades have enhanced functionality.\n\nHealing Grenade: Improves the strength of cure and restoration effects applied. Consuming a Healing Grenade with Heat Rises also applies restoration to nearby allies.\n\nSolar Grenade: Increases linger duration. Periodically emits blobs of lava around its perimeter.\n\nFirebolt Grenade: Increases target search radius and maximum target count.\n\nFusion Grenade: Explodes twice.",
+   "clarity": "Enhances your Healing, Firebolt, Solar, and Fusion Grenade Abilities:\n• Healing Grenades grant Cure x2 and Restoration x2 for 4 seconds (6 with Ember of Solace)\n• Firebolt Grenades gain 50% increased search radius (8🠚12 Meters) and targets 5 enemies (up from 4).\n• Solar Grenades last 2 seconds longer and release 'Molten Lava Orbs' that deal additional damage.\n• Fusion Grenades detonate a second time after 0.5 seconds, dealing additional damage in an 8 meter radius.",
+   "compendium": "Scans up to ↑5 enemies in Line of Sight within ↑12 metres upon impact."
+  }
+ },
+ {
+  "id": "sub:toweringbarricade",
+  "n": "Towering Barricade",
+  "kind": "classAbility",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "titan"
+  ],
+  "hashes": [
+   2495523340,
+   489583096,
+   2722641740,
+   3260056808,
+   2087010645,
+   2868073561
+  ],
+  "src": {
+   "bungie": "Creates a large barrier that can be used to reinforce a position with cover, and draws hostile fire when you stand behind it.",
+   "clarity": "Only usable while on the ground.\nGrants 20% Damage Resistance during the cast animation.\nCreates a tall, slightly curved, see-through Barricade in front of you that blocks all projectiles fired at it.\nLasts 20 seconds, has 500 HP, has 90% Damage Resistance against non-Boss PVE Combatants, and ?% Damage Resistance against Bosses.\nGrants 60% Splash Damage Resistance against PVE Combatants while standing behind the Barricade.\nEnemies that pass through the Barricade continuously receive ? non-lethal damage every ? seconds. PVE Combatants that pass through the Barricade are temporarily disoriented.\nBarricade taunts PVE Combatants that are in front of it and within ? meters.\nStanding extremely close to the barricade consistently prevents enemy melee attacks from hitting you through it.",
+   "compendium": "Creates a tall, slightly curved barricade construct in front of the caster that blocks all damage dealt to it.\nGrants 80% [20%] Damage Resist while in the Barricade Placement animation.\nBarricade lasts for 20 seconds, and has 500 Construct HP. Barricades have 90% Damage Resist against Non-Boss Combatants, and ?% against Boss Combatants.\nEnemies that pass through the barricade rapidly receive ? [?] non-lethal damage every ? seconds.\nWhile within ? meters behind the Towering Barricade:\n80% Damage Resist against Splash Damage from Combatants.\nCombatants up to ? meters in front of the barricade are taunted."
+  }
+ },
+ {
+  "id": "sub:triplejump",
+  "n": "Triple Jump",
+  "kind": "movement",
+  "el": "solar",
+  "subclasses": [
+   "solar",
+   "arc",
+   "void",
+   "stasis",
+   "strand",
+   "prism"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   1128768652,
+   95544328,
+   20616656,
+   3531427692,
+   3721022585,
+   1588878497
+  ],
+  "src": {
+   "bungie": "While airborne, sustain your air control with a second or third jump."
+  }
+ },
+ {
+  "id": "sub:tripminegrenade",
+  "n": "Tripmine Grenade",
+  "kind": "grenade",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "titan",
+   "hunter",
+   "warlock"
+  ],
+  "hashes": [
+   2946990961
+  ],
+  "src": {
+   "bungie": "An explosive grenade that sticks to surfaces and detonates when targets pass through its laser trigger, dealing damage and moderately scorching them.",
+   "compendium": "Medium Trajectory | Wall-Mounted | Sticky\nAttaches to surfaces, projecting a laser every ? seconds. Sticking to a non-surface immediately triggers the Tripmine.\nTriggers after an enemy is within its scanning cone, or after being attached for 10 seconds.\nScanning Cone extends up to 10 meters away, with a radius of 7 meters.\nExplodes after 1 second of triggering, or upon being destroyed, dealing up to 805 [140] damage and inflicting x40+20 Scorch over ? meters on detonation."
+  }
+ },
+ {
+  "id": "sub:weightedthrowingknife",
+  "n": "Weighted Throwing Knife",
+  "kind": "melee",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "hunter"
+  ],
+  "hashes": [
+   4016776975
+  ],
+  "src": {
+   "bungie": "Throw a knife that deals extra precision damage and causes scorched targets to ignite.\n\nPrecision final blows with this knife immediately recharge your class ability.",
+   "compendium": "Weighted Knife that requires a 0.65 second wind-up before throwing. Animation takes 1.55 seconds to complete.\nScoring a Precision Kill grant a Class Ability Charge.\nScoring a hit against a Scorched enemy causes an ignition.\nWeighted Knife deals 571 [140] damage with a 1.5x Precision Multiplier."
+  }
+ },
+ {
+  "id": "sub:wellofradiance",
+  "n": "Well of Radiance",
+  "kind": "super",
+  "el": "solar",
+  "subclasses": [
+   "solar"
+  ],
+  "cls": [
+   "warlock"
+  ],
+  "hashes": [
+   2274196887
+  ],
+  "src": {
+   "bungie": "Thrust your Sword into the ground, damaging and scorching nearby targets. The sword projects a continuous aura, granting radiant effects and restoration to nearby allies, protecting them from the effects of Stasis.",
+   "compendium": "Places down a Well of Radiance for 30 seconds, restoring 300HP to the caster, dealing up to 150 damage, and inflicting 40+20 Scorch to enemies within 8.5 metres.\nCreates 3 Orbs of Power, each granting 3.6% Super Energy.\nSuper Duration scales with Super Stat, up to 40 seconds at 200 Super.\nWell of Radiance:\nConstruct with 800 HP. Can be frozen and damaged by Stasis Shatter\nProjects an aura that buffs the caster and allies within 6 metres. Leaving the aura grants Radiant for 8+4 seconds.\nCombatants deal 0.25x Damage against the Well of Radiance.\nFor Guardians inside the Well of Radiance:\n25% Increased Weapon Damage, 20% Damage Resist against Combatants (10% vs Boss Combatants), immunity to Stasis Effects, and restores 50HP/s.\nGuardians receive 50% Damage Resist against Special and Power Weapons, as well as Abilities. Primary Weapons remain at 40% Damage Resist.\nRemoves any active Restoration effect. \nWeapon Damage dealt by the Caster is counted as Super Ability Damage. Caster can spawn up to 5 Orbs from scoring kills within the Well."
+  }
+ }
+]

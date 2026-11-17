@@ -1,0 +1,78 @@
+{
+ "terms": {
+  "heatrises": {
+   "l": "Heat Rises",
+   "kind": "buff",
+   "el": "solar",
+   "aka": [],
+   "def": "A Warlock buff from consuming your grenade with the Heat Rises aspect: long glides and extra airborne effectiveness, and airborne kills extend it.",
+   "q": "Hold to consume your grenade, gaining Heat Rises",
+   "src": "sub:heatrises"
+  },
+  "solarweapon": {
+   "l": "Solar weapon",
+   "kind": "damage",
+   "el": "solar",
+   "aka": [
+    "solar weapons"
+   ],
+   "def": "Damage or final blows from Solar weapons; some Solar fragments trigger on them.",
+   "q": "Solar weapon final blows grant you and your allies increased health for a short duration.",
+   "src": "sub:emberoftempering"
+  },
+  "solarability": {
+   "l": "Solar ability",
+   "kind": "damage",
+   "el": "solar",
+   "aka": [
+    "solar abilities"
+   ],
+   "def": "Damage or final blows from Solar grenades, melees, class abilities or Supers.",
+   "q": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots.",
+   "src": "sub:solinvictus"
+  },
+  "weapon": {
+   "l": "Weapon damage",
+   "kind": "damage",
+   "el": "",
+   "aka": [
+    "weapon kills",
+    "weapon final blows"
+   ],
+   "def": "Damage or final blows from any weapon. Some Supers make the caster's weapon damage count as Super damage.",
+   "q": "Weapon Damage dealt by the Caster is counted as Super Ability Damage.",
+   "src": "sub:wellofradiance"
+  },
+  "hellion": {
+   "l": "Hellion",
+   "kind": "object",
+   "el": "solar",
+   "aka": [],
+   "def": "A Solar mortar summoned by your class ability (Warlock aspect) that lobs scorching projectiles at distant targets; it counts as a grenade.",
+   "q": "Hellion projectiles count as a Grenade Ability and are buffed by, and trigger, grenade-specific effects.",
+   "src": "sub:hellion"
+  },
+  "improvisedexplosive": {
+   "l": "Improvised Explosive",
+   "kind": "object",
+   "el": "solar",
+   "aka": [
+    "gunpowder gamble explosive"
+   ],
+   "def": "A Solar explosive charged by kills (Hunter aspect Gunpowder Gamble) that replaces your grenade and ignites when shot or after a delay; it counts as both a grenade and an ignition.",
+   "q": "Gunpowder Gamble counts both as an Ignition and a Grenade Ability.",
+   "src": "sub:gunpowdergamble"
+  },
+  "scorchingrounds": {
+   "l": "Scorching Rounds",
+   "kind": "buff",
+   "el": "solar",
+   "aka": [
+    "scorch rounds"
+   ],
+   "def": "A weapon buff that makes your Solar and Kinetic weapon hits scorch targets.",
+   "q": "Scoring a Non-DoT Kinetic or Solar Direct/Explosive Weapon Hit inflicts Scorch",
+   "src": "sub:songofflame"
+  }
+ }
+}

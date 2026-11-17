@@ -1,0 +1,3021 @@
+[
+ {
+  "id": "xa:apotheosisveil",
+  "n": "Apotheosis Veil",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "super",
+    "perk": "Insatiable",
+    "q": "Immediately regenerate health, melee, grenade, and Rift energy for you and your nearby allies upon activating your Super.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "casting your Super",
+    "who": "allies",
+    "perk": "Insatiable",
+    "q": "Immediately regenerate health, melee, grenade, and Rift energy for you and your nearby allies upon activating your Super.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "casting your Super",
+    "who": "allies",
+    "perk": "Insatiable",
+    "q": "Immediately regenerate health, melee, grenade, and Rift energy for you and your nearby allies upon activating your Super.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "casting your Super",
+    "who": "allies",
+    "perk": "Insatiable",
+    "q": "Immediately regenerate health, melee, grenade, and Rift energy for you and your nearby allies upon activating your Super.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "casting your Super",
+    "who": "allies",
+    "perk": "Insatiable",
+    "q": "Immediately regenerate health, melee, grenade, and Rift energy for you and your nearby allies upon activating your Super.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "after your Super ends",
+    "perk": "Insatiable",
+    "q": "After your Super ends, temporarily gain greatly increased melee and grenade regen.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "after your Super ends",
+    "perk": "Insatiable",
+    "q": "After your Super ends, temporarily gain greatly increased melee and grenade regen.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:astrocyteverse",
+  "n": "Astrocyte Verse",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "movement",
+    "if": [
+     {
+      "slot": "movement",
+      "is": [
+       "Blink"
+      ]
+     }
+    ],
+    "perk": "Move to Survive",
+    "q": "With Blink equipped, use [Air Dodge] while airborne to perform a Dark Blink.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "airborne",
+    "if": [
+     {
+      "slot": "movement",
+      "is": [
+       "Blink"
+      ]
+     }
+    ],
+    "perk": "Move to Survive",
+    "q": "With Blink equipped, use [Air Dodge] while airborne to perform a Dark Blink.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "volatilerounds",
+    "on": "Blink or Dark Blink",
+    "if": [
+     {
+      "slot": "movement",
+      "is": [
+       "Blink"
+      ]
+     }
+    ],
+    "perk": "Move to Survive",
+    "q": "Using Blink or Dark Blink grants Volatile Rounds.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "volatile",
+    "on": "Blink",
+    "if": [
+     {
+      "slot": "movement",
+      "is": [
+       "Blink"
+      ]
+     }
+    ],
+    "perk": "Move to Survive",
+    "q": "causes nearby targets to become volatile",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "on": "Dark Blink",
+    "if": [
+     {
+      "slot": "movement",
+      "is": [
+       "Blink"
+      ]
+     }
+    ],
+    "perk": "Move to Survive",
+    "q": "Movement is identical to Nova Warp's Dark Blink, which spawns 4 [2] Weakening Seekers that scale with the Super stat.",
+    "s": "clarity"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Nova Warp"
+      ]
+     }
+    ],
+    "perk": "Move to Survive",
+    "q": "While your Nova Warp Super is active, Dark Blink does not cost Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Move to Survive",
+    "q": "Provides a moderate benefit to airborne effectiveness for all weapons.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Compendium: the Dark Blink works with Blink on Void or Prismatic."
+ },
+ {
+  "id": "xa:ballidorsewrathweavers",
+  "n": "Ballidorse Wrathweavers",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Winter's Wrath"
+      ]
+     }
+    ],
+    "perk": "Hearts of Ice",
+    "q": "Targets frozen by your Winter's Wrath Super take increased Shatter damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "shatter",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Winter's Wrath"
+      ]
+     }
+    ],
+    "perk": "Hearts of Ice",
+    "q": "Targets frozen by your Winter's Wrath Super take increased Shatter damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Winter's Wrath"
+      ]
+     }
+    ],
+    "perk": "Hearts of Ice",
+    "q": "Targets frozen by your Winter's Wrath Super take increased Shatter damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "who": "allies",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "super",
+        "is": [
+         "Winter's Wrath"
+        ]
+       },
+       {
+        "piece": "Frostpulse"
+       }
+      ]
+     }
+    ],
+    "perk": "Hearts of Ice",
+    "q": "Allies in range of your Winter's Wrath shockwave and Frostpulse gain Frost Armor and deal increased damage with Stasis weapons.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "who": "allies",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "super",
+        "is": [
+         "Winter's Wrath"
+        ]
+       },
+       {
+        "piece": "Frostpulse"
+       }
+      ]
+     }
+    ],
+    "perk": "Hearts of Ice",
+    "q": "Allies in range of your Winter's Wrath shockwave and Frostpulse gain Frost Armor and deal increased damage with Stasis weapons.",
+    "s": "bungie",
+    "note": "Stasis Weapon Surge."
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "super",
+        "is": [
+         "Winter's Wrath"
+        ]
+       },
+       {
+        "piece": "Frostpulse"
+       }
+      ]
+     }
+    ],
+    "perk": "Hearts of Ice",
+    "q": "Granting these buffs to allies grants you Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "rift",
+    "if": [
+     {
+      "piece": "Frostpulse"
+     }
+    ],
+    "perk": "Hearts of Ice",
+    "q": "On Rift Cast with the Frostpulse Aspect equipped:",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Winter's Wrath"
+      ]
+     }
+    ],
+    "perk": "Hearts of Ice",
+    "q": "Grants maximum Frost Armor Stacks to you once Winter's Wrath ends.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "xa:bootsoftheassembler",
+  "n": "Boots of the Assembler",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "rift",
+    "perk": "Blessing of Order",
+    "q": "Standing in a rift creates Noble Seekers that seek out allies and heal them.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "nobleseeker",
+    "on": "standing in your rift",
+    "perk": "Blessing of Order",
+    "q": "Standing in a rift creates Noble Seekers that seek out allies and heal them.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "nobleseeker",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Blessing of Order",
+    "q": "Standing in a Rift or Well of Radiance creates Noble Seekers",
+    "s": "clarity",
+    "note": "Well of Radiance seekers grant both the healing and the damage effect (Compendium)."
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "by": "nobleseeker",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Healing Rift"
+      ]
+     }
+    ],
+    "perk": "Blessing of Order",
+    "q": "Healing Rift Seeker: restores 70 Health, 60 Shields, and starts Health Regeneration",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "by": "nobleseeker",
+    "perk": "Blessing of Order",
+    "q": "When a Noble Seeker finds an ally, you gain class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "if": [
+     {
+      "item": "Lumina"
+     }
+    ],
+    "perk": "Blessing of Order",
+    "q": "Increases the airborne effectiveness stat of the Hand Cannon Lumina.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Empowering Rift seekers grant a damage bonus (Clarity: 35% [15%] for 5 s) instead of healing; seekers also give Lumina Noble Rounds."
+ },
+ {
+  "id": "xa:briarbinds",
+  "n": "Briarbinds",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "voidsoul",
+    "if": [
+     {
+      "piece": "Child of the Old Gods"
+     }
+    ],
+    "perk": "One with the Void",
+    "q": "Your Void Souls have a longer duration. They also gain escalating damage and durability as they defeat targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "voidsoul",
+    "if": [
+     {
+      "piece": "Child of the Old Gods"
+     }
+    ],
+    "perk": "One with the Void",
+    "q": "You can retrieve your Void Souls by interacting with them, allowing them to be redeployed.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "voidsoul",
+    "if": [
+     {
+      "piece": "Child of the Old Gods"
+     }
+    ],
+    "perk": "One with the Void",
+    "q": "Your Void Souls have a longer duration.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Void Souls come from Child of the Old Gods; kill bonuses (up to +100% damage, 50% resist) persist when redeployed."
+ },
+ {
+  "id": "xa:cenotaphmask",
+  "n": "Cenotaph Mask",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "reload",
+    "perk": "High Priority",
+    "q": "Steadily reloads a portion of your equipped Trace Rifle's magazine from reserves.",
+    "s": "bungie",
+    "note": "Trace Rifles only."
+   },
+   {
+    "do": "creates",
+    "t": "ammobrick",
+    "on": "ally kills a target you marked with a Trace Rifle",
+    "who": "allies",
+    "perk": "High Priority",
+    "q": "When an ally defeats the marked target, Special ammo is generated for you and Heavy ammo for your allies.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:chromaticfire",
+  "n": "Chromatic Fire",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weapon",
+    "if": [
+     {
+      "weapon": "kinetic"
+     }
+    ],
+    "perk": "Crystalline Transistor",
+    "q": "Final blows from Kinetic weapons create an explosion in the element of your equipped Super",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "on": "Kinetic weapon final blow",
+    "if": [
+     {
+      "weapon": "kinetic"
+     },
+     {
+      "slot": "super",
+      "is": [
+       "Chaos Reach",
+       "Stormtrance"
+      ]
+     }
+    ],
+    "perk": "Crystalline Transistor",
+    "q": "[Arc] Blinds targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "on": "Kinetic weapon final blow",
+    "if": [
+     {
+      "weapon": "kinetic"
+     },
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Crystalline Transistor",
+    "q": "[Solar] Scorches targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "on": "Kinetic weapon final blow",
+    "if": [
+     {
+      "weapon": "kinetic"
+     },
+     {
+      "slot": "super",
+      "is": [
+       "Nova Bomb: Cataclysm",
+       "Nova Bomb: Vortex",
+       "Nova Warp"
+      ]
+     }
+    ],
+    "perk": "Crystalline Transistor",
+    "q": "[Void] Weakens targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "Kinetic weapon final blow",
+    "if": [
+     {
+      "weapon": "kinetic"
+     },
+     {
+      "slot": "super",
+      "is": [
+       "Winter's Wrath"
+      ]
+     }
+    ],
+    "perk": "Crystalline Transistor",
+    "q": "[Stasis] Slows targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "on": "Kinetic weapon final blow",
+    "if": [
+     {
+      "weapon": "kinetic"
+     },
+     {
+      "slot": "super",
+      "is": [
+       "Needlestorm"
+      ]
+     }
+    ],
+    "perk": "Crystalline Transistor",
+    "q": "[Strand] Severs targets.",
+    "s": "bungie"
+   }
+  ],
+  "note": "The explosion element follows the equipped Super; elemental (non-Kinetic) final blows grow its radius."
+ },
+ {
+  "id": "xa:clawsofahamkara",
+  "n": "Claws of Ahamkara",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "The Whispers",
+    "q": "Gain an additional melee charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "The Whispers",
+    "q": "Powered melee final blows spawn an Orb of Power.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "powered melee final blow",
+    "perk": "The Whispers",
+    "q": "Powered melee final blows spawn an Orb of Power.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:contraversehold",
+  "n": "Contraverse Hold",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "piece": "Chaos Accelerant"
+     },
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Scatter Grenade",
+       "Vortex Grenade"
+      ]
+     }
+    ],
+    "perk": "Chaotic Exchanger",
+    "q": "Charged Void grenades return grenade energy on a hit and apply Weaken.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while overcharging your grenade",
+    "if": [
+     {
+      "piece": "Chaos Accelerant"
+     },
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Scatter Grenade",
+       "Vortex Grenade"
+      ]
+     }
+    ],
+    "perk": "Chaotic Exchanger",
+    "q": "Resist incoming damage while charging your Void grenade with Chaos Accelerant.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "overcharged grenade hit",
+    "if": [
+     {
+      "piece": "Chaos Accelerant"
+     },
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Scatter Grenade",
+       "Vortex Grenade"
+      ]
+     }
+    ],
+    "perk": "Chaotic Exchanger",
+    "q": "Charged Void grenades return grenade energy on a hit and apply Weaken.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "if": [
+     {
+      "piece": "Chaos Accelerant"
+     },
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Scatter Grenade",
+       "Vortex Grenade"
+      ]
+     }
+    ],
+    "perk": "Chaotic Exchanger",
+    "q": "Charged Void grenades return grenade energy on a hit and apply Weaken.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Chaos Accelerant charges Axion Bolt, Scatter, Vortex and Handheld Supernova; Clarity lists all four with different refund rates."
+ },
+ {
+  "id": "xa:crownoftempests",
+  "n": "Crown of Tempests",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "arcability",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "grenade",
+        "is": [
+         "Arcbolt Grenade",
+         "Flashbang Grenade",
+         "Lightning Grenade",
+         "Pulse Grenade",
+         "Storm Grenade"
+        ]
+       },
+       {
+        "slot": "melee",
+        "is": [
+         "Ball Lightning",
+         "Chain Lightning"
+        ]
+       },
+       {
+        "slot": "super",
+        "is": [
+         "Chaos Reach",
+         "Stormtrance"
+        ]
+       }
+      ]
+     }
+    ],
+    "perk": "Conduction Tines",
+    "q": "Arc ability or Jolt final blows increase the recharge rate of your abilities and extend the duration of Stormtrance.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "grenade",
+        "is": [
+         "Arcbolt Grenade",
+         "Flashbang Grenade",
+         "Lightning Grenade",
+         "Pulse Grenade",
+         "Storm Grenade"
+        ]
+       },
+       {
+        "slot": "melee",
+        "is": [
+         "Ball Lightning",
+         "Chain Lightning"
+        ]
+       },
+       {
+        "slot": "super",
+        "is": [
+         "Chaos Reach",
+         "Stormtrance"
+        ]
+       }
+      ]
+     }
+    ],
+    "perk": "Conduction Tines",
+    "q": "Arc ability or Jolt final blows increase the recharge rate of your abilities and extend the duration of Stormtrance.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "Arc ability or Jolt kills",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "grenade",
+        "is": [
+         "Arcbolt Grenade",
+         "Flashbang Grenade",
+         "Lightning Grenade",
+         "Pulse Grenade",
+         "Storm Grenade"
+        ]
+       },
+       {
+        "slot": "melee",
+        "is": [
+         "Ball Lightning",
+         "Chain Lightning"
+        ]
+       },
+       {
+        "slot": "super",
+        "is": [
+         "Chaos Reach",
+         "Stormtrance"
+        ]
+       }
+      ]
+     }
+    ],
+    "perk": "Conduction Tines",
+    "q": "167.5%|335%|502.5% additional Base Grenade, Melee, and Super Regeneration Rate",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "Arc ability or Jolt kills",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "grenade",
+        "is": [
+         "Arcbolt Grenade",
+         "Flashbang Grenade",
+         "Lightning Grenade",
+         "Pulse Grenade",
+         "Storm Grenade"
+        ]
+       },
+       {
+        "slot": "melee",
+        "is": [
+         "Ball Lightning",
+         "Chain Lightning"
+        ]
+       },
+       {
+        "slot": "super",
+        "is": [
+         "Chaos Reach",
+         "Stormtrance"
+        ]
+       }
+      ]
+     }
+    ],
+    "perk": "Conduction Tines",
+    "q": "167.5%|335%|502.5% additional Base Grenade, Melee, and Super Regeneration Rate",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "on": "Arc ability or Jolt kills",
+    "if": [
+     {
+      "any": [
+       {
+        "slot": "grenade",
+        "is": [
+         "Arcbolt Grenade",
+         "Flashbang Grenade",
+         "Lightning Grenade",
+         "Pulse Grenade",
+         "Storm Grenade"
+        ]
+       },
+       {
+        "slot": "melee",
+        "is": [
+         "Ball Lightning",
+         "Chain Lightning"
+        ]
+       },
+       {
+        "slot": "super",
+        "is": [
+         "Chaos Reach",
+         "Stormtrance"
+        ]
+       }
+      ]
+     }
+    ],
+    "perk": "Conduction Tines",
+    "q": "167.5%|335%|502.5% additional Base Grenade, Melee, and Super Regeneration Rate",
+    "s": "clarity"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Stormtrance"
+      ]
+     }
+    ],
+    "perk": "Conduction Tines",
+    "q": "extend the duration of Stormtrance",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "ionicsentry",
+    "if": [
+     {
+      "piece": "Ionic Sentry"
+     }
+    ],
+    "perk": "Conduction Tines",
+    "q": "While you have Conduction Tines, Ionic Sentry creates a Storm Grenade when it deploys.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:dawnchorus",
+  "n": "Dawn Chorus",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak"
+      ]
+     }
+    ],
+    "perk": "Rites of Ember",
+    "q": "Your Daybreak projectiles ignite targets on impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak"
+      ]
+     }
+    ],
+    "perk": "Rites of Ember",
+    "q": "Your Daybreak projectiles ignite targets on impact.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "ignition",
+    "perk": "Rites of Ember",
+    "q": "Your Scorch deals additional damage, and builds to more powerful Ignitions.",
+    "s": "bungie",
+    "note": "Clarity: Ignitions from any source deal 100% more damage, but Scorch tick damage is not increased."
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "perk": "Rites of Ember",
+    "q": "Dealing damage with Scorch or Ignitions grants melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ignition",
+    "perk": "Rites of Ember",
+    "q": "Dealing damage with Scorch or Ignitions grants melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "Scorch or Ignition damage",
+    "perk": "Rites of Ember",
+    "q": "Dealing damage with Scorch or Ignitions grants melee energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:deimosuffusion",
+  "n": "Deimosuffusion",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "rift",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Needlestorm"
+      ]
+     }
+    ],
+    "perk": "Malevolent Grasp",
+    "q": "casting Rift will suspend nearby combatants",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suspend",
+    "on": "casting your rift",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Needlestorm"
+      ]
+     }
+    ],
+    "perk": "Malevolent Grasp",
+    "q": "casting Rift will suspend nearby combatants",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "suspend",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Needlestorm"
+      ]
+     }
+    ],
+    "perk": "Malevolent Grasp",
+    "q": "Suspend deals damage over time, which heals you in the process. Targets who break free from suspension suffer additional damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Needlestorm"
+      ]
+     }
+    ],
+    "perk": "Malevolent Grasp",
+    "q": "Suspend deals damage over time, which heals you in the process.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Needlestorm"
+      ]
+     }
+    ],
+    "perk": "Malevolent Grasp",
+    "q": "Defeating suspended targets heals you a moderate amount.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Needs a Strand Super (Needlestorm); the damage-over-time applies to any Suspend you inflict (Compendium), not only the rift one."
+ },
+ {
+  "id": "xa:eunoia",
+  "n": "Eunoia",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "hellion",
+    "if": [
+     {
+      "piece": "Hellion"
+     }
+    ],
+    "perk": "Consul's Pitch",
+    "q": "Hellion projectiles deal increased damage the further they travel eventually fracturing into scorching shrapnel.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "by": "hellion",
+    "if": [
+     {
+      "piece": "Hellion"
+     }
+    ],
+    "perk": "Consul's Pitch",
+    "q": "eventually fracturing into scorching shrapnel",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:eyeofanotherworld",
+  "n": "Eye of Another World",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Cerebral Uplink",
+    "q": "improves the regeneration speed of your grenade, melee, and Rift abilities",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "perk": "Cerebral Uplink",
+    "q": "improves the regeneration speed of your grenade, melee, and Rift abilities",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "perk": "Cerebral Uplink",
+    "q": "improves the regeneration speed of your grenade, melee, and Rift abilities",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Cerebral Uplink",
+    "q": "Provides a small benefit to the airborne effectiveness stat of all weapons.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Its \"priority targets\" are enemies below 50% health (Clarity), not On the Prowl targets."
+ },
+ {
+  "id": "xa:fallensunstar",
+  "n": "Fallen Sunstar",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "perk": "Ionic Conductor",
+    "q": "Ionic traces you create move faster and grant you additional ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "ionictrace",
+    "perk": "Ionic Conductor",
+    "q": "Ionic traces you create move faster and grant you additional ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "by": "ionictrace",
+    "perk": "Ionic Conductor",
+    "q": "Grenade: 25% | Melee: 25% | Class Ability: 30%",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "by": "ionictrace",
+    "perk": "Ionic Conductor",
+    "q": "Grenade: 25% | Melee: 25% | Class Ability: 30%",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "by": "ionictrace",
+    "perk": "Ionic Conductor",
+    "q": "Grenade: 25% | Melee: 25% | Class Ability: 30%",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "by": "ionictrace",
+    "who": "allies",
+    "perk": "Ionic Conductor",
+    "q": "Ionic Trace pickups grant 10% Grenade, Melee, and Class Ability energy to allies within 15 meters.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "xa:felwintershelm",
+  "n": "Felwinter's Helm",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Warlord's End",
+    "q": "Powered melee hits weaken targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "on": "powered melee hit",
+    "perk": "Warlord's End",
+    "q": "Powered melee hits weaken targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "on": "powered melee final blow or finisher",
+    "perk": "Warlord's End",
+    "q": "Powered melee final blows create a burst of energy that dramatically weakens nearby targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "finisher",
+    "perk": "Warlord's End",
+    "q": "Finishers and final blows against more powerful targets increase the radius of the burst and the length of the weakening effect.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "disorient",
+    "perk": "Warlord's End",
+    "q": "Powered Melee and Finisher Kills disorient and apply a stronger (30%) Weaken debuff to enemies in a given radius around the target.",
+    "s": "clarity"
+   }
+  ],
+  "note": "Clarity/Compendium: does not work with Grapple melee or Song of Flame melees."
+ },
+ {
+  "id": "xa:geomagstabilizers",
+  "n": "Geomag Stabilizers",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Chaos Reach"
+      ]
+     }
+    ],
+    "perk": "Close Enough",
+    "q": "Damaging targets with Chaos Reach extends its duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Chaos Reach"
+      ]
+     }
+    ],
+    "perk": "Close Enough",
+    "q": "Collecting Ionic Traces grants you energy for Chaos Reach.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "by": "ionictrace",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Chaos Reach"
+      ]
+     }
+    ],
+    "perk": "Close Enough",
+    "q": "Collecting Ionic Traces grants you energy for Chaos Reach.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "sprinting",
+    "perk": "Close Enough",
+    "q": "Sprinting while near max Bolt Charge will grant stacks over time.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "boltcharge",
+    "perk": "Close Enough",
+    "q": "Sprinting while near max Bolt Charge will grant stacks over time.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "on": "sprinting at 5+ Bolt Charge stacks",
+    "perk": "Close Enough",
+    "q": "Sprinting while near max Bolt Charge will grant stacks over time.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:getawayartist",
+  "n": "Getaway Artist",
+  "fx": [
+   {
+    "do": "consumes",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ],
+    "perk": "Dynamic Duo",
+    "q": "Convert your Arc grenade into a Arc Soul and become amplified.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "arcsoul",
+    "on": "holding grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ],
+    "perk": "Dynamic Duo",
+    "q": "Convert your Arc grenade into a Arc Soul and become amplified.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "amplified",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ],
+    "perk": "Dynamic Duo",
+    "q": "Convert your Arc grenade into a Arc Soul and become amplified.",
+    "s": "bungie"
+   },
+   {
+    "do": "counts",
+    "t": "arcsoul",
+    "as": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ],
+    "perk": "Dynamic Duo",
+    "q": "Counts as Arc Grenade Ability damage",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "by": "arcsoul",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ],
+    "perk": "Dynamic Duo",
+    "q": "Grants 5% Grenade Energy once per burst if it damages an enemy",
+    "s": "clarity",
+    "note": "Not while Devour is active."
+   },
+   {
+    "do": "modifies",
+    "t": "arcsoul",
+    "if": [
+     {
+      "piece": "Arc Soul"
+     }
+    ],
+    "perk": "Dynamic Duo",
+    "q": "Arc Soul Rifts refresh Arc Soul duration to 20 seconds instead of 15 seconds while active.",
+    "s": "compendium"
+   }
+  ],
+  "note": "Works without the Arc Soul aspect; with it, rift-granted Arc Souls refresh the longer 20 s soul."
+ },
+ {
+  "id": "xa:karnsteinarmlets",
+  "n": "Karnstein Armlets",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Vampire's Caress",
+    "q": "Melee and finisher final blows instantly grant cure and provide restoration for a short duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "finisher",
+    "perk": "Vampire's Caress",
+    "q": "Melee and finisher final blows instantly grant cure and provide restoration for a short duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "on": "melee or finisher final blow",
+    "perk": "Vampire's Caress",
+    "q": "Melee and finisher final blows instantly grant cure and provide restoration for a short duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "on": "melee or finisher final blow",
+    "perk": "Vampire's Caress",
+    "q": "Melee and finisher final blows instantly grant cure and provide restoration for a short duration.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:lunafactionboots",
+  "n": "Lunafaction Boots",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "rift",
+    "perk": "Alchemical Etchings",
+    "q": "Your Rifts gain the additional ability to increase weapon reload speeds.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "by": "rift",
+    "who": "allies",
+    "perk": "Alchemical Etchings",
+    "q": "Your Rifts gain the additional ability to increase weapon reload speeds.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Alchemical Etchings",
+    "q": "Rifts and Wells of Radiance you cast grant 100 Reload Speed",
+    "s": "clarity"
+   },
+   {
+    "do": "modifies",
+    "t": "rift",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Empowering Rift"
+      ]
+     }
+    ],
+    "perk": "Alchemical Etchings",
+    "q": "Empowering Rift makes weapons effective at longer ranges.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Also improves Primary weapon hip-fire range/accuracy. Effect stays on rifts cast before swapping off the exotic."
+ },
+ {
+  "id": "xa:mantleofbattleharmony",
+  "n": "Mantle of Battle Harmony",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weapon",
+    "perk": "Absorption Cells",
+    "q": "Final blows or sustained damage with weapons matching your equipped Super damage type grant you Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "on": "Super-matching weapon kills or damage",
+    "perk": "Absorption Cells",
+    "q": "Final blows or sustained damage with weapons matching your equipped Super damage type grant you Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "on": "matching weapon kills while Super is full",
+    "perk": "Absorption Cells",
+    "q": "When your Super energy is full, you instead gain a temporary bonus to weapon damage of that type.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "perk": "Absorption Cells",
+    "q": "When you've exhausted your Super, matching elemental weapons' damage temporarily causes explosions around the target.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "perk": "Absorption Cells",
+    "q": "After casting your Super Ability, gain x4 Arc, Solar, Void, Stasis, and Strand Weapon Surge for 10 seconds",
+    "s": "clarity",
+    "note": "Compendium places this on Super end."
+   }
+  ],
+  "note": "Needs weapons whose element matches the equipped Super."
+ },
+ {
+  "id": "xa:mataiodoxa",
+  "n": "Mataiodoxía",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Arcane Needle"
+      ]
+     }
+    ],
+    "perk": "Stylostixis",
+    "q": "Targets damaged by Arcane Needle emit a suspending detonation when defeated.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suspend",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Arcane Needle"
+      ]
+     }
+    ],
+    "perk": "Stylostixis",
+    "q": "Targets damaged by Arcane Needle emit a suspending detonation when defeated.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Needlestorm"
+      ]
+     }
+    ],
+    "perk": "Stylostixis",
+    "q": "Landing multiple Arcane Needles or Needlestorm on the same target immediately triggers a larger, more powerful detonation.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "perk": "Stylostixis",
+    "q": "Defeating suspended targets grants melee energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "defeating suspended targets or Arcane Needle kills",
+    "perk": "Stylostixis",
+    "q": "Defeating suspended targets grants melee energy.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Arcane Needles also become Shield-Piercing (anti-Barrier). Any Suspend source pays out melee energy."
+ },
+ {
+  "id": "xa:necroticgrip",
+  "n": "Necrotic Grip",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Grasp of the Devourer",
+    "q": "Damaging a target with a melee inflicts potent corruption that deals increasing damage over time.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "corruption",
+    "on": "melee hit",
+    "perk": "Grasp of the Devourer",
+    "q": "Damaging a target with a melee inflicts potent corruption that deals increasing damage over time.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "corruption",
+    "on": "corrupted target dies",
+    "perk": "Grasp of the Devourer",
+    "q": "Defeating targets afflicted by corruption spreads the condition.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "corruption",
+    "if": [
+     {
+      "any": [
+       {
+        "item": "Thorn"
+       },
+       {
+        "item": "Osteo Striga"
+       },
+       {
+        "item": "Touch of Malice"
+       },
+       {
+        "item": "Necrochasm"
+       },
+       {
+        "item": "Cull's Shadow"
+       }
+      ]
+     }
+    ],
+    "perk": "Grasp of the Devourer",
+    "q": "Kills with the following also spread the Potent Corruption:",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "if": [
+     {
+      "any": [
+       {
+        "item": "Thorn"
+       },
+       {
+        "item": "Osteo Striga"
+       },
+       {
+        "item": "Touch of Malice"
+       },
+       {
+        "item": "Necrochasm"
+       },
+       {
+        "item": "Cull's Shadow"
+       }
+      ]
+     }
+    ],
+    "perk": "Grasp of the Devourer",
+    "q": "Provides a moderate benefit to the airborne effectiveness stat of all Weapons of Sorrow.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:nezarecssin",
+  "n": "Nezarec's Sin",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "Void final blows",
+    "perk": "Abyssal Extractors",
+    "q": "Void final blows increase ability energy recharge rate.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "Void final blows",
+    "perk": "Abyssal Extractors",
+    "q": "Void final blows increase ability energy recharge rate.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "Void final blows",
+    "perk": "Abyssal Extractors",
+    "q": "Void final blows increase ability energy recharge rate.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "on": "Void final blows",
+    "perk": "Abyssal Extractors",
+    "q": "Void final blows increase ability energy recharge rate.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suppress",
+    "if": [
+     {
+      "piece": "Soul Siphon"
+     }
+    ],
+    "perk": "Abyssal Extractors",
+    "q": "Combatants affected by Soul Siphon are suppressed.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "perk": "Abyssal Extractors",
+    "q": "Defeating suppressed targets grants more time to Abyssal Extractors.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Void final blows from weapons or abilities both count."
+ },
+ {
+  "id": "xa:nothingmanacles",
+  "n": "Nothing Manacles",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Scatter Grenade"
+      ]
+     }
+    ],
+    "perk": "Scatter Charge",
+    "q": "You gain an additional Scatter Grenade charge. Enables tracking for Scatter Grenade projectiles.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Scatter Grenade"
+      ]
+     }
+    ],
+    "perk": "Scatter Charge",
+    "q": "Scatter Grenade final blows create additional Scatter Grenade projectiles.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity: the extra charge stacks with Chaos Accelerant's; the tracking does not."
+ },
+ {
+  "id": "xa:ophidianaspect",
+  "n": "Ophidian Aspect",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "perk": "Cobra Totemic",
+    "q": "Improves melee range",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "handling",
+    "perk": "Cobra Totemic",
+    "q": "Improves melee range as well as ready speed and reload for weapons.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "perk": "Cobra Totemic",
+    "q": "Improves melee range as well as ready speed and reload for weapons.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Cobra Totemic",
+    "q": "Provides a small benefit to airborne effectiveness for all weapons.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:osmiomancygloves",
+  "n": "Osmiomancy Gloves",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Coldsnap Grenade"
+      ]
+     }
+    ],
+    "perk": "Fervid Coldsnap",
+    "q": "Your Coldsnap grenades have an additional charge that recharges quicker on hits. The seeker spawned from Coldsnap grenades travels farther.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "Coldsnap hits",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Coldsnap Grenade"
+      ]
+     }
+    ],
+    "perk": "Fervid Coldsnap",
+    "q": "Damaging an enemy with Coldsnap Grenades grants Grenade Ability Energy.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "xa:phoenixprotocol",
+  "n": "Phoenix Protocol",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Battle-Hearth",
+    "q": "Kills and assists you make while standing in your Well of Radiance return Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "on": "kills inside your Well",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Battle-Hearth",
+    "q": "Kills and assists you make while standing in your Well of Radiance return Super energy.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity/Compendium: only while below 50% Super energy; ally kills count."
+ },
+ {
+  "id": "xa:promethiumspur",
+  "n": "Promethium Spur",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weapon",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Embers of Light",
+    "q": "While a Solar Super is equipped, weapon final blows grant class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "weapon final blows",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Embers of Light",
+    "q": "While a Solar Super is equipped, weapon final blows grant class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "rift",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Embers of Light",
+    "q": "Defeating targets with your weapon while standing in a healing rift creates a pulse",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "radiant",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Healing Rift"
+      ]
+     }
+    ],
+    "perk": "Embers of Light",
+    "q": "Defeating targets with your weapon while standing in a healing rift creates a pulse that grants Radiant to you and nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Empowering Rift"
+      ]
+     }
+    ],
+    "perk": "Embers of Light",
+    "q": "an empowering rift instead grants Cure to you and nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "radiant",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak"
+      ]
+     }
+    ],
+    "perk": "Embers of Light",
+    "q": "Daybreak final blows grant both effects.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak"
+      ]
+     }
+    ],
+    "perk": "Embers of Light",
+    "q": "Daybreak final blows grant both effects.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Compendium adds that Well of Radiance kills also grant Radiant and Cure."
+ },
+ {
+  "id": "xa:rainoffire",
+  "n": "Rain of Fire",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "reload",
+    "on": "air dodge",
+    "if": [
+     {
+      "any": [
+       {
+        "piece": "Icarus Dash"
+       },
+       {
+        "piece": "Weavewalk"
+       }
+      ]
+     }
+    ],
+    "perk": "Soaring Fusilier",
+    "q": "Air dodge reloads all of your weapons",
+    "s": "bungie",
+    "note": "Clarity: air dodges include Icarus Dash and Weavewalk."
+   },
+   {
+    "do": "uses",
+    "t": "airborne",
+    "perk": "Soaring Fusilier",
+    "q": "Air dodge reloads all of your weapons",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "radiant",
+    "on": "Fusion or Linear Fusion Rifle final blows",
+    "perk": "Soaring Fusilier",
+    "q": "final blows with these weapons make you radiant",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Soaring Fusilier",
+    "q": "Provides a moderate benefit to the airborne effectiveness stat of Fusion Rifles and Linear Fusion Rifles.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:rimecoatraiment",
+  "n": "Rime-coat Raiment",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "stasisturret",
+    "if": [
+     {
+      "piece": "Bleak Watcher"
+     }
+    ],
+    "perk": "Bleak Domain",
+    "q": "Your Bleak Watcher turrets are enhanced with extended range and are surrounded by Stasis crystals and a storm.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "by": "stasisturret",
+    "if": [
+     {
+      "piece": "Bleak Watcher"
+     }
+    ],
+    "perk": "Bleak Domain",
+    "q": "Your Bleak Watcher turrets are enhanced with extended range and are surrounded by Stasis crystals and a storm.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "firing weapons with Icicles from the turret storm",
+    "if": [
+     {
+      "piece": "Bleak Watcher"
+     }
+    ],
+    "perk": "Bleak Domain",
+    "q": "Icicles activate when you fire your weapons, applying Slow to targets they hit.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Compendium: these crystals count as Super ability damage."
+ },
+ {
+  "id": "xa:sanguinealchemy",
+  "n": "Sanguine Alchemy",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "rift",
+    "perk": "Blood Magic",
+    "q": "While standing in any rift, damaging a target will mark it.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "on": "standing in a rift",
+    "perk": "Blood Magic",
+    "q": "gain additional bonus damage with weapons that have a damage type matching your equipped Super",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "rift",
+    "perk": "Blood Magic",
+    "q": "Weapon final blows while standing in any rift pause the rift's countdown, extending its duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Blood Magic",
+    "q": "While standing in a Rift or a Well of Radiance:",
+    "s": "clarity",
+    "note": "Well of Radiance gives the surge and mark but is not extended."
+   }
+  ]
+ },
+ {
+  "id": "xa:secantfilaments",
+  "n": "Secant Filaments",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "rift",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Nova Bomb: Cataclysm",
+       "Nova Bomb: Vortex",
+       "Nova Warp"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Empowering Rift"
+      ]
+     }
+    ],
+    "perk": "Devouring Rift",
+    "q": "While using a Void Super, casting an Empowering Rift will grant you Devour.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "devour",
+    "on": "casting or standing in your Empowering Rift",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Nova Bomb: Cataclysm",
+       "Nova Bomb: Vortex",
+       "Nova Warp"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Empowering Rift"
+      ]
+     }
+    ],
+    "perk": "Devouring Rift",
+    "q": "While using a Void Super, casting an Empowering Rift will grant you Devour.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "perk": "Devouring Rift",
+    "q": "Defeating a target while Devour is active grants you class ability energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "kills while Devour is active",
+    "perk": "Devouring Rift",
+    "q": "Defeating a target while Devour is active grants you class ability energy.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Bungie text mentions disrupting combatants; Clarity/Compendium say that part (Overload Shot) no longer functions."
+ },
+ {
+  "id": "xa:skullofdireahamkara",
+  "n": "Skull of Dire Ahamkara",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Nova Bomb: Cataclysm",
+       "Nova Bomb: Vortex"
+      ]
+     }
+    ],
+    "perk": "Actual Grandeur",
+    "q": "After casting a Nova Bomb, briefly gain a free cast of a fast-moving but weaker Nova Bomb: Lance.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Nova Bomb: Cataclysm"
+      ]
+     }
+    ],
+    "perk": "Actual Grandeur",
+    "q": "Your Nova Bomb: Cataclysm is empowered if detonated with another Nova Bomb.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Nova Bomb: Cataclysm",
+       "Nova Bomb: Vortex"
+      ]
+     }
+    ],
+    "perk": "Actual Grandeur",
+    "q": "Massively increases Damage Resist during Nova Bomb cast",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "on": "Nova Bomb kills, or weapon kills with Devour",
+    "perk": "Actual Grandeur",
+    "q": "Nova Bomb final blows and weapon final blows while you have Devour grant Super energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "perk": "Actual Grandeur",
+    "q": "weapon final blows while you have Devour grant Super energy",
+    "s": "bungie",
+    "note": "Clarity: the Devour part works with any Super."
+   }
+  ]
+ },
+ {
+  "id": "xa:solipsism",
+  "n": "Solipsism",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Spirit of the Necrotic",
+    "q": "Damaging a target with a melee inflicts potent corruption.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "corruption",
+    "on": "melee hit",
+    "perk": "Spirit of the Necrotic",
+    "q": "Damaging a target with a melee inflicts potent corruption.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "corruption",
+    "on": "corrupted target dies",
+    "perk": "Spirit of the Necrotic",
+    "q": "Defeating targets afflicted by corruption spreads the condition.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "perk": "Spirit of the Swarm",
+    "q": "Destroying a Tangle spawns Threadlings.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "threadling",
+    "on": "destroying a Tangle",
+    "perk": "Spirit of the Swarm",
+    "q": "Destroying a Tangle spawns Threadlings.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Prismatic exotic that combines two chosen Spirits; these are its Warlock-sourced Spirits (Necrotic Grip, Swarmers)."
+ },
+ {
+  "id": "xa:speakerssight",
+  "n": "Speaker's Sight",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "perk": "The Lost Voice",
+    "q": "Healing grenades spawn a Restorative Turret.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "healingturret",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "perk": "The Lost Voice",
+    "q": "Healing grenades spawn a Restorative Turret.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "by": "healingturret",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "perk": "The Lost Voice",
+    "q": "Healing Seekers apply Cure x1 and Restoration x1",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "by": "healingturret",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "perk": "The Lost Voice",
+    "q": "Healing Seekers apply Cure x1 and Restoration x1",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "healing",
+    "perk": "The Lost Voice",
+    "q": "Healing allies occasionally spawns an Orb of Power.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "healing allies (10 s cooldown)",
+    "perk": "The Lost Voice",
+    "q": "Healing allies occasionally spawns an Orb of Power.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity: with Touch of Flame the turret's Cure and Restoration are x2 for the wearer."
+ },
+ {
+  "id": "xa:starfireprotocol",
+  "n": "Starfire Protocol",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Fusion Grenade"
+      ]
+     }
+    ],
+    "perk": "Fusion Harness",
+    "q": "Fusion Grenades have an additional charge and recharge from empowered weapon damage",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Fusion Grenade"
+      ]
+     }
+    ],
+    "perk": "Fusion Harness",
+    "q": "While Radiant, in an Empowering Rift, or in a Well of Radiance:",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "rift",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Fusion Grenade"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Empowering Rift"
+      ]
+     }
+    ],
+    "perk": "Fusion Harness",
+    "q": "While Radiant, in an Empowering Rift, or in a Well of Radiance:",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "weapon",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Fusion Grenade"
+      ]
+     }
+    ],
+    "perk": "Fusion Harness",
+    "q": "recharge from empowered weapon damage, with empowered weapon final blows granting more energy",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "weapon hits/kills while Radiant or in Empowering Rift/Well",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Fusion Grenade"
+      ]
+     }
+    ],
+    "perk": "Fusion Harness",
+    "q": "recharge from empowered weapon damage, with empowered weapon final blows granting more energy",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "Fusion Grenade kills",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Fusion Grenade"
+      ]
+     }
+    ],
+    "perk": "Fusion Harness",
+    "q": "Defeating targets with Fusion Grenades grant Rift energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:stormdancersbrace",
+  "n": "Stormdancer's Brace",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Stormtrance"
+      ]
+     }
+    ],
+    "perk": "Ascending Amplitude",
+    "q": "Stormtrance hits and final blows increase the damage it deals. Refunds Super energy when it ends.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Stormtrance"
+      ]
+     }
+    ],
+    "perk": "Ascending Amplitude",
+    "q": "Refunds Super energy when it ends.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "amplified",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Stormtrance"
+      ]
+     }
+    ],
+    "perk": "Ascending Amplitude",
+    "q": "Casting your Super grants Amplified.",
+    "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Stormtrance"
+      ]
+     }
+    ],
+    "perk": "Ascending Amplitude",
+    "q": "While Stormtrance is equipped, ability damage while amplified grants Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "on": "Arc ability hits while amplified",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Stormtrance"
+      ]
+     }
+    ],
+    "perk": "Ascending Amplitude",
+    "q": "While Stormtrance is equipped, ability damage while amplified grants Bolt Charge.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:sunbracers",
+  "n": "Sunbracers",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Solar Grenade"
+      ]
+     }
+    ],
+    "perk": "Helium Spirals",
+    "q": "Increases the duration of Solar Grenades.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Solar Grenade"
+      ]
+     }
+    ],
+    "perk": "Helium Spirals",
+    "q": "Solar melee kills grant unlimited Solar Grenade energy for a brief time.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "melee kill, then throwing the grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Solar Grenade"
+      ]
+     }
+    ],
+    "perk": "Helium Spirals",
+    "q": "Solar melee kills grant unlimited Solar Grenade energy for a brief time.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity/Compendium: any Powered Melee kill arms it (not only Solar), and only the grenade named Solar Grenade benefits."
+ },
+ {
+  "id": "xa:swarmers",
+  "n": "Swarmers",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "tangle",
+    "perk": "Swarmers",
+    "q": "Destroying a Tangle spawns a Threadling.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "threadling",
+    "on": "destroying a Tangle",
+    "perk": "Swarmers",
+    "q": "Destroying a Tangle spawns a Threadling.",
+    "s": "bungie",
+    "note": "Clarity/Compendium: 2 Threadlings."
+   },
+   {
+    "do": "modifies",
+    "t": "threadling",
+    "perk": "Swarmers",
+    "q": "Your Threadlings unravel targets that they damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "unravel",
+    "by": "threadling",
+    "perk": "Swarmers",
+    "q": "Your Threadlings unravel targets that they damage.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:thestag",
+  "n": "The Stag",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "rift",
+    "perk": "Dearly Departed",
+    "q": "Your Rift provides damage reduction to allied Guardians standing in it.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "by": "rift",
+    "who": "allies",
+    "perk": "Dearly Departed",
+    "q": "Your Rift provides damage reduction to allied Guardians standing in it.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "perk": "Dearly Departed",
+    "q": "Grants Rift energy when you are critically wounded.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "reaching critical health",
+    "perk": "Dearly Departed",
+    "q": "Grants Rift energy when you are critically wounded.",
+    "s": "bungie"
+   }
+  ],
+  "note": "On death it leaves a Healing Rift on your corpse. Well of Radiance does not get the resist (Clarity)."
+ },
+ {
+  "id": "xa:transversivesteps",
+  "n": "Transversive Steps",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sprinting",
+    "perk": "Strange Protractor",
+    "q": "After a short time sprinting, your currently equipped weapon is automatically reloaded.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "on": "sprinting 1.5 s",
+    "perk": "Strange Protractor",
+    "q": "After a short time sprinting, your currently equipped weapon is automatically reloaded.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:veritysbrow",
+  "n": "Verity's Brow",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weapon",
+    "perk": "The Fourth Magic",
+    "q": "Weapon final blows with a damage type matching your grenade grant Death Throes, which provide a grenade damage bonus and grant you grenade energy.",
+    "s": "bungie",
+    "note": "Weapon element must match the grenade element."
+   },
+   {
+    "do": "grants",
+    "t": "deaththroes",
+    "on": "grenade-matching weapon final blows",
+    "perk": "The Fourth Magic",
+    "q": "Weapon final blows with a damage type matching your grenade grant Death Throes, which provide a grenade damage bonus and grant you grenade energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "by": "deaththroes",
+    "perk": "The Fourth Magic",
+    "q": "Weapon final blows with a damage type matching your grenade grant Death Throes, which provide a grenade damage bonus and grant you grenade energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "by": "deaththroes",
+    "perk": "The Fourth Magic",
+    "q": "Weapon final blows with a damage type matching your grenade grant Death Throes, which provide a grenade damage bonus and grant you grenade energy.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "perk": "The Fourth Magic",
+    "q": "When you have Death Throes and throw a grenade, nearby allies gain greatly increased grenade regeneration for a short time.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "throwing a grenade with Death Throes",
+    "who": "allies",
+    "perk": "The Fourth Magic",
+    "q": "When you have Death Throes and throw a grenade, nearby allies gain greatly increased grenade regeneration for a short time.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:vesperofradius",
+  "n": "Vesper of Radius",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "rift",
+    "perk": "Planetary Torrent",
+    "q": "Rifts periodically release Arc shockwaves.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "rift",
+    "perk": "Planetary Torrent",
+    "q": "Rifts periodically release Arc shockwaves. Final blows with these shockwaves create an Arc explosion.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Chaos Reach",
+       "Stormtrance"
+      ]
+     }
+    ],
+    "perk": "Planetary Torrent",
+    "q": "While an Arc Super is equipped, the shockwaves and subsequent explosions blind nearby targets.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "3+ enemies within 15 m",
+    "perk": "Planetary Torrent",
+    "q": "Rift energy recharges faster when you are surrounded by targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "xa:wingsofsacreddawn",
+  "n": "Wings of Sacred Dawn",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "airborne",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Tome of Dawn",
+    "q": "aiming weapons while you're midair suspends you there for a short time",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "perk": "Tome of Dawn",
+    "q": "While this effect is active, you are more resistant to incoming damage and combatants are less accurate.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "restoration",
+    "on": "Solar weapon final blows while hovering",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     },
+     {
+      "weapon": "solar"
+     }
+    ],
+    "perk": "Tome of Dawn",
+    "q": "weapon final blows provide Restoration and reload your other weapons from reserves",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "on": "Solar weapon final blows while hovering",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     },
+     {
+      "weapon": "solar"
+     }
+    ],
+    "perk": "Tome of Dawn",
+    "q": "weapon final blows provide Restoration and reload your other weapons from reserves",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "airborneeffectiveness",
+    "perk": "Tome of Dawn",
+    "q": "Provides a large benefit to the airborne effectiveness stat of all weapons.",
+    "s": "bungie",
+    "note": "Clarity: only with a Solar Super equipped, while airborne."
+   }
+  ],
+  "note": "Clarity says any weapon kill during Tome of Dawn grants Restoration and refills; Bungie/Compendium say Solar weapon kills."
+ },
+ {
+  "id": "xa:wintersguile",
+  "n": "Winter's Guile",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Warlord's Sigil",
+    "q": "Melee and finisher final blows increase melee damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "finisher",
+    "perk": "Warlord's Sigil",
+    "q": "Melee and finisher final blows increase melee damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleedamage",
+    "on": "melee or finisher final blows (stacks)",
+    "perk": "Warlord's Sigil",
+    "q": "Melee and finisher final blows increase melee damage.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "using a melee at 10 stacks",
+    "perk": "Warlord's Sigil",
+    "q": "With maximum stacks, you gain vastly increased melee regeneration speed for a short time.",
+    "s": "bungie"
+   }
+  ],
+  "note": "Clarity: reaching 10 stacks also gives a melee charge; Glaive melee kills count."
+ }
+]

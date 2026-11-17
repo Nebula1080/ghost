@@ -42,9 +42,9 @@ const pick = async (pg, sel, text) => {
   w && a ? ok('weapon and armor pickers list vault items') : fail('weapon/armor picker empty');
   const syn = await pg.$$eval('#bSyn .skey', x => x.map(k => k.querySelector('.skh b').textContent));
   syn.includes('Scorch') ? ok('interactions show Scorch: Incinerator Snap -> Ember of Searing') : fail('no Scorch interaction: ' + syn.join(','));
-  await pg.click('#bSyn .skey .schip'); await pg.waitForTimeout(100);
-  const ev = await pg.$eval('#bSyn .sev', e => e.textContent);
-  /scorch/i.test(ev) ? ok('tapping a piece shows the sentence behind it') : fail('evidence missing: ' + ev);
+  await pg.evaluate(() => [...document.querySelectorAll('#bSyn .skey')].find(k => k.querySelector('.skh b').textContent === 'Scorch').querySelector('.schip').click()); await pg.waitForTimeout(100);
+  const ev = await pg.evaluate(() => [...document.querySelectorAll('#bSyn .skey')].find(k => k.querySelector('.skh b').textContent === 'Scorch').querySelector('.sev').textContent);
+  /scorch/i.test(ev) ? ok('tapping a piece shows the curated quote behind it') : fail('evidence missing: ' + ev);
   const stats = await pg.$$eval('.bstat', x => x.length); stats === 6 ? ok('six Armor 3.0 stats shown') : fail('stats rows ' + stats);
   // DIM loadout link
   await pg.click('#bDim'); await pg.waitForSelector('#dimUrl');
