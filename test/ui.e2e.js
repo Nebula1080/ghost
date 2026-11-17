@@ -66,17 +66,19 @@ const fails = []; const ok = m => console.log('  ok  ', m); const fail = m => { 
     await p3.goto('file://' + path.join(root, 'dist/index.html').split(path.sep).join('/')); await p3.waitForTimeout(400);
     await p3.evaluate(() => document.getElementById('intro')?.remove());
     await p3.setInputFiles('#file', fx); await p3.waitForTimeout(900);
-    const pb = () => p3.evaluate(() => { const p = [...document.querySelectorAll('.pane')].find(p => p.getBoundingClientRect().left < 50 && p.getBoundingClientRect().left > -5); window.__pb = p.querySelector('.pane-body'); return window.__pb.clientHeight; });
-    const h0 = await pb();
-    await p3.evaluate(() => { const f = document.createElement('div'); f.style.height = '3000px'; window.__pb.appendChild(f); });
-    for (let i = 0; i < 5; i++) { await p3.evaluate(() => window.__pb.scrollBy(0, 120)); await p3.waitForTimeout(50); }
-    await p3.waitForTimeout(400);
-    const c1 = await p3.evaluate(() => document.body.classList.contains('compact')), h1 = await pb();
-    c1 && h1 > h0 + 150 ? ok(`phone: scrolling down collapses the header chrome (list ${h0}px → ${h1}px)`) : fail(`phone: no collapse on scroll (compact ${c1}, ${h0} → ${h1})`);
-    for (let i = 0; i < 3; i++) { await p3.evaluate(() => window.__pb.scrollBy(0, -40)); await p3.waitForTimeout(50); }
+    // phones scroll the whole page (#main): the art, chips and pane controls scroll away; only the top bar slims
+    await p3.evaluate(() => { const p = [...document.querySelectorAll('.pane')].find(p => p.getBoundingClientRect().left < 50 && p.getBoundingClientRect().left > -5); window.__pb = p.querySelector('.pane-body'); window.__sc = document.querySelector('#main'); const f = document.createElement('div'); f.style.height = '3000px'; window.__pb.appendChild(f); });
+    const pageScroll = await p3.evaluate(() => getComputedStyle(window.__pb).overflowY === 'visible' && window.__sc.scrollHeight > window.__sc.clientHeight + 1000);
+    pageScroll ? ok('phone: the vault scrolls as one page (no inner list scroller)') : fail('phone: the pane list still scrolls on its own');
+    const hh0 = await p3.evaluate(() => document.querySelector('header').offsetHeight);
+    for (let i = 0; i < 5; i++) { await p3.evaluate(() => window.__sc.scrollBy(0, 120)); await p3.waitForTimeout(50); }
+    await p3.waitForTimeout(700);
+    const c1 = await p3.evaluate(() => document.body.classList.contains('compact')), hh1 = await p3.evaluate(() => document.querySelector('header').offsetHeight);
+    c1 && hh1 < hh0 ? ok(`phone: scrolling down slims the top bar (${hh0}px → ${hh1}px)`) : fail(`phone: no fold on scroll (compact ${c1}, ${hh0} → ${hh1})`);
+    for (let i = 0; i < 3; i++) { await p3.evaluate(() => window.__sc.scrollBy(0, -40)); await p3.waitForTimeout(50); }
     await p3.waitForTimeout(300);
-    (await p3.evaluate(() => document.body.classList.contains('compact'))) ? ok('phone: scrolling up part way keeps it collapsed') : fail('phone: header expanded before reaching the top');
-    await p3.evaluate(() => { window.__pb.scrollTop = 0; }); await p3.waitForTimeout(800);
+    (await p3.evaluate(() => document.body.classList.contains('compact'))) ? ok('phone: scrolling up part way keeps it slim') : fail('phone: top bar expanded before reaching the top');
+    await p3.evaluate(() => { window.__sc.scrollTop = 0; }); await p3.waitForTimeout(800);
     (await p3.evaluate(() => !document.body.classList.contains('compact'))) ? ok('phone: reaching the very top restores it') : fail('phone: header chrome stays collapsed at the top');
     await p3.evaluate(() => window.__pb.closest('.pane').querySelector('[data-act=menu]').click()); await p3.waitForTimeout(200);
     const m = await p3.evaluate(() => {

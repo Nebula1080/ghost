@@ -251,6 +251,8 @@ at('bungie: Bungie error messages are not echoed (they could carry a token or ma
 });
 t('apiToItems: maps a Bungie profile to the CSV item shape; hostile values are dropped or coerced', () => {
   const ad = require('../data/api-defs.json');
+  const byName = n => Object.keys(ad.p).find(h => ad.p[h][0] === n);
+  const MOD_A = byName('Backup Mag'), MOD_B = byName('Counterbalance Stock');
   const resp = {
     characters: { data: { '2305843009300000001': { classType: 2 } } },
     profileInventory: { data: { items: [
@@ -263,9 +265,9 @@ t('apiToItems: maps a Bungie profile to the CSV item shape; hostile values are d
     itemComponents: {
       instances: { data: { '6917529000000000001': { damageType: 6, primaryStat: { value: 493 }, gearTier: 4 }, '6917529000000000002': { primaryStat: { value: '<b>' }, energy: { energyCapacity: 11 } } } },
       stats: { data: { '6917529000000000002': { stats: { 2996146975: { value: 30 }, 392767087: { value: 25 }, 3493869314: { value: 20 }, 144602215: { value: 5 } } } } },
-      sockets: { data: { '6917529000000000001': { sockets: [{ plugHash: 1294026524, isVisible: true }, { plugHash: 1015611457, isVisible: true }, { plugHash: 150943600, isVisible: true }] },
+      sockets: { data: { '6917529000000000001': { sockets: [{ plugHash: 1294026524, isVisible: true }, { plugHash: 1015611457, isVisible: true }, { plugHash: 150943600, isVisible: true }, {}, {}, {}, { plugHash: Number(MOD_A), isVisible: true }] },
         '6917529000000000002': { sockets: [{ plugHash: 351770835, isVisible: true }] } } },
-      reusablePlugs: { data: { '6917529000000000001': { plugs: { 1: [{ plugItemHash: 1015611457 }, { plugItemHash: 1294026524 }] } } } },
+      reusablePlugs: { data: { '6917529000000000001': { plugs: { 1: [{ plugItemHash: 1015611457 }, { plugItemHash: 1294026524 }], 6: [{ plugItemHash: Number(MOD_A) }, { plugItemHash: Number(MOD_B) }] } } } },
     },
   };
   const { weapons, armor } = C.apiToItems(resp, ad);
@@ -275,8 +277,9 @@ t('apiToItems: maps a Bungie profile to the CSV item shape; hostile values are d
   assert.strictEqual(w.ammo, 'special'); assert.strictEqual(w.power, 493); assert.strictEqual(w.tier, 4); assert.strictEqual(w.frame, 'Adaptive Frame');
   assert.ok(w.locked && w.crafted && w.owner === 'Vault' && w.src === 'api');
   assert.strictEqual(w.mwType, 'Range'); assert.strictEqual(w.mwTier, 6);
-  assert.deepStrictEqual(w.perks.filter(p => p.s).map(p => p.n), ['Adaptive Frame', 'Kill Clip', 'Tier 6: Range']);
-  assert.ok(w.perks.some(p => p.n === 'Adaptive Frame' && !p.s), 'socket options listed, only the inserted one marked');
+  assert.deepStrictEqual(w.perks.filter(p => p.s).map(p => p.n), ['Adaptive Frame', 'Kill Clip', 'Tier 6: Range', 'Backup Mag']);
+  assert.ok(w.perks.some(p => p.n === 'Adaptive Frame' && !p.s), 'perk socket options listed, only the inserted one marked');
+  assert.ok(w.perks.some(p => p.n === 'Backup Mag' && p.s) && !w.perks.some(p => p.n === 'Counterbalance Stock'), 'mod and masterwork sockets show only the inserted plug');
   const e = weapons.find(x => x.id === '6917529000000000004'); assert.ok(e.equipped && e.owner === 'Warlock');
   const a = armor[0]; assert.strictEqual(a.frame, 'Reaver'); assert.strictEqual(a.power, null); assert.strictEqual(a.energy, 11);
   assert.strictEqual(a.stats.Total, 80); assert.strictEqual(a.tertiary, 'melee'); assert.strictEqual(a.equippable, 'Warlock');

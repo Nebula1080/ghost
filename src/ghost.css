@@ -426,38 +426,39 @@ a{color:var(--light)}
 .pane-head select.s{flex:1 1 96px;min-width:0;max-width:150px}
 .pane-head [data-act=dir]{flex:none}
 
-/* phone: give the list the screen. Quick filters stay one swipeable row. body.compact (app.html: on whenever the
-   list is scrolled off its very top or an item panel is open) shrinks the header, scene art, pane chips, pane
-   controls and the Subclasses header. Everything eases over .5s and nothing pops in or out (no display:none), so
-   the change reads as one smooth fold. The pane menu scrolls within the space it has (max-height set on open). */
+/* phone: give the content the screen. Quick filters stay one swipeable row. Pages scroll as a whole; body.compact
+   (app.html: on whenever the page is scrolled off its very top or an item panel is open) only slims the top bar.
+   The pane menu scrolls within the space it has (max-height set on open). */
 .d-scroll{display:contents}
 .mrevert,.grab .gx,.lshort{display:none}
 @media (max-width:760px){
   html,body{overscroll-behavior-y:none}
   .pane-head .row.qchips{flex-wrap:nowrap}
   :root{--fold:.5s cubic-bezier(.25,.8,.3,1)}
-  header,.scene,#paneChips,.pane-head,.sv-head,.sv-els{transition:min-height var(--fold),padding var(--fold)}
-  .pbtn,.mmenu,.pchip,.sv-head .tab,.sv-head .btn,.sv-els .tab{transition:min-height var(--fold),padding var(--fold),border-color .25s,background-color .25s,color .25s}
-  .scene .title,.sv-head .title{transition:font-size var(--fold),letter-spacing var(--fold)}
+  /* Vault and Subclasses scroll as one page: the art, pane chips, pane controls and subclass header scroll away
+     with the finger (1:1, no jumps). Only the top bar slims while scrolled (body.compact). */
+  #main{overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain}
+  #panes{flex:none;align-items:flex-start}
+  .pane{height:auto}
+  .pane-body{overflow:visible;flex:none}
+  #paneChips{position:sticky;top:0;z-index:6}
+  #subv.open{overflow-y:auto;overscroll-behavior-y:contain}
+  #subv>*{flex:none}
+  .sv-body{min-height:0}
+  .sv-main{overflow:visible}
+  header{transition:min-height var(--fold),padding var(--fold)}
+  .pbtn,.mmenu{transition:min-height var(--fold),border-color .25s,background-color .25s,color .25s}
   header .brand .word{display:inline-block;overflow:hidden;white-space:nowrap;max-width:90px;transition:max-width var(--fold),opacity var(--fold)}
-  .scene .sum,.scene .credit,.sv-head .sum,.sv-head #svq,.pane-head .row.qchips{max-height:70px;overflow:hidden;transition:max-height var(--fold),opacity var(--fold),margin var(--fold),padding var(--fold)}
   .compact header{min-height:38px}
   .compact header .brand .word{max-width:0;opacity:0}
   .compact .pbtn{min-height:30px}
   .compact .mmenu{min-height:32px}
-  .compact .scene{min-height:0;padding:8px 16px}
-  .compact .scene .title,.compact .sv-head .title{font-size:20px}
-  .compact .scene .sum,.compact .scene .credit,.compact .sv-head .sum{max-height:0;opacity:0;margin:0}
+  /* Compare: each row's label sits on its own line above the values, so no item column can ever slide under it */
+  .ctable{grid-template-columns:repeat(var(--n),calc((100vw - 34px) / var(--k,1)));scroll-padding-left:0}
+  .ctable .cl{grid-column:1/-1;width:calc(100vw - 36px);border-right:0;padding:8px 10px 2px}
+  .ctable .cr.ch>.cl,.ctable .cr.sech .cc{display:none}
   /* subclass search gets its own full-width row under the class tabs so its hint is readable */
   .sv-head #svq{flex:1 0 100%;width:100%;max-width:none!important;order:5}
-  .compact .sv-head #svq{max-height:0;opacity:0;padding-top:0;padding-bottom:0;border-width:0}
-  .compact #paneChips{padding:4px 12px}
-  .compact .pchip{min-height:30px}
-  .compact .pane-head{padding:6px 12px}
-  .compact .pane-head .row.qchips{max-height:0;opacity:0;margin-top:-8px;padding-bottom:0}
-  .compact .sv-head{min-height:0;padding:8px 16px}
-  .compact .sv-head .tab,.compact .sv-head .btn,.compact .sv-els .tab{min-height:34px;padding-top:2px;padding-bottom:2px}
-  .compact .sv-els{padding:4px 16px}
   .menu.open .menu-list{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 
   /* item panel: near full height, hero + name + body scroll together, slim art strip, one tag row at the foot */
