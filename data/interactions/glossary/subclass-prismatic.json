@@ -60,18 +60,6 @@
    "def": "The class-specific grenade that replaces your grenade while Transcendent, dealing both Light and Darkness damage (Electrified Snare, Hailfire Spike, Freezing Singularity).",
    "q": "Replaces Grenade Ability with an unique class-specific Prismatic Grenade Ability with Light and Darkness damage types.",
    "src": "sub:transcendence"
-  },
-  "damageresistance": {
-   "l": "Damage resistance",
-   "kind": "buff",
-   "el": "",
-   "aka": [
-    "damage resist",
-    "damage reduction"
-   ],
-   "def": "Reduces the damage you take from enemies.",
-   "q": "Grants 15% [?%] Damage Resistance while within 15 meters of 3 enemies.",
-   "src": "sub:facetofprotection"
   }
  }
 }

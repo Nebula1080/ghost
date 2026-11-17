@@ -85,6 +85,36 @@ For exotic weapons and armor, add `"perk": "<perk name>"` to an effect when it c
 - `note`: optional short interpretation for a person reading the record (e.g. "only Healing Rift; with Empowering Rift
   the soul heals instead").
 
+## Damage sources (`dmg`, `from`)
+Destiny decides what a hit "is" (weapon, grenade, melee, class ability, Super) and many payoffs only fire for one
+source. Record it:
+- `dmg`: on an effect that deals or applies damage, the source terms that damage counts as, e.g.
+  `{ "do": "applies", "t": "scorch", "dmg": ["weapon"], … }` when weapon-applied scorch counts as weapon damage, or
+  `"dmg": ["grenade"]` for Bleak Watcher ("counts as Stasis Grenade Ability Damage"). Source terms: `weapon`,
+  `primaryweapon` / weapon types, `grenade`, `melee`, `poweredmelee`, `classability`, `super`, plus element terms
+  (`solarability`, `voidability`…) when the text says so. Without `dmg`, an effect's source is its piece's kind
+  (weapons → `weapon`, your grenade → `grenade`…); effects done `by` an object take that object's source.
+- `counts` also covers sources: `{ "do": "counts", "t": "weapon", "as": "super", "if": [{ "slot": "super",
+  "is": ["Well of Radiance"] }] }` ("Well of Radiance makes all of the caster's Weapon Damage count as Super Ability
+  Damage").
+- `from`: on a `uses`/`modifies` payoff that only fires for some sources, the accepted source terms, e.g. a perk
+  that triggers on "weapon final blows against scorched targets" → `{ "do": "uses", "t": "scorch", "from": ["weapon"] }`.
+  Only record `dmg`/`from` when the text (any source) states it.
+
+## Damage resistance (`amt`, `vs`, `cat`)
+On `{ "do": "grants", "t": "damageresistance" }` effects:
+- `amt`: the PvE percent as a number (`45` for 45%); the quote must contain that number. Use the PvE value when a
+  PvP value follows in brackets ("20% [15%]" → 20) and add a second effect with `"vs": ["players"]` for the PvP value
+  when it differs.
+- `vs`: what it resists: `all`, `combatants`, `players`, `melee`, `ranged`, `explosive`, `sniper`, `precision`,
+  `solar`, `arc`, `void`, `stasis`, `strand`, `kinetic`, `elemental`, `blocked`.
+- `amts`: when the amount depends on how many copies are equipped ("15%|25%|30% with 1|2|3 Mods"), the list of totals by copy count; every number must be in the quote. Use with `cat`.
+- `vs` may also be `subclass` ("matching your Subclass Element").
+- `cat`: optional group id when sources don't stack with each other (only the highest counts), e.g. a mod and its
+  copies, or "Empowering"-style exclusive buffs. Everything else stacks multiplicatively.
+- `on`: give the trigger ("while Woven Mail is active", "after a powered melee kill") so the tracker can split
+  always-on from situational resistance. Stacking buffs: record the per-stack amount and the maximum in `note`.
+
 ## Rules
 1. Read all sources for the piece before writing. Prefer Bungie for what it does and Clarity/Compendium for details
    that change interactions (counts-as, conditions, exceptions, "does not work with").

@@ -84,7 +84,10 @@
     "perk": "Saint's Fists",
     "on": "melee hits",
     "q": "After a successful melee hit, this weapon gains increased damage, reduced charge time, and improved reload speed for a short duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "modifies",
@@ -454,7 +457,10 @@
     "perk": "Blades of Unmaking",
     "q": "Replaces your melee ability with a 2-hit combo blade attack.",
     "s": "clarity",
-    "note": "while readied; scales with Melee stat and melee damage buffs, not a glaive melee"
+    "note": "while readied; scales with Melee stat and melee damage buffs, not a glaive melee",
+    "dmg": [
+     "melee"
+    ]
    },
    {
     "do": "grants",
@@ -463,6 +469,18 @@
     "on": "frontal blade final blows or rapid hits",
     "q": "Final blows or rapid hits with this weapon's frontal blades heal you",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 20,
+    "vs": [
+     "all"
+    ],
+    "on": "Soulfire Zeal catalyst trait: a Soulfire Crystal explodes within 15 m (7 s, up to 20 s)",
+    "note": "catalyst trait; the Compendium marks the 20% as unconfirmed",
+    "q": "Soulfire Zeal | Soulfire Crystal Explosions within 15 meters grant maximized movement speed and 20?% Damage Resist",
+    "s": "compendium"
    }
   ]
  },
@@ -794,7 +812,10 @@
     "on": "projectile final blows",
     "q": "Projectile final blows scorch nearby targets.",
     "s": "bungie",
-    "note": "Clarity: Ember of Ashes raises scorch stacks"
+    "note": "Clarity: Ember of Ashes raises scorch stacks",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "grants",
@@ -938,7 +959,10 @@
     "on": "moth detonation",
     "perk": "Loyal Moths",
     "q": "The moth will seek out nearby targets and detonate, damaging and blinding them.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "grants",
@@ -1006,7 +1030,10 @@
     "perk": "Thin the Herd",
     "q": "Rapid final blows against grenade-damaged combatants refill the magazine.",
     "s": "bungie",
-    "note": "Clarity/Compendium: the refill is a kill with any other weapon or source within 6 s of Fighting Lion damage, not grenades specifically"
+    "note": "Clarity/Compendium: the refill is a kill with any other weapon or source within 6 s of Fighting Lion damage, not grenades specifically",
+    "from": [
+     "grenade"
+    ]
    }
   ]
  },
@@ -1035,7 +1062,10 @@
     "on": "hold reload within 4 s of a weapon kill",
     "q": "replaces Grenade Ability with a Kinetic-Damage Fragmentation Grenade.",
     "s": "compendium",
-    "note": "catalyst (The Rock); the frag counts as a Grenade Ability for grenade-kill and grenade-use effects"
+    "note": "catalyst (The Rock); the frag counts as a Grenade Ability for grenade-kill and grenade-use effects",
+    "dmg": [
+     "grenade"
+    ]
    }
   ]
  },
@@ -1222,6 +1252,40 @@
   ]
  },
  {
+  "id": "xw:heirapparent",
+  "n": "Heir Apparent",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 50,
+    "vs": [
+     "kinetic"
+    ],
+    "on": "while the Arc shield is up (full health, spun up)",
+    "perk": "Armor of the Colossus",
+    "note": "the shield also makes you immune to precision damage; Clarity lists these as PvP shield properties",
+    "q": "50% Damage Resist against Kinetic Damage",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 15,
+    "vs": [
+     "solar",
+     "void",
+     "stasis",
+     "strand"
+    ],
+    "on": "while the Arc shield is up (full health, spun up)",
+    "perk": "Armor of the Colossus",
+    "q": "15% Damage Resist against Non-Arc Elemental Damage",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
   "id": "xw:heirloom",
   "n": "Heirloom",
   "fx": [
@@ -1254,7 +1318,10 @@
     "perk": "Apollonic Tangent",
     "on": "Guidance Ring seekers",
     "q": "Arrows fired through a Guidance Ring release seeking projectiles, which scorch targets",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "uses",
@@ -1285,7 +1352,11 @@
     ],
     "q": "Guidance Rings grant their benefits to any Combat Bow, including Legendaries, Exotics, Heavy Crossbows, Shadowshot, and also Buried Bloodline.",
     "s": "clarity",
-    "note": "Shadowshot arrows through a ring release seekers (Deadfall: 6); those seekers count as Void Super damage"
+    "note": "Shadowshot arrows through a ring release seekers (Deadfall: 6); those seekers count as Void Super damage",
+    "dmg": [
+     "super",
+     "voidability"
+    ]
    }
   ]
  },
@@ -1444,7 +1515,10 @@
     "on": "hip-fire hits; ADS kills explode",
     "q": "Hipfire | Shots inflict x10+5 Scorch upon dealing damage.",
     "s": "compendium",
-    "note": "catalyst (Fang and Claw); its scorch/ignitions deal 53% more damage"
+    "note": "catalyst (Fang and Claw); its scorch/ignitions deal 53% more damage",
+    "dmg": [
+     "weapon"
+    ]
    }
   ]
  },
@@ -1492,7 +1566,6 @@
    "xw:finalitysauger",
    "xw:gjallarhorn",
    "xw:hawkmoon",
-   "xw:heirapparent",
    "xw:izanagisburden",
    "xw:jtunn",
    "xw:lemonarque",

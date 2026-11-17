@@ -44,6 +44,15 @@
    "def": "The Stasis crystals spawned by Howl of the Storm's sliding uppercut. Unlike other Stasis crystals, their damage counts as powered melee damage.",
    "q": "Howl's Crystal Damage counts as Powered Stasis Melee Damage",
    "src": "sub:howlofthestorm"
+  },
+  "stasisability": {
+   "l": "Stasis ability damage",
+   "kind": "damage",
+   "el": "stasis",
+   "aka": ["stasis ability", "stasis abilities", "stasis ability damage", "stasis ability kills"],
+   "def": "Damage or final blows from your Stasis abilities (grenades, melees, Supers, turrets, lances). Some of it is only generic Stasis ability damage, not grenade or melee damage.",
+   "q": "Diamond Lance Damage is considered Generic Stasis Ability Damage. Not Grenade nor Melee Damage.",
+   "src": "sub:diamondlance"
   }
  }
 }

@@ -31,14 +31,24 @@
    {
     "do": "applies",
     "t": "slow",
+    "dmg": [
+     "grenade",
+     "stasisability"
+    ],
     "q": "deploys a miniature black hole orbited by a slowing field",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Compendium: \"The slowing field deals 18 [4] Stasis Damage\"."
    },
    {
     "do": "applies",
     "t": "suppress",
+    "dmg": [
+     "grenade",
+     "voidability"
+    ],
     "q": "the black hole implodes, suppressing and dealing heavy damage to all nearby targets",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Compendium: the implosion deals \"up to 570 [150] Void Damage\"."
    }
   ]
  },
@@ -49,20 +59,34 @@
    {
     "do": "applies",
     "t": "slow",
+    "dmg": [
+     "grenade",
+     "stasisability"
+    ],
     "q": "erupts into a slowing storm",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Compendium: \"Slowing storm deals 15.6 [?] Stasis Damage\"."
    },
    {
     "do": "applies",
     "t": "scorch",
+    "dmg": [
+     "grenade",
+     "solarability"
+    ],
     "q": "the device ignites, creating a deadly scorching cyclone",
     "s": "bungie"
    },
    {
     "do": "applies",
     "t": "scorch",
+    "dmg": [
+     "grenade",
+     "solarability"
+    ],
     "q": "inflicts x10 Scorch every 0.25 seconds for 4 seconds",
-    "s": "compendium"
+    "s": "compendium",
+    "note": "Compendium: the cyclone \"deals 39 [?] Solar Damage\"."
    }
   ]
  },
@@ -849,10 +873,15 @@
    {
     "do": "grants",
     "t": "damageresistance",
-    "on": "within 15 m of 3+ enemies",
     "who": "self",
-    "q": "While surrounded by combatants, you are more resistant to incoming damage.",
-    "s": "bungie"
+    "on": "within 15 m of 3+ enemies",
+    "amt": 15,
+    "vs": [
+     "combatants"
+    ],
+    "q": "Grants 15% [?%] Damage Resistance while within 15 meters of 3 enemies.",
+    "s": "clarity",
+    "note": "PvP value unknown. Bungie says the effect grows while Transcendent; Clarity says it does not, it only stacks with Transcendence's 20%."
    },
    {
     "do": "uses",
@@ -1184,6 +1213,11 @@
    {
     "do": "grants",
     "t": "damageresistance",
+    "on": "while Transcendent",
+    "amt": 20,
+    "vs": [
+     "combatants"
+    ],
     "q": "20% [5%] Damage Resist for 20 seconds",
     "s": "compendium",
     "note": "Also +5% weapon damage and +10% grenade/melee regen."
@@ -1219,6 +1253,17 @@
     "t": "transcendence",
     "q": "Defeating targets while transcendent extends its duration.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while Transcendent",
+    "amt": 5,
+    "vs": [
+     "players"
+    ],
+    "q": "20% [5%] Damage Resist for 20 seconds",
+    "s": "compendium"
    }
   ]
  }

@@ -98,6 +98,21 @@ t('real curated data is valid (schema, terms, conditions, quotes)', () => {
   const r = require('../tools/interactions/check.js').check();
   assert.deepStrictEqual(r.errors, [], r.errors.slice(0, 10).join('\n'));
 });
+t('damage sources: payoffs that need weapon damage do not link to ability-applied effects; counts-as converts', () => {
+  const ix = { t: { scorch: { l: 'Scorch', kind: 'debuff', el: 'solar' }, weapon: { l: 'Weapon damage', kind: 'damage' }, melee: { l: 'Melee', kind: 'ability' }, super: { l: 'Super', kind: 'ability' }, grenade: { l: 'Grenade', kind: 'ability' }, classability: { l: 'Class ability', kind: 'ability' }, movement: { l: 'Movement', kind: 'ability' }, damageresistance: { l: 'Damage resistance', kind: 'buff' } },
+    p: { 'sub:incineratorsnap': [{ do: 'applies', t: 'scorch', q: 'x', s: 'bungie' }],
+         'sub:emberofsearing': [{ do: 'uses', t: 'scorch', from: ['weapon'], q: 'x', s: 'bungie' }, { do: 'grants', t: 'damageresistance', amt: 20, vs: ['combatants'], q: '20', s: 'clarity' }],
+         'sub:heatrises': [{ do: 'grants', t: 'damageresistance', amt: 25, vs: ['combatants'], on: 'while airborne', q: '25', s: 'clarity' }],
+         'sub:emberofsingeing': [{ do: 'uses', t: 'scorch', from: ['melee'], q: 'x', s: 'bungie' }] } };
+  const b = C.normBuild({ cls: 'warlock', el: 'solar', sub: { melee: h('melee', 'Incinerator Snap'), aspects: [h('aspects', 'Heat Rises'), h('aspects', 'Touch of Flame')], fragments: [h('fragments', 'Ember of Searing'), h('fragments', 'Ember of Singeing')] } }, D);
+  const P = C.buildPieces(b, D, new Map()); const ev = C.ixEval(P, ix, D, 'solar');
+  const nm = i => P[i].n;
+  assert.ok(!ev.links.some(l => l.t === 'scorch' && nm(l.to) === 'Ember of Searing'), 'melee-applied scorch does not satisfy a weapon-only payoff');
+  assert.ok(ev.unmatched.some(u => nm(u.c.i) === 'Ember of Searing'), 'listed as a source mismatch');
+  assert.ok(ev.links.some(l => l.t === 'scorch' && nm(l.from) === 'Incinerator Snap' && nm(l.to) === 'Ember of Singeing'), 'melee scorch satisfies a melee payoff');
+  // DR: 20% always, 25% situational -> 1 - 0.8 * 0.75 = 40% at most
+  assert.strictEqual(ev.dr.combatants.always, 20); assert.strictEqual(ev.dr.combatants.all, 40);
+});
 t('stats: armor + fragment + mod bonuses (Bungie investment stats)', () => {
   const arm = { id: '1', kind: 'armor', type: 'Helmet', category: 'Helmet', hash: '0', name: 'H', perks: [], stats: { Health: 30, Melee: 13 }, base: { Health: 25, Melee: 10 } };
   const b = C.normBuild({ cls: 'warlock', el: 'solar', sub: { aspects: [h('aspects', 'Hellion')], fragments: [h('fragments', 'Ember of Torches')] }, a: { head: { id: '1' } }, mods: { head: ['Grenade Mod'] } }, D);

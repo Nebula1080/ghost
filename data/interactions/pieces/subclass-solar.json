@@ -34,6 +34,28 @@
     "t": "scorch",
     "q": "unleash a volley of Solar-charged knives that explode and scorch targets",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90?% [49%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 49,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90?% [49%]",
+    "s": "compendium"
    }
   ]
  },
@@ -59,6 +81,28 @@
     "q": "Sol Invictus creates a Sunspot on cast if grounded",
     "s": "compendium",
     "note": "Sol Invictus also cuts the Super drain."
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [53%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 53,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [53%]",
+    "s": "compendium"
    }
   ]
  },
@@ -139,6 +183,17 @@
     "q": "deals damage, and shatters Stasis Crystals",
     "s": "clarity",
     "note": "The slam wave shatters Stasis crystals (relevant on Prismatic)."
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 25,
+    "vs": [
+     "ranged"
+    ],
+    "on": "during the Consecration animation",
+    "q": "grants 25% damage resistance against non-Melee Combatant damage during the animation",
+    "s": "clarity"
    }
   ]
  },
@@ -204,6 +259,28 @@
     "t": "scorch",
     "q": "Your Daybreak projectiles scorch targets on impact.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [51%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 51,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [51%]",
+    "s": "compendium"
    }
   ]
  },
@@ -340,6 +417,9 @@
    {
     "do": "uses",
     "t": "super",
+    "from": [
+     "super"
+    ],
     "q": "Final blows with a Solar Super causes targets to ignite and creates a Firesprite.",
     "s": "bungie"
    },
@@ -370,6 +450,21 @@
     ],
     "q": "Well of Radiance makes all of the caster's Weapon Damage count as Super Ability Damage so Solar Weapons Kills will also count as Solar Super Kills.",
     "s": "clarity"
+   },
+   {
+    "do": "counts",
+    "t": "weapon",
+    "as": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "q": "Well of Radiance makes all of the caster's Weapon Damage count as Super Ability Damage",
+    "s": "clarity"
    }
   ]
  },
@@ -380,12 +475,18 @@
    {
     "do": "uses",
     "t": "solarweapon",
+    "from": [
+     "solarweapon"
+    ],
     "q": "Solar weapon or ability final blows extend the duration",
     "s": "bungie"
    },
    {
     "do": "uses",
     "t": "solarability",
+    "from": [
+     "solarability"
+    ],
     "q": "Solar weapon or ability final blows extend the duration",
     "s": "bungie"
    },
@@ -450,6 +551,9 @@
    {
     "do": "uses",
     "t": "grenade",
+    "from": [
+     "grenade"
+    ],
     "q": "Solar grenade final blows cure you.",
     "s": "bungie"
    },
@@ -545,6 +649,9 @@
    {
     "do": "uses",
     "t": "solarweapon",
+    "from": [
+     "solarweapon"
+    ],
     "q": "Solar weapon final blows grant you and your allies increased health for a short duration.",
     "s": "bungie"
    },
@@ -639,6 +746,17 @@
     "on": "standing in the rift",
     "q": "Conjure a well of power that increases weapon damage",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 20,
+    "vs": [
+     "all"
+    ],
+    "on": "during the rift cast animation",
+    "q": "Grants 20% Damage Resistance during the cast animation.",
+    "s": "clarity"
    }
   ]
  },
@@ -772,7 +890,30 @@
  {
   "id": "sub:hammerofsol",
   "n": "Hammer of Sol",
-  "fx": []
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [51%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 51,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [51%]",
+    "s": "compendium"
+   }
+  ]
  },
  {
   "id": "sub:hammerstrike",
@@ -843,6 +984,17 @@
     "t": "rift",
     "q": "Conjure a well of power that continuously heals those inside it.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 20,
+    "vs": [
+     "all"
+    ],
+    "on": "during the rift cast animation",
+    "q": "Grants 20% Damage Resistance during the cast animation.",
+    "s": "clarity"
    }
   ]
  },
@@ -959,6 +1111,10 @@
     "do": "applies",
     "t": "scorch",
     "by": "hellion",
+    "dmg": [
+     "grenade",
+     "solarability"
+    ],
     "q": "Targets damaged by the mortar are scorched.",
     "s": "bungie"
    },
@@ -1054,6 +1210,17 @@
     "who": "self",
     "q": "While airborne, rapidly defeating targets with your Super or weapons cures you.",
     "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "weapon",
+    "from": [
+     "weapon",
+     "super"
+    ],
+    "on": "rapid airborne weapon or Super kills",
+    "q": "While Airborne, Weapon or Super Kills within 5 seconds of each grants Cure x1.",
+    "s": "clarity"
    }
   ]
  },
@@ -1100,6 +1267,9 @@
    {
     "do": "uses",
     "t": "radiant",
+    "from": [
+     "poweredmelee"
+    ],
     "q": "While radiant, final blows with your equipped Throwing Knife fully refund your melee energy.",
     "s": "bungie"
    },
@@ -1178,6 +1348,25 @@
     "do": "uses",
     "t": "super",
     "q": "Casting your super grants Cure x1.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 15,
+    "vs": [
+     "all"
+    ],
+    "on": "while Golden Gun: Deadshot is active",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Golden Gun: Deadshot"
+      ]
+     }
+    ],
+    "q": "Deadshot Golden Gun is granted 15% damage resistance",
     "s": "clarity"
    }
   ]
@@ -1322,6 +1511,40 @@
     "q": "Creates a small barrier that you can peek over while aiming down sights",
     "s": "bungie",
     "note": "Behind it: faster reload, stability, range."
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 80,
+    "vs": [
+     "all"
+    ],
+    "on": "during the barricade cast animation",
+    "note": "Clarity says 20%.",
+    "q": "Grants 80% [20%] Damage Resist while in the Barricade Placement animation.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 20,
+    "vs": [
+     "players"
+    ],
+    "on": "during the barricade cast animation",
+    "q": "Grants 80% [20%] Damage Resist while in the Barricade Placement animation.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 80,
+    "vs": [
+     "explosive"
+    ],
+    "on": "standing behind the barricade",
+    "q": "80% Damage Resist against Splash Damage from Combatants.",
+    "s": "compendium"
    }
   ]
  },
@@ -1332,6 +1555,9 @@
    {
     "do": "uses",
     "t": "solarability",
+    "from": [
+     "solarability"
+    ],
     "q": "Final blows with [Solar] Solar abilities or ignitions increase the damage of your Solar abilities.",
     "s": "bungie"
    },
@@ -1366,6 +1592,14 @@
     "q": "While Roaring Flames is active, Unpowered Melee Hits apply 30 Scorch (40 with Ember of Ashes) and count as Powered Melee Hits.",
     "s": "clarity",
     "note": "Uncharged melee hits also count as powered melee hits (e.g. for Ember of Torches)."
+   },
+   {
+    "do": "counts",
+    "t": "melee",
+    "as": "poweredmelee",
+    "on": "uncharged melee hits while Roaring Flames is active",
+    "q": "Unpowered Melee Hits while Roaring Flames is active inflict x30+10 Scorch and count as Powered Melee Hits.",
+    "s": "compendium"
    }
   ]
  },
@@ -1448,6 +1682,9 @@
    {
     "do": "uses",
     "t": "solarability",
+    "from": [
+     "solarability"
+    ],
     "q": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots.",
     "s": "bungie"
    },
@@ -1593,8 +1830,13 @@
     "do": "grants",
     "t": "damageresistance",
     "who": "allies",
-    "q": "are more resistant to incoming damage",
-    "s": "bungie"
+    "amt": 30,
+    "vs": [
+     "all"
+    ],
+    "on": "allies within 15 m while Song of Flame is active",
+    "q": "Allies within 15 metres are granted 30% [?%] Damage Resist",
+    "s": "compendium"
    },
    {
     "do": "modifies",
@@ -1618,6 +1860,14 @@
     "do": "counts",
     "t": "weapon",
     "as": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Song of Flame"
+      ]
+     }
+    ],
     "q": "Weapon Kills by the Caster count as Super Kills. Weapon damage does not count as Ability damage.",
     "s": "compendium"
    },
@@ -1643,6 +1893,29 @@
      }
     ],
     "q": "Consuming a Solar Wisp while Heat Rises is equipped grants Cure x3 and Restoration x2 for 4+2 seconds",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [~50?%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 50,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "note": "Approximate PvP value.",
+    "q": "Damage Resistance: 90% [~50?%]",
     "s": "compendium"
    }
   ]
@@ -1831,6 +2104,41 @@
     "t": "barricade",
     "q": "Creates a large barrier that can be used to reinforce a position with cover",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 80,
+    "vs": [
+     "all"
+    ],
+    "on": "during the barricade cast animation",
+    "note": "Clarity says 20%.",
+    "q": "Grants 80% [20%] Damage Resist while in the Barricade Placement animation.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 20,
+    "vs": [
+     "players"
+    ],
+    "on": "during the barricade cast animation",
+    "q": "Grants 80% [20%] Damage Resist while in the Barricade Placement animation.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 80,
+    "vs": [
+     "explosive"
+    ],
+    "on": "standing behind the barricade",
+    "note": "Clarity says 60% for Towering Barricade.",
+    "q": "80% Damage Resist against Splash Damage from Combatants.",
+    "s": "compendium"
    }
   ]
  },
@@ -1921,6 +2229,12 @@
     "do": "grants",
     "t": "damageresistance",
     "who": "allies",
+    "amt": 20,
+    "vs": [
+     "combatants"
+    ],
+    "on": "standing in the Well",
+    "note": "10% against bosses.",
     "q": "20% Damage Resist against Combatants (10% vs Boss Combatants)",
     "s": "compendium"
    },
@@ -1934,6 +2248,14 @@
     "do": "counts",
     "t": "weapon",
     "as": "super",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Well of Radiance"
+      ]
+     }
+    ],
     "q": "Weapon Damage dealt by the Caster is counted as Super Ability Damage.",
     "s": "compendium"
    },
@@ -1942,6 +2264,19 @@
     "t": "weapondamage",
     "on": "standing in the Well",
     "q": "25% Increased Weapon Damage",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 40,
+    "vs": [
+     "players"
+    ],
+    "who": "allies",
+    "on": "standing in the Well",
+    "note": "Against Primary weapons; 50% against Special and Power weapons and abilities.",
+    "q": "Primary Weapons remain at 40% Damage Resist.",
     "s": "compendium"
    }
   ]

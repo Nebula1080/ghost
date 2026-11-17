@@ -244,6 +244,38 @@
   ]
  },
  {
+  "id": "wp:armorofthecolossus",
+  "n": "Armor of the Colossus",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 50,
+    "vs": [
+     "kinetic"
+    ],
+    "on": "while the Arc shield is up (full health, spun up)",
+    "note": "the shield also makes you immune to precision damage; Clarity lists these as PvP shield properties",
+    "q": "50% Damage Resist against Kinetic Damage",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 15,
+    "vs": [
+     "solar",
+     "void",
+     "stasis",
+     "strand"
+    ],
+    "on": "while the Arc shield is up (full health, spun up)",
+    "q": "15% Damage Resistance against Non-Arc Elemental Damage",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
   "id": "wp:attritionorbs",
   "n": "Attrition Orbs",
   "fx": [
@@ -420,13 +452,19 @@
     "do": "applies",
     "t": "scorch",
     "q": "Dealing sustained damage scorches the target.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "uses",
     "t": "scorch",
     "q": "Dealing damage to a scorched target inflicts scorch.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    }
   ]
  },
@@ -786,6 +824,18 @@
     "q": "Severs for 10 seconds",
     "s": "clarity",
     "note": "Requires Refraction Core; the effect follows your subclass element."
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 46,
+    "vs": [
+     "players"
+    ],
+    "on": "while blocking (attacks in a frontal cone)",
+    "note": "PvP value (~46%); in PvE blocking stops 100% of damage from the front",
+    "q": "[Blocking] grants 100% [~46%] Damage Resist against all damage in a ?° cone.",
+    "s": "compendium"
    }
   ]
  },
@@ -954,7 +1004,12 @@
     "t": "boltcharge",
     "note": "Arc Seeker discharges count as weapon damage; unaffected by Spark of Frequency.",
     "q": "Charged Arc Seeker hits grant, and can spend, Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon",
+     "primaryweapon",
+     "scoutrifle"
+    ]
    }
   ]
  },
@@ -1005,6 +1060,29 @@
     "note": "Spheres count as generic Void weapons; they do not trigger Void ability or melee effects.",
     "q": "They are also able to inflict Volatile through Volatile Rounds.",
     "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 80,
+    "vs": [
+     "all"
+    ],
+    "on": "while guarding with a Transmutation sphere",
+    "q": "grants 80% [50%] damage resistance along with knockback immunity",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 50,
+    "vs": [
+     "players"
+    ],
+    "on": "while guarding with a Transmutation sphere",
+    "note": "PvP value",
+    "q": "grants 80% [50%] damage resistance along with knockback immunity",
+    "s": "clarity"
    }
   ]
  },
@@ -1043,7 +1121,10 @@
     ],
     "note": "Each Healing Grenade orb pickup (by anyone) grants a stack.",
     "q": "Healing grenades and grenade final blows grant additional stacks of the bonus.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "grenade"
+    ]
    }
   ]
  },
@@ -1557,7 +1638,10 @@
     "do": "applies",
     "t": "blind",
     "q": "damaging and blinding them",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "grants",
@@ -1594,7 +1678,10 @@
     "do": "uses",
     "t": "melee",
     "q": "Melee kills grant ammo for this weapon.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    }
   ]
  },
@@ -1606,13 +1693,19 @@
     "do": "creates",
     "t": "threadling",
     "q": "Final blows with this weapon create a Threadling nest that periodically spawns Threadlings.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "creates",
     "t": "threadling",
     "q": "Final blows with this weapon near an existing Threadling nest create a Threadling instead.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "creates",
@@ -1684,7 +1777,10 @@
     "t": "grenade",
     "q": "replaces Grenade Ability with a Kinetic-Damage Fragmentation Grenade.",
     "s": "compendium",
-    "note": "Forerunner catalyst (The Rock); the frag counts as a Grenade Ability for grenade-kill and grenade-use effects"
+    "note": "Forerunner catalyst (The Rock); the frag counts as a Grenade Ability for grenade-kill and grenade-use effects",
+    "dmg": [
+     "grenade"
+    ]
    }
   ]
  },
@@ -2087,7 +2183,10 @@
     "do": "uses",
     "t": "melee",
     "q": "Dealing melee damage briefly improves this weapon's handling.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    }
   ]
  },
@@ -2746,7 +2845,10 @@
     "t": "grenade",
     "note": "Clarity/Compendium describe the refill as a kill with another weapon or source within 6s of Fighting Lion damage, not grenades specifically.",
     "q": "Rapid final blows against grenade-damaged combatants refill the magazine.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "grenade"
+    ]
    }
   ]
  },
@@ -2821,7 +2923,10 @@
     "t": "corruption",
     "q": "triggers a burst of Potent Corruption (Poison) at the target's location in a 5 meter radius.",
     "s": "clarity",
-    "note": "Osteo Striga; the poison counts as weapon damage"
+    "note": "Osteo Striga; the poison counts as weapon damage",
+    "dmg": [
+     "weapon"
+    ]
    }
   ]
  },
@@ -3016,7 +3121,8 @@
     "do": "applies",
     "t": "jolt",
     "q": "causing it to jolt on its next hit",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "the applied Jolt's damage generally does not count as weapon damage (Clarity, Compendium)"
    }
   ]
  },
@@ -3074,7 +3180,6 @@
   "id": "_skipped",
   "ids": [
    "wp:anticipation",
-   "wp:armorofthecolossus",
    "wp:chaosreshaped",
    "wp:circleoflife",
    "wp:darkdescent",

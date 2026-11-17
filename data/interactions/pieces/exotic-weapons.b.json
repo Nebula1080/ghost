@@ -74,7 +74,10 @@
     "on": "melee kills",
     "perk": "Markov Chain",
     "q": "This weapon gains increased damage from melee kills and kills with this weapon. Melee kills grant ammo for this weapon.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "grants",
@@ -194,7 +197,10 @@
     "perk": "Toxic Overload",
     "q": "Landing a final blow or multiple precision hits triggers a burst that inflicts nearby targets with potent corruption.",
     "s": "bungie",
-    "note": "Weapon of Sorrow; the poison counts as weapon damage; Necrotic Grip spreads it"
+    "note": "Weapon of Sorrow; the poison counts as weapon damage; Necrotic Grip spreads it",
+    "dmg": [
+     "weapon"
+    ]
    }
   ]
  },
@@ -438,6 +444,19 @@
     "q": "Severs for 10 seconds (15 with Thread of Continuity)",
     "s": "clarity",
     "note": "with Impact Core equipped; blade melee hits apply your subclass element's effect"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 46,
+    "vs": [
+     "players"
+    ],
+    "on": "while blocking (attacks in a frontal cone)",
+    "perk": "Cormorant Reversal",
+    "note": "PvP value (~46%); in PvE blocking stops 100% of damage from the front",
+    "q": "[Blocking] grants 100% [~46%] Damage Resist against all damage in a ?° cone.",
+    "s": "compendium"
    }
   ]
  },
@@ -472,7 +491,10 @@
     "perk": "Prometheus Catalyst",
     "q": "Weapon Kills trigger a Solar explosion that applies 30 Scorch Stacks",
     "s": "clarity",
-    "note": "catalyst (Incandescent)"
+    "note": "catalyst (Incandescent)",
+    "dmg": [
+     "weapon"
+    ]
    }
   ]
  },
@@ -550,6 +572,31 @@
     "q": "When taking Arc Damage, this weapon becomes more powerful and resists incoming Arc Damage.",
     "s": "bungie",
     "note": "only Arc damage you receive; the catalyst's explosion can self-trigger it"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 50,
+    "vs": [
+     "arc"
+    ],
+    "on": "while Arc Conductor is active (after taking Arc damage)",
+    "perk": "Arc Conductor",
+    "q": "While Arc Conductor is active, gain 50% [15%] Arc Damage Resistance.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 15,
+    "vs": [
+     "players"
+    ],
+    "on": "while Arc Conductor is active (after taking Arc damage)",
+    "perk": "Arc Conductor",
+    "note": "PvP value; Arc damage only",
+    "q": "While Arc Conductor is active, gain 50% [15%] Arc Damage Resistance.",
+    "s": "clarity"
    }
   ]
  },
@@ -563,7 +610,10 @@
     "perk": "Evolution",
     "q": "Heavy Attacks consume the sphere, slamming it on the ground for 1350 [300] damage with no falloff, and Suppress enemies in a 5 meter radius.",
     "s": "clarity",
-    "note": "Transmutation Sphere heavy attack"
+    "note": "Transmutation Sphere heavy attack",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "applies",
@@ -571,7 +621,10 @@
     "perk": "Evolution",
     "q": "Light Attacks deal 270 [150] damage, disorient combatants, and cost 1 ammo.",
     "s": "clarity",
-    "note": "Transmutation Sphere light attacks"
+    "note": "Transmutation Sphere light attacks",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "applies",
@@ -590,6 +643,31 @@
     "t": "volatilerounds",
     "q": "They are also able to inflict Volatile through Volatile Rounds.",
     "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 80,
+    "vs": [
+     "all"
+    ],
+    "on": "while guarding with a Transmutation sphere",
+    "perk": "Evolution",
+    "q": "grants 80% [50%] damage resistance along with knockback immunity",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 50,
+    "vs": [
+     "players"
+    ],
+    "on": "while guarding with a Transmutation sphere",
+    "perk": "Evolution",
+    "note": "PvP value",
+    "q": "grants 80% [50%] damage resistance along with knockback immunity",
+    "s": "clarity"
    }
   ]
  },
@@ -602,7 +680,10 @@
     "t": "stasiscrystal",
     "perk": "Cryocannon",
     "q": "This weapon's charged projectiles create a pattern of Stasis crystals on impact and freeze nearby targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "applies",
@@ -645,14 +726,20 @@
     "t": "threadling",
     "perk": "Dichotomous Thinking",
     "q": "Rapid healing increases weapon damage and spawns Threadlings from your allies.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "creates",
     "t": "threadling",
     "perk": "Meaning-Making",
     "q": "Final blows with this weapon create a Threadling nest that periodically spawns Threadlings.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "creates",
@@ -660,7 +747,10 @@
     "perk": "Meaning-Making",
     "q": "Threadlings spawned from Teeming Nests interact with Strand Fragments, count as weapon damage, can trigger Armor Mods, and benefit from Empowering Buffs.",
     "s": "clarity",
-    "note": "nest Threadlings work with Strand fragments"
+    "note": "nest Threadlings work with Strand fragments",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "creates",
@@ -688,13 +778,28 @@
     "perk": "Skyburner Catalyst",
     "q": "Weapon Kills trigger a Solar explosion that applies 30 Scorch Stacks",
     "s": "clarity",
-    "note": "catalyst (Incandescent)"
+    "note": "catalyst (Incandescent)",
+    "dmg": [
+     "weapon"
+    ]
    },
    {
     "do": "uses",
     "t": "scorch",
     "perk": "Skyburner Catalyst",
     "q": "Direct Hits against Scorched Enemies apply 10 [4] additional Scorch per Direct Hit",
+    "s": "clarity",
+    "note": "catalyst (Burning Ambition)"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Skyburner Catalyst",
+    "dmg": [
+     "weapon"
+    ],
+    "on": "Burning Ambition sustained damage on unscorched targets",
+    "q": "Scorch applied by Burning Ambition to Unscorched targets counts as Weapon Damage.",
     "s": "clarity",
     "note": "catalyst (Burning Ambition)"
    }
@@ -738,7 +843,8 @@
     "t": "goldengunmode",
     "perk": "Cayde's Retribution",
     "q": "Once full, [Alternate Weapon Action]  to fire Golden Gun shots.",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Cayde's Retribution does not count as a Super for Super-related effects or buffs (Clarity)"
    },
    {
     "do": "modifies",
@@ -798,7 +904,12 @@
     "t": "boltcharge",
     "perk": "Dynamic Charge",
     "q": "Charged Arc Seeker hits grant, and can spend, Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "weapon",
+     "primaryweapon",
+     "scoutrifle"
+    ]
    },
    {
     "do": "modifies",
@@ -806,7 +917,12 @@
     "perk": "Revolution",
     "q": "Bolt Charge that is discharged through Arc Seeker hits counts as 'Scout Rifle Weapon Damage'",
     "s": "clarity",
-    "note": "Bolt Charge discharges then scale with weapon damage buffs (Radiant, surges)"
+    "note": "Bolt Charge discharges then scale with weapon damage buffs (Radiant, surges)",
+    "dmg": [
+     "weapon",
+     "primaryweapon",
+     "scoutrifle"
+    ]
    },
    {
     "do": "uses",
@@ -842,6 +958,31 @@
     "perk": "Ravenous Beast",
     "q": "defeating combatants or dealing damage to Scorched combatants grants increased progress.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 50,
+    "vs": [
+     "solar"
+    ],
+    "on": "while Ravenous Beast is active",
+    "perk": "Ravenous Beast",
+    "q": "50% [15%] Solar Damage Resistance",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 15,
+    "vs": [
+     "players"
+    ],
+    "on": "while Ravenous Beast is active",
+    "perk": "Ravenous Beast",
+    "note": "PvP value; Solar damage only",
+    "q": "50% [15%] Solar Damage Resistance",
+    "s": "clarity"
    }
   ]
  },
@@ -1433,6 +1574,19 @@
     "q": "Deal additional melee damage while protected by an overshield.",
     "s": "bungie",
     "note": "any overshield; glaive melee kills refresh it"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 50,
+    "vs": [
+     "players"
+    ],
+    "on": "while blocking with the glaive shield",
+    "perk": "M1R Distribution Matrix",
+    "note": "PvP only, against Primary and melee damage (other glaives: 30%)",
+    "q": "In PvP, glaive shield uniquely provides 50% Damage Resistance against Primary and Melee Damage from other players",
+    "s": "clarity"
    }
   ]
  },
@@ -1618,7 +1772,43 @@
    {
     "do": "grants",
     "t": "damageresistance",
-    "q": "Grants Damage Resist for 5 seconds upon scoring Light Attack Hits within 3? seconds of each.",
+    "amt": 15,
+    "vs": [
+     "all"
+    ],
+    "on": "2 rapid light attack hits with the Unyielding handle (5 s)",
+    "perk": "Resurgence Directive",
+    "cat": "wolfsbanehandle",
+    "note": "the value depends on the equipped handle; only one applies",
+    "q": "Unyielding = 15% DR after 2 hits | Rampager's = 20% DR after 3 hits | Tenacious = 25% DR after 4 hits",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 20,
+    "vs": [
+     "all"
+    ],
+    "on": "3 rapid light attack hits with the Rampager's handle (5 s)",
+    "perk": "Resurgence Directive",
+    "cat": "wolfsbanehandle",
+    "note": "the value depends on the equipped handle; only one applies",
+    "q": "Unyielding = 15% DR after 2 hits | Rampager's = 20% DR after 3 hits | Tenacious = 25% DR after 4 hits",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 25,
+    "vs": [
+     "all"
+    ],
+    "on": "4 rapid light attack hits with the Tenacious handle (5 s)",
+    "perk": "Resurgence Directive",
+    "cat": "wolfsbanehandle",
+    "note": "the value depends on the equipped handle; only one applies",
+    "q": "Unyielding = 15% DR after 2 hits | Rampager's = 20% DR after 3 hits | Tenacious = 25% DR after 4 hits",
     "s": "compendium"
    }
   ]

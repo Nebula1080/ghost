@@ -74,7 +74,10 @@
     "t": "melee",
     "perk": "Fury Conductors",
     "q": "Melee hits grant Armor Charge",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "grants",
@@ -100,9 +103,14 @@
       "has": "armorcharge"
      }
     ],
-    "q": "you take less melee damage from combatants while you have Armor Charge",
-    "s": "bungie",
-    "note": "Melee damage resistance vs combatants only."
+    "q": "Melee Damage Resistance against Combatants: 23.3% | 46.7% | 70% | 73.3% | 76.7% | 80%",
+    "s": "clarity",
+    "note": "melee damage from combatants only; 23.3/46.7/70/73.3/76.7/80% at 1-6 Armor Charges (max 80%)",
+    "on": "while you have Armor Charge",
+    "amt": 23.3,
+    "vs": [
+     "melee"
+    ]
    },
    {
     "do": "consumes",
@@ -183,7 +191,11 @@
      }
     ],
     "q": "Final blows with Arc melees trigger health regeneration and fully restore a melee charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "poweredmelee"
+    ],
+    "note": "Clarity/Compendium: Powered Arc Melee kills"
    },
    {
     "do": "grants",
@@ -356,7 +368,10 @@
     "t": "grenade",
     "perk": "And Another Thing",
     "q": "Grenade final blows spawn an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "grenade"
+    ]
    },
    {
     "do": "creates",
@@ -430,9 +445,14 @@
     "do": "grants",
     "t": "damageresistance",
     "perk": "Blastwave Striders",
-    "q": "Gain resistance to your explosives.",
-    "s": "bungie",
-    "note": "Explosive self-damage only."
+    "q": "Passively grants 75% Damage Resistance against explosive self-damage.",
+    "s": "clarity",
+    "note": "Explosive self-damage only.",
+    "on": "always (your own explosive self-damage)",
+    "amt": 75,
+    "vs": [
+     "explosive"
+    ]
    },
    {
     "do": "uses",
@@ -703,8 +723,13 @@
       ]
      }
     ],
-    "q": "grants you damage resistance after impact",
-    "s": "bungie"
+    "q": "50% [10%] Damage Resist (Resist x4) for 5 seconds.",
+    "s": "compendium",
+    "on": "for 5 s after Thundercrash impact",
+    "amt": 50,
+    "vs": [
+     "all"
+    ]
    },
    {
     "do": "uses",
@@ -718,7 +743,10 @@
     "t": "melee",
     "perk": "Glorious Charge",
     "q": "Melee final blows while amplified grant you Super energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "grants",
@@ -733,6 +761,27 @@
     "q": "Melee final blows while amplified grant you Super energy.",
     "s": "bungie",
     "note": "Compendium: works with any Super."
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "perk": "Glorious Charge",
+    "on": "for 5 s after Thundercrash impact",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Thundercrash"
+      ]
+     }
+    ],
+    "amt": 10,
+    "vs": [
+     "players"
+    ],
+    "q": "50% [10%] Damage Resist (Resist x4) for 5 seconds.",
+    "s": "compendium",
+    "note": "PvP value"
    }
   ]
  },
@@ -763,7 +812,11 @@
      }
     ],
     "q": "Defeating targets with Void melee grants Super energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "poweredmelee"
+    ],
+    "note": "Compendium: On Powered Void Melee Kill"
    },
    {
     "do": "grants",
@@ -833,7 +886,10 @@
     "perk": "Linear Actuators",
     "q": "After melee-attacking a combatant, that charge will chain damage to nearby foes.",
     "s": "bungie",
-    "note": "Clarity: Glaive melee hits also trigger it."
+    "note": "Clarity: Melee or Glaive melee hits after sprinting",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "grants",
@@ -926,7 +982,12 @@
     ],
     "q": "While your Solar Super is charged, ability final blows cure you and give stacks of Sunfire Furnace.",
     "s": "bungie",
-    "note": "Needs a full Super bar."
+    "note": "ability kills, including unpowered melees; Glaive melees do not count (Compendium)",
+    "from": [
+     "grenade",
+     "melee",
+     "classability"
+    ]
    },
    {
     "do": "grants",
@@ -959,7 +1020,10 @@
      }
     ],
     "q": "While Sunfire Furnace is active, grenade and Shieldburst final blows trigger an ignition.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "grenade"
+    ]
    },
    {
     "do": "applies",
@@ -1091,6 +1155,16 @@
     "q": "Damaging targets with Exodus micro-missiles temporarily increases the damage you deal with other micro-missiles and Rocket Launchers.",
     "s": "bungie",
     "note": "Rocket Launchers and other rocket/micro-missile weapons only."
+   },
+   {
+    "do": "uses",
+    "t": "weapon",
+    "perk": "Danger Close",
+    "from": [
+     "weapon"
+    ],
+    "q": "Weapon precision hits or final blows have a chance to load a Kinetic Exodus micro-missile.",
+    "s": "bungie"
    }
   ],
   "note": "Missiles are loaded by weapon precision hits and final blows."
@@ -1111,7 +1185,11 @@
     "t": "melee",
     "perk": "Overflowing Light",
     "q": "Using an ability (grenade, melee, or Barricade) empowers the other two abilities.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "poweredmelee"
+    ],
+    "note": "Compendium: dealing Powered Melee Damage triggers it"
    },
    {
     "do": "uses",
@@ -1880,14 +1958,20 @@
     "t": "shotgun",
     "perk": "Force Multiplier",
     "q": "Shotgun and melee final blows start your health regeneration.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "shotgun"
+    ]
    },
    {
     "do": "uses",
     "t": "melee",
     "perk": "Force Multiplier",
     "q": "Shotgun and melee final blows start your health regeneration.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "grants",
@@ -2273,14 +2357,23 @@
     "t": "melee",
     "perk": "Praxic Lift",
     "q": "Weapon and Arc powered melee final blows build up Jetpack Fuel.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "weapon",
+     "poweredmelee"
+    ],
+    "note": "weapon kills and Arc powered melee kills build Jetpack Fuel"
    },
    {
     "do": "applies",
     "t": "blind",
     "perk": "Praxic Lift",
     "q": "Collide with a combatant to unleash a blinding blast of energy and gain a temporary bonus to your melee stat.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "melee"
+    ],
+    "note": "Clarity: colliding triggers a Melee Strike; Compendium: Praxic Knee benefits from Melee Damage Buffs"
    }
   ],
   "note": "Compendium: the collision (Praxic Knee) benefits from melee damage buffs; activation also inflicts Exhaust."
@@ -2313,6 +2406,21 @@
     "perk": "Kintsugi",
     "who": "allies",
     "q": "After reviving or being revived, you gain an aura that provides overshields to you and nearby allies.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "weapon",
+    "perk": "Kintsugi",
+    "if": [
+     {
+      "weapon": "super"
+     }
+    ],
+    "from": [
+     "weapon"
+    ],
+    "q": "Final blows from weapons with a damage type matching your Super create a burst of healing around you that grants allies restoration.",
     "s": "bungie"
    }
   ],
@@ -2471,7 +2579,10 @@
     "t": "melee",
     "perk": "Spheromatik Trigger",
     "q": "Powered melee final blows unleash a damaging explosion.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "poweredmelee"
+    ]
    },
    {
     "do": "uses",
@@ -2499,7 +2610,10 @@
     "t": "melee",
     "perk": "Spirit of Severance",
     "q": "Powered melee or finisher final blows unleash a damaging explosion.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "poweredmelee"
+    ]
    },
    {
     "do": "uses",
@@ -2513,7 +2627,10 @@
     "t": "melee",
     "perk": "Spirit of Contact",
     "q": "Damaging a target with a powered melee causes all nearby targets to suffer lightning strikes and become jolted.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "poweredmelee"
+    ]
    },
    {
     "do": "applies",
@@ -2541,8 +2658,12 @@
     "t": "damageresistance",
     "perk": "Clenched Fist",
     "on": "guarding with a Sword",
-    "q": "You take reduced damage while blocking with a Sword.",
-    "s": "bungie"
+    "q": "Grants 50% [10%] Damage Resistance (Stacks multiplicatively with the Damage Resistance provided by Sword Guard against blocked attacks)",
+    "s": "clarity",
+    "amt": 50,
+    "vs": [
+     "blocked"
+    ]
    },
    {
     "do": "grants",
@@ -2550,6 +2671,19 @@
     "perk": "Clenched Fist",
     "q": "Rapidly damaging targets after blocking shots with a Sword grants Restoration for a duration determined by the number of shots blocked.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "perk": "Clenched Fist",
+    "on": "guarding with a Sword",
+    "amt": 10,
+    "vs": [
+     "players"
+    ],
+    "q": "Grants 50% [10%] Damage Resistance (Stacks multiplicatively with the Damage Resistance provided by Sword Guard against blocked attacks)",
+    "s": "clarity",
+    "note": "PvP value"
    }
   ],
   "note": "Clarity: Ember of Solace extends the Restoration by 50%."
@@ -2783,7 +2917,10 @@
     "t": "melee",
     "perk": "Burning Fists",
     "q": "Defeating a target with melee or a finisher grants escalating melee damage, which decays over time.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "uses",

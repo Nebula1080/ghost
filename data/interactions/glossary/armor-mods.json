@@ -1,0 +1,17 @@
+{ "terms": {
+  "grenadestat": { "l": "Grenade stat bonus", "kind": "buff", "el": "", "aka": ["grenade stat", "increased grenade stat"],
+    "def": "A temporary bonus to the Grenade stat (faster grenade recharge), e.g. from Grenade Font while you have Armor Charge.",
+    "q": "You gain a bonus to your grenade stat while you have any Armor Charge.", "src": "mod:grenadefont" },
+  "meleestat": { "l": "Melee stat bonus", "kind": "buff", "el": "", "aka": ["melee stat", "increased melee stat"],
+    "def": "A temporary bonus to the Melee stat (faster melee recharge), e.g. from Melee Font while you have Armor Charge.",
+    "q": "Grants 20|40|50 Melee stat with 1|2|3 Mods equipped while you have active Armor Charges.", "src": "mod:meleefont" },
+  "classstat": { "l": "Class stat bonus", "kind": "buff", "el": "", "aka": ["class stat", "increased class stat"],
+    "def": "A temporary bonus to the Class stat (faster class ability recharge), e.g. from Class Font while you have Armor Charge.",
+    "q": "Grants 20|40|50 Class stat with 1|2|3 Mods equipped while you have active Armor Charges.", "src": "mod:classfont" },
+  "superstat": { "l": "Super stat bonus", "kind": "buff", "el": "", "aka": ["super stat", "increased super stat"],
+    "def": "A temporary bonus to the Super stat (faster Super energy gain), e.g. from Super Font while you have Armor Charge.",
+    "q": "Grants 20|40|50 Super stat with 1|2|3 Mods equipped while you have active Armor Charges.", "src": "mod:superfont" },
+  "weaponsstat": { "l": "Weapons stat bonus", "kind": "buff", "el": "", "aka": ["weapons stat", "weapon stat", "increased weapons stat"],
+    "def": "A temporary bonus to the Weapons stat (weapon damage and handling), e.g. from Weapons Font while you have Armor Charge.",
+    "q": "You gain a bonus to your weapons stat while you have any Armor Charge.", "src": "mod:weaponsfont" }
+} }

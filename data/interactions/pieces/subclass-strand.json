@@ -168,6 +168,28 @@
     "on": "super ends",
     "q": "Grants 3 Melee Ability Charges on Super End.",
     "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while your Super is active",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "q": "Damage Resistance: 90% [50%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while your Super is active",
+    "amt": 50,
+    "vs": [
+     "players"
+    ],
+    "q": "Damage Resistance: 90% [50%]",
+    "s": "compendium"
    }
   ]
  },
@@ -199,6 +221,18 @@
     "on": "damaging targets with weapons or melee",
     "q": "Damaging targets with your weapons or melee will send out perched Threadlings to attack.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while your Super is active",
+    "amt": 53,
+    "vs": [
+     "players"
+    ],
+    "q": "Damage Resistance: ?% [53%]",
+    "s": "compendium",
+    "note": "Compendium gives only the PvP value; the PvE value is unknown."
    }
   ],
   "note": "The perch behaviour applies to all Threadlings you create, not only the Super's."
@@ -231,6 +265,28 @@
     "on": "class ability input during the Super",
     "note": "With Ensnaring Slam, the class ability input repeats Ensnaring Slam during Silkstrike.",
     "q": "Allows the repeated usage of Ensnaring Slam while the Aspect is equipped at the cost of 4.5% Super Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while your Super is active",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "q": "Damage Resistance: 90% [45%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while your Super is active",
+    "amt": 45,
+    "vs": [
+     "players"
+    ],
+    "q": "Damage Resistance: 90% [45%]",
     "s": "compendium"
    }
   ]
@@ -401,8 +457,14 @@
    {
     "do": "grants",
     "t": "damageresistance",
+    "on": "during the Flechette Storm animation",
+    "amt": 25,
+    "vs": [
+     "ranged"
+    ],
     "q": "Grants 25% Damage Resistance against non-melee combatant attacks during this animation.",
-    "s": "clarity"
+    "s": "clarity",
+    "note": "Combatant non-melee attacks only (Clarity); Compendium: \"25% Damage Resist against Non-Melee while in the Melee Animation\"."
    }
   ]
  },
@@ -678,8 +740,14 @@
     "do": "grants",
     "t": "damageresistance",
     "on": "while in the weave",
-    "q": "gaining damage resistance from combatants and players",
-    "s": "bungie"
+    "amt": 90,
+    "vs": [
+     "combatants",
+     "players"
+    ],
+    "q": "Weavewalk grants 90% Damage Resistance against Combatants and Players",
+    "s": "clarity",
+    "note": "Compendium: 60% in PvP while carrying a Spark."
    },
    {
     "do": "grants",
