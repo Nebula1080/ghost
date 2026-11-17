@@ -108,15 +108,15 @@ else:
 assert '/*__IX__*/null' in s
 ixd = root / 'data/interactions'
 if (ixd / 'glossary.json').exists():
-    ix = {'t': {}, 'p': {}, 'pending': []}
+    ix = {'t': {}, 'p': {}, 'pending': [], 'skip': []}
     gfiles = [ixd / 'glossary.json'] + sorted((ixd / 'glossary').glob('*.json')) if (ixd / 'glossary').exists() else [ixd / 'glossary.json']
     for f in gfiles:
         for tid, t in json.loads(f.read_text(encoding='utf-8')).get('terms', {}).items():
-            ix['t'].setdefault(tid, {k: t[k] for k in ('l', 'kind', 'el', 'def') if t.get(k) is not None})
+            ix['t'].setdefault(tid, {k: t[k] for k in ('l', 'kind', 'el', 'def', 'dr') if t.get(k) is not None})
     done = set()
     for f in sorted((ixd / 'pieces').glob('*.json')) if (ixd / 'pieces').exists() else []:
         for r in json.loads(f.read_text(encoding='utf-8')):
-            if r.get('id') == '_skipped': done.update(r.get('ids', [])); continue
+            if r.get('id') == '_skipped': done.update(r.get('ids', [])); ix['skip'] += r.get('ids', []); continue
             ix['p'][r['id']] = r.get('fx', []); done.add(r['id'])
     for f in sorted((ixd / 'src').glob('*.json')):
         if f.name == 'glossary-sources.json': continue

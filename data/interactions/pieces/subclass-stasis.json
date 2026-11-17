@@ -21,8 +21,12 @@
     "do": "applies",
     "t": "freeze",
     "by": "stasiscrystal",
+    "dmg": [
+     "super"
+    ],
     "q": "sends out [Stasis] Stasis crystals to freeze additional ones",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Compendium: \"Glacial Quake Stasis Crystals deal up to 158 [?] Stasis Super Damage\"."
    },
    {
     "do": "applies",
@@ -69,6 +73,37 @@
     "t": "meleeenergy",
     "on": "super ends",
     "q": "On Super End: Grants 3 Melee Ability Charges.",
+    "s": "compendium"
+   },
+   {
+    "do": "counts",
+    "t": "stasisdamage",
+    "as": "super",
+    "on": "against frozen targets while Glacial Quake is active",
+    "q": "ALL STASIS DAMAGE (except for Light Attacks and Contact Damage) against Frozen Enemies is increased by 310%, count as Super Damage",
+    "s": "compendium",
+    "note": "Any Stasis damage (weapons, grenades, melees, shatters) on frozen targets counts as Super damage and gets +310%, except Super light attacks and contact damage. Compendium: Howl of the Storm used during the Super is \"Super Melee Damage\"."
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while your Super is active",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "q": "Damage Resistance: 90% [47%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while your Super is active",
+    "amt": 47,
+    "vs": [
+     "players"
+    ],
+    "q": "Damage Resistance: 90% [47%]",
     "s": "compendium"
    }
   ]
@@ -122,6 +157,28 @@
     "do": "consumes",
     "t": "stasiscrystal",
     "q": "Stasis Crystals and Frozen Enemies hit by the shockwave are dealt 3,453 [?] Stasis Damage.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while your Super is active",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "q": "Damage Resistance: 90% [51%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "on": "while your Super is active",
+    "amt": 51,
+    "vs": [
+     "players"
+    ],
+    "q": "Damage Resistance: 90% [51%]",
     "s": "compendium"
    }
   ]
@@ -204,8 +261,13 @@
     "do": "applies",
     "t": "slow",
     "on": "direct hit",
+    "dmg": [
+     "grenade",
+     "stasisability"
+    ],
     "q": "Directly hitting an enemy inflicts x50 [x?] Slow Stacks for 4+2 seconds.",
-    "s": "compendium"
+    "s": "compendium",
+    "note": "Compendium: \"Direct Hits count as Stasis Grenade Ability Damage.\""
    }
   ]
  },
@@ -244,8 +306,13 @@
     "do": "applies",
     "t": "freeze",
     "by": "stasiscrystal",
+    "dmg": [
+     "grenade",
+     "stasisability"
+    ],
     "q": "A grenade that creates walls out of [Stasis] Stasis crystals to block damage and freeze targets",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Compendium: \"Glacier Grenades' Stasis Crystals deal up to 158 [?] Stasis Grenade Damage upon being shattered\"."
    }
   ]
  },
@@ -302,8 +369,13 @@
     "do": "applies",
     "t": "slow",
     "by": "stasisturret",
+    "dmg": [
+     "grenade",
+     "stasisability"
+    ],
     "q": "Hold to convert your grenade into a [Stasis] Stasis turret that fires slowing projectiles at nearby targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Compendium: \"Bleak Watcher damage counts as Stasis Grenade Ability Damage.\""
    },
    {
     "do": "counts",
@@ -368,13 +440,20 @@
     "do": "applies",
     "t": "freeze",
     "by": "diamondlance",
+    "dmg": [
+     "stasisability"
+    ],
     "q": "Throw the lance to freeze targets on impact.",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Compendium: \"Diamond Lance Damage is considered Generic Stasis Ability Damage. Not Grenade nor Melee Damage.\""
    },
    {
     "do": "applies",
     "t": "freeze",
     "by": "diamondlance",
+    "dmg": [
+     "stasisability"
+    ],
     "q": "Slam the lance to the ground to freeze targets in a small area.",
     "s": "bungie"
    },
@@ -382,6 +461,9 @@
     "do": "applies",
     "t": "shatter",
     "by": "diamondlance",
+    "dmg": [
+     "stasisability"
+    ],
     "q": "Diamond Lances instantly shatter Stasis Crystals upon damaging them.",
     "s": "compendium"
    },
@@ -791,8 +873,13 @@
     "do": "applies",
     "t": "freeze",
     "on": "sliding melee",
+    "dmg": [
+     "melee",
+     "poweredmelee"
+    ],
     "q": "freezes enemy combatants, slows enemy players, and creates [Stasis] Stasis crystals",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Compendium: the uppercut deals Melee Damage and scales with Melee Stat and Melee Damage Buffs."
    },
    {
     "do": "applies",
@@ -842,6 +929,14 @@
     ],
     "q": "This attack can also be used during Glacial Quake at the cost of 15% Super Energy per Uppercut.",
     "s": "clarity"
+   },
+   {
+    "do": "counts",
+    "t": "howlcrystal",
+    "as": "poweredmelee",
+    "q": "Howl's Crystal Damage counts as Powered Stasis Melee Damage",
+    "s": "compendium",
+    "note": "Compendium: crystal damage scales with melee damage buffs but not with 100+ Melee stat."
    }
   ]
  },
@@ -1114,8 +1209,13 @@
     "do": "grants",
     "t": "damageresistance",
     "on": "after dodging",
+    "amt": 50,
+    "vs": [
+     "combatants"
+    ],
     "q": "Grants 50% Damage Resistance against Combatants for 4 seconds after the dodge.",
-    "s": "clarity"
+    "s": "clarity",
+    "note": "4 seconds after the dodge (Compendium \"4?\")."
    }
   ]
  },
@@ -1279,6 +1379,9 @@
    {
     "do": "uses",
     "t": "shatter",
+    "from": [
+     "melee"
+    ],
     "q": "Shattering a frozen target with a melee attack grants a stack of Frost Armor.",
     "s": "bungie"
    },

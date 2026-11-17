@@ -31,18 +31,6 @@
    "q": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots.",
    "src": "sub:solinvictus"
   },
-  "weapon": {
-   "l": "Weapon damage",
-   "kind": "damage",
-   "el": "",
-   "aka": [
-    "weapon kills",
-    "weapon final blows"
-   ],
-   "def": "Damage or final blows from any weapon. Some Supers make the caster's weapon damage count as Super damage.",
-   "q": "Weapon Damage dealt by the Caster is counted as Super Ability Damage.",
-   "src": "sub:wellofradiance"
-  },
   "hellion": {
    "l": "Hellion",
    "kind": "object",

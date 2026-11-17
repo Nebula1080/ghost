@@ -323,7 +323,17 @@
    ],
    "def": "A stacking Stasis buff that grants damage resistance per stack and decays over time.",
    "q": "Grants 7% [2%] Damage Resist per stack, up to 31.25% [10%] Damage Resist at x5 stacks",
-   "src": "compendium:stasis"
+   "src": "compendium:stasis",
+   "dr": {
+    "amt": 31.25,
+    "vs": [
+     "combatants"
+    ],
+    "on": "at x5 Frost Armor stacks",
+    "q": "Grants 7% [2%] Damage Resist per stack, up to 31.25% [10%] Damage Resist at x5 stacks",
+    "src": "compendium:stasis",
+    "note": "7% per stack (2% vs players), up to 31.25% at 5 stacks; decays one stack every 5 seconds."
+   }
   },
   "sever": {
    "l": "Sever",
@@ -375,7 +385,16 @@
    ],
    "def": "A Strand buff that grants high damage resistance for a short time.",
    "q": "Grants 45% [25%] Damage Resist for 10 seconds.",
-   "src": "compendium:strand"
+   "src": "compendium:strand",
+   "dr": {
+    "amt": 45,
+    "vs": [
+     "combatants"
+    ],
+    "q": "Grants 45% [25%] Damage Resist for 10 seconds.",
+    "src": "compendium:strand",
+    "note": "25% against players. Precision hits and melee attacks from Guardians bypass it; removed when you cast a Super."
+   }
   },
   "threadling": {
    "l": "Threadling",
@@ -732,6 +751,42 @@
    "def": "Being at very low health; several fragments and exotics trigger on it.",
    "q": "Upon reaching Critical Health: 400% [200%] Additional Base Grenade and Melee Ability Regeneration Rate.",
    "src": "compendium:arc"
+  },
+  "damageresistance": {
+   "l": "Damage resistance",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "damage resist",
+    "damage reduction"
+   ],
+   "def": "Reduces the damage you take from enemies.",
+   "q": "Grants 15% [?%] Damage Resistance while within 15 meters of 3 enemies.",
+   "src": "sub:facetofprotection"
+  },
+  "weapon": {
+   "l": "Weapon damage",
+   "kind": "damage",
+   "el": "",
+   "aka": [
+    "weapon kills",
+    "weapon final blows"
+   ],
+   "def": "Damage or final blows from any weapon. Some Supers make the caster's weapon damage count as Super damage.",
+   "q": "Weapon Damage dealt by the Caster is counted as Super Ability Damage.",
+   "src": "sub:wellofradiance"
+  },
+  "poweredmelee": {
+   "l": "Powered melee damage",
+   "kind": "ability",
+   "el": "",
+   "aka": [
+    "powered melee",
+    "charged melee"
+   ],
+   "def": "Damage from your charged melee ability (as opposed to an uncharged punch). Some effects count as powered melee damage and trigger melee effects.",
+   "q": "This detonation counts as Powered Melee damage",
+   "src": "xa:moirai"
   }
  }
 }

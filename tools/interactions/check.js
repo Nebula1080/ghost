@@ -9,6 +9,7 @@ const KINDS = new Set(['debuff', 'buff', 'object', 'energy', 'resource', 'abilit
 const SLOTS = new Set(['super', 'classAbility', 'movement', 'melee', 'grenade']);
 const ELS = new Set(['solar', 'arc', 'void', 'stasis', 'strand', 'kinetic', 'prismatic', '']);
 const SRCS = new Set(['bungie', 'clarity', 'clarityEnhanced', 'compendium']);
+const DR_VS = new Set(['all', 'combatants', 'players', 'melee', 'ranged', 'explosive', 'sniper', 'precision', 'solar', 'arc', 'void', 'stasis', 'strand', 'kinetic', 'elemental', 'blocked', 'subclass']);
 const flat = s => String(s || '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, '-').replace(/\s+/g, ' ').trim();
 const readJson = f => JSON.parse(fs.readFileSync(f, 'utf8'));
 
@@ -45,6 +46,9 @@ function check(only) {
     if (!KINDS.has(t.kind)) err(w, 'bad kind ' + t.kind);
     if (t.el != null && !ELS.has(t.el)) err(w, 'bad el ' + t.el);
     if (!t.def) err(w, 'missing def');
+    if (t.dr) { const d = t.dr; const tab = String(d.src || '').startsWith('compendium:') ? L.gsrc[d.src.slice(11)] : null;
+      if (!(typeof d.amt === 'number' && d.amt > 0 && d.amt < 100)) err(w, 'dr.amt must be a percent');
+      if (!tab || !flat(tab).includes(flat(d.q)) || !String(d.q).includes(String(d.amt))) err(w, 'dr.q must be a Compendium quote (dr.src compendium:<tab>) containing dr.amt'); }
     if (!t.q || !t.src) err(w, 'missing q/src');
     else {
       const hay = String(t.src).startsWith('compendium:') ? flat(L.gsrc[t.src.slice(11)]) : L.src[t.src] ? flat(Object.values(L.src[t.src].src || {}).join(' ') + ' ' + (L.src[t.src].perks || []).map(p => Object.values(p.src || {}).join(' ')).join(' ')) : null;
@@ -73,6 +77,13 @@ function check(only) {
         if (e.do === 'counts' && !L.terms[e.as]) err(we, 'counts needs a known "as" term');
         if (e.by && !L.terms[e.by]) err(we, 'unknown by-term ' + e.by);
         if (e.perk && !(s.perks || []).some(p => p.n === e.perk)) err(we, 'unknown perk ' + e.perk);
+        for (const k of ['dmg', 'from']) if (e[k] != null) { if (!Array.isArray(e[k]) || !e[k].length) err(we, k + ' must be a non-empty array'); else for (const x of e[k]) if (!L.terms[x]) err(we, `${k} names unknown term ${x}`); }
+        if (e.t === 'damageresistance' && e.do === 'grants') {
+          if (e.amt != null && !(typeof e.amt === 'number' && e.amt > 0 && e.amt < 100)) err(we, 'amt must be a number between 0 and 100 (percent)');
+          if (e.amt != null && !String(e.q).includes(String(e.amt))) err(we, 'the quote must contain the amount ' + e.amt);
+          for (const v of e.vs || []) if (!DR_VS.has(v)) err(we, 'bad vs ' + v);
+          if (e.amts != null && (!Array.isArray(e.amts) || !e.amts.every(x => typeof x === 'number' && x > 0 && x < 100 && String(e.q).includes(String(x))))) err(we, 'amts must be percents that all appear in the quote');
+        }
         const conds = (e.if || []).flatMap(c => c.any ? (Array.isArray(c.any) && c.any.length ? c.any : [{ bad: 1 }]) : [c]);
         for (const c of conds) {
           if (c.slot) { if (!SLOTS.has(c.slot)) err(we, 'bad slot ' + c.slot); for (const n of c.is || []) if (!L.pieceNames.has(n)) err(we, 'condition names unknown piece ' + n); if (!Array.isArray(c.is) || !c.is.length) err(we, 'slot condition needs "is"'); }

@@ -868,11 +868,33 @@ const Core = (() => {
     const prov = new Map(); const addP = (t, p) => { if (!prov.has(t)) prov.set(t, []); prov.get(t).push(p); };
     for (const f of fx) if (f.ok && PROVIDE.has(f.e.do)) addP(f.e.t, { f });
     for (const c of fx) if (c.ok && c.e.do === 'counts') for (const p of [...(prov.get(c.e.t) || [])]) if (!p.via) addP(c.e.as, { f: p.f, via: c });
-    const links = [], gaps = [];
+    // damage sources: what an effect's damage counts as (weapon, grenade, melee, classability, super…). Curated `dmg`
+    // wins; otherwise the piece's own kind (a weapon deals weapon damage, your grenade grenade damage). Active
+    // "counts" rules extend it (Well of Radiance: weapon → super; a Void Soul counts as a grenade).
+    const counts = fx.filter(c => c.ok && c.e.do === 'counts');
+    const LD = el => /^(arc|solar|void)$/.test(el) ? 'lightdamage' : /^(stasis|strand)$/.test(el) ? 'darknessdamage' : '';
+    const natSrc = pc => {
+      if (pc.g === 'weapon' && pc.it) { const el = norm(pc.it.element); return ['weapon', norm(pc.it.type).replace(/^combat/, ''), el + 'weapon', /primary/i.test(pc.it.ammo) ? 'primaryweapon' : '', LD(el)].filter(Boolean); }
+      if (pc.g === 'subclass' && ABIL_TERM[pc.slot]) return [ABIL_TERM[pc.slot], pc.slot === 'melee' ? 'poweredmelee' : '', pc.el && ['super', 'melee', 'grenade'].includes(pc.slot) ? pc.el + 'ability' : '', LD(pc.el)].filter(Boolean);
+      return [];
+    };
+    const srcOf = f => {
+      const out = new Set(Array.isArray(f.e.dmg) ? f.e.dmg : f.e.by ? [] : natSrc(pieces[f.i]));
+      if (f.e.by) out.add(f.e.by);
+      for (let n = 0; n < 3; n++) for (const c of counts) if (out.has(c.e.t)) out.add(c.e.as);
+      return out;
+    };
+    const links = [], gaps = [], unmatched = [];
     const abil = new Set(Object.values(ABIL_TERM));
     for (const c of fx) {
       if (!c.ok || !CONSUME.has(c.e.do)) continue;
-      const ps = (prov.get(c.e.t) || []).filter(p => p.f.i !== c.i);
+      let ps = (prov.get(c.e.t) || []).filter(p => p.f.i !== c.i);
+      // a payoff that needs a specific damage source (e.g. "weapon-applied scorch") only links to matching providers
+      if (Array.isArray(c.e.from) && c.e.from.length && ps.length) {
+        const ok = ps.filter(p => { const s = srcOf(p.f); return c.e.from.some(x => s.has(x)); });
+        if (!ok.length) { unmatched.push({ c, ps }); continue; }
+        ps = ok;
+      }
       if (!ps.length) { if (!c.implicit && c.e.do === 'uses' && !(prov.get(c.e.t) || []).length && !abil.has(c.e.t)) gaps.push(c); continue; }
       const seen = new Set();
       for (const p of ps) { const id = p.f.i + '>' + c.i; if (seen.has(id)) continue; seen.add(id); links.push({ t: c.e.t, l: tLabel(ix, c.e.t), from: p.f.i, to: c.i, pf: p.f, cf: c, via: p.via }); }
@@ -886,9 +908,28 @@ const Core = (() => {
       if (!k.p.includes(l.from)) k.p.push(l.from); if (!k.u.includes(l.to)) k.u.push(l.to); k.links.push(l);
     }
     const inactive = fx.filter(f => !f.ok && !f.implicit && f.e.do !== 'counts').map(f => ({ ...f, why: f.unmet.map(function say(c) { return c.any ? c.any.map(say).join(' or ') : c.subclass ? `needs a ${c.subclass[0].toUpperCase() + c.subclass.slice(1)} subclass` : c.piece ? `needs ${c.piece}` : c.item ? `needs ${c.item}` : c.slot ? `needs ${c.is.join(' or ')} (${slotName[c.slot] ? 'you have ' + slotName[c.slot] : 'no ' + SLOT_L[c.slot] + ' chosen'})` : c.weapon ? (['super', 'grenade', 'melee'].includes(c.weapon) ? `needs a weapon matching your ${c.weapon}'s element` : `needs a ${c.weapon[0].toUpperCase() + c.weapon.slice(1)} weapon`) : `needs ${tLabel(ix, c.has)}`; }) }));
-    return { fx, links: real, keys, gaps, inactive, pending: pieces.map((pc, i) => pc.ixState === 'pending' ? i : -1).filter(i => i >= 0) };
+    // damage resistance: active curated amounts per kind of incoming damage, stacked multiplicatively (each source
+    // multiplies the damage you take by 1 - amount); the same `cat` counts once (highest). Situational sources (with a
+    // trigger `on`) are totalled separately from always-on ones.
+    const drFx = fx.filter(f => f.ok && f.e.do === 'grants' && f.e.t === 'damageresistance' && f.e.who !== 'allies' && typeof f.e.amt === 'number' && f.e.amt > 0 && f.e.amt < 100);
+    // buffs whose glossary entry carries a resistance (Woven Mail 45%, Frost Armor…): granting the buff adds it, once
+    for (const f of fx) { const d = f.ok && f.e.do === 'grants' && ix?.t?.[f.e.t]?.dr; if (d && typeof d.amt === 'number') drFx.push({ i: f.i, ok: true, key: 'term:' + f.e.t + '@' + f.i, e: { do: 'grants', t: 'damageresistance', amt: d.amt, vs: d.vs, cat: 'term:' + f.e.t, on: d.on || `while you have ${ix.t[f.e.t].l}`, q: d.q, s: 'compendium', note: d.note } }); }
+    const dr = {};
+    const subV = subEl && subEl !== 'prism' ? subEl : 'subclass';   // "matching your subclass element"
+    for (const f of drFx) for (const v0 of (Array.isArray(f.e.vs) && f.e.vs.length ? f.e.vs : ['all'])) { const v = v0 === 'subclass' ? subV : v0; (dr[v] ||= { items: [] }).items.push(f); }
+    // a `cat` counts once: the highest amount, or with `amts` the amount for the number of copies (15|25|30% for 1|2|3 mods)
+    const amtOf = (f, n) => Array.isArray(f.e.amts) && f.e.amts.length ? f.e.amts[Math.min(n, f.e.amts.length) - 1] : f.e.amt;
+    const stack = list => { const g = new Map(); for (const f of list) { const k = f.e.cat || f.key; const x = g.get(k) || { f, n: 0, best: 0 }; x.n++; x.best = Math.max(x.best, f.e.amt); x.f = f; g.set(k, x); } return Math.round((1 - [...g.values()].reduce((m, x) => m * (1 - (Array.isArray(x.f.e.amts) ? amtOf(x.f, x.n) : x.best) / 100), 1)) * 1000) / 10; };
+    // a hit of one kind is also reduced by "all damage" resistance, and PvE kinds by "combatants" resistance
+    for (const [v, b] of Object.entries(dr)) {
+      const extra = v === 'all' ? [] : [...(dr.all?.items || []), ...(v !== 'players' && v !== 'combatants' ? dr.combatants?.items || [] : [])];
+      const list = [...b.items, ...extra.filter(f => !b.items.includes(f))];
+      b.always = stack(list.filter(f => !f.e.on)); b.all = stack(list); b.incl = extra.length ? [...new Set(extra.map(f => (f.e.vs || ['all']).includes('all') ? 'all' : 'combatants'))] : [];
+    }
+    return { fx, links: real, keys, gaps, inactive, unmatched, dr, srcOf, pending: pieces.map((pc, i) => pc.ixState === 'pending' ? i : -1).filter(i => i >= 0) };
   }
   const synergy = (pieces, ix, defs, subEl) => ixEval(pieces, ix, defs, subEl);
+  const DR_VS = { all: 'All incoming damage', combatants: 'Combatants (PvE)', players: 'Players (PvP)', melee: 'Melee', ranged: 'Ranged', explosive: 'Explosive', sniper: 'Sniper', precision: 'Precision', solar: 'Solar', arc: 'Arc', void: 'Void', stasis: 'Stasis', strand: 'Strand', kinetic: 'Kinetic', elemental: 'Elemental', blocked: 'Blocked attacks', subclass: 'Your subclass element' };
   // how well one candidate piece fits the rest of the build (picker suggestions): its links (element terms 2,
   // others 1, once per term and role) plus effects of other pieces it switches on (e.g. Healing Rift turns on Child
   // of the Old Gods' grenade and melee energy).
@@ -974,6 +1015,6 @@ const Core = (() => {
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
   return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, dimLoadout, dimLink };
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

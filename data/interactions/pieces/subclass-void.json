@@ -3,7 +3,7 @@
   "fx": [
    { "do": "creates", "t": "voidsoul", "on": "when you cast your rift", "q": "Cast your rift to create a Void Soul.", "s": "bungie" },
    { "do": "uses", "t": "rift", "q": "Cast your rift to create a Void Soul.", "s": "bungie" },
-   { "do": "applies", "t": "weaken", "by": "voidsoul", "q": "doing damage and weakening them", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "by": "voidsoul", "dmg": ["grenade", "voidability"], "q": "doing damage and weakening them", "s": "bungie" },
    { "do": "applies", "t": "suppress", "by": "voidsoul", "q": "Combatants affected by the Soul are also briefly suppressed.", "s": "bungie" },
    { "do": "grants", "t": "grenadeenergy", "by": "voidsoul", "if": [{ "slot": "classAbility", "is": ["Healing Rift"] }], "q": "you are granted grenade and melee energy (if running Healing Rift)", "s": "bungie" },
    { "do": "grants", "t": "meleeenergy", "by": "voidsoul", "if": [{ "slot": "classAbility", "is": ["Healing Rift"] }], "q": "you are granted grenade and melee energy (if running Healing Rift)", "s": "bungie" },
@@ -56,7 +56,7 @@
 
  { "id": "sub:controlleddemolition", "n": "Controlled Demolition",
   "fx": [
-   { "do": "uses", "t": "voidability", "q": "Hitting a target with a Void ability or Volatile explosion makes them volatile.", "s": "bungie" },
+   { "do": "uses", "t": "voidability", "from": ["voidability"], "q": "Hitting a target with a Void ability or Volatile explosion makes them volatile.", "s": "bungie" },
    { "do": "applies", "t": "volatile", "on": "Void ability or Volatile explosion damage", "q": "Hitting a target with a Void ability or Volatile explosion makes them volatile.", "s": "bungie" },
    { "do": "uses", "t": "volatile", "q": "Grants you and nearby allies health when volatile targets explode near you.", "s": "bungie" },
    { "do": "grants", "t": "healing", "who": "allies", "on": "when volatile targets explode near you", "q": "Grants you and nearby allies health when volatile targets explode near you.", "s": "bungie" },
@@ -66,7 +66,7 @@
 
  { "id": "sub:feedthevoid", "n": "Feed the Void",
   "fx": [
-   { "do": "uses", "t": "voidability", "q": "Defeat a target with a Void ability to activate Devour.", "s": "bungie" },
+   { "do": "uses", "t": "voidability", "from": ["voidability"], "q": "Defeat a target with a Void ability to activate Devour.", "s": "bungie" },
    { "do": "grants", "t": "devour", "on": "Void ability final blows", "q": "Defeat a target with a Void ability to activate Devour.", "s": "bungie" },
    { "do": "modifies", "t": "devour", "q": "Your Devour effects are improved, restoring additional health and grenade energy.", "s": "bungie" },
    { "do": "grants", "t": "healing", "by": "devour", "q": "Your Devour effects are improved, restoring additional health and grenade energy.", "s": "bungie" },
@@ -87,7 +87,8 @@
    { "do": "modifies", "t": "melee", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "q": "you have increased melee range and damage", "s": "bungie" },
    { "do": "grants", "t": "overshield", "on": "melee final blows while overshielded", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "q": "melee final blows restore a small portion of your Overshield and extend its duration", "s": "bungie" },
    { "do": "modifies", "t": "super", "if": [{ "slot": "super", "is": ["Sentinel Shield"] }], "q": "You gain an additional Shield Throw while in Sentinel Shield.", "s": "bungie" },
-   { "do": "counts", "t": "melee", "as": "voidability", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "q": "Unpowered Melees count as Void-Powered Melee Abilities", "s": "clarity" }
+   { "do": "counts", "t": "melee", "as": "voidability", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "q": "Unpowered Melees count as Void-Powered Melee Abilities", "s": "clarity" },
+   { "do": "counts", "t": "melee", "as": "poweredmelee", "if": [{ "any": [{ "has": "overshield" }, { "slot": "super", "is": ["Ward of Dawn"] }] }], "note": "Not for Doomfang Pauldrons or Severance Enclosure.", "q": "Basic Melee Hits count as Void Powered Melee Hits.", "s": "compendium" }
   ],
   "note": "Unpowered melee counting as Void-powered does not trigger Doomfang Pauldrons or Severance Enclosure." },
 
@@ -97,7 +98,7 @@
    { "do": "uses", "t": "invisibility", "q": "Entering invisibility immediately marks a target.", "s": "bungie" },
    { "do": "uses", "t": "prioritytarget", "q": "Defeating priority targets creates a weakening cloud of smoke", "s": "bungie" },
    { "do": "creates", "t": "voidsmoke", "on": "defeating a priority target", "q": "Defeating priority targets creates a weakening cloud of smoke that makes you and allies invisible when passing through it.", "s": "bungie" },
-   { "do": "applies", "t": "weaken", "by": "voidsmoke", "q": "creates a weakening cloud of smoke", "s": "bungie" },
+   { "do": "applies", "t": "weaken", "by": "voidsmoke", "dmg": ["melee"], "q": "creates a weakening cloud of smoke", "s": "bungie" },
    { "do": "applies", "t": "disorient", "by": "voidsmoke", "q": "Enemies within are Disoriented and Weakened", "s": "clarity" },
    { "do": "grants", "t": "invisibility", "by": "voidsmoke", "who": "allies", "q": "makes you and allies invisible when passing through it", "s": "bungie" },
    { "do": "grants", "t": "reload", "who": "allies", "on": "defeating a priority target", "q": "you and nearby allies gain increased weapon reload speed and stability for a short duration", "s": "bungie" },
@@ -111,7 +112,7 @@
  { "id": "sub:soulsiphon", "n": "Soul Siphon",
   "fx": [
    { "do": "uses", "t": "melee", "q": "Ready this aspect by striking a foe with your powered melee ability.", "s": "bungie" },
-   { "do": "modifies", "t": "melee", "q": "replacing your melee ability with Soul Siphon", "s": "clarity" },
+   { "do": "modifies", "t": "melee", "dmg": ["melee"], "q": "replacing your melee ability with Soul Siphon", "s": "clarity" },
    { "do": "grants", "t": "overshield", "on": "each Soul Siphon damage tick", "q": "gathering Overshield and class ability energy from each target", "s": "bungie" },
    { "do": "grants", "t": "classenergy", "on": "each Soul Siphon damage tick", "q": "gathering Overshield and class ability energy from each target", "s": "bungie" }
   ],
@@ -182,13 +183,13 @@
 
  { "id": "sub:echoofexchange", "n": "Echo of Exchange",
   "fx": [
-   { "do": "uses", "t": "melee", "q": "Melee final blows grant grenade energy.", "s": "bungie" },
+   { "do": "uses", "t": "melee", "from": ["melee"], "q": "Melee final blows grant grenade energy.", "s": "bungie" },
    { "do": "grants", "t": "grenadeenergy", "on": "melee final blows", "q": "Melee final blows grant grenade energy.", "s": "bungie" }
   ] },
 
  { "id": "sub:echoofexpulsion", "n": "Echo of Expulsion",
   "fx": [
-   { "do": "uses", "t": "voidability", "q": "Void ability final blows cause targets to explode.", "s": "bungie" }
+   { "do": "uses", "t": "voidability", "from": ["voidability"], "q": "Void ability final blows cause targets to explode.", "s": "bungie" }
   ],
   "note": "The explosion is up to 160 damage in 7 m (Clarity)." },
 
@@ -202,15 +203,15 @@
 
  { "id": "sub:echoofinstability", "n": "Echo of Instability",
   "fx": [
-   { "do": "uses", "t": "grenade", "q": "Defeating targets with grenades grants Volatile Rounds to your Void weapons.", "s": "bungie" },
+   { "do": "uses", "t": "grenade", "from": ["grenade"], "q": "Defeating targets with grenades grants Volatile Rounds to your Void weapons.", "s": "bungie" },
    { "do": "grants", "t": "volatilerounds", "on": "grenade final blows", "if": [{ "weapon": "void" }], "q": "Defeating targets with grenades grants Volatile Rounds to your Void weapons.", "s": "bungie" },
-   { "do": "applies", "t": "volatile", "by": "volatilerounds", "if": [{ "weapon": "void" }], "q": "making Void Weapons apply Volatile on Hit", "s": "clarity" }
+   { "do": "applies", "t": "volatile", "by": "volatilerounds", "if": [{ "weapon": "void" }], "note": "These volatile explosions do not count as weapon damage (Clarity).", "q": "making Void Weapons apply Volatile on Hit", "s": "clarity" }
   ],
   "note": "Any grenade kill counts, not just Void grenades (Clarity)." },
 
  { "id": "sub:echoofleeching", "n": "Echo of Leeching",
   "fx": [
-   { "do": "uses", "t": "melee", "q": "Melee final blows start health regeneration for you and nearby allies.", "s": "bungie" },
+   { "do": "uses", "t": "melee", "from": ["melee"], "q": "Melee final blows start health regeneration for you and nearby allies.", "s": "bungie" },
    { "do": "grants", "t": "healing", "who": "allies", "on": "melee final blows", "q": "Melee final blows start health regeneration for you and nearby allies.", "s": "bungie" }
   ] },
 
@@ -230,7 +231,7 @@
 
  { "id": "sub:echoofprovision", "n": "Echo of Provision",
   "fx": [
-   { "do": "uses", "t": "grenade", "q": "Damaging targets with grenades grants melee energy.", "s": "bungie" },
+   { "do": "uses", "t": "grenade", "from": ["grenade"], "q": "Damaging targets with grenades grants melee energy.", "s": "bungie" },
    { "do": "grants", "t": "meleeenergy", "on": "grenade damage", "q": "Damaging targets with grenades grants melee energy.", "s": "bungie" }
   ],
   "note": "Does not work with Unbreakable (Clarity). Void Soul counts as grenade damage, so it triggers this." },
@@ -303,7 +304,11 @@
    { "do": "grants", "t": "invisibility", "who": "allies", "on": "when deployed", "q": "Upon deployment, makes nearby allies invisible.", "s": "bungie" }
   ] },
 
- { "id": "sub:novabombcataclysm", "n": "Nova Bomb: Cataclysm", "fx": [],
+ { "id": "sub:novabombcataclysm", "n": "Nova Bomb: Cataclysm",
+  "fx": [
+   { "do": "grants", "t": "damageresistance", "amt": 90, "vs": ["combatants"], "on": "while your Super is active", "q": "Damage Resistance: 90% [49%]", "s": "compendium" },
+   { "do": "grants", "t": "damageresistance", "amt": 49, "vs": ["players"], "on": "while your Super is active", "q": "Damage Resistance: 90% [49%]", "s": "compendium" }
+  ],
   "note": "Slow seeking bomb that splits into seekers; pure damage, no Void keyword in its text." },
  { "id": "sub:novabombvortex", "n": "Nova Bomb: Vortex", "fx": [],
   "note": "Bomb that leaves a pulling, damaging singularity; no Void keyword in its text." },
@@ -311,7 +316,9 @@
  { "id": "sub:novawarp", "n": "Nova Warp",
   "fx": [
    { "do": "applies", "t": "weaken", "q": "Teleport a short distance and release weakening seekers.", "s": "bungie" },
-   { "do": "applies", "t": "volatile", "on": "fully charged eruption", "q": "A fully charged attack makes targets volatile.", "s": "bungie" }
+   { "do": "applies", "t": "volatile", "on": "fully charged eruption", "q": "A fully charged attack makes targets volatile.", "s": "bungie" },
+   { "do": "grants", "t": "damageresistance", "amt": 90, "vs": ["combatants"], "on": "while your Super is active", "q": "Damage Resistance: 90% [58%]", "s": "compendium" },
+   { "do": "grants", "t": "damageresistance", "amt": 58, "vs": ["players"], "on": "while your Super is active", "q": "Damage Resistance: 90% [58%]", "s": "compendium" }
   ] },
 
  { "id": "sub:sentinelshield", "n": "Sentinel Shield",
@@ -319,7 +326,9 @@
    { "do": "grants", "t": "overshield", "who": "allies", "on": "allies behind the guarding shield", "q": "Allies standing within 5m behind the barrier are granted 25% Increased Damage, a 45 HP Void Overshield", "s": "compendium" },
    { "do": "grants", "t": "reload", "who": "allies", "on": "allies behind the guarding shield", "q": "Allies behind the shield have increased survivability, weapon damage, and passive reload.", "s": "bungie" },
    { "do": "creates", "t": "orbofpower", "on": "blocking damage while guarding", "q": "Blocking ? [any] damage generates an Orb of Power", "s": "compendium" },
-   { "do": "grants", "t": "weapondamage", "on": "allies behind the guarding shield", "q": "Allies behind the shield have increased survivability, weapon damage, and passive reload.", "s": "bungie" }
+   { "do": "grants", "t": "weapondamage", "on": "allies behind the guarding shield", "q": "Allies behind the shield have increased survivability, weapon damage, and passive reload.", "s": "bungie" },
+   { "do": "grants", "t": "damageresistance", "amt": 90, "vs": ["combatants"], "on": "while your Super is active", "note": "Guarding also makes the caster immune to frontal damage.", "q": "Damage Resistance: 90% [53%]", "s": "compendium" },
+   { "do": "grants", "t": "damageresistance", "amt": 53, "vs": ["players"], "on": "while your Super is active", "q": "Damage Resistance: 90% [53%]", "s": "compendium" }
   ],
   "note": "Shield Throw replaces the grenade during the Super. Offensive Bulwark adds one more Shield Throw; Unbreakable spawns Orbs when Sentinel Shield is equipped." },
 
@@ -343,7 +352,9 @@
   "fx": [
    { "do": "applies", "t": "weaken", "on": "heavy attack", "q": "Perform a heavy attack that weakens your target, and once again vanish from sight.", "s": "bungie" },
    { "do": "grants", "t": "invisibility", "on": "heavy attack", "q": "Perform a heavy attack that weakens your target, and once again vanish from sight.", "s": "bungie" },
-   { "do": "modifies", "t": "movement", "if": [{ "piece": "Trapper's Ambush" }], "q": "Allows unlimited Trapper's Ambush usage, at the cost of 15%? Super Energy.", "s": "compendium" }
+   { "do": "modifies", "t": "movement", "if": [{ "piece": "Trapper's Ambush" }], "q": "Allows unlimited Trapper's Ambush usage, at the cost of 15%? Super Energy.", "s": "compendium" },
+   { "do": "grants", "t": "damageresistance", "amt": 90, "vs": ["combatants"], "on": "while your Super is active", "q": "Damage Resistance: 90% [59?% Invisible | 58% Visible]", "s": "compendium" },
+   { "do": "grants", "t": "damageresistance", "amt": 58, "vs": ["players"], "on": "while your Super is active", "q": "Damage Resistance: 90% [59?% Invisible | 58% Visible]", "s": "compendium" }
   ],
   "note": "Light attacks remove invisibility." },
 
@@ -363,7 +374,9 @@
    { "do": "uses", "t": "melee", "q": "Scoring a Melee Kill as the Caster generates an Orb of Power up to 5 times per Super cast.", "s": "compendium" },
    { "do": "creates", "t": "orbofpower", "on": "caster melee final blows inside the Ward", "q": "Scoring a Melee Kill as the Caster generates an Orb of Power up to 5 times per Super cast.", "s": "compendium" },
    { "do": "modifies", "t": "melee", "q": "The Ward's owner also gains increased melee damage while inside", "s": "bungie" },
-   { "do": "grants", "t": "weapondamage", "on": "while inside the Ward", "q": "allies gain Void overshield and increased weapon damage", "s": "bungie" }
+   { "do": "grants", "t": "weapondamage", "on": "while inside the Ward", "q": "allies gain Void overshield and increased weapon damage", "s": "bungie" },
+   { "do": "grants", "t": "damageresistance", "amt": 26.5, "vs": ["players"], "on": "during the Super cast animation", "note": "PvE value unknown.", "q": "Damage Resistance while in Cast Animation: ?% [26.5%]", "s": "compendium" },
+   { "do": "grants", "t": "damageresistance", "amt": 40, "vs": ["all"], "who": "allies", "on": "while inside Ward of Dawn (Armor of Light)", "q": "Armor of Light | Constantly generates 15 Void Overshield/s and grants 40% [?%] Damage Resist", "s": "compendium" }
   ],
   "note": "Offensive Bulwark treats being inside the Ward like having an Overshield." },
 
@@ -374,9 +387,11 @@
    { "do": "consumes", "t": "grenadeenergy", "q": "gradually draining your grenade energy and granting an Overshield over time", "s": "bungie" },
    { "do": "grants", "t": "overshield", "on": "while holding the shield", "q": "gradually draining your grenade energy and granting an Overshield over time", "s": "bungie" },
    { "do": "grants", "t": "grenadeenergy", "on": "blocking damage", "q": "grants ?% Grenade Energy per hit absorbed", "s": "clarity" },
-   { "do": "applies", "t": "disorient", "q": "releases a frontal blast from your shield that disorients combatants", "s": "bungie" },
+   { "do": "applies", "t": "disorient", "dmg": ["grenade"], "q": "releases a frontal blast from your shield that disorients combatants", "s": "bungie" },
    { "do": "grants", "t": "devour", "on": "frontal blast final blows", "q": "Final blows with the frontal blast grant you Devour.", "s": "bungie" },
-   { "do": "creates", "t": "orbofpower", "if": [{ "slot": "super", "is": ["Sentinel Shield"] }], "q": "If you have Sentinel Shield equipped, blocking damage also spawns an Orb of Power for your allies every 4.5 seconds.", "s": "clarity" }
+   { "do": "creates", "t": "orbofpower", "if": [{ "slot": "super", "is": ["Sentinel Shield"] }], "q": "If you have Sentinel Shield equipped, blocking damage also spawns an Orb of Power for your allies every 4.5 seconds.", "s": "clarity" },
+   { "do": "grants", "t": "damageresistance", "amt": 95, "vs": ["blocked"], "on": "while holding the Void shield", "q": "grants 95% [75%?] Damage Resistance against blocked shots", "s": "clarity" },
+   { "do": "grants", "t": "damageresistance", "amt": 64, "vs": ["players"], "on": "while holding the Void shield (blocked damage)", "note": "PvP value; Clarity says 75%?.", "q": "Grants 95?% [64%] Damage Resist against blocked damage", "s": "compendium" }
   ],
   "note": "Replaces your grenade throw; base grenade cooldown becomes 152 s. Does not trigger Echo of Provision (Clarity)." }
 ]

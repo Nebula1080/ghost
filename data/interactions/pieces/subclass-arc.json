@@ -45,6 +45,13 @@
     "as": "grenade",
     "q": "Arc Souls count as grenade abilities and are buffed by, and trigger, grenade-specific effects.",
     "s": "clarity"
+   },
+   {
+    "do": "counts",
+    "t": "arcsoul",
+    "as": "arcability",
+    "q": "fires homing projectiles that deal 69 [11] Arc Grenade Damage",
+    "s": "compendium"
    }
   ]
  },
@@ -83,6 +90,28 @@
     "q": "Allows the repeated usage of Ascension while the Aspect is equipped at the cost of ?% Super Energy.",
     "s": "compendium",
     "note": "Ascension can be recast during Arc Staff for Super energy."
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [53%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 53,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [53%]",
+    "s": "compendium"
    }
   ]
  },
@@ -214,6 +243,28 @@
     "on": "cancelling the super early",
     "q": "Partially refunds Super Energy on early deactivation",
     "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [55%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 55,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [55%]",
+    "s": "compendium"
    }
   ]
  },
@@ -304,6 +355,9 @@
    {
     "do": "uses",
     "t": "arcability",
+    "from": [
+     "arcability"
+    ],
     "q": "Defeating targets with Arc abilities or defeating jolted or blinded targets creates an Ionic Trace.",
     "s": "bungie"
    },
@@ -345,6 +399,28 @@
     "t": "blind",
     "q": "Slam your fists to the ground, blinding targets and dealing damage in an area around you",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [58%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 58,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [58%]",
+    "s": "compendium"
    }
   ]
  },
@@ -404,8 +480,12 @@
      }
     ],
     "on": "while dodging",
-    "q": "While you are amplified, your dodge recharges more quickly, you are more resilient while dodging, and your reload speed is greatly increased.",
-    "s": "bungie"
+    "amt": 66,
+    "vs": [
+     "all"
+    ],
+    "q": "66% [32%] Damage Resistance during your Dodge animation",
+    "s": "clarity"
    },
    {
     "do": "grants",
@@ -423,6 +503,22 @@
     "t": "dodge",
     "q": "While you are amplified, your dodge recharges more quickly, you are more resilient while dodging, and your reload speed is greatly increased.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 32,
+    "vs": [
+     "players"
+    ],
+    "on": "while dodging",
+    "if": [
+     {
+      "has": "amplified"
+     }
+    ],
+    "q": "66% [32%] Damage Resistance during your Dodge animation",
+    "s": "clarity"
    }
   ]
  },
@@ -441,6 +537,28 @@
     "t": "jolt",
     "q": "embedding it into surfaces or large targets and jolting nearby targets.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [49%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 49,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [49%]",
+    "s": "compendium"
    }
   ]
  },
@@ -457,6 +575,9 @@
    {
     "do": "uses",
     "t": "arcability",
+    "from": [
+     "arcability"
+    ],
     "q": "Defeat targets with Kinetic or Arc weapons or Arc abilities to charge up an Arc turret",
     "s": "bungie"
    },
@@ -503,8 +624,18 @@
       ]
      }
     ],
+    "from": [
+     "weapon"
+    ],
     "q": "Defeat targets with Kinetic or Arc weapons or Arc abilities to charge up an Arc turret",
     "s": "bungie"
+   },
+   {
+    "do": "counts",
+    "t": "ionicsentry",
+    "as": "arcability",
+    "q": "Counts as an Arc Grenade Ability Damage, and will trigger Grenade Ability interactions.",
+    "s": "compendium"
    }
   ],
   "note": "Arc or Kinetic weapon kills give 1 charge and Arc ability kills 2; ready at 6. Kills during its 6s cooldown do not charge it."
@@ -552,6 +683,40 @@
     "by": "frontalshield",
     "q": "While amplified, the shield blocks significantly more damage before breaking.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 10,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while the frontal shield is active",
+    "note": "The extra 33% while amplified is for the shield itself, not you.",
+    "q": "60% [10%] Splash Damage Resist, and 10% Damage Resist against Combatants while active.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 60,
+    "vs": [
+     "explosive"
+    ],
+    "on": "while the frontal shield is active",
+    "q": "This overshield grants 60% [10%] Splash Damage Resistance",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 10,
+    "vs": [
+     "players"
+    ],
+    "on": "while the frontal shield is active (splash)",
+    "q": "This overshield grants 60% [10%] Splash Damage Resistance",
+    "s": "clarity"
    }
   ],
   "note": "Stacks with other overshields (Clarity)."
@@ -589,6 +754,9 @@
    {
     "do": "uses",
     "t": "melee",
+    "from": [
+     "melee"
+    ],
     "q": "Defeating targets with melee attacks makes you amplified and restores a portion of your health.",
     "s": "bungie"
    },
@@ -605,6 +773,18 @@
     "on": "melee kills",
     "q": "Defeating targets with melee attacks makes you amplified and restores a portion of your health.",
     "s": "bungie"
+   },
+   {
+    "do": "counts",
+    "t": "melee",
+    "as": "poweredmelee",
+    "if": [
+     {
+      "has": "knockout"
+     }
+    ],
+    "q": "Basic Melee Attacks count as Arc Powered Melee Hits.",
+    "s": "compendium"
    }
   ]
  },
@@ -717,6 +897,11 @@
    {
     "do": "grants",
     "t": "damageresistance",
+    "vs": [
+     "combatants"
+    ],
+    "on": "briefly after casting",
+    "note": "Amount unknown in Clarity and the Compendium.",
     "q": "Grants ? damage resistance against Combatants for ? seconds upon use.",
     "s": "clarity"
    }
@@ -791,6 +976,9 @@
    {
     "do": "uses",
     "t": "amplified",
+    "from": [
+     "weapon"
+    ],
     "q": "While you are amplified, your Arc Special or Heavy ammo weapon final blows create a blinding explosion.",
     "s": "bungie"
    },
@@ -857,6 +1045,20 @@
     "t": "ionictrace",
     "note": "Any Ionic Trace grants Bolt Charge with this equipped.",
     "q": "Collecting an Ionic Trace grants you a stack of Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "weapon",
+    "from": [
+     "weapon"
+    ],
+    "if": [
+     {
+      "weapon": "arc"
+     }
+    ],
+    "q": "Arc weapon final blows have a chance to create an Ionic Trace.",
     "s": "bungie"
    }
   ]
@@ -1095,8 +1297,23 @@
     "do": "grants",
     "t": "damageresistance",
     "on": "within 15m of 3+ enemies",
-    "q": "While surrounded by combatants, you are more resistant to incoming damage.",
-    "s": "bungie"
+    "amt": 25,
+    "vs": [
+     "all"
+    ],
+    "q": "Grants 25% [10%] Damage Resistance while within 15 meters of 3+ enemies.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 10,
+    "vs": [
+     "players"
+    ],
+    "on": "within 15m of 3+ enemies",
+    "q": "Grants 25% [10%] Damage Resistance while within 15 meters of 3+ enemies.",
+    "s": "clarity"
    }
   ]
  },
@@ -1152,7 +1369,30 @@
  {
   "id": "sub:stormsedge",
   "n": "Storm's Edge",
-  "fx": [],
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [45%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 45,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [45%]",
+    "s": "compendium"
+   }
+  ],
   "note": "Teleporting dagger throws; no status or resource interactions in the text."
  },
  {
@@ -1223,6 +1463,9 @@
      }
     ],
     "note": "weapon damage can discharge Bolt Charge while behind the barricade",
+    "from": [
+     "weapon"
+    ],
     "q": "While behind your Barricade, you and allies gain stacks of Bolt Charge over time and your weapons can discharge max stacks of Bolt Charge.",
     "s": "bungie"
    }
@@ -1238,6 +1481,28 @@
     "t": "jolt",
     "q": "Casting Stormtrance creates a jolting shockwave underneath you.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [58%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 58,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [58%]",
+    "s": "compendium"
    }
   ]
  },
@@ -1279,6 +1544,11 @@
    {
     "do": "grants",
     "t": "damageresistance",
+    "amt": 75,
+    "vs": [
+     "combatants"
+    ],
+    "on": "for 4 seconds after casting",
     "q": "Grants 75% damage resistance against Combatants for 4 seconds after cast.",
     "s": "clarity"
    },
@@ -1323,6 +1593,11 @@
    {
     "do": "grants",
     "t": "damageresistance",
+    "amt": 80,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while charging and briefly after",
     "q": "Grants 80% Damage Resist against Combatants during the animation",
     "s": "compendium"
    }
@@ -1331,7 +1606,30 @@
  {
   "id": "sub:thundercrash",
   "n": "Thundercrash",
-  "fx": [],
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 90,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [25%]",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 25,
+    "vs": [
+     "players"
+    ],
+    "on": "while your Super is active",
+    "q": "Damage Resistance: 90% [25%]",
+    "s": "compendium"
+   }
+  ],
   "note": "Missile super; no status or resource interactions in the text."
  },
  {

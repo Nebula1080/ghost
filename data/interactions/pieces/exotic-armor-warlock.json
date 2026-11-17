@@ -473,7 +473,10 @@
     ],
     "perk": "Crystalline Transistor",
     "q": "Final blows from Kinetic weapons create an explosion in the element of your equipped Super",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "weapon"
+    ]
    },
    {
     "do": "applies",
@@ -594,7 +597,10 @@
     "t": "melee",
     "perk": "The Whispers",
     "q": "Powered melee final blows spawn an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "poweredmelee"
+    ]
    },
    {
     "do": "creates",
@@ -648,8 +654,12 @@
      }
     ],
     "perk": "Chaotic Exchanger",
-    "q": "Resist incoming damage while charging your Void grenade with Chaos Accelerant.",
-    "s": "bungie"
+    "q": "Grants 20% Damage Resistance while overcharging a Void Grenade with Chaos Accelerant.",
+    "s": "clarity",
+    "amt": 20,
+    "vs": [
+     "all"
+    ]
    },
    {
     "do": "grants",
@@ -734,7 +744,10 @@
     ],
     "perk": "Conduction Tines",
     "q": "Arc ability or Jolt final blows increase the recharge rate of your abilities and extend the duration of Stormtrance.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "arcability"
+    ]
    },
    {
     "do": "uses",
@@ -1193,7 +1206,10 @@
     "t": "melee",
     "perk": "Warlord's End",
     "q": "Powered melee hits weaken targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "poweredmelee"
+    ]
    },
    {
     "do": "applies",
@@ -1429,7 +1445,10 @@
     "t": "melee",
     "perk": "Vampire's Caress",
     "q": "Melee and finisher final blows instantly grant cure and provide restoration for a short duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "uses",
@@ -1519,7 +1538,10 @@
     "t": "weapon",
     "perk": "Absorption Cells",
     "q": "Final blows or sustained damage with weapons matching your equipped Super damage type grant you Super energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "weapon"
+    ]
    },
    {
     "do": "grants",
@@ -1587,7 +1609,11 @@
     ],
     "perk": "Stylostixis",
     "q": "Targets damaged by Arcane Needle emit a suspending detonation when defeated.",
-    "s": "bungie"
+    "s": "bungie",
+    "dmg": [
+     "melee"
+    ],
+    "note": "Compendium: the Arcane Needle Suspending Burst deals Strand Melee Ability Damage"
    },
    {
     "do": "modifies",
@@ -1618,6 +1644,26 @@
     "perk": "Stylostixis",
     "q": "Defeating suspended targets grants melee energy.",
     "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "suspend",
+    "perk": "Stylostixis",
+    "on": "5 Needlestorm hits on one target",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Needlestorm"
+      ]
+     }
+    ],
+    "dmg": [
+     "super"
+    ],
+    "q": "Deals 5,040 [?] Strand Super Ability Damage and inflicts Suspension to enemies within 10 meters.",
+    "s": "compendium",
+    "note": "Clarity: this blast inherits Super damage buffs"
    }
   ],
   "note": "Arcane Needles also become Shield-Piercing (anti-Barrier). Any Suspend source pays out melee energy."
@@ -1631,7 +1677,10 @@
     "t": "melee",
     "perk": "Grasp of the Devourer",
     "q": "Damaging a target with a melee inflicts potent corruption that deals increasing damage over time.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "applies",
@@ -1797,7 +1846,10 @@
     ],
     "perk": "Scatter Charge",
     "q": "Scatter Grenade final blows create additional Scatter Grenade projectiles.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "grenade"
+    ]
    }
   ],
   "note": "Clarity: the extra charge stacks with Chaos Accelerant's; the tracking does not."
@@ -1930,7 +1982,10 @@
     ],
     "perk": "Embers of Light",
     "q": "While a Solar Super is equipped, weapon final blows grant class ability energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "weapon"
+    ]
    },
    {
     "do": "grants",
@@ -1965,7 +2020,11 @@
     ],
     "perk": "Embers of Light",
     "q": "Defeating targets with your weapon while standing in a healing rift creates a pulse",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "weapon"
+    ],
+    "note": "Daybreak final blows also trigger the pulse"
    },
    {
     "do": "grants",
@@ -2140,6 +2199,20 @@
     "perk": "Bleak Domain",
     "q": "Icicles activate when you fire your weapons, applying Slow to targets they hit.",
     "s": "bungie"
+   },
+   {
+    "do": "counts",
+    "t": "stasiscrystal",
+    "as": "super",
+    "perk": "Bleak Domain",
+    "if": [
+     {
+      "piece": "Bleak Watcher"
+     }
+    ],
+    "q": "Stasis Crystals count as Super Ability Damage.",
+    "s": "compendium",
+    "note": "the crystals Rime-coat Raiment adds around Bleak Watcher"
    }
   ],
   "note": "Compendium: these crystals count as Super ability damage."
@@ -2168,7 +2241,10 @@
     "t": "rift",
     "perk": "Blood Magic",
     "q": "Weapon final blows while standing in any rift pause the rift's countdown, extending its duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "weapon"
+    ]
    },
    {
     "do": "uses",
@@ -2305,8 +2381,14 @@
      }
     ],
     "perk": "Actual Grandeur",
-    "q": "Massively increases Damage Resist during Nova Bomb cast",
-    "s": "clarity"
+    "q": "Massively increases Damage Resist during Nova Bomb cast: starts at 99.5% and drops down to 75% near the end.",
+    "s": "clarity",
+    "amt": 99.5,
+    "vs": [
+     "all"
+    ],
+    "on": "while casting Nova Bomb",
+    "note": "drops from 99.5% to 75% over the cast"
    },
    {
     "do": "grants",
@@ -2322,7 +2404,10 @@
     "perk": "Actual Grandeur",
     "q": "weapon final blows while you have Devour grant Super energy",
     "s": "bungie",
-    "note": "Clarity: the Devour part works with any Super."
+    "note": "Clarity: the Devour part works with any Super.",
+    "from": [
+     "weapon"
+    ]
    }
   ]
  },
@@ -2335,7 +2420,10 @@
     "t": "melee",
     "perk": "Spirit of the Necrotic",
     "q": "Damaging a target with a melee inflicts potent corruption.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "applies",
@@ -2525,7 +2613,10 @@
     ],
     "perk": "Fusion Harness",
     "q": "recharge from empowered weapon damage, with empowered weapon final blows granting more energy",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "weapon"
+    ]
    },
    {
     "do": "grants",
@@ -2623,7 +2714,11 @@
     ],
     "perk": "Ascending Amplitude",
     "q": "While Stormtrance is equipped, ability damage while amplified grants Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "arcability"
+    ],
+    "note": "Clarity: Arc Ability Hits while Amplified grant Bolt Charge"
    },
    {
     "do": "grants",
@@ -2675,7 +2770,11 @@
     ],
     "perk": "Helium Spirals",
     "q": "Solar melee kills grant unlimited Solar Grenade energy for a brief time.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "poweredmelee"
+    ],
+    "note": "Clarity/Compendium: Powered Melee Kills"
    },
    {
     "do": "grants",
@@ -2750,8 +2849,14 @@
     "by": "rift",
     "who": "allies",
     "perk": "Dearly Departed",
-    "q": "Your Rift provides damage reduction to allied Guardians standing in it.",
-    "s": "bungie"
+    "q": "Grants 25% [5%] Damage Resistance (Resist x2) to you and allies inside Rifts you create.",
+    "s": "clarity",
+    "amt": 25,
+    "vs": [
+     "all"
+    ],
+    "on": "standing in your Rift",
+    "note": "you and allies inside your Rift; not Well of Radiance"
    },
    {
     "do": "uses",
@@ -2767,6 +2872,21 @@
     "perk": "Dearly Departed",
     "q": "Grants Rift energy when you are critically wounded.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "by": "rift",
+    "perk": "Dearly Departed",
+    "who": "allies",
+    "on": "standing in your Rift",
+    "amt": 5,
+    "vs": [
+     "players"
+    ],
+    "q": "Grants 25% [5%] Damage Resistance (Resist x2) to you and allies inside Rifts you create.",
+    "s": "clarity",
+    "note": "PvP value"
    }
   ],
   "note": "On death it leaves a Healing Rift on your corpse. Well of Radiance does not get the resist (Clarity)."
@@ -2802,7 +2922,10 @@
     "perk": "The Fourth Magic",
     "q": "Weapon final blows with a damage type matching your grenade grant Death Throes, which provide a grenade damage bonus and grant you grenade energy.",
     "s": "bungie",
-    "note": "Weapon element must match the grenade element."
+    "note": "Weapon element must match the grenade element.",
+    "from": [
+     "weapon"
+    ]
    },
    {
     "do": "grants",
@@ -2925,8 +3048,13 @@
      }
     ],
     "perk": "Tome of Dawn",
-    "q": "While this effect is active, you are more resistant to incoming damage and combatants are less accurate.",
-    "s": "bungie"
+    "q": "Grants 15% Damage Resist and 25% Flinch Resist while active.",
+    "s": "compendium",
+    "amt": 15,
+    "vs": [
+     "all"
+    ],
+    "on": "while suspended midair by Tome of Dawn"
    },
    {
     "do": "grants",
@@ -2990,7 +3118,10 @@
     "t": "melee",
     "perk": "Warlord's Sigil",
     "q": "Melee and finisher final blows increase melee damage.",
-    "s": "bungie"
+    "s": "bungie",
+    "from": [
+     "melee"
+    ]
    },
    {
     "do": "uses",

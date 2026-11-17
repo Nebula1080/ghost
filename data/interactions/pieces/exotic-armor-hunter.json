@@ -3,13 +3,13 @@
   "fx": [
    { "do": "grants", "t": "invisibility", "perk": "Vanishing Execution", "on": "powered melee final blows", "q": "Powered melee final blows grant invisibility and restore a portion of health and shields.", "s": "bungie" },
    { "do": "grants", "t": "healing", "perk": "Vanishing Execution", "on": "powered melee final blows", "q": "Powered melee final blows grant invisibility and restore a portion of health and shields.", "s": "bungie" },
-   { "do": "uses", "t": "melee", "perk": "Vanishing Execution", "q": "Powered melee final blows grant invisibility and restore a portion of health and shields.", "s": "bungie" },
+   { "do": "uses", "t": "melee", "perk": "Vanishing Execution", "q": "Powered melee final blows grant invisibility and restore a portion of health and shields.", "s": "bungie", "from": ["poweredmelee"] },
    { "do": "uses", "t": "finisher", "perk": "Vanishing Execution", "q": "Powered Melee Kills and Finishers grant Invisibility and restore 67 HP.", "s": "clarity", "note": "finishers give 3 s longer invisibility; Echo of Persistence extends it further" }
   ] },
  { "id": "xa:athryssembrace", "n": "Athrys's Embrace",
   "fx": [
    { "do": "modifies", "t": "melee", "perk": "Skittering Stinger", "if": [{ "slot": "melee", "is": ["Weighted Throwing Knife"] }], "q": "Weighted Knife gains a second bounce.", "s": "bungie" },
-   { "do": "uses", "t": "weapon", "perk": "Skittering Stinger", "if": [{ "slot": "melee", "is": ["Weighted Throwing Knife"] }], "on": "3 rapid weapon precision hits", "q": "Rapid precision hits with your weapons grant Weighted Knife a significant damage bonus, bonus melee, and the ability to stun unshielded combatants for a short time.", "s": "bungie" },
+   { "do": "uses", "t": "weapon", "perk": "Skittering Stinger", "if": [{ "slot": "melee", "is": ["Weighted Throwing Knife"] }], "on": "3 rapid weapon precision hits", "q": "Rapid precision hits with your weapons grant Weighted Knife a significant damage bonus, bonus melee, and the ability to stun unshielded combatants for a short time.", "s": "bungie", "from": ["weapon"] },
    { "do": "grants", "t": "meleedamage", "perk": "Skittering Stinger", "if": [{ "slot": "melee", "is": ["Weighted Throwing Knife"] }], "q": "Rapid precision hits with your weapons grant Weighted Knife a significant damage bonus, bonus melee, and the ability to stun unshielded combatants for a short time.", "s": "bungie", "note": "Strengthened Throwing Knife: +300% knife damage, +50 Melee stat, stuns Unstoppable Champions; consumed on knife hit. Requires Weighted Throwing Knife." }
   ] },
  { "id": "xa:balanceofpower", "n": "Balance of Power",
@@ -51,12 +51,12 @@
   ] },
  { "id": "xa:foetracer", "n": "Foetracer",
   "fx": [
-   { "do": "grants", "t": "weaponsurge", "perk": "Relentless Tracker", "on": "ability damage to a powerful combatant or Guardian", "q": "Damaging a powerful combatant or Guardian with an ability temporarily increases weapon damage of the same type.", "s": "bungie", "note": "surge matches the ability's element" },
-   { "do": "creates", "t": "firesprite", "perk": "Relentless Tracker", "if": [{ "weapon": "solar" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity", "note": "the pickup matches the element of the ability that marked the target" },
-   { "do": "creates", "t": "ionictrace", "perk": "Relentless Tracker", "if": [{ "weapon": "arc" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity" },
-   { "do": "creates", "t": "stasisshard", "perk": "Relentless Tracker", "if": [{ "weapon": "stasis" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity" },
-   { "do": "creates", "t": "tangle", "perk": "Relentless Tracker", "if": [{ "weapon": "strand" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity" },
-   { "do": "creates", "t": "voidbreach", "perk": "Relentless Tracker", "if": [{ "weapon": "void" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity" }
+   { "do": "grants", "t": "weaponsurge", "perk": "Relentless Tracker", "on": "ability damage to a powerful combatant or Guardian", "q": "Damaging a powerful combatant or Guardian with an ability temporarily increases weapon damage of the same type.", "s": "bungie", "note": "surge matches the ability's element", "from": ["grenade", "melee", "classability", "super"] },
+   { "do": "creates", "t": "firesprite", "perk": "Relentless Tracker", "if": [{ "weapon": "solar" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity", "note": "the pickup matches the element of the ability that marked the target", "from": ["weapon"] },
+   { "do": "creates", "t": "ionictrace", "perk": "Relentless Tracker", "if": [{ "weapon": "arc" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity", "from": ["weapon"] },
+   { "do": "creates", "t": "stasisshard", "perk": "Relentless Tracker", "if": [{ "weapon": "stasis" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity", "from": ["weapon"] },
+   { "do": "creates", "t": "tangle", "perk": "Relentless Tracker", "if": [{ "weapon": "strand" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity", "from": ["weapon"] },
+   { "do": "creates", "t": "voidbreach", "perk": "Relentless Tracker", "if": [{ "weapon": "void" }], "on": "killing the marked target with a matching weapon", "q": "Elemental Pickups include Firesprites, Ionic Traces, Stasis Shards, Tangles, and Void Breaches.", "s": "clarity", "from": ["weapon"] }
   ] },
  { "id": "xa:fortunesfavor", "n": "Fortune's Favor",
   "fx": [
@@ -84,7 +84,8 @@
   "fx": [
    { "do": "applies", "t": "jolt", "perk": "The Gift of Certainty", "if": [{ "any": [{ "piece": "Ascension" }, { "piece": "Tempest Strike" }] }], "on": "activating Ascension or Tempest Strike", "q": "Activating Ascension or Tempest Strike throws bouncing explosives at nearby targets that jolt and damage them.", "s": "bungie" },
    { "do": "uses", "t": "jolt", "perk": "The Gift of Certainty", "q": "Jolting nearby targets grants you damage resistance.", "s": "bungie", "note": "any Jolt you apply within ~15 m counts, not only the exotic's projectiles" },
-   { "do": "grants", "t": "damageresistance", "perk": "The Gift of Certainty", "on": "jolting nearby targets", "q": "Jolting nearby targets grants you damage resistance.", "s": "bungie", "note": "Compendium: the Arc projectiles count toward Sword on-hit effects while a Sword is readied" }
+   { "do": "grants", "t": "damageresistance", "perk": "The Gift of Certainty", "on": "jolting nearby targets", "q": "1 Jolt Applications = 25% [5%] Damage Resist (Resist x2)", "s": "compendium", "note": "25/40/50% at 1/2/3 Jolt applications (max 50%), 10 s; Compendium: the Arc projectiles count toward Sword on-hit effects while a Sword is readied", "amt": 25, "vs": ["all"] },
+   { "do": "grants", "t": "damageresistance", "perk": "The Gift of Certainty", "on": "jolting nearby targets", "amt": 5, "vs": ["players"], "q": "1 Jolt Applications = 25% [5%] Damage Resist (Resist x2)", "s": "compendium", "note": "PvP value; 5/7.5/10% at 1/2/3 Jolt applications" }
   ] },
  { "id": "xa:gravitonforfeit", "n": "Graviton Forfeit",
   "fx": [
@@ -106,7 +107,7 @@
  { "id": "xa:gyrfalconshauberk", "n": "Gyrfalcon's Hauberk",
   "fx": [
    { "do": "uses", "t": "invisibility", "perk": "See Me, Feel Me", "q": "Your Void weapons gain Volatile Rounds after you emerge from being invisible.", "s": "bungie" },
-   { "do": "grants", "t": "volatilerounds", "perk": "See Me, Feel Me", "if": [{ "weapon": "void" }], "on": "exiting invisibility", "q": "Your Void weapons gain Volatile Rounds after you emerge from being invisible.", "s": "bungie" },
+   { "do": "grants", "t": "volatilerounds", "perk": "See Me, Feel Me", "if": [{ "weapon": "void" }], "on": "exiting invisibility", "q": "Your Void weapons gain Volatile Rounds after you emerge from being invisible.", "s": "bungie", "note": "Clarity: Volatile explosions do not count as damage originating from your weapon" },
    { "do": "uses", "t": "finisher", "perk": "See Me, Feel Me", "q": "When you are invisible and defeat a combatant while using a finisher, all of your weapons gain bonus damage; you and your nearby allies gain a reserve overshield and improved class ability regeneration.", "s": "bungie" },
    { "do": "grants", "t": "weapondamage", "perk": "See Me, Feel Me", "if": [{ "has": "invisibility" }], "on": "finisher while invisible", "q": "When you are invisible and defeat a combatant while using a finisher, all of your weapons gain bonus damage", "s": "bungie", "note": "35% Empowering buff; does not stack with other Empowering buffs" },
    { "do": "grants", "t": "classenergy", "perk": "See Me, Feel Me", "who": "allies", "if": [{ "has": "invisibility" }], "on": "finisher while invisible", "q": "you and your nearby allies gain a reserve overshield and improved class ability regeneration", "s": "bungie" },
@@ -123,7 +124,7 @@
   ] },
  { "id": "xa:liarshandshake", "n": "Liar's Handshake",
   "fx": [
-   { "do": "uses", "t": "melee", "perk": "Cross Counter", "if": [{ "slot": "melee", "is": ["Combination Blow", "Disorienting Blow"] }], "q": "Using your Arc melee ability or being hit by a melee attack will allow you to follow up with an extremely powerful melee counterpunch that will heal you.", "s": "bungie", "note": "requires an Arc melee equipped" },
+   { "do": "uses", "t": "melee", "perk": "Cross Counter", "if": [{ "slot": "melee", "is": ["Combination Blow", "Disorienting Blow"] }], "q": "Using your Arc melee ability or being hit by a melee attack will allow you to follow up with an extremely powerful melee counterpunch that will heal you.", "s": "bungie", "note": "Compendium: Powered Melee hits (Clarity: Arc melee hits) or receiving melee damage", "from": ["poweredmelee"] },
    { "do": "grants", "t": "meleedamage", "perk": "Cross Counter", "if": [{ "slot": "melee", "is": ["Combination Blow", "Disorienting Blow"] }], "on": "Arc melee hits or taking melee damage", "q": "Cross Counter grants 400% additional base Melee damage and restores 40 HP on Melee Hits.", "s": "clarity" },
    { "do": "grants", "t": "healing", "perk": "Cross Counter", "if": [{ "slot": "melee", "is": ["Combination Blow", "Disorienting Blow"] }], "on": "Cross Counter melee hits", "q": "Cross Counter grants 400% additional base Melee damage and restores 40 HP on Melee Hits.", "s": "clarity" }
   ] },
@@ -168,12 +169,13 @@
    { "do": "modifies", "t": "melee", "perk": "Webcatcher", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "q": "Threaded Spike can bounce to Tangles, detonating them and returning immediately.", "s": "bungie" },
    { "do": "uses", "t": "tangle", "perk": "Webcatcher", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "q": "Threaded Spike can bounce to Tangles, detonating them and returning immediately.", "s": "bungie" },
    { "do": "creates", "t": "tangle", "perk": "Webcatcher", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "on": "catching a Spike that detonated a Tangle", "q": "Tangles detonated by Threaded Spike are rewoven and retrieved by it.", "s": "bungie", "note": "Compendium: picking it up this way counts for Elemental Pickup effects" },
-   { "do": "grants", "t": "meleeenergy", "perk": "Webcatcher", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "on": "catching a Spike that hit no Tangle", "q": "Catches without a Tangle refund extra melee energy.", "s": "bungie", "note": "missing the catch after a Tangle detonation causes a Strand explosion that counts as powered melee damage" }
+   { "do": "grants", "t": "meleeenergy", "perk": "Webcatcher", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "on": "catching a Spike that hit no Tangle", "q": "Catches without a Tangle refund extra melee energy.", "s": "bungie", "note": "missing the catch after a Tangle detonation causes a Strand explosion that counts as powered melee damage" },
+   { "do": "modifies", "t": "melee", "perk": "Webcatcher", "on": "failing to catch a Threaded Spike that detonated a Tangle", "if": [{ "slot": "melee", "is": ["Threaded Spike"] }], "dmg": ["poweredmelee"], "q": "This detonation counts as Powered Melee damage, scaling with the Melee stat and triggering melee-effects.", "s": "clarity", "note": "9 m Strand detonation around you; does not count as Tangle damage (Compendium)" }
   ] },
  { "id": "xa:mothkeeperswraps", "n": "Mothkeeper's Wraps",
   "fx": [
    { "do": "modifies", "t": "grenade", "perk": "Winged Eclipse", "on": "kills charge the moth cage", "q": "Defeat targets to charge up cages of loyal moths that fly toward nearby targets or allies.", "s": "bungie", "note": "temporarily replaces your grenade with two moth-cage charges" },
-   { "do": "applies", "t": "blind", "perk": "Winged Eclipse", "q": "Upon reaching targets, moths detonate in a blinding explosion", "s": "bungie", "note": "Clarity: Arc Moths count as Arc grenade damage" },
+   { "do": "applies", "t": "blind", "perk": "Winged Eclipse", "q": "Upon reaching targets, moths detonate in a blinding explosion", "s": "bungie", "note": "Clarity: Arc Moths count as Arc grenade damage", "dmg": ["grenade", "arcability"] },
    { "do": "grants", "t": "overshield", "perk": "Winged Eclipse", "who": "allies", "q": "upon reaching allies, moths provide a Void overshield.", "s": "bungie" }
   ] },
  { "id": "xa:oathkeeper", "n": "Oathkeeper",
@@ -185,9 +187,10 @@
   "fx": [
    { "do": "modifies", "t": "melee", "perk": "Beyond The Veil", "if": [{ "slot": "melee", "is": ["Snare Bomb"] }], "q": "You gain a second Smoke Bomb charge", "s": "bungie" },
    { "do": "uses", "t": "invisibility", "perk": "Beyond The Veil", "q": "have damage resistance while invisible", "s": "bungie" },
-   { "do": "grants", "t": "damageresistance", "perk": "Beyond The Veil", "if": [{ "has": "invisibility" }], "on": "while invisible", "q": "You gain a second Smoke Bomb charge and have damage resistance while invisible.", "s": "bungie", "note": "not while in Super" },
+   { "do": "grants", "t": "damageresistance", "perk": "Beyond The Veil", "if": [{ "has": "invisibility" }], "on": "while invisible", "q": "Invisibility now grants 50% [10%] Damage Resistance (Resist x4).", "s": "clarity", "note": "not while in Super", "amt": 50, "vs": ["all"] },
    { "do": "grants", "t": "meleeenergy", "perk": "Beyond The Veil", "on": "making an ally invisible", "q": "When you make an ally invisible, they gain damage resistance while invisible and you gain melee energy.", "s": "bungie" },
-   { "do": "grants", "t": "damageresistance", "perk": "Beyond The Veil", "who": "allies", "on": "allies you make invisible", "q": "When you make an ally invisible, they gain damage resistance while invisible and you gain melee energy.", "s": "bungie" }
+   { "do": "grants", "t": "damageresistance", "perk": "Beyond The Veil", "who": "allies", "on": "allies you make invisible", "q": "Invisibility now grants 50% [10%] Damage Resistance (Resist x4).", "s": "clarity", "amt": 50, "vs": ["all"], "note": "allies you make invisible share the same Damage Resist" },
+   { "do": "grants", "t": "damageresistance", "perk": "Beyond The Veil", "on": "while invisible", "if": [{ "has": "invisibility" }], "amt": 10, "vs": ["players"], "q": "Invisibility now grants 50% [10%] Damage Resistance (Resist x4).", "s": "clarity", "note": "PvP value; not while in Super" }
   ] },
  { "id": "xa:ophidiaspathe", "n": "Ophidia Spathe",
   "fx": [
@@ -206,7 +209,7 @@
   ] },
  { "id": "xa:radiantdancemachines", "n": "Radiant Dance Machines",
   "fx": [
-   { "do": "uses", "t": "primaryweapon", "perk": "The Dance", "q": "Final blows with Primary ammo weapons return dodge energy, which can overflow to create additional charges when full.", "s": "bungie" },
+   { "do": "uses", "t": "primaryweapon", "perk": "The Dance", "q": "Final blows with Primary ammo weapons return dodge energy, which can overflow to create additional charges when full.", "s": "bungie", "from": ["primaryweapon"] },
    { "do": "grants", "t": "classenergy", "perk": "The Dance", "on": "Primary weapon final blows", "q": "Final blows with Primary ammo weapons return dodge energy, which can overflow to create additional charges when full.", "s": "bungie" },
    { "do": "modifies", "t": "dodge", "perk": "The Dance", "q": "At full Class Ability energy, scoring multiple Primary Weapon Kills within 6 seconds of each grants an additional Class Ability Charge.", "s": "clarity", "note": "up to 2 extra class ability charges" }
   ] },
@@ -240,7 +243,7 @@
   ] },
  { "id": "xa:sealedahamkaragrasps", "n": "Sealed Ahamkara Grasps",
   "fx": [
-   { "do": "uses", "t": "melee", "perk": "Nightmare Fuel", "q": "Powered melee and finisher final blows grant Nightmare Fuel, increasing handling and airborne effectiveness.", "s": "bungie" },
+   { "do": "uses", "t": "melee", "perk": "Nightmare Fuel", "q": "Powered melee and finisher final blows grant Nightmare Fuel, increasing handling and airborne effectiveness.", "s": "bungie", "from": ["poweredmelee"] },
    { "do": "uses", "t": "finisher", "perk": "Nightmare Fuel", "q": "Powered melee and finisher final blows grant Nightmare Fuel, increasing handling and airborne effectiveness.", "s": "bungie" },
    { "do": "uses", "t": "grapplemelee", "perk": "Nightmare Fuel", "q": "On Powered Melee/Grapple Melee Kill or Finisher: Grants Nightmare Fuel for 7 seconds.", "s": "compendium" },
    { "do": "grants", "t": "handling", "perk": "Nightmare Fuel", "on": "powered melee or finisher final blows", "q": "Powered melee and finisher final blows grant Nightmare Fuel, increasing handling and airborne effectiveness.", "s": "bungie" },
@@ -269,13 +272,13 @@
    { "do": "grants", "t": "reloadspeed", "perk": "Tight Fit", "who": "allies", "on": "dodging", "q": "Dodging instantly reloads all your weapons and grants increased reload and handling to you and nearby allies.", "s": "bungie" },
    { "do": "grants", "t": "handling", "perk": "Tight Fit", "who": "allies", "on": "dodging", "q": "Dodging instantly reloads all your weapons and grants increased reload and handling to you and nearby allies.", "s": "bungie" },
    { "do": "grants", "t": "classenergy", "perk": "Tight Fit", "on": "sustained weapon hits", "q": "Dealing sustained damage grants class ability energy.", "s": "bungie" },
-   { "do": "uses", "t": "weapon", "perk": "Tight Fit", "q": "Scoring multiple Direct Weapon Hits within 3? seconds of each grants ~20% Class Ability Energy.", "s": "clarity" }
+   { "do": "uses", "t": "weapon", "perk": "Tight Fit", "q": "Scoring multiple Direct Weapon Hits within 3? seconds of each grants ~20% Class Ability Energy.", "s": "clarity", "from": ["weapon"] }
   ] },
  { "id": "xa:st0mpee5", "n": "St0mp-EE5",
   "fx": [
    { "do": "modifies", "t": "movement", "perk": "Hydraulic Boosters", "q": "Increases slide distance and improves High Jump, Strafe Jump, and Triple Jump.", "s": "bungie" },
    { "do": "uses", "t": "airborne", "perk": "Hydraulic Boosters", "q": "Take less damage from targets when airborne.", "s": "bungie" },
-   { "do": "grants", "t": "damageresistance", "perk": "Hydraulic Boosters", "on": "while airborne", "q": "Take less damage from targets when airborne.", "s": "bungie", "note": "30% vs PvE combatants" }
+   { "do": "grants", "t": "damageresistance", "perk": "Hydraulic Boosters", "on": "while airborne", "q": "30% Damage Resist against Combatants while Airborne.", "s": "compendium", "note": "PvE combatants only", "amt": 30, "vs": ["combatants"] }
   ] },
  { "id": "xa:stareaterscales", "n": "Star-Eater Scales",
   "fx": [
@@ -304,7 +307,7 @@
   "fx": [
    { "do": "modifies", "t": "dodge", "perk": "Double Dodge", "q": "Gain a second dodge charge.", "s": "bungie" },
    { "do": "uses", "t": "dodge", "perk": "Double Dodge", "q": "Shortly after dodging, your next weapon final blow spawns an Orb of Power.", "s": "bungie" },
-   { "do": "creates", "t": "orbofpower", "perk": "Double Dodge", "on": "weapon final blow shortly after dodging", "q": "Shortly after dodging, your next weapon final blow spawns an Orb of Power.", "s": "bungie", "note": "acts as a copy of the Reaper mod" }
+   { "do": "creates", "t": "orbofpower", "perk": "Double Dodge", "on": "weapon final blow shortly after dodging", "q": "Shortly after dodging, your next weapon final blow spawns an Orb of Power.", "s": "bungie", "note": "acts as a copy of the Reaper mod", "from": ["weapon"] }
   ] },
  { "id": "xa:tritonvice", "n": "Triton Vice",
   "fx": [
@@ -323,7 +326,7 @@
   "fx": [
    { "do": "modifies", "t": "grenade", "perk": "Wish-Dragon Teeth", "if": [{ "slot": "grenade", "is": ["Tripmine Grenade"] }], "q": "Increases Tripmine Grenade duration and blast radius.", "s": "bungie", "note": "also grants Fastball to all grenades" },
    { "do": "grants", "t": "grenadeenergy", "perk": "Wish-Dragon Teeth", "if": [{ "slot": "grenade", "is": ["Tripmine Grenade"] }], "on": "ability damage", "q": "Ability damage grants Tripmine Grenade energy.", "s": "bungie" },
-   { "do": "uses", "t": "solarability", "perk": "Wish-Dragon Teeth", "q": "Solar Ability Hits grant 30% [8%] Tripmine Grenade Energy.", "s": "clarity", "note": "sources disagree: Bungie says ability damage, Clarity says Solar ability hits, Compendium says grenade and melee hits; first Scorch tick from your abilities also counts" }
+   { "do": "uses", "t": "solarability", "perk": "Wish-Dragon Teeth", "q": "Solar Ability Hits grant 30% [8%] Tripmine Grenade Energy.", "s": "clarity", "note": "Compendium: Grenade and Melee Ability Hits (Clarity: Solar Ability Hits); Crackshot Golden Gun hits also grant energy", "from": ["grenade", "melee"] }
   ] },
  { "id": "_skipped", "ids": ["xa:knuckleheadradar"] }
 ]
