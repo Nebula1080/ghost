@@ -1423,6 +1423,8 @@ function cardHtml(it, hits, paneIdx, sortKey) {
     if (it.set) sub.push(F('set', `◈ ${esc(it.set)}`));
   }
   if (Core.anyBreaker(it)) sub.push(F('breaker', breakerChips(it)));
+  // exotic catalyst: applied or still to unlock (exotics without a catalyst show nothing)
+  { const c = Core.catalyst(it, D); if (c && c.state !== 'none') sub.push(F('catalyst', `<span class="catc ${c.state}" title="${esc(c.name)}${c.d ? ': ' + esc(c.d) : ''}">◆ ${c.state === 'has' ? 'Catalyst' : 'No catalyst yet'}</span>`)); }
   if (it.crafted) sub.push(F('crafted', `${CRAFTED_SVG} Crafted${it.level != null ? ' · Lv ' + it.level : ''}`));
   // fields outside the preview, shown when searched (highlighted) or sorted by
   const extra = { source: it.source, owner: it.owner, season: it.season != null ? 'Season ' + it.season : '', locked: it.locked ? 'Locked' : 'Unlocked', holofoil: 'Holofoil', featured: 'Featured', mw: it.mwType ? `MW ${it.mwType} ${it.mwTier ?? ''}` : '', event: it.event, foundry: it.foundry, kills: it.kills != null ? it.kills + ' kills' : '', energy: it.energy != null ? 'Energy ' + it.energy : '', set: it.kind === 'armor' ? '' : (it.set ? '◈ ' + it.set : ''), equippable: it.equippable, tertiary: it.kind === 'armor' ? '' : (it.tertiary ? '3rd: ' + it.tertiary : ''), tuning: it.tuning ? 'Tuned: ' + it.tuning : '', name: '', notes: '', element: it.kind === 'armor' ? it.element : '', level: '' };
@@ -1471,17 +1473,23 @@ function openItem(id, paneId, focusPerk) {
   const hits = S.results[paneId]?.get(id) || new Set();
   const d = $('#drawer'); d.style.setProperty('--pc', PANE_COLORS[(pIdx < 0 ? 0 : pIdx) % PANE_COLORS.length]);
   const H = k => hits.has(k) ? ' hit' : '';
-  const kv = [['Type', it.type, 'type'], ['Frame / archetype', it.frame, 'frame'], ['Element', it.element, 'element', elIcon(it.element)], ['Rarity', it.rarity, 'rarity'], ['Gear tier', it.tier, 'tier'], ['Power', it.power, 'power'], ['Source', it.source, 'source'], ['Season', it.season != null ? `${it.season} (Year ${it.year ?? '?'})` : '', 'season'], ['Ammo', it.ammo, 'ammo', ammoIcon(it.ammo)], ['Intrinsic breaker', it.breaker ? `${it.breaker}${it.breakerSrc === 'rule' ? ' (from the 9.7.0 archetype table)' : ''}` : '', 'breaker', breakerIcon(it.breaker)], ['Armor set', it.set, 'set', '◈ '], ['Class', it.equippable, 'equippable'], ['Tertiary stat', it.tertiary, 'tertiary'], ['Tuning stat', it.tuning, 'tuning'], ['Masterwork', it.mwType ? `${it.mwType} ${it.mwTier ?? ''}` : '', 'mw'], ['Location', it.owner, 'owner'], ['Crafted', it.crafted ? `Yes, level ${it.level ?? '?'}` : '', 'crafted', CRAFTED_SVG + ' '], ['Kills', it.kills, 'kills'], ['Foundry', it.foundry, 'foundry'], ['Event', it.event, 'event'], ['In loadouts', it.loadouts, '']]
+  const kv = [['Type', it.type, 'type'], ['Frame / archetype', it.frame, 'frame'], ['Element', it.element, 'element', elIcon(it.element)], ['Rarity', it.rarity, 'rarity'], ['Gear tier', it.tier, 'tier'], ['Power', it.power, 'power'], ['Source', it.source, 'source'], ['Season', it.season != null ? `${it.season} (Year ${it.year ?? '?'})` : '', 'season'], ['Ammo', it.ammo, 'ammo', ammoIcon(it.ammo)], ['Intrinsic breaker', it.breaker ? `${it.breaker}${it.breakerSrc === 'rule' ? ' (from the 9.7.0 archetype table)' : ''}` : '', 'breaker', breakerIcon(it.breaker)], ['Armor set', it.set, 'set', '◈ '], ['Class', it.equippable, 'equippable'], ['Tertiary stat', it.tertiary, 'tertiary'], ['Tuning stat', it.tuning, 'tuning'], ['Masterwork', it.mwType ? `${it.mwType} ${it.mwTier ?? ''}` : '', 'mw'], ['Exotic catalyst', (() => { const c = Core.catalyst(it, D); return !c ? '' : c.state === 'has' ? `Applied · ${c.name}` : c.state === 'missing' ? `Not applied yet${c.name ? ' · ' + c.name : ''}` : 'None for this weapon'; })(), 'catalyst'], ['Location', it.owner, 'owner'], ['Crafted', it.crafted ? `Yes, level ${it.level ?? '?'}` : '', 'crafted', CRAFTED_SVG + ' '], ['Kills', it.kills, 'kills'], ['Foundry', it.foundry, 'foundry'], ['Event', it.event, 'event'], ['In loadouts', it.loadouts, '']]
     .filter(r => r[1] !== '' && r[1] != null).map(([k, v, h, ic]) => `<div>${k}</div><div><span class="f${H(h)}">${ic || ''}${esc(v)}</span></div>`).join('');
   // base stat (gray) vs what mods / masterwork / tuning add (blue); DIM exports both as "Stat" and "Stat (Base)"
   const hasBase = Object.keys(it.base).length > 0;
+  // what the masterwork and an inserted catalyst add to each stat (exact values from Bungie's plug data)
+  const mwI = Core.masterwork(it, D), catI = Core.catalyst(it, D);
   const statRows = Object.entries(it.stats).filter(([k]) => k !== 'Total').map(([k, v]) => {
     const max = ['ROF', 'Mag', 'Charge Time', 'Draw Time'].includes(k) ? null : (it.kind === 'armor' ? Math.max(45, ...Object.entries(it.stats).filter(([x]) => x !== 'Total').map(([, y]) => y)) : 100);
-    const b = it.base[k] ?? v; const add = v - b;
-    const bar = max ? `<i style="width:${Math.min(100, Math.min(b, v) / max * 100)}%"></i>${add > 0 ? `<i class="mod" style="width:${Math.min(100, add / max * 100)}%"></i>` : ''}` : '';
-    return `<div class="bar"><span class="f${H('stat:' + k)}">${esc(k)}</span><span class="tr">${bar}</span><span class="num"><b>${v}</b>${hasBase && it.base[k] != null ? ` <small>base ${b}${add ? (add > 0 ? ' +' : ' ') + add : ''}</small>` : ''}</span></div>`;
+    // count stats (Mag, ROF, charge / draw time) show rounds or ms, not the 0-100 scale the plug bonuses use
+    const mb = max ? (mwI?.bonus?.[k] || 0) : 0, cb = max && catI?.state === 'has' ? (catI.bonus?.[k] || 0) : 0;
+    const b = it.base[k] ?? Math.max(0, v - mb - cb); const other = Math.max(0, v - b - mb - cb);
+    const seg = (n, cls) => n > 0 ? `<i class="${cls}" style="width:${Math.min(100, n / max * 100)}%"></i>` : '';
+    const bar = max ? `<i style="width:${Math.min(100, Math.min(b, v) / max * 100)}%"></i>${seg(mb, 'mw')}${seg(cb, 'cat')}${seg(other, 'mod')}` : '';
+    const parts = [mb ? `+${mb} MW` : '', cb ? `+${cb} catalyst` : '', hasBase && it.base[k] != null && other ? `+${other} mods` : ''].filter(Boolean);
+    return `<div class="bar"><span class="f${H('stat:' + k)}">${esc(k)}</span><span class="tr">${bar}</span><span class="num"><b>${v}</b>${hasBase && it.base[k] != null ? ` <small>base ${b}</small>` : ''}${parts.length ? ` <small class="sbon">${parts.join(' · ')}</small>` : ''}</span></div>`;
   }).join('') + ('Total' in it.stats ? `<div class="bar"><b class="f${H('stat:Total')}">Total</b><span></span><span class="num"><b>${it.stats.Total}</b>${it.base.Total != null ? ` <small>base ${it.base.Total}</small>` : ''}</span></div>` : '');
-  const statLegend = hasBase ? '<div class="stat-legend"><span><i style="background:var(--dim)"></i>Base</span><span><i style="background:var(--accent)"></i>From mods, masterwork &amp; tuning</span></div>' : '';
+  const statLegend = (hasBase || Object.keys(mwI?.bonus || {}).length || catI?.state === 'has') ? `<div class="stat-legend"><span><i style="background:var(--dim)"></i>Base</span><span><i class="mw"></i>Masterwork</span>${catI?.state === 'has' ? '<span><i class="cat"></i>Catalyst</span>' : ''}${hasBase ? '<span><i style="background:var(--accent)"></i>Mods &amp; tuning</span>' : ''}</div>` : '';
   const perkRows = socketsDrawer(it, hits);
   const ex = it.kind === 'weapon' && Core.norm(it.rarity) === 'exotic' ? D?.dcx?.[Core.norm(it.name)] : null;
   const art = itemArt(it); const elc = it.element ? elColor(it.element) : '';
@@ -1718,7 +1726,10 @@ function renderCompare() {
       row(lbl, lists.map(l => l.length ? `<div class="cpks">${l.filter(p => p.s).map(p => pk(p, n > 1 && sh(p))).join('')}${l.some(p => !p.s) ? `<div class="copts">${l.filter(p => !p.s).map(p => pk(p, false)).join('')}</div>` : ''}</div>` : '<span class="faint">–</span>'), eq.map(l => l.map(p => Core.norm(p.n)).sort().join()));
     }
   }
-  for (const [key, label] of [['mods', 'Mods'], ['mw', 'Masterwork'], ['catalyst', 'Catalyst']]) {
+  // exotic catalyst state per weapon (applied / not yet / none), not just the inserted plug
+  const catS = cols.map(c => Core.catalyst(c.it, D));
+  if (catS.some(Boolean)) row('Catalyst', catS.map((c, i) => !c ? '<span class="faint">–</span>' : c.state === 'has' ? `${cols[i].sk.catalyst.map(p => sqpk(p, false)).join('') || `<span class="catc has">◆ ${esc(c.name)}</span>`}` : c.state === 'missing' ? `<span class="catc missing">◆ Not applied yet</span>` : '<span class="faint">None</span>'), catS.map(c => c?.state || ''));
+  for (const [key, label] of [['mods', 'Mods'], ['mw', 'Masterwork']]) {
     const lists = cols.map(c => c.sk[key]);
     if (!lists.some(l => l.length)) continue;
     const sh = sharedSet(lists);
