@@ -686,6 +686,14 @@ const Core = (() => {
     for (const mode of ['e', 'p']) if (trash[mode]) res[mode] = { score: 0, note: '', sets: [], f: WL.TRASH, trash: true };
     return res.e || res.p ? res : null;
   }
+  // Letter grade for a 0–100 rating: the nearest tier score (S 100, A 85, B 70 … F 10). Used as a stamp next to the
+  // number in Compare, where colour alone would read like the green "best stat" highlight.
+  function ratingGrade(r) {
+    if (r == null || !Number.isFinite(Number(r))) return '';
+    let best = 'F', d = Infinity;
+    for (const t of TIERS) { const x = Math.abs(TIER_SCORE[t] - Number(r)); if (x < d) { d = x; best = t; } }
+    return best;
+  }
   function mixParts(parts, W) {
     let s = 0, w = 0;
     for (const [k, v] of Object.entries(parts)) if (v != null && W[k] > 0) { s += v * W[k]; w += W[k]; }
@@ -1333,7 +1341,7 @@ const Core = (() => {
   const modsFor = (slot, defs) => [...(defs?.am?.[slot] || []), ...(defs?.am?.general || [])];
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
-  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
+  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
     SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, subclassPlan, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
