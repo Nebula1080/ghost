@@ -52,11 +52,14 @@ srv.listen(8766, async () => {
 
   await pg.goto('http://localhost:8766/'); await pg.waitForTimeout(800);
   await pg.evaluate(() => document.getElementById('intro')?.remove());
+  const rail = await pg.evaluate(() => { const b = document.querySelector('#bBungie'); return b && !b.hidden && b.offsetParent ? b.textContent : ''; });
+  rail === 'Sign in with Bungie' ? ok('desktop rail shows "Sign in with Bungie"') : fail('no Sign in button in the desktop rail: ' + JSON.stringify(rail));
   await pg.click('#bLoad'); await pg.waitForTimeout(200);
-  const btn = await pg.$('[data-bg=in]');
+  const btn = await pg.$('#modal [data-bg=in]');
   btn ? ok('Load dialog offers "Sign in with Bungie"') : fail('no Sign in with Bungie button');
   await Promise.all([pg.waitForURL(/localhost:8766/, { timeout: 8000 }), btn?.click()]);
   await pg.waitForTimeout(2500);
+  (await pg.evaluate(() => document.querySelector('#bBungie')?.textContent)) === 'Refresh from Bungie' ? ok('rail button becomes "Refresh from Bungie" after sign-in') : fail('rail button did not switch to Refresh');
   const st = await pg.evaluate(() => ({ url: location.href, items: document.querySelectorAll('#panes .card').length, ls: JSON.stringify(Object.assign({}, localStorage)), ss: JSON.stringify(Object.assign({}, sessionStorage)), x: window.__x, csp: window.__csp }));
   !/[?&](code|state)=/.test(st.url) ? ok('address bar cleaned after sign-in') : fail('code/state left in the URL: ' + st.url);
   const vault = await pg.evaluate(() => [...document.querySelectorAll('#panes .card')].map(c => c.textContent).join(' '));
