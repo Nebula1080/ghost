@@ -296,8 +296,18 @@ const Core = (() => {
     return p || null;
   }
   // Everything known about one plug/perk name: Clarity, Data Compendium (formatted), Bungie text + socket type
-  function perkInfo(name, defs, kind) {
+  // Intrinsics repeat names across weapon types with different effects ("Aggressive Frame" on swords, fusion
+  // rifles, pulse rifles…), so a weapon's own intrinsic is looked up by its plug hash (defs.wi / defs.ih,
+  // tools/build-defs.mjs). Returns the hash when `name` is that weapon's intrinsic and the name is ambiguous.
+  function intrinsicHash(it, name, defs) {
+    if (!it || it.kind !== 'weapon' || !defs?.wi) return null;
+    const h = defs.wi[it.hash]; const e = h && defs.ih?.[h];
+    return e && norm(name) === norm(e[0]) ? String(h) : null;
+  }
+  function perkInfo(name, defs, kind, ph) {
     if (!defs) return null;
+    const ih = ph && defs.ih?.[ph];
+    if (ih) return { cl: ih[2] ? { h: ih[2], ty: ih[3] || 'Intrinsic' } : null, dc: null, bd: ih[1] || '', ty: 'i', hash: Number(ph) };
     const k = norm(name); const cl = defs.cl?.[k]; let dc = defs.dc?.[k];
     if (dc?.x) dc = { h: defs.dcx?.[dc.x] || '', s: dc.s };
     const p = plugOf(name, defs, kind);
@@ -1285,7 +1295,7 @@ const Core = (() => {
   const modsFor = (slot, defs) => [...(defs?.am?.[slot] || []), ...(defs?.am?.general || [])];
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
-  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
+  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
     SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

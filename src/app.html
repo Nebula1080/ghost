@@ -667,8 +667,8 @@ function plugIcon(name, cls = '', idx) {
 }
 const stripHtml = h => String(h || '').replace(/<div class="cl-sp"><\/div>/g, '\n').replace(/<br>|<\/div>/g, '\n').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\n{3,}/g, '\n\n').trim();
 const pIdx = (n, kind) => Core.plugOf(n, D, kind)?.[0];
-function perkInfoText(name, kind) {
-  const i = Core.perkInfo(name, D, kind); if (!i) return '';
+function perkInfoText(name, kind, ph) {
+  const i = Core.perkInfo(name, D, kind, ph); if (!i) return '';
   const enh = /^enhanced\s/i.test(name);
   return stripHtml(i.cl ? (enh && i.cl.e ? i.cl.e : i.cl.h) : i.dc?.h || i.bd);
 }
@@ -685,7 +685,7 @@ const TYPE_LABEL = { i: 'Intrinsic', r: 'Armor archetype', b: 'Barrel / sight', 
 const COL_LABEL = { b: 'Barrel', m: 'Magazine', t: 'Trait', o: 'Origin', '?': 'Perk' };
 // Full detail block for one plug / perk / ability: Bungie text, Clarity, Data Compendium, light.gg link
 function infoHtml(name, opt = {}) {
-  const i = Core.perkInfo(name, D, opt.ikind) || {};
+  const i = Core.perkInfo(name, D, opt.ikind, opt.ph) || {};
   const enh = /^enhanced\s/i.test(name);
   const bd = opt.bd || i.bd;
   const hash = opt.hash || i.hash;
@@ -1361,13 +1361,14 @@ function groupIcon(g, name) {
 }
 // tooltip text for a socket
 function skTitle(p, it) {
-  const rel = it.perkRel?.[p.n]; const info = perkInfoText(p.n, it.kind);
+  const rel = it.perkRel?.[p.n]; const info = perkInfoText(p.n, it.kind, Core.intrinsicHash(it, p.n, D));
   return `${p.n} · ${p.s ? 'Equipped' : 'Selectable option'}${rel ? ` · Rating: PvE ${rel.e || '–'} · PvP ${rel.p || '–'}` : ''}${info ? '\n\n' + info.slice(0, 380) : ''}\n\nClick for details`;
 }
 function skHtml(p, it, hits, opt = {}) {
   const rel = it.perkRel?.[p.n]; const top = rel && rel.rel >= 85;
   const cls = ['sk', opt.stack ? 'stk' : '', p.s ? 'sel' : 'opt', top ? 'top' : '', /^enhanced\s/i.test(p.n) ? 'enh' : '', hits.has('perk:' + p.n) ? 'hit' : ''].join(' ');
-  return `<span class="${cls}" data-pk="${esc(p.n)}" title="${esc(skTitle(p, it))}">${plugIcon(p.n, opt.sq ? 'sq' + (opt.small ? ' sm' : '') : (opt.small ? 'sm' : ''), pIdx(p.n, it.kind))}${opt.noName ? '' : `<span class="nm2">${esc(p.n)}</span>`}</span>`;
+  const ph = Core.intrinsicHash(it, p.n, D);
+  return `<span class="${cls}" data-pk="${esc(p.n)}"${ph ? ` data-ph="${ph}"` : ''} title="${esc(skTitle(p, it))}">${plugIcon(p.n, opt.sq ? 'sq' + (opt.small ? ' sm' : '') : (opt.small ? 'sm' : ''), pIdx(p.n, it.kind))}${opt.noName ? '' : `<span class="nm2">${esc(p.n)}</span>`}</span>`;
 }
 // game-style perk grid (Clean up tiles): the intrinsic and exotic perks on top, then one labelled column per perk
 // socket (Barrel, Magazine, Trait 1, Trait 2, Origin) with the equipped perk and its name on top and the roll's
@@ -1537,7 +1538,7 @@ function openItem(id, paneId, focusPerk) {
       det.innerHTML = infoHtml(sp.n, { kind: `${set.n} · ${sp.c}-piece bonus`, bd: sp.d, icon: sp.i, sq: true, extra: dch && !Core.perkInfo(sp.n, D)?.dc ? `<span class="src2">Data Compendium · ${esc(set.n)}</span><div class="dctx">${SH(dch)}</div>` : '' });
     } else {
       const n = b.dataset.pk; const rel = it.perkRel?.[n];
-      det.innerHTML = infoHtml(n, { kind: b.dataset.kind, ikind: it.kind, sq: b.dataset.sq === '1', extra: `<span class="src2">Ghost rating</span><div class="btxt">PvE ${tierBadge(Core.perkTier(n, 'e', RT, UR))} · PvP ${tierBadge(Core.perkTier(n, 'p', RT, UR))} <button class="linkbtn" type="button" data-open-ratings>Change</button></div>` });
+      det.innerHTML = infoHtml(n, { kind: b.dataset.kind, ikind: it.kind, ph: Core.intrinsicHash(it, n, D), sq: b.dataset.sq === '1', extra: `<span class="src2">Ghost rating</span><div class="btxt">PvE ${tierBadge(Core.perkTier(n, 'e', RT, UR))} · PvP ${tierBadge(Core.perkTier(n, 'p', RT, UR))} <button class="linkbtn" type="button" data-open-ratings>Change</button></div>` });
       det.insertAdjacentHTML('beforeend', perkActHtml(it, n) + modActHtml(it, n)); bindPerkAct(it, det, reopenItem); bindModAct(it, det, reopenItem);
     }
     // place the description directly under the clicked row: after the intrinsic / set / mods block,
@@ -1689,11 +1690,11 @@ function renderCompare() {
   }
   // perks: intrinsic, then each column; perks every item shares are muted, unique ones stand out
   const pk = (p, shared) => `<span class="cpk${p.s ? ' sel' : ' opt'}${shared ? ' shared' : ' uniq'}" data-pk="${esc(p.n)}" title="${esc(p.n)}">${plugIcon(p.n, p.s ? '' : 'sm', pIdx(p.n, kind))}${p.s ? `<span>${esc(p.n)}</span>` : ''}</span>`;
-  const sqpk = (p, shared) => `<span class="cpk sel${shared ? ' shared' : ' uniq'}" data-pk="${esc(p.n)}" title="${esc(p.n)}">${plugIcon(p.n, 'sq', pIdx(p.n, kind))}<span>${esc(p.n)}</span></span>`;
+  const sqpk = (p, shared, it) => { const ph = Core.intrinsicHash(it, p.n, D); return `<span class="cpk sel${shared ? ' shared' : ' uniq'}" data-pk="${esc(p.n)}"${ph ? ` data-ph="${ph}"` : ''} title="${esc(p.n)}">${plugIcon(p.n, 'sq', pIdx(p.n, kind))}<span>${esc(p.n)}</span></span>`; };
   const sharedSet = lists => { const sets = lists.map(l => new Set(l.map(p => Core.norm(p.n)))); return x => sets.every(st => st.has(Core.norm(x.n))); };
   rows.push(`<div class="cr sech"><div class="cl">${kind === 'armor' ? 'Perks &amp; mods' : 'Perks &amp; traits'} <small>muted = all share it</small></div>${cols.map(() => '<div class="cc"></div>').join('')}</div>`);
   const intr = cols.map(c => [...c.sk.intrinsic, ...c.sk.exotic]);
-  { const sh = sharedSet(intr); row(kind === 'armor' ? 'Archetype / exotic' : 'Intrinsic', intr.map(l => l.map(p => sqpk(p, n > 1 && sh(p))).join('')), intr.map(l => l.map(p => Core.norm(p.n)).join())); }
+  { const sh = sharedSet(intr); row(kind === 'armor' ? 'Archetype / exotic' : 'Intrinsic', intr.map((l, ci) => l.map(p => sqpk(p, n > 1 && sh(p), cols[ci].it)).join('')), intr.map(l => l.map(p => Core.norm(p.n)).join())); }
   // perk rows line up by socket type (Barrel, Magazine, Trait 1, Trait 2, Origin…), never by position,
   // so each row compares like with like and an item without that socket shows a dash
   const byType = cols.map(c => { const m = {}; c.sk.cols.forEach(col => (m[col.ty] ||= []).push(col)); return m; });
@@ -1725,7 +1726,7 @@ function renderCompare() {
   v.querySelectorAll('[data-rm]').forEach(b => b.onclick = e => { e.stopPropagation(); CMP.ids = CMP.ids.filter(x => x !== b.dataset.rm); saveCmp(); renderCompare(); });
   v.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openItem(b.dataset.open, null));
   v.querySelectorAll('[data-stat]').forEach(b => b.onclick = () => { const k = b.dataset.stat; CMP.sort = CMP.sort?.[0] === k ? (CMP.sort[1] > 0 ? [k, -1] : null) : [k, lowerBetter.has(k) ? -1 : 1]; saveCmp(); renderCompare(); });
-  v.querySelectorAll('[data-pk]').forEach(b => b.onclick = () => { modal(`<div class="pdet" style="margin:0">${infoHtml(b.dataset.pk, { sq: !b.querySelector('.ic:not(.sq)'), ikind: kind })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); });
+  v.querySelectorAll('[data-pk]').forEach(b => b.onclick = () => { modal(`<div class="pdet" style="margin:0">${infoHtml(b.dataset.pk, { ph: b.dataset.ph, sq: !b.querySelector('.ic:not(.sq)'), ikind: kind })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); });
   $('#cmpDiff').onchange = e => { CMP.diff = e.target.checked; saveCmp(); renderCompare(); };
   $('#cmpClear').onclick = () => { CMP.ids = []; CMP.label = ''; CMP.q = ''; CMP.total = 0; saveCmp(); renderCompare(); };
   const cp = $('#cmpPane'); if (cp) cp.onclick = () => { setView('vault'); addPane(CMP.q, CMP.label || 'Compare'); };
@@ -1767,7 +1768,7 @@ function sheetDrag(d) {
     if (e.pointerType !== 'touch') return; const el = e.target.closest('[data-pk]'); if (!el) return;
     fired = false; x0 = e.clientX; y0 = e.clientY;
     const host = el.closest('[data-id]'); const ik = host ? S.byId.get(host.dataset.id)?.kind : (drawerItem?.kind);
-    t = setTimeout(() => { fired = true; navigator.vibrate?.(15); modal(`<div class="pdet" style="margin:0">${infoHtml(el.dataset.pk, { sq: !!el.querySelector('.ic.sq'), ikind: ik })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); }, 450);
+    t = setTimeout(() => { fired = true; navigator.vibrate?.(15); modal(`<div class="pdet" style="margin:0">${infoHtml(el.dataset.pk, { ph: el.dataset.ph, sq: !!el.querySelector('.ic.sq'), ikind: ik })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); }, 450);
   });
   const cancel = e => { if (t && (e.type !== 'pointermove' || Math.hypot(e.clientX - x0, e.clientY - y0) > 10)) { clearTimeout(t); t = null; } };
   ['pointerup', 'pointercancel', 'pointermove'].forEach(k => document.addEventListener(k, cancel));
