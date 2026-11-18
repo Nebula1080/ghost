@@ -46,6 +46,7 @@ function check(only) {
     if (!KINDS.has(t.kind)) err(w, 'bad kind ' + t.kind);
     if (t.el != null && !ELS.has(t.el)) err(w, 'bad el ' + t.el);
     if (!t.def) err(w, 'missing def');
+    for (const k of t.also || []) if (!KINDS.has(k)) err(w, 'also names unknown kind ' + k);
     if (t.nat != null && t.nat !== true && !['solar', 'arc', 'void', 'stasis', 'strand', 'prism'].includes(t.nat)) err(w, 'nat must be true or a subclass element');
     for (const g of t.isa || []) if (!L.terms[g] && !String(g).match(/^[a-z0-9]+$/)) err(w, 'isa names unknown term ' + g);
     if (t.dr) { const d = t.dr; const tab = String(d.src || '').startsWith('compendium:') ? L.gsrc[d.src.slice(11)] : null;

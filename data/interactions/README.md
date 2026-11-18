@@ -30,6 +30,12 @@ what it does as structured data. The build maker only shows curated interactions
   `damage` (solarweapon, arcdamage… only when a piece really keys off them), `state` (e.g. `transcendence`, `airborne`).
 - `isa` (optional): more general terms this one also counts as, e.g. `overshield` (Void Overshield) has
   `"isa": ["overshieldgeneric"]`, so payoffs that accept any overshield link to Void ones too.
+- `also` (optional): more Interactions-panel sections the term belongs to, e.g. Orb of Power is a Creation and a
+  Resource (`"also": ["resource"]`).
+- **Healing yourself vs healing allies:** `healing` (and `cure` / `restoration` as buffs on you) is healing yourself;
+  `healallies` is healing other players. A provider that heals "you and allies" records both (`grants healing` and
+  `grants healallies`, same quote); one that heals only allies records only `healallies`. A payoff that says "healing
+  allies" uses `healallies`; one that says "when you heal" / "while healing" uses `healing`.
 - `nat` (optional, `true`): a state any build can enter on its own (airborne, sprinting, sliding, finisher, critical
   health). Payoffs that use it are never listed as missing. A subclass element instead of `true` (`"nat": "arc"`)
   means that subclass grants it intrinsically (Amplified from rapid Arc kills).

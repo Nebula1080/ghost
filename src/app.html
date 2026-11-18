@@ -2153,7 +2153,7 @@ function renderBuilds() {
   const who = (i, t, role) => `<button class="ixn" data-ev="${esc(t)}|${i}|${role}">${pieceIcon(pieces[i], b)}<span>${esc(pieces[i].n)}</span></button>`;
   const own = t => IX.t[t]?.def ? `<small class="ixown">On its own: ${esc(IX.t[t].def)}</small>` : '';
   const row = x => `<div class="ixr${x.use.size ? '' : ' solo'}"><div class="ixrh">${pill(x.t)}${x.use.size ? '' : '<small>no other piece builds on it</small>'}</div>${x.use.size ? '' : own(x.t)}<div class="ixrl"><span class="ixlab">From</span>${[...x.prov].map(i => who(i, x.t, 'p')).join('')}</div>${x.use.size ? `<div class="ixrl"><span class="ixlab">To</span>${[...x.use].map(i => who(i, x.t, 'u')).join('')}</div>` : ''}<div class="sev"></div></div>`;
-  const overview = IXK.map(([k, l, sub, c]) => { const list = terms.filter(x => kindOf(IX.t[x.t]?.kind) === k).sort((p, q) => q.use.size - p.use.size); const used = list.filter(x => x.use.size).length;
+  const overview = IXK.map(([k, l, sub, c]) => { const list = terms.filter(x => kindOf(IX.t[x.t]?.kind) === k || (IX.t[x.t]?.also || []).includes(k)).sort((p, q) => q.use.size - p.use.size); const used = list.filter(x => x.use.size).length;
     // linked terms first; terms nothing uses fold into one compact line that opens on tap
     const unused = list.filter(x => !x.use.size);
     const fold = unused.length ? `<details class="ixun"><summary><span>${unused.length} more that work on their own (no other piece builds on ${unused.length === 1 ? 'it' : 'them'})</span><span class="ixpills">${unused.map(x => pill(x.t)).join('')}</span></summary>${unused.map(row).join('')}</details>` : '';

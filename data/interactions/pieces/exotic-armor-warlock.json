@@ -22,6 +22,15 @@
    },
    {
     "do": "grants",
+    "t": "healallies",
+    "on": "casting your Super",
+    "who": "allies",
+    "perk": "Insatiable",
+    "q": "Immediately regenerate health, melee, grenade, and Rift energy for you and your nearby allies upon activating your Super.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
     "t": "meleeenergy",
     "on": "casting your Super",
     "who": "allies",
@@ -365,7 +374,7 @@
    },
    {
     "do": "grants",
-    "t": "healing",
+    "t": "healallies",
     "by": "nobleseeker",
     "who": "allies",
     "if": [
@@ -2134,6 +2143,30 @@
    },
    {
     "do": "grants",
+    "t": "healallies",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     },
+     {
+      "slot": "classAbility",
+      "is": [
+       "Empowering Rift"
+      ]
+     }
+    ],
+    "perk": "Embers of Light",
+    "q": "an empowering rift instead grants Cure to you and nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
     "t": "radiant",
     "who": "allies",
     "if": [
@@ -2151,6 +2184,22 @@
    {
     "do": "grants",
     "t": "cure",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Daybreak"
+      ]
+     }
+    ],
+    "perk": "Embers of Light",
+    "q": "Daybreak final blows grant both effects.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
     "who": "allies",
     "if": [
      {
@@ -2598,8 +2647,25 @@
     "s": "clarity"
    },
    {
+    "do": "grants",
+    "t": "healallies",
+    "by": "healingturret",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "perk": "The Lost Voice",
+    "q": "Healing Seekers apply Cure x1 and Restoration x1",
+    "s": "clarity"
+   },
+   {
     "do": "uses",
-    "t": "healing",
+    "t": "healallies",
     "perk": "The Lost Voice",
     "q": "Healing allies occasionally spawns an Orb of Power.",
     "s": "bungie",

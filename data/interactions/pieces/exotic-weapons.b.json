@@ -22,11 +22,20 @@
     "do": "grants",
     "t": "cure",
     "on": "reloading after a kill",
-    "who": "allies",
     "perk": "Merciless Catalyst",
     "q": "Finishing a reload within 5.3? seconds of a Kill grants Cure x2 to you and Cure x1 to allies within 15 meters.",
     "s": "clarity",
-    "note": "catalyst; you and nearby allies"
+    "note": "catalyst; Cure x2 to you"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "perk": "Merciless Catalyst",
+    "on": "reloading after a kill",
+    "q": "Finishing a reload within 5.3? seconds of a Kill grants Cure x2 to you and Cure x1 to allies within 15 meters.",
+    "s": "clarity",
+    "who": "allies",
+    "note": "catalyst; Cure x1 to allies within 15 meters"
    }
   ]
  },
@@ -553,7 +562,7 @@
    },
    {
     "do": "grants",
-    "t": "cure",
+    "t": "healallies",
     "who": "allies",
     "perk": "Redemption",
     "q": "reloading after final blows cures nearby allies",
@@ -568,7 +577,7 @@
    },
    {
     "do": "grants",
-    "t": "cure",
+    "t": "healallies",
     "who": "allies",
     "q": "Healing Burst bestows Cure x2 to allies within 7.5? meters.",
     "s": "compendium",
@@ -734,7 +743,7 @@
   "fx": [
    {
     "do": "grants",
-    "t": "healing",
+    "t": "healallies",
     "who": "allies",
     "perk": "Dichotomous Thinking",
     "q": "Hip firing at allies while this weapon is charged heals them",

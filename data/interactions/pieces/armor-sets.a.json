@@ -938,6 +938,15 @@
     "note": "7 m aura, pulses every 2 s",
     "q": "Healing Drone restores 10 HP per Initiative stack per pulse up to 5 times per Class Ability Usage.",
     "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "who": "allies",
+    "on": "using your class ability while you have Initiative",
+    "note": "7 m aura, pulses every 2 s",
+    "q": "Healing Drone restores 10 HP per Initiative stack per pulse up to 5 times per Class Ability Usage.",
+    "s": "compendium"
    }
   ]
  },
@@ -1225,7 +1234,7 @@
    },
    {
     "do": "uses",
-    "t": "healing",
+    "t": "healallies",
     "q": "When you reach critical health or heal an ally at critical health, Auto Rifles, Scout Rifles, and Sidearms gain a period of increased range, stability, and reload speed.",
     "s": "bungie",
     "pay": "healing an ally at critical health gives Auto Rifles, Scout Rifles and Sidearms range, stability and reload"
