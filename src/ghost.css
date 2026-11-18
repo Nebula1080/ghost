@@ -735,3 +735,23 @@ a{color:var(--light)}
 .ixh{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin:6px 0 2px}
 .ixpane .sev:not(:empty){margin-top:2px}
 @media (max-width:760px){.ixcols{grid-template-columns:1fr}.ixn{min-height:36px}.ixtab{font-size:11.5px}}
+
+/* Interactions panel: unused terms fold into one line; wide PCs give the side column more room and its own scroll */
+.ixun{margin:6px 0;border:1px dashed var(--line)}
+.ixun>summary{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 10px;cursor:pointer;font-size:12px;color:var(--faint);min-height:40px}
+.ixun[open]>summary{border-bottom:1px dashed var(--line)}
+.ixun .ixr{margin:6px}
+.ixpills{display:flex;flex-wrap:wrap;gap:4px}
+@media (min-width:1101px){
+  .bld-body{grid-template-columns:minmax(0,1fr) minmax(360px,460px)}
+  .bld-side .ixcols{grid-template-columns:1fr}
+}
+@media (min-width:1101px) and (min-height:541px){
+  .bld-side{max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+}
+@media (max-width:760px){
+  .ixr{padding:6px 8px;gap:3px}
+  .ixrl{gap:0 12px}
+  .ixn{min-height:32px}
+  .ixlab{width:auto;margin-right:4px}
+}
