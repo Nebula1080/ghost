@@ -992,7 +992,8 @@ async function loadFromBungie(pick) {
       m = list[0];
     }
     const resp = await BG.profile(m.type, m.id);
-    const { weapons, armor } = Core.apiToItems(resp, window.VS_APIDEFS);
+    const { weapons, armor, chars } = Core.apiToItems(resp, window.VS_APIDEFS);
+    LS.set(BCTX_KEY, { type: Number(m.type), id: String(m.id), chars });
     if (!weapons.length && !armor.length) { toast('Bungie returned no weapons or armor for this account.', 6000); return; }
     routeParsed([{ kind: 'weapon', items: weapons }, { kind: 'armor', items: armor }], [`From Bungie: ${weapons.length} weapons, ${armor.length} armor`]);
   } catch (e) { toast(e?.message || 'Couldn’t load your vault from Bungie.', 7000); }
@@ -1484,6 +1485,7 @@ function openItem(id, paneId, focusPerk) {
       <div class="dtype">${esc(it.rarity)} ${esc(it.type)}${it.tier != null ? ' · Tier ' + it.tier : ''}</div>
       <div class="facts">${it.element ? `<span>${elIcon(it.element)}${esc(it.element)}</span>` : ''}${it.ammo ? `<span>${ammoIcon(it.ammo)}${esc(it.ammo)}</span>` : ''}${Core.anyBreaker(it) ? `<span>${breakerIcon(it.breaker)}${esc(it.breaker)}</span>` : ''}${it.power != null ? `<span>Power ${esc(it.power)}</span>` : ''}${it.set ? `<span>◈ ${esc(it.set)}</span>` : ''}</div>
       <div class="stat-pill" style="margin-top:8px"><a href="https://www.light.gg/db/items/${esc(it.hash)}/" target="_blank" rel="noopener noreferrer">Open on light.gg</a></div>
+      ${equipRowHtml(it)}
       ${it.kind === 'weapon' ? `<div class="rhead"><span class="stat-pill">${it.rating == null ? 'Not rated yet: no perk ratings, wish-list rolls or Aegis tier for this weapon.' : `Rating ${it.rating} · PvE ${it.pve ?? '–'} · PvP ${it.pvp ?? '–'}${it.why?.aegis ? ` · Tier ${esc(it.why.aegis.tier)} · ${AEGIS_CREDIT}` : ''}`}</span></div>` : ''}
     </div>
     <div class="d-body">
@@ -1510,6 +1512,9 @@ function openItem(id, paneId, focusPerk) {
   d.querySelectorAll('[data-pk],[data-setp]').forEach(b => b.onclick = () => showPerk(b));
   d.addEventListener('click', e => { if (e.target.closest('[data-open-ratings]')) openRatings(); });
   bindTriage(it);
+  // after a Bungie action: redraw this panel and whatever view is behind it
+  const reopenItem = () => { if (VIEW === 'builds') renderBuilds(); else if (VIEW === 'vault') refreshBodies(); openItem(id, paneId); };
+  bindEquip(it, d, reopenItem);
   const first = focusPerk ? [...d.querySelectorAll('[data-pk]')].find(b => b.dataset.pk === focusPerk) : null;
   if (first) { showPerk(first); setTimeout(() => $('#pdet')?.scrollIntoView({ block: 'center' }), 260); }
   d.insertAdjacentHTML('afterbegin', '<div class="grab"><i aria-hidden="true"></i><button class="gx" type="button" aria-label="Close item panel">×</button></div>');
@@ -1527,6 +1532,7 @@ function openItem(id, paneId, focusPerk) {
     } else {
       const n = b.dataset.pk; const rel = it.perkRel?.[n];
       det.innerHTML = infoHtml(n, { kind: b.dataset.kind, ikind: it.kind, sq: b.dataset.sq === '1', extra: `<span class="src2">Ghost rating</span><div class="btxt">PvE ${tierBadge(Core.perkTier(n, 'e', RT, UR))} · PvP ${tierBadge(Core.perkTier(n, 'p', RT, UR))} <button class="linkbtn" type="button" data-open-ratings>Change</button></div>` });
+      det.insertAdjacentHTML('beforeend', perkActHtml(it, n) + modActHtml(it, n)); bindPerkAct(it, det, reopenItem); bindModAct(it, det, reopenItem);
     }
     // place the description directly under the clicked row: after the intrinsic / set / mods block,
     // or as a full-width row right below the line of perk columns that holds the clicked perk
@@ -2253,6 +2259,102 @@ function pieceInfo(name, opt, id) {
   const cond = c => c.any ? c.any.map(cond).join(' or ') : c.slot ? c.is.join(' or ') : c.piece || c.item || (c.subclass ? `${c.subclass} subclass` : c.weapon ? `${c.weapon} weapon` : IX?.t?.[c.has]?.l || c.has || '');
   const list = fx.length ? `<span class="src2">What it does in builds</span><ul class="pfx">${fx.map(e => `<li><b>${esc(VERB[e.do] || e.do)} ${esc(IX.t[e.t]?.l || e.t)}</b>${e.do === 'counts' ? ` as ${esc(IX.t[e.as]?.l || e.as)}` : ''}${e.amt ? ` <span class="bst">${esc(e.amt)}%</span>` : ''}${e.on ? ` <small>${esc(e.on)}</small>` : ''}${(e.if || []).length ? ` <small class="warn">only with ${esc(e.if.map(cond).join(' + '))}</small>` : ''}</li>`).join('')}</ul>` : (IX?.pending?.includes(id) ? '<p class="snote">Not reviewed for interactions yet.</p>' : '');
   modal(`<div class="pdet" style="margin:0">${infoHtml(name, { ...opt, extra: list })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`);
+}
+// ---------- Bungie actions: switch weapon perks, swap armor mods, equip (moving from the vault first) ----------
+// Approved by the user 2026-11-17 (GHOST_PLAN -> Security). Only for vaults loaded from Bungie while signed in. Every
+// change goes through runActions: a confirmation sheet that lists each request, then one request at a time through
+// BG.act (bungie.js guards the endpoint and body), stopping at the first error. Nothing is sent without that tap.
+const BCTX_KEY = 'bctx';
+function bctx() {
+  const v = LS.get(BCTX_KEY);
+  if (!v || !(v.type >= 1 && v.type <= 6) || !/^\d{1,20}$/.test(String(v.id))) return null;
+  const chars = (Array.isArray(v.chars) ? v.chars : []).filter(c => /^\d{1,20}$/.test(String(c?.id)) && ['Titan', 'Hunter', 'Warlock'].includes(c?.cls)).map(c => ({ id: String(c.id), cls: c.cls }));
+  return { type: Number(v.type), id: String(v.id), chars };
+}
+const canAct = it => !!(BG?.signedIn?.() && it?.src === 'api' && /^\d{1,20}$/.test(String(it.id)) && bctx()?.chars.length);
+const charOf = id => bctx()?.chars.find(c => c.id === id) || null;
+// the character Bungie should act through: the item's own, else (vault) the first character that can use it
+function actChar(it) {
+  if (it.cid && charOf(it.cid)) return charOf(it.cid);
+  const cs = bctx()?.chars || [];
+  return (it.kind === 'armor' ? cs.find(c => c.cls === it.equippable) : null) || cs[0] || null;
+}
+// confirmation sheet -> sequential requests -> local updates
+function runActions(title, steps, done) {
+  modal(`<h2>${esc(title)}</h2><ol class="actsteps">${steps.map(s => `<li>${esc(s.label)}</li>`).join('')}</ol>
+    <p class="stat-pill">Ghost sends ${steps.length === 1 ? 'this change' : 'these changes'} to Bungie one at a time. Destiny only allows it in orbit, a social space, or while offline.</p>
+    <div class="actmsg" id="actMsg" aria-live="polite"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><button class="btn" data-close>Cancel</button><button class="btn primary" id="actGo">Confirm</button></div>`);
+  const go = $('#actGo'), msg = $('#actMsg');
+  go.onclick = async () => {
+    go.disabled = true; $('#modalBox').querySelector('[data-close]').disabled = true;
+    const lis = $('#modalBox').querySelectorAll('.actsteps li');
+    for (let k = 0; k < steps.length; k++) {
+      lis[k].classList.add('run');
+      try { await BG.act(steps[k].action, steps[k].body); steps[k].apply?.(); lis[k].classList.replace('run', 'ok'); }
+      catch (e) { lis[k].classList.replace('run', 'err'); msg.textContent = (e?.message || 'Bungie refused the change.') + (k ? ` The step${k > 1 ? 's' : ''} before this one went through.` : ''); go.textContent = 'Close'; go.disabled = false; go.onclick = () => { closeModal(); done?.(false); }; saveVault(); return; }
+    }
+    saveVault(); msg.textContent = 'Done.'; setTimeout(() => { closeModal(); done?.(true); }, 500);
+  };
+}
+// one step's request bodies (ids as digit strings, as Bungie's int64 fields accept)
+const bodyOf = (it, ch) => ({ itemId: String(it.id), characterId: ch.id, membershipType: bctx().type });
+function equipSteps(it, ch) {
+  const steps = [];
+  if (!it.cid || it.cid !== ch.id) {
+    if (it.cid) steps.push({ action: 'transfer', label: `Move ${it.name} from your ${it.owner} to the vault`, body: { itemReferenceHash: +it.hash, stackSize: 1, transferToVault: true, ...bodyOf(it, charOf(it.cid)) }, apply: () => { it.cid = ''; it.owner = 'Vault'; it.equipped = false; } });
+    steps.push({ action: 'transfer', label: `Move ${it.name} from the vault to your ${ch.cls}`, body: { itemReferenceHash: +it.hash, stackSize: 1, transferToVault: false, ...bodyOf(it, ch) }, apply: () => { it.cid = ch.id; it.owner = ch.cls; } });
+  }
+  steps.push({ action: 'equip', label: `Equip ${it.name} on your ${ch.cls} (replaces what's in that slot)`, body: bodyOf(it, ch),
+    apply: () => { for (const o of S.items) if (o !== it && o.cid === ch.id && o.equipped && o.bucket && o.bucket === it.bucket) o.equipped = false; it.cid = ch.id; it.owner = ch.cls; it.equipped = true; } });
+  return steps;
+}
+function equipRowHtml(it) {
+  if (it.src !== 'api') return '';
+  if (!canAct(it)) return `<div class="stat-pill eqrow">${BG ? 'Sign in with Bungie (and load your vault from Bungie) to equip items and switch perks from Ghost.' : ''}</div>`;
+  if (it.equipped) return `<div class="eqrow"><span class="stat-pill">Equipped on your ${esc(it.owner)}</span></div>`;
+  const chars = (bctx().chars || []).filter(c => it.kind !== 'armor' || c.cls === it.equippable);
+  if (!chars.length) return '';
+  return `<div class="eqrow">${chars.map(c => `<button class="btn" data-equip="${esc(c.id)}">Equip on ${esc(c.cls)}${it.cid === c.id ? '' : it.cid ? ' (move)' : ' (from vault)'}</button>`).join('')}</div>`;
+}
+function bindEquip(it, root, after) {
+  root.querySelectorAll('[data-equip]').forEach(b => b.onclick = () => { const ch = charOf(b.dataset.equip); if (ch) runActions(`Equip ${it.name}`, equipSteps(it, ch), ok => { if (ok) toast(`${it.name} equipped on your ${ch.cls}.`); after?.(); }); });
+}
+// weapon perk switch: another option in the same perk socket the weapon already has
+function perkActHtml(it, name) {
+  if (!canAct(it) || it.kind !== 'weapon') return '';
+  const p = it.perks.find(x => x.n === name && x.roll && !x.s && Number.isInteger(x.si) && x.h);
+  const cur = p && it.perks.find(x => x.si === p.si && x.s);
+  return p && cur ? `<div class="actrow"><button class="btn primary" data-swap="${p.si}|${p.h}">Switch ${esc(cur.n)} to ${esc(p.n)}</button></div>` : '';
+}
+function bindPerkAct(it, root, after) {
+  root.querySelectorAll('[data-swap]').forEach(b => b.onclick = () => {
+    const [si, h] = b.dataset.swap.split('|').map(Number); const p = it.perks.find(x => x.si === si && x.h === h); const cur = it.perks.find(x => x.si === si && x.s); const ch = actChar(it);
+    if (!p || !cur || !ch) return;
+    runActions(`Switch perk on ${it.name}`, [{ action: 'plug', label: `${it.name}: switch ${cur.n} to ${p.n}`, body: { plug: { socketIndex: si, socketArrayType: 0, plugItemHash: h }, ...bodyOf(it, ch) },
+      apply: () => { for (const x of it.perks) if (x.si === si) x.s = x === p ? 1 : 0; } }], ok => { if (ok) toast(`${p.n} is now active on ${it.name}.`); after?.(); });
+  });
+}
+// armor mod swap: any mod for that socket's slot (all armor mods are unlocked for every player)
+const AM_SLOT = { ah: 'head', aa: 'arms', ac: 'chest', al: 'legs', ax: 'class', ag: 'general' };
+function modActHtml(it, name) {
+  if (!canAct(it) || it.kind !== 'armor') return '';
+  const p = it.perks.find(x => x.n === name && x.ac && Number.isInteger(x.si));
+  return p ? `<div class="actrow"><button class="btn primary" data-modswap="${p.si}">Change this mod</button></div>` : '';
+}
+function bindModAct(it, root, after) {
+  root.querySelectorAll('[data-modswap]').forEach(b => b.onclick = () => {
+    const si = +b.dataset.modswap; const cur = it.perks.find(x => x.si === si && x.ac); const ch = actChar(it); if (!cur || !ch) return;
+    const ad = window.VS_APIDEFS?.p || {}; const seen = new Set();
+    const opts = Object.entries(ad).filter(([h, v]) => v[1] === cur.ac && v[0] && !seen.has(v[0]) && seen.add(v[0])).map(([h, v]) => ({ h: +h, n: v[0] }));
+    const cost = n => (D?.am?.[AM_SLOT[cur.ac]] || []).concat(D?.am?.general || []).find(x => Core.norm(x[0]) === Core.norm(n))?.[1];
+    const rows = opts.sort((x, y) => (/^Empty/.test(x.n) - /^Empty/.test(y.n)) || x.n.localeCompare(y.n)).map(o => ({ k: String(o.h), n: /^Empty/.test(o.n) ? 'Remove mod (empty socket)' : o.n, icon: plugIcon(o.n, 'sq', pIdx(o.n, 'armor')), sub: cost(o.n) != null ? `<span class="bst">${cost(o.n)} energy</span>` : '', s: o.n, on: o.h === cur.h }));
+    openPicker(`${it.name}: ${cur.n}`, rows, k => {
+      const o = opts.find(x => String(x.h) === k); if (!o || o.h === cur.h) return;
+      runActions(`Change mod on ${it.name}`, [{ action: 'plug', label: `${it.name}: replace ${cur.n} with ${o.n}`, body: { plug: { socketIndex: si, socketArrayType: 0, plugItemHash: o.h }, ...bodyOf(it, ch) },
+        apply: () => { cur.n = o.n; cur.h = o.h; } }], ok => { if (ok) toast(`${o.n} is now on ${it.name}.`); after?.(); });
+    }, { note: 'Bungie checks armor energy: a mod that doesn’t fit is refused.' });
+  });
 }
 // picker sheet: a searchable list of choices, best synergy first
 function openPicker(title, rows, onPick, opt = {}) {

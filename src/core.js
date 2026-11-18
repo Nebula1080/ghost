@@ -174,17 +174,17 @@ const Core = (() => {
     if (!resp || typeof resp !== 'object' || !ad?.i) throw new Error('Bungie returned an unexpected profile.');
     const comp = resp.itemComponents || {};
     const inst = comp.instances?.data || {}, st = comp.stats?.data || {}, so = comp.sockets?.data || {}, rp = comp.reusablePlugs?.data || {};
-    const chars = resp.characters?.data || {};
+    const chars = resp.characters?.data || {}; const chars0 = () => chars;
     const clsOf = cid => API_CLASS[chars[cid]?.classType] || 'Character';
     const n = v => (typeof v === 'number' && isFinite(v) ? v : null);
     const plugName = h => ad.p?.[String(h)]?.[0] || '';
     const plugCat = h => ad.p?.[String(h)]?.[1] || '';
     const raw = [];
-    for (const it of resp.profileInventory?.data?.items || []) raw.push([it, 'Vault', false]);
-    for (const [cid, inv] of Object.entries(resp.characterInventories?.data || {})) for (const it of inv?.items || []) raw.push([it, clsOf(cid), false]);
-    for (const [cid, inv] of Object.entries(resp.characterEquipment?.data || {})) for (const it of inv?.items || []) raw.push([it, clsOf(cid), true]);
+    for (const it of resp.profileInventory?.data?.items || []) raw.push([it, 'Vault', false, '']);
+    for (const [cid, inv] of Object.entries(resp.characterInventories?.data || {})) for (const it of inv?.items || []) raw.push([it, clsOf(cid), false, cid]);
+    for (const [cid, inv] of Object.entries(resp.characterEquipment?.data || {})) for (const it of inv?.items || []) raw.push([it, clsOf(cid), true, cid]);
     const weapons = [], armor = [];
-    for (const [r, owner, equipped] of raw) {
+    for (const [r, owner, equipped, cid0] of raw) {
       const id = String(r?.itemInstanceId ?? ''); if (!ID_RE.test(id)) continue;
       const hash = String(r.itemHash ?? '').replace(/\D/g, ''); const def = ad.i[hash]; if (!def) continue;
       const [name, k, type, rarity, ammoT, bucket, classType, perkSockets] = def;
@@ -202,7 +202,9 @@ const Core = (() => {
         if (cur && !list.includes(cur)) list.unshift(cur);
         for (const h of list) {
           const pn = plugName(h); if (!pn) continue;
-          perks.push({ n: pn, s: h === cur ? 1 : 0, j: JUNK_PERK.test(pn) ? 1 : 0 });
+          // si / h: the socket index and plug hash, so Ghost can switch perks and mods through Bungie (src: 'api' only)
+          const pc = plugCat(h);
+          perks.push({ n: pn, s: h === cur ? 1 : 0, j: JUNK_PERK.test(pn) ? 1 : 0, si: i, h: /^\d{1,10}$/.test(h) ? +h : 0, ...(/^a[hacglx]$/.test(pc) ? { ac: pc } : {}), ...(rollIdx.has(i) ? { roll: 1 } : {}) });
         }
         const cat = plugCat(cur), cn = plugName(cur);
         if (!frame && cn && (cat === 'i' && kind === 'weapon' || cat === 'r' && kind === 'armor')) frame = cn;
@@ -228,11 +230,13 @@ const Core = (() => {
         power: n(ins.primaryStat?.value), energy: n(ins.energy?.energyCapacity), frame, tertiary, tuning: '',
         mwType, mwTier, owner, locked: !!(state & 1), equipped, featured: false, holofoil: false,
         year: null, season: null, event: '', crafted: !!(state & 8), level: null, kills: null, foundry: '', loadouts: '',
-        stats, base: {}, perks, src: 'api',
+        stats, base: {}, perks, src: 'api', cid: ID_RE.test(String(cid0)) ? String(cid0) : '', bucket: Number(bucket) || 0,
       };
       (kind === 'weapon' ? weapons : armor).push(item);
     }
-    return { weapons, armor };
+    // the account's characters (id + class), for equip / transfer actions
+    const charList = Object.entries(chars0()).map(([id, c]) => ({ id, cls: API_CLASS[c?.classType] || '' })).filter(c => ID_RE.test(c.id) && c.cls);
+    return { weapons, armor, chars: charList };
   }
 
   // ---------- reference data (data/defs.json, built by tools/build-defs.mjs) ----------
