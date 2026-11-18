@@ -306,6 +306,36 @@ for (const [tab, gid] of Object.entries(TABS)) {
   }
 }
 
+// ---------- masterworks and exotic catalysts ----------
+// mwp[normName]  = [[stat, value], …]: what a weapon masterwork plug adds (its non-conditional investment stats),
+//                  e.g. "Tier 5: Reload Speed" -> [["Reload", 5]]. Stat names match DIM's spreadsheet columns.
+// cata[normName] = { st: [[stat, value], …], d: description }: an exotic catalyst plug's stat bonus and text.
+// wc[weaponHash] = the catalyst that weapon can take (its catalyst socket's plug), so a missing one can be named.
+const STAT_SHORT = { 'Rounds Per Minute': 'ROF', 'Aim Assistance': 'AA', 'Recoil Direction': 'Recoil', 'Magazine': 'Mag', 'Reload Speed': 'Reload' };
+const statName = h => { const n = statDefs[h]?.displayProperties?.name; return n ? (STAT_SHORT[n] || n) : ''; };
+const mwStats = it => (it.investmentStats || []).filter(x => !x.isConditionallyActive && x.value && statName(x.statTypeHash) && statName(x.statTypeHash) !== 'Armor Energy Capacity').map(x => [statName(x.statTypeHash), x.value]);
+// a catalyst's own displayed text is generic ("Upgrades this weapon to a Masterwork…"); its effect is in its perks
+const catDesc = it => (it.perks || []).map(p => perkDefs[p.perkHash]).filter(p => p?.isDisplayable && p.displayProperties?.description).map(p => p.displayProperties.description.trim()).join('\n') || bungieDesc(it);
+const mwp = {}, cata = {}, wc = {};
+for (const it of Object.values(items)) {
+  const cat = it.plug?.plugCategoryIdentifier || ''; const n = name(it); if (!n) continue;
+  // catalysts: the "catalysts" category, or (most of them) a weapon's own *masterwork category with a "… Catalyst" name
+  const isCat = cat === 'catalysts' || (/masterwork/.test(cat) && / Catalyst$/.test(n) && !/^Empty /.test(n));
+  if (isCat) { if (!cata[norm(n)]) cata[norm(n)] = { st: mwStats(it), d: catDesc(it).slice(0, 600) }; continue; }
+  if (/weapons\.masterworks\.stat|_masterwork$|\.masterwork$/.test(cat) && !/armor|empty/.test(cat)) { const st = mwStats(it); if (st.length && !mwp[norm(n)]) mwp[norm(n)] = st; }
+}
+for (const w of Object.values(items)) {
+  if (w.itemType !== 3 || !/exotic/i.test(w.inventory?.tierTypeName || '')) continue;
+  for (const se of w.sockets?.socketEntries || []) {
+    const set = plugSets[se.reusablePlugSetHash || se.randomizedPlugSetHash];
+    const c = [...(set?.reusablePlugItems || []).map(p => items[p.plugItemHash]), ...(se.reusablePlugItems || []).map(p => items[p.plugItemHash])].find(x => x && cata[norm(name(x))]);
+    if (c) { wc[w.hash] = name(c); break; }
+  }
+  // most catalysts unlock through records, so the socket only lists "Empty Catalyst Socket": pair by name instead
+  if (!wc[w.hash] && cata[norm(name(w) + ' Catalyst')]) wc[w.hash] = name(w) + ' Catalyst';
+}
+console.log('masterwork plugs:', Object.keys(mwp).length, '· catalysts:', Object.keys(cata).length, '· exotics with a catalyst:', Object.keys(wc).length);
+
 // ---------- weapon intrinsics by plug hash ----------
 // Intrinsic names repeat across weapon types with different effects ("Aggressive Frame" is 39 plugs with 6 different
 // descriptions), so pi / cl / dc (keyed by name) can describe the wrong one. For names that are ambiguous, record each
@@ -337,7 +367,7 @@ console.log('intrinsics by hash:', Object.keys(wi).length, 'weapons,', Object.ke
 
 const out = {
   v: manifest.Response.version, built: new Date().toISOString().slice(0, 10), artifact: name(artifact),
-  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, am, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos], wi, ih,
+  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, am, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos], wi, ih, mwp, cata, wc,
 };
 fs.mkdirSync(path.join(root, 'data'), { recursive: true });
 fs.writeFileSync(path.join(root, 'data/defs.json'), JSON.stringify(out));

@@ -303,6 +303,28 @@ const Core = (() => {
     return p || null;
   }
   // Everything known about one plug/perk name: Clarity, Data Compendium (formatted), Bungie text + socket type
+  // Masterwork: the inserted masterwork plug and the exact stat bonus it adds (defs.mwp, from Bungie's investment
+  // stats: "Tier 5: Reload Speed" = Reload +5). Armor 3.0 masterwork bonuses are computed by the game and aren't in
+  // Bungie's plug data, so armor reports the tier only (bonus {} unless the plug itself lists stats).
+  function masterwork(it, defs) {
+    const p = sockets(it, defs).mw.find(x => x.s !== 0);
+    if (!p && it.mwTier == null) return null;
+    const st = p && defs?.mwp?.[norm(p.n)];
+    return { name: p?.n || (it.mwType ? `${it.mwType} ${it.mwTier ?? ''}`.trim() : ''), tier: it.mwTier ?? null, bonus: st ? Object.fromEntries(st) : {} };
+  }
+  // Exotic catalyst: 'has' (inserted, with its stat bonus and effect), 'missing' (the weapon has one but it isn't
+  // inserted / unlocked yet) or 'none' (no catalyst exists for this weapon). defs.cata / defs.wc, tools/build-defs.mjs.
+  function catalyst(it, defs) {
+    if (it?.kind !== 'weapon' || !/exotic/i.test(it.rarity || '')) return null;
+    const ins = it.perks.find(p => p.s !== 0 && defs?.cata?.[norm(p.n)]);
+    if (ins) { const c = defs.cata[norm(ins.n)]; return { state: 'has', name: ins.n, bonus: Object.fromEntries(c.st || []), d: c.d || '' }; }
+    const avail = defs?.wc?.[it.hash];
+    if (avail || it.perks.some(p => /^empty catalyst socket$/i.test(p.n))) {
+      const c = avail && defs.cata?.[norm(avail)];
+      return { state: 'missing', name: avail || 'Catalyst', bonus: Object.fromEntries(c?.st || []), d: c?.d || '' };
+    }
+    return { state: 'none', name: '', bonus: {}, d: '' };
+  }
   // Intrinsics repeat names across weapon types with different effects ("Aggressive Frame" on swords, fusion
   // rifles, pulse rifles…), so a weapon's own intrinsic is looked up by its plug hash (defs.wi / defs.ih,
   // tools/build-defs.mjs). Returns the hash when `name` is that weapon's intrinsic and the name is ambiguous.
@@ -824,6 +846,8 @@ const Core = (() => {
         if (v === 'holofoil') return it.holofoil ? ['holofoil'] : null;
         if (v === 'featured' || v === 'new gear' || v === 'newgear') return it.featured ? ['featured'] : null;
         if (v === 'masterwork' || v === 'masterworked') return (it.mwTier ?? 0) >= 10 ? ['mw'] : null;
+        if (v === 'catalyst' || v === 'catalyzed') return ctx.defs && catalyst(it, ctx.defs)?.state === 'has' ? ['catalyst'] : null;
+        if (v === 'nocatalyst' || v === 'catalystmissing') return ctx.defs && catalyst(it, ctx.defs)?.state === 'missing' ? ['catalyst'] : null;
         if (v === 'tagged') return it.tag ? ['tag'] : null;
         if (v === 'untagged') return !it.tag ? ['tag'] : null;
         if (v === 'hasnotes' || v === 'notes') return it.notes ? ['notes'] : null;
@@ -1408,7 +1432,7 @@ const Core = (() => {
   }
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
-  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
+  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
     SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

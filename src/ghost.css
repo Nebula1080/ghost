@@ -250,6 +250,14 @@ a{color:var(--light)}
 .bar .tr i.mod{background:var(--accent);animation-delay:.12s}
 @keyframes grow{from{transform:scaleX(0)}}
 .stat-legend i{border-radius:0}
+/* stat bars: base, then what the masterwork and an inserted exotic catalyst add, then mods / tuning */
+.bar .tr i.mw,.stat-legend i.mw,.cstat .tr i.mw{background:var(--light)}
+.bar .tr i.cat,.stat-legend i.cat,.cstat .tr i.cat{background:var(--exotic)}
+.bar .num .sbon{color:var(--faint);white-space:nowrap}
+/* catalyst chip on exotic weapon cards */
+.catc{display:inline-flex;align-items:center;gap:4px}
+.catc.has{color:var(--exotic)}
+.catc.missing{color:var(--faint)}
 .stat-legend span:first-child i{background:var(--dim)!important}.stat-legend span:last-child i{background:var(--accent)!important}
 .tagbtn{position:relative;overflow:hidden}
 .burst{position:absolute;left:var(--bx);top:var(--by);width:8px;height:8px;margin:-4px;border-radius:50%;border:1px solid var(--light);animation:burst .55s var(--ease) forwards;pointer-events:none}
