@@ -1454,7 +1454,12 @@ function cardHtml(it, hits, paneIdx, sortKey) {
 // ---------- item drawer ----------
 let drawerItem = null;
 function openItem(id, paneId, focusPerk) {
-  const it = S.byId.get(id); if (!it) return; drawerItem = it;
+  const it = S.byId.get(id); if (!it) return;
+  // a different item (or the panel was closed) opens fresh: at the top, with every dropdown closed.
+  // Re-rendering the same open item (after a tag change or revert) keeps its place.
+  const fresh = drawerItem?.id !== it.id;
+  if (fresh) TRI.open = false;
+  drawerItem = it;
   const pIdx = S.panes.findIndex(p => p.id === paneId);
   const hits = S.results[paneId]?.get(id) || new Set();
   const d = $('#drawer'); d.style.setProperty('--pc', PANE_COLORS[(pIdx < 0 ? 0 : pIdx) % PANE_COLORS.length]);
@@ -1515,6 +1520,7 @@ function openItem(id, paneId, focusPerk) {
   d.insertAdjacentHTML('afterbegin', '<div class="grab"><i aria-hidden="true"></i><button class="gx" type="button" aria-label="Close item panel">×</button></div>');
   d.querySelector('.gx').onclick = closeDrawer; sheetDrag(d);
   d.classList.add('open'); $('#scrim').classList.add('open'); if (isMobile()) setCompact(true);
+  if (fresh && !first) for (const el of [d, d.querySelector('.d-scroll'), d.querySelector('.d-body')]) if (el) el.scrollTop = 0;
   function showPerk(b) {
     const det = $('#pdet'); if (!det) return;
     // clicking the open one again closes it

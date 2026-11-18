@@ -46,6 +46,17 @@ const fails = []; const ok = m => console.log('  ok  ', m); const fail = m => { 
   // pane menu: clicking the drawn dots opens it
   await pg.click('#panes .pane .menu [data-act=menu] svg', { force: true }); await pg.waitForTimeout(150);
   (await pg.$('#panes .pane .menu.open')) ? ok('pane menu opens from its icon') : fail('pane menu did not open');
+  // a newly opened item panel starts at the top with its dropdowns closed, even after scrolling the previous one
+  await pg.evaluate(() => document.querySelectorAll('.menu.open').forEach(m => m.classList.remove('open')));
+  const cards = await pg.$$('#panes .card');
+  await cards[0].click(); await pg.waitForTimeout(700);
+  await pg.evaluate(() => { const t = document.querySelector('#drawer details.tri'); if (t) t.open = true; const s = document.querySelector('#drawer .d-body'); if (s) s.scrollTop = 400; });
+  await pg.waitForTimeout(200);
+  await pg.evaluate(() => document.querySelector('#dClose').click()); await pg.waitForTimeout(400);
+  await (await pg.$$('#panes .card'))[1].click(); await pg.waitForTimeout(700);
+  const fresh = await pg.evaluate(() => ({ top: document.querySelector('#drawer .d-body')?.scrollTop ?? 0, tri: !!document.querySelector('#drawer details.tri[open]') }));
+  fresh.top === 0 && !fresh.tri ? ok('a new item panel opens at the top with dropdowns closed') : fail('item panel kept the old scroll or dropdown ' + JSON.stringify(fresh));
+  await pg.evaluate(() => document.querySelector('#dClose').click()); await pg.waitForTimeout(300);
   await b.close();
   // item panel with reduced motion (animations off): it must still be visible
   for (const rm of ['reduce', 'no-preference']) {
