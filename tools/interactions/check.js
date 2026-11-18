@@ -46,6 +46,7 @@ function check(only) {
     if (!KINDS.has(t.kind)) err(w, 'bad kind ' + t.kind);
     if (t.el != null && !ELS.has(t.el)) err(w, 'bad el ' + t.el);
     if (!t.def) err(w, 'missing def');
+    if (t.nat != null && t.nat !== true && !['solar', 'arc', 'void', 'stasis', 'strand', 'prism'].includes(t.nat)) err(w, 'nat must be true or a subclass element');
     for (const g of t.isa || []) if (!L.terms[g] && !String(g).match(/^[a-z0-9]+$/)) err(w, 'isa names unknown term ' + g);
     if (t.dr) { const d = t.dr; const tab = String(d.src || '').startsWith('compendium:') ? L.gsrc[d.src.slice(11)] : null;
       if (!(typeof d.amt === 'number' && d.amt > 0 && d.amt < 100)) err(w, 'dr.amt must be a percent');
@@ -78,6 +79,8 @@ function check(only) {
         if (e.do === 'counts' && !L.terms[e.as]) err(we, 'counts needs a known "as" term');
         if (e.by && !L.terms[e.by]) err(we, 'unknown by-term ' + e.by);
         if (e.perk && !(s.perks || []).some(p => p.n === e.perk)) err(we, 'unknown perk ' + e.perk);
+        // `from` = the damage source a debuff / damage / ability must come from; a buff or energy has no damage source
+        if (e.from && e.do !== 'grants' && ['buff', 'energy'].includes(L.terms[e.t]?.kind)) err(we, `from on a ${L.terms[e.t].kind} (${e.t}) has no meaning; put the kill type in pay / note`);
         for (const k of ['dmg', 'from']) if (e[k] != null) { if (!Array.isArray(e[k]) || !e[k].length) err(we, k + ' must be a non-empty array'); else for (const x of e[k]) if (!L.terms[x]) err(we, `${k} names unknown term ${x}`); }
         if (e.t === 'damageresistance' && e.do === 'grants') {
           if (e.amt != null && !(typeof e.amt === 'number' && e.amt > 0 && e.amt < 100)) err(we, 'amt must be a number between 0 and 100 (percent)');

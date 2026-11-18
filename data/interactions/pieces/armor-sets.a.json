@@ -1,0 +1,1378 @@
+[
+ {
+  "id": "set:awishforprotection",
+  "n": "A Wish for Protection",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "protectivewish",
+    "on": "taking heavy damage in a short time",
+    "note": "7 s; 5 s cooldown after it ends",
+    "q": "Taking significant damage in a short time generates a Protective Wish",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "by": "protectivewish",
+    "note": "Protective Wish also gives flinch resistance and makes combatants less accurate against you",
+    "q": "+? Reload Speed and 0.?x Reload Duration Multiplier",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:awishfulfilled",
+  "n": "A Wish Fulfilled",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "protectivewish",
+    "note": "rapid final blows end the Wish early (so the Cure comes sooner); needs the 2-piece A Wish for Protection",
+    "q": "When the Protective Wish expires, it cures you.",
+    "s": "bungie",
+    "pay": "Cure when the Protective Wish ends"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "on": "Protective Wish expires",
+    "q": "On Protective Wish expiry:\nGrants Cure x1.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:ascendantescape",
+  "n": "Ascendant Escape",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "q": "After a final blow on a powerful combatant, the next time your shields are broken, you become invisible.",
+    "s": "bungie",
+    "pay": "invisibility when your shields break, after a powerful-combatant kill"
+   },
+   {
+    "do": "grants",
+    "t": "invisibility",
+    "on": "shields broken after an Elite+ final blow",
+    "q": "Invisibility for 6+? seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:augmentedarmaments",
+  "n": "Augmented Armaments",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "disorient",
+    "note": "Compendium: 15%; does not work with Arc Blind Kill/damage type: primaryweapon.",
+    "q": "Primary ammo weapons deal increased damage to disoriented combatants.",
+    "s": "bungie",
+    "pay": "15% more Primary weapon damage to disoriented targets"
+   }
+  ]
+ },
+ {
+  "id": "set:augmentedexplosives",
+  "n": "Augmented Explosives",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Your grenade abilities release an additional disorienting pulse shortly after detonating.",
+    "s": "bungie",
+    "pay": "grenades release a disorienting pulse after detonating"
+   },
+   {
+    "do": "applies",
+    "t": "disorient",
+    "on": "grenade detonation",
+    "note": "does not work on Grapple or Young Ahamkara's Spine tripmines",
+    "q": "Disorients enemies within 10 meters for 2.7 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:augmentedservos",
+  "n": "Augmented Servos",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "poweredmelee",
+    "q": "Powered melees release an additional disorienting pulse when used to defeat a target.",
+    "s": "bungie",
+    "pay": "powered melee kills release a disorienting pulse"
+   },
+   {
+    "do": "applies",
+    "t": "disorient",
+    "on": "powered melee final blow",
+    "q": "Disorienting Pulse inflicts Disorient for 2.5 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:baddreams",
+  "n": "Bad Dreams",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "scorch",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "blind",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "note": "any subclass debuff counts; Compendium: every 3rd such kill",
+    "q": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+    "s": "bungie",
+    "pay": "Orb of Power from killing subclass-debuffed targets"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "killing subclass-debuffed targets",
+    "q": "Upon scoring 3 Elementally-Debuffed Enemy Kills:\nSpawns an Orb of Power",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:balestra",
+  "n": "Balestra",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Damaging a target with a Sword, Glaive, or any melee attack exhausts them.",
+    "s": "bungie",
+    "pay": "melee hits exhaust the target (25% less damage dealt)"
+   },
+   {
+    "do": "uses",
+    "t": "sword",
+    "q": "Damaging a target with a Sword, Glaive, or any melee attack exhausts them.",
+    "s": "bungie",
+    "pay": "sword hits exhaust the target (25% less damage dealt)"
+   },
+   {
+    "do": "uses",
+    "t": "glaive",
+    "q": "Damaging a target with a Sword, Glaive, or any melee attack exhausts them.",
+    "s": "bungie",
+    "pay": "glaive hits exhaust the target (25% less damage dealt)"
+   },
+   {
+    "do": "applies",
+    "t": "exhaust",
+    "on": "sword, glaive or melee damage",
+    "q": "Inflicts Exhaustion for 5 seconds, reducing Combatant Damage Output by 25%.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:betweenpoles",
+  "n": "Between Poles",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadestat",
+    "on": "Light weapon final blows",
+    "if": [
+     {
+      "any": [
+       {
+        "weapon": "solar"
+       },
+       {
+        "weapon": "arc"
+       },
+       {
+        "weapon": "void"
+       }
+      ]
+     }
+    ],
+    "note": "Light Polarity stacks to 5 (10 s); a kill with the other alignment clears it",
+    "q": "Light Polarity grants +8 | +16 | +24 | +32 | +40 Grenade Stat.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleestat",
+    "on": "Kinetic, Stasis or Strand weapon final blows",
+    "if": [
+     {
+      "any": [
+       {
+        "weapon": "stasis"
+       },
+       {
+        "weapon": "strand"
+       },
+       {
+        "weapon": "kinetic"
+       }
+      ]
+     }
+    ],
+    "note": "Dark Polarity stacks to 5 (10 s); a kill with the other alignment clears it",
+    "q": "Dark Polarity grants +8 | +16 | +24 | +32 | +40 Melee Stat.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:bittersweet",
+  "n": "Bittersweet",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "builtbitter",
+    "note": "needs the 2-piece Built Bitter; disabled in Crucible",
+    "q": "When you stow a weapon, restore health based on the number of Built Bitter stacks lost.",
+    "s": "bungie",
+    "pay": "heals on weapon stow, more for more Built Bitter stacks"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "stowing a weapon with Built Bitter stacks",
+    "note": "Compendium: also starts critical health regeneration",
+    "q": "When you stow a weapon, restore health",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "set:bladefocus",
+  "n": "Blade Focus",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sword",
+    "q": "While Blade Focus is readied, hitting a target with your sword increases Sword damage and lunge distance for a moderate duration.",
+    "s": "bungie",
+    "pay": "guard then hit to gain Blade Focus: 10% more sword damage and longer lunge"
+   },
+   {
+    "do": "grants",
+    "t": "bladefocus",
+    "on": "guarding 1.35 s, then landing a sword hit",
+    "note": "removed when you guard again or stow the sword; raises Combat Meditation (4-piece) energy to 8% per hit",
+    "q": "Swinging while it is active AND scoring a hit consumes Blade Focus Ready to grant Blade Focus for 7 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:builtbitter",
+  "n": "Built Bitter",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "builtbitter",
+    "on": "taking damage",
+    "note": "self-damage does not count; stacks are lost on stow",
+    "q": "Grants a stack of Built Bitter for every ? damage taken, up to 10 stacks",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "by": "builtbitter",
+    "q": "Built Bitter grants Reload Speed and Reload Duration Multiplier per stack until stowed.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:burnemdown",
+  "n": "Burn 'Em Down",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "if": [
+     {
+      "subclass": "prismatic"
+     }
+    ],
+    "q": "While Transcendence is active, using your grenade ability consumes all stacks of Stack 'Em Up to grant an escalating amount of grenade energy.",
+    "s": "bungie",
+    "pay": "grenade energy back per Stack 'Em Up stack when you throw a grenade while Transcendent"
+   },
+   {
+    "do": "consumes",
+    "t": "stackemup",
+    "if": [
+     {
+      "subclass": "prismatic"
+     }
+    ],
+    "q": "Consumes all stacks of Stack 'Em Up to grant ~6% Prismatic Grenade Energy per stack",
+    "s": "compendium",
+    "pay": "~6% grenade energy per stack, up to 30%",
+    "note": "needs the 2-piece Stack 'Em Up"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "if": [
+     {
+      "subclass": "prismatic"
+     }
+    ],
+    "pq": "6% | 12% | 18% | 24% | 30% Prismatic Grenade Energy.",
+    "q": "On Prismatic Grenade Ability Usage while Transcendent",
+    "s": "compendium",
+    "pay": "grenade energy back when thrown while Transcendent"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "using your grenade while Transcendent",
+    "if": [
+     {
+      "subclass": "prismatic"
+     }
+    ],
+    "q": "6% | 12% | 18% | 24% | 30% Prismatic Grenade Energy.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:cauterize",
+  "n": "Cauterize",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "solarweapon",
+    "q": "Rapid Solar final blows heal you.",
+    "s": "bungie",
+    "pay": "heals 30 HP after 3 quick Solar kills"
+   },
+   {
+    "do": "uses",
+    "t": "solarability",
+    "q": "Rapid Solar final blows heal you.",
+    "s": "bungie",
+    "pay": "heals 30 HP after 3 quick Solar kills"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "rapid Solar final blows",
+    "note": "3 Solar kills in quick succession; 1 s cooldown",
+    "q": "Restores 30 HP.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:collectivepower",
+  "n": "Collective Power",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "amplified",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Amplified, Bolt Charge",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "uses",
+    "t": "boltcharge",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Amplified, Bolt Charge",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "uses",
+    "t": "cure",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Cure, Radiant, Restoration",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Cure, Radiant, Restoration",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "uses",
+    "t": "restoration",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Cure, Radiant, Restoration",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Devour, Invisibility, Overshield",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Devour, Invisibility, Overshield",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Devour, Invisibility, Overshield",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Frost Armor | Woven Mail",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "uses",
+    "t": "wovenmail",
+    "pq": "Spawns an Orb of Power on the user",
+    "q": "Frost Armor | Woven Mail",
+    "s": "compendium",
+    "pay": "sustained damage while you have it spawns Orbs of Power"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "sustained damage while you have a subclass buff",
+    "note": "5 hits, counted at most once per 0.8 s; damage to immune enemies counts",
+    "q": "While you have a subclass buff, dealing sustained damage creates an Orb of Power.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "set:combatmeditation",
+  "n": "Combat Meditation",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sword",
+    "q": "Sword hits return grenade and class energy.",
+    "s": "bungie",
+    "pay": "grenade and class ability energy per sword hit"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "sword hits",
+    "q": "3% Grenade and Class Ability Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "sword hits",
+    "q": "3% Grenade and Class Ability Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "bladefocus",
+    "note": "Compendium (Blade Focus record): 8% instead of 3%",
+    "q": "Bonus energy is granted if Blade Focus is active.",
+    "s": "bungie",
+    "pay": "more energy per sword hit while Blade Focus is active"
+   }
+  ]
+ },
+ {
+  "id": "set:concussiverounds",
+  "n": "Concussive Rounds",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "disorient",
+    "on": "Elite+ final blow or breaking a combatant shield with Kinetic damage",
+    "q": "Defeating powerful combatants or breaking a combatant shield with Kinetic damage releases a disorienting Kinetic shockwave.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "set:crookandflail",
+  "n": "Crook and Flail",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "ammobrick",
+    "q": "Picking up an ammo brick heals you.",
+    "s": "bungie",
+    "pay": "heals 70 HP on pickup"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "picking up an ammo brick",
+    "q": "Restores 70 HP.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:cursedfist",
+  "n": "Cursed Fist",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "note": "Glaive melee kills also trigger it; Compendium suggests Arc damage (unconfirmed)",
+    "q": "Melee final blows trigger a Cursed Thrall explosion.",
+    "s": "bungie",
+    "pay": "melee kills make the target explode"
+   }
+  ]
+ },
+ {
+  "id": "set:dielectricdrift",
+  "n": "Dielectric Drift",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "speedbooster",
+    "q": "Sliding while Speed Booster is active jolts combatants in front of you.",
+    "s": "bungie",
+    "pay": "slides jolt combatants in front of you"
+   },
+   {
+    "do": "uses",
+    "t": "sliding",
+    "q": "Sliding while Speed Booster is active jolts combatants in front of you.",
+    "s": "bungie",
+    "pay": "slides jolt combatants in front of you while Speed Booster is active"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "on": "sliding while Speed Booster is active",
+    "q": "Sliding inflicts Jolt to Combatants within 10 meters in a frontal cone.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:dopplereffect",
+  "n": "Doppler Effect",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "suspend",
+    "q": "Suspend, unravel, and sever effects applied to targets, and radiant and restoration effects applied to you have increased duration.",
+    "s": "bungie",
+    "pay": "lasts 50% longer",
+    "note": "Compendium: 50% longer, 70% with Ember of Solace or Thread of Continuity"
+   },
+   {
+    "do": "modifies",
+    "t": "unravel",
+    "q": "Suspend, unravel, and sever effects applied to targets, and radiant and restoration effects applied to you have increased duration.",
+    "s": "bungie",
+    "pay": "lasts 50% longer",
+    "note": "Compendium: 50% longer, 70% with Ember of Solace or Thread of Continuity"
+   },
+   {
+    "do": "modifies",
+    "t": "sever",
+    "q": "Suspend, unravel, and sever effects applied to targets, and radiant and restoration effects applied to you have increased duration.",
+    "s": "bungie",
+    "pay": "lasts 50% longer",
+    "note": "Compendium: 50% longer, 70% with Ember of Solace or Thread of Continuity"
+   },
+   {
+    "do": "modifies",
+    "t": "radiant",
+    "q": "Suspend, unravel, and sever effects applied to targets, and radiant and restoration effects applied to you have increased duration.",
+    "s": "bungie",
+    "pay": "lasts 50% longer",
+    "note": "Compendium: 50% longer, 70% with Ember of Solace or Thread of Continuity"
+   },
+   {
+    "do": "modifies",
+    "t": "restoration",
+    "q": "Suspend, unravel, and sever effects applied to targets, and radiant and restoration effects applied to you have increased duration.",
+    "s": "bungie",
+    "pay": "lasts 50% longer",
+    "note": "Compendium: 50% longer, 70% with Ember of Solace or Thread of Continuity"
+   }
+  ]
+ },
+ {
+  "id": "set:downtheline",
+  "n": "Down the Line",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "on": "hitting minibosses, Champions or bosses",
+    "note": "stacks to 10; each weapon kill on a rank-and-file or Elite enemy spends a stack",
+    "q": "15% increased Weapon Damage against Rank-and-File and Elite Combatants.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:dreamdevourer",
+  "n": "Dream-Devourer",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Performing a finisher versus a powerful combatant grants Devour.",
+    "s": "bungie",
+    "pay": "Devour on Elite+ finishers"
+   },
+   {
+    "do": "grants",
+    "t": "devour",
+    "on": "finisher on a powerful combatant",
+    "q": "Devour for 6+3 seconds.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "s": "bungie",
+    "q": "While you have Devour, gain damage resistance versus combatants.",
+    "pay": "20% damage resistance against combatants while Devour is active"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 20,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while Devour is active",
+    "q": "20?% Damage Resist against Combatants.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:emergencyelectromagnet",
+  "n": "Emergency Electromagnet",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "q": "When your shields become broken, collect all nearby Orbs of Power and ammo bricks.",
+    "s": "bungie",
+    "pay": "pulls in nearby Orbs of Power and ammo bricks"
+   },
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "note": "several Orbs collected at once count as simultaneous pickups (e.g. for Repurposed charge mods)",
+    "q": "When your shields become broken, collect all nearby Orbs of Power and ammo bricks.",
+    "s": "bungie",
+    "pay": "nearby Orbs are collected when your shields break"
+   },
+   {
+    "do": "uses",
+    "t": "ammobrick",
+    "q": "When your shields become broken, collect all nearby Orbs of Power and ammo bricks.",
+    "s": "bungie",
+    "pay": "nearby ammo bricks are collected when your shields break"
+   }
+  ]
+ },
+ {
+  "id": "set:fieldexpertise",
+  "n": "Field Expertise",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "on": "precision final blows",
+    "note": "up to 5 stacks (10% vs non-boss combatants); a non-precision weapon kill clears it",
+    "q": "Precision final blows with any weapon grant a stacking bonus to reload speed, target acquisition, and weapon damage against non-boss combatants for a short duration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "on": "precision final blows",
+    "q": "Precision final blows with any weapon grant a stacking bonus to reload speed",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "set:forceabsorption",
+  "n": "Force Absorption",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "rocketlauncher",
+    "note": "Grenade Launchers count too",
+    "q": "Final blows with a Rocket Launcher, Grenade Launcher, or micro-missile temporarily decrease incoming area-of-effect damage.",
+    "s": "bungie",
+    "pay": "20% area-of-effect damage resistance after a kill"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 20,
+    "vs": [
+     "explosive"
+    ],
+    "on": "after a Rocket Launcher, Grenade Launcher or micro-missile final blow",
+    "note": "15 s; also 60% resistance to your own explosive damage",
+    "q": "20% Area-of-Effect Damage Resist and 60% Explosive Self-Damage Resist for 15 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:forceconverter",
+  "n": "Force Converter",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "rocketlauncher",
+    "note": "Grenade Launchers count too",
+    "q": "After a final blow with a Rocket Launcher, Grenade Launcher, or micro-missile, sprint for a short time to gain Speed Booster.",
+    "s": "bungie",
+    "pay": "sprinting after a kill grants Speed Booster"
+   },
+   {
+    "do": "uses",
+    "t": "sprinting",
+    "q": "Sprinting while Force Converter is active grants Speed Booster.",
+    "s": "compendium",
+    "pay": "Speed Booster after a Rocket/Grenade Launcher kill"
+   },
+   {
+    "do": "grants",
+    "t": "speedbooster",
+    "on": "sprinting after a Rocket Launcher, Grenade Launcher or micro-missile final blow",
+    "q": "Sprinting while Force Converter is active grants Speed Booster.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:fromthestorm",
+  "n": "From the Storm",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "on": "out of combat for 12 s",
+    "note": "1 stack every 3 s up to 5; disabled in Crucible",
+    "q": "After being out of combat for a moderate duration, slowly gain Frost Armor until you reenter combat.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "set:giftoftheleylines",
+  "n": "Gift of the Ley Lines",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "voiddamage",
+    "q": "Rapidly defeating combatants with Void energy spawns a Void breach.",
+    "s": "bungie",
+    "pay": "Void Breach after 3 quick Void kills"
+   },
+   {
+    "do": "creates",
+    "t": "voidbreach",
+    "on": "3 rapid Void final blows",
+    "q": "Spawns a Void Breach.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:godlikejudgment",
+  "n": "God-like Judgment",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "q": "When your shields are broken by a combatant, or upon casting your Super, release a swarm of heat seeking micro-missiles.",
+    "s": "bungie",
+    "pay": "2 seeking micro-missiles when combatants break your shields"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "note": "missiles deal Kinetic damage",
+    "q": "When your shields are broken by a combatant, or upon casting your Super, release a swarm of heat seeking micro-missiles.",
+    "s": "bungie",
+    "pay": "4 seeking micro-missiles on Super cast"
+   }
+  ]
+ },
+ {
+  "id": "set:healinginitiative",
+  "n": "Healing Initiative",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "initiative",
+    "note": "needs the 2-piece Taking Initiative",
+    "q": "The aura gains increased healing based on the number of Initiative stacks.",
+    "s": "bungie",
+    "pay": "class ability makes a healing aura, stronger with more Initiative stacks"
+   },
+   {
+    "do": "uses",
+    "t": "classability",
+    "q": "While you have Initiative, using your class ability creates a stationary healing aura.",
+    "s": "bungie",
+    "pay": "creates a stationary healing aura"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "who": "allies",
+    "on": "using your class ability while you have Initiative",
+    "note": "7 m aura, pulses every 2 s",
+    "q": "Healing Drone restores 10 HP per Initiative stack per pulse up to 5 times per Class Ability Usage.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:highnoon",
+  "n": "High Noon",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "on": "readying a weapon",
+    "note": "precision damage only; 14% with Tex Balanced Stock or Tex Mechanica exotics",
+    "q": "7% Increased Weakspot Damage against Combatants for 4 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:iaido",
+  "n": "Iaido",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "weapon final blow within 4 s of reloading or readying",
+    "note": "3 s cooldown",
+    "q": "Restores 40 HP.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:ionicoverclock",
+  "n": "Ionic Overclock",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "While amplified, your Fusion Rifles, Linear Fusion Rifles, and Heat weapons gain increased handling, reload, and vent speeds.",
+    "s": "bungie",
+    "pay": "Fusion, Linear Fusion and Heat weapons get handling, reload and vent speed"
+   }
+  ]
+ },
+ {
+  "id": "set:ironconviction",
+  "n": "Iron Conviction",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "note": "final blows extend it; cannot retrigger until shields recover",
+    "q": "When your shields become broken, you gain increased ammo generation, flinch resistance, and damage resistance against nearby combatants for a short time.",
+    "s": "bungie",
+    "pay": "damage resistance vs nearby combatants, ammo generation and flinch resistance"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 15,
+    "vs": [
+     "combatants"
+    ],
+    "on": "after your shields break",
+    "note": "only combatants within 10 m; kills refresh the duration",
+    "q": "15% Damage Resist against Combatants within 10 meters for 7 seconds",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:knittogether",
+  "n": "Knit Together",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "threadling",
+    "q": "For a short time after your shields break, your next several Threadling hits restore health.",
+    "s": "bungie",
+    "pay": "Threadling hits heal you after your shields break"
+   },
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "q": "For a short time after your shields break, your next several Threadling hits restore health.",
+    "s": "bungie",
+    "pay": "next 3 Threadling hits heal you"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "by": "threadling",
+    "on": "Threadling hits after your shields break",
+    "note": "5 s cooldown",
+    "q": "The next 3 Threadling hits within 10 seconds of reaching Critical Health restore 50? HP.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:lethalweave",
+  "n": "Lethal Weave",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "Defeating an unraveled combatant grants grenade ability energy.",
+    "s": "bungie",
+    "pay": "10% grenade energy on killing unraveled targets (Special ammo progress if grenade is full)"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "defeating unraveled targets",
+    "q": "10% Grenade Ability Energy.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:licensetothrill",
+  "n": "License to Thrill",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Activating your grenade or the Nanotech Tracer Missiles Origin Trait provides stacking resistance to incoming damage at point-blank range.",
+    "s": "bungie",
+    "pay": "stacking damage resistance at point-blank range"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 12,
+    "vs": [
+     "all"
+    ],
+    "on": "using your grenade (enemies within 5 m)",
+    "note": "first stack 12%, rising to 30% at 10 stacks; 15 s, refreshed on retrigger; also triggered by Nanotech Tracer Missiles / Quicksilver Storm",
+    "q": "12% [2%] Damage Resist against enemies within <5 metres, increased by +?% [?%] per stack afterwards, up to 30% [5%] Damage Resist.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 2,
+    "vs": [
+     "players"
+    ],
+    "on": "using your grenade (enemies within 5 m)",
+    "note": "PvP: 2% rising to 5% at 10 stacks",
+    "q": "12% [2%] Damage Resist against enemies within <5 metres, increased by +?% [?%] per stack afterwards, up to 30% [5%] Damage Resist.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:lucentswarm",
+  "n": "Lucent Swarm",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "note": "Compendium: extends it to 30 s",
+    "q": "Collecting Orbs of Power extends the Ceremony.",
+    "s": "bungie",
+    "pay": "extends the Ceremony to 30 s"
+   },
+   {
+    "do": "uses",
+    "t": "ceremony",
+    "note": "needs the 2-piece The Ceremony",
+    "q": "While it is active, ability final blows occasionally spawn allied Arc moths.",
+    "s": "bungie",
+    "pay": "every 2 ability kills spawn a seeking Arc moth that blinds"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "note": "anything that would discharge Bolt Charge counts, including unpowered melee kills",
+    "q": "While it is active, ability final blows occasionally spawn allied Arc moths.",
+    "s": "bungie",
+    "pay": "ability kills during the Ceremony spawn Arc moths"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "note": "anything that would discharge Bolt Charge counts, including unpowered melee kills",
+    "q": "While it is active, ability final blows occasionally spawn allied Arc moths.",
+    "s": "bungie",
+    "pay": "ability kills during the Ceremony spawn Arc moths"
+   },
+   {
+    "do": "uses",
+    "t": "classability",
+    "note": "anything that would discharge Bolt Charge counts, including unpowered melee kills",
+    "q": "While it is active, ability final blows occasionally spawn allied Arc moths.",
+    "s": "bungie",
+    "pay": "ability kills during the Ceremony spawn Arc moths"
+   },
+   {
+    "do": "uses",
+    "t": "super",
+    "note": "anything that would discharge Bolt Charge counts, including unpowered melee kills",
+    "q": "While it is active, ability final blows occasionally spawn allied Arc moths.",
+    "s": "bungie",
+    "pay": "ability kills during the Ceremony spawn Arc moths"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "on": "Arc moth impact",
+    "note": "moth damage is generic Arc damage, not ability damage",
+    "q": "dealing up to 180 Arc Damage and inflicting blind for 8 seconds",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:lucenttithes",
+  "n": "Lucent Tithes",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Performing a finisher on powerful combatants heals you and generates loyal Void moths.",
+    "s": "bungie",
+    "pay": "heals you and spawns 3 Void moths that give overshields"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "finisher on a powerful combatant",
+    "q": "Performing a finisher on powerful combatants heals you",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "who": "allies",
+    "on": "finisher on a powerful combatant",
+    "q": "spawns 3 Loyal Void Moths that each grant 22.5HP Void Overshield to the user and their allies on impact.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:lucenttransmutation",
+  "n": "Lucent Transmutation",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Performing a finisher on a combatant, or landing successive powered melee final blows, generates an Elemental pickup based on your Light subclass.",
+    "s": "bungie",
+    "pay": "creates an Elemental pickup matching your Light Super"
+   },
+   {
+    "do": "uses",
+    "t": "poweredmelee",
+    "q": "Performing a finisher on a combatant, or landing successive powered melee final blows, generates an Elemental pickup based on your Light subclass.",
+    "s": "bungie",
+    "pay": "every 2 powered melee kills create an Elemental pickup"
+   },
+   {
+    "do": "creates",
+    "t": "elementalpickup",
+    "on": "finisher or 2 powered melee kills",
+    "note": "matches your Super element (Firesprite, Ionic Trace or Void Breach); does nothing with a Stasis or Strand Super",
+    "q": "Generates a Light-Subclass Super-Matching Elemental Pickup.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:magnificentduty",
+  "n": "Magnificent Duty",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "q": "When you reach critical health or heal an ally at critical health, Auto Rifles, Scout Rifles, and Sidearms gain a period of increased range, stability, and reload speed.",
+    "s": "bungie",
+    "pay": "Auto Rifles, Scout Rifles and Sidearms get range, stability and reload"
+   },
+   {
+    "do": "uses",
+    "t": "healing",
+    "q": "When you reach critical health or heal an ally at critical health, Auto Rifles, Scout Rifles, and Sidearms gain a period of increased range, stability, and reload speed.",
+    "s": "bungie",
+    "pay": "healing an ally at critical health gives Auto Rifles, Scout Rifles and Sidearms range, stability and reload"
+   },
+   {
+    "do": "grants",
+    "t": "reloadspeed",
+    "on": "reaching critical health or healing an ally at critical health",
+    "note": "Auto Rifles, Scout Rifles and Sidearms only",
+    "q": "+20 Range, +20 Stability, +30 Reload Speed, and 0.9x Reload Duration Multiplier for 11 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:meleeconduction",
+  "n": "Melee Conduction",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "While you have Radiant, Restoration, or Cure, your melee hits release a burst that will scorch the target.",
+    "s": "bungie",
+    "pay": "melee hits release a scorching Solar burst"
+   },
+   {
+    "do": "uses",
+    "t": "restoration",
+    "q": "While you have Radiant, Restoration, or Cure, your melee hits release a burst that will scorch the target.",
+    "s": "bungie",
+    "pay": "melee hits release a scorching Solar burst"
+   },
+   {
+    "do": "uses",
+    "t": "cure",
+    "q": "While you have Radiant, Restoration, or Cure, your melee hits release a burst that will scorch the target.",
+    "s": "bungie",
+    "pay": "melee hits release a scorching Solar burst"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "note": "Glaive melee hits too; 1 s cooldown; not if that melee hit itself granted the Solar buff",
+    "q": "While you have Radiant, Restoration, or Cure, your melee hits release a burst that will scorch the target.",
+    "s": "bungie",
+    "pay": "melee hits release a scorching Solar burst"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "on": "melee hits while Radiant, Restoration or Cure",
+    "q": "Melee and Glaive Hits trigger a Solar Burst on the target, dealing 28 [17] Damage and inflicting x20+10 Scorch within 7 meters.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:networkadmin",
+  "n": "Network Admin",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healthstat",
+    "on": "near an ally also wearing Network Admin",
+    "note": "any nearby ally also gives handling and reload",
+    "q": "Being near other allied Network Admins additionally grants the wearer a bonus to Health stat.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "set:networkupload",
+  "n": "Network Upload",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "who": "allies",
+    "on": "weapon final blows",
+    "note": "10.2% melee energy to you and allies within 15 m",
+    "q": "Weapon final blows grant the wearer and nearby allies melee energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "set:nightmarishpower",
+  "n": "Nightmarish Power",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "unstableessence",
+    "on": "Elite+ final blows",
+    "note": "15 s, refreshed by more Elite+ kills",
+    "q": "Final blows to a challenging combatant or higher-ranked target grant Unstable Essence.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "grenadestat",
+    "by": "unstableessence",
+    "q": "Unstable Essence | +30 Melee Stat and +30 Grenade Stat.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleestat",
+    "by": "unstableessence",
+    "q": "Unstable Essence | +30 Melee Stat and +30 Grenade Stat.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "set:nightmarishresilience",
+  "n": "Nightmarish Resilience",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "unstableessence",
+    "note": "needs the 2-piece Nightmarish Power",
+    "q": "When you have Unstable Essence, rapid weapon damage or final blows heal you and begin health regeneration.",
+    "s": "bungie",
+    "pay": "sustained weapon damage heals 20 HP and starts health regen"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "rapid weapon damage while you have Unstable Essence",
+    "note": "8 weapon hits within 3 s each; 2 s cooldown",
+    "q": "Begins Critical Health Regeneration and restores 20 HP.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "_skipped",
+  "ids": [
+   "set:accretion",
+   "set:adrenalrush",
+   "set:bountifulmunitions",
+   "set:builtfromscratch",
+   "set:fanfare",
+   "set:giftofsight",
+   "set:hotshot",
+   "set:ironsharpensiron",
+   "set:martingale"
+  ]
+ }
+]

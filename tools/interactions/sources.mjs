@@ -57,7 +57,9 @@ for (const w of Object.values(items)) {
 }
 
 // ---------- weapon perks (traits, origins) whose text names a subclass keyword or an element ----------
-const KEY = new RegExp(Core.SYN.map(s => s.re.source).join('|') + '|\\b(solar|arc|void|stasis|strand|prismatic|light|darkness) (weapon|abilit|damage|debuff|buff|subclass)', 'i');
+const KEY = new RegExp(Core.SYN.map(s => s.re.source).join('|') + '|\\b(solar|arc|void|stasis|strand|prismatic|light|darkness) (weapon|abilit|damage|debuff|buff|subclass)'
+  // perks that pay off or feed abilities (grenade / melee / class ability / Super kills or energy)
+  + '|\\b(grenade|melee|class ability|super)s? (final blow|kill|energy|damage)|\\babilit(y|ies) (final blow|kill|energy)', 'i');
 // pi keys are normalized; recover display names from the manifest
 const plugName = new Map();
 for (const it of Object.values(items)) { const n = it.displayProperties?.name; const c = it.plug?.plugCategoryIdentifier; if (n && (c === 'frames' || c === 'origins')) { const k = norm(n); if (!plugName.has(k) || /^Enhanced/.test(plugName.get(k))) plugName.set(k, n.replace(/^Enhanced\s+/, '')); } }
@@ -88,6 +90,43 @@ for (const a of Object.values(items)) {
 for (const [slot, list] of Object.entries(D.am || {})) for (const [n, cost, st, h] of list) {
   add('armor-mods', { id: 'mod:' + norm(n), n, kind: 'armorMod', slot, cost, hashes: [h], ...(st ? { stats: st } : {}), src: texts(n, null, 'armor') });
 }
+
+// ---------- armor set bonuses (2- and 4-piece): one record per bonus perk ----------
+for (const set of Object.values(D.sets || {})) for (const p of set.p || []) {
+  add('armor-sets', { id: 'set:' + norm(p.n), n: p.n, kind: 'setBonus', set: set.n, pieces: p.c, src: texts(p.n, p.d, 'armor') });
+}
+
+// ---------- artifacts (Monument of Triumph system): every Artifact item, 7 perk slots over 3 tiers ----------
+// Sockets 0-1 take tier-1 perks, 2-4 tier 1-2, 5-6 any tier (socket categories 2631166533/4/5). A perk's tier is the
+// first socket group whose plug set lists it. Records merge by name across artifacts (Horde Shuttle is in several).
+const plugsets = JSON.parse(fs.readFileSync(path.join(root, 'data/raw/plugsets.json'), 'utf8'));
+const sbx = JSON.parse(fs.readFileSync(path.join(root, 'data/raw/sandboxperks.json'), 'utf8'));
+const ART_TIER = { 2631166533: 1, 2631166534: 2, 2631166535: 3 };
+const artRecs = new Map(); const artifactList = [];
+for (const [ah, a] of Object.entries(items)) {
+  if (a.itemTypeDisplayName !== 'Artifact' || !a.sockets || a.redacted) continue;
+  const perks = []; const seen = new Set();
+  for (const cat of a.sockets.socketCategories || []) {
+    const tier = ART_TIER[cat.socketCategoryHash]; if (!tier) continue;
+    for (const si of cat.socketIndexes || []) {
+      const e = a.sockets.socketEntries[si]; const list = plugsets[e.reusablePlugSetHash || e.randomizedPlugSetHash]?.reusablePlugItems || [];
+      for (const pl of list) {
+        const d = items[pl.plugItemHash]; const n = d?.displayProperties?.name;
+        if (!n || /^empty|^reset/i.test(n) || seen.has(n)) continue; seen.add(n);
+        // the perk's text lives on its sandbox perk (the item description is often empty)
+        const bd = (d.displayProperties.description || '').trim() || (d.perks || []).map(x => sbx[x.perkHash]?.displayProperties?.description || '').filter(Boolean).join('\n').trim() || '';
+        perks.push([pl.plugItemHash, n, tier, bd, d.displayProperties.icon || '']);
+        const id = 'art:' + norm(n); const r = artRecs.get(id);
+        if (r) { if (!r.hashes.includes(pl.plugItemHash)) r.hashes.push(pl.plugItemHash); r.artifacts.push(a.displayProperties.name); }
+        else artRecs.set(id, { id, n, kind: 'artifactPerk', artifacts: [a.displayProperties.name], hashes: [pl.plugItemHash], src: texts(n, bd || null, 'armor') });
+      }
+    }
+  }
+  artifactList.push({ h: +ah, n: a.displayProperties.name, d: (a.displayProperties.description || '').trim(), i: a.displayProperties.icon || '', p: perks });
+}
+for (const r of artRecs.values()) add('artifact', r);
+// the page's artifact table (bundled by build.py): artifacts with their perks [hash, name, tier, Bungie text, icon]
+fs.writeFileSync(path.join(root, 'data/interactions/artifacts.json'), JSON.stringify(artifactList.sort((x, y) => x.n.localeCompare(y.n))) + '\n');
 
 const dir = path.join(root, 'data/interactions/src'); fs.mkdirSync(dir, { recursive: true });
 for (const [g, recs] of Object.entries(out)) {

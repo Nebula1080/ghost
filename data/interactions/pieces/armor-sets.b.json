@@ -1,0 +1,226 @@
+[
+ { "id": "set:oldmartiandiplomacy", "n": "Old Martian Diplomacy", "fx": [
+  {"do":"grants","t":"healing","on":"stowing a weapon after a weapon kill on a powerful combatant or Guardian","q":"Stowing a weapon after defeating a powerful combatant or a Guardian heals you a small amount","s":"bungie","note":"Compendium: about 40 HP, ~2 s cooldown"},
+  {"do":"applies","t":"disorient","on":"stowing a weapon after a weapon kill on a powerful combatant or Guardian","q":"Restores 40? HP and disorients Combatants within 12 meters.","s":"compendium"}
+ ] },
+ { "id": "set:openingact", "n": "Opening Act", "fx": [
+  {"do":"uses","t":"grenade","q":"Final blows with grenades grant Heat weapons bonus stability and vent speed and grant Primary ammo weapons bonus stability and reload speed.","s":"bungie","pay":"grenade kills give Heat weapons stability and vent speed, Primary weapons stability and reload speed for 15 s"},
+  {"do":"grants","t":"reloadspeed","on":"grenade final blow (Primary ammo weapons)","q":"Primary Weapons are instead granted +? Stability and +? Reload Speed.","s":"compendium"}
+ ] },
+ { "id": "set:overflowingcoffers", "n": "Overflowing Coffers", "fx": [
+  {"do":"uses","t":"untoldgreed","if":[{"has":"untoldgreed"}],"q":"While you have stacks of Untold Greed, Orbs of Power and Elemental pickups provide more of their respective energy, and Strand Tangles deal increased damage.","s":"bungie","pay":"bigger elemental pickups and stronger Tangles while you have stacks (Compendium: 5+ stacks)","note":"disabled in Crucible"},
+  {"do":"modifies","t":"elementalpickup","if":[{"has":"untoldgreed"}],"q":"Elemental Pickups are massively improved.","s":"compendium","pay":"elemental pickups give much more ability energy"},
+  {"do":"modifies","t":"firesprite","if":[{"has":"untoldgreed"}],"q":"Firesprites (+120%) | 11.25% -> 25% Grenade Energy","s":"compendium","pay":"Firesprites give 25% grenade energy instead of 11.25%"},
+  {"do":"modifies","t":"ionictrace","if":[{"has":"untoldgreed"}],"q":"Ionic Traces (+100% Class, +85% Grenade/Melee)","s":"compendium","pay":"Ionic Traces give about double ability energy plus a little Super energy"},
+  {"do":"modifies","t":"voidbreach","if":[{"has":"untoldgreed"}],"q":"Void Breaches (+120%) | 11.25% -> 25% Class Energy","s":"compendium","pay":"Void Breaches give 25% class ability energy instead of 11.25%"},
+  {"do":"modifies","t":"stasisshard","if":[{"has":"untoldgreed"}],"q":"Stasis Shards (+260%) | 10% -> 36% Melee Energy.","s":"compendium","pay":"Stasis Shards give 36% melee energy instead of 10%"},
+  {"do":"modifies","t":"tangle","if":[{"has":"untoldgreed"}],"q":"Strand Tangles | 350% increased damage.","s":"compendium","pay":"Tangles deal 350% more damage"},
+  {"do":"modifies","t":"whirlingtangle","if":[{"has":"untoldgreed"}],"q":"Affects Whirling Maelstrom too!","s":"compendium","pay":"Whirling Maelstrom deals more damage too"},
+  {"do":"modifies","t":"orbofpower","if":[{"has":"untoldgreed"}],"q":"Orbs of Power and Elemental pickups provide more of their respective energy","s":"bungie","pay":"Orbs of Power give more energy","note":"Compendium: no discernible effect on Orbs of Power"},
+  {"do":"consumes","t":"untoldgreed","on":"when your shields are broken","q":"When your shields are broken, all stacks are converted into a fountain of Orbs of Power.","s":"bungie","pay":"all stacks become Orbs of Power"},
+  {"do":"uses","t":"criticalhealth","q":"Upon reaching Critical Health while having x5 Untold Greed or higher:","s":"compendium","pq":"Consumes ALL STACKS to spawn 4 Orbs of Power that each grant ~3.15% Super Energy.","pay":"spends the stacks for 4 Orbs of Power"},
+  {"do":"creates","t":"orbofpower","on":"shields broken with 5+ Untold Greed","q":"Consumes ALL STACKS to spawn 4 Orbs of Power that each grant ~3.15% Super Energy.","s":"compendium","note":"allies can pick them up too"}
+ ] },
+ { "id": "set:photogalvanic", "n": "Photogalvanic", "fx": [
+  {"do":"uses","t":"healing","q":"Receiving healing temporarily grants your Solar weapons increased flinch resistance, handling, and reload speed.","s":"bungie","pay":"Solar weapons get handling, reload speed and flinch resistance for 4 s","note":"any healing while not at full health, e.g. Orb pickups"},
+  {"do":"uses","t":"restoration","q":"Restoration constantly refreshes it","s":"compendium","pay":"keeps the Solar weapon handling and reload bonus up"},
+  {"do":"grants","t":"handling","if":[{"weapon":"solar"}],"on":"after receiving healing","q":"+20? Handling, +10 Reload Speed, 0.85x Reload Duration Multiplier, and ?% Flinch Resist for Solar Weapons for 4 seconds.","s":"compendium"},
+  {"do":"grants","t":"reloadspeed","if":[{"weapon":"solar"}],"on":"after receiving healing","q":"+20? Handling, +10 Reload Speed, 0.85x Reload Duration Multiplier, and ?% Flinch Resist for Solar Weapons for 4 seconds.","s":"compendium"}
+ ] },
+ { "id": "set:pleasheard", "n": "Pleas Heard", "fx": [
+  {"do":"grants","t":"healing","on":"reloading an Auto Rifle, Scout Rifle or Sidearm within 3 s of a kill","q":"Reloading an Auto Rifle, Scout Rifle, or Sidearm after a final blow slowly restores health until you reenter combat.","s":"bungie","note":"Compendium: 2 HP/s until you fire, cast an ability or take enemy damage"},
+  {"do":"uses","t":"autorifle","q":"Reloading an Auto Rifle, Scout Rifle, or Sidearm after a final blow","s":"bungie","pay":"health regeneration after reloading following a kill"},
+  {"do":"uses","t":"scoutrifle","q":"Reloading an Auto Rifle, Scout Rifle, or Sidearm after a final blow","s":"bungie","pay":"health regeneration after reloading following a kill"},
+  {"do":"uses","t":"sidearm","q":"Reloading an Auto Rifle, Scout Rifle, or Sidearm after a final blow","s":"bungie","pay":"health regeneration after reloading following a kill"}
+ ] },
+ { "id": "set:powerloader", "n": "Power Loader", "fx": [
+  {"do":"uses","t":"orbofpower","q":"Picking up an Orb of Power grants Special ammo progress.","s":"bungie","pay":"6% Special ammo progress per Orb picked up"}
+ ] },
+ { "id": "set:poweroftheson", "n": "Power of the Son", "fx": [
+  {"do":"grants","t":"damageresistance","on":"after 12 s of continuous combat","amt":15,"vs":["combatants"],"cat":"poweroftheson","q":"Power of the Son x1 | 15% Damage Resist against Combatants","s":"compendium","note":"combat = dealing or taking damage at least every 7 s"},
+  {"do":"grants","t":"damageresistance","on":"after 24 s of continuous combat","amt":25,"vs":["combatants"],"cat":"poweroftheson","q":"Power of the Son x2 | 25% Damage Resist against Combatants","s":"compendium","note":"replaces the 15% stack"}
+ ] },
+ { "id": "set:queensfoilrush", "n": "Queensfoil Rush", "fx": [
+  {"do":"uses","t":"finisher","q":"Gain a powerful overshield while performing your finisher. When you finish a target, release a slowing burst around you.","s":"bungie","pay":"overshield during the finisher and a slowing burst after it"},
+  {"do":"grants","t":"overshieldgeneric","on":"while performing a finisher","q":"Finishers grant a 200? HP Overshield for the duration of the finisher (+0.3s).","s":"compendium"},
+  {"do":"applies","t":"slow","on":"finishing a target","q":"Inflicts x? Slow to enemies within 7 meters.","s":"compendium"}
+ ] },
+ { "id": "set:radiolariabreach", "n": "Radiolaria Breach", "fx": [
+  {"do":"uses","t":"orbofpower","q":"After picking up an Orb of Power, the next time your shields are broken, gain a bonus to Health stat for a short duration and release a burst of radiolaria around you.","s":"bungie","pay":"primes a Health stat bonus and radiolaria burst for the next shield break","note":"once per full heal"},
+  {"do":"uses","t":"criticalhealth","q":"Upon reaching Critical Health:","s":"compendium","pq":"+50 Health Stat for 7.5 seconds and releases 4 Radiolaria Pools 5 meters away from the user.","pay":"+50 Health stat, an explosion and damaging radiolaria pools (needs a primed Orb pickup)"},
+  {"do":"grants","t":"healthstat","on":"shields broken after an Orb pickup","q":"+50 Health Stat for 7.5 seconds","s":"compendium","note":"the pools deal Arc damage"}
+ ] },
+ { "id": "set:rapidrepair", "n": "Rapid Repair", "fx": [
+  {"do":"grants","t":"damageresistance","on":"when your shields begin to regenerate (7 s)","amt":10,"vs":["all"],"q":"10% [2.5%] Damage Resist (Resist x1) and ?% Flinch Resist for 7 seconds.","s":"compendium","note":"once per full heal"},
+  {"do":"grants","t":"damageresistance","on":"when your shields begin to regenerate (7 s)","amt":2.5,"vs":["players"],"q":"10% [2.5%] Damage Resist (Resist x1) and ?% Flinch Resist for 7 seconds.","s":"compendium"}
+ ] },
+ { "id": "set:rasputinsreprisal", "n": "Rasputin's Reprisal", "fx": [
+  {"do":"uses","t":"warmindcharge","if":[{"has":"warmindcharge"}],"q":"While you have Warmind Charges, defeating powerful combatants, destroying a construct, or destroying a Tangle releases a Solar detonation that damages combatants and heals allies.","s":"bungie","pay":"powerful kills and destroyed constructs/Tangles cause a healing Solar detonation"},
+  {"do":"uses","t":"tangle","if":[{"has":"warmindcharge"}],"q":"destroying a Tangle releases a Solar detonation that damages combatants and heals allies","s":"bungie","pay":"Solar detonation that heals allies"},
+  {"do":"uses","t":"stasiscrystal","if":[{"has":"warmindcharge"}],"q":"Constructs include barricades, turrets, Stasis crystals, and other objects created in the field.","s":"bungie","pq":"destroying a construct, or destroying a Tangle releases a Solar detonation that damages combatants and heals allies","pay":"destroying a crystal causes a healing Solar detonation","note":"Compendium: construct detonations deal and heal half"},
+  {"do":"grants","t":"healing","who":"allies","if":[{"has":"warmindcharge"}],"on":"Warmind detonation","q":"restores 50 HP to the user and their allies over 10 meters without falloff","s":"compendium"}
+ ] },
+ { "id": "set:rasputinswrath", "n": "Rasputin's Wrath", "fx": [
+  {"do":"grants","t":"warmindcharge","on":"area-of-effect, Solar ability, Seventh Seraph or IKELOS weapon final blows","q":"Final blows with area-of-effect damage, Solar abilities, Seventh Seraph weapons, or IKELOS weapons grant Warmind Charges.","s":"bungie","note":"Compendium: also Sleeper Simulant and Outbreak Perfected; 10 s, up to 10 charges"},
+  {"do":"uses","t":"solarability","q":"Final blows with area-of-effect damage, Solar abilities, Seventh Seraph weapons, or IKELOS weapons grant Warmind Charges.","s":"bungie","pay":"Solar ability kills grant Warmind Charges (+3 Weapons and Grenade stat each)"},
+  {"do":"grants","t":"grenadestat","if":[{"has":"warmindcharge"}],"q":"Warmind Charges each grant +3 Grenade Stat and +3 Weapons Stat, up to +30 Grenade Stat and +30 Weapons Stat at 10 charges.","s":"compendium"},
+  {"do":"grants","t":"weaponsstat","if":[{"has":"warmindcharge"}],"q":"Warmind Charges each grant +3 Grenade Stat and +3 Weapons Stat, up to +30 Grenade Stat and +30 Weapons Stat at 10 charges.","s":"compendium"}
+ ] },
+ { "id": "set:reactivebooster", "n": "Reactive Booster", "fx": [
+  {"do":"grants","t":"speedbooster","on":"sprinting at critical health, being suspended or slowed by Stasis (once per Force Converter activation)","q":"will immediately grant Speed Booster for a short duration","s":"bungie","note":"needs the AION Renewal 2-piece Force Converter activation (no Force Converter term exists to link)"},
+  {"do":"uses","t":"criticalhealth","q":"sprinting while at critical health","s":"bungie","pq":"will immediately grant Speed Booster for a short duration","pay":"Speed Booster when you sprint at critical health"},
+  {"do":"uses","t":"suspend","q":"being suspended","s":"bungie","pq":"will immediately grant Speed Booster for a short duration","pay":"Speed Booster when you are suspended"},
+  {"do":"uses","t":"slow","q":"being slowed by a Stasis effect","s":"bungie","pq":"will immediately grant Speed Booster for a short duration","pay":"Speed Booster when you are slowed"}
+ ] },
+ { "id": "set:reactiveshock", "n": "Reactive Shock", "fx": [
+  {"do":"applies","t":"disorient","on":"taking melee damage while Force Absorption is active (once)","q":"When Force Absorption is active, taking melee damage causes you to emit a disorienting burst once.","s":"bungie","note":"needs the AION Adapter 2-piece Force Absorption (no Force Absorption term exists to link)"}
+ ] },
+ { "id": "set:regenerativethreshold", "n": "Regenerative Threshold", "fx": [
+  {"do":"uses","t":"finisher","q":"Performing a finisher stores power.","s":"bungie","pq":"The next time your shields are broken, consume stored power to immediately heal and start health regeneration.","pay":"stores a heal for the next time your shields break"},
+  {"do":"uses","t":"criticalhealth","q":"Upon reaching Critical Health:","s":"compendium","pq":"Restores 20 HP and begins Health Regeneration.","pay":"20 HP and instant health regeneration (after a finisher)"},
+  {"do":"grants","t":"healing","on":"shields broken after a finisher","q":"Restores 20 HP and begins Health Regeneration.","s":"compendium"}
+ ] },
+ { "id": "set:repurposedcharge", "n": "Repurposed Charge", "fx": [
+  {"do":"uses","t":"armorcharge","q":"Whenever you gain, lose, or spend an Armor Charge, heal and gain damage reduction for a short time.","s":"bungie","pay":"heal and damage resistance, more for more charges at once"},
+  {"do":"grants","t":"healing","on":"gaining, losing or spending Armor Charge","q":"Gaining, losing, or consuming Armor Charges restores 5? HP","s":"compendium"},
+  {"do":"grants","t":"damageresistance","on":"after gaining, losing or spending 1 Armor Charge (e.g. Orb pickup), 6 s","amt":13,"vs":["all"],"cat":"repurposedcharge","q":"x2 = 13% [?%]","s":"compendium","note":"stacks = charges changed at once + 1; 3 s per stack, extendable to 30 s"},
+  {"do":"grants","t":"damageresistance","on":"after 6 Armor Charges change at once (Kickstart or finisher mods)","amt":35,"vs":["all"],"cat":"repurposedcharge","q":"up to 35% [?%] DR at 7 stacks","s":"compendium","note":"x3 21%, x4 29.5%, x5 31%, x6 33%, x7 35%"}
+ ] },
+ { "id": "set:resonanceredirection", "n": "Resonance Redirection", "fx": [
+  {"do":"uses","t":"stableresonance","if":[{"has":"stableresonance"}],"q":"While you have Stable Resonance, continued weapon damage occasionally generates a resonance burst that damages and exhausts targets.","s":"bungie","pay":"sustained weapon damage triggers bursts that damage and exhaust"},
+  {"do":"applies","t":"exhaust","if":[{"has":"stableresonance"}],"on":"after about 600 weapon damage (2 s cooldown)","q":"Exhausting Blast deals ? Damage and inflicts Exhaust over 8 meters, reducing Combatant Damage Output by 25%.","s":"compendium"}
+ ] },
+ { "id": "set:resonantplating", "n": "Resonant Plating", "fx": [
+  {"do":"grants","t":"healing","on":"taking melee damage from a powerful combatant","q":"Your health begins regenerating immediately after taking melee damage from a powerful combatant.","s":"bungie"}
+ ] },
+ { "id": "set:resupply", "n": "Resupply", "fx": [
+  {"do":"creates","t":"orbofpower","on":"your next final blow after being out of combat for a while","q":"After being out of combat for a moderate duration, your next final blow grants additional ammo progress and creates an Orb of Power.","s":"bungie","note":"Compendium: also +20% Special and Heavy ammo progress; 12 s cooldown"}
+ ] },
+ { "id": "set:revvingup", "n": "Revving Up", "fx": [
+  {"do":"grants","t":"healing","on":"moving fast (stacks up to 10)","q":"Fast movement builds up a charge that gradually increases your health regeneration speed.","s":"bungie","note":"faster critical-health regeneration only; no effect on shields"},
+  {"do":"grants","t":"speedbooster","on":"sprinting 2.5 s while Fully Revved","q":"Once you are Fully Revved, sprinting grants Speed Booster.","s":"bungie"},
+  {"do":"uses","t":"sprinting","q":"Once you are Fully Revved, sprinting grants Speed Booster.","s":"bungie","pay":"Speed Booster at full stacks"}
+ ] },
+ { "id": "set:ridetogetherdietogether", "n": "Ride Together, Die Together", "fx": [
+  {"do":"uses","t":"orbofpower","q":"When you pick up an Orb of Power, gain a brief period of rapidly decaying damage reduction.","s":"bungie","pay":"brief decaying damage resistance"},
+  {"do":"grants","t":"damageresistance","on":"picking up an Orb of Power (3 s, decays)","amt":40,"vs":["all"],"q":"Ride Together, Die Together initially grants 40% [5%] Damage Resist.","s":"compendium","note":"decays from 40% to 0 over 3 s"},
+  {"do":"grants","t":"damageresistance","on":"picking up an Orb of Power (3 s, decays)","amt":5,"vs":["players"],"q":"Ride Together, Die Together initially grants 40% [5%] Damage Resist.","s":"compendium"}
+ ] },
+ { "id": "set:roomclearing", "n": "Room Clearing", "fx": [
+  {"do":"grants","t":"grenadestat","on":"3 Heat or Primary weapon kills in quick succession (10 s)","q":"Room Cleaning | +40 Grenade and +40 Weapons.","s":"compendium"},
+  {"do":"grants","t":"weaponsstat","on":"3 Heat or Primary weapon kills in quick succession (10 s)","q":"Room Cleaning | +40 Grenade and +40 Weapons.","s":"compendium"},
+  {"do":"uses","t":"primaryweapon","q":"Multiple final blows with Heat weapons or Primary ammo weapons grant bonuses to weapon and grenade stats","s":"bungie","pay":"+40 Grenade and Weapons stat after 3 quick kills"}
+ ] },
+ { "id": "set:shockandclear", "n": "Shock and Clear", "fx": [
+  {"do":"uses","t":"jolt","q":"Final blows with Jolt or against jolted combatants create Ionic Traces.","s":"bungie","pay":"Jolt kills create Ionic Traces"},
+  {"do":"creates","t":"ionictrace","on":"Jolt kills or kills on jolted targets","q":"Final blows with Jolt or against jolted combatants create Ionic Traces.","s":"bungie"}
+ ] },
+ { "id": "set:shoottoscoot", "n": "Shoot to Scoot", "fx": [
+  {"do":"grants","t":"damageresistance","on":"while sliding","amt":50,"vs":["all"],"q":"50% [10%] Damage Resist (Resist x4)","s":"compendium"},
+  {"do":"grants","t":"damageresistance","on":"while sliding","amt":10,"vs":["players"],"q":"50% [10%] Damage Resist (Resist x4)","s":"compendium"},
+  {"do":"uses","t":"sliding","q":"Sliding provides damage resistance.","s":"bungie","pay":"50% damage resistance while sliding; weapon damage lengthens slides"}
+ ] },
+ { "id": "set:sinewstitching", "n": "Sinew Stitching", "fx": [
+  {"do":"creates","t":"threadling","on":"taking damage from combatants or reaching critical health (5 s cooldown each)","q":"Taking damage from combatants sometimes spawns a Threadling.","s":"bungie"},
+  {"do":"uses","t":"criticalhealth","q":"upon reaching Critical Health:","s":"compendium","pq":"Spawns a Threadling.","pay":"spawns a Threadling"}
+ ] },
+ { "id": "set:siphoningtouch", "n": "Siphoning Touch", "fx": [
+  {"do":"grants","t":"healing","on":"switching weapons (spends all stacks)","q":"Switching weapons heals you and consumes all stacks.","s":"bungie","note":"30/60/90/105/120 HP at 1-5 stacks; scorch ticks don't add stacks"},
+  {"do":"uses","t":"glaive","q":"Gain stacks of Siphoning Touch for weapon or Glaive melee hits.","s":"bungie","pay":"Glaive melee hits add stacks that heal when you switch weapons"}
+ ] },
+ { "id": "set:soverythin", "n": "So Very Thin", "fx": [
+  {"do":"grants","t":"grenadeenergy","if":[{"any":[{"weapon":"solar"},{"weapon":"arc"},{"weapon":"void"}]}],"on":"Light (Arc/Solar/Void) weapon final blows","q":"Final blows with Light weapons grants additional grenade energy.","s":"bungie","note":"Compendium: 18% per kill"},
+  {"do":"grants","t":"meleeenergy","if":[{"any":[{"weapon":"stasis"},{"weapon":"strand"},{"weapon":"kinetic"}]}],"on":"Dark (Stasis/Strand) or Kinetic weapon final blows","q":"Final blows with Dark or Kinetic weapons grants additional melee energy.","s":"bungie","note":"Compendium: 18% per kill"},
+  {"do":"grants","t":"damageresistance","on":"alternating Light and Dark weapon kills within 10 s (5 s)","amt":40,"vs":["all"],"q":"Resist x3 (40% [7.5%] DR) for 5 seconds.","s":"compendium"},
+  {"do":"grants","t":"damageresistance","on":"alternating Light and Dark weapon kills within 10 s (5 s)","amt":7.5,"vs":["players"],"q":"Resist x3 (40% [7.5%] DR) for 5 seconds.","s":"compendium"}
+ ] },
+ { "id": "set:stableresonance", "n": "Stable Resonance", "fx": [
+  {"do":"grants","t":"stableresonance","on":"defeating a powerful combatant (12 s)","q":"Defeating a powerful combatant generates Stable Resonance","s":"bungie"},
+  {"do":"grants","t":"weapondamage","on":"defeating a powerful combatant (12 s)","q":"7% Increased Weapon Damage and Resist x2 (25% DR) for 12 seconds.","s":"compendium"},
+  {"do":"grants","t":"damageresistance","on":"defeating a powerful combatant (12 s)","amt":25,"vs":["all"],"q":"7% Increased Weapon Damage and Resist x2 (25% DR) for 12 seconds.","s":"compendium"}
+ ] },
+ { "id": "set:stackemup", "n": "Stack 'Em Up", "fx": [
+  {"do":"grants","t":"stackemup","on":"a kill with each different element (24 s, up to 5 stacks)","q":"Scoring a kill with each unique element grants a stack of Stack 'Em Up for 24 seconds.","s":"compendium"},
+  {"do":"grants","t":"transcendenceenergy","on":"kills with each different element (up to 5 stacks)","q":"Defeating targets with unique elemental damage grants a stacking bonus to Transcendence energy gains while Transcendence is inactive.","s":"bungie","note":"only matters on Prismatic; Compendium: 1.2% per stack, 18% after all five elements"}
+ ] },
+ { "id": "set:stessotempo", "n": "Stesso Tempo", "fx": [
+  {"do":"grants","t":"damageresistance","on":"for 3 s after dropping guard, having blocked with a Sword or Glaive","amt":50,"vs":["all"],"q":"50% [10%] Damage Resist (Resist x4) for 3 seconds upon no longer guarding.","s":"compendium"},
+  {"do":"grants","t":"damageresistance","on":"for 3 s after dropping guard, having blocked with a Sword or Glaive","amt":10,"vs":["players"],"q":"50% [10%] Damage Resist (Resist x4) for 3 seconds upon no longer guarding.","s":"compendium"},
+  {"do":"uses","t":"sword","q":"Blocking attacks with a Sword or Glaive grants a short period of damage resistance","s":"bungie","pay":"50% damage resistance after you drop your guard"},
+  {"do":"uses","t":"glaive","q":"Blocking attacks with a Sword or Glaive grants a short period of damage resistance","s":"bungie","pay":"50% damage resistance after you drop your guard"}
+ ] },
+ { "id": "set:supercyclical", "n": "Supercyclical", "fx": [
+  {"do":"uses","t":"super","q":"Final blows while your Super is active refund Super energy when it ends.","s":"bungie","pay":"Super energy refund when the Super ends, scaling with kills"},
+  {"do":"grants","t":"superenergy","on":"when your Super ends, per kill scored during it","q":"x6 = ~33% Super Ability Energy once it ends.","s":"compendium","note":"Super damage kills outside a Super also refund energy; refund cap resets on Super cast"}
+ ] },
+ { "id": "set:superluminalmotion", "n": "Superluminal Motion", "fx": [
+  {"do":"uses","t":"super","q":"After dealing damage with your Super, health and shields regenerate over time while you are in motion.","s":"bungie","pay":"health and shields regenerate while moving after Super damage"},
+  {"do":"grants","t":"healing","on":"after dealing Super damage, while moving (11 s, refreshes)","q":"After dealing damage with your Super, health and shields regenerate over time while you are in motion.","s":"bungie"}
+ ] },
+ { "id": "set:takenarmaments", "n": "Taken Armaments", "fx": [
+  {"do":"uses","t":"grenade","q":"Grenade final blows grant additional Heavy ammo progress.","s":"bungie","pay":"10% Heavy ammo progress per grenade kill"}
+ ] },
+ { "id": "set:takenbarrier", "n": "Taken Barrier", "fx": [
+  {"do":"uses","t":"grenade","q":"Grenade final blows temporarily reduce incoming damage.","s":"bungie","pay":"10% damage resistance for 7 s after a grenade kill"},
+  {"do":"grants","t":"damageresistance","on":"grenade final blow (7 s)","amt":10,"vs":["all"],"q":"Resist x1 (10% [2.5%] DR) for 7 seconds.","s":"compendium"},
+  {"do":"grants","t":"damageresistance","on":"grenade final blow (7 s)","amt":2.5,"vs":["players"],"q":"Resist x1 (10% [2.5%] DR) for 7 seconds.","s":"compendium"}
+ ] },
+ { "id": "set:takinginitiative", "n": "Taking Initiative", "fx": [
+  {"do":"grants","t":"initiative","on":"melee, Glaive melee or Sword hits (8 s, up to 5 stacks)","q":"Grants a stack of Initiative for 8 seconds, up to a maximum of 5 stacks.","s":"compendium"},
+  {"do":"uses","t":"melee","q":"Hitting combatants with melee attacks or Sword strikes grants a stack of Initiative, giving bonus handling and reload.","s":"bungie","pay":"stacking handling and reload speed (up to 5 stacks)"},
+  {"do":"uses","t":"sword","q":"Hitting combatants with melee attacks or Sword strikes grants a stack of Initiative, giving bonus handling and reload.","s":"bungie","pay":"stacking handling and reload speed (up to 5 stacks)"},
+  {"do":"grants","t":"handling","on":"melee, Glaive melee or Sword hits","q":"Initiative grants +Handling and +Reload Speed.","s":"compendium","note":"damage-over-time ticks (Scorch, Smoke Bomb) also add stacks"},
+  {"do":"grants","t":"reloadspeed","on":"melee, Glaive melee or Sword hits","q":"Initiative grants +Handling and +Reload Speed.","s":"compendium"}
+ ] },
+ { "id": "set:techeunsforesight", "n": "Techeun's Foresight", "fx": [
+  {"do":"uses","t":"voidbreach","q":"After collecting a Void breach, your next final blow with a Void weapon triggers a detonation.","s":"bungie","pay":"next Void weapon kill causes a detonation, stronger within 7 s of the pickup"},
+  {"do":"uses","t":"voiddamage","if":[{"weapon":"void"}],"q":"The next Void Weapon Kill consumes Techeun's Clairvoyance to trigger a Potent Void Detonation.","s":"compendium","pay":"Void weapon kill after a Void Breach pickup detonates","note":"Kill/damage type: weapon."}
+ ] },
+ { "id": "set:theceremony", "n": "The Ceremony", "fx": [
+  {"do":"grants","t":"ceremony","on":"finisher or ally revive (30 s)","q":"Initiates a Ceremony for 30 seconds.","s":"compendium"},
+  {"do":"uses","t":"finisher","q":"Finishing combatants or reviving allies initiates a Lucent Hive ritual. While the ritual is active, gain increased Super stat.","s":"bungie","pay":"+30 Super stat for 30 s"},
+  {"do":"grants","t":"superstat","on":"finisher or ally revive (30 s)","q":"+30 Super Stat.","s":"compendium"}
+ ] },
+ { "id": "set:toooldforthis", "n": "Too Old for This", "fx": [
+  {"do":"uses","t":"finisher","q":"Defeating a powerful combatant with a finisher grants you Special ammo progress and replenishes a small amount of health.","s":"bungie","pay":"32 HP and Special ammo progress on a powerful-combatant finisher"},
+  {"do":"grants","t":"healing","on":"finishing a powerful combatant","q":"Restores 32 HP and +16% Special Ammo Progress.","s":"compendium"}
+ ] },
+ { "id": "set:truthtopower", "n": "Truth to Power", "fx": [
+  {"do":"grants","t":"damageresistance","on":"stacks from damage and final blows (max at 999 stacks)","amt":15,"vs":["all"],"q":"Truth grants Damage Resist per stack, up to 15% DR at maximum.","s":"compendium","note":"3.75% at 250, 7.5% at 500, 10% at 750, 15% at 999 stacks; all lost on death"},
+  {"do":"uses","t":"finisher","q":"Finishers grant accelerated progress.","s":"bungie","pay":"many more stacks toward Power (damage resistance and ability regen)"},
+  {"do":"grants","t":"grenadeenergy","on":"at max stacks (Power)","q":"+50% Additional Base Grenade, and Melee Regeneration Rate.","s":"compendium","note":"faster regeneration, not a lump of energy"},
+  {"do":"grants","t":"meleeenergy","on":"at max stacks (Power)","q":"+50% Additional Base Grenade, and Melee Regeneration Rate.","s":"compendium","note":"faster regeneration, not a lump of energy"},
+  {"do":"grants","t":"classenergy","on":"at max stacks (Power)","q":"+35% Additional Base Class Regeneration Rate","s":"compendium","note":"faster regeneration, not a lump of energy"}
+ ] },
+ { "id": "set:unfalteringfocus", "n": "Unfaltering Focus", "fx": [
+  {"do":"grants","t":"damageresistance","on":"Bow, Shotgun or Sword final blow (7 s, extended by weapon damage)","amt":10,"vs":["all"],"q":"Resist x1 (10% | 2.5%) for 7 seconds.","s":"compendium"},
+  {"do":"grants","t":"damageresistance","on":"Bow, Shotgun or Sword final blow (7 s, extended by weapon damage)","amt":2.5,"vs":["players"],"q":"Resist x1 (10% | 2.5%) for 7 seconds.","s":"compendium"},
+  {"do":"uses","t":"bow","q":"Bow, Shotgun, or Sword final blows temporarily reduce incoming damage.","s":"bungie","pay":"10% damage resistance after a kill"},
+  {"do":"uses","t":"shotgun","q":"Bow, Shotgun, or Sword final blows temporarily reduce incoming damage.","s":"bungie","pay":"10% damage resistance after a kill"},
+  {"do":"uses","t":"sword","q":"Bow, Shotgun, or Sword final blows temporarily reduce incoming damage.","s":"bungie","pay":"10% damage resistance after a kill"}
+ ] },
+ { "id": "set:untoldgreed", "n": "Untold Greed", "fx": [
+  {"do":"grants","t":"untoldgreed","on":"picking up ammo, Orbs of Power or elemental pickups, or destroying a Tangle","q":"Picking up ammo, Orbs of Power, Elemental pickups, or destroying a Strand Tangle grants stacks of Untold Greed","s":"bungie","note":"up to 100 stacks; 10 lost at critical health"},
+  {"do":"uses","t":"orbofpower","q":"Picking up ammo, Orbs of Power, Elemental pickups, or destroying a Strand Tangle grants stacks of Untold Greed","s":"bungie","pay":"a stack of Untold Greed (damage resistance, reload speed)"},
+  {"do":"uses","t":"elementalpickup","q":"Picking up ammo, Orbs of Power, Elemental pickups, or destroying a Strand Tangle grants stacks of Untold Greed","s":"bungie","pay":"a stack of Untold Greed (damage resistance, reload speed)"},
+  {"do":"uses","t":"tangle","q":"Picking up ammo, Orbs of Power, Elemental pickups, or destroying a Strand Tangle grants stacks of Untold Greed","s":"bungie","pay":"a stack of Untold Greed (damage resistance, reload speed)"},
+  {"do":"uses","t":"ammobrick","q":"Picking up ammo, Orbs of Power, Elemental pickups, or destroying a Strand Tangle grants stacks of Untold Greed","s":"bungie","pay":"a stack of Untold Greed (damage resistance, reload speed)"},
+  {"do":"grants","t":"damageresistance","if":[{"has":"untoldgreed"}],"on":"at 25+ Untold Greed stacks","amt":15,"vs":["all"],"q":"Up to +? Reload Speed and 15% Damage Resist at x25 stacks.","s":"compendium","note":"6% at 5, 9% at 10, 11% at 15, 13% at 20, 15% at 25+ stacks"},
+  {"do":"grants","t":"reloadspeed","if":[{"has":"untoldgreed"}],"on":"with Untold Greed stacks","q":"Up to +? Reload Speed and 15% Damage Resist at x25 stacks.","s":"compendium"}
+ ] },
+ { "id": "set:vigilantwatch", "n": "Vigilant Watch", "fx": [
+  {"do":"uses","t":"criticalhealth","q":"While at Critical Health:","s":"compendium","pq":"Weapon Kills restore 30HP.","pay":"weapon kills restore 30 HP (5 s cooldown)"},
+  {"do":"grants","t":"healing","on":"weapon final blows while shields are depleted","q":"Weapon final blows while your shields are depleted heal you.","s":"bungie"}
+ ] },
+ { "id": "set:watchtower", "n": "Watchtower", "fx": [
+  {"do":"grants","t":"damageresistance","on":"after a precision kill while aiming down sights, until you stop aiming","amt":25,"vs":["all"],"q":"Resist x2 (25% [5%]) until no longer ADS.","s":"compendium","note":"Bungie says precision final blows; Compendium says any kill while ADS"},
+  {"do":"grants","t":"damageresistance","on":"after a precision kill while aiming down sights, until you stop aiming","amt":5,"vs":["players"],"q":"Resist x2 (25% [5%]) until no longer ADS.","s":"compendium"}
+ ] },
+ { "id": "set:wellprepared", "n": "Well Prepared", "fx": [
+  {"do":"grants","t":"armorcharge","on":"picking up ammo","q":"Picking up ammo grants Armor Charge.","s":"bungie"},
+  {"do":"uses","t":"ammobrick","q":"Picking up ammo grants Armor Charge.","s":"bungie","pay":"a stack of Armor Charge"},
+  {"do":"uses","t":"armorcharge","q":"Grants a bonus to Health stat per Armor Charge you have.","s":"bungie","pay":"+10 Health stat per Armor Charge (up to +60)"},
+  {"do":"grants","t":"healthstat","if":[{"has":"armorcharge"}],"on":"per Armor Charge you have","q":"Each Armor Charge stack grants +10 Health Stat.","s":"compendium"}
+ ] },
+ {"id":"_skipped","ids":["set:paroli","set:primarychain","set:primaryhoning","set:primaryphantom","set:primarysurvivor","set:reflexaction","set:scoottoloot","set:specialrelativity","set:sublimetransit","set:surosharmony","set:terminalvelocity","set:wrecker"]}
+]

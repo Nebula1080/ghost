@@ -1,0 +1,17 @@
+{
+ "terms": {
+  "disruption": {
+   "l": "Disruption",
+   "kind": "debuff",
+   "el": "",
+   "aka": [
+    "disrupt",
+    "disrupted",
+    "disrupts"
+   ],
+   "def": "A debuff that stuns Overload Champions and, on other combatants, delays their ability regeneration and lowers their damage output.",
+   "q": "Void Grenade Ability Damage inflicts disruption.",
+   "src": "art:overloadgrenades"
+  }
+ }
+}

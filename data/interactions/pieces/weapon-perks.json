@@ -3393,11 +3393,372 @@
   ]
  },
  {
+  "id": "wp:adrenalinejunkie",
+  "n": "Adrenaline Junkie",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Grenade Kills grant all 5 Stacks instantly even if the weapon is stowed.",
+    "s": "clarity",
+    "pay": "grenade kills grant all 5 damage stacks at once (up to 33% more damage), even while stowed",
+    "from": [
+     "grenade"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:bluntexecutionrounds",
+  "n": "Blunt Execution Rounds",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "note": "Powered melees that need sprinting, sliding or a slam do not activate it (Clarity, Compendium).",
+    "q": "Upon dealing Melee damage while an Enemy is within 15 meters:",
+    "s": "clarity",
+    "pay": "500% more damage and +100 handling on the next burst",
+    "pq": "Grants 500% [100%] increased damage and 100 Handling for the next full burst within 10 seconds.",
+    "from": [
+     "melee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:braylegacy",
+  "n": "Bray Legacy",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "note": "Only the most-charged ability that isn't already full gets the energy.",
+    "q": "Hits with the weapon grant ability energy to the most charged ability.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "note": "Only the most-charged ability that isn't already full gets the energy.",
+    "q": "Hits with the weapon grant ability energy to the most charged ability.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "note": "Only the most-charged ability that isn't already full gets the energy.",
+    "q": "Hits with the weapon grant ability energy to the most charged ability.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:breakthrough",
+  "n": "Breakthrough",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "melee",
+    "q": "300% [100%] increased Melee Damage for the next Melee Hit within 3 seconds.",
+    "s": "compendium",
+    "pay": "300% more damage on your next melee hit after landing 14 pellets in a burst"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Upon dealing Melee Damage:\n35% increased damage",
+    "s": "compendium",
+    "pay": "35% more weapon damage, faster reload and charge time for 8.5 seconds",
+    "pq": "35% increased damage, +? Reload Speed, and 0.85x Charge Time Multiplier for 8.5 seconds.",
+    "from": [
+     "melee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:castnoshadows",
+  "n": "Cast No Shadows",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Dealing Melee Damage refills 20% of the Magazine (rounded up)",
+    "s": "clarity",
+    "pay": "refills 20% of the magazine and adds handling",
+    "from": [
+     "melee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:cursedthrall",
+  "n": "Cursed Thrall",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "After defeating a target with a melee attack, final blows with this weapon cause targets to explode for a short duration.",
+    "s": "bungie",
+    "pay": "weapon kills make enemies explode for 7.5 seconds",
+    "from": [
+     "melee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:desperatemeasures",
+  "n": "Desperate Measures",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Grenade or Melee Kills grant 20% increased damage for 7 seconds (DMx2).",
+    "s": "clarity",
+    "pay": "20% more weapon damage, rising to 30% on a second grenade or melee kill",
+    "pq": "Scoring another Grenade or Melee Kill with DMx2 active increases this to 30% (DMx3).",
+    "from": [
+     "grenade"
+    ]
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Grenade or Melee Kills grant 20% increased damage for 7 seconds (DMx2).",
+    "s": "clarity",
+    "pay": "20% more weapon damage, rising to 30% on a second grenade or melee kill",
+    "pq": "Scoring another Grenade or Melee Kill with DMx2 active increases this to 30% (DMx3).",
+    "from": [
+     "melee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:extrovert",
+  "n": "Extrovert",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "weapon kills near 3 enemies or a Nightmare",
+    "q": "Weapon Kills while within 15 meters of 3 enemies or a Nightmare restore 60 HP after a 0.25 second delay.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
+  "id": "wp:fistfulsofbullets",
+  "n": "Fistfuls of Bullets",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Melee kills overload the magazine to double its capacity.",
+    "s": "bungie",
+    "pay": "overloads the magazine to double capacity",
+    "from": [
+     "melee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:goldentricorn",
+  "n": "Golden Tricorn",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "if": [
+     {
+      "weapon": "grenade"
+     }
+    ],
+    "q": "Grenade or Elemental Melee Kills matching the element of the Weapon grant Golden Tricorn x2 for 10 seconds, increasing weapon damage by 50%.",
+    "s": "clarity",
+    "pay": "50% more weapon damage for 10 seconds (needs the x1 buff from a weapon kill first)",
+    "from": [
+     "grenade"
+    ]
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "if": [
+     {
+      "weapon": "melee"
+     }
+    ],
+    "note": "Clarity says elemental melee, Compendium says Powered Melee kills; uncharged/weapon melees don't count.",
+    "q": "Grenade or Elemental Melee Kills matching the element of the Weapon grant Golden Tricorn x2 for 10 seconds, increasing weapon damage by 50%.",
+    "s": "clarity",
+    "pay": "50% more weapon damage for 10 seconds (needs the x1 buff from a weapon kill first)",
+    "from": [
+     "poweredmelee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:goldentricornenhanced",
+  "n": "Golden Tricorn Enhanced",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "if": [
+     {
+      "weapon": "grenade"
+     }
+    ],
+    "q": "Grenade or Elemental Melee Kills matching the element of the Weapon grant Golden Tricorn x2 for 10 seconds, increasing weapon damage by 50%.",
+    "s": "clarity",
+    "pay": "50% more weapon damage for 10 seconds (needs the x1 buff from a weapon kill first)",
+    "from": [
+     "grenade"
+    ]
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "if": [
+     {
+      "weapon": "melee"
+     }
+    ],
+    "note": "Clarity says elemental melee, Compendium says Powered Melee kills; uncharged/weapon melees don't count.",
+    "q": "Grenade or Elemental Melee Kills matching the element of the Weapon grant Golden Tricorn x2 for 10 seconds, increasing weapon damage by 50%.",
+    "s": "clarity",
+    "pay": "50% more weapon damage for 10 seconds (needs the x1 buff from a weapon kill first)",
+    "from": [
+     "poweredmelee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:graverobber",
+  "n": "Grave Robber",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "poweredmelee",
+    "q": "Powered Melee Hits and (Glaive) Melee Kills refill the magazine from reserves.",
+    "s": "clarity",
+    "pay": "refills the magazine from reserves (3 s cooldown)",
+    "from": [
+     "poweredmelee"
+    ]
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Melee final blows or dealing damage with a charged melee reloads this weapon's magazine from reserves.",
+    "s": "bungie",
+    "pay": "melee kills refill the magazine from reserves (3 s cooldown)",
+    "from": [
+     "melee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:recycledenergy",
+  "n": "Recycled Energy",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "note": "Goes to the least-charged ability only; 5.7–20% by kills before the reload.",
+    "q": "Reloading after defeating targets grants energy to your lowest charged ability.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "note": "Goes to the least-charged ability only; 5.7–20% by kills before the reload.",
+    "q": "Reloading after defeating targets grants energy to your lowest charged ability.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "note": "Goes to the least-charged ability only; 5.7–20% by kills before the reload.",
+    "q": "Reloading after defeating targets grants energy to your lowest charged ability.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "wp:righthook",
+  "n": "Right Hook",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "Dealing Melee damage grants 10 Aim Assist and 10 Range for 10 seconds.",
+    "s": "clarity",
+    "pay": "+10 aim assist and +10 range for 10 seconds (extends up to 20)",
+    "from": [
+     "melee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:swashbuckler",
+  "n": "Swashbuckler",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "q": "(Glaive) Melee Kills grant all 5 Stacks instantly.",
+    "s": "clarity",
+    "pay": "melee kills grant all 5 damage stacks at once (up to 33% more damage)",
+    "from": [
+     "melee"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wp:wellspring",
+  "n": "Wellspring",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "note": "8% split between your uncharged abilities.",
+    "q": "Grants 8% Ability Energy split equally amongst all uncharged abilities.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "note": "8% split between your uncharged abilities.",
+    "q": "Grants 8% Ability Energy split equally amongst all uncharged abilities.",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "note": "8% split between your uncharged abilities.",
+    "q": "Grants 8% Ability Energy split equally amongst all uncharged abilities.",
+    "s": "clarity"
+   }
+  ]
+ },
+ {
   "id": "_skipped",
   "ids": [
    "wp:anticipation",
    "wp:chaosreshaped",
    "wp:circleoflife",
+   "wp:closetomelee",
    "wp:darkdescent",
    "wp:deconstruct",
    "wp:desperation",
@@ -3408,11 +3769,12 @@
    "wp:fanaticallance",
    "wp:firefly",
    "wp:frameofreference",
-   "wp:hkkebreacharmaments",
    "wp:harmonicresonance",
    "wp:hereticalbehavior",
+   "wp:hkkebreacharmaments",
    "wp:impetus",
    "wp:jumpdriver",
+   "wp:meleemomentum",
    "wp:nobledeeds",
    "wp:radiolariatransposer",
    "wp:reciprocity",

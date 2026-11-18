@@ -64,7 +64,7 @@
    "q": "Defeating targets with Arc abilities or defeating jolted or blinded targets creates an Ionic Trace.",
    "src": "sub:electrostaticmind"
   },
-  "sprinting": {
+  "sprinting": {"nat": true, 
    "l": "Sprinting",
    "kind": "state",
    "el": "",
@@ -76,7 +76,7 @@
    "q": "After sprinting for a short time, your class ability regeneration is increased.",
    "src": "sub:sparkoffocus"
   },
-  "sliding": {
+  "sliding": {"nat": true, 
    "l": "Sliding",
    "kind": "state",
    "el": "",

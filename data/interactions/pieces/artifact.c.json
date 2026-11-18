@@ -1,0 +1,1096 @@
+[
+ {
+  "id": "art:hailthestorm",
+  "n": "Hail The Storm",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "q": "Shattering Stasis crystals releases shards of ice that damage and slow targets.",
+    "s": "bungie",
+    "pay": "+25% crystal shatter damage; shattered crystals release homing shards that slow",
+    "note": "Compendium: crystal shatters +25% damage, 5 shards"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Shattering frozen targets and Stasis crystals deals increased damage.",
+    "s": "bungie",
+    "pay": "+12.5% damage when shattering frozen enemies",
+    "note": "Compendium: enemy shatters +12.5%"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "q": "Shattering Stasis crystals releases shards of ice that damage and slow targets.",
+    "s": "bungie",
+    "by": "stasiscrystal",
+    "on": "shattering a Stasis crystal",
+    "note": "5 homing ice shards per crystal"
+   }
+  ]
+ },
+ {
+  "id": "art:harshrefraction",
+  "n": "Harsh Refraction",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "blind",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "jolt",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "ignition",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+    "s": "bungie",
+    "pay": "Trace Rifle damage up (50% Legendary, 35% Exotic) after 3 hits on a target with a debuff matching the Trace Rifle element",
+    "note": "needs a Trace Rifle of the same element as the debuff"
+   }
+  ]
+ },
+ {
+  "id": "art:heartoftheflame",
+  "n": "Heart of the Flame",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "super",
+    "q": "Casting your Solar Super grants nearby allies radiant and increases the damage of your Super for each nearby ally.",
+    "s": "bungie",
+    "pay": "Radiant for you and nearby allies plus more Super damage per nearby ally",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Blade Barrage",
+       "Burning Maul",
+       "Daybreak",
+       "Golden Gun: Deadshot",
+       "Golden Gun: Marksman",
+       "Hammer of Sol",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ]
+   },
+   {
+    "do": "grants",
+    "t": "radiant",
+    "q": "Caster and Allies within 15 meters are granted Radiant.",
+    "s": "compendium",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Blade Barrage",
+       "Burning Maul",
+       "Daybreak",
+       "Golden Gun: Deadshot",
+       "Golden Gun: Marksman",
+       "Hammer of Sol",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "on": "casting your Solar Super"
+   },
+   {
+    "do": "grants",
+    "t": "superdamage",
+    "q": "Grants an Ally-Amount based Increased Super Damage.",
+    "s": "compendium",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Blade Barrage",
+       "Burning Maul",
+       "Daybreak",
+       "Golden Gun: Deadshot",
+       "Golden Gun: Marksman",
+       "Hammer of Sol",
+       "Song of Flame",
+       "Well of Radiance"
+      ]
+     }
+    ],
+    "on": "casting your Solar Super",
+    "note": "6% alone, up to about 15% with a full fireteam nearby; the caster counts as an ally"
+   }
+  ]
+ },
+ {
+  "id": "art:heavyordnanceregeneration",
+  "n": "Heavy Ordnance Regeneration",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "machinegun",
+    "q": "Dealing sustained damage to targets with a Heavy Machine Gun or Rocket Launcher grants damage resistance and increases grenade and melee regeneration for a short duration.",
+    "s": "bungie",
+    "pay": "15.5s of 25% damage resistance, faster grenade and melee regen; elite kills disorient nearby enemies"
+   },
+   {
+    "do": "uses",
+    "t": "rocketlauncher",
+    "q": "Dealing sustained damage to targets with a Heavy Machine Gun or Rocket Launcher grants damage resistance and increases grenade and melee regeneration for a short duration.",
+    "s": "bungie",
+    "pay": "15.5s of 25% damage resistance, faster grenade and melee regen; elite kills disorient nearby enemies"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "q": "25% [5%] Damage Resist (Resist x2) for 15.5 seconds",
+    "s": "compendium",
+    "amt": 25,
+    "vs": [
+     "all"
+    ],
+    "on": "8 Machine Gun or 2 Rocket Launcher hits in quick succession"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "q": "25% [5%] Damage Resist (Resist x2) for 15.5 seconds",
+    "s": "compendium",
+    "amt": 5,
+    "vs": [
+     "players"
+    ],
+    "on": "8 Machine Gun or 2 Rocket Launcher hits in quick succession"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "q": "85% Additional Base Grenade and Melee Ability Regeneration Rate for 10 seconds.",
+    "s": "compendium",
+    "on": "8 Machine Gun or 2 Rocket Launcher hits in quick succession",
+    "note": "faster regeneration rate for 10 s, not a lump of energy"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "q": "85% Additional Base Grenade and Melee Ability Regeneration Rate for 10 seconds.",
+    "s": "compendium",
+    "on": "8 Machine Gun or 2 Rocket Launcher hits in quick succession",
+    "note": "faster regeneration rate for 10 s, not a lump of energy"
+   },
+   {
+    "do": "applies",
+    "t": "disorient",
+    "q": "While active, defeating powerful combatants disorients nearby rank-and-file combatants.",
+    "s": "bungie",
+    "on": "killing an elite or stronger combatant while Heavy Ordnance is active",
+    "note": "rank-and-file within 10 m"
+   }
+  ]
+ },
+ {
+  "id": "art:holdtheline",
+  "n": "Hold the Line",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "glaive",
+    "q": "While within 15 meters of 3 enemies, while a Glaive or Machine Gun is readied:",
+    "s": "compendium",
+    "pay": "reload and stability while surrounded; kills heal 55 HP",
+    "pq": "Glaive Projectile/Melee and Machine Gun Kills restore 55 HP."
+   },
+   {
+    "do": "uses",
+    "t": "machinegun",
+    "q": "While within 15 meters of 3 enemies, while a Glaive or Machine Gun is readied:",
+    "s": "compendium",
+    "pay": "reload and stability while surrounded; kills heal 55 HP",
+    "pq": "Glaive Projectile/Melee and Machine Gun Kills restore 55 HP."
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "q": "Glaive Projectile/Melee and Machine Gun Kills restore 55 HP.",
+    "s": "compendium",
+    "on": "Glaive or Machine Gun kills while within 15 m of 3 enemies"
+   }
+  ]
+ },
+ {
+  "id": "art:hordeshuttle",
+  "n": "Horde Shuttle",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "Damaging unraveled targets with a weapon occasionally spawns a Threadling.",
+    "s": "bungie",
+    "pay": "weapon damage on unraveled targets spawns Threadlings that sever"
+   },
+   {
+    "do": "creates",
+    "t": "threadling",
+    "on": "weapon damage on unraveled targets",
+    "q": "Damaging unraveled targets with a weapon occasionally spawns a Threadling.",
+    "s": "bungie",
+    "note": "one per 10% of the target's health dealt; 0.5 s cooldown"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "q": "Threadlings sever targets that they damage.",
+    "s": "bungie",
+    "by": "threadling"
+   }
+  ]
+ },
+ {
+  "id": "art:improvedunraveling",
+  "n": "Improved Unraveling",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "unravel",
+    "q": "Unraveling Threads deal 15% increased damage.",
+    "s": "compendium",
+    "pay": "+15% unraveling thread damage"
+   }
+  ]
+ },
+ {
+  "id": "art:incendiaryriflerounds",
+  "n": "Incendiary Rifle Rounds",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Solar Sniper Rifle precision hits scorch targets.",
+    "s": "bungie",
+    "if": [
+     {
+      "weapon": "solar"
+     }
+    ],
+    "dmg": [
+     "weapon"
+    ],
+    "on": "Solar Sniper Rifle precision hits",
+    "note": "30 scorch stacks per hit; needs a Solar Sniper Rifle"
+   }
+  ]
+ },
+ {
+  "id": "art:kindlingtrigger",
+  "n": "Kindling Trigger",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "Radiant causes Solar weapons to apply scorch to unscorched combatants.",
+    "s": "bungie",
+    "pay": "Solar weapon damage scorches targets that have no scorch yet",
+    "note": "does not work inside a Well of Radiance"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Radiant causes Solar weapons to apply scorch to unscorched combatants.",
+    "s": "bungie",
+    "if": [
+     {
+      "weapon": "solar"
+     },
+     {
+      "has": "radiant"
+     }
+    ],
+    "dmg": [
+     "weapon"
+    ],
+    "on": "Solar weapon damage on unscorched combatants while Radiant",
+    "note": "30 stacks; not while inside a Well of Radiance"
+   }
+  ]
+ },
+ {
+  "id": "art:lightningstrikestwice",
+  "n": "Lightning Strikes Twice",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "After throwing an Arc grenade, gain increased grenade recharge for a short time. Arc final blows extend the duration of this benefit.",
+    "s": "bungie",
+    "pay": "130% faster grenade recharge for 5 s after throwing an Arc grenade; Arc kills extend it up to 20 s",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Flux Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Skip Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ]
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "q": "130% Additional Grenade Base Recharge Rate for 5 seconds.",
+    "s": "compendium",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Arcbolt Grenade",
+       "Flashbang Grenade",
+       "Flux Grenade",
+       "Lightning Grenade",
+       "Pulse Grenade",
+       "Skip Grenade",
+       "Storm Grenade"
+      ]
+     }
+    ],
+    "on": "throwing an Arc grenade",
+    "note": "faster recharge rate, not a lump of energy"
+   }
+  ]
+ },
+ {
+  "id": "art:limitbreak",
+  "n": "Limit Break",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when cast at critical health",
+    "note": "the only way it works with a Strand Super (Woven Mail is removed on cast)"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when you cast your Super with this buff",
+    "note": "only with a Arc Super"
+   },
+   {
+    "do": "uses",
+    "t": "boltcharge",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when you cast your Super with this buff",
+    "note": "only with a Arc Super"
+   },
+   {
+    "do": "uses",
+    "t": "cure",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when you cast your Super with this buff",
+    "note": "only with a Solar Super"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when you cast your Super with this buff",
+    "note": "only with a Solar Super"
+   },
+   {
+    "do": "uses",
+    "t": "restoration",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when you cast your Super with this buff",
+    "note": "only with a Solar Super"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when you cast your Super with this buff",
+    "note": "only with a Void Super"
+   },
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when you cast your Super with this buff",
+    "note": "only with a Void Super"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when you cast your Super with this buff",
+    "note": "only with a Void Super"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+    "s": "bungie",
+    "pay": "+15% Super damage when you cast your Super with this buff",
+    "note": "only with a Stasis Super"
+   },
+   {
+    "do": "grants",
+    "t": "superdamage",
+    "q": "15% Increased Super Ability Damage.",
+    "s": "compendium",
+    "on": "casting a Super at critical health or with an element-matching buff",
+    "note": "one-off Supers buffed for 8 s; roaming Supers for their whole duration"
+   }
+  ]
+ },
+ {
+  "id": "art:malignedharvest",
+  "n": "Maligned Harvest",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "volatile",
+    "q": "Rapidly applying Volatile causes your next instance of [Void]Void weapon damage to create a weakening burst.",
+    "s": "bungie",
+    "pay": "next Void weapon hit releases a weakening burst",
+    "note": "4 volatile applications within 5 s of each other"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "q": "Rapidly applying Volatile causes your next instance of [Void]Void weapon damage to create a weakening burst.",
+    "s": "bungie",
+    "if": [
+     {
+      "weapon": "void"
+     }
+    ],
+    "on": "the next Void weapon hit after rapidly applying volatile",
+    "note": "burst hits enemies within 7 m"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Applying Weaken provides a small Void Overshield.",
+    "s": "bungie",
+    "pay": "a small Void Overshield (+25 HP) when you weaken a target"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "q": "Applying Weaken provides a small Void Overshield.",
+    "s": "bungie",
+    "on": "weakening a non-weakened target",
+    "note": "+25 overshield HP; once per weaken source; not with Fafnir or Tractor Cannon"
+   }
+  ]
+ },
+ {
+  "id": "art:oldgodsrite",
+  "n": "Old God's Rite",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "After picking up a [Void] Void Breach, dealing damage with a Void weapon creates a rain of seeking projectiles.",
+    "s": "bungie",
+    "pay": "next Void weapon hit within 10 s opens a portal firing 8 seeking Void projectiles",
+    "if": [
+     {
+      "weapon": "void"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "art:overloadgrenades",
+  "n": "Overload Grenades",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "grenade",
+    "q": "Void grenades disrupt combatants, stunning them, delaying ability energy regeneration and lowering combatant damage output.",
+    "s": "bungie",
+    "pay": "Void grenade damage disrupts targets and stuns Overload Champions",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Magnetic Grenade",
+       "Scatter Grenade",
+       "Suppressor Grenade",
+       "Void Spike",
+       "Void Wall",
+       "Vortex Grenade"
+      ]
+     }
+    ]
+   },
+   {
+    "do": "applies",
+    "t": "disruption",
+    "q": "Void Grenade Ability Damage inflicts disruption.",
+    "s": "compendium",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Magnetic Grenade",
+       "Scatter Grenade",
+       "Suppressor Grenade",
+       "Void Spike",
+       "Void Wall",
+       "Vortex Grenade"
+      ]
+     }
+    ],
+    "dmg": [
+     "grenade"
+    ],
+    "on": "Void grenade damage"
+   },
+   {
+    "do": "applies",
+    "t": "stun",
+    "q": "Strong against [Disruption] Overload Champions.",
+    "s": "bungie",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Axion Bolt",
+       "Magnetic Grenade",
+       "Scatter Grenade",
+       "Suppressor Grenade",
+       "Void Spike",
+       "Void Wall",
+       "Vortex Grenade"
+      ]
+     }
+    ],
+    "dmg": [
+     "grenade"
+    ],
+    "on": "Void grenade damage",
+    "note": "Overload Champions"
+   }
+  ]
+ },
+ {
+  "id": "art:packtactics",
+  "n": "Pack Tactics",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "threadling",
+    "q": "Dealing damage with Threadlings increases Threadling damage. At maximum stacks, Threadlings stun [Stagger] Unstoppable Champions.",
+    "s": "bungie",
+    "pay": "Threadling damage stacks up to +30%; at 2 stacks Threadlings stun Unstoppable Champions"
+   },
+   {
+    "do": "applies",
+    "t": "stun",
+    "q": "At maximum stacks, Threadlings stun [Stagger] Unstoppable Champions.",
+    "s": "bungie",
+    "by": "threadling",
+    "note": "Unstoppable Champions; needs 2 Pack Tactics stacks"
+   }
+  ]
+ },
+ {
+  "id": "art:passiveaggressiveguard",
+  "n": "Passive Aggressive Guard",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "q": "50% Damage Resist against Combatants within ? meters.",
+    "s": "compendium",
+    "amt": 50,
+    "vs": [
+     "combatants"
+    ],
+    "on": "while a Glaive is readied, against nearby combatants",
+    "note": "only damage from close-range combatants"
+   }
+  ]
+ },
+ {
+  "id": "art:photonicflare",
+  "n": "Photonic Flare",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "exhaust",
+    "q": "Defeating an exhausted or severed target with [Arc]Arc damage releases a blinding burst.",
+    "s": "bungie",
+    "pay": "Arc-damage kills release a blinding burst (6 s cooldown)"
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Defeating an exhausted or severed target with [Arc]Arc damage releases a blinding burst.",
+    "s": "bungie",
+    "pay": "Arc-damage kills release a blinding burst (6 s cooldown)"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "q": "Defeating an exhausted or severed target with [Arc]Arc damage releases a blinding burst.",
+    "s": "bungie",
+    "on": "Arc-damage kills on exhausted or severed targets",
+    "note": "enemies within about 5 m"
+   }
+  ]
+ },
+ {
+  "id": "art:pillarofice",
+  "n": "Pillar of Ice",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Defeating a frozen target spawns Stasis crystals.",
+    "s": "bungie",
+    "pay": "killing a frozen target spawns a Stasis crystal (2 from bosses)"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "on": "killing a frozen target",
+    "q": "Defeating a frozen target spawns Stasis crystals.",
+    "s": "bungie",
+    "note": "1 crystal, 2 from bosses"
+   }
+  ]
+ },
+ {
+  "id": "art:prismatictransfer",
+  "n": "Prismatic Transfer",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "super",
+    "q": "When you cast your Super, each member of your fireteam with a Super type different than yours gains a bonus to weapon damage.",
+    "s": "bungie",
+    "pay": "allies with a different Super element get 20% more damage for 10 s"
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "q": "Allies within 15 meters with a Super Element different from the caster's receive 20% [10%] increased damage for 10 [5] seconds.",
+    "s": "compendium",
+    "who": "allies",
+    "on": "casting your Super",
+    "note": "not the caster; does not stack with Radiant or similar empowering buffs"
+   }
+  ]
+ },
+ {
+  "id": "art:protectivebreach",
+  "n": "Protective Breach",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Picking up a Void Breach gives you an overshield or refreshes your existing overshield.",
+    "s": "bungie",
+    "pay": "+45 Void Overshield (or refresh) on pickup"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "q": "Picking up a Void Breach gives you an overshield or refreshes your existing overshield.",
+    "s": "bungie",
+    "on": "picking up a Void Breach",
+    "note": "+45 overshield HP for 10+5 s"
+   }
+  ]
+ },
+ {
+  "id": "art:radiantorbs",
+  "n": "Radiant Orbs",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "While you have a Solar or Prismatic subclass equipped, picking up an Orb of Power makes you radiant.",
+    "s": "bungie",
+    "pay": "Radiant for 10+5 s on Orb pickup",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "solar"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "do": "grants",
+    "t": "radiant",
+    "q": "While you have a Solar or Prismatic subclass equipped, picking up an Orb of Power makes you radiant.",
+    "s": "bungie",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "solar"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "picking up an Orb of Power"
+   }
+  ]
+ },
+ {
+  "id": "art:radiantshrapnel",
+  "n": "Radiant Shrapnel",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "Dealing sustained weapon damage while Radiant or defeating a scorched combatant with a weapon causes the target to release Solar projectiles that deal damage and scorch on impact.",
+    "s": "bungie",
+    "pay": "sustained weapon damage makes the target release scorching Solar shrapnel"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "q": "Dealing sustained weapon damage while Radiant or defeating a scorched combatant with a weapon causes the target to release Solar projectiles that deal damage and scorch on impact.",
+    "s": "bungie",
+    "pay": "weapon kills on scorched targets release scorching Solar shrapnel"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "q": "Dealing sustained weapon damage while Radiant or defeating a scorched combatant with a weapon causes the target to release Solar projectiles that deal damage and scorch on impact.",
+    "s": "bungie",
+    "on": "sustained weapon damage while Radiant, or weapon kills on scorched targets",
+    "note": "20 scorch stacks per shrapnel; 1 s cooldown"
+   }
+  ]
+ },
+ {
+  "id": "art:raysofprecision",
+  "n": "Rays of Precision",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "While radiant, Solar precision final blows cause combatants to ignite.",
+    "s": "bungie",
+    "pay": "Solar precision kills ignite the target"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "q": "While radiant, Solar precision final blows cause combatants to ignite.",
+    "s": "bungie",
+    "if": [
+     {
+      "weapon": "solar"
+     },
+     {
+      "has": "radiant"
+     }
+    ],
+    "on": "Solar precision kills while Radiant"
+   }
+  ]
+ },
+ {
+  "id": "art:refreshthreads",
+  "n": "Refresh Threads",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "elementalpickup",
+    "q": "Picking up an Elemental pickup matching your subclass element or picking up a Tangle while you have a [Strand]Strand Super equipped grants energy to your least charged ability.",
+    "s": "bungie",
+    "pay": "25% energy to your least-charged ability",
+    "note": "pickup must match your subclass element"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "q": "Picking up an Elemental pickup matching your subclass element or picking up a Tangle while you have a [Strand]Strand Super equipped grants energy to your least charged ability.",
+    "s": "bungie",
+    "pay": "25% energy to your least-charged ability",
+    "if": [
+     {
+      "slot": "super",
+      "is": [
+       "Bladefury",
+       "Needlestorm",
+       "Silkstrike"
+      ]
+     }
+    ]
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "q": "25% Ability Energy to the least-charged Ability.",
+    "s": "compendium",
+    "on": "picking up a matching Elemental pickup (or a Tangle with a Strand Super)",
+    "note": "only the least-charged ability; not abilities with a charge ready; not with Acrobat's Dodge on Prismatic"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "q": "25% Ability Energy to the least-charged Ability.",
+    "s": "compendium",
+    "on": "picking up a matching Elemental pickup (or a Tangle with a Strand Super)",
+    "note": "only the least-charged ability; not abilities with a charge ready; not with Acrobat's Dodge on Prismatic"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "q": "25% Ability Energy to the least-charged Ability.",
+    "s": "compendium",
+    "on": "picking up a matching Elemental pickup (or a Tangle with a Strand Super)",
+    "note": "only the least-charged ability; not abilities with a charge ready; not with Acrobat's Dodge on Prismatic"
+   }
+  ]
+ },
+ {
+  "id": "art:retinalburn",
+  "n": "Retinal Burn",
+  "fx": [
+   {
+    "do": "consumes",
+    "t": "armorcharge",
+    "q": "Rapid [Arc] Arc weapon precision hits consume an Armor Charge to trigger a blinding burst at the target's location.",
+    "s": "bungie",
+    "pay": "blinding burst at the target on 2 quick Arc precision hits",
+    "if": [
+     {
+      "weapon": "arc"
+     }
+    ]
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "q": "Rapid [Arc] Arc weapon precision hits consume an Armor Charge to trigger a blinding burst at the target's location.",
+    "s": "bungie",
+    "if": [
+     {
+      "weapon": "arc"
+     },
+     {
+      "has": "armorcharge"
+     }
+    ],
+    "on": "2 Arc weapon precision hits within 2 s on a non-blinded target",
+    "note": "enemies within 7 m"
+   }
+  ]
+ },
+ {
+  "id": "art:revitalizingblast",
+  "n": "Revitalizing Blast",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stun",
+    "q": "Stunning a Champion causes it to ignite and clears your shield stun.",
+    "s": "bungie",
+    "pay": "the stunned Champion ignites"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "q": "Stunning a Champion causes it to ignite and clears your shield stun.",
+    "s": "bungie",
+    "on": "stunning a Champion"
+   }
+  ]
+ },
+ {
+  "id": "art:semiautostriker",
+  "n": "Semi-Auto Striker",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "armorcharge",
+    "q": "If you have fewer than 2 stacks of Armor Charge, rapid precision shots with Bows, Snipers, and Scout Rifles generate an Armor Charge.",
+    "s": "bungie",
+    "on": "rapid precision hits with Bows, Sniper Rifles or Scout Rifles while below 2 Armor Charges",
+    "note": "Scouts 5, Bows 3, Snipers 2 hits within 3 s"
+   },
+   {
+    "do": "uses",
+    "t": "bow",
+    "q": "If you have fewer than 2 stacks of Armor Charge, rapid precision shots with Bows, Snipers, and Scout Rifles generate an Armor Charge.",
+    "s": "bungie",
+    "pay": "an Armor Charge from 3 quick precision hits"
+   },
+   {
+    "do": "uses",
+    "t": "scoutrifle",
+    "q": "If you have fewer than 2 stacks of Armor Charge, rapid precision shots with Bows, Snipers, and Scout Rifles generate an Armor Charge.",
+    "s": "bungie",
+    "pay": "an Armor Charge from 5 quick precision hits"
+   }
+  ]
+ },
+ {
+  "id": "art:servedcold",
+  "n": "Served Cold",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Picking up a [Stasis] Stasis Shard grants you class ability energy.",
+    "s": "bungie",
+    "pay": "10% class ability energy per shard"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "q": "Picking up a [Stasis] Stasis Shard grants you class ability energy.",
+    "s": "bungie",
+    "by": "stasisshard",
+    "on": "picking up a Stasis shard",
+    "note": "10%"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Picking up a [Void] Void Breach grants you melee energy.",
+    "s": "bungie",
+    "pay": "about 10% melee energy per Void Breach"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "q": "Picking up a [Void] Void Breach grants you melee energy.",
+    "s": "bungie",
+    "by": "voidbreach",
+    "on": "picking up a Void Breach",
+    "note": "about 10%"
+   }
+  ]
+ },
+ {
+  "id": "_skipped",
+  "ids": [
+   "art:ironlordsvigor",
+   "art:killingbreeze",
+   "art:kineticimpacts",
+   "art:nobell",
+   "art:particlereconstruction",
+   "art:perpetualdestruction"
+  ]
+ }
+]

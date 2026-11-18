@@ -2474,10 +2474,7 @@
     "q": "weapon final blows while you have Devour grant Super energy",
     "s": "bungie",
     "pay": "Super energy on weapon kills while Devour is active",
-    "note": "Clarity: the Devour part works with any Super.",
-    "from": [
-     "weapon"
-    ]
+    "note": "Clarity: the Devour part works with any Super."
    }
   ]
  },
@@ -2797,9 +2794,6 @@
     "q": "While Stormtrance is equipped, ability damage while amplified grants Bolt Charge.",
     "s": "bungie",
     "pay": "Bolt Charge from ability damage while Amplified",
-    "from": [
-     "arcability"
-    ],
     "note": "Clarity: Arc Ability Hits while Amplified grant Bolt Charge"
    },
    {

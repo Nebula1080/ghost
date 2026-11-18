@@ -1,5 +1,19 @@
 [
  {
+  "id": "wp:adrenalinejunkie",
+  "n": "Adrenaline Junkie",
+  "kind": "weaponTrait",
+  "hashes": [
+   11612903
+  ],
+  "src": {
+   "bungie": "This weapon gains increased damage and handling from final blows with grenades or this weapon.",
+   "clarity": "Weapon Kills grant 1 Stack of Adrenaline Junkie for 4.5 seconds. Grenade Kills grant all 5 Stacks instantly even if the weapon is stowed.\nAdrenaline Junkie benefits:\n• 20 Handling\n• 6.7%|13.3%|20%|26.6%|33.3% increased damage at 1|2|3|4|5 Stacks",
+   "clarityEnhanced": "Weapon Kills grant 1 Stack of Adrenaline Junkie for 🡅5 seconds. Grenade Kills grant all 5 Stacks instantly even if the weapon is stowed.\nAdrenaline Junkie benefits:\n• 20 Handling\n• 6.7%|13.3%|20%|26.6%|33.3% increased damage at 1|2|3|4|5 Stacks\n🡅 Buff Duration is increased by 0.5 seconds.",
+   "compendium": "On Weapon or Grenade Kill:\n6.7% | 13.3% | 20% | 26.6% | 33.3% increased damage and +20 Handling for 4.5 ↑5 seconds. Grenade Kills grant 5 stacks, even if stowed.\nAdditional Weapon or Grenade Kills refresh the buff duration.\nBuff can be triggered while stowed and persists through stow."
+  }
+ },
+ {
   "id": "wp:aggregatecharge",
   "n": "Aggregate Charge",
   "kind": "weaponTrait",
@@ -147,6 +161,20 @@
   }
  },
  {
+  "id": "wp:bluntexecutionrounds",
+  "n": "Blunt Execution Rounds",
+  "kind": "weaponTrait",
+  "hashes": [
+   454085387
+  ],
+  "src": {
+   "bungie": "Damaging nearby combatants with melee abilities dramatically increases handling and damage. Expires after a short duration or the next shot.",
+   "clarity": "Upon dealing Melee damage while an Enemy is within 15 meters:\nGrants 500% [100%] increased damage and 100 Handling for the next full burst within 10 seconds.\n4 second cooldown after buff expires. Can be activated while stowed. Stowing the weapon removes the buff.\nAny Powered Melee that requires sprinting, sliding, or performs a slam will not activate the perk.",
+   "clarityEnhanced": "Upon dealing Melee damage while an Enemy is within 15 meters:\nGrants 500% [100%] increased damage and 100 Handling for the next full burst within 🡅11 seconds.\n4 second cooldown after buff expires. Can be activated while stowed. Stowing the weapon removes the buff.\nAny Powered Melee that requires sprinting, sliding, or performs a slam will not activate the perk.\n🡅 Buff duration is increased by 1 second.",
+   "compendium": "Upon dealing Melee Damage while within 15 metres of an enemy:\n500% [100%] increased damage and +100 Handling for the next burst within 10 ↑11 seconds.\nIncurs a 4 second cooldown after buff expires before it can be reactivated. \nBuff can be triggered while stowed, but is removed on stow if active.\nAny Powered Melee which requires sprinting, sliding, or performs a slam will not activate Blunt Execution Rounds."
+  }
+ },
+ {
   "id": "wp:bottomlessappetite",
   "n": "Bottomless Appetite",
   "kind": "weaponTrait",
@@ -170,6 +198,32 @@
    "bungie": "Dealing damage regenerates a small amount of ability energy.",
    "clarity": "Weapon Hits grant Grenade, Melee, and Class Ability Energy. Does not require Direct Hits.\nAbility Energy gains on Hits by weapon:\n• Trustee: 0.35%\n• Posterity: 0.45%\n• Commemoration: 0.4%\n• Heritage: 0.85%\n• Succession: 1.5%\n• Bequest: 2% (Grenade and Class Ability only)\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
    "compendium": "Grants Grenade, Melee, and Class Ability Energy per damage instance.\nAmount gained decreases as Magazine Size increases.\n% Energy Gain at X Magazine Size:\nPosterity: 0.42% ↑0.55% at 13 | 0.33% ↑0.43% at 17\nTrustee: 0.31% ↑0.42% at 17 | 0.27% ↑0.36% at 20\nHeritage: 0.9% ↑1.2% at 6 | 0.78% ↑1% at 7 | 0.68% ↑0.877% at 8\nSuccession: 1.8% ↑2.4% at 3 | 1.36% ↑1.8% at 4 | 1.1% ↑1.47% at 5\nBequest: 1.8% ↑2.4% \nCommemoration: 0.45% ↑0.62% at 59 | 0.36% ↑0.49% at 75\n↑1.33x Ability Energy Gains."
+  }
+ },
+ {
+  "id": "wp:braylegacy",
+  "n": "Bray Legacy",
+  "kind": "originTrait",
+  "hashes": [
+   4139916815
+  ],
+  "src": {
+   "bungie": "Damage with this weapon generates a small amount of ability energy for the one closest to a full charge.",
+   "clarity": "Hits with the weapon grant ability energy to the most charged ability. Does not require Direct Hits.\nDoes not grant any energy to abilities that you already have a full charge of.\nAbility energy gains by weapon:\n• VS Pyroelectric Propellant: 0.2%\n• VS Velocity Baton: 0.365%\n• VS Gravitic Arrest: 0.425%\n• VS Chill Inhibitor: 3.5%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "compendium": "Grants Ability Energy to the most-charged Ability per damage instance. Excludes instances from Explosive Perks/Micro Missiles.\nDoes not grant any Ability Energy to abilities with multiple charges as long as it has 1 Charge. Amount gained decreases as Magazine Size increases.\n% Energy Gain at X Magazine Size:\nVesper's Host\nVS Pyroelectric Propellant: 0.22% ↑0.29% at 48 | 0.18% ↑0.23% at 60\nVS Gravitic Arrest: 0.4% ↑0.48% at 6 | 0.3% ↑0.38% at 8\nVS Velocity Baton: 0.32% ↑0.39%\nVS Chill Inhibitor: 5% ↑6.5% at 6 | 3.9% ↑4.8% at 8\nReclamation\nAhab Char: 0.2% ↑0.25% at 51 | 0.15% ↑0.19% at 72\nJurisprudent: 0.85% ↑1.05% at 13 | 0.68% ↑0.84% at 16\nFaustus Decline: 0.77% ↑0.96% at 14 | 0.64% ↑0.8% at 17\nShortline Dissident: 2.72% ↑3.42% at 6 | 2.35% ↑2.91% at 7\nEighty-Six: 10.34% ↑13.05%\nHaliaetus: 10.37% ↑13%. Unaffected by Bipod.\n↑1.25x Ability Energy Gains."
+  }
+ },
+ {
+  "id": "wp:breakthrough",
+  "n": "Breakthrough",
+  "kind": "weaponTrait",
+  "hashes": [
+   4190643473
+  ],
+  "src": {
+   "bungie": "This weapon fires [Stagger] staggering projectiles. Strong against Unstoppable Champions.",
+   "clarity": "Fires a three-burst volley with 7 pellets in each burst.\nShots intrinsically stun Unstoppable champions.",
+   "compendium": "Kinetic Fusion Rifle\nFires a 3-round burst of 7 pellets each.\nDeals 136 [31.2] damage per pellet x 7 = 952 [218.4] per burst x 3 = 2,856 [655.2] damage per Ammo spent.\nUpon scoring 14 pellets in a burst:\n300% [100%] increased Melee Damage for the next Melee Hit within 3 seconds.\nUpon dealing Melee Damage:\n35% increased damage, +? Reload Speed, and 0.85x Charge Time Multiplier for 8.5 seconds.\nAdditional Melee Damage refreshes Saint's Fury duration. \nBuff is removed on stow.\n↑Catalyst: Grants the Cast No Shadows Origin Trait"
   }
  },
  {
@@ -211,6 +265,19 @@
    "clarity": "Direct Hits against Scorched Enemies apply additional Scorch on a 0.5 second cooldown:\n• Primary Weapons apply 10 [4] additional Scorch per Direct Hit (15 [9?] with Ember of Ashes)\n• Special and Power Weapons apply 20 additional Scorch (30 with Ember of Ashes)\nScoring multiple Direct Hits within 3? seconds of each causes the next Direct Hit to Scorch the target. Hit counter persists through stow.\nNumber of Direct Hits required by weapon type:\n• Bows: 2\n• Swords: 3\n• Other Weapons: 55% of the base magazine size\nScorch applied by Burning Ambition to Unscorched targets counts as Weapon Damage.\nEmber of Ashes increases the amount of Scorch applied by 50%.",
    "clarityEnhanced": "Direct Hits against Scorched Enemies apply additional Scorch on a 0.5 second cooldown:\n• Primary Weapons apply 10 [4] additional Scorch per Direct Hit (15 [9?] with Ember of Ashes)\n• Special and Power Weapons apply 20 additional Scorch (30 with Ember of Ashes)\nScoring multiple Direct Hits within 3? seconds of each causes the next Direct Hit to Scorch the target. Hit counter persists through stow.\nNumber of Direct Hits required by weapon type:\n• Bows: 🡅1\n• Swords: 🡅2\n• Other Weapons: 55% of the base magazine size 🡅 -1\nScorch applied by Burning Ambition to Unscorched targets counts as Weapon Damage.\nEmber of Ashes increases the amount of Scorch applied by 50%.\n🡅 Decreases the number of Direct Hits required by one.",
    "compendium": "Upon scoring a Magazine-based amount of direct hits within 2 seconds of each:\nThe next direct hit inflicts Scorch within 2 seconds.\nHit counter persists through stow. Hits do not have to be on the same target.\nScorch inflicted by Burning Ambition counts as Weapon Damage.\nHits needed to prepare Scorching Shot:\n55% of Magazine, rounded down.\nBow: ↑2 | Sword: 2 ↑1\nLinear FR | Precision: ↑1, Burst: ↑2?\nRocket Sidearm: ↑3 Missiles\nScouts | Precision: ↑5, Rapid: ↑8\nFusion Rifles: ↑11 Bolts\nMGs | Adaptive: ↑13, Aggressive: ↑19, Rapid: ↑28?\nAutos | Heat, Precision: ↑14 | Adaptive, Support: ↑19 | Rapid: ↑23\nTrace Rifle: ↑29\nScorching Shot and direct hits against Scorched Enemies inflict Scorch.\nPrimary Weapons inflict x10+5 [x4+5? against Scorched Guardians] Scorch.\nSpecial and Power Weapons inflict x20+10 Scorch.\nIncurs a 0.5 second cooldown upon inflicting Scorch before additional Scorch can be inflicted. Cooldown is GLOBAL, not per-enemy."
+  }
+ },
+ {
+  "id": "wp:castnoshadows",
+  "n": "Cast No Shadows",
+  "kind": "originTrait",
+  "hashes": [
+   2838996248
+  ],
+  "src": {
+   "bungie": "Dealing melee damage increases this weapon's handling and loads a small amount of ammo from reserves.",
+   "clarity": "Dealing Melee Damage refills 20% of the Magazine (rounded up) and grants ? Handling for ? seconds.",
+   "compendium": "Upon dealing Melee Damage:\nRefills 20% of Magazine. No cooldown.\n+? ↑+? Handling for ? seconds."
   }
  },
  {
@@ -279,6 +346,20 @@
    "bungie": "Final blows with this weapon grant class ability energy.",
    "clarity": "Kills grant 5% Class Ability Energy.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
    "compendium": "On Weapon Kill:\nGrants 5% ↑6%? Class Ability Energy."
+  }
+ },
+ {
+  "id": "wp:closetomelee",
+  "n": "Close to Melee",
+  "kind": "weaponTrait",
+  "hashes": [
+   1782407750
+  ],
+  "src": {
+   "bungie": "Glaive projectile final blows improve Glaive melee damage. Glaive projectile or melee damage extends the duration.",
+   "clarity": "Glaive Projectile Kills grant 60% [30%] increased Glaive Melee damage for 10 seconds.\nDealing Projectile or Melee damage extends the buff duration by 5 seconds, up to 10 seconds.",
+   "clarityEnhanced": "Glaive Projectile Kills grant 60% [30%] increased Glaive Melee damage for 🡅11 seconds.\nDealing Projectile or Melee damage extends the buff duration by 5 seconds, up to 🡅11 seconds.\n🡅 Buff Duration is increased by 1 second.",
+   "compendium": "Upon scoring a Glaive Projectile Kill:\n60% [30%] increased Glaive Melee Damage for 10 ↑11 seconds.\nBuff persists through stow.\nDealing additional Projectile or Melee Damage extends the buff duration by +5 seconds, up to 10 ↑11 seconds."
   }
  },
  {
@@ -405,6 +486,19 @@
   }
  },
  {
+  "id": "wp:cursedthrall",
+  "n": "Cursed Thrall",
+  "kind": "originTrait",
+  "hashes": [
+   1156201379
+  ],
+  "src": {
+   "bungie": "After defeating a target with a melee attack, final blows with this weapon cause targets to explode for a short duration.",
+   "clarity": "After a Melee Kill, for 7.5 seconds:\nWeapon Kills cause the enemy to explode, dealing up to 123.5 [?] damage over a 4.5? meter radius.\nExplosions inherit the weapon's Combatant Damage Scaling and match the element of the Weapon.",
+   "compendium": "On Melee Kill:\nWeapon Kills cause the enemy to explode, dealing up to 123.5 [?] Weapon-Element Matching damage over a 4.5? metre radius for 7.5 ↑8.5? seconds.\nDamage against Combatants scales with Combatant Rank Modifiers."
+  }
+ },
+ {
   "id": "wp:darkdescent",
   "n": "Dark Descent",
   "kind": "weaponTrait",
@@ -495,6 +589,20 @@
    "clarity": "Precision Kills apply Weaken to enemies within 7 meters of the target for ? seconds.\n1.5? second cooldown between activations.",
    "clarityEnhanced": "Precision Kills apply Weaken to enemies within 7 meters of the target for ? seconds.\n🡅1? second cooldown between activations.\n🡅 Cooldown is decreased by 0.5? seconds.",
    "compendium": "On Precision Kill: \nTarget triggers a Void Burst, inflicting Weaken to enemies within 7 meters.\nIncurs a 1.5? ↑1 second cooldown between activations."
+  }
+ },
+ {
+  "id": "wp:desperatemeasures",
+  "n": "Desperate Measures",
+  "kind": "weaponTrait",
+  "hashes": [
+   2109543898
+  ],
+  "src": {
+   "bungie": "Weapon final blows grant bonus damage. Melee and grenade final blows grant a larger damage bonus that can stack.",
+   "clarity": "Weapon Kills grant 'Desperate Measures x1' (DMx1), increasing damage by 10% for 7 seconds.\nGrenade or Melee Kills grant 20% increased damage for 7 seconds (DMx2). Scoring another Grenade or Melee Kill with DMx2 active increases this to 30% (DMx3).\nCan be activated while stowed. Weapon, Grenade, and Melee Kills refresh the buff duration.",
+   "clarityEnhanced": "Weapon Kills grant 'Desperate Measures x1' (DMx1), increasing damage by 10% for 🡅7.5 seconds.\nGrenade or Melee Kills grant 20% increased damage for 🡅7.5 seconds (DMx2). Scoring another Grenade or Melee Kill with DMx2 active increases this to 30% (DMx3).\nCan be activated while stowed. Weapon, Grenade, and Melee Kills refresh the buff duration.\n🡅 Buff duration is increased by 0.5 seconds.",
+   "compendium": "On Weapon Kill:\nDesperate Measures x1 | 10% increased damage for 7 ↑7.5 seconds. Additional Weapon Kills refresh the buff duration.\nOn Grenade or Melee Kill:\nDesperate Measures x2 | 20% increased damage for 7 ↑7.5 seconds. Additional Weapon Kills refresh the buff duration.\nUpon scoring an additional Grenade or Melee Kill while Desperate Measures x2 is active:\nDesperate Measures x3 | 30% increased damage for 7 ↑7.5 seconds. Additional Weapon, Grenade, and Melee Kills refresh the buff duration.\nBuff can be activated while stowed, and persists through stow."
   }
  },
  {
@@ -659,6 +767,19 @@
   }
  },
  {
+  "id": "wp:extrovert",
+  "n": "Extrovert",
+  "kind": "originTrait",
+  "hashes": [
+   1250481499
+  ],
+  "src": {
+   "bungie": "Final blows while near multiple combatants or near Nightmares restores health.",
+   "clarity": "Weapon Kills while within 15 meters of 3 enemies or a Nightmare restore 60 HP after a 0.25 second delay.\nGlaive Melee Kills also count.\n3 second cooldown between activations.",
+   "compendium": "After 0.25 seconds of scoring a Weapon Kill while within 15 metres of 3 enemies or a Nightmare:\nRestores 60 ↑+? HP.\nGlaive Melee Kills can also trigger the effect.\nIncurs a 3 second cooldown after activation."
+  }
+ },
+ {
   "id": "wp:eyesupguardian",
   "n": "Eyes Up, Guardian",
   "kind": "weaponTrait",
@@ -709,6 +830,17 @@
    "clarity": "On Precision Kill:\n• Target explodes, dealing 436 [80] Solar damage in a 7.5 meter radius. Falloff begins at 3.75m.\n• Grants 50 Reload Speed for 6 seconds\n(Ace of Spade's Firefly is 272% stronger than the Legendary trait in PvE)",
    "clarityEnhanced": "On Precision Kills:\n• Target explodes, dealing 104 [80] Solar damage in a 4 meter radius\n• Grants 🡅55 Reload Speed for 6 seconds\n🡅 Reload Speed bonus is increased by 5.",
    "compendium": "On Precision Kill:\nTarget explodes, dealing up to 104 [80] Solar Damage in a 7.5 metre radius, and grants +50 +55 Reload Speed for 6 seconds. \nReload Buff persists through stow. Damage against Combatants scales differently by Weapon Type and Combatant Rank :)"
+  }
+ },
+ {
+  "id": "wp:fistfulsofbullets",
+  "n": "Fistfuls of Bullets",
+  "kind": "weaponTrait",
+  "hashes": [
+   3189251502
+  ],
+  "src": {
+   "bungie": "Melee kills overload the magazine to double its capacity."
   }
  },
  {
@@ -775,6 +907,45 @@
    "bungie": "Each stack of Gathering Light improves this weapon's reload, handling, and target acquisition.",
    "clarity": "Gain 15 Handling, 15 Reload Speed, and 2 Aim Assist for each stack of Gathering Light.",
    "compendium": "Kinetic Adaptive Sidearm\nKills grants a stack of Gathering Light, up to a maximum of 10 stacks.\nGathering Light grants +15 Handling, +15 Reload Speed, and +2 Aim Assist per stack.\nGathering Light stacks persist through stow.\nHolding [Reload] will trigger a special reload animation, consuming all stacks of Gathering Light to provide Ability Energy.\nGrants 10% Grenade, Melee, and Class Ability Energy per Gathering Light stack\n↑Catalyst:\nPassively grants +2 Magazine Size (15 -> 17), the Osmosis trait, and the Surplus trait."
+  }
+ },
+ {
+  "id": "wp:goldentricorn",
+  "n": "Golden Tricorn",
+  "kind": "weaponTrait",
+  "hashes": [
+   2610012052
+  ],
+  "src": {
+   "bungie": "Final blows with this weapon grant bonus damage. While this buff is active, grenade or melee kills of the same damage type greatly increase its damage and duration.",
+   "clarity": "While the perk's buff isn't active, Weapon Kills grant 'Golden Tricorn x1' for 7 seconds, increasing weapon damage by 15%. Additional Kills refresh the buff duration.\nWhile Golden Tricorn x1 or x2 is active:\nGrenade or Elemental Melee Kills matching the element of the Weapon grant Golden Tricorn x2 for 10 seconds, increasing weapon damage by 50%.\nClarity tooltip editor's note: We're replacing the previous Powered Melee term with Elemental Melee. The former is now exclusively used for perks that require the consumption of a Melee Ability Charge. This note is temporary and will be removed in the future.",
+   "compendium": "On Weapon Kill:\nGolden Tricorn x1 | 15% Increased damage for 7 seconds. \nAdditional Weapon Kills refresh the buff duration to 7 ↑8 seconds.\nBuff is removed on stow.\nOn Grenade or Powered Melee Kill, while the buff is active, if the Weapon's Element matches the Grenade or Melee Element, respectively:\nGolden Tricorn x2 | 50% increased damage for 10 seconds.\n Additional Grenade or Powered Melee Kills refresh the buff duration to 10 seconds.\nBuff is removed on stow."
+  }
+ },
+ {
+  "id": "wp:goldentricornenhanced",
+  "n": "Golden Tricorn Enhanced",
+  "kind": "weaponTrait",
+  "hashes": [
+   4290541820
+  ],
+  "src": {
+   "bungie": "Final blows with this weapon grant bonus damage for an improved duration. While this buff is active, grenade or melee final blows of the same damage type greatly increase its damage for an improved duration.",
+   "clarity": "While the perk's buff isn't active, Weapon Kills grant 'Golden Tricorn x1' for 7 seconds, increasing weapon damage by 15%. Additional Kills refresh the buff duration to 🡅8 seconds.\nWhile Golden Tricorn x1 or x2 is active:\nGrenade or Elemental Melee Kills matching the element of the Weapon grant Golden Tricorn x2 for 10 seconds, increasing weapon damage by 50%.\nClarity tooltip editor's note: We're replacing the previous Powered Melee term with Elemental Melee. The former is now exclusively used for perks that require the consumption of a Melee Ability Charge. This note is temporary and will be removed in the future.\n🡅 Golden Tricorn x1's duration is refreshed to 8 seconds."
+  }
+ },
+ {
+  "id": "wp:graverobber",
+  "n": "Grave Robber",
+  "kind": "weaponTrait",
+  "hashes": [
+   1631667848
+  ],
+  "src": {
+   "bungie": "Melee final blows or dealing damage with a charged melee reloads this weapon's magazine from reserves.",
+   "clarity": "Powered Melee Hits and (Glaive) Melee Kills refill the magazine from reserves.\n3 second cooldown between activations.",
+   "clarityEnhanced": "Powered Melee Hits and (Glaive) Melee Kills refill the magazine from reserves.\n3 second cooldown between activations.\n🡅 Passively grants 5 Handling.",
+   "compendium": "Upon dealing Powered Melee Damage, or upon scoring a Melee Kill:\nRefills Magazine.\nIncurs a 3 second cooldown between Magazine Refills.\n↑Passively grants +5 Handling."
   }
  },
  {
@@ -1172,6 +1343,20 @@
   }
  },
  {
+  "id": "wp:meleemomentum",
+  "n": "Melee Momentum",
+  "kind": "weaponTrait",
+  "hashes": [
+   3773585912
+  ],
+  "src": {
+   "bungie": "Melee final blows with this weapon grant it bonus energy and provide increased movement speed while blocking.",
+   "clarity": "Glaive Melee Kills grant Weapon Energy and ?% increased movement speed while Blocking for 10 seconds.\nWeapon Energy granted by Enemy Rank:\n• Minors: 16.7%\n• Elites, Players: ?%\n• Minibosses: 50%",
+   "clarityEnhanced": "Glaive Melee Kills grant Weapon Energy and ?% increased movement speed while Blocking for 10 seconds.\nWeapon Energy granted by Enemy Rank:\n• Minors: 16.7%\n• Elites, Players: ?%\n• Minibosses: 50%\n🡅 Weapon Energy granted is increased.",
+   "compendium": "On Glaive Melee Kill:\nGrants Weapon Energy and ?% Increased Movement Speed while Blocking for 10 seconds.\nRank-and-File = 16.7% ↑?% Energy | Elite = ?% ↑?% | Miniboss = 50% ↑?% | Guardian = ?% ↑?%\n↑Increased Weapon Energy on Melee Kill."
+  }
+ },
+ {
   "id": "wp:nobledeeds",
   "n": "Noble Deeds",
   "kind": "originTrait",
@@ -1452,6 +1637,20 @@
   }
  },
  {
+  "id": "wp:recycledenergy",
+  "n": "Recycled Energy",
+  "kind": "weaponTrait",
+  "hashes": [
+   3713215006
+  ],
+  "src": {
+   "bungie": "Reloading after defeating targets grants energy to your lowest charged ability.",
+   "clarity": "Finishing a reload within ? seconds after scoring 1|2|3|4|5 Weapon Kills grants 5.7%|8%|9.7%|13.3%|20% Ability Energy to the least-charged Ability.",
+   "clarityEnhanced": "Finishing a reload within ? seconds after scoring 1|2|3|4|5 Weapon Kills grants 5.7%|8%|9.7%|13.3%|20% Ability Energy to the least-charged Ability.\n🡅 Grants ?% more Ability Energy.",
+   "compendium": "Upon manually loading Ammo within ? seconds of a Weapon Kill:\nGrants Ability Energy to the least-charged Ability based on the amount of kills.\n5.7% | 8% | 9.7% | 13.3% | 20%\n↑6% | 7.5% | 9.5% | 13.5% | 22%"
+  }
+ },
+ {
   "id": "wp:refinedsoul",
   "n": "Refined Soul",
   "kind": "weaponTrait",
@@ -1565,6 +1764,19 @@
    "bungie": "Damaging a combatant heals the wielder.",
    "clarity": "Landing hits grants 7HP per damage instance.",
    "compendium": "Solar Chainsaw Sword\nRestores 7HP per damage instances.\nBanshee's Wail:\n[Block] revs the blade, granting Banshee's Wail x1.\nHits while revved grant a stack of Banshee's Wail, up to x9 after 8 hits.\nBanshee's Wail stacks are removed upon no longer attacking, running out of Sword Energy, or upon performing a Heavy Attack.\nRevved Light Attack Strikes: Consume 20% Sword Energy per swing.\nDeal 539 [389] Direct Damage, followed by two additional instances of 135 [95] Damage after 0.1 second.\nRevved Light Attack Strikes after the first attack animation deal 33% increased direct damage.\nRevved Heavy Attacks: Empties remaining Sword Energy.\nConsume 2 Ammo to deal 2 hits of 198 [152] Damage each within 0.1 seconds of one another, ending with a strike that deals 1,054 [811] damage.\nPerforming a Revved Heavy Attacks consumes all Banshee's Wail stacks to deal increased damage based on the amount of stacks it consumed.\nx1-x3 = Base Damage | x4-x6 = 54% Increased Damage | x7-x9 = 109% Increased Damage.\n↑Catalyst: Grants the Burning Ambition trait.\nAllows Scorch to be inflicted from a single Revved Light/Heavy Attack.\nScorch ticks also restore 7HP."
+  }
+ },
+ {
+  "id": "wp:righthook",
+  "n": "Right Hook",
+  "kind": "originTrait",
+  "hashes": [
+   3907865655
+  ],
+  "src": {
+   "bungie": "Dealing melee damage gives this weapon increased target acquisition and range for a short period of time.\nDealing melee damage again extends the effect.",
+   "clarity": "Dealing Melee damage grants 10 Aim Assist and 10 Range for 10 seconds.\nDealing additional Melee damage while the Buff is active extends the duration by 10 seconds, up to the maximum of 20 seconds.",
+   "compendium": "Upon dealing Melee Damage:\n +10 ↑+12? Range and +10 ↑+12? Aim Assistance for 10 seconds\nAdditional Melee Damage extends the duration by +10 seconds, up to 20 seconds.\nBuff persists through stow."
   }
  },
  {
@@ -1856,6 +2068,20 @@
    "bungie": "Detonating a large number of rounds embedded in a single target suspends them.",
    "clarity": "Manually detonating at least 6 rounds that are embedded into a target Suspends them for 6 seconds (8 with Thread of Continuity).\nSuspend duration is halved against Minibosses.",
    "compendium": "Strand Special Ammo Micro-Missile Pulse Rifle\nHold [Reload] to manually detonate all embedded projectiles.\nFires a 3-round burst of sticky projectiles that embed themselves to enemies and surfaces they hit, each dealing 271 [2] Impact Damage.\nProjectiles detonate upon holding [Reload] or after being embed for 6 seconds, detonating for up to 321 [60] Explosive Damage over 6 meters.\nManually triggering the detonation of 6 embedded projectiles on a single enemy inflicts Suspension.\n↑Unraveling Blast: Explosive Damage from Enemy-Embedded Projectiles now inflicts Unravel."
+  }
+ },
+ {
+  "id": "wp:swashbuckler",
+  "n": "Swashbuckler",
+  "kind": "weaponTrait",
+  "hashes": [
+   4082225868
+  ],
+  "src": {
+   "bungie": "This weapon gains increased damage from melee kills and kills with this weapon.",
+   "clarity": "Weapon Kills grant a Stack of 'Swashbuckler' for 4.5 seconds. Maximum of 5 Stacks.\n(Glaive) Melee Kills grant all 5 Stacks instantly.\nDamage increase at 1|2|3|4|5 Stacks:\n6.7% | 13.3% | 20% | 26.6% | 33.3%\nStowing the weapon removes the buff.",
+   "clarityEnhanced": "Weapon Kills grant a Stack of 'Swashbuckler' for 🡅6.5 seconds. Maximum of 5 Stacks.\n(Glaive) Melee Kills grant all 5 Stacks instantly.\nDamage increase at 1|2|3|4|5 Stacks:\n6.7% | 13.3% | 20% | 26.6% | 33.3%\nStowing the weapon removes the buff.\n🡅 Buff Duration is increased by 2 seconds.",
+   "compendium": "On Weapon or Melee Kill:\n6.7% | 13.3% | 20% | 26.6% | 33.3% Increased Damage for 4.5 ↑6.5 seconds. Melee Kills grant 5 stacks.\nAdditional Weapon or Melee Kills refresh the buff duration.\nBuff is removed on stow."
   }
  },
  {
@@ -2176,6 +2402,20 @@
    "bungie": "This weapon's melee attacks deal increased damage and slow targets when loaded with ammo.",
    "clarity": "When the magazine has at least 1 round loaded, Glaive Melee Attacks deal 50% increased damage and apply 40 Slow for 4 [1.5] seconds (8 [1.5] with Whisper of Durance).\nBosses only receive 20% increased damage.",
    "compendium": "Stasis Aggressive Glaive\nGains 25% Weapon Energy on each Freeze Orb hit.\nFreeze Orb fires Explosive Projectiles every 0.5 seconds towards non-frozen enemies within 10 metres of it.\nExplosive Projectiles inflict Freeze over a 3? meter radius and deal up to 60 [11] damage on impact.\nFreeze Orb detonates on impact, dealing 1282 [250] damage and inflicting x60 Slow in a 10 metre radius.\nFreeze Orb moves at a speed of 9.5 metres per second and has a maximum lifetime of ? seconds, being able to travel up to ? metres.\nWhile Magazine is loaded with at least 1 Ammo:\nMelee Attacks deal 50% increased damage and inflict x40 Slow for ?+? [1.5+0] seconds.\nBoss Combatants only receive 20% increased damage.\n↑Catalyst: Grants the Rimestealer trait."
+  }
+ },
+ {
+  "id": "wp:wellspring",
+  "n": "Wellspring",
+  "kind": "weaponTrait",
+  "hashes": [
+   3592538738
+  ],
+  "src": {
+   "bungie": "Kills with this weapon generate ability energy. This energy is divided between your uncharged abilities.",
+   "clarity": "On Weapon Kill:\nGrants 8% Ability Energy split equally amongst all uncharged abilities.\nAbilities with multiple charges only receive one third of the ability energy normally split to them once they have a full ability charge ready.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
+   "clarityEnhanced": "On Weapon Kill:\nGrants 🡅9% Ability Energy split equally amongst all uncharged abilities.\nAbilities with multiple charges only receive one third of the ability energy normally split to them once they have a full ability charge ready.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.\n🡅 Ability Energy Gain is increased by 12.5%. (8%🠚9%)",
+   "compendium": "On Weapon Kill:\nGrants 8% ↑9% Ability Energy split equally amongst all uncharged abilities.\nOn Abilities with multiple charges, once the ability has at least one full charge it will count as charged and will only receive a third of the regular Ability Energy per kill."
   }
  },
  {

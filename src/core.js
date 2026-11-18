@@ -1066,7 +1066,21 @@ const Core = (() => {
     b.sub.aspects = [...new Set((b.sub.aspects || []).filter(h => findSub(sc, 'aspects', h)))].slice(0, 2);
     b.sub.fragments = [...new Set((b.sub.fragments || []).filter(h => findSub(sc, 'fragments', h)))].slice(0, fragSlots(b, defs));
     for (const s of A_SLOTS) b.mods[s] = (b.mods[s] || []).filter(n => typeof n === 'string').slice(0, 3);
+    b.art = artValid(b.art, artOf(b, defs));
     return b;
+  }
+  // artifacts (Monument of Triumph): defs.artp = [{h, n, d, i, p: [[hash, name, tier, text, icon]]}]. One artifact per
+  // build, 7 perk slots: 2 take tier-1 perks, 3 take tier 1-2, 2 take any tier (Bungie socket categories).
+  const ART_MAX = 7, ART_SLOTS = [2, 3, 2];
+  const artOf = (b, defs) => (defs?.artp || []).find(a => a.h === b?.artA) || null;
+  function artValid(list, art) {
+    const out = []; const n = [0, 0, 0];
+    for (const h of Array.isArray(list) ? list : []) {
+      const p = art?.p.find(x => x[0] === h); if (!p || out.includes(h)) continue;
+      const t = p[2]; const fits = out.length < ART_MAX && (t < 3 || n[2] < ART_SLOTS[2]) && (t < 2 || n[1] + n[2] < ART_SLOTS[1] + ART_SLOTS[2]);
+      if (fits) { out.push(h); n[t - 1]++; }
+    }
+    return out;
   }
   // every piece of a build with its text: { g: group, slot, n: name, label, it?, parts }
   function buildPieces(b, defs, byId) {
@@ -1096,6 +1110,9 @@ const Core = (() => {
     for (const s of A_SLOTS) { const it = byId?.get(b.a?.[s]?.id); const si = it && defs?.as?.[it.hash]; if (si != null) setN[si] = (setN[si] || 0) + 1; }
     for (const [si, n] of Object.entries(setN)) for (const p of defs.sets[si]?.p || []) if (n >= p.c) out.push({ g: 'armor', slot: 'set', n: p.n, label: `${defs.sets[si].n} · ${p.c}-piece bonus`, parts: [['Bungie', p.d]] });
     for (const s of A_SLOTS) for (const n of b.mods?.[s] || []) out.push({ g: 'mod', slot: s, n, label: 'Armor mod', parts: pieceText(n, defs, null, 'armor') });
+    // artifact perks (one artifact per build)
+    const art = artOf(b, defs);
+    for (const h of b.art || []) { const p = art?.p.find(x => x[0] === h); if (p) out.push({ g: 'artifact', slot: 'artifact', n: p[1], label: `${art.n} · tier ${p[2]}`, parts: p[3] ? [['Bungie', p[3]]] : [] }); }
     for (const p of out) p.subEl = b.el;
     return out;
   }
@@ -1117,6 +1134,8 @@ const Core = (() => {
       const sk = sockets(pc.it, defs);
       return [...new Set(sk.cols.flatMap(c => c.perks.filter(p => p.s)).map(p => 'wp:' + norm(p.n)))];
     }
+    if (pc.g === 'armor' && pc.slot === 'set') return ['set:' + norm(pc.n)];
+    if (pc.g === 'artifact') return ['art:' + norm(pc.n)];
     if (pc.g === 'armor' && pc.it) return /exotic/i.test(pc.it.rarity) ? ['xa:' + norm(pc.it.name)] : [];
     return [];
   }
@@ -1182,6 +1201,8 @@ const Core = (() => {
       for (let n = 0; n < 3; n++) for (const c of counts) if (out.has(c.e.t)) out.add(c.e.as);
       return out;
     };
+    // nat: true = any build can enter it; nat: '<element>' = that subclass grants it intrinsically (Arc → Amplified)
+    const natHas = t => { const n = ix?.t?.[t]?.nat; return n === true || (!!n && n === subEl); };
     const links = [], gaps = [], unmatched = [];
     const abil = new Set(Object.values(ABIL_TERM));
     for (const c of fx) {
@@ -1189,11 +1210,13 @@ const Core = (() => {
       let ps = (prov.get(c.e.t) || []).filter(p => p.f.i !== c.i);
       // a payoff that needs a specific damage source (e.g. "weapon-applied scorch") only links to matching providers
       if (Array.isArray(c.e.from) && c.e.from.length && ps.length) {
-        const ok = ps.filter(p => { const s = srcOf(p.f); return c.e.from.some(x => s.has(x)); });
+        // a piece that provides the term itself is that kind of damage (an aspect that "creates" powered melee damage)
+        const ok = ps.filter(p => { const s = srcOf(p.f); return c.e.from.includes(c.e.t) || c.e.from.some(x => s.has(x)); });
         if (!ok.length) { unmatched.push({ c, ps }); continue; }
         ps = ok;
       }
-      if (!ps.length) { if (!c.implicit && c.e.do === 'uses' && !(prov.get(c.e.t) || []).length && !abil.has(c.e.t)) gaps.push(c); continue; }
+      // states you can always enter (jumping, sprinting, sliding, finishers, low health) are never missing
+      if (!ps.length) { if (!c.implicit && c.e.do === 'uses' && !(prov.get(c.e.t) || []).length && !abil.has(c.e.t) && !natHas(c.e.t)) gaps.push(c); continue; }
       const seen = new Set();
       for (const p of ps) { const id = p.f.i + '>' + c.i; if (seen.has(id)) continue; seen.add(id); links.push({ t: c.e.t, l: tLabel(ix, c.e.t), from: p.f.i, to: c.i, pf: p.f, cf: c, via: p.via }); }
     }
@@ -1342,6 +1365,6 @@ const Core = (() => {
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
   return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, subclassPlan, dimLoadout, dimLink };
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, subclassPlan, artValid, artOf, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
