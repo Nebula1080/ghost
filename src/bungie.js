@@ -3,9 +3,11 @@
 // keep the ~1 hour access token in sessionStorage (never localStorage, cookies, IndexedDB or the SW cache).
 // Security rules (GHOST_PLAN → Security, plus the 2026-11-16 scope decision):
 //  - state: 32 random bytes, sessionStorage, single use, compared exactly; mismatch is rejected.
-//  - the app is registered with move/equip permission, but this module can ONLY send the token exchange POST and
-//    the read-only GETs listed in READ_PATHS. `allowed()` enforces it and test/security.test.js fails if a write
-//    endpoint (transfer, equip, lock, pull, insert, apply, action) ever appears here.
+//  - the app is registered with move/equip permission. Besides the token exchange POST and the read-only GETs in
+//    READ_PATHS, this module may send exactly three write actions, approved by the user 2026-11-17 (GHOST_PLAN ->
+//    Security): InsertSocketPlugFree (weapon perks, armor mods), EquipItem, TransferItem. `allowed()` enforces the
+//    exact paths, `writeBody()` the exact body shape, and test/security.test.js fails on any other write endpoint.
+//    Writes are sent one at a time, only from a confirmation the user tapped (app.html runActions), never retried.
 //  - tokens, codes and the API key never go into messages, logs or toasts.
 // Pure enough to unit-test in Node: browser objects are passed in to create().
 const Bungie = (() => {
@@ -18,10 +20,42 @@ const Bungie = (() => {
   ];
   // profiles, profile inventory, characters, character inventories + equipment, instances, stats, sockets, reusable plugs
   const PROFILE_COMPONENTS = '100,102,200,201,205,300,304,305,310';
+  // the only write actions, with Bungie's documented minimum gap between actions per user (ms)
+  const WRITES = {
+    plug: { path: '/Platform/Destiny2/Actions/Items/InsertSocketPlugFree/', gap: 500 },
+    equip: { path: '/Platform/Destiny2/Actions/Items/EquipItem/', gap: 100 },
+    transfer: { path: '/Platform/Destiny2/Actions/Items/TransferItem/', gap: 100 },
+  };
+  const WRITE_PATHS = Object.values(WRITES).map(w => w.path);
+  const ID = v => typeof v === 'string' && /^\d{1,20}$/.test(v);
+  const U32 = v => Number.isInteger(v) && v > 0 && v < 2 ** 32;
+  const MT = v => Number.isInteger(v) && v >= 1 && v <= 6;
+  const keysAre = (o, ks) => !!o && typeof o === 'object' && !Array.isArray(o) && Object.keys(o).sort().join() === [...ks].sort().join();
+  // exact body shapes; anything else is refused before it leaves the browser. Ids are digit strings (int64).
+  function writeBody(action, b) {
+    if (action === 'plug') return keysAre(b, ['plug', 'itemId', 'characterId', 'membershipType']) && keysAre(b.plug, ['socketIndex', 'socketArrayType', 'plugItemHash'])
+      && Number.isInteger(b.plug.socketIndex) && b.plug.socketIndex >= 0 && b.plug.socketIndex < 64 && b.plug.socketArrayType === 0 && U32(b.plug.plugItemHash) && ID(b.itemId) && ID(b.characterId) && MT(b.membershipType);
+    if (action === 'equip') return keysAre(b, ['itemId', 'characterId', 'membershipType']) && ID(b.itemId) && ID(b.characterId) && MT(b.membershipType);
+    if (action === 'transfer') return keysAre(b, ['itemReferenceHash', 'stackSize', 'transferToVault', 'itemId', 'characterId', 'membershipType'])
+      && U32(b.itemReferenceHash) && b.stackSize === 1 && typeof b.transferToVault === 'boolean' && ID(b.itemId) && ID(b.characterId) && MT(b.membershipType);
+    return false;
+  }
+  // Bungie error statuses explained in plain words
+  const WRITE_ERR = {
+    DestinyCannotPerformActionAtThisLocation: 'Destiny only allows this in orbit, a social space, or while offline. Go to orbit and try again.',
+    DestinyNoRoomInDestination: 'There\u2019s no room for it there. Make space on that character or in the vault and try again.',
+    DestinyItemUniqueEquipRestricted: 'You can only equip one exotic weapon and one exotic armor piece at a time.',
+    DestinyItemNotFound: 'Bungie couldn\u2019t find that item where Ghost expected it. Refresh your vault from Bungie and try again.',
+    DestinyCharacterNotFound: 'Bungie couldn\u2019t find that character. Refresh your vault from Bungie and try again.',
+    DestinyItemCantBeEquipped: 'That item can\u2019t be equipped on this character.',
+    DestinyItemActionForbidden: 'Bungie doesn\u2019t allow that action on this item.',
+    DestinySocketActionNotAllowed: 'Bungie doesn\u2019t allow changing that socket.',
+    DestinySocketNotFound: 'That socket wasn\u2019t found. Refresh your vault from Bungie and try again.',
+  };
   const K_STATE = 'gh:oauth:state', K_TOKEN = 'gh:oauth:token';
 
   function allowed(method, path) {
-    if (method === 'POST') return path === TOKEN_PATH;
+    if (method === 'POST') return path === TOKEN_PATH || WRITE_PATHS.includes(path);
     if (method === 'GET') return READ_PATHS.some(r => r.test(path));
     return false;
   }
@@ -108,8 +142,32 @@ const Bungie = (() => {
       return get(`/Platform/Destiny2/${Number(type)}/Profile/${id}/`, 'components=' + PROFILE_COMPONENTS);
     };
 
-    return { available: ok, authorizeUrl, handleCallback, signedIn, signOut, memberships, profile };
+    // one write action (see WRITES). Called only from the app's confirmed runActions; never retried automatically,
+    // so a failed move can't repeat. Waits Bungie's per-user gap between actions.
+    const lastAt = {};
+    async function act(action, body) {
+      const w = WRITES[action];
+      if (!w || !allowed('POST', w.path) || !writeBody(action, body)) throw new BungieError('Blocked request.', 'guard');
+      const s = session(); if (!s) throw new BungieError('Your Bungie sign-in has expired. Sign in again, then try again.', 'auth');
+      const wait = (lastAt[action] || 0) + w.gap - now(); if (wait > 0) await sleep(wait);
+      lastAt[action] = now();
+      const res = await fetch(ORIGIN + w.path, {
+        method: 'POST', credentials: 'omit', cache: 'no-store',
+        headers: { 'Content-Type': 'application/json', 'X-API-Key': key, Authorization: 'Bearer ' + s.t },
+        body: JSON.stringify(body),
+      });
+      if (res.status === 401) { signOut(); throw new BungieError('Your Bungie sign-in has expired. Sign in again, then try again.', 'auth'); }
+      const j = await res.json().catch(() => null);
+      const throttle = Math.min(Number(j?.ThrottleSeconds) || 0, 30); if (throttle) lastAt[action] = now() + throttle * 1000;
+      if (res.ok && j && j.ErrorCode === 1) return j.Response ?? true;
+      const st = String(j?.ErrorStatus || '');
+      if (st === 'SystemDisabled') throw new BungieError('Bungie\u2019s API is down for maintenance. Try again later.', 'down');
+      if (res.status === 429 || /Throttle/.test(st)) throw new BungieError('Bungie asked Ghost to slow down. Wait a moment and try again.', 'throttle');
+      throw new BungieError(WRITE_ERR[st] || `Bungie refused the change (${/^[A-Za-z]{1,80}$/.test(st) ? st : 'HTTP ' + res.status}).`, 'write');
+    }
+
+    return { available: ok, authorizeUrl, handleCallback, signedIn, signOut, memberships, profile, act };
   }
-  return { create, allowed, BungieError, TOKEN_PATH, READ_PATHS, PROFILE_COMPONENTS, K_STATE, K_TOKEN };
+  return { create, allowed, writeBody, BungieError, TOKEN_PATH, READ_PATHS, WRITES, WRITE_PATHS, PROFILE_COMPONENTS, K_STATE, K_TOKEN };
 })();
 if (typeof module !== 'undefined') module.exports = Bungie;

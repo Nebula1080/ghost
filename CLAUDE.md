@@ -17,7 +17,7 @@ Help sort a Destiny 2 vault. Read all the information for each item, and tag and
 |---|---|
 | `src/core.js` | Pure logic with no DOM: CSV parse/serialize, DIM row → item, query language, sort/group, rating. Exported for Node via `module.exports`. |
 | `src/app.html` | The UI, a single page. `/*__CORE__*/` gets replaced with core.js at build time. |
-| `src/bungie.js` | Hosted build only (inlined at `/*__BUNGIE__*/`): Bungie public-client sign-in (state check, code→token, token in sessionStorage), read-only request guard `Bungie.allowed()` (token POST + memberships + profile GETs only; the app holds move/equip scope but must not use it, see GHOST_PLAN Security), throttling. Exported for Node tests. |
+| `src/bungie.js` | Hosted build only (inlined at `/*__BUNGIE__*/`): Bungie public-client sign-in (state check, code→token, token in sessionStorage), request guard `Bungie.allowed()` (token POST, memberships + profile GETs, and the three approved write actions `InsertSocketPlugFree` / `EquipItem` / `TransferItem` with exact body shapes in `writeBody()`; see GHOST_PLAN Security, approved 2026-11-17), `act()` (one write, Bungie's gap, never retried), throttling. Exported for Node tests. |
 | `data/api-defs.json`, `tools/build-api-defs.mjs` | Compact manifest table (items, plugs, stats) for `Core.apiToItems`, which turns a Bungie profile into the same item objects as a DIM CSV (`src:'api'`). Rebuild after a manifest refresh: `node tools/build-api-defs.mjs`. |
 | `src/ghost.css` | The Ghost design system (themes, layout, components, motion), inlined at build. |
 | `data/art/`, `data/fonts/`, `data/item-art.json` | Backdrops + subclass art, embedded fonts, hosted-only Bungie item art map. |
@@ -168,6 +168,7 @@ CSS block "phones & touch" at the end of `<style>`; `isMobile()` = `matchMedia('
 - Item ids are 19-digit strings. Always treat them as strings, never as Numbers.
 
 ## Bungie sign-in (hosted build, 2026-11-16)
+- **Actions (2026-11-17, user-approved):** in an item's panel, a Bungie-loaded vault offers **Equip on <class>** (moves from the vault / another character first; replaces what's in the slot), weapon perk options offer **Switch X to Y** (same perk socket, options the weapon has), and armor mods offer **Change this mod** (any mod for that socket's slot). All go through `runActions` (confirm sheet → sequential `BG.act` → local update → `saveVault`). Needs `si`/`h`/`ac`/`roll` on perks and `cid`/`bucket` on items (from `Core.apiToItems`, api-defs plug cats `ah/aa/ac/al/ax/ag` for mod slots) and the account context `bctx` (localStorage: membership type/id + characters). CSV vaults stay read-only.
 - Load dialog, phone ⋯ menu: "Sign in with Bungie" → bungie.net authorize → back with `?code&state` → `bungieReturn()` cleans the URL, exchanges the code, `loadFromBungie()` picks the Destiny account (asks if several) and loads the profile through `routeParsed` (same profile matching as CSVs). Tags/notes from the previous vault carry over by item id.
 - With a Bungie-loaded vault, dropping DIM CSVs only merges Tag/Notes (`mergeCsvTags`). Export to DIM is unchanged.
 - Not from the API (left blank): season, year, source, kill count, crafted level, tuning stat. Armor tertiary = third-highest current stat (approximation).

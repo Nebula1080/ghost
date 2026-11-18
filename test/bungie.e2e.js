@@ -22,13 +22,18 @@ const srv = http.createServer((q, s) => {
 const profile = {
   characters: { data: { '2305843009300000001': { classType: 1 } } },
   profileInventory: { data: { items: [
-    { itemHash: 437854388, itemInstanceId: '6917529000000000001', state: 1 },
+    { itemHash: 437854388, itemInstanceId: '6917529000000000001', state: 1, bucketHash: 1498876634 },
     { itemHash: 341892117, itemInstanceId: '6917529000000000002', state: 0 },
     { itemHash: 437854388, itemInstanceId: '"><img src=x onerror=window.__x=1>' },
   ] } },
   characterEquipment: { data: { '2305843009300000001': { items: [{ itemHash: 437854388, itemInstanceId: '6917529000000000003' }] } } },
+  // a Hunter helmet on the character with Heavy Ammo Finder in a head mod socket (index 1)
+  characterInventories: { data: { '2305843009300000001': { items: [{ itemHash: 30472172, itemInstanceId: '6917529000000000004' }] } } },
   itemComponents: { instances: { data: { '6917529000000000001': { damageType: 6, primaryStat: { value: 500 } } } },
-    sockets: { data: { '6917529000000000001': { sockets: [{ plugHash: 1294026524, isVisible: true }] } } } },
+    // Action Item: trait socket 3 holds Rimestealer and can switch to Rewind Rounds
+    sockets: { data: { '6917529000000000001': { sockets: [{ plugHash: 1294026524, isVisible: true }, { plugHash: 839105230, isVisible: true }, { plugHash: 2680121939, isVisible: true }, { plugHash: 1955165503, isVisible: true }, { plugHash: 2922950962, isVisible: true }] },
+      '6917529000000000004': { sockets: [{ plugHash: 0, isVisible: true }, { plugHash: 644105, isVisible: true }] } } },
+    reusablePlugs: { data: { '6917529000000000001': { plugs: { 3: [{ plugItemHash: 1955165503 }, { plugItemHash: 3418782618 }] } } } } },
 };
 
 srv.listen(8766, async () => {
@@ -37,7 +42,7 @@ srv.listen(8766, async () => {
   const pg = await ctx.newPage();
   const errs = []; pg.on('pageerror', e => errs.push(e.message));
   await pg.addInitScript(() => { window.__csp = []; document.addEventListener('securitypolicyviolation', e => window.__csp.push(e.violatedDirective + ' ' + e.blockedURI)); });
-  const bungieReqs = [];
+  const bungieReqs = []; const writes = []; const WRITE_FAIL = { on: false };
   await ctx.route('https://www.bungie.net/**', async route => {
     const r = route.request(); const u = new URL(r.url());
     bungieReqs.push([r.method(), u.pathname, r.headers(), r.postData() || '']);
@@ -47,6 +52,12 @@ srv.listen(8766, async () => {
     if (u.pathname === '/Platform/App/OAuth/token/') return route.fulfill({ status: 200, headers: cors, body: JSON.stringify({ access_token: TOKEN, token_type: 'Bearer', expires_in: 3600, membership_id: '1' }) });
     if (u.pathname === '/Platform/User/GetMembershipsForCurrentUser/') return route.fulfill({ status: 200, headers: cors, body: JSON.stringify({ ErrorCode: 1, Response: { destinyMemberships: [{ membershipType: 3, membershipId: '4611686018400000001', bungieGlobalDisplayName: 'Tester<b>' }] } }) });
     if (/^\/Platform\/Destiny2\/3\/Profile\/4611686018400000001\/$/.test(u.pathname)) return route.fulfill({ status: 200, headers: cors, body: JSON.stringify({ ErrorCode: 1, Response: profile }) });
+    // the three approved write actions: record the exact JSON body; WRITE_FAIL makes the next one fail like Bungie does
+    if (r.method() === 'POST' && /^\/Platform\/Destiny2\/Actions\/Items\/(InsertSocketPlugFree|EquipItem|TransferItem)\/$/.test(u.pathname)) {
+      writes.push([u.pathname.split('/')[5], JSON.parse(r.postData() || 'null'), r.headers()]);
+      if (WRITE_FAIL.on) { WRITE_FAIL.on = false; return route.fulfill({ status: 200, headers: cors, body: JSON.stringify({ ErrorCode: 1634, ErrorStatus: 'DestinyCannotPerformActionAtThisLocation', Message: 'x' }) }); }
+      return route.fulfill({ status: 200, headers: cors, body: JSON.stringify({ ErrorCode: 1, Response: 0 }) });
+    }
     return route.fulfill({ status: 404, body: '' });
   });
 
@@ -69,12 +80,57 @@ srv.listen(8766, async () => {
   st.csp.length === 0 ? ok('zero CSP violations') : fail('CSP violations: ' + st.csp.join(' | '));
   const api = bungieReqs.filter(([m, p]) => p.startsWith('/Platform/') && m !== 'OPTIONS');
   const allowedRe = [/^POST \/Platform\/App\/OAuth\/token\/$/, /^GET \/Platform\/User\/GetMembershipsForCurrentUser\/$/, /^GET \/Platform\/Destiny2\/[1-6]\/Profile\/\d+\/$/];
+  !writes.length ? ok('loading the vault sends no write requests') : fail('writes sent while loading: ' + writes.map(w => w[0]).join(', '));
   const bad = api.filter(([m, p]) => !allowedRe.some(r => r.test(`${m} ${p}`)));
   !bad.length && api.length === 3 ? ok('only the token exchange + 2 read-only calls were sent') : fail('unexpected Bungie requests: ' + api.map(([m, p]) => m + ' ' + p).join(', '));
   const tok = api.find(([, p]) => p.endsWith('/token/'));
   tok && !/secret/i.test(tok[3]) && /client_id=424242/.test(tok[3]) ? ok('token exchange sends client_id, no secret') : fail('token request body wrong');
   const reads = api.filter(([m]) => m === 'GET');
   reads.every(([, , h]) => h['x-api-key'] === FAKE_KEY && h.authorization === 'Bearer ' + TOKEN) ? ok('reads send X-API-Key + bearer token') : fail('read headers wrong');
+  // ---- Bungie actions (approved 2026-11-17): every write only after the confirmation sheet ----
+  const cid = '2305843009300000001', W = '6917529000000000001', H = '6917529000000000004';
+  await pg.evaluate(id => { document.querySelector('#drawer.open') && document.querySelector('#dClose')?.click(); document.querySelector(`#panes .card[data-id="${id}"]`).click(); }, W); await pg.waitForTimeout(500);
+  const eq = await pg.$('#drawer [data-equip]');
+  eq && /from vault/.test(await eq.textContent()) ? ok('vault weapon shows "Equip on Hunter (from vault)"') : fail('no equip button on the vault weapon');
+  await eq.click(); await pg.waitForTimeout(300);
+  const steps = await pg.$$eval('#modalBox .actsteps li', x => x.map(l => l.textContent));
+  steps.length === 2 && /vault to your Hunter/.test(steps[0]) && /Equip/.test(steps[1]) && !writes.length ? ok('confirm sheet lists move + equip, nothing sent yet') : fail('confirm sheet ' + JSON.stringify(steps) + ' writes ' + writes.length);
+  await pg.click('#actGo'); await pg.waitForTimeout(1500);
+  const exp1 = [['TransferItem', { itemReferenceHash: 437854388, stackSize: 1, transferToVault: false, itemId: W, characterId: cid, membershipType: 3 }], ['EquipItem', { itemId: W, characterId: cid, membershipType: 3 }]];
+  JSON.stringify(writes.map(w => [w[0], w[1]])) === JSON.stringify(exp1) && writes.every(w => w[2].authorization === 'Bearer ' + TOKEN && w[2]['x-api-key'] === FAKE_KEY && /json/.test(w[2]['content-type']))
+    ? ok('equip from vault sends TransferItem then EquipItem with exact bodies') : fail('equip writes ' + JSON.stringify(writes.map(w => [w[0], w[1]])));
+  const eqd = await pg.evaluate(() => document.querySelector('#drawer .eqrow')?.textContent || '');
+  /Equipped on your Hunter/.test(eqd) ? ok('panel shows the weapon as equipped afterwards') : fail('equipped state not shown: ' + eqd);
+  // perk switch: Rimestealer -> Rewind Rounds in socket 3
+  writes.length = 0;
+  await pg.evaluate(() => [...document.querySelectorAll('#drawer [data-pk]')].find(x => x.dataset.pk === 'Rewind Rounds')?.click()); await pg.waitForTimeout(300);
+  const sw = await pg.$('#drawer [data-swap]');
+  sw && /Switch Rimestealer to Rewind Rounds/.test(await sw.textContent()) ? ok('perk detail offers "Switch Rimestealer to Rewind Rounds"') : fail('no perk switch button');
+  await sw?.click(); await pg.waitForTimeout(200); await pg.click('#actGo'); await pg.waitForTimeout(1200);
+  JSON.stringify(writes.map(w => [w[0], w[1]])) === JSON.stringify([['InsertSocketPlugFree', { plug: { socketIndex: 3, socketArrayType: 0, plugItemHash: 3418782618 }, itemId: W, characterId: cid, membershipType: 3 }]])
+    ? ok('perk switch sends one InsertSocketPlugFree with the exact body') : fail('perk writes ' + JSON.stringify(writes.map(w => [w[0], w[1]])));
+  // armor mod swap: Heavy Ammo Finder -> Arc Targeting in head mod socket 1
+  writes.length = 0;
+  await pg.evaluate(() => document.querySelector('#dClose')?.click()); await pg.fill('#panes .pane .qin', 'is:armor'); await pg.waitForTimeout(900);
+  await pg.evaluate(id => { document.querySelector('#dClose')?.click(); document.querySelector(`#panes .card[data-id="${id}"]`).click(); }, H); await pg.waitForTimeout(500);
+  await pg.evaluate(() => [...document.querySelectorAll('#drawer [data-pk]')].find(x => x.dataset.pk === 'Heavy Ammo Finder')?.click()); await pg.waitForTimeout(300);
+  const ms = await pg.$('#drawer [data-modswap]'); ms ? ok('mod detail offers "Change this mod"') : fail('no mod swap button');
+  await ms?.click(); await pg.waitForSelector('#plist'); await pg.fill('#pkq', 'Arc Targeting'); await pg.waitForTimeout(300);
+  await pg.evaluate(() => [...document.querySelectorAll('#plist .prow[data-s]')].find(r => !r.hidden && /Arc Targeting/.test(r.textContent))?.click()); await pg.waitForTimeout(300);
+  await pg.click('#actGo'); await pg.waitForTimeout(1200);
+  JSON.stringify(writes.map(w => [w[0], w[1]])) === JSON.stringify([['InsertSocketPlugFree', { plug: { socketIndex: 1, socketArrayType: 0, plugItemHash: 96682422 }, itemId: H, characterId: cid, membershipType: 3 }]])
+    ? ok('mod swap sends one InsertSocketPlugFree with the exact body') : fail('mod writes ' + JSON.stringify(writes.map(w => [w[0], w[1]])));
+  // Bungie refuses (not in orbit): message shown, the sequence stops at the first error
+  writes.length = 0; WRITE_FAIL.on = true;
+  await pg.evaluate(id => { document.querySelector('#dClose')?.click(); document.querySelector(`#panes .card[data-id="${id}"]`).click(); }, H); await pg.waitForTimeout(400);
+  await pg.click('#drawer [data-equip]'); await pg.waitForTimeout(200); await pg.click('#actGo'); await pg.waitForTimeout(1200);
+  const em = await pg.evaluate(() => document.querySelector('#actMsg')?.textContent || '');
+  writes.length === 1 && /orbit/.test(em) ? ok('a refused action stops at the first error and explains it') : fail('error handling ' + JSON.stringify({ n: writes.length, em }));
+  await pg.evaluate(() => document.querySelector('#actGo')?.click()); await pg.waitForTimeout(300);
+  const st2 = await pg.evaluate(() => window.__csp.length);
+  st2 === 0 ? ok('zero CSP violations after write actions') : fail('CSP violations after writes');
+  await pg.evaluate(() => { document.querySelector('#dClose')?.click(); }); await pg.keyboard.press('Escape'); await pg.waitForTimeout(400);
+  await pg.fill('#panes .pane .qin', ''); await pg.waitForTimeout(500);
   // sign out clears the session but keeps the vault
   await pg.click('#bLoad'); await pg.waitForTimeout(200);
   await pg.click('[data-bg=out]'); await pg.waitForTimeout(300);

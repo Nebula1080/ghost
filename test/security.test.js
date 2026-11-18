@@ -191,24 +191,67 @@ t('.gitignore covers secrets and real exports', () => {
 // ---------- Bungie sign-in (src/bungie.js) and the API item adapter (Core.apiToItems) ----------
 const BG = require('../src/bungie.js');
 const bsrc = read('src/bungie.js');
-t('bungie: only the token exchange and read-only lookups are allowed (move/equip scope stays unused)', () => {
+t('bungie: the token exchange, read-only lookups and exactly the three approved write actions are allowed', () => {
   assert.ok(BG.allowed('POST', '/Platform/App/OAuth/token/'));
   assert.ok(BG.allowed('GET', '/Platform/User/GetMembershipsForCurrentUser/'));
   assert.ok(BG.allowed('GET', '/Platform/Destiny2/3/Profile/4611686018400000000/'));
-  for (const [m, p] of [['POST', '/Platform/Destiny2/Actions/Items/TransferItem/'], ['POST', '/Platform/Destiny2/Actions/Items/EquipItem/'],
-    ['POST', '/Platform/Destiny2/Actions/Items/SetLockState/'], ['POST', '/Platform/Destiny2/Actions/Items/PullFromPostmaster/'],
-    ['POST', '/Platform/Destiny2/Actions/Items/InsertSocketPlugFree/'], ['GET', '/Platform/Destiny2/Actions/Items/TransferItem/'],
+  // approved 2026-11-17 (GHOST_PLAN -> Security): weapon perks / armor mods, equip, vault moves. Nothing else.
+  assert.deepStrictEqual(BG.WRITE_PATHS.slice().sort(), ['/Platform/Destiny2/Actions/Items/EquipItem/', '/Platform/Destiny2/Actions/Items/InsertSocketPlugFree/', '/Platform/Destiny2/Actions/Items/TransferItem/']);
+  for (const p of BG.WRITE_PATHS) assert.ok(BG.allowed('POST', p), p);
+  for (const [m, p] of [['POST', '/Platform/Destiny2/Actions/Items/SetLockState/'], ['POST', '/Platform/Destiny2/Actions/Items/PullFromPostmaster/'],
+    ['POST', '/Platform/Destiny2/Actions/Items/InsertSocketPlug/'], ['POST', '/Platform/Destiny2/Actions/Items/EquipItems/'], ['POST', '/Platform/Destiny2/Actions/Items/SetTrackedState/'],
+    ['POST', '/Platform/Destiny2/Actions/Loadouts/EquipLoadout/'], ['GET', '/Platform/Destiny2/Actions/Items/TransferItem/'], ['PUT', '/Platform/Destiny2/Actions/Items/EquipItem/'],
+    ['POST', '/Platform/Destiny2/Actions/Items/EquipItem/../SetLockState/'], ['POST', '/Platform/Destiny2/Actions/Items/EquipItem'], ['POST', '/platform/destiny2/actions/items/equipitem/'],
     ['PUT', '/Platform/App/OAuth/token/'], ['DELETE', '/Platform/User/GetMembershipsForCurrentUser/'], ['GET', '/Platform/User/GetMembershipsForCurrentUser/../Destiny2/Actions/'],
     ['GET', '/Platform/Destiny2/3/Profile/123/../../Actions/Items/EquipItem/'], ['POST', '/Platform/User/GetMembershipsForCurrentUser/']])
     assert.ok(!BG.allowed(m, p), `${m} ${p} must be refused`);
-  assert.ok(!/Actions|TransferItem|EquipItem|SetLockState|PullFromPostmaster|InsertSocketPlug|SetQuestTracked|Loadout/i.test(bsrc.replace(/^\s*\/\/.*$/gm, '')), 'bungie.js must not contain any write endpoint');
-  assert.ok(!/localStorage|indexedDB|document\.cookie|console\./.test(bsrc.replace(/^\s*\/\/.*$/gm, '')), 'bungie.js must not use persistent storage or log anything');
+  const code = bsrc.replace(/^\s*\/\/.*$/gm, '');
+  assert.ok(!/SetLockState|PullFromPostmaster|InsertSocketPlug\/|EquipItems|SetQuestTracked|SetTrackedState|Loadout|AdvancedWriteActions/i.test(code), 'no other write endpoint or scope in bungie.js');
+  assert.ok(!/localStorage|indexedDB|document\.cookie|console\./.test(code), 'bungie.js must not use persistent storage or log anything');
+});
+t('bungie: write bodies must have exactly the approved shape', () => {
+  const ok = { plug: { plug: { socketIndex: 3, socketArrayType: 0, plugItemHash: 2420895100 }, itemId: '6917529000000000001', characterId: '2305843009300000001', membershipType: 3 },
+    equip: { itemId: '6917529000000000001', characterId: '2305843009300000001', membershipType: 3 },
+    transfer: { itemReferenceHash: 1399243961, stackSize: 1, transferToVault: false, itemId: '6917529000000000001', characterId: '2305843009300000001', membershipType: 3 } };
+  for (const [a, b] of Object.entries(ok)) assert.ok(BG.writeBody(a, b), a);
+  const bad = [['equip', { ...ok.equip, extra: 1 }], ['equip', { ...ok.equip, itemId: 6917529000000000001 }], ['equip', { ...ok.equip, itemId: '12a' }], ['equip', { ...ok.equip, membershipType: 254 }],
+    ['plug', { ...ok.plug, plug: { ...ok.plug.plug, socketArrayType: 1 } }], ['plug', { ...ok.plug, plug: { ...ok.plug.plug, plugItemHash: -5 } }], ['plug', { ...ok.plug, plug: { ...ok.plug.plug, extra: 1 } }],
+    ['transfer', { ...ok.transfer, stackSize: 2 }], ['transfer', { ...ok.transfer, transferToVault: 'yes' }], ['transfer', { ...ok.equip }], ['lock', ok.equip], ['equip', null], ['equip', [1]]];
+  for (const [a, b] of bad) assert.ok(!BG.writeBody(a, b), `${a} ${JSON.stringify(b)} must be refused`);
+});
+t('app: Bungie writes only run from the confirmation sheet', () => {
+  const app = read('src/app.html');
+  const calls = app.match(/BG\.act\(/g) || [];
+  assert.strictEqual(calls.length, 1, 'exactly one BG.act call site');
+  const fn = app.slice(app.indexOf('function runActions('), app.indexOf('function runActions(') + 2000);
+  assert.ok(/BG\.act\(/.test(fn) && /id="actGo"/.test(fn) && /go\.onclick = async/.test(fn), 'BG.act lives inside the Confirm button handler of runActions');
+  assert.ok(!/setInterval|setTimeout\([^)]*runActions/.test(app.slice(app.indexOf('// ---------- Bungie actions'), app.indexOf('// picker sheet'))), 'no timers start actions');
 });
 const mkStore = () => { const m = new Map(); return { m, getItem: k => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)), removeItem: k => m.delete(k) }; };
 const KEY = 'ab'.repeat(16) /* made-up test value */, CLIENT = '12345', TOKEN = 'tok_SECRET_value_123';
 const mkRes = (status, body) => ({ ok: status >= 200 && status < 300, status, json: async () => body });
 const asyncTests = [];
 const at = (name, fn) => asyncTests.push([name, fn]);
+at('bungie: act() sends one guarded JSON POST, waits the Bungie gap, explains errors, refuses bad bodies offline', async () => {
+  const store = mkStore(); store.setItem(BG.K_TOKEN, JSON.stringify({ t: TOKEN, exp: Date.now() + 3600e3, mid: '1' }));
+  const calls = []; let clock = 1000; const slept = [];
+  let reply = mkRes(200, { ErrorCode: 1, Response: 0 });
+  const b = BG.create({ key: KEY, client: CLIENT, store, now: () => clock, sleep: async ms => { slept.push(ms); clock += ms; }, random: n => new Uint8Array(n), fetch: async (url, o) => { calls.push([url, o]); return reply; } });
+  const body = { plug: { socketIndex: 3, socketArrayType: 0, plugItemHash: 2420895100 }, itemId: '6917529000000000001', characterId: '2305843009300000001', membershipType: 3 };
+  await b.act('plug', body);
+  const [url, o] = calls[0];
+  assert.strictEqual(url, 'https://www.bungie.net/Platform/Destiny2/Actions/Items/InsertSocketPlugFree/');
+  assert.strictEqual(o.method, 'POST'); assert.strictEqual(o.credentials, 'omit'); assert.strictEqual(o.headers.Authorization, 'Bearer ' + TOKEN);
+  assert.deepStrictEqual(JSON.parse(o.body), body, 'body sent exactly as validated');
+  await b.act('plug', body); assert.ok(slept.some(ms => ms >= 499), 'second plug action waits 0.5 s');
+  await assert.rejects(b.act('plug', { ...body, extra: 1 }), /Blocked/); await assert.rejects(b.act('lock', body), /Blocked/);
+  assert.strictEqual(calls.length, 2, 'refused bodies never reach the network');
+  reply = mkRes(200, { ErrorCode: 1634, ErrorStatus: 'DestinyCannotPerformActionAtThisLocation' });
+  await assert.rejects(b.act('equip', { itemId: '1', characterId: '2', membershipType: 3 }), /orbit/);
+  reply = mkRes(200, { ErrorCode: 9, ErrorStatus: '<img src=x onerror=alert(1)>' });
+  await assert.rejects(b.act('equip', { itemId: '1', characterId: '2', membershipType: 3 }), e => !/</.test(e.message), 'unknown statuses are not echoed raw');
+  assert.ok(calls.every(([, o2]) => !/SECRET/.test(o2.body || '')), 'token never in a body');
+});
 at('bungie: a mismatched, missing or reused state is rejected and no token is requested', async () => {
   let calls = 0; const store = mkStore();
   const b = BG.create({ key: KEY, client: CLIENT, store, fetch: async () => { calls++; return mkRes(200, {}); }, random: n => new Uint8Array(n).fill(7) });

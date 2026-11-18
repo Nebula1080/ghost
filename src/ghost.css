@@ -855,3 +855,14 @@ a{color:var(--light)}
   .ixn{min-height:32px}
   .ixlab{width:auto;margin-right:4px}
 }
+
+/* Bungie actions: equip row, perk / mod switch, confirmation steps */
+.eqrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.actrow{margin-top:10px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.btn.primary:disabled{opacity:.6}
+.actsteps{margin:4px 0 10px;padding-left:20px}.actsteps li{margin:4px 0;color:var(--dim)}
+.actsteps li.run{color:var(--text)}.actsteps li.run::marker{color:var(--accent)}
+.actsteps li.ok{color:var(--good)}.actsteps li.err{color:var(--bad)}
+.actmsg{min-height:1.2em;font-size:13px;color:var(--mid)}
+@media (max-width:760px){.eqrow .btn,.actrow .btn{min-height:44px;flex:1 1 auto}}

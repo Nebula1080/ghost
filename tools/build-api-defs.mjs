@@ -4,7 +4,8 @@
 //   node tools/build-api-defs.mjs
 // Output shape (all keys are item / plug / stat hashes as strings):
 //   i: weapons + armor  -> [name, kind 'w'|'a', type, rarity, ammo 0-3, bucket hash, classType, perk socket indexes]
-//   p: plugs            -> [name, cat]  cat: i intrinsic, r armor archetype, m masterwork, u tuning, k tracker, '' other
+//   p: plugs            -> [name, cat]  cat: i intrinsic, r armor archetype, m masterwork, u tuning, k tracker,
+//                          ah/aa/ac/al/ax/ag armor mod (head/arms/chest/legs/class item/general), '' other
 //   s: stats            -> short name as DIM's spreadsheet uses it (only stats DIM exports)
 import fs from 'node:fs';
 import path from 'node:path';
@@ -33,7 +34,9 @@ const STAT_KEEP = new Set(['ROF', 'AA', 'Recoil', 'Mag', 'Reload', 'Impact', 'Ra
   'Airborne Effectiveness', 'Ammo Generation', 'Heat Generated', 'Cooling Efficiency', 'Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee']);
 
 const PERK_CATS = new Set([4241085061, 3154740035]); // WEAPON PERKS, ARMOR PERKS
-const plugCat = c => !c ? '' : c === 'intrinsics' ? 'i' : /armor_archetypes/.test(c) ? 'r' : /trackers/.test(c) ? 'k'
+// armor mod sockets by slot (ah head, aa arms, ac chest, al legs, ax class item, ag general) so Ghost can offer mod swaps
+const AMOD = { 'enhancements.v2_head': 'ah', 'enhancements.v2_arms': 'aa', 'enhancements.v2_chest': 'ac', 'enhancements.v2_legs': 'al', 'enhancements.v2_class_item': 'ax', 'enhancements.v2_general': 'ag' };
+const plugCat = c => !c ? '' : AMOD[c] ? AMOD[c] : c === 'intrinsics' ? 'i' : /armor_archetypes/.test(c) ? 'r' : /trackers/.test(c) ? 'k'
   : /tuning/.test(c) ? 'u' : /masterwork/.test(c) ? 'm' : '';
 
 const out = { v: manifest.Response.version, i: {}, p: {}, s: {} };
