@@ -897,3 +897,7 @@ a{color:var(--light)}
 .bmk{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);line-height:1.2}
 .bwms{display:flex;flex-wrap:wrap;gap:4px 10px}.bwm{color:var(--dim)}.bwc.has{color:var(--good)}.bwc.missing{color:var(--faint)}.bwc{cursor:pointer}
 .bwb{font-style:normal;font-size:11px;color:var(--good);margin-left:4px}
+.bstat .tr{position:relative;display:flex}.bstat .tr i{height:100%}.bstat .tr .p-armor{background:var(--light)}.bstat .tr .p-mw{background:var(--accent)}.bstat .tr .p-tune{background:var(--arc)}.bstat .tr .p-mods{background:var(--good)}.bstat .tr .p-frag{background:var(--void)}
+.bstat .tr .t100{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--line2)}
+.bstat b.over{color:var(--bad)}.bfx{display:flex;flex-direction:column;gap:2px;grid-column:1/-1;font-size:11.5px;color:var(--dim);line-height:1.35;margin:2px 0 6px}.bfx .enh{color:var(--good)}
+.bmod.ins{opacity:.7;border-style:dashed}
