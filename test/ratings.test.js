@@ -138,15 +138,28 @@ t('wish list: every-item (*) rolls apply to any weapon', () => {
   const it = roll(); it.hash = '555'; C.rateGhost(it, defs, T, null);
   assert.strictEqual(it.why.wish.e.score, 100); assert.strictEqual(it.why.wish.p.score, 100); // untagged = both modes
 });
-t('perks: equipped perk weighted 0.7, best option 0.3, traits ×2, origin ×0.5, best combo ×2', () => {
+t('perks: the best roll from every option counts, not just the equipped perks (traits ×2, best combo ×2)', () => {
   const it = roll(); C.rateGhost(it, defs, R, null);
   const e = it.why.perks.e;
-  // barrel: S equipped (S best) = 100; mag: A = 85; trait1: 0.7×B(70) + 0.3×S(100) = 79; trait2: 0.7×A(85) + 0.3×S(100) = 89.5
-  assert.deepStrictEqual(e.cols.map(c => c.score), [100, 85, 79, 90]);
-  assert.strictEqual(e.combos[0].a + '+' + e.combos[0].b, 'Outlaw+Rampage'); assert.ok(e.combos[0].equipped);
-  // (100 + 85 + 79×2 + 89.5×2 + 100×2) / 8
-  assert.strictEqual(e.score, Math.round((100 + 85 + 79 * 2 + 89.5 * 2 + 100 * 2) / 8));
+  // equipped Outlaw (B) + Rampage (A) + their S combo: (100 + 85 + 70×2 + 85×2 + 100×2) / 8 = 86.9
+  // unselected Kill Clip (S) + Frenzy (S), no combo:  (100 + 85 + 100×2 + 100×2) / 6 = 97.5  -> wins
+  assert.deepStrictEqual(e.cols.map(c => c.pick), ['Arrowhead Brake', 'Tactical Mag', 'Kill Clip', 'Frenzy']);
+  assert.deepStrictEqual(e.cols.map(c => c.switched), [false, false, true, true]);
+  assert.deepStrictEqual(e.switched, ['Kill Clip', 'Frenzy']);
+  assert.strictEqual(e.score, 98); assert.strictEqual(e.equipped, 87);
+  assert.strictEqual(e.combos.length, 0);
   assert.strictEqual(it.why.perks.p.combos.length, 0); // the combo has no PvP tier
+});
+t('perks: a rated combo can make an unselected pair the best roll; ties keep the equipped perks', () => {
+  // PvP: Kill Clip (S, option) + Rampage (A, equipped) scores 90; rating Kill Clip + Rampage S as a combo lifts it to 92.5
+  const U = C.prepUserRatings({ c: { [C.comboKey('Kill Clip', 'Rampage')]: { a: 'Kill Clip', b: 'Rampage', p: 'S' } } });
+  const it = roll(); C.rateGhost(it, defs, R, U); const p = it.why.perks.p;
+  assert.deepStrictEqual(p.combos.map(c => [c.a, c.b, c.tier, c.equipped]), [['Kill Clip', 'Rampage', 'S', false]]);
+  assert.strictEqual(p.score, 93); assert.deepStrictEqual(p.switched, ['Kill Clip']);
+  // same tier on equipped and option: the equipped one is kept
+  const T = C.prepUserRatings({ p: { outlaw: { e: 'S' }, rampage: { e: 'S' }, killclip: { e: 'S' }, frenzy: { e: 'S' } } });
+  const t2 = roll(); C.rateGhost(t2, defs, R, T); assert.deepStrictEqual(t2.why.perks.e.switched, []);
+  assert.deepStrictEqual(t2.why.perks.e.combos.map(c => c.a + '+' + c.b), ['Outlaw+Rampage']);
 });
 t('mix: weights 50/25/25, Aegis PvE only, rating = average of PvE and PvP', () => {
   const it = roll(); C.rateGhost(it, defs, R, null);
@@ -165,13 +178,12 @@ t('mix: missing parts are left out and the rest rescaled; nothing at all = unrat
 });
 t('overrides: a personal tier, "unrated", combos and weights change the score', () => {
   const base = roll(); C.rateGhost(base, defs, R, null);
-  const U = C.prepUserRatings({ p: { outlaw: { e: 'S' } } }); const it = roll(); C.rateGhost(it, defs, R, U);
-  assert.ok(it.why.perks.e.score > base.why.perks.e.score);
-  assert.strictEqual(C.perkTier('Outlaw', 'e', R, U), 'S'); assert.strictEqual(C.perkTier('Outlaw', 'p', R, U), 'C');
+  const U = C.prepUserRatings({ p: { killclip: { e: 'x' }, frenzy: { e: 'D' } } }); const it = roll(); C.rateGhost(it, defs, R, U);
+  assert.ok(it.why.perks.e.score < base.why.perks.e.score);
+  assert.deepStrictEqual(it.why.perks.e.cols.map(c => c.pick).slice(2), ['Outlaw', 'Rampage']); // back to the equipped pair + combo
+  assert.strictEqual(C.perkTier('Kill Clip', 'e', R, U), ''); assert.strictEqual(C.perkTier('Kill Clip', 'p', R, U), 'S');
   const X = C.prepUserRatings({ p: { arrowheadbrake: { e: 'x', p: 'x' } } }); const x = roll(); C.rateGhost(x, defs, R, X);
   assert.strictEqual(x.why.perks.e.cols[0].score, null);
-  const CB = C.prepUserRatings({ c: { [C.comboKey('Kill Clip', 'Frenzy')]: { a: 'Kill Clip', b: 'Frenzy', p: 'S' } } }); const c = roll(); C.rateGhost(c, defs, R, CB);
-  assert.strictEqual(c.why.perks.p.combos[0].equipped, false); assert.strictEqual(c.why.perks.p.combos[0].score, 30);
   const W0 = C.prepUserRatings({ w: { perks: 0, wish: 100, aegis: 0 } }); const w = roll(); C.rateGhost(w, defs, R, W0);
   assert.strictEqual(w.pve, 100); assert.strictEqual(w.pvp, 40);
   const none = C.prepUserRatings({ w: { perks: 0, wish: 0, aegis: 0 } }); const z = roll(); C.rateGhost(z, defs, R, none); assert.strictEqual(z.rating, null);

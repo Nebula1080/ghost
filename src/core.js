@@ -589,36 +589,51 @@ const Core = (() => {
     return m;
   }
   const RATE_COL_W = { b: 1, m: 1, t: 2, o: 0.5, '?': 1 };
-  const EQUIP_W = 0.7; // equipped perk vs the best other option in its column
   const equippedOf = c => c.perks.find(p => p.s) || (c.perks.length === 1 ? c.perks[0] : null);
+  // Perk part = the best roll this weapon can have: one perk per column chosen from every option it rolled
+  // (equipped or not), so a better trait combo sitting unselected counts. Each column scores its chosen perk's
+  // tier (barrel/mag ×1, traits ×2, origin ×0.5) and the best rated combo among the chosen perks counts ×2.
+  // Ties prefer the equipped perks. The result lists the chosen perks and which ones differ from equipped.
+  const BEST_MAX = 20000; // selections tried per weapon and mode; past this each column keeps its top 4 options
   function perkPart(cols, mode, R, U, cmap) {
-    const why = []; let sum = 0, w = 0;
-    for (const c of cols) {
+    const cand = cols.map(c => {
       const eq = equippedOf(c);
-      let eqS = null, best = null, bestN = '';
-      for (const p of c.perks) {
-        const t = perkTier(p.n, mode, R, U); if (!t) continue;
-        const sc = TIER_SCORE[t];
-        if (p === eq) eqS = sc;
-        if (best === null || sc > best) { best = sc; bestN = p.n; }
+      const rated = c.perks.map(p => ({ p, t: perkTier(p.n, mode, R, U) })).filter(x => x.t);
+      return { c, eq, list: rated.length ? rated : [{ p: eq || c.perks[0], t: '' }] };
+    });
+    let n = cand.reduce((a, x) => a * x.list.length, 1);
+    if (n > BEST_MAX) {
+      for (const x of cand) x.list = x.list.sort((a, b) => TIER_SCORE[b.t] - TIER_SCORE[a.t] || (b.p === x.eq) - (a.p === x.eq)).slice(0, 4);
+      n = cand.reduce((a, x) => a * x.list.length, 1);
+    }
+    const evalSel = sel => {
+      let sum = 0, w = 0, eqN = 0, combo = null;
+      sel.forEach((x, i) => { if (x.p === cand[i].eq) eqN++; if (!x.t) return; const wt = RATE_COL_W[cand[i].c.ty] ?? 1; sum += TIER_SCORE[x.t] * wt; w += wt; });
+      for (let i = 0; i < sel.length; i++) for (let j = i + 1; j < sel.length; j++) {
+        const c = cmap.get(comboKey(sel[i].p.n, sel[j].p.n)); const t = c?.[mode];
+        if (t && (!combo || TIER_SCORE[t] > TIER_SCORE[combo.tier])) combo = { a: sel[i].p.n, b: sel[j].p.n, tier: t, score: TIER_SCORE[t], equipped: sel[i].p === cand[i].eq && sel[j].p === cand[j].eq };
       }
-      if (best === null) { why.push({ ty: c.ty, eq: eq?.n || '', tier: '', score: null }); continue; }
-      // a column scores mostly its equipped perk, partly its best option (a perk you can still select);
-      // an unrated equipped perk counts as nothing on the equipped side
-      const sc = c.perks.length === 1 ? best : EQUIP_W * (eqS ?? 0) + (1 - EQUIP_W) * best;
-      const wt = RATE_COL_W[c.ty] ?? 1; sum += sc * wt; w += wt;
-      why.push({ ty: c.ty, eq: eq?.n || '', tier: eq ? perkTier(eq.n, mode, R, U) : '', best: bestN, bestTier: perkTier(bestN, mode, R, U), score: Math.round(sc) });
+      if (combo) { sum += combo.score * 2; w += 2; }
+      return { score: w ? sum / w : null, eqN, combo };
+    };
+    let best = null, bestSel = null;
+    const idx = new Array(cand.length).fill(0);
+    for (let k = 0; k < n; k++) {
+      const sel = cand.map((x, i) => x.list[idx[i]]);
+      const r = evalSel(sel);
+      if (r.score != null && (!best || r.score > best.score + 1e-9 || (Math.abs(r.score - best.score) < 1e-9 && r.eqN > best.eqN))) { best = r; bestSel = sel; }
+      for (let i = 0; i < idx.length; i++) { if (++idx[i] < cand[i].list.length) break; idx[i] = 0; }
     }
-    // combos: a pair of perks from two different columns; both equipped counts fully, otherwise at the option weight
-    const hits = [];
-    for (let i = 0; i < cols.length; i++) for (let j = i + 1; j < cols.length; j++) for (const a of cols[i].perks) for (const b of cols[j].perks) {
-      const c = cmap.get(comboKey(a.n, b.n)); const t = c?.[mode]; if (!t) continue;
-      const both = equippedOf(cols[i]) === a && equippedOf(cols[j]) === b;
-      hits.push({ a: a.n, b: b.n, tier: t, equipped: both, score: Math.round(TIER_SCORE[t] * (both ? 1 : 1 - EQUIP_W)) });
-    }
-    hits.sort((x, y) => y.score - x.score);
-    if (hits.length) { sum += hits[0].score * 2; w += 2; }
-    return { score: w ? Math.round(sum / w) : null, cols: why, combos: hits.slice(0, 6) };
+    // the equipped roll's own score, for "equipped vs best" in the item panel
+    const eqSel = cand.map(x => ({ p: x.eq || x.c.perks[0], t: x.eq ? perkTier(x.eq.n, mode, R, U) : '' }));
+    const eqR = evalSel(eqSel);
+    const why = cand.map((x, i) => {
+      const s = bestSel?.[i]; const pick = s?.t ? s.p : null;
+      return { ty: x.c.ty, pick: pick?.n || '', tier: pick ? s.t : '', eq: x.eq?.n || '', eqTier: x.eq ? perkTier(x.eq.n, mode, R, U) : '',
+        switched: !!(pick && x.eq && pick !== x.eq), score: pick ? TIER_SCORE[s.t] : null };
+    });
+    return { score: best ? Math.round(best.score) : null, cols: why, combos: best?.combo ? [best.combo] : [],
+      equipped: eqR.score != null ? Math.round(eqR.score) : null, switched: why.filter(c => c.switched).map(c => c.pick) };
   }
   // Wish-list match: per listed roll, each perk set scores 1 if the equipped perk is in it, 0.4 if only another
   // option is, else 0; trait sets count double. The best roll per mode wins. A trash roll fully matched by
