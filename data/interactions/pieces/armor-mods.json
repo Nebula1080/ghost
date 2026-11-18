@@ -7,7 +7,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Reduces all ability cooldowns each time you pick up an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grenade, melee and class ability energy on pickup"
    },
    {
     "do": "grants",
@@ -40,7 +41,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Reduces grenade cooldown each time you pick up an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grenade energy on pickup"
    },
    {
     "do": "grants",
@@ -59,7 +61,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Reduces melee cooldown each time you pick up an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "melee energy on pickup"
    },
    {
     "do": "grants",
@@ -78,7 +81,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Reduces class ability cooldown each time you pick up an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "class ability energy on pickup"
    },
    {
     "do": "grants",
@@ -97,7 +101,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Picking up an Orb of Power grants a small amount of energy to your ability with the least energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "energy for your least-charged ability on pickup"
    },
    {
     "do": "grants",
@@ -133,7 +138,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Your health begins to regenerate immediately after picking up an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "health starts regenerating at once on pickup"
    },
    {
     "do": "grants",
@@ -153,7 +159,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Replenishes health each time you pick up an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "restores health on pickup"
    },
    {
     "do": "grants",
@@ -173,7 +180,8 @@
     "do": "uses",
     "t": "grenade",
     "q": "Your grenade final blows create Orbs of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grenade kills create Orbs of Power"
    },
    {
     "do": "creates",
@@ -193,7 +201,8 @@
     "do": "uses",
     "t": "poweredmelee",
     "q": "Your powered melee final blows create Orbs of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "powered melee kills create Orbs of Power"
    },
    {
     "do": "creates",
@@ -213,7 +222,8 @@
     "do": "uses",
     "t": "super",
     "q": "Your Super final blows create extra Orbs of Power for your allies.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Super kills create Orbs of Power for allies"
    },
    {
     "do": "creates",
@@ -233,7 +243,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Shortly after using your class ability, your next weapon final blow spawns an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "next weapon kill after using it creates an Orb of Power"
    },
    {
     "do": "creates",
@@ -591,7 +602,8 @@
      "grenade"
     ],
     "q": "Grants class ability energy when you cause damage with a grenade.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "class ability energy when your grenade deals damage"
    },
    {
     "do": "grants",
@@ -614,7 +626,8 @@
      "grenade"
     ],
     "q": "Causing damage with a grenade reduces your melee cooldown.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "melee energy when your grenade deals damage"
    },
    {
     "do": "grants",
@@ -637,7 +650,8 @@
      "poweredmelee"
     ],
     "q": "Grants class ability energy when you cause damage with a powered melee attack.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "class ability energy when your powered melee deals damage"
    },
    {
     "do": "grants",
@@ -660,7 +674,8 @@
      "poweredmelee"
     ],
     "q": "Causing damage with a powered melee attack reduces your grenade cooldown.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grenade energy when your powered melee deals damage"
    },
    {
     "do": "grants",
@@ -680,7 +695,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Reduces grenade cooldown when using your class ability.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grenade energy when you use it"
    },
    {
     "do": "grants",
@@ -699,7 +715,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Reduces melee cooldown when using your class ability.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "melee energy when you use it"
    },
    {
     "do": "grants",
@@ -718,7 +735,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Reduces all ability cooldowns when using your class ability near targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grenade, melee, class and Super energy when used near enemies"
    },
    {
     "do": "grants",
@@ -758,7 +776,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Reduces Super cooldown when using your class ability near targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Super energy when used near enemies"
    },
    {
     "do": "grants",
@@ -778,7 +797,8 @@
     "do": "uses",
     "t": "grenade",
     "q": "Gain bonus Super energy on grenade kills.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "bonus Super energy on grenade kills"
    },
    {
     "do": "grants",
@@ -798,7 +818,8 @@
     "do": "uses",
     "t": "melee",
     "q": "Gain bonus Super energy on melee kills.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "bonus Super energy on melee kills"
    },
    {
     "do": "grants",
@@ -819,6 +840,7 @@
     "t": "grenade",
     "q": "Increases grenade throw distance.",
     "s": "bungie",
+    "pay": "thrown grenades travel farther and faster",
     "note": "thrown grenades travel ~25% faster (Clarity)"
    }
   ]
@@ -831,7 +853,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Automatically collects nearby Orbs of Power when you activate your class ability.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "pulls in nearby Orbs of Power when you use it"
    },
    {
     "do": "uses",
@@ -839,6 +862,7 @@
     "on": "activating your class ability collects nearby Orbs",
     "q": "Automatically collects nearby Orbs of Power when you activate your class ability.",
     "s": "bungie",
+    "pay": "nearby Orbs of Power are collected automatically",
     "note": "12.5 m, 18.5 m with 2+ copies"
    }
   ]
@@ -852,6 +876,7 @@
     "t": "armorcharge",
     "q": "Increases the maximum number of stacks of Armor Charge you can carry by 1.",
     "s": "bungie",
+    "pay": "+1 maximum Armor Charge stack per copy",
     "note": "max 4|5|6 stacks with 1|2|3 copies"
    }
   ]
@@ -864,13 +889,15 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Picking up an Orb of Power grants you 1 additional stack of Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "an extra Armor Charge stack on pickup"
    },
    {
     "do": "modifies",
     "t": "armorcharge",
     "q": "All Armor Charge sources grant an additional Stack.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "every Armor Charge source gives one extra stack"
    }
   ]
  },
@@ -883,6 +910,7 @@
     "t": "armorcharge",
     "q": "Your decaying Armor Charge has a longer duration.",
     "s": "bungie",
+    "pay": "Armor Charge decays more slowly",
     "note": "decay every 15|18|20 s instead of 10 s with 1|2|3 copies"
    }
   ]
@@ -895,37 +923,47 @@
     "do": "uses",
     "t": "elementalpickup",
     "q": "Collecting an Elemental pickup or destroying a Tangle has an escalating chance to give you Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "builds progress toward a stack of Armor Charge"
    },
    {
     "do": "uses",
     "t": "tangle",
     "q": "Collecting an Elemental pickup or destroying a Tangle has an escalating chance to give you Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "builds progress toward a stack of Armor Charge"
    },
    {
     "do": "uses",
     "t": "firesprite",
     "q": "Firesprites, Void Breaches, Tangles: 50%|50%|100%",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "builds progress toward a stack of Armor Charge",
+    "pq": "grants 1 Stack of Armor Charge upon reaching 100% Activation Progress"
    },
    {
     "do": "uses",
     "t": "voidbreach",
     "q": "Firesprites, Void Breaches, Tangles: 50%|50%|100%",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "builds progress toward a stack of Armor Charge",
+    "pq": "grants 1 Stack of Armor Charge upon reaching 100% Activation Progress"
    },
    {
     "do": "uses",
     "t": "ionictrace",
     "q": "Ionic Traces: 34%|50%|50%",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "builds progress toward a stack of Armor Charge",
+    "pq": "grants 1 Stack of Armor Charge upon reaching 100% Activation Progress"
    },
    {
     "do": "uses",
     "t": "stasisshard",
     "q": "Stasis Shards: 25%|34%|50%",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "builds progress toward a stack of Armor Charge",
+    "pq": "grants 1 Stack of Armor Charge upon reaching 100% Activation Progress"
    },
    {
     "do": "grants",
@@ -957,7 +995,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes nearby allies with at least one Armor Charge to gain an additional one.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "nearby allies with Armor Charge gain one more stack"
    },
    {
     "do": "grants",
@@ -977,7 +1016,8 @@
     "do": "uses",
     "t": "super",
     "q": "Casting your Super causes nearby allies with at least one Armor Charge to gain an additional one.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "nearby allies with Armor Charge gain one more stack"
    },
    {
     "do": "grants",
@@ -998,7 +1038,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "You gain a bonus to your grenade stat while you have any Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "+grenade stat while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1018,7 +1059,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "You gain a bonus to your weapons stat while you have any Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "+weapons stat while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1038,7 +1080,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1051,7 +1094,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Grants 20|40|50 Melee stat with 1|2|3 Mods equipped while you have active Armor Charges.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "+melee stat while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1071,7 +1115,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1084,7 +1129,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Grants 20|40|50 Class stat with 1|2|3 Mods equipped while you have active Armor Charges.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "+class stat while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1104,7 +1150,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1117,7 +1164,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Grants 20|40|50 Super stat with 1|2|3 Mods equipped while you have active Armor Charges.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "+Super stat while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1137,7 +1185,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1150,7 +1199,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Grants 20|40|50 Health stat with 1|2|3 Mods equipped while you have active Armor Charges.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "+health stat while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1170,7 +1220,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1183,7 +1234,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Increases Arc Weapon damage while you have active Armor Charges",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "more Arc weapon damage while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1208,7 +1260,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1221,7 +1274,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Increases Kinetic Weapon damage while you have active Armor Charges",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "more Kinetic weapon damage while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1246,7 +1300,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1259,7 +1314,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Increases Void Weapon damage while you have active Armor Charges",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "more Void weapon damage while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1284,7 +1340,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Your Solar weapons gain a small bonus to damage while you have any Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Solar weapon damage while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1309,7 +1366,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Your Stasis weapons gain a small bonus to damage while you have any Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Stasis weapon damage while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1334,7 +1392,8 @@
     "do": "uses",
     "t": "armorcharge",
     "q": "Your Strand weapons gain a small bonus to damage while you have any Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Strand weapon damage while you have Armor Charge"
    },
    {
     "do": "grants",
@@ -1360,13 +1419,15 @@
     "t": "grenade",
     "on": "when its energy is fully expended",
     "q": "When your grenade energy is fully expended, your Armor Charge is consumed and you gain grenade energy for each Armor Charge used.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "spends your Armor Charge for grenade energy when your grenade is used up"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "When your grenade energy is fully expended, your Armor Charge is consumed and you gain grenade energy for each Armor Charge used.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grenade energy for each Armor Charge spent"
    },
    {
     "do": "grants",
@@ -1387,13 +1448,15 @@
     "t": "melee",
     "on": "when its energy is fully expended",
     "q": "When your melee energy is fully expended, your Armor Charge is consumed and you gain melee energy for each Armor Charge used.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "spends your Armor Charge for melee energy when your melee is used up"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "When your melee energy is fully expended, your Armor Charge is consumed and you gain melee energy for each Armor Charge used.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "melee energy for each Armor Charge spent"
    },
    {
     "do": "grants",
@@ -1414,13 +1477,15 @@
     "t": "classability",
     "on": "when its energy is fully expended",
     "q": "When your class ability energy is fully expended, your Armor Charge is consumed and you gain class ability energy for each Armor Charge used.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "spends your Armor Charge for class ability energy when it is used up"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "When your class ability energy is fully expended, your Armor Charge is consumed and you gain class ability energy for each Armor Charge used.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "class ability energy for each Armor Charge spent"
    },
    {
     "do": "grants",
@@ -1440,7 +1505,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1453,13 +1519,15 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finishers consume 3 Stacks of Armor Charge and spawn an Orb of Power for your allies",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "spends 3 Armor Charge to spawn an Orb of Power for allies"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Finishers consume 3 Stacks of Armor Charge and spawn an Orb of Power for your allies",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "an Orb of Power for allies"
    },
    {
     "do": "creates",
@@ -1479,7 +1547,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1492,13 +1561,15 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finishers consume 3 or more Stacks of Armor Charge and grant a 45 HP Void Overshield.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "spends 3+ Armor Charge for a Void Overshield"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Finishers consume 3 or more Stacks of Armor Charge and grant a 45 HP Void Overshield.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "a Void Overshield, longer with more stacks spent"
    },
    {
     "do": "grants",
@@ -1518,7 +1589,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1531,13 +1603,15 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finisher consume 3 or more Stacks of Armor Charge and grant Grenade Ability Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "spends 3+ Armor Charge for grenade energy"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Finisher consume 3 or more Stacks of Armor Charge and grant Grenade Ability Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "grenade energy (70-100% by stacks spent)"
    },
    {
     "do": "grants",
@@ -1557,7 +1631,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1570,13 +1645,15 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finishers consume 3 or more Stacks of Armor Charge and grant Melee Ability Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "spends 3+ Armor Charge for melee energy"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Finishers consume 3 or more Stacks of Armor Charge and grant Melee Ability Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "melee energy (70-100% by stacks spent)"
    },
    {
     "do": "grants",
@@ -1596,7 +1673,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1609,13 +1687,15 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finisher consume 3 or more Stacks of Armor Charge and grant Class Ability Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "spends 3+ Armor Charge for class ability energy"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Finisher consume 3 or more Stacks of Armor Charge and grant Class Ability Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "class ability energy (70-100% by stacks spent)"
    },
    {
     "do": "grants",
@@ -1635,7 +1715,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1648,13 +1729,15 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finishers consume 1 Stack of Armor Charge to fully restore Health and Shields.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "spends 1 Armor Charge to fully restore health and shields"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Finishers consume 1 Stack of Armor Charge to fully restore Health and Shields.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "fully restores health and shields"
    },
    {
     "do": "grants",
@@ -1673,7 +1756,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1686,13 +1770,15 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finishers consume 2 Stacks of Armor Charge and grant 50% Ability Energy to your least-charged Ability.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "spends 2 Armor Charge for 50% energy to your least-charged ability"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Finishers consume 2 Stacks of Armor Charge and grant 50% Ability Energy to your least-charged Ability.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "50% energy to your least-charged ability"
    },
    {
     "do": "grants",
@@ -1728,7 +1814,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1741,13 +1828,15 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finishers consume 1 Stack of Armor Charge and refill all your weapons from reserves.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "spends 1 Armor Charge to refill all weapons from reserves"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Finishers consume 1 Stack of Armor Charge and refill all your weapons from reserves.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "refills all weapons from reserves"
    }
   ]
  },
@@ -1759,7 +1848,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge on pickup"
    },
    {
     "do": "grants",
@@ -1772,13 +1862,15 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finishers consume 3 Stacks of Armor Charge and generate a Special Ammo Brick for you and allies.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "spends 3 Armor Charge for a Special ammo brick for you and allies"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Finishers consume 3 Stacks of Armor Charge and generate a Special Ammo Brick for you and allies.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "a Special ammo brick for you and allies"
    },
    {
     "do": "creates",
@@ -1798,7 +1890,8 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finisher final blows grant you 1 temporary Armor Charge when you have none.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "1 temporary Armor Charge when you have none"
    },
    {
     "do": "grants",
@@ -1817,7 +1910,8 @@
     "do": "uses",
     "t": "finisher",
     "q": "Gain a powerful overshield while performing your finisher.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "a 200 HP overshield while the finisher plays"
    },
    {
     "do": "grants",
@@ -1838,13 +1932,15 @@
     "t": "criticalhealth",
     "q": "Grants 10% Damage Resist upon reaching Critical Health while at 3 or more Stacks Armor Charge and consumes all Armor Charges.",
     "s": "clarity",
+    "pay": "10% damage resistance, spending 3+ Armor Charge",
     "note": "Bungie: when your shields become broken"
    },
    {
     "do": "consumes",
     "t": "armorcharge",
     "q": "Consumes 3 or more stacks of Armor Charge, granting a longer duration to the damage reduction for each charge consumed.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "longer damage resistance for each stack spent"
    },
    {
     "do": "grants",

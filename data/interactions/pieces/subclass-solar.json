@@ -21,7 +21,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "Jump while airborne to activate Glide",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "activates Glide: a drift with moderate speed and directional control",
+    "pq": "start an airborne drift with both moderate speed and directional control"
    }
   ]
  },
@@ -114,7 +116,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "Jump while airborne to activate Glide",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "activates Glide with a strong initial speed boost",
+    "pq": "start an airborne drift with a strong initial boost of speed"
    }
   ]
  },
@@ -126,7 +130,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "Jump while airborne to activate Lift",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "activates Lift with a strong initial burst of momentum",
+    "pq": "launch into the air with a strong initial burst of momentum"
    }
   ]
  },
@@ -150,13 +156,17 @@
     "do": "uses",
     "t": "sliding",
     "q": "While sliding, activate your charged melee ability",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "charged melee launches a Solar wave that damages and scorches",
+    "pq": "launch a wave of [Solar] Solar energy forward, damaging and scorching targets in front of you"
    },
    {
     "do": "uses",
     "t": "melee",
     "q": "While sliding, activate your charged melee ability",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "launches a Solar wave that damages and scorches; recast to slam a second wave",
+    "pq": "launch a wave of [Solar] Solar energy forward, damaging and scorching targets in front of you"
    },
    {
     "do": "applies",
@@ -168,7 +178,8 @@
     "do": "uses",
     "t": "scorch",
     "q": "If the wave hits a scorched target, they ignite.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "the second wave ignites scorched targets"
    },
    {
     "do": "applies",
@@ -182,6 +193,7 @@
     "t": "stasiscrystal",
     "q": "deals damage, and shatters Stasis Crystals",
     "s": "clarity",
+    "pay": "the second wave shatters Stasis crystals",
     "note": "The slam wave shatters Stasis crystals (relevant on Prismatic)."
    },
    {
@@ -205,13 +217,15 @@
     "do": "uses",
     "t": "classability",
     "q": "Activate your class ability to fire up to three scorching shots",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "fires up to three scorching shots at marked targets"
    },
    {
     "do": "uses",
     "t": "dodge",
     "q": "triggers the effects of your equipped dodge when activated",
     "s": "clarity",
+    "pay": "also triggers your equipped dodge's effects",
     "note": "Replaces your dodge but still triggers its effects (e.g. Acrobat's Dodge radiant, Gambler's Dodge energy)."
    },
    {
@@ -231,7 +245,8 @@
     "do": "uses",
     "t": "radiant",
     "q": "Benefits from Radiant, which grants the shots 20% [0%] increased damage.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "20% more Crackshot damage while radiant (PvE)"
    },
    {
     "do": "uses",
@@ -246,6 +261,7 @@
     ],
     "q": "Pairing Crackshot with Acrobat's Dodge always applies the damage bonus.",
     "s": "clarity",
+    "pay": "Acrobat's Dodge radiant always boosts the shots' damage",
     "note": "Acrobat's Dodge radiant applies before the shots fire."
    }
   ]
@@ -292,7 +308,8 @@
     "do": "modifies",
     "t": "scorch",
     "q": "You apply more scorch stacks to targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more scorch stacks per application"
    }
   ]
  },
@@ -315,6 +332,7 @@
     ],
     "q": "Your Solar Super projectiles have stronger target acquisition.",
     "s": "bungie",
+    "pay": "Solar Super projectiles track targets better",
     "note": "Only affects Blade Barrage, Daybreak and Song of Flame projectiles."
    }
   ]
@@ -327,25 +345,33 @@
     "do": "uses",
     "t": "restoration",
     "q": "Applying restoration, cure, or radiant to allies",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster grenade, melee and class ability regen for a short time",
+    "pq": "grants increased grenade, melee, and class ability regeneration for a short duration"
    },
    {
     "do": "uses",
     "t": "cure",
     "q": "Applying restoration, cure, or radiant to allies",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster grenade, melee and class ability regen for a short time",
+    "pq": "grants increased grenade, melee, and class ability regeneration for a short duration"
    },
    {
     "do": "uses",
     "t": "radiant",
     "q": "Applying restoration, cure, or radiant to allies",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster grenade, melee and class ability regen for a short time",
+    "pq": "grants increased grenade, melee, and class ability regeneration for a short duration"
    },
    {
     "do": "uses",
     "t": "healing",
     "q": "Healing (from most sources), or reviving allies",
     "s": "clarity",
+    "pay": "faster grenade, melee and class ability regen for a short time",
+    "pq": "grants 300% Additional Base Grenade, Melee, and Class Ability Regeneration Rate for 7 [3.5?] seconds",
     "note": "Does NOT trigger from Empowering Rift, mods, Crest of Alpha Lupi, Mothkeeper's Wraps or non-Solar Support Frame autos."
    },
    {
@@ -379,7 +405,8 @@
     "do": "uses",
     "t": "ignition",
     "q": "Defeating targets with Solar ignitions grants grenade energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grenade energy on ignition kills"
    },
    {
     "do": "grants",
@@ -398,7 +425,8 @@
     "do": "uses",
     "t": "ignition",
     "q": "Your Solar ignitions spread scorch to affected targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "ignitions spread scorch to targets they hit"
    },
    {
     "do": "applies",
@@ -421,7 +449,8 @@
      "super"
     ],
     "q": "Final blows with a Solar Super causes targets to ignite and creates a Firesprite.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Solar Super kills ignite the target and create a Firesprite"
    },
    {
     "do": "applies",
@@ -449,7 +478,9 @@
      }
     ],
     "q": "Well of Radiance makes all of the caster's Weapon Damage count as Super Ability Damage so Solar Weapons Kills will also count as Solar Super Kills.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "during Well of Radiance, weapon kills count as Super kills, so they ignite and create Firesprites",
+    "pq": "Targets killed by Solar Supers Ignite and spawn a Firesprite at their location."
    },
    {
     "do": "counts",
@@ -479,7 +510,9 @@
      "solarweapon"
     ],
     "q": "Solar weapon or ability final blows extend the duration",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "extends your restoration and radiant duration on final blows",
+    "pq": "extend the duration of restoration and radiant effects applied to you"
    },
    {
     "do": "uses",
@@ -488,20 +521,24 @@
      "solarability"
     ],
     "q": "Solar weapon or ability final blows extend the duration",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "extends your restoration and radiant duration on final blows",
+    "pq": "extend the duration of restoration and radiant effects applied to you"
    },
    {
     "do": "modifies",
     "t": "restoration",
     "q": "extend the duration of restoration and radiant effects applied to you",
     "s": "bungie",
+    "pay": "longer restoration on Solar final blows",
     "note": "Capped at 15 seconds."
    },
    {
     "do": "modifies",
     "t": "radiant",
     "q": "extend the duration of restoration and radiant effects applied to you",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "longer radiant on Solar final blows"
    }
   ]
  },
@@ -513,7 +550,8 @@
     "do": "modifies",
     "t": "ignition",
     "q": "Your Solar ignitions have increased area of effect.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "bigger ignition area"
    }
   ]
  },
@@ -533,7 +571,8 @@
     "do": "uses",
     "t": "firesprite",
     "q": "Picking up a Firesprite grants restoration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "restoration when you pick up a Firesprite"
    },
    {
     "do": "grants",
@@ -555,7 +594,8 @@
      "grenade"
     ],
     "q": "Solar grenade final blows cure you.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Solar grenade kills cure you"
    },
    {
     "do": "grants",
@@ -575,7 +615,8 @@
     "do": "uses",
     "t": "scorch",
     "q": "Defeating scorched targets grants melee energy and creates a Firesprite.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "melee energy and a Firesprite on scorched kills"
    },
    {
     "do": "grants",
@@ -602,6 +643,7 @@
     "t": "scorch",
     "q": "Your class ability recharges faster when you scorch targets.",
     "s": "bungie",
+    "pay": "class ability recharges faster when you scorch targets",
     "note": "Only when scorching a target that is not already scorched."
    },
    {
@@ -620,13 +662,15 @@
     "do": "modifies",
     "t": "radiant",
     "q": "Radiant and restoration effects applied to you have increased duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "longer radiant on you"
    },
    {
     "do": "modifies",
     "t": "restoration",
     "q": "Radiant and restoration effects applied to you have increased duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "longer restoration on you"
    }
   ]
  },
@@ -653,7 +697,8 @@
      "solarweapon"
     ],
     "q": "Solar weapon final blows grant you and your allies increased health for a short duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more health for you and allies for a short time (stacks 3 times)"
    },
    {
     "do": "creates",
@@ -677,7 +722,8 @@
     "do": "uses",
     "t": "melee",
     "q": "Powered melee attacks against combatants make you and nearby allies radiant.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "powered melee hits make you and nearby allies radiant"
    },
    {
     "do": "grants",
@@ -697,7 +743,8 @@
     "do": "uses",
     "t": "ignition",
     "q": "Rapidly defeating multiple targets with Solar ignitions generates an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Orb of Power on rapid ignition kills"
    },
    {
     "do": "creates",
@@ -738,6 +785,8 @@
     "t": "rift",
     "q": "Conjure a well of power that increases weapon damage",
     "s": "bungie",
+    "pay": "the rift boosts weapon damage and ability regen for those inside",
+    "pq": "increases weapon damage and ability energy regeneration for those inside it",
     "note": "Does not trigger Ember of Benevolence."
    },
    {
@@ -811,7 +860,8 @@
     "do": "uses",
     "t": "radiant",
     "q": "Benefits from being radiant.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "radiant's damage bonus applies to Golden Gun"
    }
   ]
  },
@@ -836,7 +886,8 @@
     "do": "uses",
     "t": "radiant",
     "q": "Benefits from being radiant.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "radiant's damage bonus applies to Golden Gun"
    }
   ]
  },
@@ -855,7 +906,9 @@
     "do": "modifies",
     "t": "grenade",
     "q": "replaces your Grenade Ability with a thrown explosive",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "at 6 charges your grenade becomes a thrown explosive that ignites",
+    "pq": "Explosive causes an Ignition when detonated"
    },
    {
     "do": "applies",
@@ -869,6 +922,7 @@
     "t": "ignition",
     "q": "Ignition and Scorch: 3 [4] charges",
     "s": "clarity",
+    "pay": "ignition and scorch kills give 3 charges (weapon kills give 1)",
     "note": "Ignition and scorch kills charge it faster than weapon kills."
    },
    {
@@ -923,7 +977,9 @@
     "do": "uses",
     "t": "sprinting",
     "q": "After sprinting for a short time, use this melee ability",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "enables a hammer swing that scorches and hits a cone behind the target",
+    "pq": "swing a blazing hammer that scorches your target and deals damage in a cone behind them"
    },
    {
     "do": "applies",
@@ -974,16 +1030,26 @@
    },
    {
     "do": "grants",
-    "t": "overshield",
+    "t": "overshieldgeneric",
+    "on": "while standing in the rift",
     "q": "Standing in a friendly Healing Rift makes the game count you as having an active Overshield at all times.",
     "s": "clarity",
-    "note": "A generic (non-Void) overshield; counts as having an overshield for perk interactions."
+    "note": "A generic (non-Void) overshield; counts as having an overshield for perk interactions, not as a Void Overshield."
+   },
+   {
+    "do": "grants",
+    "t": "overshieldgeneric",
+    "on": "at full health inside the rift",
+    "q": "If at full health, the Rift grants 3 HP of Overshield per second, up to a 15 HP Overshield.",
+    "s": "clarity",
+    "note": "Not a Void Overshield: the Compendium says having a Void Overshield prevents it."
    },
    {
     "do": "uses",
     "t": "rift",
     "q": "Conjure a well of power that continuously heals those inside it.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "rift continuously heals everyone inside"
    },
    {
     "do": "grants",
@@ -1006,7 +1072,9 @@
     "do": "consumes",
     "t": "grenade",
     "q": "Hold to consume your grenade, gaining Heat Rises",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "gain Heat Rises and cure nearby allies",
+    "pq": "gaining Heat Rises and releasing a burst of healing energy that cures nearby allies"
    },
    {
     "do": "grants",
@@ -1073,7 +1141,8 @@
     "do": "uses",
     "t": "airborne",
     "q": "Final blows while airborne increase the duration of Heat Rises and grant melee energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "airborne final blows extend Heat Rises and grant melee energy"
    },
    {
     "do": "grants",
@@ -1087,6 +1156,7 @@
     "t": "movement",
     "q": "You can fire weapons, melee, and throw grenades while gliding.",
     "s": "bungie",
+    "pay": "shoot, melee and throw grenades while gliding",
     "note": "Heat Rises also gives near-infinite glide."
    }
   ]
@@ -1099,7 +1169,9 @@
     "do": "uses",
     "t": "classability",
     "q": "Activate your class ability to summon a [Solar] Solar mortar",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "summons a Solar mortar that scorches distant targets",
+    "pq": "summon a [Solar] Solar mortar that lobs flaming projectiles at distant targets. Targets damaged by the mortar are scorched."
    },
    {
     "do": "creates",
@@ -1136,7 +1208,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "While airborne, jump a second time",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "a second jump to greater heights",
+    "pq": "jump a second time to reach greater heights"
    }
   ]
  },
@@ -1148,7 +1222,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "Jump while airborne to activate Lift",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "activates Lift to greater heights",
+    "pq": "launch into the air to greater heights"
    }
   ]
  },
@@ -1160,13 +1236,15 @@
     "do": "uses",
     "t": "airborne",
     "q": "[Air Dodge]  : Dodge quickly while airborne.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "a quick dash while airborne"
    },
    {
     "do": "uses",
     "t": "heatrises",
     "q": "While Heat Rises is active, you have an additional dodge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "an extra dodge charge"
    },
    {
     "do": "uses",
@@ -1187,6 +1265,8 @@
     ],
     "q": "While Heat Rises is active, or during the Song of Flame Super Ability while the Incinerator Snap Melee Ability is equipped:",
     "s": "compendium",
+    "pay": "an extra dash charge in Song of Flame (only with Incinerator Snap)",
+    "pq": "Gains an additional charge, and recharges both charges simultaneously",
     "note": "Extra dash charge in Song of Flame only with Incinerator Snap, not Celestial Fire."
    },
    {
@@ -1201,7 +1281,8 @@
      }
     ],
     "q": "Icarus Dash can be used infinitely during Daybreak at the cost of 4.2% super energy per use.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "unlimited dashes during Daybreak for 4.2% Super energy each"
    },
    {
     "do": "grants",
@@ -1220,7 +1301,8 @@
     ],
     "on": "rapid airborne weapon or Super kills",
     "q": "While Airborne, Weapon or Super Kills within 5 seconds of each grants Cure x1.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "cure on rapid airborne weapon or Super kills"
    }
   ]
  },
@@ -1271,7 +1353,8 @@
      "poweredmelee"
     ],
     "q": "While radiant, final blows with your equipped Throwing Knife fully refund your melee energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Throwing Knife kills fully refund melee energy"
    },
    {
     "do": "grants",
@@ -1306,7 +1389,8 @@
      }
     ],
     "q": "Deadshot Golden Gun has damage resistance",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Deadshot Golden Gun gains damage resistance"
    },
    {
     "do": "modifies",
@@ -1320,7 +1404,8 @@
      }
     ],
     "q": "Marksman Golden Gun has increased duration",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Marksman Golden Gun lasts longer"
    },
    {
     "do": "modifies",
@@ -1334,7 +1419,8 @@
      }
     ],
     "q": "Blade Barrage launches more projectiles",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Blade Barrage throws more knives"
    },
    {
     "do": "grants",
@@ -1348,7 +1434,8 @@
     "do": "uses",
     "t": "super",
     "q": "Casting your super grants Cure x1.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "cure when you cast your Super"
    },
    {
     "do": "grants",
@@ -1393,7 +1480,9 @@
     "do": "uses",
     "t": "ammobrick",
     "q": "Dodging automatically collects nearby ammo boxes",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "dodging collects nearby ammo and reloads all weapons",
+    "pq": "Dodging automatically collects nearby ammo boxes and reloads all weapons."
    },
    {
     "do": "grants",
@@ -1420,7 +1509,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Activating your class ability or landing precision hits grants you and nearby allies increased reload speed and Weapons stat",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reload speed and Weapons stat for you and allies (stacks 10 times)"
    },
    {
     "do": "grants",
@@ -1448,7 +1538,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "Only usable while airborne.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "a dive that cures you and nearby allies",
+    "pq": "Applies Cure x2 to you and allies within 9 meters upon landing."
    },
    {
     "do": "grants",
@@ -1461,7 +1553,8 @@
     "do": "uses",
     "t": "heatrises",
     "q": "While Heat Rises is active, you gain restoration while diving and scorch targets upon landing.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "restoration while diving and scorch on landing"
    },
    {
     "do": "grants",
@@ -1510,6 +1603,8 @@
     "t": "barricade",
     "q": "Creates a small barrier that you can peek over while aiming down sights",
     "s": "bungie",
+    "pay": "faster reload, stability and range behind it",
+    "pq": "increases weapon reload speed, stability, and range",
     "note": "Behind it: faster reload, stability, range."
    },
    {
@@ -1559,31 +1654,36 @@
      "solarability"
     ],
     "q": "Final blows with [Solar] Solar abilities or ignitions increase the damage of your Solar abilities.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Solar ability damage (stacks 3 times)"
    },
    {
     "do": "uses",
     "t": "ignition",
     "q": "Final blows with [Solar] Solar abilities or ignitions increase the damage of your Solar abilities.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Solar ability damage (stacks 3 times)"
    },
    {
     "do": "modifies",
     "t": "grenade",
     "q": "increase the damage of your Solar abilities. Stacks 3 times.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Solar grenade damage (up to 3 stacks)"
    },
    {
     "do": "modifies",
     "t": "melee",
     "q": "increase the damage of your Solar abilities. Stacks 3 times.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Solar melee damage (up to 3 stacks)"
    },
    {
     "do": "modifies",
     "t": "super",
     "q": "increase the damage of your Solar abilities. Stacks 3 times.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Solar Super damage (up to 3 stacks)"
    },
    {
     "do": "applies",
@@ -1611,13 +1711,17 @@
     "do": "uses",
     "t": "barricade",
     "q": "Enhances your equipped barricade with [Solar] Solar capabilities.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "barricade can be remotely detonated to scorch combatants",
+    "pq": "While your barricade is deployed, activate your class ability again to remotely detonate it, scorching combatants caught in the detonation."
    },
    {
     "do": "modifies",
     "t": "barricade",
     "q": "Enhances your equipped barricade with [Solar] Solar capabilities.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Towering Barricade slides forward; Rally Barricade gives allies scorching rounds",
+    "pq": "Rally Barricade: Standing behind your barricade grants scorching rounds to your allies' Solar and Kinetic weapons."
    },
    {
     "do": "applies",
@@ -1686,13 +1790,15 @@
      "solarability"
     ],
     "q": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Solar ability kills create a Sunspot"
    },
    {
     "do": "uses",
     "t": "scorch",
     "q": "Solar ability final blows, Hammer of Sol impacts, and defeating scorched targets creates Sunspots.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "scorched kills create a Sunspot"
    },
    {
     "do": "creates",
@@ -1752,7 +1858,8 @@
     "t": "super",
     "by": "sunspot",
     "q": "your Super drains more slowly while standing in a Sunspot",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Super drains more slowly while in a Sunspot"
    }
   ]
  },
@@ -1842,7 +1949,8 @@
     "do": "modifies",
     "t": "grenade",
     "q": "Create a sentient flame wisp that seeks out targets and detonates in a scorching explosion",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grenade becomes a seeking flame wisp that scorches and chains to more targets"
    },
    {
     "do": "applies",
@@ -1854,7 +1962,8 @@
     "do": "modifies",
     "t": "melee",
     "q": "Release a supercharged melee attack that launches additional projectiles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "supercharged melee that launches extra projectiles"
    },
    {
     "do": "counts",
@@ -1928,7 +2037,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "Jump while airborne to activate Glide",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "activates Glide with strong directional control",
+    "pq": "start an airborne drift with strong directional control"
    }
   ]
  },
@@ -1940,7 +2051,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "While airborne, jump a second time",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "a second jump with strong directional control",
+    "pq": "jump a second time with strong directional control"
    }
   ]
  },
@@ -1952,7 +2065,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "Jump while airborne to activate Lift",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "activates Lift with strong directional control",
+    "pq": "launch into the air with strong directional control"
    }
   ]
  },
@@ -2016,7 +2131,8 @@
      }
     ],
     "q": "Healing Grenade: Improves the strength of cure and restoration effects applied.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Healing Grenade gives stronger cure and restoration"
    },
    {
     "do": "grants",
@@ -2063,7 +2179,8 @@
      }
     ],
     "q": "Solar Grenade: Increases linger duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Solar Grenade lingers longer"
    },
    {
     "do": "modifies",
@@ -2077,7 +2194,8 @@
      }
     ],
     "q": "Firebolt Grenade: Increases target search radius and maximum target count.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Firebolt Grenade seeks farther and hits more targets"
    },
    {
     "do": "modifies",
@@ -2091,7 +2209,8 @@
      }
     ],
     "q": "Fusion Grenade: Explodes twice.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Fusion Grenade explodes twice"
    }
   ]
  },
@@ -2103,7 +2222,8 @@
     "do": "uses",
     "t": "barricade",
     "q": "Creates a large barrier that can be used to reinforce a position with cover",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "a large barrier for cover"
    },
    {
     "do": "grants",
@@ -2150,7 +2270,9 @@
     "do": "uses",
     "t": "airborne",
     "q": "While airborne, sustain your air control",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "a second or third jump to sustain air control",
+    "pq": "sustain your air control with a second or third jump"
    }
   ]
  },
@@ -2174,7 +2296,8 @@
     "do": "uses",
     "t": "scorch",
     "q": "causes scorched targets to ignite",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "the knife ignites scorched targets"
    },
    {
     "do": "applies",

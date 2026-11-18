@@ -1139,6 +1139,8 @@ const Core = (() => {
     const prov = new Map(); const addP = (t, p) => { if (!prov.has(t)) prov.set(t, []); prov.get(t).push(p); };
     for (const f of fx) if (f.ok && PROVIDE.has(f.e.do)) addP(f.e.t, { f });
     for (const c of fx) if (c.ok && c.e.do === 'counts') for (const p of [...(prov.get(c.e.t) || [])]) if (!p.via) addP(c.e.as, { f: p.f, via: c });
+    // glossary "is a": a more specific term also provides the general one (a Void Overshield is an overshield)
+    for (const [t, list] of [...prov.entries()]) for (const g of ix?.t?.[t]?.isa || []) for (const p of list) addP(g, { f: p.f, via: p.via, isa: t });
     // damage sources: what an effect's damage counts as (weapon, grenade, melee, classability, super…). Curated `dmg`
     // wins; otherwise the piece's own kind (a weapon deals weapon damage, your grenade grenade damage). Active
     // "counts" rules extend it (Well of Radiance: weapon → super; a Void Soul counts as a grenade).
