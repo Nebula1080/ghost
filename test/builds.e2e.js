@@ -62,10 +62,14 @@ const pick = async (pg, sel, text) => {
   const asheet = await pg.evaluate(() => ({ txt: document.querySelector('#modalBox').innerText, picker: !!document.querySelector('#plist') }));
   /Touch of Flame/.test(asheet.txt) && /Bungie/i.test(asheet.txt) && !asheet.picker ? ok('aspect details sheet opens from its info button') : fail("aspect info " + JSON.stringify(asheet).slice(0, 200));
   await pg.click('#modal [data-close]'); await pg.waitForTimeout(200);
-  const syn = await pg.$$eval('#bSyn .skey', x => x.map(k => k.querySelector('.skh b').textContent));
-  syn.includes('Scorch') ? ok('interactions show Scorch: Incinerator Snap -> Ember of Searing') : fail('no Scorch interaction: ' + syn.join(','));
-  await pg.evaluate(() => [...document.querySelectorAll('#bSyn .skey')].find(k => k.querySelector('.skh b').textContent === 'Scorch').querySelector('.schip').click()); await pg.waitForTimeout(100);
-  const ev = await pg.evaluate(() => [...document.querySelectorAll('#bSyn .skey')].find(k => k.querySelector('.skh b').textContent === 'Scorch').querySelector('.sev').textContent);
+  const hasScorch = await pg.evaluate(() => { const r = [...document.querySelectorAll('#bSyn .ixr')].find(r => r.querySelector('.ixt')?.textContent === 'Scorch' && /Ember of Searing/.test(r.textContent)); return !!r && /Incinerator Snap/.test(r.textContent); });
+  hasScorch ? ok('Overview shows Scorch: Incinerator Snap -> Ember of Searing') : fail('no Scorch row in the Overview');
+  await pg.evaluate(() => [...document.querySelectorAll('#bSyn .ixr')].find(r => r.querySelector('.ixt')?.textContent === 'Scorch' && /Ember of Searing/.test(r.textContent)).querySelector('.ixn').click()); await pg.waitForTimeout(100);
+  const ev = await pg.evaluate(() => [...document.querySelectorAll('#bSyn .ixr')].find(r => r.querySelector('.ixt')?.textContent === 'Scorch' && /Ember of Searing/.test(r.textContent)).querySelector('.sev').textContent);
+  await pg.click('#bSyn [data-ixtab=bp]'); await pg.waitForTimeout(100);
+  const bp = await pg.evaluate(() => ({ shown: !document.querySelector('.ixpane[data-pane=bp]').hidden, pieces: document.querySelectorAll('.ixpane[data-pane=bp] .ixp').length }));
+  bp.shown && bp.pieces > 1 ? ok(`By piece tab lists ${bp.pieces} pieces`) : fail('By piece tab ' + JSON.stringify(bp));
+  await pg.click('#bSyn [data-ixtab=ov]');
   /scorch/i.test(ev) ? ok('tapping a piece shows the curated quote behind it') : fail('evidence missing: ' + ev);
   const stats = await pg.$$eval('.bstat', x => x.length); stats === 6 ? ok('six Armor 3.0 stats shown') : fail('stats rows ' + stats);
   // DIM loadout link
