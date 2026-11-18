@@ -28,11 +28,13 @@ const profile = {
   ] } },
   characterEquipment: { data: { '2305843009300000001': { items: [{ itemHash: 437854388, itemInstanceId: '6917529000000000003' }] } } },
   // a Hunter helmet on the character with Heavy Ammo Finder in a head mod socket (index 1)
-  characterInventories: { data: { '2305843009300000001': { items: [{ itemHash: 30472172, itemInstanceId: '6917529000000000004' }] } } },
+  // + Gunslinger (not equipped): Golden Gun: Deadshot, no aspects or fragments
+  characterInventories: { data: { '2305843009300000001': { items: [{ itemHash: 30472172, itemInstanceId: '6917529000000000004' }, { itemHash: 2240888816, itemInstanceId: '6917529000000000005' }] } } },
   itemComponents: { instances: { data: { '6917529000000000001': { damageType: 6, primaryStat: { value: 500 } } } },
     // Action Item: trait socket 3 holds Rimestealer and can switch to Rewind Rounds
     sockets: { data: { '6917529000000000001': { sockets: [{ plugHash: 1294026524, isVisible: true }, { plugHash: 839105230, isVisible: true }, { plugHash: 2680121939, isVisible: true }, { plugHash: 1955165503, isVisible: true }, { plugHash: 2922950962, isVisible: true }] },
-      '6917529000000000004': { sockets: [{ plugHash: 0, isVisible: true }, { plugHash: 644105, isVisible: true }] } } },
+      '6917529000000000004': { sockets: [{ plugHash: 0, isVisible: true }, { plugHash: 644105, isVisible: true }] },
+      '6917529000000000005': { sockets: [3636300854, 1128768652, 375052469, 4016776972, 3199702642, 3875863236, 3875863236, 424005861, 424005861, 424005861, 424005861, 424005861, 424005861].map(plugHash => ({ plugHash, isVisible: true })) } } },
     reusablePlugs: { data: { '6917529000000000001': { plugs: { 3: [{ plugItemHash: 1955165503 }, { plugItemHash: 3418782618 }] } } } } },
 };
 
@@ -131,6 +133,30 @@ srv.listen(8766, async () => {
   st2 === 0 ? ok('zero CSP violations after write actions') : fail('CSP violations after writes');
   await pg.evaluate(() => { document.querySelector('#dClose')?.click(); }); await pg.keyboard.press('Escape'); await pg.waitForTimeout(400);
   await pg.fill('#panes .pane .qin', ''); await pg.waitForTimeout(500);
+  // Equip build: the whole build onto the Hunter (subclass equip + sockets, armor equip, armor mod), one confirm
+  writes.length = 0;
+  // a stored build, picked up after a reload (the Bungie session lives in sessionStorage and survives it)
+  await pg.evaluate(([W, H]) => localStorage.setItem('vs:builds', JSON.stringify({ cur: 'beqtest', list: [{ id: 'beqtest', name: 'Eq test', cls: 'hunter', el: 'solar',
+    sub: { super: 375052468, aspects: [3066103996], fragments: [362132288] }, w: { kinetic: { id: W } }, a: { head: { id: H } }, mods: { head: ['Heavy Ammo Finder'] } }] })), [W, H]);
+  await pg.reload(); await pg.waitForTimeout(1200); await pg.evaluate(() => document.getElementById('intro')?.remove());
+  await pg.click('nav.views [data-view=builds]'); await pg.waitForTimeout(600);
+  const be = await pg.$('#bEquip'); be ? ok('Builds shows "Equip build" when signed in') : fail('no Equip build button');
+  await be?.click(); await pg.waitForTimeout(300);
+  const bsteps = await pg.$$eval('#modalBox .actsteps li', x => x.map(l => l.textContent));
+  /Equip Gunslinger/.test(bsteps[0]) && bsteps.some(l => /Aspect: Gunpowder Gamble/.test(l)) && !writes.length ? ok('build confirm sheet lists ' + bsteps.length + ' steps, nothing sent yet') : fail('build steps ' + JSON.stringify(bsteps));
+  await pg.click('#actGo'); await pg.waitForTimeout(5000);
+  const SUBB = { itemId: '6917529000000000005', characterId: cid, membershipType: 3 };
+  const pl = (si, h) => ['InsertSocketPlugFree', { plug: { socketIndex: si, socketArrayType: 0, plugItemHash: h }, ...SUBB }];
+  const got = writes.map(w => [w[0], w[1]]);
+  JSON.stringify(got.slice(0, 4)) === JSON.stringify([['EquipItem', SUBB], pl(5, 3066103996), pl(2, 375052468), pl(7, 362132288)])
+    && JSON.stringify(got[4]) === JSON.stringify(['EquipItem', { itemId: H, characterId: cid, membershipType: 3 }]) && got[5]?.[0] === 'InsertSocketPlugFree' && got[5][1].itemId === H && got[5][1].plug.socketIndex === 1 && got.length === 6
+    ? ok('equip build: subclass, sockets, armor, then mod, with exact bodies') : fail('equip build writes ' + JSON.stringify(got));
+  await pg.waitForSelector('#modal.open', { state: 'detached', timeout: 5000 }).catch(() => {});
+  writes.length = 0; await pg.evaluate(() => document.querySelector('#bEquip')?.click()); await pg.waitForTimeout(300);
+  const again = await pg.evaluate(() => document.querySelector('#modal.open') ? [...document.querySelectorAll('#modalBox .actsteps li')].map(l => l.textContent) : []);
+  !writes.length && !again.length ? ok('equipping the same build again has nothing to send') : fail('second equip still had steps ' + JSON.stringify(again));
+  await pg.keyboard.press('Escape');
+  await pg.evaluate(() => document.querySelector('nav.views [data-view=vault]').click()); await pg.waitForTimeout(300);
   // sign out clears the session but keeps the vault
   await pg.click('#bLoad'); await pg.waitForTimeout(200);
   await pg.click('[data-bg=out]'); await pg.waitForTimeout(300);

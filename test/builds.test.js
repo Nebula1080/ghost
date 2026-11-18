@@ -140,4 +140,27 @@ t('DIM loadout link: subclass socket overrides, items, mods, class', () => {
   const url = C.dimLink(lo); assert.ok(url.startsWith('https://app.destinyitemmanager.com/loadouts?loadout='));
   assert.deepStrictEqual(JSON.parse(new URL(url).searchParams.get('loadout')), lo);
 });
+t('equip build: subclass plan keeps what is in place, clears unwanted fragments first, then aspects, abilities, new fragments', () => {
+  const AD = JSON.parse(fs.readFileSync(__dirname + '/../data/api-defs.json', 'utf8'));
+  const sc = D.sub.warlock.solar, init = AD.c[sc.h];
+  assert.ok(Array.isArray(init) && init.length === sc.so.length, 'api-defs has the Dawnblade empty plugs');
+  // on the character: Daybreak, Healing Rift, Heat Rises + Hellion, fragments Torches / Char / Tempering / Combustion
+  const plugs = init.slice(); plugs[5] = 83039194; plugs[6] = 83039192; plugs[7] = 362132288; plugs[8] = 362132291; plugs[9] = 362132290; plugs[10] = 362132289;
+  const b = { cls: 'warlock', el: 'solar', sub: { super: 2274196884, classAbility: 2979486802, aspects: [83039192, 83039193], fragments: [362132289, 362132288, 362132291] }, w: {}, a: {}, mods: {} };
+  const plan = C.subclassPlan(b, D, { plugs }, init);
+  assert.deepStrictEqual(plan.map(x => [x.si, x.h]), [[9, init[9]], [5, 83039193], [2, 2274196884], [0, 2979486802]]);
+  assert.match(plan[0].label, /Remove fragment Ember of Tempering/); assert.match(plan[1].label, /Aspect: Touch of Flame/);
+  // nothing to do when it already matches; new fragments go into open sockets
+  const after = plugs.slice(); for (const x of plan) after[x.si] = x.h;
+  assert.deepStrictEqual(C.subclassPlan(b, D, { plugs: after }, init), []);
+  const b2 = { ...b, sub: { ...b.sub, fragments: [...b.sub.fragments, 362132290] } };
+  assert.deepStrictEqual(C.subclassPlan(b2, D, { plugs: after }, init).map(x => [x.si, x.h]), [[9, 362132290]]);
+  // Bungie profile -> subclass instances with their plugs
+  const resp = { characters: { data: { '2305843009300000001': { classType: 2 } } },
+    characterEquipment: { data: { '2305843009300000001': { items: [{ itemHash: sc.h, itemInstanceId: '6917529000000000009' }] } } },
+    itemComponents: { sockets: { data: { '6917529000000000009': { sockets: plugs.map(h => ({ plugHash: h })) } } } } };
+  const r = C.apiToItems(resp, AD);
+  assert.deepStrictEqual(r.subs, [{ id: '6917529000000000009', hash: sc.h, cid: '2305843009300000001', eq: true, plugs }]);
+  assert.strictEqual(r.weapons.length + r.armor.length, 0);
+});
 console.log(n, 'build tests passed');

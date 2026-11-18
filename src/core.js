@@ -183,10 +183,17 @@ const Core = (() => {
     for (const it of resp.profileInventory?.data?.items || []) raw.push([it, 'Vault', false, '']);
     for (const [cid, inv] of Object.entries(resp.characterInventories?.data || {})) for (const it of inv?.items || []) raw.push([it, clsOf(cid), false, cid]);
     for (const [cid, inv] of Object.entries(resp.characterEquipment?.data || {})) for (const it of inv?.items || []) raw.push([it, clsOf(cid), true, cid]);
-    const weapons = [], armor = [];
+    const weapons = [], armor = [], subs = [];
     for (const [r, owner, equipped, cid0] of raw) {
       const id = String(r?.itemInstanceId ?? ''); if (!ID_RE.test(id)) continue;
-      const hash = String(r.itemHash ?? '').replace(/\D/g, ''); const def = ad.i[hash]; if (!def) continue;
+      const hash = String(r.itemHash ?? '').replace(/\D/g, '');
+      // subclasses on a character: their inserted plugs per socket, so Ghost can equip a build's subclass setup
+      if (ad.c?.[hash]) {
+        const sk = so[id]?.sockets;
+        if (ID_RE.test(String(cid0)) && Array.isArray(sk)) subs.push({ id, hash: +hash, cid: String(cid0), eq: !!equipped, plugs: sk.map(x => /^\d{1,10}$/.test(String(x?.plugHash ?? '')) ? +x.plugHash : 0) });
+        continue;
+      }
+      const def = ad.i[hash]; if (!def) continue;
       const [name, k, type, rarity, ammoT, bucket, classType, perkSockets] = def;
       const rollIdx = new Set(Array.isArray(perkSockets) ? perkSockets : []);
       const kind = k === 'w' ? 'weapon' : 'armor';
@@ -236,7 +243,7 @@ const Core = (() => {
     }
     // the account's characters (id + class), for equip / transfer actions
     const charList = Object.entries(chars0()).map(([id, c]) => ({ id, cls: API_CLASS[c?.classType] || '' })).filter(c => ID_RE.test(c.id) && c.cls);
-    return { weapons, armor, chars: charList };
+    return { weapons, armor, chars: charList, subs };
   }
 
   // ---------- reference data (data/defs.json, built by tools/build-defs.mjs) ----------
@@ -1282,10 +1289,39 @@ const Core = (() => {
     return lo;
   }
   const dimLink = lo => 'https://app.destinyitemmanager.com/loadouts?loadout=' + encodeURIComponent(JSON.stringify(lo));
+  // the subclass socket changes that turn a character's subclass (inst.plugs, init = each socket's empty plug) into
+  // the build's choices. Order matters to Bungie: unwanted fragments come out first (aspects set how many fragment
+  // sockets are open, and a fragment can't sit in two sockets), then aspects, abilities, and the new fragments.
+  const SUB_RE = { super: /\.supers$/, classAbility: /\.class_abilities$/, movement: /\.movement$/, melee: /\.melee$/, grenade: /\.grenades$/, aspects: /\.aspects$/, fragments: /\.fragments$/ };
+  function subclassPlan(b, defs, inst, init) {
+    const sc = subOf(b, defs); if (!sc || !inst || !Array.isArray(inst.plugs)) return null;
+    const so = sc.so || [], cur = inst.plugs.slice(), ini = Array.isArray(init) ? init : [];
+    const socks = k => so.map((c, i) => String(c).split('|').some(x => SUB_RE[k].test(x)) ? i : -1).filter(i => i >= 0);
+    const nameOf = h => { for (const k of Object.keys(SUB_RE)) { const a = findSub(sc, k, h); if (a) return a.n; } return ''; };
+    const L = { super: 'Super', classAbility: 'class ability', movement: 'jump', melee: 'melee', grenade: 'grenade' };
+    const removes = [], aspects = [], abil = [], frags = [];
+    // place the wanted plugs: keep those already in one of the target sockets, fill free targets with the rest,
+    // empty the other sockets that hold something unwanted
+    const place = (idx, targets, want, out, rmOut, what) => {
+      const kept = new Set(), used = new Set();
+      for (const i of targets) if (want.includes(cur[i]) && !kept.has(cur[i])) { kept.add(cur[i]); used.add(i); }
+      const free = targets.filter(i => !used.has(i));
+      for (const h of want) if (!kept.has(h)) { const i = free.shift(); if (i == null) break; used.add(i); out.push({ si: i, h, label: `${what}: ${nameOf(h)}` }); }
+      for (const i of idx) if (!used.has(i) && ini[i] && cur[i] && cur[i] !== ini[i]) rmOut.push({ si: i, h: ini[i], label: `Remove ${what.toLowerCase()} ${nameOf(cur[i]) || ''}`.trim() });
+    };
+    const fi = socks('fragments'), ai = socks('aspects');
+    place(fi, fi.slice(0, fragSlots(b, defs)), b.sub?.fragments || [], frags, removes, 'Fragment');
+    place(ai, ai, b.sub?.aspects || [], aspects, aspects, 'Aspect');
+    for (const k of SUB_SINGLE) {
+      const a = findSub(sc, k, b.sub?.[k]); const i = socks(k)[0];
+      if (a && i != null && cur[i] !== a.h) abil.push({ si: i, h: a.h, label: `${k === 'super' ? 'Super' : L[k][0].toUpperCase() + L[k].slice(1)}: ${a.n}` });
+    }
+    return [...removes, ...aspects, ...abil, ...frags];
+  }
   const modsFor = (slot, defs) => [...(defs?.am?.[slot] || []), ...(defs?.am?.general || [])];
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
   return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, dimLoadout, dimLink };
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, subclassPlan, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
