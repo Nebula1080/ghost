@@ -173,6 +173,11 @@ if defs_path.exists():
                     for a in lst2: a['i'] = ix(a.get('i'))
         fname = 'icons' + spr.suffix
         d['spr'] = {'n': len(idx), 'c': 48, 'r': -(-len(idx) // 48), 'f': fname}
+        # artifact + artifact perk icons (data/interactions/artifacts.json keeps Bungie paths): tail -> sprite cell
+        afp = root / 'data/interactions/artifacts.json'
+        if afp.exists():
+            at = [t for a in json.loads(afp.read_text(encoding='utf-8')) for t in [a.get('i')] + [p[4] for p in a.get('p', []) if len(p) > 4]]
+            d['ai'] = {t.rsplit('/', 1)[-1]: idx[t.rsplit('/', 1)[-1]] for t in at if isinstance(t, str) and t.rsplit('/', 1)[-1] in idx}
         for old in OUT.glob('icons.*'):
             if old.name != fname: old.unlink()
         shutil.copyfile(spr, OUT / fname)

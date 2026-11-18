@@ -7,6 +7,9 @@ const s = new Set();
 Object.values(d.pi).forEach(p => p[0] && s.add(p[0]));
 d.sets.forEach(x => x.p.forEach(p => p.i && s.add(p.i)));
 for (const c of Object.values(d.sub)) for (const e of Object.values(c)) { e.i && s.add(e.i); Object.values(e.s).flat().forEach(a => a.i && s.add(a.i)); }
+// artifacts and their perks (data/interactions/artifacts.json, Bungie paths); listed last so earlier cells keep their place
+const af = path.join(root, 'data/interactions/artifacts.json');
+if (fs.existsSync(af)) for (const a of JSON.parse(fs.readFileSync(af, 'utf8'))) for (const t of [a.i, ...(a.p || []).map(p => p[4])]) if (typeof t === 'string' && t.startsWith('/common/destiny2_content/icons/')) s.add(t.slice(31));
 const dir = path.join(root, 'data/raw/icons/b'); fs.mkdirSync(dir, { recursive: true });
 const list = [...s].filter(t => !fs.existsSync(path.join(dir, t.replace(/\//g, '_'))));
 console.log(s.size, 'icons,', list.length, 'to download');
