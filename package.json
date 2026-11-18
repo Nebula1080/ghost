@@ -2,14 +2,15 @@
   "name": "ghost",
   "version": "0.1.0",
   "private": true,
-  "description": "Ghost: sort, tag and annotate a Destiny 2 vault from DIM CSV exports, with light.gg-based perk ratings",
+  "description": "Ghost: sort, tag and annotate a Destiny 2 vault from DIM CSV exports, with Ghost weapon ratings (DIM wish lists, Aegis's Endgame Analysis, perk ratings)",
   "scripts": {
     "build": "python build.py",
     "build:hosted": "python build.py --target hosted",
     "defs": "node --max-old-space-size=4096 tools/build-defs.mjs --refresh",
+    "ratings": "node --max-old-space-size=4096 tools/build-ratings.mjs --refresh",
     "icons": "node tools/fetch-icons.mjs && python tools/build-sprite.py",
-    "test": "node test/core.smoke.js && node test/security.test.js && node test/builds.test.js",
-    "e2e": "python build.py && python build.py --target hosted && node test/e2e.playwright.js && node test/ui.e2e.js && node test/security.e2e.js && node test/bungie.e2e.js && node test/builds.e2e.js",
+    "test": "node test/core.smoke.js && node test/security.test.js && node test/builds.test.js && node test/ratings.test.js",
+    "e2e": "python build.py && python build.py --target hosted && node test/e2e.playwright.js && node test/ui.e2e.js && node test/security.e2e.js && node test/bungie.e2e.js && node test/builds.e2e.js && node test/ratings.e2e.js",
     "secrets": "node tools/check-secrets.mjs --all",
     "audit": "npm audit --audit-level=high",
     "gates": "npm run audit && npm run secrets && npm test && npm run e2e"

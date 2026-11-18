@@ -441,7 +441,7 @@ nav.views svg{display:none}
   body{padding-bottom:0}
   #app{height:calc(100% - var(--bar) - env(safe-area-inset-bottom))}
   header{min-height:48px;padding:env(safe-area-inset-top) 12px 0;flex-wrap:nowrap;gap:8px}
-  header #summary,header #pending,header #bLoad,header #bExport,header #bHelp,header #bAbout{display:none!important}
+  header #summary,header #pending,header #bLoad,header #bExport,header #bHelp,header #bRatings,header #bAbout{display:none!important}
   .mmenu{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:40px;font-size:18px;margin-left:auto}
   .pbtn{max-width:44vw;min-height:36px}
   header .brand{font-size:11px}
@@ -547,6 +547,7 @@ nav.views svg{display:none}
     <button class="btn" id="bLoad">Load DIM CSVs</button>
     <button class="btn warn" id="bExport" title="Download a CSV of your tag/note changes to import in DIM">Export to DIM</button>
     <button class="btn" id="bHelp">Search help</button>
+    <button class="btn" id="bRatings">Perk ratings</button>
     <button class="btn" id="bAbout">About &amp; privacy</button>
     <button class="btn mmenu" id="bMenu" aria-label="Menu"><svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg><i class="mdot" id="mDot"></i></button>
     <div class="rail-foot"><div class="wpick" id="wpick" role="group" aria-label="Colour theme"></div><div class="wrow"><span id="wname"></span><button id="bMotion" type="button"></button></div></div>
@@ -564,13 +565,14 @@ nav.views svg{display:none}
 <div id="clean" class="view"></div>
 <div id="compare" class="view"></div>
 <div id="builds" class="view"></div>
+<div id="ratings" class="view"></div>
 <div id="modal"><div class="box" id="modalBox"></div></div>
 <div id="toast"></div>
 <div id="tip" aria-hidden="true"></div>
 <div id="intro" aria-hidden="true"><svg class="sig" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-ghost"/></svg><span>GHOST</span></div>
 <input type="file" id="file" accept=".csv,text/csv" multiple hidden>
 
-<script>window.VS_DEFS = /*__DEFS__*/null;window.VS_ART = /*__ART__*/null;window.VS_ISPR = /*__ISPR__*/null;window.VS_APIDEFS = /*__APIDEFS__*/null;window.VS_BUNGIE_CFG = /*__BUNGIECFG__*/null;window.VS_IX = /*__IX__*/null;</script>
+<script>window.VS_DEFS = /*__DEFS__*/null;window.VS_ART = /*__ART__*/null;window.VS_ISPR = /*__ISPR__*/null;window.VS_APIDEFS = /*__APIDEFS__*/null;window.VS_BUNGIE_CFG = /*__BUNGIECFG__*/null;window.VS_IX = /*__IX__*/null;window.VS_RATE = /*__RATE__*/null;</script>
 <script>
 /*__CORE__*/
 /*__BUNGIE__*/
@@ -790,7 +792,7 @@ function resetProfileState() {
   editQueue.clear();
 }
 async function loadProfile() {
-  resetProfileState(); loadCompareState(); loadCleanState(); loadBuildState();
+  resetProfileState(); loadCompareState(); loadCleanState(); loadBuildState(); loadUserRatings();
   if (!S.db) {
     const v = LS.get(PK('vault')); if (v) setVault(v.weapon || [], v.armor || []);
     S.edits = LS.get(PK('edits')) || {}; S.panes = LS.get(PK('panes')) || defaultPanes();
@@ -809,7 +811,7 @@ async function loadProfile() {
       chunks.forEach(c => (c?.items || []).forEach(it => (it.kind === 'armor' ? a : w).push(it)));
       setVault(w, a, true);
     }
-    await loadCleanFromDb(); await loadBuildsFromDb();
+    await loadCleanFromDb(); await loadBuildsFromDb(); await loadUserRatingsFromDb();
     applyRatings(); renderAll();
   } catch (e) {
     console.error(e);
@@ -823,6 +825,7 @@ async function flushSaves() {
   if (paneSaveT) { clearTimeout(paneSaveT); paneSaveT = null; await writePanes(); }
   if (cleanSaveT) { clearTimeout(cleanSaveT); cleanSaveT = null; await writeClean(); }
   if (bldSaveT) { clearTimeout(bldSaveT); bldSaveT = null; await writeBuilds(); }
+  if (urSaveT) { clearTimeout(urSaveT); urSaveT = null; await writeUserRatings(); }
   for (let i = 0; i < 100 && (editBusy || editQueue.size); i++) await new Promise(r => setTimeout(r, 100));
 }
 async function switchProfile(id) {
@@ -835,7 +838,7 @@ async function switchProfile(id) {
   toast(`Switched to ${activeProfile().name}.`);
 }
 async function deleteProfileData(pid) {
-  for (const k of ['vault', 'edits', 'panes', 'clean', 'compare', 'builds']) LS.del(pkey(pid, k));
+  for (const k of ['vault', 'edits', 'panes', 'clean', 'compare', 'builds', 'perkRatings']) LS.del(pkey(pid, k));
   if (!S.db) return;
   const del = async path => { try { await S.db.doc(path).delete(); } catch {} };
   try {
@@ -843,7 +846,7 @@ async function deleteProfileData(pid) {
     for (const c of meta?.chunks || []) await del(ppath(pid, 'vault/' + c));
     for (const [id] of await dbAll(ppath(pid, 'edits'))) await del(ppath(pid, 'edits/' + id));
   } catch (e) { console.warn(e); }
-  for (const path of ['meta/vault', 'meta/weaponHashes', 'config/panes', 'config/clean', 'config/builds']) await del(ppath(pid, path));
+  for (const path of ['meta/vault', 'meta/weaponHashes', 'config/panes', 'config/clean', 'config/builds', 'config/perkRatings']) await del(ppath(pid, path));
 }
 
 function setVault(weapons, armor, fromDb) {
@@ -856,10 +859,11 @@ function setVault(weapons, armor, fromDb) {
   refreshEffective();
 }
 function refreshEffective() { S.items.forEach(it => { it.tag = effTag(it); it.notes = effNotes(it); }); }
-function applyRatings() { S.R = Core.prepRatings(S.ratingsRaw); S.items.forEach(it => Core.rateItem(it, S.R)); }
+// Ghost's own ratings (DIM wish list + Aegis's Endgame Analysis + perk ratings); see the Ratings section below
+function applyRatings() { S.items.forEach(it => Core.rateGhost(it, D, RT, UR, RCMAP)); }
 
 async function saveVault() {
-  const strip = it => { const o = { ...it }; delete o.breaker; delete o.rating; delete o.pve; delete o.pvp; delete o.perkRel; delete o.tag; delete o.notes; return o; };
+  const strip = it => { const o = { ...it }; delete o.breaker; delete o.rating; delete o.pve; delete o.pvp; delete o.perkRel; delete o.why; delete o.tag; delete o.notes; return o; };
   const all = S.items.map(strip);
   if (!S.db) { LS.set(PK('vault'), { weapon: S.weapons.map(strip), armor: S.armor.map(strip) }); return; }
   // pack into chunks under 200KB
@@ -1156,7 +1160,7 @@ function kindsOf(items) { const w = items.some(i => i.kind === 'weapon'), a = it
 function sortChoices(items) {
   const { w, a } = kindsOf(items);
   const o = [];
-  if (w) o.push(['rating', 'Rating'], ['pve', 'Light.gg PvE'], ['pvp', 'Light.gg PvP']);
+  if (w) o.push(['rating', 'Rating'], ['pve', 'PvE score'], ['pvp', 'PvP score']);
   o.push(['power', 'Power'], ['tier', 'Tier'], ['rarity', 'Rarity'], ['name', 'Name'], ['type', 'Type'], ['frame', w && a ? 'Frame / archetype' : w ? 'Frame' : 'Archetype']);
   if (w) o.push(['element', 'Element'], ['ammo', 'Ammo type'], ['breaker', 'Breaker'], ['crafted', 'Crafted'], ['kills', 'Kills']);
   if (a) o.push(['set', 'Armor set'], ['class', 'Class'], ['total', 'Stat total']);
@@ -1348,10 +1352,10 @@ function groupIcon(g, name) {
 // tooltip text for a socket
 function skTitle(p, it) {
   const rel = it.perkRel?.[p.n]; const info = perkInfoText(p.n, it.kind);
-  return `${p.n} · ${p.s ? 'Equipped' : 'Selectable option'}${rel ? ` · light.gg: ${rel.pct}% of rolls` : ''}${info ? '\n\n' + info.slice(0, 380) : ''}\n\nClick for details`;
+  return `${p.n} · ${p.s ? 'Equipped' : 'Selectable option'}${rel ? ` · Rating: PvE ${rel.e || '–'} · PvP ${rel.p || '–'}` : ''}${info ? '\n\n' + info.slice(0, 380) : ''}\n\nClick for details`;
 }
 function skHtml(p, it, hits, opt = {}) {
-  const rel = it.perkRel?.[p.n]; const top = rel && rel.rel >= 80;
+  const rel = it.perkRel?.[p.n]; const top = rel && rel.rel >= 85;
   const cls = ['sk', opt.stack ? 'stk' : '', p.s ? 'sel' : 'opt', top ? 'top' : '', /^enhanced\s/i.test(p.n) ? 'enh' : '', hits.has('perk:' + p.n) ? 'hit' : ''].join(' ');
   return `<span class="${cls}" data-pk="${esc(p.n)}" title="${esc(skTitle(p, it))}">${plugIcon(p.n, opt.sq ? 'sq' + (opt.small ? ' sm' : '') : (opt.small ? 'sm' : ''), pIdx(p.n, it.kind))}${opt.noName ? '' : `<span class="nm2">${esc(p.n)}</span>`}</span>`;
 }
@@ -1419,7 +1423,7 @@ function cardHtml(it, hits, paneIdx, sortKey) {
   if (sortKey === 'total' && 'Total' in it.stats) statKeys.add('Total');
   const statHtml = [...statKeys].filter(k => k in it.stats).map(k => `<span class="f${H('stat:' + k)}">${esc(k)} <b>${it.stats[k]}</b>${it.base[k] != null && it.base[k] !== it.stats[k] ? ` <small style="color:var(--faint)">(base ${it.base[k]})</small>` : ''}</span>`).join('');
   const showRating = it.kind === 'weapon' && (hits.has('rating') || ['rating', 'pve', 'pvp'].includes(sortKey));
-  const rating = showRating ? `<span class="rate f${H('rating')}" title="${it.rating == null ? 'No light.gg data yet' : `Perk rating ${it.rating}/100 · light.gg PvE ${it.pve ?? '–'}★ PvP ${it.pvp ?? '–'}★`}">${it.rating ?? '–'}<span class="rbar" style="--v:${it.rating ?? 0}%;--mc:${rateColor(it.rating)}"><i></i></span></span>` : '';
+  const rating = showRating ? `<span class="rate f${H('rating')}"${rbdAttr(it)} title="${it.rating == null ? 'Not rated: no perk ratings, wish-list rolls or Aegis tier for this weapon' : `Rating ${it.rating}/100 · PvE ${it.pve ?? '–'} · PvP ${it.pvp ?? '–'}${it.why?.aegis ? ` · Tier ${it.why.aegis.tier} in Aegis’s Endgame Analysis` : ''}`} · click for the breakdown">${it.rating ?? '–'}<span class="rbar" style="--v:${it.rating ?? 0}%;--mc:${rateColor(it.rating)}"><i></i></span></span>` : '';
   // identity strip: intrinsic + every equipped perk as icons; search hits light up in the pane colour
   const strip = [...sk.intrinsic, ...sk.exotic].map(p => ({ ...p, s: 1, sq: 1 })).concat(sk.cols.flatMap(c => c.perks.filter(p => p.s)));
   const stripHtml = strip.length ? `<div class="pstrip">${strip.map(p => `<span class="${hits.has('perk:' + p.n) ? 'on' : ''}" data-pk="${esc(p.n)}" title="${esc(p.n)}">${plugIcon(p.n, p.sq ? 'sq' : '', pIdx(p.n, it.kind))}</span>`).join('')}</div>` : '';
@@ -1457,7 +1461,6 @@ function openItem(id, paneId, focusPerk) {
     return `<div class="bar"><span class="f${H('stat:' + k)}">${esc(k)}</span><span class="tr">${bar}</span><span class="num"><b>${v}</b>${hasBase && it.base[k] != null ? ` <small>base ${b}${add ? (add > 0 ? ' +' : ' ') + add : ''}</small>` : ''}</span></div>`;
   }).join('') + ('Total' in it.stats ? `<div class="bar"><b class="f${H('stat:Total')}">Total</b><span></span><span class="num"><b>${it.stats.Total}</b>${it.base.Total != null ? ` <small>base ${it.base.Total}</small>` : ''}</span></div>` : '');
   const statLegend = hasBase ? '<div class="stat-legend"><span><i style="background:var(--dim)"></i>Base</span><span><i style="background:var(--accent)"></i>From mods, masterwork &amp; tuning</span></div>' : '';
-  const r = S.R[it.hash];
   const perkRows = socketsDrawer(it, hits);
   const ex = it.kind === 'weapon' && Core.norm(it.rarity) === 'exotic' ? D?.dcx?.[Core.norm(it.name)] : null;
   const art = itemArt(it); const elc = it.element ? elColor(it.element) : '';
@@ -1466,20 +1469,20 @@ function openItem(id, paneId, focusPerk) {
   const rv = it.kind === 'weapon' && it.rating != null ? it.rating : null;
   d.innerHTML = `<div class="d-scroll"><div class="hero">${art?.shot ? `<img class="shot" src="${esc(art.shot)}" alt="" decoding="async">` : ''}
       <div class="hin">${itemIcon(it, 64)}<div style="flex:1"></div>
-      ${it.kind === 'weapon' ? `<svg class="ring" viewBox="0 0 66 66" style="--d:${rv == null ? 0 : (rv / 100 * 182).toFixed(0)};--mc:${rateColor(rv)}" aria-label="Perk rating ${rv ?? 'not rated'}"><circle class="tr" cx="33" cy="33" r="29"/><circle class="vl" cx="33" cy="33" r="29" transform="rotate(-90 33 33)"/><text x="33" y="40">${rv ?? '–'}</text></svg>` : ''}</div></div>
+      ${it.kind === 'weapon' ? `<svg class="ring rbd-ring"${rbdAttr(it)} viewBox="0 0 66 66" style="--d:${rv == null ? 0 : (rv / 100 * 182).toFixed(0)};--mc:${rateColor(rv)}" ><title>Rating ${rv ?? 'not rated'}: show the breakdown</title><circle class="tr" cx="33" cy="33" r="29"/><circle class="vl" cx="33" cy="33" r="29" transform="rotate(-90 33 33)"/><text x="33" y="40">${rv ?? '–'}</text></svg>` : ''}</div></div>
     <div class="d-head" style="--rc:${rarityColor(it.rarity)}">
       <div class="nm">${esc(it.name)}${it.crafted ? ' ' + CRAFTED_SVG : ''}</div>
       <div class="dtype">${esc(it.rarity)} ${esc(it.type)}${it.tier != null ? ' · Tier ' + it.tier : ''}</div>
       <div class="facts">${it.element ? `<span>${elIcon(it.element)}${esc(it.element)}</span>` : ''}${it.ammo ? `<span>${ammoIcon(it.ammo)}${esc(it.ammo)}</span>` : ''}${Core.anyBreaker(it) ? `<span>${breakerIcon(it.breaker)}${esc(it.breaker)}</span>` : ''}${it.power != null ? `<span>Power ${esc(it.power)}</span>` : ''}${it.set ? `<span>◈ ${esc(it.set)}</span>` : ''}</div>
       <div class="stat-pill" style="margin-top:8px"><a href="https://www.light.gg/db/items/${esc(it.hash)}/" target="_blank" rel="noopener noreferrer">Open on light.gg</a></div>
-      ${it.kind === 'weapon' ? `<div style="margin-top:8px;display:flex;gap:12px;align-items:center">
-        <span class="stat-pill">${r ? `Perk rating from light.gg community popularity<br>light.gg PvE ${r.pve ?? '–'}★ · PvP ${r.pvp ?? '–'}★` : 'No light.gg data for this weapon yet, so no perk rating. Clarity and the Data Compendium don’t publish ratings; their perk details are below.'}</span></div>` : ''}
+      ${it.kind === 'weapon' ? `<div class="rhead"><span class="stat-pill">${it.rating == null ? 'Not rated yet: no perk ratings, wish-list rolls or Aegis tier for this weapon.' : `Rating ${it.rating} · PvE ${it.pve ?? '–'} · PvP ${it.pvp ?? '–'}${it.why?.aegis ? ` · Tier ${esc(it.why.aegis.tier)} · ${AEGIS_CREDIT}` : ''}`}</span></div>` : ''}
     </div>
     <div class="d-body">
       <div class="sec tagsec"><div class="h">Tag</div><div class="tagrow">${TAGS.map(([v, l, i]) => `<button class="tagbtn${(it.tag || '') === v ? ' on' : ''}" data-tag="${v}">${i} ${l}</button>`).join('')}</div></div>
       <div class="sec"><div class="h">Notes</div><textarea class="notes" maxlength="${NOTE_MAX}" placeholder="Notes show up on this item in DIM after you import.">${esc(it.notes)}</textarea>
         <div class="nstate"><span class="stat-pill" id="dState">${S.edits[it.id] ? 'Changed here, not yet in DIM' : 'Matches DIM'}</span><button class="btn small mrevert" data-revert ${S.edits[it.id] ? '' : 'disabled'}>Revert to DIM</button></div></div>
-      <div class="sec"><div class="h">${it.kind === 'armor' ? 'Perks, set bonus &amp; mods' : 'Perks &amp; mods'}${r ? ' · light.gg popularity' : ''}</div>${perkRows ? `<div class="stat-pill" style="margin-bottom:6px">Click any perk, mod or set bonus for its Bungie, Clarity and Data Compendium details.</div>${perkRows}<div class="pdet" id="pdet" hidden></div>` : '<span class="stat-pill">None listed</span>'}</div>
+      <div class="sec"><div class="h">${it.kind === 'armor' ? 'Perks, set bonus &amp; mods' : 'Perks &amp; mods'}${it.why ? ' · PvE/PvP tiers' : ''}</div>${perkRows ? `<div class="stat-pill" style="margin-bottom:6px">Click any perk, mod or set bonus for its Bungie, Clarity and Data Compendium details.</div>${perkRows}<div class="pdet" id="pdet" hidden></div>` : '<span class="stat-pill">None listed</span>'}</div>
+      ${it.kind === 'weapon' ? ratingWhyHtml(it) : ''}
       ${triageHtml(it)}
       ${ex ? `<div class="sec"><div class="h">Data Compendium · exotic</div><div class="dctx">${SH(ex)}</div></div>` : ''}
       <div class="sec"><div class="h">Stats</div>${statLegend}${statRows || '<span class="stat-pill">None listed</span>'}</div>
@@ -1496,6 +1499,7 @@ function openItem(id, paneId, focusPerk) {
   $('#dClose').onclick = closeDrawer;
   // socket clicks -> detail panel
   d.querySelectorAll('[data-pk],[data-setp]').forEach(b => b.onclick = () => showPerk(b));
+  d.addEventListener('click', e => { if (e.target.closest('[data-open-ratings]')) openRatings(); });
   bindTriage(it);
   const first = focusPerk ? [...d.querySelectorAll('[data-pk]')].find(b => b.dataset.pk === focusPerk) : null;
   if (first) { showPerk(first); setTimeout(() => $('#pdet')?.scrollIntoView({ block: 'center' }), 260); }
@@ -1513,7 +1517,7 @@ function openItem(id, paneId, focusPerk) {
       det.innerHTML = infoHtml(sp.n, { kind: `${set.n} · ${sp.c}-piece bonus`, bd: sp.d, icon: sp.i, sq: true, extra: dch && !Core.perkInfo(sp.n, D)?.dc ? `<span class="src2">Data Compendium · ${esc(set.n)}</span><div class="dctx">${SH(dch)}</div>` : '' });
     } else {
       const n = b.dataset.pk; const rel = it.perkRel?.[n];
-      det.innerHTML = infoHtml(n, { kind: b.dataset.kind, ikind: it.kind, sq: b.dataset.sq === '1', extra: rel ? `<span class="src2">light.gg</span><div class="btxt">On ${rel.pct}% of community rolls · ${rel.rel}% as popular as the top perk in its column</div>` : '' });
+      det.innerHTML = infoHtml(n, { kind: b.dataset.kind, ikind: it.kind, sq: b.dataset.sq === '1', extra: `<span class="src2">Ghost rating</span><div class="btxt">PvE ${tierBadge(Core.perkTier(n, 'e', RT, UR))} · PvP ${tierBadge(Core.perkTier(n, 'p', RT, UR))} <button class="linkbtn" type="button" data-open-ratings>Change</button></div>` });
     }
     // place the description directly under the clicked row: after the intrinsic / set / mods block,
     // or as a full-width row right below the line of perk columns that holds the clicked perk
@@ -1536,7 +1540,7 @@ function socketsDrawer(it, hits) {
   const H = n => hits.has('perk:' + n) ? ' hit' : '';
   const dsk = (p, opt = {}) => {
     const rel = it.perkRel?.[p.n];
-    return `<div class="dsk${p.s ? ' sel' : ' opt'}${/^enhanced\s/i.test(p.n) ? ' enh' : ''}" data-pk="${esc(p.n)}" data-kind="${esc(opt.kind || '')}" data-sq="${opt.sq ? 1 : 0}" title="${esc(p.n)}">${plugIcon(p.n, opt.sq ? 'sq lg' : 'lg', pIdx(p.n, it.kind))}<span class="nm2 f${H(p.n)}">${esc(p.n)}</span>${rel && !opt.sq ? `<span class="pct">${rel.pct}%</span>` : ''}</div>`;
+    return `<div class="dsk${p.s ? ' sel' : ' opt'}${/^enhanced\s/i.test(p.n) ? ' enh' : ''}" data-pk="${esc(p.n)}" data-kind="${esc(opt.kind || '')}" data-sq="${opt.sq ? 1 : 0}" title="${esc(p.n)}">${plugIcon(p.n, opt.sq ? 'sq lg' : 'lg', pIdx(p.n, it.kind))}<span class="nm2 f${H(p.n)}">${esc(p.n)}</span>${rel && !opt.sq ? `<span class="pct">${esc(rel.e || '–')}/${esc(rel.p || '–')}</span>` : ''}</div>`;
   };
   const intr = (p, kind) => `<div class="dintr" data-pk="${esc(p.n)}" data-kind="${esc(kind)}" data-sq="1">${plugIcon(p.n, 'sq xl', pIdx(p.n, it.kind))}<div style="min-width:0"><div class="t">${esc(kind)}</div><b class="f${H(p.n)}">${esc(p.n)}</b><div class="stat-pill" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(perkInfoText(p.n, it.kind).split('\n')[0] || '')}</div></div></div>`;
   s.intrinsic.forEach(p => out.push(intr(p, it.kind === 'armor' ? 'Archetype' : 'Intrinsic')));
@@ -1634,7 +1638,7 @@ function renderCompare() {
     info('Element', it => it.element ? `${elIcon(it.element)}${esc(it.element)}` : '', it => it.element);
     info('Ammo', it => it.ammo ? `${ammoIcon(it.ammo)}${esc(it.ammo)}` : '', it => it.ammo);
     info('Breaker', it => breakerChips(it), it => Core.anyBreaker(it));
-    info('Rating', it => it.rating != null ? `<b style="color:${rateColor(it.rating)}">${it.rating}</b>` : '', it => it.rating);
+    info('Rating', it => it.rating != null ? `<b class="rbd-link" style="color:${rateColor(it.rating)}"${rbdAttr(it)}>${it.rating}</b>` : '', it => it.rating);
   } else {
     info('Class', it => esc(it.equippable));
     info('Armor set', it => it.set ? '◈ ' + esc(it.set) : '', it => it.set);
@@ -1849,7 +1853,7 @@ async function copyDimQuery(p) {
 }
 
 // ---------- modal / help ----------
-function modal(html) { $('#modalBox').innerHTML = html; $('#modal').classList.add('open'); $('#modalBox').querySelectorAll('[data-close]').forEach(b => b.onclick = closeModal); }
+function modal(html) { $('#modalBox').classList.remove('rbd-box'); $('#modalBox').innerHTML = html; $('#modal').classList.add('open'); $('#modalBox').querySelectorAll('[data-close]').forEach(b => b.onclick = closeModal); }
 function closeModal() { $('#modal').classList.remove('open'); }
 $('#modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
 // About & privacy (GHOST_PLAN A7): Bungie notice, credits, what is stored where, and "Delete my data"
@@ -1860,7 +1864,9 @@ function openAbout() {
     <h3>Credits</h3>
     <ul class="steps">
       <li><b>Bungie</b>: game data, item and perk icons, and all backdrop and subclass art (Bungie Press Room and the Destiny 2 manifest).</li>
-      <li><b>light.gg</b>: community perk popularity behind the perk ratings.</li>
+      <li><b>Aegis’s Endgame Analysis</b> (Destiny 2: Endgame Analysis spreadsheet by Aegis): weapon tiers and PvE perk / origin trait tiers in Ghost’s ratings, used with his permission.</li>
+      <li><b>DIM community wish lists</b>: voltron.txt from github.com/48klocs/dim-wish-list-sources (MIT) by 48klocs, with community rolls from u/-seudonym- and u/zman2100 (ShardItKeepIt)${RT.meta.credits ? ` and the curators it credits: ${esc(RT.meta.credits.replace(/^Thanks to /i, '').replace(/ for their contributions\..*$/i, ''))}` : ''}.</li>
+      <li><b>light.gg</b>: item page links.</li>
       <li><b>Clarity</b> (Database Clarity): tested perk descriptions.</li>
       <li><b>Destiny Data Compendium</b> by Pip1n: perk, exotic and set-bonus notes.</li>
       <li><b>DIM</b> (Destiny Item Manager): the spreadsheet format Ghost reads and writes.</li>
@@ -1869,7 +1875,7 @@ function openAbout() {
     <p class="stat-pill">Everything stays in this browser on this device: your vault, tags and notes, sort panes, Clean up and Compare state, theme, and profiles. There are no accounts, analytics or trackers, and nothing is sent anywhere except to Bungie when you sign in with Bungie${bungieOn() ? '' : ' (not available in this copy)'}. A Bungie sign-in lasts about an hour, is kept only for this browser tab, and is never saved on the device.</p>
     <div class="msheet"><button class="btn warn" id="aDel">Delete my data</button><button class="btn" data-close>Close</button></div>`);
   $('#aDel').onclick = () => {
-    modal(`<h2>Delete all Ghost data?</h2><p>This removes every profile's vault, tags, notes, panes, Clean up and Compare state, light.gg ratings and settings from this browser, and signs you out of Bungie. Tags already exported to DIM stay in DIM. This can't be undone.</p>
+    modal(`<h2>Delete all Ghost data?</h2><p>This removes every profile's vault, tags, notes, panes, Clean up and Compare state, perk ratings and settings from this browser, and signs you out of Bungie. Tags already exported to DIM stay in DIM. This can't be undone.</p>
       <div class="msheet"><button class="btn warn" id="aDelYes">Delete everything</button><button class="btn" data-close>Cancel</button></div>`);
     $('#aDelYes').onclick = async () => {
       closeModal();
@@ -1899,7 +1905,7 @@ function openHelp() {
     ['<code>source:"vault of glass"</code> <code>season:>=24</code>', 'Source and season'],
     ['<code>tag:keep</code> <code>tag:none</code> <code>is:tagged</code>', 'DIM tags (favorite, keep, infuse, archive, junk)'],
     ['<code>notes:pvp</code> <code>is:hasnotes</code> <code>notes:none</code>', 'Notes'],
-    ['<code>rating>=80</code> <code>pve>=4.5</code> <code>pvp>=4</code> <code>is:unrated</code>', 'Perk rating (0–100) and light.gg star ratings'],
+    ['<code>rating>=80</code> <code>pve>=70</code> <code>pvp>=60</code> <code>is:unrated</code>', 'Ghost rating (0–100): PvE score, PvP score, and their average'],
     ['<code>is:dupe</code> <code>count>=3</code>', 'Duplicates by name'],
     ['<code>ammo:heavy</code> <code>is:special</code> <code>sort:ammo</code>', 'Ammo type (sorts Primary → Special → Heavy)'],
     ['<code>is:breaker</code> <code>breaker:stagger</code> <code>is:shieldpiercing</code> <code>is:disruption</code> <code>breaker:none</code>', 'Intrinsic champion breaker. Every weapon has one (Update 9.7.0), read from Bungie’s game data for each weapon, exotics included. Aliases: antibarrier, overload, unstoppable'],
@@ -1912,7 +1918,7 @@ function openHelp() {
   ];
   modal(`<h2>Search help</h2><div class="help"><p class="stat-pill">The syntax is close to DIM’s. Every part of an item that made it match is highlighted in that pane’s color, and the colored dots on a card show which other panes it appears in.</p>
   <table>${rows.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join('')}</table>
-  <p class="stat-pill" style="margin-top:12px"><b>How the rating works:</b> for each perk column on light.gg, your roll gets the popularity of its best perk in that column, scaled so the most popular perk scores 100. The columns are then averaged, with the two trait columns counting double and the origin-trait column counting half. light.gg lists about the top 9 perks per column, so a perk below that list scores half of the lowest listed one. Perks that are among the top picks in their column get a gold outline. The ★ ratings are light.gg’s community PvE/PvP scores for the weapon.</p>
+  <p class="stat-pill" style="margin-top:12px"><b>How the rating works:</b> every weapon gets a PvE and a PvP score from 0 to 100, and its rating is the average of the two. Each score mixes three parts (weights adjustable under Perk ratings): your <b>perk and combo ratings</b> (50%: the best roll the weapon can have from every perk it rolled, equipped or not, with traits counting double and the best rated combo among those perks; the item panel shows that best roll and what to select), the <b>DIM community wish list</b> (25%: how well the roll matches the best listed roll for that mode) and <b>Aegis’s Endgame Analysis</b> (25%, PvE only: his tier for the weapon). A part that has no data is left out and the others count more. The item panel shows each part.</p>
   <p class="stat-pill"><b>Perk details:</b> descriptions come from the <a href="https://www.d2clarity.com/" target="_blank" rel="noopener noreferrer" >Clarity</a> community database and Pip1n’s <a href="https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4" target="_blank" rel="noopener noreferrer" >Destiny Data Compendium</a>${D ? ` (snapshot ${esc(D.built)})` : ''}. Icons and intrinsic breakers come from Bungie’s game data.</p></div>
   <div style="text-align:right"><button class="btn" data-close>Close</button></div>`);
 }
@@ -2349,18 +2355,212 @@ function setView(v) {
   VIEW = v; COMPACT.el = v === 'vault' ? $('#main') : null; syncCompact();
   document.querySelectorAll('nav.views button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
   placeViews();
-  for (const id of ['subv', 'clean', 'compare', 'builds']) $('#' + id).classList.toggle('open', v === id);
+  for (const id of ['subv', 'clean', 'compare', 'builds', 'ratings']) $('#' + id).classList.toggle('open', v === id);
+  $('#bRatings')?.classList.toggle('on', v === 'ratings');
   lightWrite(document.querySelector(v === 'vault' ? '#vscene .title' : `#${v} .band h1, #${v} .svt`));
   if (v === 'subv') openSubclasses();
   if (v === 'clean') renderClean();
   if (v === 'builds') renderBuilds();
   if (v === 'compare') renderCompare();
+  if (v === 'ratings') renderRatings();
   if (v === 'vault') refreshBodies();
 }
 document.querySelectorAll('nav.views button').forEach(b => b.onclick = () => setView(b.dataset.view));
 // keep the views just below the header even when it wraps or the banner appears
-const placeViews = () => { const hh = isMobile() ? document.querySelector('header').offsetHeight + ($('#banner').offsetHeight || 0) : ($('#banner').offsetHeight || 0); for (const id of ['subv', 'clean', 'compare', 'builds']) $('#' + id).style.top = hh + 'px'; };
+const placeViews = () => { const hh = isMobile() ? document.querySelector('header').offsetHeight + ($('#banner').offsetHeight || 0) : ($('#banner').offsetHeight || 0); for (const id of ['subv', 'clean', 'compare', 'builds', 'ratings']) $('#' + id).style.top = hh + 'px'; };
 try { const ro = new ResizeObserver(placeViews); ro.observe(document.querySelector('header')); ro.observe($('#banner')); } catch { window.addEventListener('resize', placeViews); }
+
+// ---------- Ratings (CLAUDE.md -> Ratings): Ghost's own weapon scores ----------
+// RT = shipped tables (DIM wish list, Aegis's Endgame Analysis, default perk / combo tiers); UR = this profile's
+// own perk / combo tiers and weights (localStorage PK('perkRatings') + db PP('config/perkRatings')).
+// Every string from the tables or storage is escaped with esc(); nothing here renders HTML from the sources.
+const RT = Core.prepGhostRatings(window.VS_RATE);
+let UR = Core.prepUserRatings(null), RCMAP = Core.combos(RT, UR);
+const RV = { tab: 'perks', kind: 'w', q: '', type: '', el: '', changed: false, n: 120, back: 'vault' };
+const AEGIS_CREDIT = 'Aegis’s Endgame Analysis';
+const tierBadge = (t, title = '') => t ? `<span class="tier t${esc(t)}"${title ? ` title="${esc(title)}"` : ''}>${esc(t)}</span>` : '<span class="tier t0" title="Not rated">–</span>';
+function loadUserRatings() { UR = Core.prepUserRatings(LS.get(PK('perkRatings'))); RCMAP = Core.combos(RT, UR); }
+async function loadUserRatingsFromDb() {
+  if (!S.db) return;
+  try { const v = await dbGet(PP('config/perkRatings')); if (v) { UR = Core.prepUserRatings(structuredClone(v)); RCMAP = Core.combos(RT, UR); } } catch (e) { console.warn(e); }
+}
+let urSaveT;
+async function writeUserRatings() { const v = { p: UR.p, c: UR.c, w: UR.w }; LS.set(PK('perkRatings'), v); if (S.db) { try { await dbSet(PP('config/perkRatings'), v); } catch (e) { console.warn(e); } } }
+function saveUserRatings() { clearTimeout(urSaveT); urSaveT = setTimeout(() => { urSaveT = null; writeUserRatings(); }, 400); }
+let rerateT;
+function rerate() { RCMAP = Core.combos(RT, UR); applyRatings(); clearTimeout(rerateT); rerateT = setTimeout(() => { if (VIEW === 'vault') refreshBodies(); }, 250); }
+function openRatings() { if (VIEW !== 'ratings') RV.back = VIEW || 'vault'; closeDrawer(); setView('ratings'); }
+const MODE_L = { e: 'PvE', p: 'PvP' };
+const WEIGHT_L = { perks: 'Perk & combo ratings', wish: 'DIM wish list', aegis: AEGIS_CREDIT };
+const isDefaultW = () => Object.keys(UR.w).every(k => UR.w[k] === Core.DEFAULT_WEIGHTS[k]);
+function tierSelect(attr, cur, def, label) {
+  const opts = [['', `Default${def ? ' (' + def + ')' : ' (none)'}`], ...Core.TIERS.map(t => [t, `Tier ${t}`]), ['x', 'Unrated']];
+  return `<select class="tsel${cur ? ' own' : ''}" ${attr} aria-label="${esc(label)}">${opts.map(([v, l]) => `<option value="${v}"${(cur || '') === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+}
+function weightsHtml() {
+  const W = UR.w; const tot = Object.values(W).reduce((a, b) => a + b, 0) || 1;
+  return `<div class="rweights">${Object.keys(Core.DEFAULT_WEIGHTS).map(k => `<label class="rw"><span>${esc(WEIGHT_L[k])}${k === 'aegis' ? ' <small>PvE only</small>' : ''}</span><input type="range" min="0" max="100" step="5" value="${W[k]}" data-w="${k}" aria-label="Weight of ${esc(WEIGHT_L[k])}"><b data-wv="${k}">${Math.round(W[k] / tot * 100)}%</b></label>`).join('')}
+    <button class="btn small" id="rwReset"${isDefaultW() ? ' disabled' : ''}>Reset weights</button></div>`;
+}
+const RCOLS = { w: [['b', 'Barrels / sights'], ['m', 'Magazines / batteries'], ['t', 'Traits'], ['o', 'Origin traits']], a: [['r', 'Armor archetypes']] };
+function ratingsListHtml() {
+  const q = Core.norm(RV.q);
+  if (RV.tab === 'combos') {
+    const rows = [...RCMAP.entries()].filter(([k, c]) => (!q || k.includes(q)) && (!RV.changed || c.user))
+      .sort((a, b) => (b[1].def?.w || 0) - (a[1].def?.w || 0) || a[1].a.localeCompare(b[1].a));
+    return `<section class="rgrp"><h2 class="rgh">Combos <small>${rows.length}</small></h2>${rows.slice(0, RV.n).map(([k, c]) => comboRowHtml(k, c)).join('') || '<div class="empty"><b>No combos match</b><span>Change the search, or add one above.</span></div>'}${rows.length > RV.n ? `<button class="btn rmore" data-more>Show more (${rows.length - RV.n} more)</button>` : ''}</section>`;
+  }
+  const list = [...RT.pk.entries()].filter(([k, p]) => p.kind === RV.kind && (!q || k.includes(q))
+    && (RV.kind !== 'w' || ((!RV.type || p.types.includes(RV.type)) && (!RV.el || (RV.el === '*' ? !!p.el : p.el === RV.el))))
+    && (!RV.changed || UR.p[k]));
+  let body = '', shown = 0;
+  for (const [col, label] of RCOLS[RV.kind]) {
+    // best rated first (either mode, your rating or the default), then by name
+    const best = ([, p]) => Math.max(...['e', 'p'].map(m => Core.TIER_SCORE[Core.perkTier(p.n, m, RT, UR)] || 0));
+    const rows = list.filter(([, p]) => p.col === col).map(r => [r[0], r[1], best(r)]).sort((a, b) => b[2] - a[2] || a[1].n.localeCompare(b[1].n));
+    if (!rows.length) continue;
+    const take = rows.slice(0, Math.max(0, RV.n - shown)); shown += take.length;
+    body += `<section class="rgrp"><h2 class="rgh">${esc(label)} <small>${rows.length}</small></h2>${take.map(([k, p]) => perkRowHtml(k, p)).join('')}${take.length < rows.length ? `<button class="btn rmore" data-more>Show more (${rows.length - take.length} more here)</button>` : ''}</section>`;
+  }
+  if (!body) body = '<div class="empty"><b>No perks match</b><span>Change the search or filters.</span></div>';
+  if (RV.kind === 'a') body = '<p class="stat-pill rnote">Armor perk ratings are saved with your profile; they don’t change weapon scores.</p>' + body;
+  return body;
+}
+function renderRatings() {
+  const v = $('#ratings');
+  const types = [...new Set([...RT.pk.values()].flatMap(p => p.types))].sort();
+  const els = [...new Set([...RT.pk.values()].map(p => p.el).filter(Boolean))].sort();
+  const nOwn = Object.keys(UR.p).length + Object.keys(UR.c).length;
+  const changed = `<label class="rchk"><input type="checkbox" id="rChanged"${RV.changed ? ' checked' : ''}> Only my changes</label>`;
+  const filters = RV.tab === 'perks' ? `<div class="rfil">
+      <input class="qin" id="rq" type="search" placeholder="Find a perk" value="${esc(RV.q)}" spellcheck="false" aria-label="Find a perk">
+      <div class="seg" role="group" aria-label="Weapon or armor perks"><button data-rk="w" class="${RV.kind === 'w' ? 'on' : ''}" aria-pressed="${RV.kind === 'w'}">Weapon</button><button data-rk="a" class="${RV.kind === 'a' ? 'on' : ''}" aria-pressed="${RV.kind === 'a'}">Armor</button></div>
+      ${RV.kind === 'w' ? `<label class="rsel"><span>Weapon type</span><select id="rType"><option value="">Any</option>${types.map(t => `<option${t === RV.type ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></label>
+      <label class="rsel"><span>Element</span><select id="rEl"><option value="">Any perk</option><option value="*"${RV.el === '*' ? ' selected' : ''}>Element-specific only</option>${els.map(e => `<option${e === RV.el ? ' selected' : ''}>${esc(e)}</option>`).join('')}</select></label>` : ''}
+      ${changed}</div>`
+    : `<div class="rfil"><input class="qin" id="rq" type="search" placeholder="Find a combo" value="${esc(RV.q)}" spellcheck="false" aria-label="Find a combo">${changed}</div>
+      <section class="rgrp radd-sec"><h2 class="rgh">Add a combo</h2><div class="radd"><input class="qin" id="rcA" list="rTraits" placeholder="First perk" aria-label="First perk" maxlength="80"><span aria-hidden="true">+</span><input class="qin" id="rcB" list="rTraits" placeholder="Second perk" aria-label="Second perk" maxlength="80"><button class="btn" id="rcAdd">Add</button></div>
+      <datalist id="rTraits">${[...RT.pk.values()].filter(p => p.kind === 'w').map(p => p.n).sort().map(n => `<option value="${esc(n)}">`).join('')}</datalist></section>`;
+  v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Ratings</div><h1>Perk ratings</h1>
+      <p>Each weapon gets a PvE and a PvP score (0–100); its rating is the average of the two. Rate perks and perk combos here. Ghost’s defaults come from ${AEGIS_CREDIT} (his PvE perk and origin trait tiers) and from how often the DIM community wish list picks a perk. Your changes stay on this device, in this profile.</p></div>
+      <button class="btn" id="rClose">Close</button></div>
+      ${weightsHtml()}
+      <div class="blist" role="tablist"><button class="tab${RV.tab === 'perks' ? ' on' : ''}" data-rt="perks" role="tab" aria-selected="${RV.tab === 'perks'}">Perks</button><button class="tab${RV.tab === 'combos' ? ' on' : ''}" data-rt="combos" role="tab" aria-selected="${RV.tab === 'combos'}">Combos</button>${nOwn ? `<button class="tab add" id="rResetAll">Reset all my ratings (${nOwn})</button>` : ''}</div></div>
+    <div class="rt-body">${filters}<div id="rList">${ratingsListHtml()}</div></div>`;
+  bindRatings(v);
+}
+function renderRatingsList() { const box = $('#rList'); if (!box) return; box.innerHTML = ratingsListHtml(); bindList($('#ratings')); }
+function perkRowHtml(k, p) {
+  const o = UR.p[k] || {};
+  const src = m => (m === 'e' ? p.se : p.sp) || 'No default: too few curated weapons can roll it';
+  const scope = p.kind === 'w' ? [p.el ? `${p.el} only` : '', p.types.length && p.types.length <= 3 ? p.types.join(', ') : ''].filter(Boolean).join(' · ') : '';
+  return `<div class="rrow" data-k="${esc(k)}"><button class="rpn" type="button" data-pinfo="${esc(p.n)}" data-pkind="${p.kind}" title="Perk details">${plugIcon(p.n, p.kind === 'a' ? 'sq' : '', pIdx(p.n, p.kind === 'a' ? 'armor' : 'weapon'))}<span><b>${esc(p.n)}</b>${scope ? `<small>${esc(scope)}</small>` : ''}</span></button>
+    ${['e', 'p'].map(m => `<label class="rmode"><span class="rml">${MODE_L[m]} ${tierBadge(Core.perkTier(p.n, m, RT, UR), src(m))}</span>${tierSelect(`data-pm="${m}"`, o[m], p[m], `${p.n} ${MODE_L[m]} rating`)}<small class="rsrc">${esc(o[m] ? 'Your rating' : src(m))}</small></label>`).join('')}
+    <button class="btn small rreset" type="button" data-preset${o.e || o.p ? '' : ' disabled'} aria-label="Reset ${esc(p.n)} to Ghost’s default">Reset</button></div>`;
+}
+function comboRowHtml(k, c) {
+  const u = c.user || {}; const d = c.def;
+  const src = m => d ? (d[m] ? `Picked together on ${d.w} weapons in curated wish lists` : 'No default for this mode') : 'Added by you';
+  return `<div class="rrow" data-ck="${esc(k)}"><div class="rpn rcn">${plugIcon(c.a, '', pIdx(c.a, 'weapon'))}${plugIcon(c.b, '', pIdx(c.b, 'weapon'))}<span><b>${esc(c.a)} + ${esc(c.b)}</b><small>${d ? esc(d.w) + ' weapons' : 'Your combo'}</small></span></div>
+    ${['e', 'p'].map(m => `<label class="rmode"><span class="rml">${MODE_L[m]} ${tierBadge(c[m])}</span>${tierSelect(`data-cm="${m}"`, u[m], d?.[m], `${c.a} + ${c.b} ${MODE_L[m]} rating`)}<small class="rsrc">${esc(u[m] ? 'Your rating' : src(m))}</small></label>`).join('')}
+    <button class="btn small rreset" type="button" data-creset${c.user ? '' : ' disabled'}>${d ? 'Reset' : 'Remove'}</button></div>`;
+}
+function bindRatings(v) {
+  $('#rClose').onclick = () => setView(RV.back && RV.back !== 'ratings' ? RV.back : 'vault');
+  v.querySelectorAll('[data-rt]').forEach(b => b.onclick = () => { RV.tab = b.dataset.rt; RV.q = ''; RV.n = 120; renderRatings(); });
+  v.querySelectorAll('[data-rk]').forEach(b => b.onclick = () => { RV.kind = b.dataset.rk; RV.n = 120; renderRatings(); });
+  const rq = $('#rq'); let qt; rq.oninput = () => { clearTimeout(qt); qt = setTimeout(() => { RV.q = rq.value.slice(0, 80); RV.n = 120; renderRatingsList(); }, 180); };
+  const rt = $('#rType'); if (rt) rt.onchange = () => { RV.type = rt.value; RV.n = 120; renderRatingsList(); };
+  const re = $('#rEl'); if (re) re.onchange = () => { RV.el = re.value; RV.n = 120; renderRatingsList(); };
+  $('#rChanged').onchange = e => { RV.changed = e.target.checked; RV.n = 120; renderRatingsList(); };
+  const ra = $('#rResetAll'); if (ra) ra.onclick = () => {
+    modal(`<h2>Reset all your ratings?</h2><p>Your own perk and combo ratings in this profile go back to Ghost’s defaults, and combos you added are removed. Weights stay as they are.</p><div class="msheet"><button class="btn warn" id="rraYes">Reset</button><button class="btn" data-close>Cancel</button></div>`);
+    $('#rraYes').onclick = () => { closeModal(); UR.p = {}; UR.c = {}; saveUserRatings(); rerate(); renderRatings(); };
+  };
+  v.querySelectorAll('[data-w]').forEach(r => {
+    r.oninput = () => { UR.w[r.dataset.w] = +r.value; const tot = Object.values(UR.w).reduce((a, b) => a + b, 0) || 1; v.querySelectorAll('[data-wv]').forEach(b => { b.textContent = Math.round(UR.w[b.dataset.wv] / tot * 100) + '%'; }); };
+    r.onchange = () => { saveUserRatings(); rerate(); $('#rwReset').disabled = isDefaultW(); };
+  });
+  $('#rwReset').onclick = () => { UR.w = { ...Core.DEFAULT_WEIGHTS }; saveUserRatings(); rerate(); renderRatings(); };
+  const add = $('#rcAdd'); if (add) add.onclick = () => {
+    const a = $('#rcA').value.trim(), b = $('#rcB').value.trim();
+    const pa = RT.pk.get(Core.norm(a)), pb = RT.pk.get(Core.norm(b));
+    if (!pa || !pb || pa.kind !== 'w' || pb.kind !== 'w') { toast('Pick two weapon perks from the list.'); return; }
+    if (Core.norm(a) === Core.norm(b)) { toast('Pick two different perks.'); return; }
+    const k = Core.comboKey(pa.n, pb.n);
+    if (RCMAP.has(k)) { toast('That combo is already listed.'); RV.q = pa.n; renderRatings(); return; }
+    UR.c[k] = { a: pa.n, b: pb.n, e: 'A', p: 'A' }; saveUserRatings(); rerate(); RV.q = ''; renderRatings(); toast(`Added ${pa.n} + ${pb.n} as Tier A. Change it below.`);
+  };
+  bindList(v);
+}
+function bindList(v) {
+  v.querySelectorAll('[data-more]').forEach(b => b.onclick = () => { RV.n += 200; renderRatingsList(); });
+  v.querySelectorAll('[data-pinfo]').forEach(b => b.onclick = () => modal(`<div class="pinfo">${infoHtml(b.dataset.pinfo, { ikind: b.dataset.pkind === 'a' ? 'armor' : 'weapon', sq: b.dataset.pkind === 'a' })}</div><div class="msheet"><button class="btn" data-close>Close</button></div>`));
+  const redrawRow = row => { const k = row.dataset.k, ck = row.dataset.ck; const html = k ? perkRowHtml(k, RT.pk.get(k)) : comboRowHtml(ck, RCMAP.get(ck)); const t = document.createElement('div'); t.innerHTML = html; const n = t.firstElementChild; row.replaceWith(n); bindList(n); };
+  v.querySelectorAll('[data-pm]').forEach(s => s.onchange = () => {
+    const row = s.closest('.rrow'); const k = row.dataset.k; const o = { ...(UR.p[k] || {}) };
+    if (s.value) o[s.dataset.pm] = s.value; else delete o[s.dataset.pm];
+    if (o.e || o.p) UR.p[k] = o; else delete UR.p[k];
+    saveUserRatings(); rerate(); redrawRow(row); $('#ratings').querySelector(`[data-k="${CSS.escape(k)}"] [data-pm="${s.dataset.pm}"]`)?.focus();
+  });
+  v.querySelectorAll('[data-cm]').forEach(s => s.onchange = () => {
+    const row = s.closest('.rrow'); const k = row.dataset.ck; const c = RCMAP.get(k); if (!c) return;
+    const o = { ...(UR.c[k] || { a: c.a, b: c.b }) };
+    if (s.value) o[s.dataset.cm] = s.value; else delete o[s.dataset.cm];
+    if (c.def && !o.e && !o.p) delete UR.c[k]; else UR.c[k] = o;
+    saveUserRatings(); rerate(); redrawRow(row); $('#ratings').querySelector(`[data-ck="${CSS.escape(k)}"] [data-cm="${s.dataset.cm}"]`)?.focus();
+  });
+  v.querySelectorAll('[data-preset]').forEach(b => b.onclick = () => { const row = b.closest('.rrow'); delete UR.p[row.dataset.k]; saveUserRatings(); rerate(); redrawRow(row); });
+  v.querySelectorAll('[data-creset]').forEach(b => b.onclick = () => {
+    const row = b.closest('.rrow'); const k = row.dataset.ck; const had = RCMAP.get(k)?.def; delete UR.c[k]; saveUserRatings(); rerate();
+    if (had) redrawRow(row); else row.remove();
+  });
+}
+// item panel: the score and why
+function ratingWhyHtml(it) {
+  const w = it.why; if (!w) return '';
+  const W = w.w;
+  const has = (k, m) => k === 'perks' ? w.perks[m].score != null : k === 'wish' ? !!w.wish?.[m] : m === 'e' && !!w.aegis;
+  const tot = m => Object.keys(W).filter(k => has(k, m)).reduce((a, k) => a + W[k], 0);
+  const share = (k, m) => !has(k, m) ? `${MODE_L[m]} not available` : `${tot(m) ? Math.round(W[k] / tot(m) * 100) : 0}% of ${MODE_L[m]}`;
+  const shares = (k, modes = ['e', 'p']) => modes.map(m => share(k, m)).join(' · ');
+  const num = v => v == null ? '<span class="rn none">–</span>' : `<span class="rn" style="color:${rateColor(v)}">${v}</span>`;
+  // perk part = the best roll from every option on the weapon; switched perks say what's equipped instead
+  const colRow = c => `<div class="rwr${c.switched ? ' sw' : ''}"><span class="rwl">${esc(COL_LABEL[c.ty] || 'Perk')}</span><span class="rwp">${c.pick ? `${esc(c.pick)} ${tierBadge(c.tier)}` : `${c.eq ? esc(c.eq) + ' ' : ''}<i>not rated</i>`}${c.switched ? `<small class="rwsw">select it · equipped: ${esc(c.eq)} ${tierBadge(c.eqTier)}</small>` : ''}</span>${num(c.score)}</div>`;
+  const perkBlock = m => { const p = w.perks[m]; const cb = p.combos[0];
+    const roll = p.cols.filter(c => c.pick).map(c => esc(c.pick)).join(' · ');
+    return `<div class="rwm"><div class="rwmh">${MODE_L[m]} ${num(p.score)} <small>best roll${p.switched.length ? ` · equipped roll ${p.equipped ?? '–'}` : ' = equipped'}</small></div>
+      ${roll ? `<div class="rwbest"><span class="rwl">Best roll</span><span>${roll}${cb ? `<br><b>Combo: ${esc(cb.a)} + ${esc(cb.b)}</b> ${tierBadge(cb.tier)}${cb.equipped ? ' <small>(equipped)</small>' : ` <small>(select ${[cb.a, cb.b].filter(n => p.switched.includes(n)).map(esc).join(' and ') || 'both'})</small>`}` : ''}</span></div>` : ''}
+      ${p.cols.map(colRow).join('')}${cb ? `<div class="rwr"><span class="rwl">Combo</span><span class="rwp">${esc(cb.a)} + ${esc(cb.b)} ${tierBadge(cb.tier)}</span>${num(cb.score)}</div>` : ''}</div>`; };
+  const wl = w.wish;
+  const wishBlock = m => { const r = wl?.[m]; if (!r) return `<div class="rwm"><div class="rwmh">${MODE_L[m]} ${num(null)}</div><small class="rsrc">No ${MODE_L[m]} rolls listed for this weapon.</small></div>`;
+    if (r.trash) return `<div class="rwm"><div class="rwmh">${MODE_L[m]} ${num(0)}</div><small class="rsrc">The equipped perks match a trash roll on the list.</small></div>`;
+    return `<div class="rwm"><div class="rwmh">${MODE_L[m]} ${num(r.score)} <small>best matching roll</small></div><div class="rwsets">${r.sets.map(s => `<span class="rws${s.got ? (s.s ? ' on' : ' opt') : ''}" title="${esc(s.perks.join(', '))}">${esc(s.got || s.perks.slice(0, 2).join(' / ') + (s.perks.length > 2 ? ' …' : ''))}</span>`).join('')}</div>${r.note ? `<q class="rwn">${esc(r.note)}</q>` : ''}</div>`; };
+  const ae = w.aegis;
+  return `<div class="sec rsec"><div class="h">Rating</div>
+    <div class="rtot">${[['PvE', it.pve], ['PvP', it.pvp], ['Rating', it.rating]].map(([l, v]) => `<div class="rbox"><span class="rl">${l}</span>${num(v)}</div>`).join('')}</div>
+    <details class="rwhy" open><summary>Perk &amp; combo ratings · best roll <small>${shares('perks')}</small></summary><div class="rwcols">${perkBlock('e')}${perkBlock('p')}</div></details>
+    <details class="rwhy"${wl ? ' open' : ''}><summary>DIM wish list <small>${wl ? shares('wish') : 'not available: no rolls listed for this weapon'}</small></summary>${wl ? `<div class="rwcols">${wishBlock('e')}${wishBlock('p')}</div>` : ''}<small class="rsrc">Community wish list voltron.txt (48klocs/dim-wish-list-sources).</small></details>
+    <details class="rwhy"${ae ? ' open' : ''}><summary>${AEGIS_CREDIT} <small>${ae ? shares('aegis', ['e']) : 'not available: this weapon isn’t rated there'}</small></summary>${ae ? `<div class="rwae">${tierBadge(ae.tier)} <b>Tier ${esc(ae.tier)} · ${AEGIS_CREDIT}</b>${ae.tab ? ` <small>(${esc(ae.tab)})</small>` : ''}</div>${ae.note ? `<q class="rwn">${esc(ae.note)}</q>` : ''}${ae.alts.length ? `<small class="rsrc">Other versions: ${ae.alts.map(a => `${esc(a[1])} · Tier ${esc(a[0])}`).join('; ')}</small>` : ''}<small class="rsrc">Rates the weapon for PvE endgame, not this roll.</small>` : ''}</details>
+    <p class="rsrc">Weights: perks ${W.perks} · wish list ${W.wish} · Aegis ${W.aegis} (PvE only); parts that aren’t available are left out and the rest rescaled.</p>
+    <button class="btn small" type="button" data-open-ratings>Adjust perk ratings &amp; weights</button></div>`;
+}
+// The total rating is clickable wherever it shows (cards, item panel ring, Clean up, Compare): [data-rbd=itemId]
+// opens this breakdown (a bottom sheet on phones via modal(), a floating panel on desktop). Captured at the
+// document so the card / tile underneath never gets the click.
+const rbdAttr = it => it?.kind === 'weapon' ? ` data-rbd="${esc(it.id)}" role="button" tabindex="0" aria-label="Rating ${it.rating ?? 'not available'}: show the breakdown"` : '';
+function openRatingBreakdown(id) {
+  const it = S.byId.get(id); if (!it || it.kind !== 'weapon') return;
+  const body = it.why ? ratingWhyHtml(it) : '<p class="stat-pill">Not rated: no perk ratings, wish-list rolls or Aegis tier for this weapon.</p>';
+  modal(`<div class="rbd"><h2>${esc(it.name)}</h2><p class="rsrc">${esc([it.rarity, it.type, it.frame].filter(Boolean).join(' · '))}</p>${body}</div><div class="msheet"><button class="btn" data-close>Close</button></div>`);
+  $('#modalBox').classList.add('rbd-box');
+  $('#modalBox [data-open-ratings]')?.addEventListener('click', () => { closeModal(); openRatings(); });
+}
+const rbdKey = e => e.target.closest?.('[data-rbd]');
+document.addEventListener('click', e => { const el = rbdKey(e); if (!el) return; e.preventDefault(); e.stopPropagation(); openRatingBreakdown(el.dataset.rbd); }, true);
+document.addEventListener('keydown', e => { if (e.key !== 'Enter' && e.key !== ' ') return; const el = rbdKey(e); if (!el) return; e.preventDefault(); e.stopPropagation(); openRatingBreakdown(el.dataset.rbd); }, true);
+// touch: a tap on the rating must not start a card swipe / long-press either
+for (const ev of ['pointerdown', 'touchstart']) document.addEventListener(ev, e => { if (rbdKey(e)) e.stopPropagation(); }, { capture: true, passive: true });
 
 // ---------- Clean up: group the vault, decide keep / trash per group, review, apply as DIM tags ----------
 // Like a vault cleaner: pick what makes items "the same kind" (weapon type, frame, element…), the tool ranks each
@@ -2369,7 +2569,7 @@ const CLEAN_KEYS = {
   weapon: [['type', 'Weapon type'], ['frame', 'Archetype / frame'], ['element', 'Element'], ['ammo', 'Ammo'], ['slot', 'Slot'], ['rarity', 'Rarity'], ['breaker', 'Breaker'], ['name', 'Same weapon (name)']],
   armor: [['class', 'Class'], ['type', 'Armor slot'], ['frame', 'Archetype'], ['set', 'Armor set'], ['tertiary', 'Tertiary stat'], ['rarity', 'Rarity'], ['name', 'Same armor (name)']],
 };
-const CLEAN_RANK = { weapon: [['rating', 'Perk rating (light.gg)'], ['tier', 'Gear tier'], ['power', 'Power'], ['season', 'Newest season'], ['kills', 'Kills']], armor: [['total', 'Stat total'], ['tier', 'Gear tier'], ['power', 'Power'], ['season', 'Newest season']] };
+const CLEAN_RANK = { weapon: [['rating', 'Rating (PvE + PvP)'], ['tier', 'Gear tier'], ['power', 'Power'], ['season', 'Newest season'], ['kills', 'Kills']], armor: [['total', 'Stat total'], ['tier', 'Gear tier'], ['power', 'Power'], ['season', 'Newest season']] };
 const CL = {
   setup: { kind: 'weapon', keys: { weapon: ['type', 'frame', 'element'], armor: ['class', 'type', 'frame'] }, rank: { weapon: 'rating', armor: 'total' }, keep: 1, filter: '', exoticsByName: true, protectTags: true, protectLocked: true, onlyNeeded: true },
   dec: {},        // itemId -> 'keep' | 'trash' (explicit choices; otherwise the suggestion applies)
@@ -2487,7 +2687,7 @@ function cleanTile(it, g, i) {
   const stats = kind === 'armor' ? `<div class="stats">${['Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee'].filter(k => k in it.stats).map(k => `<span>${k} <b>${it.stats[k]}</b></span>`).join('')}${'Total' in it.stats ? `<span>Total <b>${it.stats.Total}</b></span>` : ''}</div>` : '';
   const slam = CL.slam === it.id && motionOK(); if (slam) CL.slam = null;
   return `<div class="tile ${d}" data-id="${esc(it.id)}" style="--rc:${rarityColor(it.rarity)}"><span class="stamp${slam ? ' slam' : ''}">${d === 'keep' ? 'KEEP' : 'TRASH'}</span>
-    <div class="tile-h">${itemIcon(it, 44)}<span class="tn">${esc(it.name)}<br><span class="rank">#${i + 1}</span></span><span class="rv">${rv === -Infinity ? '–' : rv}</span></div>
+    <div class="tile-h">${itemIcon(it, 44)}<span class="tn">${esc(it.name)}<br><span class="rank">#${i + 1}</span></span><span class="rv"${r === 'rating' ? rbdAttr(it) : ''}>${rv === -Infinity ? '–' : rv}</span></div>
     <div class="tile-b">
       <div class="sub">${it.element ? `<span class="cfield">${elIcon(it.element)}${esc(it.element)}</span>` : ''}${it.tier != null ? `<span>Tier ${it.tier}</span>` : ''}${it.power != null ? `<span>${ICO.power} ${it.power}</span>` : ''}${it.tag ? `<span>${TAG_ICON[it.tag] || ''} ${esc(TAG_LABEL[it.tag] || it.tag)}</span>` : ''}${it.locked ? `<span title="Locked in game">${ICO.lock}</span>` : ''}${Core.anyBreaker(it) ? breakerChips(it) : ''}</div>
       ${sk}${stats}${it.notes ? `<div class="note">${esc(it.notes)}</div>` : ''}
@@ -2570,6 +2770,7 @@ $('#bLoad').onclick = openLoad;
 $('#bExport').onclick = exportCsv;
 $('#bHelp').onclick = openHelp;
 $('#bAbout').onclick = openAbout;
+$('#bRatings').onclick = openRatings;
 // phone ⋯ menu: everything the desktop header shows
 let installPrompt = null;
 addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; });
@@ -2583,6 +2784,7 @@ $('#bMenu').onclick = () => {
       <button class="btn" id="mLoad">Load DIM CSVs</button>
       ${n ? `<button class="btn warn" id="mExport">Export ${n} change${n > 1 ? 's' : ''} to DIM</button>` : ''}
       <button class="btn" id="mHelp">Search help</button>
+      <button class="btn" id="mRatings">Perk ratings</button>
       <button class="btn" id="mAbout">About &amp; privacy</button>
       ${installPrompt ? '<button class="btn" id="mInstall">Install app on this phone</button>' : ''}
       <button class="btn" data-close>Close</button></div>
@@ -2590,6 +2792,7 @@ $('#bMenu').onclick = () => {
   $('#mLoad').onclick = () => { closeModal(); openLoad(); };
   $('#mProf').onclick = () => openProfiles();
   $('#mHelp').onclick = () => { closeModal(); openHelp(); };
+  $('#mRatings').onclick = () => { closeModal(); openRatings(); };
   $('#mAbout').onclick = () => { closeModal(); openAbout(); };
   const mb = $('#mBungie'); if (mb) mb.onclick = async () => { closeModal(); if (BG.signedIn()) loadFromBungie(); else { try { await flushSaves(); location.assign(BG.authorizeUrl()); } catch (e) { toast(e.message || 'Couldn’t start Bungie sign-in.', 6000); } } };
   const me = $('#mExport'); if (me) me.onclick = () => { closeModal(); exportCsv(); };

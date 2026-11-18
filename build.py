@@ -126,6 +126,17 @@ if (ixd / 'glossary.json').exists():
 else:
     s = s.replace('/*__IX__*/null', 'null')
 
+# Ghost's weapon ratings: DIM wish list, Aegis's Endgame Analysis, default perk / combo tiers
+# (tools/build-ratings.mjs; validated again in the page by Core.prepGhostRatings). Both targets get them.
+assert '/*__RATE__*/null' in s
+rate_path = root / 'data/ratings.json'
+if rate_path.exists():
+    s = s.replace('/*__RATE__*/null', page_json(json.loads(rate_path.read_text(encoding='utf-8'))))
+    print(f'[{TARGET}] ratings: {rate_path.stat().st_size // 1024} KB')
+else:
+    s = s.replace('/*__RATE__*/null', 'null')
+    print('warning: data/ratings.json missing; run node tools/build-ratings.mjs')
+
 # reference data (icons, breakers, Clarity + Data Compendium); run tools/build-defs.mjs to refresh
 OUT.mkdir(exist_ok=True)
 defs_path = root / 'data/defs.json'

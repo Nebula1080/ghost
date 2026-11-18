@@ -42,6 +42,9 @@ The artifact's db (vault, edits, ratings) can only be reached by the page itself
 ## Profiles (2026-11-15)
 Multiple players' vaults in one app (see CLAUDE.md → Persistence). Next step discussed with the user: Bungie OAuth login for one-click refresh on a hosted copy (needs the user to register an app at bungie.net/developer and pick a host); optional desktop "refresh from Downloads folder" via the File System Access API.
 
+## Ratings (2026-11-17)
+Ghost's own weapon ratings replaced light.gg (CLAUDE.md → Ratings): DIM wish list + Aegis's Endgame Analysis + perk ratings, Perk ratings page. Tasks 1, 2 and 4 (per-perk overrides) below are superseded.
+
 ## Next tasks (in priority order)
 1. **"Import ratings JSON" in the UI.** Add a file input next to *Load DIM CSVs* that reads a ratings JSON (shape in CLAUDE.md), merges it into `S.ratingsRaw`, and saves it. In db mode, write chunks of ≤150 weapons to `ratings/rN` as `{w:{…}}`. In local mode, use `vs:ratings`. Then call `applyRatings(); refreshBodies()`.
 2. **Ratings pipeline** (`tools/`):
@@ -54,6 +57,6 @@ Multiple players' vaults in one app (see CLAUDE.md → Persistence). Next step d
 
 ## Decisions already made (don't relitigate without the user)
 - DIM's CSV round trip is the integration for tags/notes (there's no DIM Sync API). **Changed 2026-11-15 (GHOST_PLAN):** the hosted GitHub Pages build adds a Bungie OAuth public-client sign-in to load inventory; the claude.ai artifact build stays CSV-only.
-- The rating comes from light.gg perk **popularity** (light.gg doesn't publish per-perk scores), plus light.gg's PvE/PvP community stars shown next to it.
+- ~~The rating comes from light.gg perk popularity.~~ **Changed 2026-11-17:** Ghost's own ratings (CLAUDE.md → Ratings).
 - The UI is one self-contained HTML file so it works as a claude.ai artifact and straight from disk.
 - Export only the changed rows, because DIM's importer clears tags/notes for any row it is given with empty values.

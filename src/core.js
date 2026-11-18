@@ -422,6 +422,273 @@ const Core = (() => {
     it.rating = w ? Math.round(sum / w) : null;
   }
 
+  // ---------- Ghost ratings: DIM wish lists + Aegis's Endgame Analysis + perk ratings ----------
+  // Each weapon gets a PvE and a PvP score (0–100) from three parts, mixed by user-adjustable weights:
+  //   perks – Ghost's perk / combo ratings (defaults shipped in data/ratings.json, personal overrides per profile)
+  //   wish  – best match against the DIM community wish list (voltron.txt) rolls tagged for that mode
+  //   aegis – Aegis's Endgame Analysis weapon tier (PvE only)
+  // A missing part is left out and the others rescaled. rating = mean of PvE and PvP.
+  const WL = { PVE: 1, PVP: 2, MKB: 4, CTRL: 8, TRASH: 16 };
+  const WL_ANY = '69420'; // DIM: item=-69420 applies the roll to every item
+  const TAG_TOKEN = /^(pve|pvp|m\+kb|mkb|kbm|controller)(-[\w+-]*)?$/i;
+  const tagGroup = g => {
+    const toks = g.split(/[\s/\\,]+/).filter(Boolean);
+    return toks.length && toks.every(t => TAG_TOKEN.test(t) || /^[\w+]+-[\w+-]+$/.test(t)) && toks.some(t => TAG_TOKEN.test(t)) ? toks : null;
+  };
+  // Tags from "|tags:pve,mkb", a tag group in parentheses "(PvE PvE-Minor M+KB Controller)", the list title,
+  // or (last) the words PvE / PvP in the note.
+  function wlTags(notes, title) {
+    const s = String(notes || '');
+    const flag = words => {
+      let f = 0;
+      for (const w of words) {
+        const x = w.toLowerCase();
+        if (/^pve($|-)|-pve$/.test(x)) f |= WL.PVE;
+        if (/^pvp($|-)|-pvp$/.test(x)) f |= WL.PVP;
+        if (/^(m\+kb|mkb|kbm)$/.test(x)) f |= WL.MKB;
+        if (x === 'controller') f |= WL.CTRL;
+      }
+      return f;
+    };
+    const tm = s.match(/\|tags:([^|]*)$/i);
+    if (tm) return flag(tm[1].split(/[\s,]+/).filter(Boolean));
+    for (const g of s.matchAll(/\(([^()]{2,200})\)/g)) { const toks = tagGroup(g[1]); if (toks) return flag(toks); }
+    let f = 0;
+    for (const src of [title, s]) {
+      const t = String(src || '').toLowerCase(); const e = /\bpve\b/.test(t), p = /\bpvp\b/.test(t);
+      if (e !== p) { f |= e ? WL.PVE : WL.PVP; break; }
+    }
+    if (/(^|[^\w+])(m\+kb|mkb)\b/i.test(s)) f |= WL.MKB;
+    if (/\bcontroller\b/i.test(s)) f |= WL.CTRL;
+    return f;
+  }
+  // Parses DIM's wish list format (DIM docs/COMMUNITY_CURATIONS.md):
+  //   title:… / description:…                   list header
+  //   //notes:…                                 notes for the following rolls (until a blank line or a new title)
+  //   dimwishlist:item=H&perks=a,b,c#notes:…    H = item hash; -H = trash roll; -69420 = every item
+  // Returns rolls { item: 'H' | '*', trash, perks: ['hash'…], notes, tags }. Text is untrusted: lengths capped,
+  // hashes must be digits, malformed lines are skipped.
+  function parseWishlist(text, max = 2000000) {
+    const out = { title: '', description: '', rolls: [] };
+    let title = '', block = '';
+    const lines = String(text || '').split(/\r?\n/);
+    for (let i = 0; i < lines.length && out.rolls.length < max; i++) {
+      const raw = lines[i]; if (raw.length > 20000) continue;
+      const ln = raw.trim();
+      if (!ln) { block = ''; continue; }
+      if (/^@?title:/i.test(ln)) { title = ln.replace(/^@?title:/i, '').trim().slice(0, 300); if (!out.title) out.title = title; block = ''; continue; }
+      if (/^@?description:/i.test(ln)) { if (!out.description) out.description = ln.replace(/^@?description:/i, '').trim().slice(0, 2000); continue; }
+      if (/^\/\/\s*notes:/i.test(ln)) { block = ln.replace(/^\/\/\s*notes:/i, '').trim().slice(0, 4000); continue; }
+      const m = ln.match(/^dimwishlist:item=(-?)(\d{1,10})(?:&perks=([^#]*))?(?:#notes:(.*))?$/i);
+      if (!m) continue;
+      const perks = (m[3] || '').split(',').map(x => x.trim()).filter(x => /^\d{1,10}$/.test(x)).slice(0, 20);
+      const notes = (m[4] != null ? m[4].trim() : block).slice(0, 4000);
+      const any = m[1] === '-' && m[2] === WL_ANY;
+      out.rolls.push({ item: any ? '*' : m[2], trash: m[1] === '-' && !any, perks, notes, tags: wlTags(notes, title), title });
+    }
+    return out;
+  }
+  // Note text without the tag list, shortened for the item panel.
+  function wlNote(notes, max = 180) {
+    let s = String(notes || '').replace(/\|tags:[^|]*$/i, '').replace(/\s*\(([^()]{2,200})\)/g, (m, g) => tagGroup(g) ? '' : m).replace(/\s+/g, ' ').trim();
+    if (s.length > max) s = s.slice(0, max - 1).replace(/\s+\S*$/, '') + '…';
+    return s;
+  }
+
+  // The committed table is build output from untrusted sources: coerce shapes and sizes once at load.
+  // data/ratings.json = { wl: { p: [perkName], n: [note], w: { hash: [[flags, noteIdx, [[perkIdx…]…]]…] } },
+  //   ae: { tabs: [tab], n: [note], w: { hash: [tier, tabIdx, noteIdx, [[tier, label]…]?] } },
+  //   pk: { normName: [name, kind 'w'|'a', col b|m|t|o|r, pveTier|'', pvpTier|'', srcPve, srcPvp, [weapon types], onlyElement|''] },
+  //   cb: [[a, b, pveTier|'', pvpTier|'', weapons]], meta: {wl, ae, credits} }
+  const TIERS = ['S', 'A', 'B', 'C', 'D', 'E', 'F'];
+  const TIER_SCORE = { S: 100, A: 85, B: 70, C: 55, D: 40, E: 25, F: 10 };
+  const isTier = t => typeof t === 'string' && Object.prototype.hasOwnProperty.call(TIER_SCORE, t);
+  const str = (v, n) => typeof v === 'string' ? v.slice(0, n) : '';
+  const int = (v, lo, hi) => Number.isInteger(v) && v >= lo && v <= hi ? v : -1;
+  function prepGhostRatings(raw) {
+    const R = { wl: { p: [], n: [], w: new Map() }, ae: { tabs: [], n: [], w: new Map() }, pk: new Map(), cb: [], meta: { wl: '', ae: '', credits: '' } };
+    if (!raw || typeof raw !== 'object') return R;
+    const obj = v => v && typeof v === 'object' && !Array.isArray(v) ? v : {};
+    const wl = obj(raw.wl);
+    R.wl.p = (Array.isArray(wl.p) ? wl.p : []).slice(0, 20000).map(x => str(x, 120));
+    R.wl.n = (Array.isArray(wl.n) ? wl.n : []).slice(0, 50000).map(x => str(x, 400));
+    for (const [h, rolls] of Object.entries(obj(wl.w))) {
+      if (!/^(\d{1,10}|\*)$/.test(h) || !Array.isArray(rolls)) continue;
+      const list = [];
+      for (const r of rolls.slice(0, 400)) {
+        if (!Array.isArray(r) || !Array.isArray(r[2])) continue;
+        const sets = r[2].slice(0, 8).map(s => (Array.isArray(s) ? s : []).slice(0, 40).filter(i => int(i, 0, R.wl.p.length - 1) >= 0)).filter(s => s.length);
+        list.push({ f: int(r[0], 0, 31) < 0 ? 0 : r[0], note: int(r[1], 0, R.wl.n.length - 1), sets });
+      }
+      if (list.length) R.wl.w.set(h, list);
+    }
+    const ae = obj(raw.ae);
+    R.ae.tabs = (Array.isArray(ae.tabs) ? ae.tabs : []).slice(0, 60).map(x => str(x, 60));
+    R.ae.n = (Array.isArray(ae.n) ? ae.n : []).slice(0, 20000).map(x => str(x, 400));
+    for (const [h, a] of Object.entries(obj(ae.w))) {
+      if (!/^\d{1,10}$/.test(h) || !Array.isArray(a) || !isTier(a[0])) continue;
+      const alts = (Array.isArray(a[3]) ? a[3] : []).slice(0, 6).filter(x => Array.isArray(x) && isTier(x[0])).map(x => [x[0], str(x[1], 80)]);
+      R.ae.w.set(h, { tier: a[0], tab: R.ae.tabs[int(a[1], 0, R.ae.tabs.length - 1)] || '', note: R.ae.n[int(a[2], 0, R.ae.n.length - 1)] || '', alts });
+    }
+    for (const [k, v] of Object.entries(obj(raw.pk))) {
+      if (!Array.isArray(v) || typeof v[0] !== 'string' || !k || k !== norm(v[0])) continue;
+      R.pk.set(k, { n: str(v[0], 120), kind: v[1] === 'a' ? 'a' : 'w', col: str(v[2], 2), e: isTier(v[3]) ? v[3] : '', p: isTier(v[4]) ? v[4] : '', se: str(v[5], 200), sp: str(v[6], 200),
+        types: (Array.isArray(v[7]) ? v[7] : []).slice(0, 30).map(x => str(x, 40)).filter(Boolean), el: str(v[8], 20) });
+    }
+    for (const c of (Array.isArray(raw.cb) ? raw.cb : []).slice(0, 2000)) {
+      if (!Array.isArray(c) || typeof c[0] !== 'string' || typeof c[1] !== 'string' || !norm(c[0]) || !norm(c[1])) continue;
+      R.cb.push({ a: str(c[0], 120), b: str(c[1], 120), e: isTier(c[2]) ? c[2] : '', p: isTier(c[3]) ? c[3] : '', w: int(c[4], 0, 1e5) < 0 ? 0 : c[4] });
+    }
+    const m = obj(raw.meta);
+    R.meta = { wl: str(m.wl, 40), ae: str(m.ae, 40), credits: str(m.credits, 2000) };
+    return R;
+  }
+  const comboKey = (a, b) => [norm(a), norm(b)].sort().join('|');
+  // Personal overrides (per profile): { p: {normName: {e, p}}, c: {comboKey: {a, b, e, p}}, w: {perks, wish, aegis} }
+  // A tier ('S'…'F'), 'x' = unrated on purpose; missing = use Ghost's default.
+  const DEFAULT_WEIGHTS = { perks: 50, wish: 25, aegis: 25 };
+  function prepUserRatings(raw) {
+    const U = { p: {}, c: {}, w: { ...DEFAULT_WEIGHTS } };
+    if (!raw || typeof raw !== 'object') return U;
+    const ok = v => v === 'x' || isTier(v);
+    const obj = v => v && typeof v === 'object' && !Array.isArray(v) ? v : {};
+    let n = 0;
+    for (const [k, v] of Object.entries(obj(raw.p))) {
+      if (++n > 5000) break;
+      if (!/^[a-z0-9]{1,80}$/.test(k) || !v || typeof v !== 'object') continue;
+      const o = {}; if (ok(v.e)) o.e = v.e; if (ok(v.p)) o.p = v.p;
+      if (o.e || o.p) U.p[k] = o;
+    }
+    n = 0;
+    for (const [k, v] of Object.entries(obj(raw.c))) {
+      if (++n > 2000) break;
+      if (!/^[a-z0-9]{1,80}\|[a-z0-9]{1,80}$/.test(k) || !v || typeof v !== 'object') continue;
+      const a = str(v.a, 120), b = str(v.b, 120); if (!a || !b || comboKey(a, b) !== k || norm(a) === norm(b)) continue;
+      const o = { a, b }; if (ok(v.e)) o.e = v.e; if (ok(v.p)) o.p = v.p; if (v.add === 1) o.add = 1;
+      U.c[k] = o;
+    }
+    const w = obj(raw.w);
+    for (const k of Object.keys(DEFAULT_WEIGHTS)) { const x = Number(w[k]); if (w[k] != null && w[k] !== '' && Number.isFinite(x) && x >= 0 && x <= 100) U.w[k] = Math.round(x); }
+    return U;
+  }
+  // Effective tier of a perk for a mode ('e' PvE, 'p' PvP): personal override, else Ghost's default.
+  function perkTier(name, mode, R, U) {
+    const k = norm(name); const o = U?.p?.[k]?.[mode];
+    if (o === 'x') return ''; if (o) return o;
+    return R?.pk?.get(k)?.[mode] || '';
+  }
+  // Defaults merged with personal combos / overrides: Map comboKey -> {a, b, e, p, def, user}
+  function combos(R, U) {
+    const m = new Map();
+    for (const c of R?.cb || []) m.set(comboKey(c.a, c.b), { a: c.a, b: c.b, e: c.e, p: c.p, def: c, user: null });
+    for (const [k, c] of Object.entries(U?.c || {})) {
+      const d = m.get(k)?.def || null;
+      const pick = mode => c[mode] === 'x' ? '' : c[mode] || d?.[mode] || '';
+      m.set(k, { a: d?.a || c.a, b: d?.b || c.b, e: pick('e'), p: pick('p'), def: d, user: c });
+    }
+    return m;
+  }
+  const RATE_COL_W = { b: 1, m: 1, t: 2, o: 0.5, '?': 1 };
+  const equippedOf = c => c.perks.find(p => p.s) || (c.perks.length === 1 ? c.perks[0] : null);
+  // Perk part = the best roll this weapon can have: one perk per column chosen from every option it rolled
+  // (equipped or not), so a better trait combo sitting unselected counts. Each column scores its chosen perk's
+  // tier (barrel/mag ×1, traits ×2, origin ×0.5) and the best rated combo among the chosen perks counts ×2.
+  // Ties prefer the equipped perks. The result lists the chosen perks and which ones differ from equipped.
+  const BEST_MAX = 20000; // selections tried per weapon and mode; past this each column keeps its top 4 options
+  function perkPart(cols, mode, R, U, cmap) {
+    const cand = cols.map(c => {
+      const eq = equippedOf(c);
+      const rated = c.perks.map(p => ({ p, t: perkTier(p.n, mode, R, U) })).filter(x => x.t);
+      return { c, eq, list: rated.length ? rated : [{ p: eq || c.perks[0], t: '' }] };
+    });
+    let n = cand.reduce((a, x) => a * x.list.length, 1);
+    if (n > BEST_MAX) {
+      for (const x of cand) x.list = x.list.sort((a, b) => TIER_SCORE[b.t] - TIER_SCORE[a.t] || (b.p === x.eq) - (a.p === x.eq)).slice(0, 4);
+      n = cand.reduce((a, x) => a * x.list.length, 1);
+    }
+    const evalSel = sel => {
+      let sum = 0, w = 0, eqN = 0, combo = null;
+      sel.forEach((x, i) => { if (x.p === cand[i].eq) eqN++; if (!x.t) return; const wt = RATE_COL_W[cand[i].c.ty] ?? 1; sum += TIER_SCORE[x.t] * wt; w += wt; });
+      for (let i = 0; i < sel.length; i++) for (let j = i + 1; j < sel.length; j++) {
+        const c = cmap.get(comboKey(sel[i].p.n, sel[j].p.n)); const t = c?.[mode];
+        if (t && (!combo || TIER_SCORE[t] > TIER_SCORE[combo.tier])) combo = { a: sel[i].p.n, b: sel[j].p.n, tier: t, score: TIER_SCORE[t], equipped: sel[i].p === cand[i].eq && sel[j].p === cand[j].eq };
+      }
+      if (combo) { sum += combo.score * 2; w += 2; }
+      return { score: w ? sum / w : null, eqN, combo };
+    };
+    let best = null, bestSel = null;
+    const idx = new Array(cand.length).fill(0);
+    for (let k = 0; k < n; k++) {
+      const sel = cand.map((x, i) => x.list[idx[i]]);
+      const r = evalSel(sel);
+      if (r.score != null && (!best || r.score > best.score + 1e-9 || (Math.abs(r.score - best.score) < 1e-9 && r.eqN > best.eqN))) { best = r; bestSel = sel; }
+      for (let i = 0; i < idx.length; i++) { if (++idx[i] < cand[i].list.length) break; idx[i] = 0; }
+    }
+    // the equipped roll's own score, for "equipped vs best" in the item panel
+    const eqSel = cand.map(x => ({ p: x.eq || x.c.perks[0], t: x.eq ? perkTier(x.eq.n, mode, R, U) : '' }));
+    const eqR = evalSel(eqSel);
+    const why = cand.map((x, i) => {
+      const s = bestSel?.[i]; const pick = s?.t ? s.p : null;
+      return { ty: x.c.ty, pick: pick?.n || '', tier: pick ? s.t : '', eq: x.eq?.n || '', eqTier: x.eq ? perkTier(x.eq.n, mode, R, U) : '',
+        switched: !!(pick && x.eq && pick !== x.eq), score: pick ? TIER_SCORE[s.t] : null };
+    });
+    return { score: best ? Math.round(best.score) : null, cols: why, combos: best?.combo ? [best.combo] : [],
+      equipped: eqR.score != null ? Math.round(eqR.score) : null, switched: why.filter(c => c.switched).map(c => c.pick) };
+  }
+  // Wish-list match: per listed roll, each perk set scores 1 if the equipped perk is in it, 0.4 if only another
+  // option is, else 0; trait sets count double. The best roll per mode wins. A trash roll fully matched by
+  // equipped perks sets that mode to 0.
+  function wishPart(it, cols, R) {
+    const rolls = [...(R?.wl?.w.get(String(it.hash)) || []), ...(R?.wl?.w.get('*') || [])];
+    if (!rolls.length) return null;
+    const where = new Map(); // normName -> {s: equipped, ty}
+    for (const c of cols) { const eq = equippedOf(c); for (const p of c.perks) { const k = norm(p.n); const s = p === eq; const cur = where.get(k); if (!cur || s) where.set(k, { s, ty: c.ty }); } }
+    const res = { e: null, p: null };
+    const trash = { e: false, p: false };
+    for (const r of rolls) {
+      if (!r.sets.length) continue;
+      let sum = 0, w = 0, full = true; const hit = [];
+      for (const set of r.sets) {
+        let best = 0, ty = '?', name = '';
+        for (const i of set) { const n = R.wl.p[i]; const at = where.get(norm(n)); if (!at) continue; const v = at.s ? 1 : 0.4; if (v > best) { best = v; ty = at.ty; name = n; } }
+        const wt = ty === 't' ? 2 : 1; sum += best * wt; w += wt; if (best < 1) full = false;
+        hit.push({ perks: set.map(i => R.wl.p[i]), got: name, s: best === 1 });
+      }
+      const score = Math.round(100 * sum / w);
+      for (const mode of ['e', 'p']) {
+        const bit = mode === 'e' ? WL.PVE : WL.PVP;
+        if ((r.f & (WL.PVE | WL.PVP)) && !(r.f & bit)) continue;
+        if (r.f & WL.TRASH) { if (full) trash[mode] = true; continue; }
+        if (!res[mode] || score > res[mode].score) res[mode] = { score, note: R.wl.n[r.note] || '', sets: hit, f: r.f };
+      }
+    }
+    for (const mode of ['e', 'p']) if (trash[mode]) res[mode] = { score: 0, note: '', sets: [], f: WL.TRASH, trash: true };
+    return res.e || res.p ? res : null;
+  }
+  function mixParts(parts, W) {
+    let s = 0, w = 0;
+    for (const [k, v] of Object.entries(parts)) if (v != null && W[k] > 0) { s += v * W[k]; w += W[k]; }
+    return w ? Math.round(s / w) : null;
+  }
+  // Sets it.rating / it.pve / it.pvp (0–100), it.why (each part, for the item panel) and it.perkRel (perk tiers).
+  function rateGhost(it, defs, R, U, cmap) {
+    it.rating = null; it.pve = null; it.pvp = null; it.perkRel = {}; it.why = null;
+    if (it.kind !== 'weapon' || !R) return;
+    const W = U?.w || DEFAULT_WEIGHTS; cmap = cmap || combos(R, U);
+    const cols = sockets(it, defs).cols.filter(c => c.perks.length);
+    const pe = perkPart(cols, 'e', R, U, cmap), pp = perkPart(cols, 'p', R, U, cmap);
+    const wl = wishPart(it, cols, R);
+    const ae = R.ae.w.get(String(it.hash)) || null;
+    it.pve = mixParts({ perks: pe.score, wish: wl?.e?.score ?? null, aegis: ae ? TIER_SCORE[ae.tier] : null }, W);
+    it.pvp = mixParts({ perks: pp.score, wish: wl?.p?.score ?? null }, W);
+    it.rating = it.pve != null && it.pvp != null ? Math.round((it.pve + it.pvp) / 2) : it.pve ?? it.pvp;
+    for (const c of cols) for (const p of c.perks) {
+      const e = perkTier(p.n, 'e', R, U), v = perkTier(p.n, 'p', R, U);
+      if (e || v) it.perkRel[p.n] = { e, p: v, rel: Math.max(e ? TIER_SCORE[e] : 0, v ? TIER_SCORE[v] : 0) };
+    }
+    it.why = { perks: { e: pe, p: pp }, wish: wl, aegis: ae, w: W };
+  }
+
   // ---------- query language ----------
   function tokenize(s) {
     const out = []; const re = /(-?)([a-z%]+[a-z0-9.%]*)?(:|>=|<=|>|<|=)?("[^"]*"|\S+)?/gi;
@@ -1014,7 +1281,7 @@ const Core = (() => {
   const modsFor = (slot, defs) => [...(defs?.am?.[slot] || []), ...(defs?.am?.general || [])];
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
-  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
+  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
     SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
