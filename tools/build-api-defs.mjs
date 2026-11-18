@@ -7,6 +7,7 @@
 //   p: plugs            -> [name, cat]  cat: i intrinsic, r armor archetype, m masterwork, u tuning, k tracker,
 //                          ah/aa/ac/al/ax/ag armor mod (head/arms/chest/legs/class item/general), '' other
 //   s: stats            -> short name as DIM's spreadsheet uses it (only stats DIM exports)
+//   c: subclasses       -> each socket's empty / default plug hash (so Ghost can clear aspects and fragments)
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -39,7 +40,7 @@ const AMOD = { 'enhancements.v2_head': 'ah', 'enhancements.v2_arms': 'aa', 'enha
 const plugCat = c => !c ? '' : AMOD[c] ? AMOD[c] : c === 'intrinsics' ? 'i' : /armor_archetypes/.test(c) ? 'r' : /trackers/.test(c) ? 'k'
   : /tuning/.test(c) ? 'u' : /masterwork/.test(c) ? 'm' : '';
 
-const out = { v: manifest.Response.version, i: {}, p: {}, s: {} };
+const out = { v: manifest.Response.version, i: {}, p: {}, s: {}, c: {} };
 for (const [h, d] of Object.entries(items)) {
   const n = d.displayProperties?.name; if (!n) continue;
   if (d.itemType === 3 || d.itemType === 2) {
@@ -49,6 +50,7 @@ for (const [h, d] of Object.entries(items)) {
       // Mods, masterworks, intrinsics, cosmetics show only the inserted plug.
       (d.sockets?.socketCategories || []).filter(c => PERK_CATS.has(c.socketCategoryHash)).flatMap(c => c.socketIndexes || [])];
   }
+  if (d.inventory?.bucketTypeHash === 3284755031 && d.sockets) out.c[h] = d.sockets.socketEntries.map(e => e.singleInitialItemHash || 0);
   if (d.plug) out.p[h] = [n, plugCat(d.plug.plugCategoryIdentifier)];
 }
 for (const [h, d] of Object.entries(stats)) {

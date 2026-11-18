@@ -992,8 +992,8 @@ async function loadFromBungie(pick) {
       m = list[0];
     }
     const resp = await BG.profile(m.type, m.id);
-    const { weapons, armor, chars } = Core.apiToItems(resp, window.VS_APIDEFS);
-    LS.set(BCTX_KEY, { type: Number(m.type), id: String(m.id), chars });
+    const { weapons, armor, chars, subs } = Core.apiToItems(resp, window.VS_APIDEFS);
+    LS.set(BCTX_KEY, { type: Number(m.type), id: String(m.id), chars, subs });
     if (!weapons.length && !armor.length) { toast('Bungie returned no weapons or armor for this account.', 6000); return; }
     routeParsed([{ kind: 'weapon', items: weapons }, { kind: 'armor', items: armor }], [`From Bungie: ${weapons.length} weapons, ${armor.length} armor`]);
   } catch (e) { toast(e?.message || 'Couldn’t load your vault from Bungie.', 7000); }
@@ -2164,7 +2164,7 @@ function renderBuilds() {
   const statHtml = Core.ARMOR3.map(k => { const s = st.stats[k]; const w = x => Math.max(0, Math.min(100, x / 2)); return `<div class="bstat"><span class="sn">${esc(k)}</span><b>${s.total}</b><span class="tr" title="Armor ${s.armor}, fragments ${s.frag}, mods ${s.mods}"><i style="width:${w(s.armor)}%"></i>${s.mods > 0 ? `<i class="mod" style="width:${w(s.mods)}%"></i>` : ''}${s.frag > 0 ? `<i class="frag" style="width:${w(s.frag)}%"></i>` : ''}</span><small>${s.frag ? `<span class="${s.frag > 0 ? 'up' : 'dn'}">${s.frag > 0 ? '+' : ''}${s.frag} frag</span>` : ''}${s.mods ? ` <span class="up">+${s.mods} mods</span>` : ''}</small></div>`; }).join('');
   const subName = sc?.n || '';
   v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Builds</div><h1><span id="bName" class="bname" tabindex="0" title="Rename">${esc(b.name)}</span></h1><p class="sum"><b style="color:${EL_COL[b.el]}">${esc(subName)}</b> · ${esc(B_CLASSES.find(c => c[0] === b.cls)?.[1] || '')} · <button class="linkbtn" id="bJump">${nLinks} interaction${nLinks === 1 ? '' : 's'}</button> · ${st.total} stat total</p></div>
-      <div class="band-actions"><button class="btn" id="bDim">Send to DIM</button><button class="btn" id="bRen">Rename</button><button class="btn" id="bDup">Duplicate</button><button class="btn" id="bDel">Delete</button></div></div>${list}</div>
+      <div class="band-actions">${BG?.signedIn?.() && buildChar(b).length ? '<button class="btn primary" id="bEquip">Equip build</button>' : ''}<button class="btn" id="bDim">Send to DIM</button><button class="btn" id="bRen">Rename</button><button class="btn" id="bDup">Duplicate</button><button class="btn" id="bDel">Delete</button></div></div>${list}</div>
     <div class="bld-body"><div class="bld-main">
       <section class="bsec"><h2 class="bh">Subclass</h2>${subHtml}</section>
       <section class="bsec"><h2 class="bh">Weapons</h2><div class="bcards">${Core.W_SLOTS.map(s => itemCard('w', s)).join('')}</div></section>
@@ -2191,6 +2191,7 @@ function bindBuild(v, b, pieces, syn) {
   $('#bRen').onclick = rename; $('#bName').onclick = rename; $('#bName').onkeydown = e => { if (e.key === 'Enter') rename(); };
   $('#bDup').onclick = () => newBuild(b);
   $('#bDim').onclick = () => openDimLink(b);
+  const eb = $('#bEquip'); if (eb) eb.onclick = () => equipBuild(b);
   $('#bJump').onclick = () => $('#bSyn').scrollIntoView({ behavior: motionOK() ? 'smooth' : 'auto', block: 'start' });
   $('#bDel').onclick = () => {
     modal(`<h2>Delete “${esc(b.name)}”?</h2><p>This removes the build from Ghost. Your items aren’t touched.</p><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" data-close>Cancel</button><button class="btn danger" id="bDelOk">Delete build</button></div>`);
@@ -2277,8 +2278,12 @@ function bctx() {
   const v = LS.get(BCTX_KEY);
   if (!v || !(v.type >= 1 && v.type <= 6) || !/^\d{1,20}$/.test(String(v.id))) return null;
   const chars = (Array.isArray(v.chars) ? v.chars : []).filter(c => /^\d{1,20}$/.test(String(c?.id)) && ['Titan', 'Hunter', 'Warlock'].includes(c?.cls)).map(c => ({ id: String(c.id), cls: c.cls }));
-  return { type: Number(v.type), id: String(v.id), chars };
+  const subs = (Array.isArray(v.subs) ? v.subs : []).filter(x => /^\d{1,20}$/.test(String(x?.id)) && chars.some(c => c.id === String(x.cid)) && Number.isInteger(x.hash) && Array.isArray(x.plugs))
+    .map(x => ({ id: String(x.id), cid: String(x.cid), hash: x.hash, eq: !!x.eq, plugs: x.plugs.slice(0, 32).map(h => Number.isInteger(h) && h >= 0 && h < 2 ** 32 ? h : 0) }));
+  return { type: Number(v.type), id: String(v.id), chars, subs };
 }
+// keep the stored subclass state in step with what Bungie confirmed
+function saveSub(sub) { const v = LS.get(BCTX_KEY); if (!v || !Array.isArray(v.subs)) return; for (const x of v.subs) if (String(x.id) === sub.id) { x.eq = sub.eq; x.plugs = sub.plugs.slice(); } else if (sub.eq && String(x.cid) === sub.cid) x.eq = false; LS.set(BCTX_KEY, v); }
 const canAct = it => !!(BG?.signedIn?.() && it?.src === 'api' && /^\d{1,20}$/.test(String(it.id)) && bctx()?.chars.length);
 const charOf = id => bctx()?.chars.find(c => c.id === id) || null;
 // the character Bungie should act through: the item's own, else (vault) the first character that can use it
@@ -2288,8 +2293,8 @@ function actChar(it) {
   return (it.kind === 'armor' ? cs.find(c => c.cls === it.equippable) : null) || cs[0] || null;
 }
 // confirmation sheet -> sequential requests -> local updates
-function runActions(title, steps, done) {
-  modal(`<h2>${esc(title)}</h2><ol class="actsteps">${steps.map(s => `<li>${esc(s.label)}</li>`).join('')}</ol>
+function runActions(title, steps, done, note = '') {
+  modal(`<h2>${esc(title)}</h2>${note ? `<p class="actnote">${esc(note)}</p>` : ''}<ol class="actsteps">${steps.map(s => `<li>${esc(s.label)}</li>`).join('')}</ol>
     <p class="stat-pill">Ghost sends ${steps.length === 1 ? 'this change' : 'these changes'} to Bungie one at a time. Destiny only allows it in orbit, a social space, or while offline.</p>
     <div class="actmsg" id="actMsg" aria-live="polite"></div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><button class="btn" data-close>Cancel</button><button class="btn primary" id="actGo">Confirm</button></div>`);
@@ -2327,6 +2332,56 @@ function equipRowHtml(it) {
 }
 function bindEquip(it, root, after) {
   root.querySelectorAll('[data-equip]').forEach(b => b.onclick = () => { const ch = charOf(b.dataset.equip); if (ch) runActions(`Equip ${it.name}`, equipSteps(it, ch), ok => { if (ok) toast(`${it.name} equipped on your ${ch.cls}.`); after?.(); }); });
+}
+// a whole build onto one character: subclass (equip, then super / abilities / aspects / fragments), weapons and
+// armor (non-exotics first so the old exotic leaves its slot), then the build's armor mods on the equipped armor
+function buildChar(b) { return (bctx()?.chars || []).filter(c => c.cls.toLowerCase() === b.cls); }
+function equipBuildPlan(b, ch) {
+  const steps = [], skipped = [], ctx = bctx(), sc = scAll(b);
+  const inst = sc && ctx.subs.find(x => x.cid === ch.id && x.hash === sc.h);
+  if (sc && !inst) skipped.push(`${sc.n} (reload your vault from Bungie so Ghost can see your subclasses)`);
+  if (inst) {
+    const sub = { ...inst, plugs: inst.plugs.slice() }; const body = { itemId: sub.id, characterId: ch.id, membershipType: ctx.type };
+    if (!sub.eq) steps.push({ action: 'equip', label: `Equip ${sc.n}`, body, apply: () => { sub.eq = true; saveSub(sub); } });
+    for (const x of Core.subclassPlan(b, D, sub, window.VS_APIDEFS?.c?.[sc.h]) || [])
+      steps.push({ action: 'plug', label: `${sc.n}: ${x.label}`, body: { plug: { socketIndex: x.si, socketArrayType: 0, plugItemHash: x.h }, ...body }, apply: () => { sub.plugs[x.si] = x.h; saveSub(sub); } });
+  }
+  const items = [...Core.W_SLOTS.map(s => [s, b.w?.[s]]), ...Core.A_SLOTS.map(s => [s, b.a?.[s]])].map(([s, r]) => [s, r && S.byId.get(r.id)]).filter(([, it]) => it);
+  for (const [s, it] of items) if (!canAct(it)) skipped.push(`${it.name} (not loaded from Bungie)`);
+  const ok = items.filter(([, it]) => canAct(it));
+  for (const [, it] of ok.filter(([, it]) => !(it.equipped && it.cid === ch.id)).sort(([, x], [, y]) => /exotic/i.test(x.rarity) - /exotic/i.test(y.rarity))) steps.push(...equipSteps(it, ch));
+  // armor mods: keep mods already in place, put the rest into free sockets of their kind, cheaper swaps first
+  const ad = window.VS_APIDEFS?.p || {};
+  for (const [s, it] of ok) {
+    const want = b.mods?.[s] || []; if (it.kind !== 'armor' || !want.length) continue;
+    const socks = [...new Map(it.perks.filter(x => x.ac && x.s && Number.isInteger(x.si)).map(x => [x.si, x])).values()];
+    const used = new Set(); const todo = [];
+    for (const n of want) { const k = socks.find(x => !used.has(x.si) && Core.norm(x.n) === Core.norm(n)); if (k) used.add(k.si); else todo.push(n); }
+    const swaps = [];
+    for (const n of todo) {
+      const h = Core.modsFor(s, D).find(x => Core.norm(x[0]) === Core.norm(n))?.[3]; const cat = ad[h]?.[1];
+      const k = cat && socks.find(x => !used.has(x.si) && x.ac === cat);
+      if (!k) { skipped.push(`${n} on ${it.name} (no free ${cat === 'ag' ? 'general' : 'matching'} mod socket)`); continue; }
+      used.add(k.si); swaps.push({ k, h, n, d: Core.modCost(n, s, D) - Core.modCost(k.n, s, D) });
+    }
+    for (const w of swaps.sort((x, y) => x.d - y.d)) steps.push({ action: 'plug', label: `${it.name}: ${/^Empty/.test(w.k.n) ? 'add' : `replace ${w.k.n} with`} ${w.n}`,
+      body: { plug: { socketIndex: w.k.si, socketArrayType: 0, plugItemHash: w.h }, itemId: String(it.id), characterId: ch.id, membershipType: ctx.type }, apply: () => { w.k.n = w.n; w.k.h = w.h; } });
+  }
+  return { steps, skipped };
+}
+function equipBuild(b) {
+  const chars = buildChar(b);
+  if (!BG?.signedIn?.() || !bctx()) return toast('Sign in with Bungie and load your vault from Bungie to equip builds.', 5000);
+  if (!chars.length) return toast(`No ${B_CLASSES.find(c => c[0] === b.cls)?.[1] || b.cls} on this account.`, 5000);
+  const go = ch => {
+    const { steps, skipped } = equipBuildPlan(b, ch);
+    const note = skipped.length ? `Skipped: ${skipped.join('; ')}.` : '';
+    if (!steps.length) return toast(skipped.length ? note : `${b.name} is already equipped on your ${ch.cls}.`, 6000);
+    runActions(`Equip ${b.name} on your ${ch.cls}`, steps, ok => { if (ok) toast(`${b.name} equipped on your ${ch.cls}.`); renderBuilds(); }, note);
+  };
+  if (chars.length === 1) return go(chars[0]);
+  modal(`<h2>Which ${esc(chars[0].cls)}?</h2><div class="eqrow">${chars.map((c, i) => `<button class="btn" data-ch="${i}">${esc(c.cls)} ${i + 1}</button>`).join('')}</div>`);
+  $('#modalBox').querySelectorAll('[data-ch]').forEach(x => x.onclick = () => { closeModal(); go(chars[+x.dataset.ch]); });
 }
 // weapon perk switch: another option in the same perk socket the weapon already has
 function perkActHtml(it, name) {
