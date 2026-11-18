@@ -682,6 +682,23 @@
    },
    {
     "do": "grants",
+    "t": "healallies",
+    "perk": "Survival Well",
+    "who": "allies",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Rally Barricade",
+       "Towering Barricade"
+      ]
+     }
+    ],
+    "q": "Generating a Barricade, or dealing sustained damage or defeating targets from behind one creates a healing pulse.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
     "t": "healing",
     "perk": "Survival Well",
     "if": [
@@ -694,6 +711,22 @@
     ],
     "q": "Using Thruster restores 60 Health.",
     "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "perk": "Survival Well",
+    "if": [
+     {
+      "slot": "classAbility",
+      "is": [
+       "Thruster"
+      ]
+     }
+    ],
+    "q": "Using Thruster restores 60 Health.",
+    "s": "clarity",
+    "who": "allies"
    },
    {
     "do": "grants",
@@ -2323,7 +2356,7 @@
    },
    {
     "do": "grants",
-    "t": "restoration",
+    "t": "healallies",
     "perk": "Beacons of Empowerment",
     "by": "sunspot",
     "who": "allies",
@@ -2479,6 +2512,15 @@
    {
     "do": "grants",
     "t": "restoration",
+    "perk": "Kintsugi",
+    "on": "weapon final blows matching your Super's element",
+    "who": "allies",
+    "q": "Final blows from weapons with a damage type matching your Super create a burst of healing around you that grants allies restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
     "perk": "Kintsugi",
     "on": "weapon final blows matching your Super's element",
     "who": "allies",

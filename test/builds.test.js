@@ -187,4 +187,17 @@ t('artifact perks, set bonuses, natural states and damage-source rules', () => {
   const r = C.ixEval([{ g: 'subclass', slot: 'aspects', n: 'Howl' }, { g: 'mod', n: 'Y' }], ix2, D, 'stasis');
   assert.strictEqual(r.links.length, 1); assert.strictEqual(r.unmatched.length, 0);
 });
+t('healing yourself vs healing allies (real data): Devour does not feed Speaker\'s Sight, a Healing Grenade does', () => {
+  const R = require('../tools/interactions/check.js'); const fs2 = require('fs'), path2 = require('path');
+  const dir = path2.join(__dirname, '../data/interactions'); const ix = { t: {}, p: {} };
+  for (const f of ['glossary.json', ...fs2.readdirSync(path2.join(dir, 'glossary')).map(f => 'glossary/' + f)]) Object.assign(ix.t, JSON.parse(fs2.readFileSync(path2.join(dir, f), 'utf8')).terms);
+  for (const f of fs2.readdirSync(path2.join(dir, 'pieces'))) for (const r of JSON.parse(fs2.readFileSync(path2.join(dir, 'pieces', f), 'utf8'))) if (r.id !== '_skipped') ix.p[r.id] = r.fx;
+  const links = pcs => C.ixEval(pcs, ix, D, 'void').links.map(l => `${pcs[l.from].n}>${pcs[l.to].n}:${l.t}`);
+  const ss = { g: 'armor', n: "Speaker's Sight", it: { name: "Speaker's Sight", kind: 'armor', rarity: 'Exotic' } };
+  const a = links([{ g: 'subclass', slot: 'aspects', n: 'Feed the Void' }, ss]);
+  assert.ok(!a.some(l => /^Feed the Void>Speaker's Sight:heal/.test(l)), 'Devour (self heal) must not count as healing allies: ' + a.join(', '));
+  const b = links([{ g: 'subclass', slot: 'grenade', n: 'Healing Grenade' }, ss]);
+  assert.ok(b.some(l => /^Healing Grenade>Speaker's Sight:healallies$/.test(l)), 'Healing Grenade heals allies: ' + b.join(', '));
+  assert.deepStrictEqual(ix.t.orbofpower.also, ['resource'], 'Orbs of Power also show under Resources');
+});
 console.log(n, 'build tests passed');

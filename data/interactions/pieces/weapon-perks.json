@@ -412,7 +412,7 @@
   "fx": [
    {
     "do": "grants",
-    "t": "healing",
+    "t": "healallies",
     "who": "allies",
     "q": "Using a Noble Round on an ally heals them",
     "s": "bungie"
@@ -1002,6 +1002,14 @@
     "t": "healing",
     "q": "restores 22 HP, and starts Health Regeneration",
     "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "who": "allies",
+    "q": "Scoring multiple Kills with the weapon spawns a Dawning Gift for you and allies.",
+    "s": "clarity",
+    "note": "allies who pick up a Dawning Gift regain health"
    }
   ]
  },
@@ -1421,9 +1429,15 @@
    {
     "do": "grants",
     "t": "cure",
-    "who": "allies",
     "q": "Reloading shortly after dealing a final blow grants Cure to you and your nearby allies.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "q": "Reloading shortly after dealing a final blow grants Cure to you and your nearby allies.",
+    "s": "bungie",
+    "who": "allies"
    }
   ]
  },
@@ -2080,10 +2094,22 @@
       "weapon": "solar"
      }
     ],
-    "who": "allies",
-    "note": "Element follows the weapon's own damage type; granted to you and the healed ally on Support Frame Boost.",
+    "note": "Element follows the weapon's own damage type; granted to you on Support Frame Boost.",
     "q": "Solar: Restoration x1 for 4 seconds",
     "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "if": [
+     {
+      "weapon": "solar"
+     }
+    ],
+    "q": "Solar: Restoration x1 for 4 seconds",
+    "s": "clarity",
+    "who": "allies",
+    "note": "Restoration given to the healed ally on Support Frame Boost (Solar weapon)."
    },
    {
     "do": "grants",
@@ -2537,17 +2563,11 @@
   "fx": [
    {
     "do": "grants",
-    "t": "cure",
+    "t": "healallies",
     "who": "allies",
     "q": "provides Cure and Restoration to nearby allies",
-    "s": "bungie"
-   },
-   {
-    "do": "grants",
-    "t": "restoration",
-    "who": "allies",
-    "q": "provides Cure and Restoration to nearby allies",
-    "s": "bungie"
+    "s": "bungie",
+    "note": "Cure and Restoration"
    },
    {
     "do": "grants",

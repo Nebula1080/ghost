@@ -59,7 +59,8 @@
    { "do": "uses", "t": "voidability", "from": ["voidability"], "pay": "Void ability hits make targets volatile", "q": "Hitting a target with a Void ability or Volatile explosion makes them volatile.", "s": "bungie" },
    { "do": "applies", "t": "volatile", "on": "Void ability or Volatile explosion damage", "q": "Hitting a target with a Void ability or Volatile explosion makes them volatile.", "s": "bungie" },
    { "do": "uses", "t": "volatile", "pay": "volatile explosions heal you and nearby allies", "q": "Grants you and nearby allies health when volatile targets explode near you.", "s": "bungie" },
-   { "do": "grants", "t": "healing", "who": "allies", "on": "when volatile targets explode near you", "q": "Grants you and nearby allies health when volatile targets explode near you.", "s": "bungie" },
+   { "do": "grants", "t": "healing", "on": "when volatile targets explode near you", "q": "Grants you and nearby allies health when volatile targets explode near you.", "s": "bungie" },
+   { "do": "grants", "t": "healallies", "who": "allies", "on": "when volatile targets explode near you", "q": "Grants you and nearby allies health when volatile targets explode near you.", "s": "bungie" },
    { "do": "counts", "t": "volatile", "as": "voidability", "q": "Volatile Explosions also count as Void Ability Damage.", "s": "compendium" }
   ],
   "note": "Volatile explosions re-apply Volatile, so it chains. Heals you and allies within 40 m (Clarity)." },
@@ -212,7 +213,8 @@
  { "id": "sub:echoofleeching", "n": "Echo of Leeching",
   "fx": [
    { "do": "uses", "t": "melee", "from": ["melee"], "pay": "melee kills start health regeneration for you and nearby allies", "q": "Melee final blows start health regeneration for you and nearby allies.", "s": "bungie" },
-   { "do": "grants", "t": "healing", "who": "allies", "on": "melee final blows", "q": "Melee final blows start health regeneration for you and nearby allies.", "s": "bungie" }
+   { "do": "grants", "t": "healing", "on": "melee final blows", "q": "Melee final blows start health regeneration for you and nearby allies.", "s": "bungie" },
+   { "do": "grants", "t": "healallies", "who": "allies", "on": "melee final blows", "q": "Melee final blows start health regeneration for you and nearby allies.", "s": "bungie" }
   ] },
 
  { "id": "sub:echoofobscurity", "n": "Echo of Obscurity",

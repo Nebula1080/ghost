@@ -363,6 +363,13 @@
     "do": "grants",
     "t": "healing",
     "by": "bannerofwar",
+    "q": "Periodically restores 20 HP every 2.5 seconds.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "by": "bannerofwar",
     "who": "allies",
     "q": "periodically healing nearby allies",
     "s": "bungie"
@@ -527,6 +534,13 @@
    {
     "do": "grants",
     "t": "healing",
+    "on": "destroying a Tangle",
+    "q": "restoring 15 HP and granting Woven Mail to the user and allies",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
     "on": "destroying a Tangle",
     "who": "allies",
     "q": "Allies within this radius are healed for 15 HP",

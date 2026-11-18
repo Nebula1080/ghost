@@ -343,15 +343,7 @@
   "fx": [
    {
     "do": "uses",
-    "t": "restoration",
-    "q": "Applying restoration, cure, or radiant to allies",
-    "s": "bungie",
-    "pay": "faster grenade, melee and class ability regen for a short time",
-    "pq": "grants increased grenade, melee, and class ability regeneration for a short duration"
-   },
-   {
-    "do": "uses",
-    "t": "cure",
+    "t": "healallies",
     "q": "Applying restoration, cure, or radiant to allies",
     "s": "bungie",
     "pay": "faster grenade, melee and class ability regen for a short time",
@@ -367,7 +359,7 @@
    },
    {
     "do": "uses",
-    "t": "healing",
+    "t": "healallies",
     "q": "Healing (from most sources), or reviving allies",
     "s": "clarity",
     "pay": "faster grenade, melee and class ability regen for a short time",
@@ -562,6 +554,14 @@
    {
     "do": "grants",
     "t": "restoration",
+    "on": "reviving an ally",
+    "who": "allies",
+    "q": "When you revive an ally, you and other nearby allies gain restoration.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
     "on": "reviving an ally",
     "who": "allies",
     "q": "When you revive an ally, you and other nearby allies gain restoration.",
@@ -1009,7 +1009,14 @@
    },
    {
     "do": "grants",
-    "t": "restoration",
+    "t": "healallies",
+    "who": "allies",
+    "q": "A grenade that cures allies on impact",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
     "who": "allies",
     "q": "granting restoration to allies when picked up",
     "s": "bungie",
@@ -1024,6 +1031,13 @@
    {
     "do": "grants",
     "t": "healing",
+    "who": "allies",
+    "q": "Conjure a well of power that continuously heals those inside it.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
     "who": "allies",
     "q": "Conjure a well of power that continuously heals those inside it.",
     "s": "bungie"
@@ -1086,6 +1100,13 @@
    {
     "do": "grants",
     "t": "cure",
+    "who": "allies",
+    "q": "releasing a burst of healing energy that cures nearby allies",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
     "who": "allies",
     "q": "releasing a burst of healing energy that cures nearby allies",
     "s": "bungie"
@@ -1547,6 +1568,13 @@
     "s": "bungie"
    },
    {
+    "do": "grants",
+    "t": "healallies",
+    "who": "allies",
+    "q": "Dive to the ground and create a burst of Solar Light that cures nearby allies.",
+    "s": "bungie"
+   },
+   {
     "do": "uses",
     "t": "heatrises",
     "q": "While Heat Rises is active, you gain restoration while diving and scorch targets upon landing.",
@@ -1991,6 +2019,19 @@
    },
    {
     "do": "grants",
+    "t": "healallies",
+    "on": "consuming a Solar Wisp with Heat Rises",
+    "if": [
+     {
+      "piece": "Heat Rises"
+     }
+    ],
+    "who": "allies",
+    "q": "Consuming a Solar Wisp while Heat Rises is equipped grants Cure x3 and Restoration x2 for 4+2 seconds",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
     "t": "restoration",
     "on": "consuming a Solar Wisp with Heat Rises",
     "if": [
@@ -2148,7 +2189,22 @@
    },
    {
     "do": "grants",
-    "t": "restoration",
+    "t": "healallies",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Healing Grenade"
+      ]
+     }
+    ],
+    "who": "allies",
+    "q": "Healing Grenades grant Cure x2 and Restoration x2 for 4 seconds (6 with Ember of Solace)",
+    "s": "clarity"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
     "who": "allies",
     "if": [
      {
@@ -2337,6 +2393,13 @@
     "q": "granting radiant effects and restoration to nearby allies",
     "s": "bungie",
     "note": "Compendium says the Well removes active Restoration and heals 50 HP/s instead; sources disagree."
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "who": "allies",
+    "q": "granting radiant effects and restoration to nearby allies",
+    "s": "bungie"
    },
    {
     "do": "grants",

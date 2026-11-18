@@ -438,6 +438,7 @@
   "orbofpower": {
    "l": "Orb of Power",
    "kind": "object",
+   "also": ["resource"],
    "el": "",
    "aka": [
     "orbs of power",
@@ -472,9 +473,22 @@
     "restores health",
     "health regeneration"
    ],
-   "def": "Restoring your or allies' health, from any source.",
+   "def": "Restoring your own health, from any source. Healing other players is Healing allies.",
    "q": "Melee Kills begin health regeneration for the user and allies",
    "src": "compendium:void"
+  },
+  "healallies": {
+   "l": "Healing allies",
+   "kind": "buff",
+   "el": "",
+   "aka": [
+    "heal allies",
+    "healing allies",
+    "heals allies"
+   ],
+   "def": "Restoring other players' health (allies, not yourself): healing grenades, rifts, Well of Radiance, Cure or Restoration given to allies.",
+   "q": "Healing allies occasionally spawns an Orb of Power.",
+   "src": "xa:speakerssight"
   },
   "grenadeenergy": {
    "l": "Grenade energy",

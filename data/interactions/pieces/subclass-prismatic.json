@@ -209,6 +209,18 @@
     "s": "bungie"
    },
    {
+    "do": "grants",
+    "t": "healallies",
+    "if": [
+     {
+      "has": "transcendence"
+     }
+    ],
+    "who": "allies",
+    "q": "While transcendent, melee final blows start health regeneration for you and nearby allies.",
+    "s": "bungie"
+   },
+   {
     "do": "uses",
     "t": "transcendence",
     "q": "While Transcendent, this also applies to allies within ? meters.",

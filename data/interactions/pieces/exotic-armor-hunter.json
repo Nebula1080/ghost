@@ -263,7 +263,8 @@
    { "do": "grants", "t": "boltcharge", "perk": "New Tricks", "if": [{ "slot": "grenade", "is": ["Skip Grenade"] }], "on": "Skip Grenade damage", "q": "Skip Grenade damage grants Bolt Charge", "s": "bungie" },
    { "do": "uses", "t": "boltcharge", "perk": "New Tricks", "q": "gaining Bolt Charge grants Skip Grenade energy", "s": "bungie", "note": "Bolt Charge from any source counts", "pay": "Skip Grenade energy whenever you gain Bolt Charge" },
    { "do": "grants", "t": "grenadeenergy", "perk": "New Tricks", "if": [{ "slot": "grenade", "is": ["Skip Grenade"] }], "on": "gaining Bolt Charge", "q": "gaining Bolt Charge grants Skip Grenade energy", "s": "bungie" },
-   { "do": "grants", "t": "healing", "perk": "New Tricks", "who": "allies", "if": [{ "slot": "grenade", "is": ["Skip Grenade"] }], "on": "reaching full Bolt Charge", "q": "When Bolt Charge is ready, you heal nearby allies and enhance your next Skip Grenade.", "s": "bungie" }
+   { "do": "grants", "t": "healing", "perk": "New Tricks", "who": "allies", "if": [{ "slot": "grenade", "is": ["Skip Grenade"] }], "on": "reaching full Bolt Charge", "q": "When Bolt Charge is ready, you heal nearby allies and enhance your next Skip Grenade.", "s": "bungie" },
+   { "do": "grants", "t": "healallies", "perk": "New Tricks", "who": "allies", "if": [{ "slot": "grenade", "is": ["Skip Grenade"] }], "on": "reaching full Bolt Charge", "q": "When Bolt Charge is ready, you heal nearby allies and enhance your next Skip Grenade.", "s": "bungie" }
   ] },
  { "id": "xa:speedloaderslacks", "n": "Speedloader Slacks",
   "fx": [
@@ -320,6 +321,7 @@
    { "do": "grants", "t": "cure", "perk": "Burning Souls", "on": "using your class ability", "q": "Activating your class ability grants Cure.", "s": "bungie" },
    { "do": "modifies", "t": "dodge", "perk": "Burning Souls", "on": "rapid Solar final blows", "q": "increase the potency of Dodge's healing, and spreads the healing to nearby allies.", "s": "bungie", "pay": "stronger dodge healing that also heals nearby allies" },
    { "do": "grants", "t": "cure", "perk": "Burning Souls", "who": "allies", "on": "class ability with Burning Souls stacks", "q": "Class Ability Healing is enhanced and granted to allies within 15 meters of cast.", "s": "clarity" },
+   { "do": "grants", "t": "healallies", "perk": "Burning Souls", "who": "allies", "on": "class ability with Burning Souls stacks", "q": "Class Ability Healing is enhanced and granted to allies within 15 meters of cast.", "s": "clarity" },
    { "do": "grants", "t": "restoration", "perk": "Burning Souls", "who": "allies", "on": "class ability at 2-3 Burning Souls stacks", "q": "Cure x1 + Restoration x1 for 3 seconds", "s": "clarity", "note": "Burning Souls also gives +15% Solar ability damage; Ember of Solace extends the Restoration" }
   ] },
  { "id": "xa:youngahamkarasspine", "n": "Young Ahamkara's Spine",

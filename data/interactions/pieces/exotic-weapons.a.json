@@ -860,22 +860,13 @@
    },
    {
     "do": "grants",
-    "t": "cure",
+    "t": "healallies",
     "perk": "Restorative Turret",
     "who": "allies",
     "on": "healing turret",
-    "q": "deploy a healing turret on impact that provides Cure and Restoration to nearby allies",
-    "s": "bungie"
-   },
-   {
-    "do": "grants",
-    "t": "restoration",
-    "on": "healing turret",
-    "who": "allies",
-    "perk": "Restorative Turret",
     "q": "deploy a healing turret on impact that provides Cure and Restoration to nearby allies",
     "s": "bungie",
-    "note": "Ember of Solace extends the duration"
+    "note": "Cure and Restoration; Ember of Solace extends the duration"
    },
    {
     "do": "grants",
@@ -1604,7 +1595,7 @@
   "fx": [
    {
     "do": "grants",
-    "t": "healing",
+    "t": "healallies",
     "on": "Noble Round hits an ally",
     "who": "allies",
     "perk": "Blessing of the Sky",

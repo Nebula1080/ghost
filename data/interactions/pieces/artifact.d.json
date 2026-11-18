@@ -528,6 +528,14 @@
     "on": "killing a severed target",
     "q": "Releases 3 healing pulses on Enemy Death Location, restoring 15 HP",
     "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "who": "allies",
+    "on": "killing a severed target",
+    "q": "restoring 15 HP and granting Woven Mail for 10 seconds to the user and allies",
+    "s": "compendium"
    }
   ]
  },
