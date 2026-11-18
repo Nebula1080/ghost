@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#170f1c">
+<meta name="color-scheme" content="dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -2029,7 +2030,9 @@ function showSubDetail() {
 const BLD = { list: [], cur: null };
 let IXTAB = 'ov';   // open tab of the Interactions panel (kept while you edit the build)
 const IX = window.VS_IX || null;   // curated interactions (data/interactions)
-if (D && Array.isArray(IX?.art)) D.artp = IX.art;   // the artifacts and their perks (build maker artifact section)
+// artifact + perk icons are Bungie paths in the data; build.py lists their sprite cells in D.ai
+const artIcon = t => { const k = D?.ai?.[String(t || '').split('/').pop()]; return typeof k === 'number' ? k : -1; };
+if (D && Array.isArray(IX?.art)) D.artp = IX.art.map(a => ({ ...a, i: artIcon(a.i), p: (a.p || []).map(p => [p[0], p[1], p[2], p[3], artIcon(p[4])]) }));   // the artifacts and their perks (build maker artifact section)
 const IX_EL = t => EL_COL[IX?.t?.[t]?.el === 'prismatic' ? 'prism' : IX?.t?.[t]?.el] || '';
 const VERB = { creates: 'creates', applies: 'applies', grants: 'grants', uses: 'uses', modifies: 'changes', consumes: 'spends', counts: 'counts as' };
 const BLD_MAX = 60;
@@ -2090,7 +2093,7 @@ function pieceIcon(pc, b) {
   if (pc.g === 'mod') return plugIcon(pc.n, 'sq', pIdx(pc.n, 'armor'));
   if (pc.g === 'subclass') { const a = Core.subList(scAll(b), pc.slot).find(x => x.n === pc.n); return plugIcon(pc.n, 'sq', a?.i); }
   if (pc.slot === 'set') return plugIcon(pc.n, 'sq', setPerk(pc.n)?.i);
-  if (pc.g === 'artifact') return plugIcon(pc.n, 'sq', artPerk(pc.n)?.[5]);
+  if (pc.g === 'artifact') return plugIcon(pc.n, 'sq', artPerk(pc.n)?.[4]);
   return plugIcon(pc.n, 'sq');
 }
 const statChips = st => Object.entries(st || {}).map(([k, v]) => `<span class="bst ${v > 0 ? 'up' : 'dn'}">${v > 0 ? '+' : ''}${v} ${esc(k)}</span>`).join('');
