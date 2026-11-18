@@ -328,6 +328,16 @@ t('apiToItems: maps a Bungie profile to the CSV item shape; hostile values are d
   assert.strictEqual(a.stats.Total, 80); assert.strictEqual(a.tertiary, 'melee'); assert.strictEqual(a.equippable, 'Warlock');
   assert.throws(() => C.apiToItems(null, ad)); assert.throws(() => C.apiToItems({}, null));
 });
+t('intrinsics: a weapon gets its own intrinsic text, not another weapon type\'s with the same name', () => {
+  const D = require('../data/defs.json');
+  const tahoma = { kind: 'weapon', hash: '1225851434', frame: 'Aggressive Frame' }; // TAHOMA 01, a fusion rifle
+  const ph = C.intrinsicHash(tahoma, 'Aggressive Frame', D);
+  assert.ok(ph, 'ambiguous intrinsic resolves to the weapon\'s own plug');
+  const i = C.perkInfo('Aggressive Frame', D, 'weapon', ph);
+  assert.ok(/horizontal volley/i.test(i.bd) && !/heavy attack/i.test(i.bd), 'fusion rifle text, not the sword\'s');
+  assert.strictEqual(String(i.hash), ph, 'light.gg link points at the weapon\'s own plug');
+  assert.strictEqual(C.intrinsicHash(tahoma, 'Some Other Perk', D), null, 'only the intrinsic itself is remapped');
+});
 t('hosted build: Bungie config only in the hosted build; artifact build has no sign-in code', () => {
   const art = fs.readFileSync(path.join(root, 'dist/index.html'), 'utf8');
   assert.ok(/window\.VS_BUNGIE_CFG = null;/.test(art) && !/OAuth\/Authorize|X-API-Key/.test(art), 'artifact build must not carry Bungie sign-in');
