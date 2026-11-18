@@ -393,7 +393,7 @@ const Core = (() => {
     for (const c of sk.cols) for (const p of c.perks.filter(p => p.s)) add('perk:' + p.n, c.ty === 't' ? 'Trait' : c.ty === 'o' ? 'Origin trait' : 'Perk', p.n.replace(/^Enhanced\s+/i, ''), 'exactperk:' + q(p.n.replace(/^Enhanced\s+/i, '')));
     for (const p of sk.exotic) add('perk:' + p.n, 'Exotic perk', p.n, 'exactperk:' + q(p.n));
     if (it.name) add('name', 'Name', it.name, 'exactname:' + q(it.name));
-    if (it.source) add('source', 'Source', it.source, 'exactsource:' + q(it.source));
+    if (it.source) add('source', 'Source', sourceName(it.source), 'exactsource:' + q(it.source));
     return out;
   }
 
@@ -1005,7 +1005,7 @@ const Core = (() => {
     switch (g) {
       case 'type': return it.type || '—'; case 'frame': return it.frame || '—'; case 'element': return it.element || '—';
       case 'rarity': return it.rarity || '—'; case 'tier': return it.tier != null ? 'Tier ' + it.tier : 'No tier';
-      case 'tag': return it.tag || 'untagged'; case 'source': return it.source || '—';
+      case 'tag': return it.tag || 'untagged'; case 'source': return sourceName(it.source) || '—';
       case 'season': return it.season != null ? 'Season ' + it.season : '—'; case 'name': return it.name;
       case 'class': return it.equippable || '—'; case 'ammo': return it.ammo || '—';
       case 'breaker': return anyBreaker(it) || 'No breaker';
@@ -1426,6 +1426,10 @@ const Core = (() => {
   const MOD_SOCK_L = { g: 'General', t: 'Tuning', a: 'Artifice' };
   const modSockLabel = (c, slotLabel) => c === 's' ? slotLabel : MOD_SOCK_L[c] || (/^x:raid/.test(c) ? 'Raid' : /^x:season/.test(c) ? 'Seasonal' : 'Activity');
   // the mods one socket takes (code given), or every mod an armor slot can hold (lookups: costs, stats, hashes)
+  // DIM's source keys are lowercase words run together; show them spaced and capitalised. Unknown keys fall back to
+  // the key with its first letter capitalised. Search still matches the raw key (norm drops spaces).
+  const SOURCE_NAMES = {"monumentoftriumph": "Monument of Triumph", "dungeon": "Dungeon", "ironbanner": "Iron Banner", "crucible": "Crucible", "engram": "Engram", "seasonpass": "Season Pass", "events": "Events", "lastwish": "Last Wish", "rahool": "Rahool", "paleheart": "Pale Heart", "duality": "Duality", "renegades": "Renegades", "campaign": "Campaign", "exoticquest": "Exotic Quest", "brave": "BRAVE", "30th": "30th Anniversary", "pantheon": "Pantheon", "rootofnightmares": "Root of Nightmares", "blackarmory": "Black Armory", "desertperpetual": "Desert Perpetual", "edgeoffate": "Edge of Fate", "moon": "Moon", "nightfall": "Nightfall", "europa": "Europa", "deluxe": "Deluxe", "sonar": "Sonar", "kepler": "Kepler", "battlegrounds": "Battlegrounds", "deepstonecrypt": "Deep Stone Crypt", "dreaming": "Dreaming", "sparrowracingleague": "Sparrow Racing League", "rivenslair": "Riven's Lair", "strikes": "Strikes", "contact": "Contact", "reclaim": "Reclaim", "rasputin": "Rasputin", "throneworld": "Throne World", "pinnacleops": "Pinnacle Ops", "echoes": "Echoes", "edz": "EDZ", "heresy": "Heresy", "wellspring": "Wellspring", "crotasend": "Crota's End", "neomuna": "Neomuna", "revenant": "Revenant", "gardenofsalvation": "Garden of Salvation", "trials": "Trials", "dcv": "DCV", "gambit": "Gambit", "nessus": "Nessus", "evidenceboard": "Evidence Board", "haunted": "Haunted", "mercury": "Mercury", "ritual-weapon": "Ritual Weapon", "cosmodrome": "Cosmodrome", "avalon": "Avalon", "lost": "Lost", "lostsectors": "Lost Sectors", "vaultofglass": "Vault of Glass", "kingsfall": "King's Fall", "vowofthedisciple": "Vow of the Disciple", "salvationsedge": "Salvation's Edge", "ghostsofthedeep": "Ghosts of the Deep", "prophecy": "Prophecy", "pitofheresy": "Pit of Heresy", "shatteredthrone": "Shattered Throne", "spireofthewatcher": "Spire of the Watcher", "warlordsruin": "Warlord's Ruin", "vespershost": "Vesper's Host", "sundereddoctrine": "Sundered Doctrine", "dreamingcity": "Dreaming City", "tangledshore": "Tangled Shore", "zerohour": "Zero Hour", "presage": "Presage", "raid": "Raid", "gunsmith": "Gunsmith", "xur": "Xûr", "eververse": "Eververse", "vanguard": "Vanguard"};
+  const sourceName = k => !k ? '' : SOURCE_NAMES[String(k).toLowerCase()] || (String(k)[0].toUpperCase() + String(k).slice(1));
   const modsFor = (slot, defs, code) => code === 'g' ? (defs?.am?.general || []) : code === 's' ? (defs?.am?.[slot] || []) : code ? (defs?.sock?.m?.[code] || [])
     : [...(defs?.am?.[slot] || []), ...(defs?.am?.general || []), ...Object.values(defs?.sock?.m || {}).flat()];
   const modFits = (n, code, slot, defs) => modsFor(slot, defs, code).some(x => norm(x[0]) === norm(n));
@@ -1437,7 +1441,7 @@ const Core = (() => {
   }
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
-  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
+  return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
     SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

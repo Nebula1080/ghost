@@ -18,3 +18,8 @@ console.log('sort ammo asc', C.sortItems([...items],'ammo','asc').map(i=>i.name+
 console.log('sort breaker asc', C.sortItems([...items],'breaker','asc').map(i=>i.name+':'+(i.breaker||'-')));
 console.log('group breaker', items.map(i=>C.groupKey(i,'breaker')), C.groupOrder('ammo','Heavy'));
 console.log(C.toCSV(['Id','Hash','Tag','Notes'],[{Id:'1',Hash:'2',Tag:'keep',Notes:'a, "b"'}]));
+// readable source names (DIM keys run words together); unknown keys keep the key, capitalised; search still matches
+{ const ok = C.sourceName('monumentoftriumph') === 'Monument of Triumph' && C.sourceName('lastwish') === 'Last Wish' && C.sourceName('zzkey') === 'Zzkey' && C.sourceName('') === '';
+  const it = { id: '9', kind: 'weapon', name: 'x', source: 'lastwish', perks: [], stats: {} };
+  const hit = C.runQuery(C.parseQuery('source:"last wish"'), [it], {}).size === 1 && C.groupKey(it, 'source') === 'Last Wish';
+  if (!ok || !hit) { console.error('FAIL sourceName'); process.exit(1); } console.log('sourceName ok'); }
