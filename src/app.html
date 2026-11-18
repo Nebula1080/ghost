@@ -441,7 +441,7 @@ nav.views svg{display:none}
   body{padding-bottom:0}
   #app{height:calc(100% - var(--bar) - env(safe-area-inset-bottom))}
   header{min-height:48px;padding:env(safe-area-inset-top) 12px 0;flex-wrap:nowrap;gap:8px}
-  header #summary,header #pending,header #bLoad,header #bExport,header #bHelp,header #bRatings,header #bAbout{display:none!important}
+  header #summary,header #pending,header #bLoad,header #bBungie,header #bExport,header #bHelp,header #bRatings,header #bAbout{display:none!important}
   .mmenu{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:40px;font-size:18px;margin-left:auto}
   .pbtn{max-width:44vw;min-height:36px}
   header .brand{font-size:11px}
@@ -544,6 +544,7 @@ nav.views svg{display:none}
     <span class="stat-pill" id="summary">No vault loaded</span>
     <span class="grow"></span>
     <span class="stat-pill" id="pending"></span>
+    <button class="btn primary" id="bBungie" type="button" hidden>Sign in with Bungie</button>
     <button class="btn" id="bLoad">Load DIM CSVs</button>
     <button class="btn warn" id="bExport" title="Download a CSV of your tag/note changes to import in DIM">Export to DIM</button>
     <button class="btn" id="bHelp">Search help</button>
@@ -962,8 +963,16 @@ function bindBungieButtons(root) {
     const a = b.dataset.bg;
     if (a === 'in') { try { await flushSaves(); location.assign(BG.authorizeUrl()); } catch (e) { toast(e.message || 'Couldn’t start Bungie sign-in.', 6000); } }
     else if (a === 'load') { closeModal(); loadFromBungie(); }
-    else if (a === 'out') { BG.signOut(); closeModal(); toast('Signed out of Bungie. Your loaded vault stays here.'); }
+    else if (a === 'out') { BG.signOut(); closeModal(); renderBungieBtn(); toast('Signed out of Bungie. Your loaded vault stays here.'); }
   });
+}
+// desktop rail: its own Sign in / Refresh button, so sign-in isn't hidden inside the Load dialog (phones use the ⋯ menu)
+function renderBungieBtn() {
+  const b = $('#bBungie'); if (!b) return;
+  b.hidden = !bungieOn(); if (b.hidden) return;
+  const inn = BG.signedIn();
+  b.dataset.bg = inn ? 'load' : 'in'; b.textContent = inn ? 'Refresh from Bungie' : 'Sign in with Bungie';
+  bindBungieButtons(b.parentElement);
 }
 async function loadFromBungie(pick) {
   if (!BG?.signedIn()) { toast('Your Bungie sign-in has expired. Sign in again to refresh your vault.', 6000); return; }
@@ -993,7 +1002,7 @@ async function bungieReturn() {
   if (!BG) return;
   const search = location.search; if (!/[?&](code|state|error)=/.test(search)) return;
   try { history.replaceState(null, '', location.pathname + location.hash); } catch {}
-  try { if (await BG.handleCallback(search)) { toast('Signed in with Bungie.'); await loadFromBungie(); } }
+  try { if (await BG.handleCallback(search)) { renderBungieBtn(); toast('Signed in with Bungie.'); await loadFromBungie(); } }
   catch (e) { toast(e?.message || 'Bungie sign-in didn’t complete.', 7000); }
 }
 $('#file').onchange = e => { handleFiles([...e.target.files]); e.target.value = ''; };
@@ -2816,7 +2825,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 matchMedia('(max-width: 760px)').addEventListener?.('change', () => { if (VIEW === 'vault') renderPanes(); else setView(VIEW); });
 
 renderAll();
-loadAll().then(bungieReturn);
+loadAll().then(bungieReturn).finally(renderBungieBtn);
 })();
 </script>
 </body>
