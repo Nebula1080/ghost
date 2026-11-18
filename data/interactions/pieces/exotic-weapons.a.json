@@ -14,20 +14,28 @@
    {
     "do": "applies",
     "t": "slow",
-    "perk": "Ager's Call",
-    "q": "Hits inflict x20 [x0] Slow Stacks for 4+0 seconds",
-    "s": "compendium",
-    "note": "catalyst (Will Given Form mode)"
+    "perk": "Ager's Scepter Catalyst",
+    "on": "beam hits during Will Given Form",
+    "q": "20 [0] slow stacks per hit",
+    "s": "clarity"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "perk": "Ager's Scepter Catalyst",
+    "on": "beam hits during Will Given Form",
+    "q": "empowering the beam with bonus damage and the ability to slow and freeze targets",
+    "s": "bungie"
    },
    {
     "do": "consumes",
     "t": "superenergy",
-    "perk": "Ager's Call",
+    "perk": "Ager's Scepter Catalyst",
     "on": "activating Will Given Form at full Super",
-    "q": "Immediately drains 20% Super Energy, then constantly drains 4% Super Energy per Second.",
-    "s": "compendium",
-    "pay": "powers Will Given Form, which drains Super energy over time",
-    "note": "catalyst; requires full Super energy to activate"
+    "q": "Will Given Form immediately takes away 20% Super Energy, then drains at a rate of 4% Super Energy per second",
+    "s": "clarity",
+    "pay": "powers Will Given Form (overfilled magazine, more damage, slowing beam) while it drains Super energy",
+    "note": "requires full Super energy to activate; does not count as a Super for related effects"
    },
    {
     "do": "uses",
@@ -47,19 +55,19 @@
    {
     "do": "applies",
     "t": "jolt",
-    "perk": "Arc Traps",
-    "q": "Jolts on the 4th damage instance, 3 if Amplified.",
-    "s": "compendium",
-    "note": "catalyst (Jolting Feedback)"
+    "perk": "Anarchy Catalyst",
+    "on": "repeated hits",
+    "q": "Dealing repeated damage with this weapon inflicts Jolt.",
+    "s": "bungie",
+    "note": "Clarity: every 3 hits within 3 s"
    },
    {
     "do": "uses",
     "t": "amplified",
-    "perk": "Arc Traps",
-    "q": "Jolts on the 4th damage instance, 3 if Amplified.",
-    "s": "compendium",
-    "pay": "jolts targets one hit sooner (3 hits instead of 4)",
-    "note": "catalyst; Amplified jolts one hit sooner"
+    "perk": "Anarchy Catalyst",
+    "q": "While amplified, Jolt is applied faster.",
+    "s": "bungie",
+    "pay": "jolts targets faster (2 hits instead of 3)"
    }
   ]
  },
@@ -101,6 +109,18 @@
     "s": "bungie",
     "pay": "more melee damage for a short time",
     "note": "next melee within 3 s deals bonus damage"
+   },
+   {
+    "do": "uses",
+    "t": "melee",
+    "perk": "Bastion Catalyst",
+    "on": "dealing melee damage",
+    "q": "Dealing melee damage increases this weapon's handling and loads a small amount of ammo from reserves.",
+    "s": "bungie",
+    "pay": "refills part of the magazine from reserves and more handling",
+    "from": [
+     "melee"
+    ]
    }
   ]
  },
@@ -123,6 +143,33 @@
     "q": "Hitting a target already suppressed spreads the effect to nearby targets.",
     "s": "bungie",
     "pay": "spreads suppression to nearby targets"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "perk": "Black Talon Catalyst",
+    "q": "Dealing damage to Void debuffed targets increases this weapon's damage for a short time per each type of Void debuff affecting the target.",
+    "s": "bungie",
+    "pay": "more weapon damage per type of Void debuff on the target",
+    "note": "any Void debuff counts; Clarity says the catalyst is bugged and does not work (intended 10% per unique Void debuff)"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "perk": "Black Talon Catalyst",
+    "q": "Dealing damage to Void debuffed targets increases this weapon's damage for a short time per each type of Void debuff affecting the target.",
+    "s": "bungie",
+    "pay": "more weapon damage per type of Void debuff on the target",
+    "note": "Clarity: currently bugged"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "perk": "Black Talon Catalyst",
+    "q": "Dealing damage to Void debuffed targets increases this weapon's damage for a short time per each type of Void debuff affecting the target.",
+    "s": "bungie",
+    "pay": "more weapon damage per type of Void debuff on the target",
+    "note": "Clarity: currently bugged"
    }
   ]
  },
@@ -199,6 +246,14 @@
     "s": "bungie",
     "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "applies",
+    "t": "disorient",
+    "perk": "Borealis Catalyst",
+    "on": "breaking a matching elemental shield",
+    "q": "Explosion disorients enemies within 7 meters for 5 seconds.",
+    "s": "clarity"
    }
   ]
  },
@@ -225,24 +280,24 @@
    {
     "do": "applies",
     "t": "weaken",
-    "perk": "Hungering Quarrel",
+    "perk": "Buried Bloodline Catalyst",
     "if": [
      {
       "has": "devour"
      }
     ],
-    "q": "While Devour is active: Hits inflict Weaken for 5 [?] seconds.",
-    "s": "compendium",
-    "note": "catalyst (Splitvein Lineage)"
+    "q": "While Devour is active, this weapon weakens on hit.",
+    "s": "bungie",
+    "note": "Clarity: Weaken lasts 6 s"
    },
    {
     "do": "uses",
     "t": "devour",
-    "perk": "Hungering Quarrel",
-    "q": "While Devour is active: Hits inflict Weaken for 5 [?] seconds.",
-    "s": "compendium",
+    "perk": "Buried Bloodline Catalyst",
+    "q": "While Devour is active, this weapon weakens on hit.",
+    "s": "bungie",
     "pay": "hits weaken targets while Devour is active",
-    "note": "catalyst; Devour from any source enables weakening hits"
+    "note": "Devour from any source enables weakening hits"
    }
   ]
  },
@@ -262,11 +317,11 @@
    {
     "do": "uses",
     "t": "amplified",
-    "perk": "Overcharge Capacitor",
-    "q": "Passively generates 7% Charge per second and removes Passive Decay while Amplified.",
-    "s": "compendium",
-    "pay": "passively builds charge and stops charge decay",
-    "note": "catalyst (Static Buildup)"
+    "perk": "Centrifuse Catalyst",
+    "q": "While amplified, this weapon gradually gains overcharge.",
+    "s": "bungie",
+    "pay": "gradually builds overcharge",
+    "note": "Clarity: 7% charge per second and no passive decay while Amplified"
    }
   ]
  },
@@ -411,6 +466,39 @@
     "q": "This weapon's magazine is automatically reloaded when you gain Devour, a Void overshield, or become invisible.",
     "s": "bungie",
     "pay": "refills the magazine"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "perk": "Collective Obligation Catalyst",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie",
+    "pay": "kills of Void-debuffed targets grant an overshield",
+    "note": "any Void debuff (volatile, weaken, suppression)"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "perk": "Collective Obligation Catalyst",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie",
+    "pay": "kills of Void-debuffed targets grant an overshield"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "perk": "Collective Obligation Catalyst",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie",
+    "pay": "kills of Void-debuffed targets grant an overshield"
+   },
+   {
+    "do": "grants",
+    "t": "overshieldgeneric",
+    "perk": "Collective Obligation Catalyst",
+    "on": "defeating a Void-debuffed target",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie"
    }
   ]
  },
@@ -433,6 +521,48 @@
     "on": "landing nearly all Solar pellets",
     "q": "landing nearly all Solar pellets will ignite targets",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "perk": "Conditional Finality Catalyst",
+    "on": "reloading shortly after a final blow",
+    "q": "Reloading shortly after dealing a final blow grants Cure to you and your nearby allies.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "who": "allies",
+    "perk": "Conditional Finality Catalyst",
+    "on": "reloading shortly after a final blow",
+    "q": "Reloading shortly after dealing a final blow grants Cure to you and your nearby allies.",
+    "s": "bungie",
+    "note": "Clarity: Cure x2 for you, Cure x1 for allies within 15 m"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "perk": "Conditional Finality Catalyst",
+    "on": "shattering a Stasis crystal or killing a frozen target",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "perk": "Conditional Finality Catalyst",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie",
+    "pay": "killing frozen targets with this weapon grants Frost Armor"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "perk": "Conditional Finality Catalyst",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie",
+    "pay": "destroying a Stasis crystal with this weapon grants Frost Armor"
    }
   ]
  },
@@ -465,12 +595,12 @@
    {
     "do": "uses",
     "t": "freeze",
-    "perk": "LN2 Burst",
-    "on": "killing frozen targets",
-    "q": "Scoring a Frozen Enemy Kill refills the Magazine.",
-    "s": "compendium",
-    "pay": "refills the magazine",
-    "note": "catalyst (Cold Efficiency); frozen targets from any source"
+    "perk": "Cryosthesia 77K Catalyst",
+    "on": "shattering frozen targets",
+    "q": "Shattering a frozen target refills this weapon's magazine from reserves.",
+    "s": "bungie",
+    "pay": "refills the magazine from reserves",
+    "note": "frozen targets from any source"
    }
   ]
  },
@@ -600,6 +730,14 @@
     "s": "bungie",
     "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
+   },
+   {
+    "do": "grants",
+    "t": "overshieldgeneric",
+    "perk": "Turnabout",
+    "on": "breaking a combatant's shield or a Super-using Guardian's shield",
+    "q": "Grants a 30 HP Overshield for 10 seconds.",
+    "s": "clarity"
    }
   ]
  },
@@ -632,6 +770,16 @@
     "on": "overcharged shot hits",
     "q": "Collecting an Ionic Trace overcharges this weapon's next shot, jolting targets on hit.",
     "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "perk": "Delicate Tomb Catalyst",
+    "on": "collecting an Ionic Trace",
+    "q": "Collecting an Ionic Trace partially reloads the magazine from reserves.",
+    "s": "bungie",
+    "pay": "reloads part of the magazine from reserves",
+    "note": "Ionic Traces from any source"
    }
   ]
  },
@@ -716,6 +864,49 @@
     ],
     "q": "Hits against Suspended enemies inflicts 20 Scorch (30 with Ember of Ashes).",
     "s": "clarity"
+   },
+   {
+    "do": "uses",
+    "t": "firesprite",
+    "perk": "Devil's Ruin Catalyst",
+    "q": "Collecting an Elemental pickup or destroying a Tangle grants this weapon a stacking period of increased damage.",
+    "s": "bungie",
+    "pay": "more weapon damage for a stacking duration",
+    "note": "Clarity: Firesprites and Void Breaches give 8 s, other pickups 4 s; stacks up to 16 s"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "perk": "Devil's Ruin Catalyst",
+    "q": "Collecting an Elemental pickup or destroying a Tangle grants this weapon a stacking period of increased damage.",
+    "s": "bungie",
+    "pay": "more weapon damage for a stacking duration"
+   },
+   {
+    "do": "uses",
+    "t": "ionictrace",
+    "perk": "Devil's Ruin Catalyst",
+    "q": "Collecting an Elemental pickup or destroying a Tangle grants this weapon a stacking period of increased damage.",
+    "s": "bungie",
+    "pay": "more weapon damage for a stacking duration"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "perk": "Devil's Ruin Catalyst",
+    "q": "Collecting an Elemental pickup or destroying a Tangle grants this weapon a stacking period of increased damage.",
+    "s": "bungie",
+    "pay": "more weapon damage for a stacking duration",
+    "note": "Clarity: shards from Facet of Awakening or Facet of Command do not count"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "perk": "Devil's Ruin Catalyst",
+    "q": "Collecting an Elemental pickup or destroying a Tangle grants this weapon a stacking period of increased damage.",
+    "s": "bungie",
+    "pay": "more weapon damage for a stacking duration",
+    "note": "destroying a Tangle by shooting or throwing it; throwing a held Tangle adds more time"
    }
   ]
  },
@@ -731,6 +922,23 @@
     "q": "Sustained damage with this weapon envelops the target in a field that weakens and stuns them.",
     "s": "bungie",
     "note": "the cage turns hits from other precision-capable weapons into precision hits"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "perk": "Divinity Catalyst",
+    "on": "repeated hits",
+    "q": "Dealing repeated damage with this weapon inflicts Jolt.",
+    "s": "bungie",
+    "note": "Clarity: every 18 hits within 3 s"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Divinity Catalyst",
+    "q": "While amplified, Jolt is applied faster.",
+    "s": "bungie",
+    "pay": "jolts targets faster (13 hits instead of 18)"
    }
   ]
  },
@@ -759,11 +967,11 @@
    {
     "do": "creates",
     "t": "firesprite",
-    "perk": "Composite Propellant",
+    "perk": "Dragon's Breath Catalyst",
     "on": "kills",
-    "q": "Kills spawn Firesprites without any cooldown between each pickup.",
-    "s": "compendium",
-    "note": "catalyst (Pyromancer)"
+    "q": "Defeating targets with this weapon causes them to periodically drop Firesprites.",
+    "s": "bungie",
+    "note": "Clarity: these kills ignore the global Firesprite cooldown"
    }
   ]
  },
@@ -808,6 +1016,39 @@
     "q": "Helm of Saint-14 Interaction | Remote Shield allows triggering The Saint's Suppression Burst with the same conditionals.",
     "s": "compendium",
     "note": "the dome lets Helm of Saint-14 trigger its suppressing burst"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "perk": "Edge of Action Catalyst",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie",
+    "pay": "kills of Void-debuffed targets grant a Void Overshield",
+    "note": "any Void debuff (volatile, weaken, suppression)"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "perk": "Edge of Action Catalyst",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie",
+    "pay": "kills of Void-debuffed targets grant a Void Overshield"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "perk": "Edge of Action Catalyst",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie",
+    "pay": "kills of Void-debuffed targets grant a Void Overshield"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "perk": "Edge of Action Catalyst",
+    "on": "defeating a Void-debuffed target",
+    "q": "Kills against Void Debuffed enemies grant a 45 HP Void Overshield for 8 seconds",
+    "s": "clarity"
    }
   ]
  },
@@ -839,6 +1080,14 @@
     "on": "charged Lightning Seeker shot",
     "q": "jolting them and unleashing chain lightning on impact",
     "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Edge of Concurrence Catalyst",
+    "q": "Temporarily increases reload speed and handling after sprinting or while amplified. This effect is improved when you are amplified.",
+    "s": "bungie",
+    "pay": "faster reload and more handling without needing to sprint, with a bigger reload bonus"
    }
   ]
  },
@@ -895,6 +1144,24 @@
     "q": "If Touch of Flame is equipped, the turret grants Cure x2 and Restoration x2 for 6 seconds (9 with Ember of Solace) to the caster.",
     "s": "clarity",
     "note": "x2 Cure and Restoration for the caster"
+   },
+   {
+    "do": "grants",
+    "t": "cure",
+    "perk": "Edge of Intent Catalyst",
+    "on": "reloading shortly after a final blow",
+    "q": "Reloading shortly after dealing a final blow grants Cure to you and your nearby allies.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healallies",
+    "who": "allies",
+    "perk": "Edge of Intent Catalyst",
+    "on": "reloading shortly after a final blow",
+    "q": "Reloading shortly after dealing a final blow grants Cure to you and your nearby allies.",
+    "s": "bungie",
+    "note": "Clarity: Cure x2 for you, Cure x1 for allies within 15 m"
    }
   ]
  },
@@ -942,6 +1209,15 @@
     "q": "Kills grant an additional 2.5% energy to both Light and Dark Transcendence bars.",
     "s": "clarity",
     "note": "Transcendent Duelist is one rolled Ergo Sum trait"
+   },
+   {
+    "do": "uses",
+    "t": "prismaticgrenade",
+    "perk": "Ergo Sum Catalyst",
+    "on": "damage with your Transcendent grenade",
+    "q": "Dealing damage with a Transcendent grenade grants Ergo Sum ammo.",
+    "s": "bungie",
+    "pay": "generates Ergo Sum ammo"
    }
   ]
  },
@@ -1015,20 +1291,53 @@
    {
     "do": "grants",
     "t": "amplified",
-    "perk": "Corrupted Nucleosynthesis",
+    "perk": "Ex Diris Catalyst",
     "on": "kills",
-    "q": "Grants Amplified on kill.",
-    "s": "compendium",
-    "note": "catalyst (Berserk Rush)"
+    "q": "Final blows with this weapon make you amplified.",
+    "s": "bungie",
+    "note": "Clarity: Amplified for 15 s"
    },
    {
     "do": "uses",
     "t": "amplified",
-    "perk": "Corrupted Nucleosynthesis",
-    "q": "Hits while Amplified grant 50% Enrage on hit.",
-    "s": "compendium",
-    "pay": "hits build Enrage faster",
-    "note": "catalyst"
+    "perk": "Ex Diris Catalyst",
+    "q": "Weapon enrages faster while amplified.",
+    "s": "bungie",
+    "pay": "hits build Enrage twice as fast"
+   }
+  ]
+ },
+ {
+  "id": "xw:eyesoftomorrow",
+  "n": "Eyes of Tomorrow",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "perk": "Eyes of Tomorrow Catalyst",
+    "on": "weapon kills",
+    "q": "Kills with this weapon generate grenade energy.",
+    "s": "bungie",
+    "note": "Clarity: 10% grenade energy per kill"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "perk": "Eyes of Tomorrow Catalyst",
+    "on": "activating your grenade",
+    "q": "Activating your grenade ability reloads this weapon from reserves.",
+    "s": "bungie",
+    "pay": "reloads this weapon from reserves",
+    "note": "Clarity: 3 s cooldown"
+   },
+   {
+    "do": "grants",
+    "t": "grenadestat",
+    "perk": "Eyes of Tomorrow Catalyst",
+    "on": "dealing splash damage",
+    "q": "Dealing splash damage grants a bonus to Grenade stat.",
+    "s": "bungie",
+    "note": "Clarity: +10 Grenade per stack for 5 s, up to 5 stacks"
    }
   ]
  },
@@ -1094,15 +1403,47 @@
    {
     "do": "modifies",
     "t": "grenade",
-    "perk": "Full Stop",
+    "perk": "Forerunner Catalyst",
     "on": "hold reload within 4 s of a weapon kill",
-    "q": "replaces Grenade Ability with a Kinetic-Damage Fragmentation Grenade.",
-    "s": "compendium",
+    "q": "The Rock replaces your grenade ability with a tossed Kinetic grenade",
+    "s": "clarity",
     "pay": "swaps your grenade for a Kinetic frag grenade",
-    "note": "catalyst (The Rock); the frag counts as a Grenade Ability for grenade-kill and grenade-use effects",
+    "note": "the frag counts as a Grenade Ability for grenade-kill and grenade-use effects",
     "dmg": [
      "grenade"
     ]
+   }
+  ]
+ },
+ {
+  "id": "xw:gjallarhorn",
+  "n": "Gjallarhorn",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "wolfpackround",
+    "perk": "Wolfpack Rounds",
+    "on": "rocket detonation",
+    "q": "Rounds fired split into tracking micro-missiles upon detonation.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "wolfpackround",
+    "who": "allies",
+    "perk": "Pack Hunter",
+    "on": "firing this weapon near allies",
+    "q": "Firing this weapon also grants Wolfpack Rounds to nearby allies wielding non-Exotic Rocket Launchers.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "wolfpackround",
+    "perk": "Gjallarhorn Catalyst",
+    "on": "Wolfpack Round final blows",
+    "q": "Final blows with Wolfpack Rounds spawn a faster, more powerful micro-missile at the target's location.",
+    "s": "bungie",
+    "pay": "Wolfpack Round kills spawn a faster, stronger micro-missile at the target"
    }
   ]
  },
@@ -1113,11 +1454,10 @@
    {
     "do": "applies",
     "t": "blind",
-    "perk": "Omega Strike",
+    "perk": "Grand Overture Catalyst",
     "on": "missile hits",
     "q": "Missiles blind Combatants on hit.",
-    "s": "compendium",
-    "note": "catalyst"
+    "s": "compendium"
    }
   ]
  },
@@ -1297,6 +1637,15 @@
     "on": "kills during Shot in the Dark",
     "q": "Defeating a target with this weapon while Shot in the Dark is active turns you invisible once more.",
     "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "perk": "Heartshadow Catalyst",
+    "q": "Faster movement while invisible.",
+    "s": "bungie",
+    "pay": "move faster while invisible",
+    "note": "Clarity: 50% faster with Void invisibility"
    }
   ]
  },
@@ -1341,20 +1690,28 @@
    {
     "do": "applies",
     "t": "scorch",
-    "perk": "Bolt Thrower",
+    "perk": "Heirloom Catalyst",
     "on": "charged shot direct hits",
-    "q": "Direct Hits with charged shots inflict x20 Scorch per Charge Level.",
-    "s": "compendium",
-    "note": "catalyst"
+    "q": "Direct hits with charged shots scorch the target.",
+    "s": "bungie",
+    "note": "Clarity: 20/40/60 stacks by charge level"
    },
    {
     "do": "uses",
     "t": "scorch",
-    "perk": "Bolt Thrower",
-    "q": "Deals 10% increased damage against Scorched Enemies.",
-    "s": "compendium",
+    "perk": "Heirloom Catalyst",
+    "q": "This weapon deals more damage against scorched targets.",
+    "s": "bungie",
     "pay": "more damage against scorched targets",
-    "note": "catalyst; also grants Incandescent"
+    "note": "Clarity: 10% more damage"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Heirloom Catalyst",
+    "on": "weapon kills (Incandescent)",
+    "q": "Defeating a target spreads scorch to those nearby.",
+    "s": "bungie"
    }
   ]
  },
@@ -1475,6 +1832,28 @@
   ]
  },
  {
+  "id": "xw:jtunn",
+  "n": "Jötunn",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "disorient",
+    "perk": "Shield Disorient",
+    "on": "breaking a matching elemental shield",
+    "q": "Energy matched shield explosion disorients nearby combatants.",
+    "s": "bungie"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Jötunn Catalyst",
+    "on": "weapon kills (Incandescent)",
+    "q": "Defeating a target spreads scorch to those nearby.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
   "id": "xw:khvostov7g0x",
   "n": "Khvostov 7G-0X",
   "fx": [
@@ -1495,6 +1874,30 @@
     "q": "Shooting an Orb of Power picks it up.",
     "s": "bungie",
     "pay": "shooting an Orb picks it up"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "perk": "Khvostov Catalyst",
+    "on": "sustained damage",
+    "q": "Dealing sustained damage creates an Orb of Power.",
+    "s": "bungie",
+    "note": "Clarity: 25 hits within 5 s of each other"
+   }
+  ]
+ },
+ {
+  "id": "xw:lemonarque",
+  "n": "Le Monarque",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "Le Monarque Catalyst",
+    "on": "rapid weapon kills",
+    "q": "Rapidly defeating targets triggers health regeneration.",
+    "s": "bungie",
+    "note": "Clarity: restores 65 HP and starts health regeneration; powerful combatants and Guardians count as more than one kill"
    }
   ]
  },
@@ -1562,12 +1965,10 @@
    {
     "do": "uses",
     "t": "amplified",
-    "perk": "Starlight Beam",
-    "q": "While Amplified:",
-    "s": "compendium",
-    "pay": "faster reload, more aim assist, less ADS move penalty",
-    "pq": "Reload Speed, +10? Aim Assist, and ?% Decreased ADS Movement Speed Penalty",
-    "note": "catalyst (Supercharged Matrix): reload, aim assist and ADS movement bonuses"
+    "perk": "Lodestar Catalyst",
+    "q": "While amplified, this weapon gains greatly increased reload speed, aim assist, and movement while aiming down sights.",
+    "s": "bungie",
+    "pay": "faster reload, more aim assist, less ADS move penalty"
    }
   ]
  },
@@ -1578,14 +1979,22 @@
    {
     "do": "applies",
     "t": "scorch",
-    "perk": "Shrapnel Launcher",
-    "on": "hip-fire hits; ADS kills explode",
-    "q": "Hipfire | Shots inflict x10+5 Scorch upon dealing damage.",
-    "s": "compendium",
-    "note": "catalyst (Fang and Claw); its scorch/ignitions deal 53% more damage",
+    "perk": "Lord of Wolves Catalyst",
+    "on": "hits while Release the Wolves is active",
+    "q": "While Release the Wolves is active, damaging targets with this weapon applies Scorch.",
+    "s": "bungie",
+    "note": "Clarity: hipfired shots apply 10 Scorch on hit with a 0.5 s cooldown",
     "dmg": [
      "weapon"
     ]
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "perk": "Lord of Wolves Catalyst",
+    "on": "kills while aiming down sights",
+    "q": "When aiming down sights, defeating a target spreads Scorch to those nearby.",
+    "s": "bungie"
    }
   ]
  },
@@ -1630,13 +2039,9 @@
    "xw:deadmanstale",
    "xw:deathbringer",
    "xw:duality",
-   "xw:eyesoftomorrow",
    "xw:finalitysauger",
-   "xw:gjallarhorn",
    "xw:hawkmoon",
    "xw:izanagisburden",
-   "xw:jtunn",
-   "xw:lemonarque",
    "xw:legendofacrius",
    "xw:lorentzdriver"
   ]

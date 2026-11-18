@@ -66,6 +66,14 @@
     "q": "Refills the magazine on Super cast.",
     "s": "clarity",
     "pay": "refills the magazine when you cast your Super"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "on": "final blows",
+    "perk": "Microcosm Catalyst",
+    "q": "Killing combatants with this weapon generates a small amount of Super energy.",
+    "s": "bungie"
    }
   ]
  },
@@ -95,9 +103,11 @@
    {
     "do": "grants",
     "t": "meleeenergy",
-    "q": "Bayonet Melee Attacks deal 2,495 [140] Kinetic Melee Damage, grant 50% Fixed Melee Ability Energy",
-    "s": "compendium",
-    "note": "catalyst (Bayonet Locked): the bayonet replaces your melee for one attack and counts as an unpowered melee"
+    "on": "bayonet melee hits",
+    "perk": "Monte Carlo Catalyst",
+    "q": "Landing a bayonet melee hit grants melee energy.",
+    "s": "bungie",
+    "note": "catalyst: at 5 Markov Chain stacks the bayonet replaces your melee while Monte Carlo is held"
    }
   ]
  },
@@ -139,9 +149,9 @@
    {
     "do": "applies",
     "t": "unravel",
-    "q": "Explosive Damage from Enemy-Embedded Projectiles now inflicts Unravel.",
-    "s": "compendium",
-    "note": "catalyst"
+    "perk": "New Malpais Catalyst",
+    "q": "This weapon's explosions unravel nearby targets.",
+    "s": "bungie"
    }
   ]
  },
@@ -200,10 +210,11 @@
    {
     "do": "uses",
     "t": "blight",
-    "q": "Blighted Enemies (Witherhoard Direct Hit) receive 100% increased tick damage.",
-    "s": "compendium",
-    "pay": "more damage from blight ticks",
-    "note": "catalyst Taken Seekers"
+    "perk": "One Thousand Voices Catalyst",
+    "q": "Blighted Enemies (directly impacted by Witherhoard) take 100% increased tick damage.",
+    "s": "clarity",
+    "pay": "Taken Seekers deal double tick damage to blighted targets",
+    "note": "Bungie says the seekers blight targets, Clarity says they do not interact with Malfeasance or Wish-Ender, so no blight is recorded as applied"
    }
   ]
  },
@@ -221,6 +232,14 @@
     "dmg": [
      "weapon"
     ]
+   },
+   {
+    "do": "uses",
+    "t": "corruption",
+    "perk": "Osteo Striga Catalyst",
+    "q": "Final blows with corruption return ammo to the magazine.",
+    "s": "bungie",
+    "pay": "corruption kills refill (and overfill) the magazine"
    }
   ]
  },
@@ -242,6 +261,14 @@
     "q": "This weapon does more damage to enemies based on the number of SIVA nanites that attach to them.",
     "s": "bungie",
     "pay": "more damage per nanite on the target"
+   },
+   {
+    "do": "modifies",
+    "t": "sivananite",
+    "perk": "Outbreak Perfected Catalyst",
+    "q": "Increases nanite damage. Enemies that die with nanites attached to them generate additional nanites.",
+    "s": "bungie",
+    "pay": "more nanite damage; nanite-covered kills release more nanites"
    }
   ]
  },
@@ -529,8 +556,10 @@
    {
     "do": "creates",
     "t": "tangle",
-    "q": "Grenade Launcher Mode Kills create a Tangle.",
-    "s": "compendium",
+    "on": "grenade final blows",
+    "perk": "Quicksilver Storm Catalyst",
+    "q": "Final blows with grenades from this weapon create Tangles.",
+    "s": "bungie",
     "note": "catalyst; also turns the weapon Strand"
    }
   ]
@@ -545,6 +574,15 @@
     "perk": "Vermin",
     "q": "Reloading immediately after a kill grants a brief period of invisibility.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "reloading after a kill",
+    "perk": "Rat King Catalyst",
+    "q": "Finishing a reload within 6 seconds of a kill begins Health Regeneration.",
+    "s": "clarity",
+    "note": "starts health regeneration"
    }
   ]
  },
@@ -570,17 +608,31 @@
    },
    {
     "do": "grants",
+    "t": "healallies",
+    "who": "allies",
+    "on": "the kill after Red Death Charged",
+    "perk": "Red Death Reformed Catalyst",
+    "q": "triggers a burst of healing, granting 120 HP (Cure x2) to allies within a 7.5 meter radius of you.",
+    "s": "clarity",
+    "note": "catalyst (Helping Hand)"
+   },
+   {
+    "do": "grants",
     "t": "restoration",
-    "q": "Restoration Orb grants Restoration x2 for 4+2 seconds.",
-    "s": "compendium",
+    "on": "picking up the Restoration Orb",
+    "perk": "Red Death Reformed Catalyst",
+    "q": "granting you and allies Restoration x2 for 4 seconds (6 with Ember of Solace) on pickup",
+    "s": "clarity",
     "note": "catalyst (Helping Hand)"
    },
    {
     "do": "grants",
     "t": "healallies",
     "who": "allies",
-    "q": "Healing Burst bestows Cure x2 to allies within 7.5? meters.",
-    "s": "compendium",
+    "on": "picking up the Restoration Orb",
+    "perk": "Red Death Reformed Catalyst",
+    "q": "leaves a remnant behind that provides restoration to allies",
+    "s": "bungie",
     "note": "catalyst (Helping Hand)"
    }
   ]
@@ -734,6 +786,30 @@
     "s": "bungie",
     "pay": "reloads from reserves",
     "note": "crystals from any source"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "on": "shattering a Stasis crystal or killing a frozen target",
+    "perk": "Salvation's Grip Catalyst",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "perk": "Salvation's Grip Catalyst",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie",
+    "pay": "Frost Armor for shattering crystals with this weapon"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "perk": "Salvation's Grip Catalyst",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie",
+    "pay": "Frost Armor for killing frozen targets with this weapon"
    }
   ]
  },
@@ -783,9 +859,11 @@
    {
     "do": "creates",
     "t": "tangle",
-    "q": "Harvesting a Nest destroys it to grant a Throwable Tangle.",
-    "s": "compendium",
-    "note": "catalyst"
+    "on": "harvesting a mature nest",
+    "perk": "Service of Luzaku Catalyst",
+    "q": "Teeming Nests can be harvested into a collectible Tangle after spawning 6 Threadlings.",
+    "s": "clarity",
+    "note": "catalyst; harvesting destroys the nest and gives you a held Tangle"
    }
   ]
  },
@@ -854,6 +932,38 @@
     "s": "clarity",
     "pay": "grants Nightsworn Sight (reload, precision damage, weakening submunitions) and Truesight",
     "pq": "Nightsworn Sight grants ? Reload speed and the following benefits:"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "on": "killing a Void-debuffed target",
+    "perk": "Repulsor Brace Refit",
+    "q": "Defeating a Void-debuffed target grants an overshield.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "weaken",
+    "perk": "Repulsor Brace Refit",
+    "q": "Kills against Void Debuffed enemies grant a 45 HP Void Overshield",
+    "s": "clarity",
+    "pay": "Void Overshield on kills against Void-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "perk": "Repulsor Brace Refit",
+    "q": "Kills against Void Debuffed enemies grant a 45 HP Void Overshield",
+    "s": "clarity",
+    "pay": "Void Overshield on kills against Void-debuffed targets"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "perk": "Repulsor Brace Refit",
+    "q": "Kills against Void Debuffed enemies grant a 45 HP Void Overshield",
+    "s": "clarity",
+    "pay": "Void Overshield on kills against Void-debuffed targets"
    }
   ]
  },
@@ -918,6 +1028,14 @@
     "q": "Kills have a 25% chance to grant 20 HP and begin Health Regeneration.",
     "s": "clarity",
     "note": "catalyst doubles the chance to 50%"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "perk": "SUROS Regime Catalyst",
+    "q": "doubles the healing chance (25%🠚50%)",
+    "s": "clarity",
+    "note": "doubles SUROS Legacy's chance to heal"
    }
   ]
  },
@@ -981,6 +1099,14 @@
     "s": "compendium",
     "pay": "Bolt Charge discharges twice at once",
     "note": "as Well of Radiance caster or behind a Storm's Keep barricade, Arc Seeker hits discharge Bolt Charge twice"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "perk": "Symmetry Catalyst",
+    "q": "Temporarily increases reload speed and handling after sprinting or while amplified. This effect is improved when you are amplified.",
+    "s": "bungie",
+    "pay": "faster reload and handling without sprinting, with a bigger reload bonus"
    }
   ]
  },
@@ -1106,8 +1232,9 @@
       ]
      }
     ],
-    "q": "Arc = Blind",
-    "s": "compendium",
+    "perk": "Tessellation Catalyst",
+    "q": "Blind for 9 seconds",
+    "s": "clarity",
     "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
    },
    {
@@ -1128,8 +1255,9 @@
       ]
      }
     ],
-    "q": "Solar = x70+10 Scorch",
-    "s": "compendium",
+    "perk": "Tessellation Catalyst",
+    "q": "70 Scorch Stacks (80 with Ember of Ashes)",
+    "s": "clarity",
     "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
    },
    {
@@ -1149,8 +1277,9 @@
       ]
      }
     ],
-    "q": "Void = Weaken for 6 [2.5] seconds.",
-    "s": "compendium",
+    "perk": "Tessellation Catalyst",
+    "q": "Weaken for 6 [2.5] seconds",
+    "s": "clarity",
     "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
    },
    {
@@ -1167,8 +1296,9 @@
       ]
      }
     ],
-    "q": "Stasis = x80 Slow",
-    "s": "compendium",
+    "perk": "Tessellation Catalyst",
+    "q": "80 Slow Stacks",
+    "s": "clarity",
     "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
    },
    {
@@ -1185,8 +1315,9 @@
       ]
      }
     ],
-    "q": "Strand = Sever for 5+2.5",
-    "s": "compendium",
+    "perk": "Tessellation Catalyst",
+    "q": "Sever for 5 seconds (7.5 with Thread of Continuity)",
+    "s": "clarity",
     "note": "catalyst (Property: Unavoidable); the shot follows your grenade's element"
    }
   ]
@@ -1219,8 +1350,22 @@
    {
     "do": "applies",
     "t": "scorch",
-    "q": "Allows Scorch to be inflicted from a single Revved Light/Heavy Attack.",
-    "s": "compendium",
+    "on": "sustained damage",
+    "perk": "The Lament Catalyst",
+    "dmg": [
+     "weapon"
+    ],
+    "q": "Dealing sustained damage scorches the target.",
+    "s": "bungie",
+    "note": "catalyst (Burning Ambition); Clarity: this scorch counts as weapon damage and triggers Revved Consumption healing"
+   },
+   {
+    "do": "uses",
+    "t": "scorch",
+    "perk": "The Lament Catalyst",
+    "q": "Dealing damage to a scorched target inflicts scorch.",
+    "s": "bungie",
+    "pay": "hits on scorched targets add more scorch",
     "note": "catalyst (Burning Ambition)"
    }
   ]
@@ -1240,9 +1385,11 @@
    {
     "do": "grants",
     "t": "overshield",
-    "q": "Scoring an Airborne Kill refills 12 Manticore Ammo and grants a 15HP Void Overshield for 6 seconds.",
-    "s": "compendium",
-    "note": "catalyst"
+    "on": "airborne kills or sustained damage to difficult combatants",
+    "perk": "The Manticore Catalyst",
+    "q": "grant a Void overshield",
+    "s": "bungie",
+    "note": "catalyst; only while airborne"
    }
   ]
  },
@@ -1283,10 +1430,11 @@
    },
    {
     "do": "creates",
-    "t": "tangle",
-    "q": "Grapple Tangle Mode shoots a Grapple Tangle",
-    "s": "compendium",
-    "note": "catalyst (Gordian Knot); 30 s cooldown"
+    "t": "grappletangle",
+    "perk": "The Navigator Catalyst",
+    "q": "Special reload and then fire to create a Grapple Tangle at the targeted point.",
+    "s": "bungie",
+    "note": "catalyst; same grapple point as Widow's Silk; 30 s cooldown"
    }
   ]
  },
@@ -1340,9 +1488,10 @@
    {
     "do": "applies",
     "t": "weaken",
-    "q": "inflicting weaken over 8 meters",
-    "s": "compendium",
-    "note": "catalyst; Amalgamation Round precision kills"
+    "on": "Amalgamation Round precision kills",
+    "perk": "Third Iteration Catalyst",
+    "q": "Precision final blows with Amalgamation Rounds cause the target to detonate into a weakening blast.",
+    "s": "bungie"
    }
   ]
  },
@@ -1387,16 +1536,18 @@
    {
     "do": "grants",
     "t": "cure",
-    "q": "Weapon Kills grant Cure x1.",
-    "s": "compendium",
-    "note": "catalyst; while Ignition Trigger is active"
+    "on": "final blows while Ignition Trigger is active",
+    "perk": "Tommy's Matchbook Catalyst",
+    "q": "final blows with this weapon cure you",
+    "s": "bungie"
    },
    {
     "do": "applies",
     "t": "scorch",
-    "q": "Every 5th shot applies x15+5 [x10+10] Scorch.",
-    "s": "compendium",
-    "note": "catalyst; while Ignition Trigger is active"
+    "on": "sustained fire while Ignition Trigger is active",
+    "perk": "Tommy's Matchbook Catalyst",
+    "q": "sustained fire scorches your target",
+    "s": "bungie"
    }
   ]
  },
@@ -1473,6 +1624,15 @@
     "perk": "Gathering Light",
     "q": "Consume stacks, granting melee, grenade, and class ability energy based on the number of stacks.",
     "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "grenade",
+    "perk": "Traveler's Chosen Catalyst",
+    "q": "Using your grenade ability partially refills the magazine and changes this weapon's damage type to match your grenade until you stow it.",
+    "s": "bungie",
+    "pay": "refills half the magazine and switches the weapon's element to your grenade's",
+    "note": "Clarity: perks that replace your grenade (Gunpowder Gamble, Transcendence grenades) also trigger it"
    }
   ]
  },
@@ -1483,8 +1643,9 @@
    {
     "do": "uses",
     "t": "arcdamage",
-    "q": "Lightning Rod now triggers by scoring any Arc Kill.",
-    "s": "compendium",
+    "perk": "Trinity Ghoul Catalyst",
+    "q": "Lightning Rod now triggers from any Arc damage final blow.",
+    "s": "bungie",
     "pay": "any Arc kill grants Lightning Rod (chain lightning arrows)",
     "note": "catalyst (Forked Lightning): any Arc kill, abilities included, grants Lightning Rod"
    }
@@ -1505,9 +1666,11 @@
    {
     "do": "grants",
     "t": "overshield",
-    "q": "Void Overshield for 10+5 seconds.",
-    "s": "compendium",
-    "note": "catalyst; when Unleashed Power ends"
+    "on": "when Void empowerment ends",
+    "perk": "Turncoat Catalyst",
+    "q": "When empowerment ends, you gain a Void Overshield",
+    "s": "bungie",
+    "note": "catalyst; strength depends on how long you were empowered"
    }
   ]
  },
@@ -1576,16 +1739,18 @@
    {
     "do": "uses",
     "t": "freeze",
-    "q": "0.65x Draw Time Multiplier for 5 seconds upon inflicting freeze or slow.",
-    "s": "compendium",
+    "perk": "Verglas Curve Catalyst",
+    "q": "Freezing or slowing a target grants this weapon faster draw speed for a short period of time.",
+    "s": "bungie",
     "pay": "faster draw time",
     "note": "catalyst"
    },
    {
     "do": "uses",
     "t": "slow",
-    "q": "0.65x Draw Time Multiplier for 5 seconds upon inflicting freeze or slow.",
-    "s": "compendium",
+    "perk": "Verglas Curve Catalyst",
+    "q": "Freezing or slowing a target grants this weapon faster draw speed for a short period of time.",
+    "s": "bungie",
     "pay": "faster draw time",
     "note": "catalyst"
    }
@@ -1673,6 +1838,14 @@
     "perk": "Supercharged Battery",
     "q": "Sustained fire in this mode suppresses targets.",
     "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "sustained damage",
+    "perk": "Wavesplitter Catalyst",
+    "q": "Dealing sustained damage creates an Orb of Power.",
+    "s": "bungie"
    }
   ]
  },
@@ -1683,9 +1856,18 @@
    {
     "do": "creates",
     "t": "grenade",
-    "q": "create a Solar Grenade that lasts for ? seconds.",
-    "s": "compendium",
-    "note": "catalyst; fully charged shots; the Solar Grenade benefits from Touch of Flame but not Sunbracers. Counts as a Strand weapon for most mods"
+    "perk": "Whirling Ovation Catalyst",
+    "q": "leaving a Solar Grenade behind at each combatant's death location",
+    "s": "clarity",
+    "note": "catalyst; fully charged shots; the Solar Grenade benefits from Touch of Flame but not Sunbracers"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "on": "fully charged shots",
+    "perk": "Whirling Ovation Catalyst",
+    "q": "cause a delayed Solar detonation with a brief scorching field",
+    "s": "bungie"
    }
   ]
  },
@@ -1722,6 +1904,22 @@
     "q": "collecting Stasis shards refills the magazine.",
     "s": "bungie",
     "pay": "refills the magazine"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "on": "precision final blows",
+    "perk": "Wicked Implement Catalyst",
+    "q": "Precision final blows spawn a [Stasis] Stasis crystal at the victim's location.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "perk": "Wicked Implement Catalyst",
+    "q": "Collecting Stasis shards gradually overflows the magazine.",
+    "s": "bungie",
+    "pay": "Stasis shards overfill the magazine"
    }
   ]
  },
@@ -1749,6 +1947,30 @@
     "perk": "Weighted Edge",
     "q": "This weapon's melee attacks deal increased damage and slow targets when loaded with ammo.",
     "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "on": "shattering a Stasis crystal or killing a frozen target",
+    "perk": "Winterbite Catalyst",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasiscrystal",
+    "perk": "Winterbite Catalyst",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie",
+    "pay": "Frost Armor for shattering crystals with this weapon"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "perk": "Winterbite Catalyst",
+    "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
+    "s": "bungie",
+    "pay": "Frost Armor for killing frozen targets with this weapon"
    }
   ]
  },
@@ -1868,6 +2090,14 @@
     "note": "the value depends on the equipped handle; only one applies",
     "q": "Unyielding = 15% DR after 2 hits | Rampager's = 20% DR after 3 hits | Tenacious = 25% DR after 4 hits",
     "s": "compendium"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "sustained damage",
+    "perk": "Attrition Orbs Refit",
+    "q": "Dealing sustained damage creates an Orb of Power.",
+    "s": "bungie"
    }
   ]
  },

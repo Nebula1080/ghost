@@ -1221,7 +1221,12 @@ const Core = (() => {
     const wOk = w => ['super', 'grenade', 'melee'].includes(w) ? !!abilEl[w] && wEls.has(abilEl[w]) : wEls.has(w);
     const names = new Set(pieces.filter(p => p.g === 'subclass').map(p => p.n)), items = new Set(pieces.filter(p => p.it).map(p => p.it.name));
     const fails = (c, provided) => c.any ? c.any.every(x => fails(x, provided)) : c.subclass ? (c.subclass === 'prismatic' ? 'prism' : c.subclass) !== subEl : c.piece ? !names.has(c.piece) : c.item ? !items.has(c.item) : c.slot ? !(c.is || []).includes(slotName[c.slot]) : c.weapon ? !wOk(c.weapon) : c.has ? !provided.has(c.has) : true;
-    const unmetOf = (f, provided) => (f.e.if || []).filter(c => fails(c, provided));
+    // an exotic's catalyst effects only count when that weapon has its catalyst applied (Core.catalyst)
+    const catOf = new Map();
+    const catGate = f => { const pc = pieces[f.i]; if (!f.e.perk || !defs?.cata?.[norm(f.e.perk)] || pc?.g !== 'weapon' || !pc.it) return [];
+      if (!catOf.has(f.i)) catOf.set(f.i, catalyst(pc.it, defs)); const c = catOf.get(f.i);
+      return c?.state === 'has' && norm(c.name) === norm(f.e.perk) ? [] : [{ catalyst: f.e.perk }]; };
+    const unmetOf = (f, provided) => [...catGate(f), ...(f.e.if || []).filter(c => fails(c, provided))];
     let provided = new Set();
     for (let pass = 0; pass < 3; pass++) {           // `has` conditions can depend on other conditional effects
       const next = new Set();
@@ -1278,7 +1283,7 @@ const Core = (() => {
       if (!k) keys.push(k = { t: l.t, l: l.l, el: ix?.t?.[l.t]?.el || '', kind: ix?.t?.[l.t]?.kind || '', p: [], u: [], links: [] });
       if (!k.p.includes(l.from)) k.p.push(l.from); if (!k.u.includes(l.to)) k.u.push(l.to); k.links.push(l);
     }
-    const inactive = fx.filter(f => !f.ok && !f.implicit && f.e.do !== 'counts').map(f => ({ ...f, why: f.unmet.map(function say(c) { return c.any ? c.any.map(say).join(' or ') : c.subclass ? `needs a ${c.subclass[0].toUpperCase() + c.subclass.slice(1)} subclass` : c.piece ? `needs ${c.piece}` : c.item ? `needs ${c.item}` : c.slot ? `needs ${c.is.join(' or ')} (${slotName[c.slot] ? 'you have ' + slotName[c.slot] : 'no ' + SLOT_L[c.slot] + ' chosen'})` : c.weapon ? (['super', 'grenade', 'melee'].includes(c.weapon) ? `needs a weapon matching your ${c.weapon}'s element` : `needs a ${c.weapon[0].toUpperCase() + c.weapon.slice(1)} weapon`) : `needs ${tLabel(ix, c.has)}`; }) }));
+    const inactive = fx.filter(f => !f.ok && !f.implicit && f.e.do !== 'counts').map(f => ({ ...f, why: f.unmet.map(function say(c) { return c.any ? c.any.map(say).join(' or ') : c.catalyst ? `needs ${c.catalyst} applied` : c.subclass ? `needs a ${c.subclass[0].toUpperCase() + c.subclass.slice(1)} subclass` : c.piece ? `needs ${c.piece}` : c.item ? `needs ${c.item}` : c.slot ? `needs ${c.is.join(' or ')} (${slotName[c.slot] ? 'you have ' + slotName[c.slot] : 'no ' + SLOT_L[c.slot] + ' chosen'})` : c.weapon ? (['super', 'grenade', 'melee'].includes(c.weapon) ? `needs a weapon matching your ${c.weapon}'s element` : `needs a ${c.weapon[0].toUpperCase() + c.weapon.slice(1)} weapon`) : `needs ${tLabel(ix, c.has)}`; }) }));
     // damage resistance: active curated amounts per kind of incoming damage, stacked multiplicatively (each source
     // multiplies the damage you take by 1 - amount); the same `cat` counts once (highest). Situational sources (with a
     // trigger `on`) are totalled separately from always-on ones.
