@@ -1660,7 +1660,8 @@ function renderCompare() {
     info('Element', it => it.element ? `${elIcon(it.element)}${esc(it.element)}` : '', it => it.element);
     info('Ammo', it => it.ammo ? `${ammoIcon(it.ammo)}${esc(it.ammo)}` : '', it => it.ammo);
     info('Breaker', it => breakerChips(it), it => Core.anyBreaker(it));
-    info('Rating', it => it.rating != null ? `<b class="rbd-link" style="color:${rateColor(it.rating)}"${rbdAttr(it)}>${it.rating}</b>` : '', it => it.rating);
+    // rating stays in text colour here (green in Compare means "best stat"); a letter-grade stamp sits beside it
+    info('Rating', it => it.rating != null ? `<span class="cmp-rate rbd-link"${rbdAttr(it)}>${[['PvE', it.pve], ['PvP', it.pvp]].map(([l, v]) => `<span class="cr"><small>${l}</small><b>${v ?? '–'}</b></span>`).join('')}<span class="cr tot"><small>Total</small><b>${it.rating}</b>${tierBadge(Core.ratingGrade(it.rating), `Grade ${Core.ratingGrade(it.rating)}: rating ${it.rating}/100`)}</span></span>` : '', it => it.rating);
   } else {
     info('Class', it => esc(it.equippable));
     info('Armor set', it => it.set ? '◈ ' + esc(it.set) : '', it => it.set);

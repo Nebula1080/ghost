@@ -188,6 +188,10 @@ t('overrides: a personal tier, "unrated", combos and weights change the score', 
   assert.strictEqual(w.pve, 100); assert.strictEqual(w.pvp, 40);
   const none = C.prepUserRatings({ w: { perks: 0, wish: 0, aegis: 0 } }); const z = roll(); C.rateGhost(z, defs, R, none); assert.strictEqual(z.rating, null);
 });
+t('ratingGrade: nearest tier letter', () => {
+  assert.deepStrictEqual([100, 93, 92, 85, 78, 77, 70, 63, 55, 48, 40, 33, 25, 18, 10, 0].map(C.ratingGrade).join(''), 'SSAAABBBCCDDEEFF'); // midpoints: 92.5 S|A, 77.5 A|B, 62.5 B|C …
+  assert.strictEqual(C.ratingGrade(null), ''); assert.strictEqual(C.ratingGrade('x'), '');
+});
 t('perkRel: perk tiers feed the perk chips', () => {
   const it = roll(); C.rateGhost(it, defs, R, null);
   assert.deepStrictEqual(it.perkRel['Kill Clip'], { e: 'S', p: 'S', rel: 100 });

@@ -88,8 +88,18 @@ const openReed = async pg => {
   await pg.fill('#rcA', 'Triple Tap'); await pg.fill('#rcB', 'Firing Line'); await pg.click('#rcAdd'); await pg.waitForTimeout(300);
   const cmb = await pg.evaluate(() => JSON.parse(localStorage.getItem('vs:perkRatings') || '{}').c || {});
   Object.keys(cmb).length === 1 || (await pg.$('[data-ck="firingline|tripletap"]')) ? ok('combo tab lists / adds combos') : fail('combo add');
+  await pg.click('#rClose'); await pg.waitForTimeout(300);
+  // Compare: the rating is text-coloured with a letter-grade stamp (green there means "best stat")
+  await pg.evaluate(() => { const v = JSON.parse(localStorage.getItem('vs:compare') || '{}'); v.ids = [...new Set([...document.querySelectorAll('#panes .card')].map(c => c.dataset.id))].slice(0, 3); localStorage.setItem('vs:compare', JSON.stringify(v)); });
+  await pg.reload(); await pg.waitForTimeout(900); await pg.evaluate(() => document.getElementById('intro')?.remove());
+  await pg.click('nav.views [data-view=compare]'); await pg.waitForTimeout(600);
+  const cr = await pg.evaluate(() => [...document.querySelectorAll('#compare .cmp-rate')].map(e => ({ labels: [...e.querySelectorAll('small')].map(x => x.textContent).join(','), fits: e.scrollWidth <= e.parentElement.clientWidth + 1, n: e.querySelector('.tot b').textContent, g: e.querySelector('.tier')?.textContent, c: getComputedStyle(e.querySelector('b')).color, t: getComputedStyle(document.body).color })));
+  cr.length && cr.every(x => x.labels === 'PvE,PvP,Total' && x.fits && /^\d+$/.test(x.n) && /^[SABCDEF]$/.test(x.g) && x.c === x.t) ? ok('Compare shows PvE, PvP and total (text colour, letter grade) within the cell') : fail('compare rating ' + JSON.stringify(cr));
+  await pg.click('#compare .cmp-rate'); await pg.waitForTimeout(300);
+  (await pg.$('#modal.open .rbd')) ? ok('Compare rating opens the breakdown') : fail('compare rating click');
+  await pg.click('#modal [data-close]'); await pg.click('nav.views [data-view=vault]'); await pg.waitForTimeout(300);
   // About credits
-  await pg.click('#rClose'); await pg.click('#bAbout'); await pg.waitForTimeout(200);
+  await pg.click('#bAbout'); await pg.waitForTimeout(200);
   const about = await pg.$eval('#modalBox', e => e.textContent);
   /Aegis’s Endgame Analysis/.test(about) && /48klocs/.test(about) && /seudonym/.test(about) ? ok('About credits Aegis and the wish-list curators') : fail('About credits');
   await pg.click('#modal [data-close]');
