@@ -2128,7 +2128,7 @@ function renderBuilds() {
   const pend = syn.pending.map(i => pieces[i].n);
   // interactions panel (curated data only), chosen with the user 2026-11-17 ("A2"): kind sections that spell out
   // From / To names, plus tabs for By piece, Not active and Missing. Every name is tappable for its quote.
-  const IXK = [['buff', 'Buffs', 'on you and allies', 'var(--good)'], ['debuff', 'Debuffs', 'on enemies', 'var(--bad)'], ['object', 'Creations', 'things you create', 'var(--light)'], ['energy', 'Ability energy', 'what refills what', 'var(--accent)'], ['resource', 'Resources', 'Orbs, Armor Charge…', 'var(--arc)'], ['ability', 'Abilities & damage', 'what counts as what', 'var(--void)'], ['state', 'States', 'Transcendence, airborne…', 'var(--dim)']];
+  const IXK = [['buff', 'Buffs', 'on you and allies', 'var(--good)'], ['debuff', 'Debuffs', 'on enemies', 'var(--bad)'], ['object', 'Creations', 'things you create', 'var(--prismatic)'], ['energy', 'Ability energy', 'what refills what', 'var(--accent)'], ['resource', 'Resources', 'Orbs, Armor Charge…', 'var(--arc)'], ['ability', 'Abilities & damage', 'what counts as what', 'var(--void)'], ['state', 'States', 'Transcendence, airborne…', 'var(--dim)']];
   const kindOf = k => k === 'damage' ? 'ability' : IXK.some(x => x[0] === k) ? k : 'state';
   // every term the build provides (active curated effects) and who uses it (links)
   const T = new Map(); const term = t => { if (!T.has(t)) T.set(t, { t, prov: new Set(), use: new Set() }); return T.get(t); };
