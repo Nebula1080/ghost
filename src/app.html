@@ -1505,10 +1505,10 @@ function openItem(id, paneId, focusPerk) {
     const b = it.base[k] ?? Math.max(0, v - mb - cb); const other = Math.max(0, v - b - mb - cb);
     const seg = (n, cls) => n > 0 ? `<i class="${cls}" style="width:${Math.min(100, n / max * 100)}%"></i>` : '';
     const bar = max ? `<i style="width:${Math.min(100, Math.min(b, v) / max * 100)}%"></i>${seg(mb, 'mw')}${seg(cb, 'cat')}${seg(other, 'mod')}` : '';
-    const parts = [mb ? `+${mb} MW` : '', cb ? `+${cb} catalyst` : '', hasBase && it.base[k] != null && other ? `+${other} mods` : ''].filter(Boolean);
+    const parts = [mb ? `<span class="b-mw">+${mb} MW</span>` : '', cb ? `<span class="b-cat">+${cb} catalyst</span>` : '', hasBase && it.base[k] != null && other ? `<span class="b-mod">+${other} mods</span>` : ''].filter(Boolean);
     return `<div class="bar"><span class="f${H('stat:' + k)}">${esc(k)}</span><span class="tr">${bar}</span><span class="num"><b>${v}</b>${hasBase && it.base[k] != null ? ` <small>base ${b}</small>` : ''}${parts.length ? ` <small class="sbon">${parts.join(' · ')}</small>` : ''}</span></div>`;
   }).join('') + ('Total' in it.stats ? `<div class="bar"><b class="f${H('stat:Total')}">Total</b><span></span><span class="num"><b>${it.stats.Total}</b>${it.base.Total != null ? ` <small>base ${it.base.Total}</small>` : ''}</span></div>` : '');
-  const statLegend = (hasBase || Object.keys(mwI?.bonus || {}).length || catI?.state === 'has') ? `<div class="stat-legend"><span><i style="background:var(--dim)"></i>Base</span><span><i class="mw"></i>Masterwork</span>${catI?.state === 'has' ? '<span><i class="cat"></i>Catalyst</span>' : ''}${hasBase ? '<span><i style="background:var(--accent)"></i>Mods &amp; tuning</span>' : ''}</div>` : '';
+  const statLegend = (hasBase || Object.keys(mwI?.bonus || {}).length || catI?.state === 'has') ? `<div class="stat-legend"><span><i class="base"></i>Base</span><span><i class="mw"></i>Masterwork</span>${catI?.state === 'has' ? '<span><i class="cat"></i>Catalyst</span>' : ''}${hasBase ? '<span><i class="mod"></i>Mods &amp; tuning</span>' : ''}</div>` : '';
   const perkRows = socketsDrawer(it, hits);
   const ex = it.kind === 'weapon' && Core.norm(it.rarity) === 'exotic' ? D?.dcx?.[Core.norm(it.name)] : null;
   const art = itemArt(it); const elc = it.element ? elColor(it.element) : '';
@@ -1723,7 +1723,12 @@ function renderCompare() {
     row(`<button class="statsort${sorted ? ' on' : ''}" data-stat="${esc(k)}">${esc(k)}${sorted ? ' ' + (CMP.sort[1] > 0 ? ICO.down : ICO.up) : ''}</button>`, items.map(it => {
       const x = it.stats[k]; if (x == null || (it.kind === 'weapon' && !x)) return '<span class="faint">–</span>';
       const b = it.base[k]; const add = b != null ? x - b : 0;
-      return `<div class="cstat${x === best && nums.length > 1 && !same(nums) ? ' best' : ''}"><b>${x}</b>${b != null && add ? ` <small>base ${b}${add > 0 ? ' +' + add : ' ' + add}</small>` : ''}<span class="tr"><i style="width:${Math.min(100, (b ?? x) / max * 100)}%"></i>${add > 0 ? `<i class="mod" style="width:${Math.min(100, add / max * 100)}%"></i>` : ''}</span></div>`;
+      // weapons: what the masterwork / an applied catalyst add (0-100 stats only, like the item panel)
+      const cnt = /^(ROF|Mag|Charge Time|Draw Time)$/.test(k); const mwB = it.kind === 'weapon' && !cnt ? (Core.masterwork(it, D)?.bonus?.[k] || 0) : 0;
+      const ct = it.kind === 'weapon' && !cnt ? Core.catalyst(it, D) : null; const catB = ct?.state === 'has' ? (ct.bonus?.[k] || 0) : 0;
+      const base0 = b ?? Math.max(0, x - mwB - catB); const seg = (n, c) => n > 0 ? `<i class="${c}" style="width:${Math.min(100, n / max * 100)}%"></i>` : '';
+      const txt = [b != null && add ? `base ${b} <span class="b-mod">${add > 0 ? '+' + add : add}</span>` : '', mwB ? `<span class="b-mw">+${mwB} MW</span>` : '', catB ? `<span class="b-cat">+${catB} catalyst</span>` : ''].filter(Boolean).join(' ');
+      return `<div class="cstat${x === best && nums.length > 1 && !same(nums) ? ' best' : ''}"><b>${x}</b>${txt ? ` <small>${txt}</small>` : ''}<span class="tr"><i style="width:${Math.min(100, base0 / max * 100)}%"></i>${seg(mwB, 'mw')}${seg(catB, 'cat')}${add > 0 ? seg(add, 'mod') : ''}</span></div>`;
     }), vals);
   }
   // perks: intrinsic, then each column; perks every item shares are muted, unique ones stand out
@@ -2166,7 +2171,7 @@ function renderBuilds() {
         ap.gen3 ? (ap.mwLevel ? `Masterwork ${ap.mwLevel}/5: +${ap.mwLevel} ${ap.low.join(', ')}` : `Not masterworked (up to +5 ${ap.low.join(', ')})`) : (Object.values(ap.mw).some(Boolean) ? 'Masterworked: +2 all stats' : '')].filter(Boolean) : [];
       // masterwork + catalyst: what they are and how much of each shown 0-100 stat they add (not counts like Mag / ROF)
       const mw = g === 'w' ? Core.masterwork(it, D) : null; const cat = g === 'w' ? Core.catalyst(it, D) : null;
-      const add = k => /^(ROF|Mag|Charge Time|Draw Time)$/.test(k) ? '' : [[mw?.bonus?.[k], 'MW'], [cat?.state === 'has' ? cat.bonus?.[k] : 0, 'catalyst']].filter(([v]) => v).map(([v, l]) => `<i class="bwb">${v > 0 ? '+' : ''}${v} ${l}</i>`).join('');
+      const add = k => /^(ROF|Mag|Charge Time|Draw Time)$/.test(k) ? '' : [[mw?.bonus?.[k], 'MW'], [cat?.state === 'has' ? cat.bonus?.[k] : 0, 'catalyst']].filter(([v]) => v).map(([v, l]) => `<i class="bwb ${l === 'MW' ? 'b-mw' : 'b-cat'}">${v > 0 ? '+' : ''}${v} ${l}</i>`).join('');
       const ws = g === 'w' ? STAT_SHOW_W.filter(k => it.stats[k] != null).slice(0, 4).map(k => `<span>${esc(k)} <b>${it.stats[k]}</b>${add(k)}</span>`).join('') : '';
       const mwc = g === 'w' ? [mw?.name ? `<span class="bwm">Masterwork: ${esc(mw.name)}</span>` : '', cat && cat.state !== 'none' ? `<span class="bwm bwc ${cat.state}" data-pk="${esc(cat.name)}">${cat.state === 'has' ? '◆ Catalyst applied' : '◇ Catalyst not applied'}: ${esc(cat.name)}</span>` : ''].join('') : '';
       body = `${iIcon(it, 48)}<span class="bit"><b style="color:${rarityColor(it.rarity)}">${esc(it.name)}</b><small>${sub.filter(Boolean).map(esc).join(' · ')}</small>${perks.length ? `<small class="bpk">${perks.map(p => `<span data-pk="${esc(p.n)}">${plugIcon(p.n, 'sm', pIdx(p.n, it.kind))}${esc(p.n)}</span>`).join('')}</small>` : ''}${mwc ? `<small class="bwms">${mwc}</small>` : ''}${a3.length ? `<small class="bwms">${a3.map(x => `<span class="bwm">${esc(x)}</span>`).join('')}</small>` : ''}${ws ? `<small class="bws">${ws}</small>` : ''}</span>`;
@@ -2232,7 +2237,7 @@ function renderBuilds() {
   const statHtml = Core.ARMOR3.map(k => { const s = st.stats[k]; const w = x => Math.max(0, Math.min(100, x / 2)); const v = Math.max(0, Math.min(200, s.total));
     const fx = v > 0 ? STAT_FX[k](v).filter(Boolean) : ['No bonus at 0'];
     return `<div class="bstat"><span class="sn">${esc(k)}</span><b class="${s.total > 200 ? 'over' : ''}">${s.total}</b><span class="tr" title="${PARTS.map(([p, l]) => `${l} ${s[p]}`).join(', ')}">${PARTS.map(([p]) => s[p] > 0 ? `<i class="p-${p}" style="width:${w(s[p])}%"></i>` : '').join('')}<i class="t100"></i></span>
-      <small>${PARTS.filter(([p]) => p !== 'armor' && s[p]).map(([p, l]) => `<span class="${s[p] > 0 ? 'up' : 'dn'}">${s[p] > 0 ? '+' : ''}${s[p]} ${l}</span>`).join(' ')}${s.total > 200 ? ' <span class="dn">over the 200 cap</span>' : ''}</small>
+      <small>${PARTS.filter(([p]) => p !== 'armor' && s[p]).map(([p, l]) => `<span class="${s[p] > 0 ? 'up b-' + ({ mw: 'mw', tune: 'tune', mods: 'mod', frag: 'frag' }[p] || 'mod') : 'dn'}">${s[p] > 0 ? '+' : ''}${s[p]} ${l}</span>`).join(' ')}${s.total > 200 ? ' <span class="dn">over the 200 cap</span>' : ''}</small>
       <div class="bfx">${fx.map((t, i) => `<span class="${i ? 'enh' : ''}">${i ? '↑ ' : ''}${esc(t)}</span>`).join('')}</div></div>`; }).join('');
   const subName = sc?.n || '';
   v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Builds</div><h1><span id="bName" class="bname" tabindex="0" title="Rename">${esc(b.name)}</span></h1><p class="sum"><b style="color:${EL_COL[b.el]}">${esc(subName)}</b> · ${esc(B_CLASSES.find(c => c[0] === b.cls)?.[1] || '')} · <button class="linkbtn" id="bJump">${nLinks} interaction${nLinks === 1 ? '' : 's'}</button> · ${st.total} stat total</p></div>
