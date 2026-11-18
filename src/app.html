@@ -2589,7 +2589,7 @@ function pickMod(b, slot, i, pieces) {
   openPicker(`${A_LABEL[slot]} · ${sl} mod socket`, rows, n => {
     const arr = lay.map((_, k) => ms[k] ?? null); arr[i] = n || null;
     b.mods[slot] = arr; saveBuilds(); renderBuilds();
-  }, { clear: !!cur, note: code === 't' ? `Tier 5 tuning: +5 to this piece's Tuned stat${it?.tuning ? ` (${it.tuning})` : ''} at -5 to another, or Balanced Tuning (+1 to its three lowest stats).` : code === 's' ? `Only ${A_LABEL[slot].toLowerCase()} mods fit this socket.` : code === 'g' ? 'General mods (stat mods) fit any armor piece’s general socket.' : `Only ${sl.toLowerCase()} mods fit this socket.` });
+  }, { clear: !!cur, note: code === 't' ? `Tier 5 tuning: +5 to this piece's Tuned stat${it?.tuning ? ` (${esc(it.tuning)})` : ''} at -5 to another, or Balanced Tuning (+1 to its three lowest stats).` : code === 's' ? `Only ${A_LABEL[slot].toLowerCase()} mods fit this socket.` : code === 'g' ? 'General mods (stat mods) fit any armor piece’s general socket.' : `Only ${sl.toLowerCase()} mods fit this socket.` });
 }
 
 // ---------- views: Vault (panes) · Clean up · Subclasses ----------
