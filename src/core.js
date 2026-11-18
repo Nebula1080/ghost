@@ -380,7 +380,12 @@ const Core = (() => {
   const COL_TYPES = new Set(['b', 'm', 't', 'o']);
   function sockets(it, defs) {
     const out = { intrinsic: [], cols: [], mods: [], exotic: [], mw: [], catalyst: [] };
-    let cur = null;
+    let cur = null; const colPerks = [];
+    // the old guess: a new column when the type changes or a second equipped perk appears
+    const guess = (p, colTy) => {
+      if (!cur || (colTy !== '?' && cur.ty !== '?' && colTy !== cur.ty) || (p.s && cur.perks.some(x => x.s))) { cur = { ty: colTy, perks: [] }; out.cols.push(cur); }
+      cur.perks.push(p);
+    };
     for (const p of it.perks) {
       if (p.j) continue;
       const ty = plugOf(p.n, defs, it.kind)?.[1] || '';
@@ -398,9 +403,28 @@ const Core = (() => {
       if (ty === 'c' || /catalyst/i.test(p.n)) { out.catalyst.push(p); continue; }
       const colTy = COL_TYPES.has(ty) ? ty : (ty ? '' : '?');
       if (!colTy) { out.mods.push(p); continue; }
-      if (!cur || (colTy !== '?' && cur.ty !== '?' && colTy !== cur.ty) || (p.s && cur.perks.some(x => x.s))) { cur = { ty: colTy, perks: [] }; out.cols.push(cur); }
-      cur.perks.push(p);
+      colPerks.push([p, colTy]);
     }
+    // perk columns: Bungie's own sockets. API items carry the socket index (si); CSV items are matched against the
+    // weapon's per-column perk lists (defs.sock); only unknown weapons fall back to guessing from the flat order.
+    const known = it.kind === 'weapon' && defs?.sock?.w?.[it.hash];
+    if (colPerks.length && colPerks.every(([p]) => Number.isInteger(p.si))) {
+      const by = new Map(); for (const [p, ty] of colPerks) { if (!by.has(p.si)) by.set(p.si, { ty, perks: [] }); const c = by.get(p.si); c.perks.push(p); if (c.ty === '?' && ty !== '?') c.ty = ty; }
+      out.cols = [...by.entries()].sort((a, b) => a[0] - b[0]).map(x => x[1]);
+    } else if (known) {
+      const sets = known.map(ph => new Set((defs.sock.ps[ph] || []).map(i => norm(defs.sock.n[i]))));
+      const cols = known.map(() => ({ ty: '?', perks: [] })); const loose = [];
+      for (const [p, ty] of colPerks) {
+        const k = norm(p.n.replace(/^Enhanced\s+/i, ''));
+        const cand = sets.map((s, i) => s.has(k) ? i : -1).filter(i => i >= 0);
+        // a perk two columns share (some traits) goes to the first of them that has no equipped perk yet
+        const i = cand.find(c => !(p.s && cols[c].perks.some(x => x.s))) ?? cand[0];
+        if (i == null) { loose.push([p, ty]); continue; }
+        cols[i].perks.push(p); if (cols[i].ty === '?' && ty !== '?') cols[i].ty = ty;
+      }
+      out.cols = cols.filter(c => c.perks.length);
+      for (const [p, ty] of loose) guess(p, ty);
+    } else for (const [p, ty] of colPerks) guess(p, ty);
     for (const c of out.cols) c.perks.sort((a, b) => b.s - a.s);
     return out;
   }
@@ -1065,7 +1089,9 @@ const Core = (() => {
     for (const k of SUB_SINGLE) if (b.sub[k] != null && !findSub(sc, k, b.sub[k])) delete b.sub[k];
     b.sub.aspects = [...new Set((b.sub.aspects || []).filter(h => findSub(sc, 'aspects', h)))].slice(0, 2);
     b.sub.fragments = [...new Set((b.sub.fragments || []).filter(h => findSub(sc, 'fragments', h)))].slice(0, fragSlots(b, defs));
-    for (const s of A_SLOTS) b.mods[s] = (b.mods[s] || []).filter(n => typeof n === 'string').slice(0, 3);
+    // armor mods follow the chosen piece's own sockets (general, slot, tuning, artifice, raid…): b.mods[slot][i] is
+    // the mod in socket i of modLayout (null = empty); stored names that don't fit a socket move to one that fits
+    for (const s of A_SLOTS) b.mods[s] = placeMods(b.mods[s], modLayout(b.a?.[s]?.hash, defs), s, defs);
     b.art = artValid(b.art, artOf(b, defs));
     return b;
   }
@@ -1109,7 +1135,7 @@ const Core = (() => {
     const setN = {};
     for (const s of A_SLOTS) { const it = byId?.get(b.a?.[s]?.id); const si = it && defs?.as?.[it.hash]; if (si != null) setN[si] = (setN[si] || 0) + 1; }
     for (const [si, n] of Object.entries(setN)) for (const p of defs.sets[si]?.p || []) if (n >= p.c) out.push({ g: 'armor', slot: 'set', n: p.n, label: `${defs.sets[si].n} · ${p.c}-piece bonus`, parts: [['Bungie', p.d]] });
-    for (const s of A_SLOTS) for (const n of b.mods?.[s] || []) out.push({ g: 'mod', slot: s, n, label: 'Armor mod', parts: pieceText(n, defs, null, 'armor') });
+    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(Boolean)) out.push({ g: 'mod', slot: s, n, label: 'Armor mod', parts: pieceText(n, defs, null, 'armor') });
     // artifact perks (one artifact per build)
     const art = artOf(b, defs);
     for (const h of b.art || []) { const p = art?.p.find(x => x[0] === h); if (p) out.push({ g: 'artifact', slot: 'artifact', n: p[1], label: `${art.n} · tier ${p[2]}`, parts: p[3] ? [['Bungie', p[3]]] : [] }); }
@@ -1299,7 +1325,7 @@ const Core = (() => {
     const sc = subOf(b, defs);
     for (const h of b.sub?.fragments || []) { const f = findSub(sc, 'fragments', h); for (const [k, v] of Object.entries(f?.st || {})) if (out[k]) out[k].frag += v; }
     const modSt = n => { for (const l of Object.values(defs?.am || {})) { const m = l.find(x => norm(x[0]) === norm(n)); if (m) return m[2] || {}; } return {}; };
-    for (const s of A_SLOTS) for (const n of b.mods?.[s] || []) for (const [k, v] of Object.entries(modSt(n))) if (out[k]) out[k].mods += v;
+    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(Boolean)) for (const [k, v] of Object.entries(modSt(n))) if (out[k]) out[k].mods += v;
     for (const k of ARMOR3) out[k].total = out[k].armor + out[k].frag + out[k].mods;
     return { stats: out, src, total: ARMOR3.reduce((a, k) => a + out[k].total, 0) };
   }
@@ -1325,7 +1351,7 @@ const Core = (() => {
       equipped.push(ID_RE.test(String(r.id)) ? { id: String(r.id), hash } : { hash });
     }
     const mods = [];
-    for (const s of A_SLOTS) for (const n of b.mods?.[s] || []) { const m = modsFor(s, defs).find(x => norm(x[0]) === norm(n)); if (m?.[3]) mods.push(m[3]); }
+    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(Boolean)) { const m = modsFor(s, defs).find(x => norm(x[0]) === norm(n)); if (m?.[3]) mods.push(m[3]); }
     const lo = { id, name: String(b.name || 'Ghost build').slice(0, 60), classType: DIM_CLASS[b.cls] ?? 3, equipped, unequipped: [] };
     if (mods.length) lo.parameters = { mods };
     if (b.notes) lo.notes = String(b.notes).slice(0, 1024);
@@ -1361,10 +1387,28 @@ const Core = (() => {
     }
     return [...removes, ...aspects, ...abil, ...frags];
   }
-  const modsFor = (slot, defs) => [...(defs?.am?.[slot] || []), ...(defs?.am?.general || [])];
+  // armor mod sockets of one armor piece (Bungie, defs.sock): [[socketIndex, code]], code g general, s slot-specific,
+  // t tuning, a artifice, x:<name> raid / seasonal. Without a known piece: 1 general + 3 slot sockets (Armor 3.0).
+  const MOD_DEFAULT = [[-1, 'g'], [-1, 's'], [-1, 's'], [-1, 's']];
+  function modLayout(hash, defs) {
+    const sk = defs?.sock; const i = sk?.a?.[String(hash || '')]; const lay = i != null ? sk.lay[i] : MOD_DEFAULT;
+    return lay.filter(([, c]) => c === 'g' || c === 's' || ((c === 't' || c === 'a' || c.startsWith('x:')) && (sk?.m?.[c] || []).length));
+  }
+  const MOD_SOCK_L = { g: 'General', t: 'Tuning', a: 'Artifice' };
+  const modSockLabel = (c, slotLabel) => c === 's' ? slotLabel : MOD_SOCK_L[c] || (/^x:raid/.test(c) ? 'Raid' : /^x:season/.test(c) ? 'Seasonal' : 'Activity');
+  // the mods one socket takes (code given), or every mod an armor slot can hold (lookups: costs, stats, hashes)
+  const modsFor = (slot, defs, code) => code === 'g' ? (defs?.am?.general || []) : code === 's' ? (defs?.am?.[slot] || []) : code ? (defs?.sock?.m?.[code] || [])
+    : [...(defs?.am?.[slot] || []), ...(defs?.am?.general || []), ...Object.values(defs?.sock?.m || {}).flat()];
+  const modFits = (n, code, slot, defs) => modsFor(slot, defs, code).some(x => norm(x[0]) === norm(n));
+  function placeMods(list, lay, slot, defs) {
+    const out = lay.map(() => null); const rest = [];
+    (Array.isArray(list) ? list : []).forEach((n, i) => { if (typeof n !== 'string' || !n) return; if (i < lay.length && out[i] == null && modFits(n, lay[i][1], slot, defs)) out[i] = n; else rest.push(n); });
+    for (const n of rest) { const j = out.findIndex((x, k) => x == null && modFits(n, lay[k][1], slot, defs)); if (j >= 0) out[j] = n; }
+    return out;
+  }
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
   return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, subclassPlan, artValid, artOf, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
