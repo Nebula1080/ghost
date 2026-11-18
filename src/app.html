@@ -497,7 +497,11 @@ nav.views svg{display:none}
   .mtags .tagbtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:0;padding:4px 2px;font-size:16px;line-height:1.1}
   .mtags .tagbtn small{font-size:9.5px;color:var(--dim)}
   .d-body .tagrow{display:none}
-  .dcols{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .dcols{grid-template-columns:minmax(0,1fr)!important;gap:8px}
+  .dcols>.dcol{margin-left:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .dcol .t{grid-column:1/-1;text-align:left;display:flex;align-items:center;gap:8px}
+  .dcol .t .dcc{margin-left:auto}
+  .dcol .dsk{border-right:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
   /* modals become bottom sheets */
   #modal{align-items:flex-end;padding:0}
   #modal .box{max-height:86dvh;padding:16px 16px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
@@ -1567,7 +1571,11 @@ function socketsDrawer(it, hits) {
   const intr = (p, kind) => `<div class="dintr" data-pk="${esc(p.n)}" data-kind="${esc(kind)}" data-sq="1">${plugIcon(p.n, 'sq xl', pIdx(p.n, it.kind))}<div style="min-width:0"><div class="t">${esc(kind)}</div><b class="f${H(p.n)}">${esc(p.n)}</b><div class="stat-pill" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(perkInfoText(p.n, it.kind).split('\n')[0] || '')}</div></div></div>`;
   s.intrinsic.forEach(p => out.push(intr(p, it.kind === 'armor' ? 'Archetype' : 'Intrinsic')));
   s.exotic.forEach(p => out.push(intr(p, /^spirit of/i.test(p.n) ? 'Exotic class item perk' : 'Exotic perk')));
-  if (s.cols.length) out.push(`<div class="dcols" style="grid-template-columns:repeat(${Math.min(s.cols.length, 5)},minmax(0,1fr))">${s.cols.map(c => `<div class="dcol"><div class="t">${COL_LABEL[c.ty] || 'Perk'}</div>${c.perks.map(p => dsk(p, { kind: TYPE_LABEL[c.ty] || 'Perk' })).join('')}</div>`).join('')}</div>`);
+  // perk columns numbered in game order (1 Barrel, 2 Magazine, 3 Trait 1, 4 Trait 2, 5 Origin); the equipped perk
+  // leads each column. Phones show one column per band so every option sits under its own heading (user-approved 2026-11-18).
+  let tn = 0;
+  if (s.cols.length) out.push(`<div class="dcols" style="grid-template-columns:repeat(${Math.min(s.cols.length, 5)},minmax(0,1fr))">${s.cols.map((c, ci) => { const lab = c.ty === 't' ? 'Trait ' + (++tn) : (COL_LABEL[c.ty] || 'Perk');
+    return `<div class="dcol"><div class="t"><i class="dcn">${ci + 1}</i>${lab}<small class="dcc">${c.perks.length > 1 ? `${c.perks.length} options` : ''}</small></div>${[...c.perks.filter(p => p.s), ...c.perks.filter(p => !p.s)].map(p => dsk(p, { kind: TYPE_LABEL[c.ty] || 'Perk' })).join('')}</div>`; }).join('')}</div>`);
   const si = D?.as?.[it.hash]; const set = si != null ? D.sets[si] : null;
   if (set) out.push(`<div class="dset"><div class="h2">◈ ${esc(set.n)} <span class="stat-pill">set bonus</span></div>${set.p.map((sp, i) => `<div class="dsk sel" data-setp="${si}:${i}" title="${esc(sp.n)}">${plugIcon(sp.n, 'sq lg', sp.i)}<span class="nm2"><b>${sp.c}-piece</b> · ${esc(sp.n)}</span></div>`).join('')}</div>`);
   const grp = (label, list, kind) => list.length ? `<div class="t stat-pill" style="margin:2px 0 4px">${label}</div><div class="dmods">${list.map(p => dsk({ ...p, s: 1 }, { sq: true, kind: kind || TYPE_LABEL[Core.plugOf(p.n, D, it.kind)?.[1]] || 'Mod' })).join('')}</div>` : '';
