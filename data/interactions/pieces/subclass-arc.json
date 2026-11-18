@@ -1019,9 +1019,6 @@
    {
     "do": "uses",
     "t": "amplified",
-    "from": [
-     "weapon"
-    ],
     "q": "While you are amplified, your Arc Special or Heavy ammo weapon final blows create a blinding explosion.",
     "s": "bungie",
     "pay": "Arc Special and Heavy weapon kills cause a blinding explosion"
@@ -1527,9 +1524,6 @@
      }
     ],
     "note": "weapon damage can discharge Bolt Charge while behind the barricade",
-    "from": [
-     "weapon"
-    ],
     "q": "While behind your Barricade, you and allies gain stacks of Bolt Charge over time and your weapons can discharge max stacks of Bolt Charge.",
     "s": "bungie",
     "pay": "weapons can discharge max Bolt Charge while behind your Barricade"

@@ -112,7 +112,7 @@ if (ixd / 'glossary.json').exists():
     gfiles = [ixd / 'glossary.json'] + sorted((ixd / 'glossary').glob('*.json')) if (ixd / 'glossary').exists() else [ixd / 'glossary.json']
     for f in gfiles:
         for tid, t in json.loads(f.read_text(encoding='utf-8')).get('terms', {}).items():
-            ix['t'].setdefault(tid, {k: t[k] for k in ('l', 'kind', 'el', 'def', 'dr', 'isa') if t.get(k) is not None})
+            ix['t'].setdefault(tid, {k: t[k] for k in ('l', 'kind', 'el', 'def', 'dr', 'isa', 'nat') if t.get(k) is not None})
     done = set()
     for f in sorted((ixd / 'pieces').glob('*.json')) if (ixd / 'pieces').exists() else []:
         for r in json.loads(f.read_text(encoding='utf-8')):
@@ -121,6 +121,9 @@ if (ixd / 'glossary.json').exists():
     for f in sorted((ixd / 'src').glob('*.json')):
         if f.name == 'glossary-sources.json': continue
         ix['pending'] += [r['id'] for r in json.loads(f.read_text(encoding='utf-8')) if r['id'] not in done]
+    # artifacts for the build maker (tools/interactions/sources.mjs): [{h, n, d, i, p: [[hash, name, tier, text, icon]]}]
+    af = ixd / 'artifacts.json'
+    if af.exists(): ix['art'] = json.loads(af.read_text(encoding='utf-8'))
     s = s.replace('/*__IX__*/null', page_json(ix))
     print(f'[{TARGET}] interactions: {len(ix["p"])} curated pieces, {len(ix["t"])} terms, {len(ix["pending"])} pending')
 else:

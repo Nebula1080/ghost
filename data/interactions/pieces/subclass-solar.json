@@ -1349,9 +1349,6 @@
    {
     "do": "uses",
     "t": "radiant",
-    "from": [
-     "poweredmelee"
-    ],
     "q": "While radiant, final blows with your equipped Throwing Knife fully refund your melee energy.",
     "s": "bungie",
     "pay": "Throwing Knife kills fully refund melee energy"

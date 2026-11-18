@@ -1,0 +1,442 @@
+[
+ {
+  "id": "art:armorsmith",
+  "n": "Armorsmith",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 10,
+    "vs": [
+     "all"
+    ],
+    "on": "breaking a combatant's shield or performing a finisher",
+    "q": "10% [2.5%] Damage Resist (Resist x1) for 6 seconds.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 2.5,
+    "vs": [
+     "players"
+    ],
+    "on": "breaking a combatant's shield or performing a finisher",
+    "q": "10% [2.5%] Damage Resist (Resist x1) for 6 seconds.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleedamage",
+    "on": "breaking a combatant's shield or performing a finisher",
+    "q": "100% Increased Melee Damage for 6 seconds.",
+    "s": "compendium"
+   },
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Upon breaking a Combatant's Shield or performing a Finisher:",
+    "s": "compendium",
+    "pay": "6s of 10% damage resistance and +100% melee damage",
+    "pq": "100% Increased Melee Damage for 6 seconds."
+   }
+  ]
+ },
+ {
+  "id": "art:blindingjolts",
+  "n": "Blinding Jolts",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "jolt",
+    "q": "Final blows on jolted combatants blind nearby combatants.",
+    "s": "bungie",
+    "pay": "killing a jolted target blinds enemies within 8 m"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "on": "killing a jolted combatant",
+    "q": "Final blows on jolted combatants blind nearby combatants.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:counterenergy",
+  "n": "Counter Energy",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stun",
+    "q": "When you or a member of your fireteam stuns a champion, you gain energy for your least-charged ability.",
+    "s": "bungie",
+    "pay": "25% energy to your least-charged ability (not Super)",
+    "note": "any fireteam member's stun counts"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "a Champion is stunned",
+    "q": "25% Ability Energy to the least-charged Ability.",
+    "s": "compendium",
+    "note": "only the least-charged ability gets the energy; never Super"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "a Champion is stunned",
+    "q": "25% Ability Energy to the least-charged Ability.",
+    "s": "compendium",
+    "note": "only the least-charged ability gets the energy; never Super"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "a Champion is stunned",
+    "q": "25% Ability Energy to the least-charged Ability.",
+    "s": "compendium",
+    "note": "only the least-charged ability gets the energy; never Super"
+   }
+  ]
+ },
+ {
+  "id": "art:dielectric",
+  "n": "Dielectric",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "jolt",
+    "q": "Defeating [Arc]Arc debuffed targets grants Bolt Charge.",
+    "s": "bungie",
+    "pay": "Bolt Charge on kill; 3 quick kills spawn an Orb of Power and heal",
+    "note": "any Arc debuff (Jolt, Blind) counts"
+   },
+   {
+    "do": "uses",
+    "t": "blind",
+    "q": "Defeating [Arc]Arc debuffed targets grants Bolt Charge.",
+    "s": "bungie",
+    "pay": "Bolt Charge on kill; 3 quick kills spawn an Orb of Power and heal"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "on": "killing Arc-debuffed targets",
+    "q": "Defeating [Arc]Arc debuffed targets grants Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "3 Arc-debuffed kills within 6 seconds of each other",
+    "q": "Rapidly defeating Arc debuffed targets spawns an Orb of Power and heals a small portion of health.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "3 Arc-debuffed kills within 6 seconds of each other",
+    "q": "Rapidly defeating Arc debuffed targets spawns an Orb of Power and heals a small portion of health.",
+    "s": "bungie",
+    "note": "restores 40 HP"
+   }
+  ]
+ },
+ {
+  "id": "art:elementalorbsarc",
+  "n": "Elemental Orbs: Arc",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "jolt",
+    "if": [
+     {
+      "weapon": "arc"
+     }
+    ],
+    "on": "throwing or shooting an Arc Elemental Orb dropped by Arc weapon kills",
+    "q": "Arc Orbs can be thrown or shot to create an Arc explosion that jolts targets it damages.",
+    "s": "bungie",
+    "note": "the orb spawns after several Arc weapon final blows (Compendium: 6 kills)"
+   }
+  ]
+ },
+ {
+  "id": "art:elementalsiphon",
+  "n": "Elemental Siphon",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "elementalpickup",
+    "if": [
+     {
+      "any": [
+       {
+        "weapon": "kinetic"
+       },
+       {
+        "weapon": "super"
+       }
+      ]
+     }
+    ],
+    "on": "rapid Kinetic or Super-matching weapon kills",
+    "q": "Rapid final blows with a Kinetic weapon or a weapon matching your equipped Super create an Elemental pickup that matches your equipped Super.",
+    "s": "bungie",
+    "note": "3 kills within 3 seconds of each other; the pickup's element follows your Super"
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "by": "elementalpickup",
+    "on": "collecting an Elemental Pickup",
+    "q": "Grants 5% [1%] Element-Matching Super Ability.",
+    "s": "compendium",
+    "note": "2 second cooldown between gains"
+   }
+  ]
+ },
+ {
+  "id": "art:fierceproxemics",
+  "n": "Fierce Proxemics",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Finisher final blows grant grenade and melee energy.",
+    "s": "bungie",
+    "pay": "25% grenade and melee energy on finisher kills"
+   },
+   {
+    "do": "grants",
+    "t": "grenadeenergy",
+    "on": "finisher final blows",
+    "q": "25% Grenade and Melee Ability Energy.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "meleeenergy",
+    "on": "finisher final blows",
+    "q": "25% Grenade and Melee Ability Energy.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "art:powerfrompain",
+  "n": "Power from Pain",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Rapid final blows against weakened combatants grant you Devour.",
+    "s": "bungie",
+    "pay": "Devour after 3 quick kills on weakened targets"
+   },
+   {
+    "do": "grants",
+    "t": "devour",
+    "on": "3 weakened kills within 4 seconds of each other",
+    "q": "Rapid final blows against weakened combatants grant you Devour.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:precisionequity",
+  "n": "Precision Equity",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "building 10 stacks of precision kills",
+    "q": "Precision final blows build progress towards a large Orb of Power that also grants bonus weapon damage on pickup.",
+    "s": "bungie",
+    "note": "higher ranked targets give more stacks; the large orb grants 12.5% Super energy"
+   },
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "on": "picking up the large Orb of Power",
+    "q": "Weapon Surge x2 for 11 seconds.",
+    "s": "compendium",
+    "note": "works for all damage types; does not overwrite stronger Weapon Surges"
+   }
+  ]
+ },
+ {
+  "id": "art:rapidremedy",
+  "n": "Rapid Remedy",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "3 Machine Gun kills within 3 seconds of each other",
+    "q": "Machine Gun rapid final blows heal you.",
+    "s": "bungie",
+    "note": "restores 15 HP and starts health regeneration"
+   }
+  ]
+ },
+ {
+  "id": "art:singularityblade",
+  "n": "Singularity Blade",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "devour",
+    "q": "While you have a Void elemental buff, melee and Sword hits weaken targets",
+    "s": "bungie",
+    "pay": "melee and Sword hits weaken; melee/Sword kills release a weakening burst"
+   },
+   {
+    "do": "uses",
+    "t": "invisibility",
+    "q": "While you have a Void elemental buff, melee and Sword hits weaken targets",
+    "s": "bungie",
+    "pay": "melee and Sword hits weaken; melee/Sword kills release a weakening burst"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "q": "While you have a Void elemental buff, melee and Sword hits weaken targets",
+    "s": "bungie",
+    "pay": "melee and Sword hits weaken; melee/Sword kills release a weakening burst"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "if": [
+     {
+      "any": [
+       {
+        "has": "devour"
+       },
+       {
+        "has": "invisibility"
+       },
+       {
+        "has": "overshield"
+       }
+      ]
+     }
+    ],
+    "on": "melee or Sword hits while you have a Void buff",
+    "q": "While you have a Void elemental buff, melee and Sword hits weaken targets, while melee and Sword final blows create a weakening burst.",
+    "s": "bungie",
+    "note": "Compendium: Void buff = Devour, Invisibility or Overshield; checked on hit"
+   }
+  ]
+ },
+ {
+  "id": "art:stickershock",
+  "n": "Sticker Shock",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "grenade",
+    "if": [
+     {
+      "slot": "grenade",
+      "is": [
+       "Flux Grenade",
+       "Magnetic Grenade",
+       "Fusion Grenade"
+      ]
+     }
+    ],
+    "q": "Arc Flux, Magnetic, and Fusion Grenades deal more damage when attached to combatants; on final blows, they release several micro-missiles that seek nearby combatants.",
+    "s": "bungie",
+    "pay": "more damage when stuck to a target; kills release seeking micro-missiles",
+    "note": "Flux +60%, Fusion +30%, Magnetic +22.5%; does not boost Fusion Grenade's Solar effect damage"
+   }
+  ]
+ },
+ {
+  "id": "art:tazertag",
+  "n": "Tazer Tag",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "melee",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Ball Lightning",
+       "Ballistic Slam",
+       "Chain Lightning",
+       "Combination Blow",
+       "Disorienting Blow",
+       "Seismic Strike",
+       "Thunderclap"
+      ]
+     }
+    ],
+    "q": "Arc-powered melee hits jolt combatants and deal further damage for a short duration.",
+    "s": "bungie",
+    "pay": "Arc melee hits jolt and add Arc damage over time"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "if": [
+     {
+      "slot": "melee",
+      "is": [
+       "Ball Lightning",
+       "Ballistic Slam",
+       "Chain Lightning",
+       "Combination Blow",
+       "Disorienting Blow",
+       "Seismic Strike",
+       "Thunderclap"
+      ]
+     }
+    ],
+    "on": "Arc melee hits",
+    "dmg": [
+     "melee"
+    ],
+    "q": "Arc-powered melee hits jolt combatants and deal further damage for a short duration.",
+    "s": "bungie",
+    "note": "Compendium says any Arc melee damage triggers it"
+   }
+  ]
+ },
+ {
+  "id": "art:voidinfestation",
+  "n": "Void Infestation",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Defeating a weakened target spawns a tracking projectile that weakens other targets.",
+    "s": "bungie",
+    "pay": "kills on weakened targets spawn a seeking projectile that weakens others"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "on": "killing a weakened target",
+    "q": "Defeating a weakened target spawns a tracking projectile that weakens other targets.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "_skipped",
+  "ids": [
+   "art:combinationargentblade",
+   "art:kineticrupture",
+   "art:kineticsynthesis",
+   "art:presstheadvantage",
+   "art:reloadatrange",
+   "art:riposte",
+   "art:snipersmeditation",
+   "art:swordstormcombo"
+  ]
+ }
+]

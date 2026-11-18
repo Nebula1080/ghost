@@ -1,0 +1,1899 @@
+[
+ {
+  "id": "art:ampedup",
+  "n": "Amped Up",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   255237657
+  ],
+  "src": {
+   "bungie": "Stay amplified longer while your Arc or Prismatic subclass is equipped.",
+   "compendium": "While on Arc or Prismatic Subclass: \nAmplified duration is increased to 20 seconds."
+  }
+ },
+ {
+  "id": "art:antichampionnosecone",
+  "n": "Anti-Champion Nosecone",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   51032914
+  ],
+  "src": {
+   "bungie": "Rocket Launchers deal increased damage to Champions.",
+   "compendium": "For Rocket Launchers:\n33% Increased Damage against Champions."
+  }
+ },
+ {
+  "id": "art:arccompounding",
+  "n": "Arc Compounding",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   3117519993
+  ],
+  "src": {
+   "bungie": "[Arc] Arc sources deal increased damage to Blind targets.",
+   "compendium": "15% [7.5%] increased Arc Damage against Blinded Enemies.\nStacks with everything."
+  }
+ },
+ {
+  "id": "art:argentblade",
+  "n": "Argent Blade",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   1533272842
+  ],
+  "src": {
+   "bungie": "While you have Armor Charge, dealing damage with a Sword consumes an Armor Charge and empowers your Sword for a short time, granting it bonus damage and energy charge rate.",
+   "compendium": "Dealing Sword Damage consumes an Armor Charge to grant Argent Blade for 5 seconds.\nArgent Blade:\n15% Increased Sword Damage\n+100 Charge Rate.\nStacks with other buffs.\nDoes not consume additional Armor Charges while Argent Blade is active"
+  }
+ },
+ {
+  "id": "art:argentordnance",
+  "n": "Argent Ordnance",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   1328115228
+  ],
+  "src": {
+   "bungie": "Firing a Rocket Launcher consumes one stack of Armor Charge, granting increased damage and reload speed until you reload or stow your Rocket Launcher.",
+   "compendium": "Firing a Rocket Launcher consumes x1 Armor Charge to grant Godslayer Warheads for 4.5 seconds:\nGodslayer Warheads:\n15% Increased Damage. Stacks with everything.\n+? Reload Speed and 0.?x Reload Duration Multiplier.\nDoes not consume additional Armor Charges while the buff is active."
+  }
+ },
+ {
+  "id": "art:argentquiver",
+  "n": "Argent Quiver",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   2659604386
+  ],
+  "src": {
+   "bungie": "Reloading a Bow consumes one stack of Armor Charge, granting increased damage and reload speed for your next 3 shots or until you stow your Bow.",
+   "compendium": "Reloading a bow consumes an Armor Charge to grant 3 stacks of Godslayer Broadheads.\nCannot consume Armor Charge or grant stacks while buff is active.\nWhile Godslayer Broadhead is active:\nGrants increased damage and +? Reload Speed.\nFiring consumes a stack. Stowing removes all stacks.\nPrimary = 35% increased damage to Combatants.\nHeavy = 25% increased damage to Combatants.\nStacks with everything."
+  }
+ },
+ {
+  "id": "art:armorsmith",
+  "n": "Armorsmith",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk",
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   2903198437
+  ],
+  "src": {
+   "bungie": "Breaking a combatant's shield temporarily grants you damage resistance and increased melee damage.",
+   "compendium": "Upon breaking a Combatant's Shield or performing a Finisher:\n10% [2.5%] Damage Resist (Resist x1) for 6 seconds.\n100% Increased Melee Damage for 6 seconds."
+  }
+ },
+ {
+  "id": "art:badamplitude",
+  "n": "Bad Amplitude",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   2344320974
+  ],
+  "src": {
+   "bungie": "Damaging a Champion with an Arc ability causes the Champion to become jolted.",
+   "compendium": "Upon dealing Arc Ability Damage to a Champion:\nInflicts Jolt to the Champion."
+  }
+ },
+ {
+  "id": "art:bladestamina",
+  "n": "Blade Stamina",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   2344320969
+  ],
+  "src": {
+   "bungie": "Rapidly defeating combatants with a Sword refunds some ammo.",
+   "compendium": "Upon scoring 3 Combatant Kills within 5 seconds of each with a Sword:\nGenerates +3 Ammo.\nPraxic Blade and Ergo Sum receive +2 Ammo instead."
+  }
+ },
+ {
+  "id": "art:blastradius",
+  "n": "Blast Radius",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   2317325399
+  ],
+  "src": {
+   "bungie": "Rapid final blows with Rocket Launchers and Grenade Launchers grant Armor Charge.",
+   "compendium": "Upon scoring 2 Kills within ? seconds of each with Grenade Launchers or Rocket Launchers:\nGrants a stack of Armor Charge."
+  }
+ },
+ {
+  "id": "art:blindingjolts",
+  "n": "Blinding Jolts",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2903198433
+  ],
+  "src": {
+   "bungie": "Final blows on jolted combatants blind nearby combatants.",
+   "compendium": "On Jolted Enemy Kill:\nInflicts Blind to enemies within 8 meters for 10 seconds."
+  }
+ },
+ {
+  "id": "art:brainfreeze",
+  "n": "Brain Freeze",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   3117519998
+  ],
+  "src": {
+   "bungie": "Frozen combatants become surrounded by chilling fog, which slows combatants that aren't already.",
+   "compendium": "Frozen Enemies inflict x? Slow to enemies within 4? meters that aren't affected by Stasis Debuffs."
+  }
+ },
+ {
+  "id": "art:bricksfrombeyond",
+  "n": "Bricks from Beyond",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   4232817861
+  ],
+  "src": {
+   "bungie": "Defeating a powerful combatant with a Void weapon has a chance to generate Heavy ammo progress for you and your teammates.",
+   "compendium": "Every 3? Elite+ Void Weapon Kills:\n50?% Heavy Ammo Progress to the user and allies within ? meters."
+  }
+ },
+ {
+  "id": "art:cauterizeddarkness",
+  "n": "Cauterized Darkness",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3459646240
+  ],
+  "src": {
+   "bungie": "[Stasis]Stasis or [Strand] Strand debuffed non-boss combatants take increased [Solar]Solar damage from all sources.",
+   "compendium": "Upon inflicting a Darkness Debuff on a Non-Boss Combatants:\n75% Increased Solar Damage dealt.\nIndicated by getting Yellow Numbers on Solar Damage.\nStacks with other Weaken sources.\nIncurs a 2? second cooldown between additional Darkness Debuffs inflicting the Cauterized Darkness debuff."
+  }
+ },
+ {
+  "id": "art:combinationargentblade",
+  "n": "Combination Argent Blade",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2903198435
+  ],
+  "src": {
+   "bungie": "Briefly pause after executing a light attack, then follow it up with a light or heavy attack to empower your Sword for a short time, granting it bonus damage and charge rate.",
+   "compendium": "Upon swinging, then waiting for 0.5 seconds before swinging again while grounded:\nGrants Argent Blade for 5 seconds.\nBuff cannot be refreshed.\nArgent Blade:\n15% Increased Sword Damage\n+100 Charge Rate"
+  }
+ },
+ {
+  "id": "art:conductivecosmiccrystal",
+  "n": "Conductive Cosmic Crystal",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   3117519996
+  ],
+  "src": {
+   "bungie": "Your [Arc] Arc and [Void] Void abilities deal bonus damage to targets that are affected by a [Stasis] Stasis debuff.",
+   "compendium": "Against Stasis-Debuffed Enemies:\nArc and Void Ability Damage is increased by 5%."
+  }
+ },
+ {
+  "id": "art:conductivecosmicneedle",
+  "n": "Conductive Cosmic Needle",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   2311625538
+  ],
+  "src": {
+   "bungie": "Targets affected by Strand debuffs take increased damage from Arc and Void abilities.",
+   "compendium": "Against Strand-Debuffed Combatants while an Arc or Void Super Ability is equipped:\n 5% Increased Arc and Void Ability Damage per Strand Debuff.\n1x = 5% | 2x = 10.25% | 3x = 15.76%"
+  }
+ },
+ {
+  "id": "art:countercharge",
+  "n": "Counter Charge",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   4232817860
+  ],
+  "src": {
+   "bungie": "Gain a stack of Armor Charge when you stun a Champion.",
+   "compendium": "Upon stunning a Champion:\nGrants a stack of Armor Charge."
+  }
+ },
+ {
+  "id": "art:counterenergy",
+  "n": "Counter Energy",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk",
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   2903198436,
+   2344320970
+  ],
+  "src": {
+   "bungie": "When you or a member of your fireteam stuns a champion, you gain energy for your least-charged ability.",
+   "compendium": "Whenever a Champion gets stunned:\n25% Ability Energy to the least-charged Ability.\nExcludes Super Abilities, obviously."
+  }
+ },
+ {
+  "id": "art:creepingchill",
+  "n": "Creeping Chill",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal",
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   3116632769
+  ],
+  "src": {
+   "bungie": "Stasis final blows against slowed or frozen targets release a burst that slows combatants and grants Frost Armor to allies caught in the blast.",
+   "compendium": "Upon scoring a Stasis Kill against a Stasis-Debuffed Enemy:\nTriggers a Slowing Burst over 6 meters.\nSlowing Burst\nInflicts x20 Slow for 2?+? seconds to enemies.\nGrants x? Frost Armor to the user and allies.\nHas no effect."
+  }
+ },
+ {
+  "id": "art:crystallineconverter",
+  "n": "Crystalline Converter",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   4037132131
+  ],
+  "src": {
+   "bungie": "After activating your class ability, your next [Stasis] Stasis weapon final blow creates a Stasis Shard. \n\nGather Stasis Shards to gain stacks of Crystalline Converter, which cause your next powered Stasis melee hit to create Stasis crystals equal to the number of stacks you have.",
+   "compendium": "Picking up Stasis Shards progresses the Crystalline Converter Counter.\nUpon dealing Stasis Melee Damage or Diamond Lance Damage: \nConsumes the Crystalline Converter Counter.\nSpawns Crystals based on the amount of Shards picked up.\n8 | 12 | 15 Shards Pickups\n1 | 2 | 3 Crystals Spawned\nOn Class Ability Usage:\nThe next Stasis Weapon Kill spawns a Stasis Shard."
+  }
+ },
+ {
+  "id": "art:curativeorbs",
+  "n": "Curative Orbs",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   611645146
+  ],
+  "src": {
+   "bungie": "The first time you break a target's shield or break the shield of a Guardian using their Super, you create an Orb of Power.\n\nCollecting an Elemental pickup, collecting an Orb of Power, or destroying a Tangle grants you a small amount of health.",
+   "compendium": "Upon first breaking a Combatant Shield, or a Supering Guardian's Shield:\nCreates an Orb of Power that grants 7.15% Super Energy.\nPerforming a Finisher on a Combatant that didn't trigger the effect will also spawn an Orb of Power.\nUpon picking up an Orb of Power, an Elemental Pickup, or destroying a Tangle:\nRestores 40 HP."
+  }
+ },
+ {
+  "id": "art:debilitatingwave",
+  "n": "Debilitating Wave",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   611645151
+  ],
+  "src": {
+   "bungie": "Finishers emit a damaging wave that matches the element of your currently equipped Super.\n\nArc, Void, and Stasis waves apply Blind, Weaken, and Slow respectively.",
+   "compendium": "Upon finishing a Combatant:\nTriggers a wave, dealing 180 Super-Element Matching Damage up to 20 meters away.\nWave travels in the direction of the finisher and tracks enemies.\nWave damage ignores Power Delta, always dealing 180.\nEquipping an Arc, Void, or Stasis Super makes the wave inflict a Super-Matching Elemental Debuff.\nArc = Blind\nVoid = Weaken\nStasis = Slow"
+  }
+ },
+ {
+  "id": "art:defibrillatingblast",
+  "n": "Defibrillating Blast",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   1319563986
+  ],
+  "src": {
+   "bungie": "Stunning a Champion grants maximum stacks of Bolt Charge. Damaging targets with Bolt Charge bolts jolts them and heals you.",
+   "compendium": "Upon stunning a Champion:\nGrants x10 Bolt Charge.\nBolt Discharge's Bolt Splash damage portion now inflicts Jolt.\nUpon triggering a Bolt Discharge:\nRestores ~55 HP.\nBegins Critical Health regeneration\nDoes not begin recharging Shields."
+  }
+ },
+ {
+  "id": "art:dielectric",
+  "n": "Dielectric",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk",
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   2903198438,
+   3585856470
+  ],
+  "src": {
+   "bungie": "Defeating [Arc]Arc debuffed targets grants Bolt Charge.\n\nRapidly defeating Arc debuffed targets spawns an Orb of Power and heals a small portion of health.",
+   "compendium": "On Arc-Debuffed Enemy Kill:\nGrants x1 Bolt Charge.\nUpon scoring 3 Arc-Debuffed Enemy Kills within 6 seconds of each:\nSpawns an Orb of Power that grants 7.15% Super Energy.\nRestores 40 HP."
+  }
+ },
+ {
+  "id": "art:dragonsbite",
+  "n": "Dragon's Bite",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   51032915
+  ],
+  "src": {
+   "bungie": "Breaking a combatant's shield with a Strand or Stasis weapon has a chance to suspend or freeze that combatant.",
+   "compendium": "For every THIRD Combatant Shield broken with a Strand or Stasis Weapon:\nStrand inflicts Suspend.\nStasis inflicts Freeze."
+  }
+ },
+ {
+  "id": "art:elementalbenevolence",
+  "n": "Elemental Benevolence",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3153265449
+  ],
+  "src": {
+   "bungie": "Granting allies an elemental buff gives class ability energy.",
+   "compendium": "Upon bestowing an Elemental Buff to allies:\n~15?% Class Ability Energy.\nIncurs a ? second cooldown PER ALLY after activation."
+  }
+ },
+ {
+  "id": "art:elementalcoalescence",
+  "n": "Elemental Coalescence",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3459646247
+  ],
+  "src": {
+   "bungie": "Defeating targets has the chance to create an Elemental pickup matching your equipped Super element.",
+   "compendium": "Upon scoring a random, Pickup-based amount of kills:\nSpawns a Super-Matching Elemental Pickup.\nKills needed to trigger vary per Elemental Pickup.\nFiresprites, Void Breaches: 4–7 kills.\nIonic Trace, Stasis Shards, Tangles: 9–11 kills.\nTriggers the global cooldown for Firesprites, Void Breaches, and Tangles.\nKills scored during the cooldown do not count for the next pickup.\nMatching the Damage Type to the Super Element has no bonus effects."
+  }
+ },
+ {
+  "id": "art:elementaldaze",
+  "n": "Elemental Daze",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3459646241
+  ],
+  "src": {
+   "bungie": "Stunning a Champion with an elemental weapon creates an elementally aligned explosion, applying a matching elemental debuff to them and nearby targets.",
+   "compendium": "Upon stunning a Champion with an Elemental Weapon:\nTriggers an Elemental-Matching Explosion that deals up to 315 Elemental Damage and inflicts an Elemental Debuff over 5 meters, down to 0% damage.\nArc: Jolt | Solar: Ignition | Void: Volatile\nStasis: Freeze | Strand: Sever\nHas no effect on Kinetic Weapons."
+  }
+ },
+ {
+  "id": "art:elementalorbsarc",
+  "n": "Elemental Orbs: Arc",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2742146821
+  ],
+  "src": {
+   "bungie": "[Arc]Arc weapon final blows have a chance to spawn an Arc Elemental Orb. Arc Orbs can be thrown or shot to create an Arc explosion that jolts targets it damages.",
+   "compendium": "Upon scoring 6 [2?] Arc Weapon Kills:\nSpawns an Arc Elemental Orb.\nArc Elemental Orb:\nArc Orbs remain on the ground for up to 20 seconds before expiring.\nArc Orbs that are picked up can be held for up to 20 seconds.\nArc Orbs deal up to 405 [101] damage, down to 90% damage, and inflict Jolt over 8 meters."
+  }
+ },
+ {
+  "id": "art:elementaloverdrive",
+  "n": "Elemental Overdrive",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   2659604390
+  ],
+  "src": {
+   "bungie": "Picking up an Elemental pickup or Tangle grants increased damage to weapons of the same element.",
+   "compendium": "Upon picking up a Elemental Pickup:\n22% [?%] increased Pickup-Matching Weapon Damage for 7 seconds.\nDisplays as Weapon Surge despite stacking multiplicatively with it."
+  }
+ },
+ {
+  "id": "art:elementalsiphon",
+  "n": "Elemental Siphon",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal",
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   3116632771,
+   3585856466
+  ],
+  "src": {
+   "bungie": "Rapid final blows with a Kinetic weapon or a weapon matching your equipped Super create an Elemental pickup that matches your equipped Super.",
+   "compendium": "Upon scoring 3 kills within 3 seconds of each using a Kinetic Weapon or a Super-Element Matching Weapon:\nCreates an Elemental Pickup that matches the equipped Super Ability's element.\nUpon collecting an Elemental Pickup:\nGrants 5% [1%] Element-Matching Super Ability.\nIncurs a 2 second cooldown between additional Ability gains."
+  }
+ },
+ {
+  "id": "art:elementalsupercharger",
+  "n": "Elemental Supercharger",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   1319563988
+  ],
+  "src": {
+   "bungie": "Defeating exhausted or severed targets with weapons that match your Super element grants Super energy.\n\nExhausted targets deal reduced outgoing damage.",
+   "compendium": "On Exhausted or Severed Enemy Kill with Super-Matching Weapons:\nGrants 2?% Additional Super Ability Energy."
+  }
+ },
+ {
+  "id": "art:energyacceleration",
+  "n": "Energy Acceleration",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3459646245
+  ],
+  "src": {
+   "bungie": "Sustained damage with micro-missiles causes the combatant to emit a Kinetic shockwave that damages nearby combatants. Strong against [Stagger] Unstoppable Champions.",
+   "compendium": "Upon scoring 2 non-simultaneous Micro-Missile damage instances within 3 seconds of each or a Micro-Missile Kill:\nTarget releases a Kinetic Shockwave that deals 120 [20] Kinetic Damage and stuns Unstoppable Champions over 7 meters.\nShockwave has no falloff.\nIncurs a 2 second cooldown between activations."
+  }
+ },
+ {
+  "id": "art:energydiffusionsubstrate",
+  "n": "Energy Diffusion Substrate",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   3116632768
+  ],
+  "src": {
+   "bungie": "Gain a small amount of resistance to all damage dealt to you by combatants.",
+   "compendium": "5%? Damage Resist against Combatants."
+  }
+ },
+ {
+  "id": "art:expandingabyss",
+  "n": "Expanding Abyss",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   1533272843
+  ],
+  "src": {
+   "bungie": "Void sources deal increased damage to weakened targets.",
+   "compendium": "User deals increased Void Damage towards Weakened Enemies.\n7.5% -> 10% (2.3% increased damage)\n15% -> 25% (8.7% increased damage)\n30% -> 35% (3.8% increased damage)\n35% -> 40% (3.7% increased damage)\nDivinity's Weaken is unaffected."
+  }
+ },
+ {
+  "id": "art:feverandchill",
+  "n": "Fever and Chill",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity",
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   3153265450
+  ],
+  "src": {
+   "bungie": "Rapid precision hits with [Solar]Solar weapons grant Radiant. Rapid precision hits with [Stasis]Stasis weapons grant Frost Armor.",
+   "compendium": "Upon scoring multiple Precision Hits within 3 seconds of each:\nSolar Weapons | Grants Radiant for 10+5 seconds.\nStasis Weapons: Grants a stack of Frost Armor.\nIncurs a 1.5s cooldown between triggers.\nAdditional hits during this time do not count.\nPrecision Hits trigger:\n (25% of Magazine Size) + 1, rounded down\nMag to Crits Requirement: \nBows = 3 Crits | 3 Mag = 1 Crit\n4–7 Mag = 2 Crits | 8–11 Mag = 3 Crits\n 12–15 Mag = 4 Crits | 16–19 Mag = 5 Crits\n20–23 Mag = 6 Crits | 24-27 Mag = 7 Crits\n28–31 Mag = 8 Crits | 32–35 Mag = 9 Crits\n36–39 Mag = 10 Crits | 40–43 Mag = 11 Crits"
+  }
+ },
+ {
+  "id": "art:fierceproxemics",
+  "n": "Fierce Proxemics",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   3834273536
+  ],
+  "src": {
+   "bungie": "Finisher final blows grant grenade and melee energy.",
+   "compendium": "On Finisher:\n25% Grenade and Melee Ability Energy."
+  }
+ },
+ {
+  "id": "art:flashover",
+  "n": "Flashover",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   2596646298
+  ],
+  "src": {
+   "bungie": "When you gain maximum Bolt Charge, you also become amplified. Lightning bolts deal more damage.",
+   "compendium": "Upon reaching x10 Bolt Charge:\nAmplified for 15 seconds.\nBolt Discharges deal 50% increased damage against Combatants.\n405 Impact + 270 Splash = 675 Base\n608 Impact + 406 Splash = 1014 Flashover"
+  }
+ },
+ {
+  "id": "art:frigidglare",
+  "n": "Frigid Glare",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity",
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   2659604384
+  ],
+  "src": {
+   "bungie": "While Frost Armor is active, [Stasis]Stasis precision final blows cause combatants to release a freezing burst.",
+   "compendium": "Upon scoring a Precision Kill with a Stasis Weapon while Frost Armor is active:\nTriggers a Freezing Burst on Enemy Death Location.\nFreezing Burst affects enemies within 7 meters."
+  }
+ },
+ {
+  "id": "art:frostrenewal",
+  "n": "Frost Renewal",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity",
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   3153265448,
+   611645149
+  ],
+  "src": {
+   "bungie": "While you have Frost Armor, taking critical damage releases a burst that freezes nearby combatants and grants Frost Armor to you and nearby allies.",
+   "compendium": "On Shield Break from Combatant Damage, while Frost Armor is active:\nReleases a Stasis Burst over 10 meters.\nStasis Burst freezes enemies and grants a stack of Frost Armor to the user and allies in range."
+  }
+ },
+ {
+  "id": "art:goldfromlead",
+  "n": "Gold from Lead",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   2596646302
+  ],
+  "src": {
+   "bungie": "Picking up Special ammo has the chance to grant Heavy ammo.",
+   "compendium": "Upon picking up 5–6 Special Ammo Bricks:\nGenerates 8% Heavy Ammo, rounded up.\nPickup Counter is reset on death.\nNot affected by Scavenger Mods.\nDoes not function in the Crucible."
+  }
+ },
+ {
+  "id": "art:hailthestorm",
+  "n": "Hail The Storm",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel",
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   611645150,
+   1328115227
+  ],
+  "src": {
+   "bungie": "Shattering frozen targets and Stasis crystals deals increased damage.\n\nShattering Stasis crystals releases shards of ice that damage and slow targets.",
+   "compendium": "Upon shattering a Stasis Crystal:\nReleases 5 Homing Ice Shards in a * pattern, each dealing 46 damage and inflicting x? [x10] Slow for ? seconds.\nShards are spread uniformally, with one shard going towards the closest enemy and the others spreading.\nEnemy Shatters deal 12.5% [?%] increased damage.\nCrystal Shatters deal 25% [?%] increased damage."
+  }
+ },
+ {
+  "id": "art:harshrefraction",
+  "n": "Harsh Refraction",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   2596646303
+  ],
+  "src": {
+   "bungie": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+   "compendium": "Upon scoring 3 Trace Rifle hits against enemies affected by Element-Matching Debuffs:\nGrants increased Trace Rifle damage for 4 seconds.\nLegendary Trace Rifles = 50% increased damage\nExotic Special Traces / Lodestar = 35% increased damage\nMicrocosm deals 20% increased damage after scoring 4 hits against enemies affected by ANY Elemental Debuff.\nArc = ↓Blind ↓Jolt\nSolar = ↓Scorch ↓Ignition\nVoid = ↓Suppression ↓Volatile ↓Weaken\nStasis = ↓Slow ↓Freeze ↓Shatter\nStrand = ↓Sever ↓Suspend ↓Unravel"
+  }
+ },
+ {
+  "id": "art:heartoftheflame",
+  "n": "Heart of the Flame",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   3547711348
+  ],
+  "src": {
+   "bungie": "Casting your Solar Super grants nearby allies radiant and increases the damage of your Super for each nearby ally.",
+   "compendium": "On Solar Super Cast:\nCaster and Allies within 15 meters are granted Radiant.\nGrants an Ally-Amount based Increased Super Damage.\nCaster counts as an ally. \nIncreased Super Damage:\n6% | ?% | ?% | ?% | ?% | 15?%\nWell of Radiance Caster benefits for 5 seconds."
+  }
+ },
+ {
+  "id": "art:heavyordnanceregeneration",
+  "n": "Heavy Ordnance Regeneration",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   1319563989
+  ],
+  "src": {
+   "bungie": "Dealing sustained damage to targets with a Heavy Machine Gun or Rocket Launcher grants damage resistance and increases grenade and melee regeneration for a short duration. While active, defeating powerful combatants disorients nearby rank-and-file combatants.",
+   "compendium": "Upon scoring 8 Machine Gun damage instances, or 2 Rocket Launcher damage instances within 7 seconds of each:\n25% [5%] Damage Resist (Resist x2) for 15.5 seconds\n85% Additional Base Grenade and Melee Ability Regeneration Rate for 10 seconds.\nWhile Heavy Ordnance is active:\nElite+ Combatants Kills disorient Rank-and-File Combatants within 10 meters."
+  }
+ },
+ {
+  "id": "art:holdtheline",
+  "n": "Hold the Line",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   3585856469
+  ],
+  "src": {
+   "bungie": "While surrounded, Machine Guns and Glaives gain increased reload speed and stability; final blows heal you.",
+   "compendium": "While within 15 meters of 3 enemies, while a Glaive or Machine Gun is readied:\n+? Stability and +30 Reload Speed for Glaives and Machine Guns.\nGlaive Projectile/Melee and Machine Gun Kills restore 55 HP.\nStat Bonus persist for 5 seconds once criteria isn''t met. \nHealing on Kill does not persist."
+  }
+ },
+ {
+  "id": "art:hordeshuttle",
+  "n": "Horde Shuttle",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity",
+   "Queensfoil Censer",
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   2596646301
+  ],
+  "src": {
+   "bungie": "Damaging unraveled targets with a weapon occasionally spawns a Threadling. Threadlings sever targets that they damage.",
+   "compendium": "Dealing Weapon Damage equal to 10% [100? HP] of an Unraveled Enemy's Combined Health + Shields spawns a Threadling.\nIncurs a 0.5 second cooldown between Threadlings.\nThreadlings inflict Sever upon dealing damage."
+  }
+ },
+ {
+  "id": "art:improvedunraveling",
+  "n": "Improved Unraveling",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   255237660
+  ],
+  "src": {
+   "bungie": "Increases the amount of damage dealt by unraveling a target.",
+   "compendium": "Unraveling Threads deal 15% increased damage."
+  }
+ },
+ {
+  "id": "art:incendiaryriflerounds",
+  "n": "Incendiary Rifle Rounds",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   3116632772
+  ],
+  "src": {
+   "bungie": "Solar Sniper Rifle precision hits scorch targets.",
+   "compendium": "Upon scoring a Solar Sniper Rifle Precision Hit:\nInflicts x30+15 Scorch.\nUnaffected by Weapon Frame or Ammo Type."
+  }
+ },
+ {
+  "id": "art:ironlordsvigor",
+  "n": "Iron Lord's Vigor",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   2659604387
+  ],
+  "src": {
+   "bungie": "While wielding a Sword, you take decreased damage; rapid final blows grant ammo to the wielder.",
+   "compendium": "Upon scoring 3 Sword Kills within 3 seconds of each:\nGrants +3 Ammo.\nPraxic Blade and Ergo Sum receive +1 Ammo instead.\nDoes not grant any Damage Resist, contrary to description."
+  }
+ },
+ {
+  "id": "art:killingbreeze",
+  "n": "Killing Breeze",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   4037132134
+  ],
+  "src": {
+   "bungie": "Rapid weapon final blows grant you a bonus to mobility.",
+   "compendium": "Upon scoring 3 Weapon Kills within 3 seconds of each:\n+50? Mobility for 7 seconds.\nBuff can be refreshed by retriggering it."
+  }
+ },
+ {
+  "id": "art:kindlingtrigger",
+  "n": "Kindling Trigger",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   2317325398
+  ],
+  "src": {
+   "bungie": "Radiant causes Solar weapons to apply scorch to unscorched combatants.",
+   "compendium": "While Radiant:\nSolar Weapon Damage inflicts x30+15 Scorch to Combatants without Scorch stacks.\nSolar Effects initially triggered by Kindling Trigger do not benefit from Weapon nor Ability Damage increases.\nDoes not work while within a Well of Radiance."
+  }
+ },
+ {
+  "id": "art:kineticimpacts",
+  "n": "Kinetic Impacts",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   3117519994
+  ],
+  "src": {
+   "bungie": "Sustained damage with a Grenade Launcher increases the reload speed of Grenade Launchers and triggers a damaging Kinetic shockwave.\n\nThis shockwave can stun [Stagger] Unstoppable Champions.",
+   "compendium": "Releases a single Unstoppable-staggering Shockwave underneath the enemy.\nShockwave deals 227x2 = 454 Kinetic Damage over 7 meters.\nShockwaves from Primary and Special GLs only deal 150x2 Damage.\nShockwave has no damage falloff.\nIncurs a 1 second cooldown upon triggering before hits count again.\nTriggering Kinetic Impacts:\nBy scoring 3 non-simultaneous Power GL damage instances within 3 seconds of each.\nBy scoring a single non-lethal non-DoT Primary/Special GL damage instance.\nBy scoring a total of 5 DoT damage instances, counted up to once every 0.5 seconds.\n-------------------------------------------\nUpon dealing Grenade Launcher Damage:\nGrants a stack of Rapid Impacts for 5 seconds, up to a maximum of 5 stacks.\n+5 | +10 | +15? | +20? | +30 Reload Speed\n0.99x | 0.99x | 0.98x | 0.96x | 0.94x Duration Multiplier"
+  }
+ },
+ {
+  "id": "art:kineticrupture",
+  "n": "Kinetic Rupture",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2742146822
+  ],
+  "src": {
+   "bungie": "Kinetic weapon damage against a powerful combatant has a chance to create a Kinetic Rupture. Targeting this Rupture causes a damaging explosion that staggers combatants. Strong against [Stagger] Unstoppable Champions.",
+   "compendium": "Upon scoring enough Kinetic Weapon Damage Instances against Elite+ Combatants:\nSpawns a Kinetic Rupture for ? seconds which counts as a Weakspot.\nKinetic Ruptures can be damaged, activating after 0.3? seconds of being dealt damage, stunning Unstoppable Champions and dealing damage based on the amount of damage it received.\nKinetic Rupture Damage doesn't count as dealing damage to Combatants, uses PVP values for Damage Buffs, doesn't count as hitting nor missing either.\nEg: Radiant is 10%, Surges are 3% | 4.5% | 5.5%, Collective Action is 11%.\nIt's complicated, not worth on 99% of situations.\nTends to decrease damage by 25% to 50% on almost every situation.\nOne of the few meaningful exceptions is Izanagi x4\nIzanagi x4 is +120% damage down baseline to +63% based on the buffs used."
+  }
+ },
+ {
+  "id": "art:kineticsynthesis",
+  "n": "Kinetic Synthesis",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   3834273540
+  ],
+  "src": {
+   "bungie": "Sustained Kinetic weapon damage and rapid final blows have a chance to generate a unique ammo brick. Collecting this brick will grant ammo to equipped Kinetic damage weapons and grant Special and Heavy ammo progress.",
+   "compendium": "Dealing Kinetic Weapon Damage and scoring Kinetic Weapon Kills progress a counter, spawning an unique Kinetic Ammo Brick upon reaching 100%.\nCounter lasts 15s and is refreshed upon dealing Kinetic Weapon Damage.\nEach damage point grants 0.0265% progress, requiring 3770 damage to spawn a brick.\nA499 generates 75% less progress (15K damage for a brick).\nRnF Kill = 8% | Elite = 15% | Miniboss = 25%\nDamage requirement IGNORES Power-Delta, but considers ACTUAL DAMAGE DEALT.\nThis means it requires the same \"base damage\" regardless of reduced damage from PL deltas.\nUpon collecting a Kinetic Ammo Brick:\n+5% Special and +5% Heavy Ammo Progress.\nRefills equipped Kinetic Damage Weapons and generates Special/Heavy Ammo for them.\nGenerates (1/3rd of Magazine) + 1 Ammo, with certain exceptions.\nCounts for Ammo Pickup effects. Kinetic Ammo Generation is unaffected by Scavenger Bricks.\nBastion = +1 Ammo | Cull's Shadow = +2 Ammo | Praxic = +2 Ammo | Microcosm = +12 Ammo."
+  }
+ },
+ {
+  "id": "art:lightningstrikestwice",
+  "n": "Lightning Strikes Twice",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   2311625542
+  ],
+  "src": {
+   "bungie": "After throwing an Arc grenade, gain increased grenade recharge for a short time. Arc final blows extend the duration of this benefit.",
+   "compendium": "On Arc Grenade Ability Usage:\n130% Additional Grenade Base Recharge Rate for 5 seconds.\nArc Kills increase the buff duration by +3? seconds, up to 20 seconds."
+  }
+ },
+ {
+  "id": "art:limitbreak",
+  "n": "Limit Break",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   1319563984
+  ],
+  "src": {
+   "bungie": "Casting a Super while you are critically wounded or have a elemental buff matching your Super element grants a period of increased Super damage.",
+   "compendium": "On Super Cast, while at Critical Health or affected by an Element-Matching Buff:\n15% Increased Super Ability Damage.\nOne-Off Supers are only buffed for 8 seconds.\nRoaming Supers are buffed until it runs out.\nArc = ↑Amplified ↑Bolt Charge\nSolar = ↑Cure ↑Radiant ↑Restoration\nVoid = ↑Devour ↑Invisibility ↑Void Overshield\nStasis = ↑Frost Armor\nStrand can only function when cast at Critical Health.\n(This is due to Woven Mail being removed on Super Cast)"
+  }
+ },
+ {
+  "id": "art:malignedharvest",
+  "n": "Maligned Harvest",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   2596646299
+  ],
+  "src": {
+   "bungie": "Rapidly applying Volatile causes your next instance of [Void]Void weapon damage to create a weakening burst. Applying Weaken provides a small Void Overshield.",
+   "compendium": "Upon inflicting Volatile 4 times within 5 seconds of each: \nThe next Void Damage Instance within 10 seconds releases a weakening burst, affecting enemies within 7 metres.\nUpon inflicting Weaken on a Non-Weakened Enemy:\n+25 Void Overshield HP for 10+5 seconds.\nOnly triggers once per source of weaken. \nEg: Smoke Bomb won't repeatedly trigger it.\nDoes not grant Void Overshield with Fafnir or Tractor Cannon."
+  }
+ },
+ {
+  "id": "art:nobell",
+  "n": "No Bell",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   2596646300
+  ],
+  "src": {
+   "bungie": "Rapid Glaive melee final blows grant Special ammo Glaives additional ammo. Blocking damage with Glaives increases their melee damage to targets.",
+   "compendium": "Upon scoring 2 Glaive Melee Kills within 3 seconds of each:\n+2 Reserve Ammo to Special Ammo Glaives.\nUpon blocking damage with a Glaive Shield:\n85% [?%] increased Glaive Melee Damage for 6 seconds.\nAlso triggers if an Ally shoots the shield."
+  }
+ },
+ {
+  "id": "art:oldgodsrite",
+  "n": "Old God's Rite",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   3117519992
+  ],
+  "src": {
+   "bungie": "After picking up a [Void] Void Breach, dealing damage with a Void weapon creates a rain of seeking projectiles.",
+   "compendium": "On Void Breach Pickup: \nThe next Void Weapon Damage Instance within 10 seconds creates a Void Portal.\nVoid Portal:\nReleases 8 Homing Void Orbs towards enemies within ~10 meters.\nVoid Orbs deal up to 334 [?] Splash Damage over ~3? meters.\nRank-and-File Combatants take 540 Damage per Orb.\nMiniboss+ take 180 Damage per Orb."
+  }
+ },
+ {
+  "id": "art:overloadgrenades",
+  "n": "Overload Grenades",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   4232817862
+  ],
+  "src": {
+   "bungie": "Void grenades disrupt combatants, stunning them, delaying ability energy regeneration and lowering combatant damage output. Strong against [Disruption] Overload Champions.",
+   "compendium": "Void Grenade Ability Damage inflicts disruption."
+  }
+ },
+ {
+  "id": "art:packtactics",
+  "n": "Pack Tactics",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3153265453
+  ],
+  "src": {
+   "bungie": "Dealing damage with Threadlings increases Threadling damage. At maximum stacks, Threadlings stun [Stagger] Unstoppable Champions.",
+   "compendium": "Dealing Threadling Damage grants a stack of Pack Tactic for 10 seconds, up to a maximum of 2 stacks.\nDealing additional Threadling damage refreshes the buff duration.\nPack Tactics x1 | 15% increased Threadling Damage.\nPack Tactics x2 | 30% Increased Threadling Damage.\nThreadling Damage stuns Unstoppable Champions.\nEach Threadling hit while at x2 stacks will increase Threadling Damage by 1.03x until buff expires."
+  }
+ },
+ {
+  "id": "art:particlereconstruction",
+  "n": "Particle Reconstruction",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   1319563991
+  ],
+  "src": {
+   "bungie": "Dealing sustained damage with Fusion Rifles or Linear Fusion Rifles partially refills the magazine from reserves and grants them bonus damage for a short duration against that target.",
+   "compendium": "(Linear) Fusion Rifle hits inflict an unique stacking weaken that increases (Linear) Fusion Rifle damage.\n5% | 10.25% | 15.8% | 21.6% | 27.6%\n30% Weaken overrides Particle Reconstruction weaken.\nDivinity's Cage also overrides it down to 15%.\nScoring multiple direct hits refills 10% of Magazine, rounded up.\nFusion Rifles: Every bolt in the magazine generally. \nAggressive Fusion Rifles (+Cull's Shadow) uniquely trigger every other burst. \nPrecision Linear Fusion Rifles: Magazine + 2\nAdaptive Burst Linear Fusion Rifles: 3 x (Magazine + 4)\nBastion triggers every 7 bursts.\nEuphony Threadlings count for hits, otherwise 30 hits. (Triggers in 8 bursts)\nDelicate Tomb triggers every 3 full bursts. Jotunn triggers after 8 shots.\nMythoclast triggers every 25 hits"
+  }
+ },
+ {
+  "id": "art:passiveaggressiveguard",
+  "n": "Passive Aggressive Guard",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   2311625541
+  ],
+  "src": {
+   "bungie": "Receive less damage from combatants that are close to you while you are wielding a Glaive.",
+   "compendium": "While a Glaive is readied:\n50% Damage Resist against Combatants within ? meters."
+  }
+ },
+ {
+  "id": "art:perpetualdestruction",
+  "n": "Perpetual Destruction",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer",
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   3585856467
+  ],
+  "src": {
+   "bungie": "Rapid final blows with non-Exotic Rocket Launchers refund ammo and increase reload speed for a short duration.",
+   "compendium": "Non-Exotic Rocket Launcher Kills within 2-3? seconds of each progress a counter.\nRank-and-File = 25% | Elite = 34% | Miniboss = 100%\nUpon reaching 100% Counter Progress:\nRocket Launchers are granted +1 Ammo.\nPrecision/High-Impact Rockets (or Bipod RLs) receive +2 Ammo.\n+? Reload Speed and 0.?x Reload Duration Multiplier for 10 seconds.\nNot affected by Scavenger Mods."
+  }
+ },
+ {
+  "id": "art:photonicflare",
+  "n": "Photonic Flare",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   3585856465
+  ],
+  "src": {
+   "bungie": "Defeating an exhausted or severed target with [Arc]Arc damage releases a blinding burst.\n\nExhausted targets deal reduced outgoing damage.",
+   "compendium": "Upon killing an Exhausted or Severed Enemy with Arc Damage:\nTriggers a blinding burst, blinding enemies within 5? meters.\nIncurs a 6? second cooldown between activations."
+  }
+ },
+ {
+  "id": "art:pillarofice",
+  "n": "Pillar of Ice",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   51032916
+  ],
+  "src": {
+   "bungie": "Defeating a frozen target spawns Stasis crystals.",
+   "compendium": "Upon killing a Frozen Enemy:\nSpawns 1 Stasis Crystals.\nBosses spawn 2 Stasis Crystals.\nCrystals are spawned close to where the enemy dies."
+  }
+ },
+ {
+  "id": "art:powerfrompain",
+  "n": "Power from Pain",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk",
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   3834273539,
+   4037132133
+  ],
+  "src": {
+   "bungie": "Rapid final blows against weakened combatants grant you Devour.",
+   "compendium": "Upon scoring 3 Consecutive Weakened Enemy Kills within 4 seconds of each:\nGrants Devour for 5+2.5 seconds.\nHits that would've inflicted Weaken will also count even if they instantly kill an enemy."
+  }
+ },
+ {
+  "id": "art:precisionequity",
+  "n": "Precision Equity",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2903198432
+  ],
+  "src": {
+   "bungie": "Precision final blows build progress towards a large Orb of Power that also grants bonus weapon damage on pickup. Higher ranked targets grant more progress.",
+   "compendium": "Precision Kills grant stacks of Precision Equity, up to 10 stacks.\nRank-and-File = 1 | Elite = 2 | Miniboss = 5 | Champion+ = 10\nDoes not overflow or retains stacks past x10.\nUpon reaching x10 stacks:\nConsumes all stacks to spawn a MASSIVE Orb of Power.\nGlobe of Power grants 12.5% Super Energy.\nOn GIGA ORB OF POWER PICKUP:\nWeapon Surge x2 for 11 seconds.\nDoes not overwrite stronger Weapon Surges.\nWorks for all damage types."
+  }
+ },
+ {
+  "id": "art:presstheadvantage",
+  "n": "Press The Advantage",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk",
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   3834273543,
+   3116632774
+  ],
+  "src": {
+   "bungie": "Breaking a combatant's shield grants increased weapon stability, handling, and reload speed. Swords gain increased guard resistance.",
+   "compendium": "Upon breaking a Combatant's Shield:\n+20 Stability, +20? Handling, and +20 Reload Speed for 10 seconds.\nSwords receive +20 Guard Resistance."
+  }
+ },
+ {
+  "id": "art:prismatictransfer",
+  "n": "Prismatic Transfer",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   1533272841
+  ],
+  "src": {
+   "bungie": "When you cast your Super, each member of your fireteam with a Super type different than yours gains a bonus to weapon damage.",
+   "compendium": "On Super Cast:\nAllies within 15 meters with a Super Element different from the caster's receive 20% [10%] increased damage for 10 [5] seconds.\nDamage buff is not refreshable.\nDoesn't stack with Radiant or other similar empowering buffs."
+  }
+ },
+ {
+  "id": "art:protectivebreach",
+  "n": "Protective Breach",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   4232817859
+  ],
+  "src": {
+   "bungie": "Picking up a Void Breach gives you an overshield or refreshes your existing overshield.",
+   "compendium": "On Void Breach Pickup:\n+45 Void Overshield for 10+5 seconds."
+  }
+ },
+ {
+  "id": "art:radiantorbs",
+  "n": "Radiant Orbs",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   2344320975
+  ],
+  "src": {
+   "bungie": "While you have a Solar or Prismatic subclass equipped, picking up an Orb of Power makes you radiant.",
+   "compendium": "While a Solar or Prismatic Subclass is equipped:\nOrbs of Power grant Radiant for 10+5 seconds."
+  }
+ },
+ {
+  "id": "art:radiantshrapnel",
+  "n": "Radiant Shrapnel",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   2659604388
+  ],
+  "src": {
+   "bungie": "Dealing sustained weapon damage while Radiant or defeating a scorched combatant with a weapon causes the target to release Solar projectiles that deal damage and scorch on impact.",
+   "compendium": "Upon dealing Weapon Damage equal to 10% of an Enemy's Combined Health+Shields while Radiant, or upon killing a Scorched Combatant with a Weapon:\nTarget releases 1 Solar Shrapnel that deals 54 [?] Impact Damage and up to 289 [20] Explosive Damage, inflicting x20+0 Scorch over ? meters.\nIncurs a 1 second cooldown between Shrapnel spawns.\nShrapnel is slightly homing, and often misses the enemy it spawns on."
+  }
+ },
+ {
+  "id": "art:rapidremedy",
+  "n": "Rapid Remedy",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   3834273537
+  ],
+  "src": {
+   "bungie": "Machine Gun rapid final blows heal you.",
+   "compendium": "Upon scoring 3 Machine Gun Kills within 3 seconds of each:\nRestores 15 HP.\nBegins Critical Health Regeneration."
+  }
+ },
+ {
+  "id": "art:raysofprecision",
+  "n": "Rays of Precision",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   1328115226
+  ],
+  "src": {
+   "bungie": "While radiant, Solar precision final blows cause combatants to ignite.",
+   "compendium": "While Radiant:\nSolar Precision Kills on Combatants cause an Ignition."
+  }
+ },
+ {
+  "id": "art:refreshthreads",
+  "n": "Refresh Threads",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3153265454
+  ],
+  "src": {
+   "bungie": "Picking up an Elemental pickup matching your subclass element or picking up a Tangle while you have a [Strand]Strand Super equipped grants energy to your least charged ability.",
+   "compendium": "Upon picking up a Super-Matching Elemental Pickup:\n25% Ability Energy to the least-charged Ability.\nAlso triggers with Tangles on Strand.\nIncurs a 0.3 second cooldown between triggers. \nDoes not trigger on Abilities that have at least 1 Charge ready.\nDoes not work while Acrobat Dodge is equipped on Prismatic."
+  }
+ },
+ {
+  "id": "art:reloadatrange",
+  "n": "Reload at Range",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   3834273541
+  ],
+  "src": {
+   "bungie": "Precision hits with Bows and Sniper Rifles grant a stacking bonus to their reload speed.",
+   "compendium": "Upon scoring a Precision Hit with a Bow or Sniper Rifle:\nGrants a stack of Reload at Range for ? seconds, up to 5 stacks.\nReload at Range:\nx1 | +10 Reload Speed and 0.98x Reload Duration Multiplier.\nx2 | +20 Reload Speed and 0.96x Reload Duration Multiplier.\nx3 | +30 Reload Speed and 0.94x Reload Duration Multiplier.\nx4 | +40 Reload Speed and 0.92x Reload Duration Multiplier.\nx5 | +50 Reload Speed and 0.90x Reload Duration Multiplier."
+  }
+ },
+ {
+  "id": "art:retinalburn",
+  "n": "Retinal Burn",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   611645145
+  ],
+  "src": {
+   "bungie": "Rapid [Arc] Arc weapon precision hits consume an Armor Charge to trigger a blinding burst at the target's location.",
+   "compendium": "Upon scoring 2 Arc Weapon Precision Hits against Non-Blinded Combatants within 2 seconds of each while Armor Charge is active:\nConsumes x1 Armor Charge.\nInflicts blind to enemies within 7 meters for ~8.5 seconds."
+  }
+ },
+ {
+  "id": "art:revitalizingblast",
+  "n": "Revitalizing Blast",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   51032917
+  ],
+  "src": {
+   "bungie": "Stunning a Champion causes it to ignite and clears your shield stun.",
+   "compendium": "Upon stunning a Champion:\nChampion triggers an ignition."
+  }
+ },
+ {
+  "id": "art:riposte",
+  "n": "Riposte",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   3834273538
+  ],
+  "src": {
+   "bungie": "Shortly after guarding with a Sword, your light and heavy attacks stun unshielded combatants. Strong against [Stagger] Unstoppable Champions.",
+   "compendium": "After guarding with a Sword:\nGrants Unstoppable Shots for 3 seconds.\nTHIS DOESN'T DO ANYTHING AT ALL LMAO."
+  }
+ },
+ {
+  "id": "art:semiautostriker",
+  "n": "Semi-Auto Striker",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3153265452
+  ],
+  "src": {
+   "bungie": "If you have fewer than 2 stacks of Armor Charge, rapid precision shots with Bows, Snipers, and Scout Rifles generate an Armor Charge.",
+   "compendium": "While at <2 Armor Charges:\nUpon scoring multiple Precision Hits within 3 seconds of each with Bows, Sniper Rifles, or Scout Rifles:\nGrants an Armor Charge.\nPrecision Hit Requirement:\nScouts = 5 | Bows = 3 | Snipers = 2"
+  }
+ },
+ {
+  "id": "art:servedcold",
+  "n": "Served Cold",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   3117519995
+  ],
+  "src": {
+   "bungie": "Picking up a [Stasis] Stasis Shard grants you class ability energy. \n\nPicking up a [Void] Void Breach grants you melee energy.",
+   "compendium": "Stasis Shards additionally grant 10% Class Energy.\nVoid Breaches additionally grant 10?% Melee Energy."
+  }
+ },
+ {
+  "id": "art:shatterorbs",
+  "n": "Shatter Orbs",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   255237658
+  ],
+  "src": {
+   "bungie": "The first time you break a combatant's shield, you create an Orb of Power if you break the shield with the matching damage type.",
+   "compendium": "Upon first breaking a Combatant Shield:\nCreates an Orb of Power that grants 7.15% Super Energy.\nPerforming a Finisher on a Combatant that didn't trigger the effect will also spawn an Orb of Power.\nOnly works once per enemy."
+  }
+ },
+ {
+  "id": "art:shieldcrush",
+  "n": "Shieldcrush",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity",
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   2659604391,
+   1533272844
+  ],
+  "src": {
+   "bungie": "While you have Woven Mail, Frost Armor, or a Void overshield, your melee recharges faster and deals increased damage.\n\nWhile you are Amplified or Radiant, your grenade recharges faster and deals increased damage.",
+   "compendium": "While Frost Armor, Void Overshield, or Woven Mail are active:\n?% [?%] Additional Base Melee Recharge Rate\n 50% [5%] Increased Powered Melee Damage.\nAlso increases Super Melee Damage and Ignition Damage.\nWhile Amplified or Radiant are active:\n?% [?%] Additional Base Grenade Recharge Rate\n25% [5%] Increased Grenade Damage.\nGrapple Melee instead receives 12% Increased Damage for each half of the perk.\nShieldcrush will not buff Grapple Melee while Combination Blow is active."
+  }
+ },
+ {
+  "id": "art:shockandawe",
+  "n": "Shock and Awe",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator",
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   2311625537,
+   1533272847
+  ],
+  "src": {
+   "bungie": "Arc final blows while you are amplified summon a burst of lightning that damages and jolts targets.",
+   "compendium": "While an Arc or Prismatic Subclass is equipped, while Amplified: \nArc Kills trigger a lightning burst, dealing up to 126 [?] Arc Damage and jolting in a 8 metre radius.\nIncurs a 5 second cooldown between activations."
+  }
+ },
+ {
+  "id": "art:shouldertoshoulder",
+  "n": "Shoulder to Shoulder",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3459646246
+  ],
+  "src": {
+   "bungie": "Dealing sustained precision damage against combatants while near two or more allies grants you damage resistance.",
+   "compendium": "Upon dealing sustained Precision Damage while within 15 meters of 2 allies:\n25% Damage Resist (Resist x2) for 10? seconds"
+  }
+ },
+ {
+  "id": "art:singularityblade",
+  "n": "Singularity Blade",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2903198434
+  ],
+  "src": {
+   "bungie": "While you have a Void elemental buff, melee and Sword hits weaken targets, while melee and Sword final blows create a weakening burst.",
+   "compendium": "While a Void Buff (Devour, Invisibility, or Overshield) is active:\nMelee and Sword Hits inflict Weaken for 6 seconds.\nChecks on-hit, instead of snapshotting on-usage.\nOn Melee or Sword Kill while a Void Buff is active:\nTriggers a Weakening Burst, inflicting Weaken to enemies within 4 meters for 6 seconds."
+  }
+ },
+ {
+  "id": "art:snipersmeditation",
+  "n": "Sniper's Meditation",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk",
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   2742146823,
+   1533272846
+  ],
+  "src": {
+   "bungie": "Sniper Rifle hits grant stacking Sniper Rifle damage, stability, and reload bonuses for a short time. Heavy ammo Sniper Rifle hits count as more than one hit.",
+   "compendium": "On Sniper Rifle Direct Hit:\nGrant a stack of Sniper's Meditation for 7 seconds.\nHeavy Sniper Rifle hits grant 2 stacks.\nSniper's Meditation Buff persists through stow.\nSniper's Meditation \nIncreased Damage, Stability, and Reload Speed.\n2.8% | 5.7% | 9% | 12% | 15% Increased Damage\n+? | +? | +? | +? | +? Stability\n+15 | +30 | +35 | +40 | +45 Reload Speed"
+  }
+ },
+ {
+  "id": "art:solarfulmination",
+  "n": "Solar Fulmination",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   2344320973
+  ],
+  "src": {
+   "bungie": "Your ignitions do increased damage in an increased radius.",
+   "compendium": "Ignitions deal an additional damage instance.\nFulmination deal 171 [30] Solar Damage in a 12? meter radius. \nFulminations count as an Ignition and don't [do] have damage falloff.\nFulmination Damage can be scaled by Ignition buffs (Dawn Chorus)\nWhile Ember of Char is equipped:\nFulminations inflict an additional x40+20 Scorch.\nAllows chain-ignitions when paired with Ember of Ashes."
+  }
+ },
+ {
+  "id": "art:solooperative",
+  "n": "Solo Operative",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   1328115229
+  ],
+  "src": {
+   "bungie": "While you are the only member of your fireteam, precision weapon final blows increase weapon damage until you are defeated.",
+   "compendium": "While Solo:\nPrecision Kills grant a stack of Damage Boost, up to ∞ stacks.\nAll stacks are lost on death.\n1.2% Increased Weapon Damage against Combatants per stack.\nGrants up to 30% Increased Weapon Damage at x25 stacks.\nWeapon Damage Buff stacks with everything."
+  }
+ },
+ {
+  "id": "art:squadgoals",
+  "n": "Squad Goals",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   2311625543
+  ],
+  "src": {
+   "bungie": "Performing a finisher while you are amplified grants Amplified to nearby allies. \n\nPerforming a finisher while you have Woven Mail grants Woven Mail to nearby allies. \n\nPerforming a finisher while you have Devour grants Devour to nearby allies.",
+   "compendium": "On Finisher:\nAllies within ? metres are bestowed an Elemental Buff:\nWhile Amplified is active: Amplified for 15 seconds.\nWhile Devour is active: Devour for 5 seconds.\nWhile Woven Mail is active: Woven Mail for 10 seconds.\nCan only bestow 1 buff to Allies, prioritized from top to bottom."
+  }
+ },
+ {
+  "id": "art:stickershock",
+  "n": "Sticker Shock",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2742146819
+  ],
+  "src": {
+   "bungie": "Arc Flux, Magnetic, and Fusion Grenades deal more damage when attached to combatants; on final blows, they release several micro-missiles that seek nearby combatants.",
+   "compendium": "Flux, Fusion, and Magnetic deal increased damage on direct hits.\nFlux = 60% | Fusion = 30% | Magnetic = 22.5% total increase\nOnly the first Magnetic explosion gets increased by 45%.\nDoes not increase the Solar Effect Damage of Fusion Grenades.\nUpon scoring a kill with the aforementioned grenades:\nSpawns 4 homing Kinetic Micro-Missiles over the Enemy Death Location.\nMicro-missiles track the closest enemy within 30 meters.\nMicro-Missiles deal 216 [?] Kinetic Damage on impact.\nThey're identical in behavior to Ancillary Ordinance's missiles."
+  }
+ },
+ {
+  "id": "art:strandsoldier",
+  "n": "Strand Soldier",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   4232817857
+  ],
+  "src": {
+   "bungie": "Your Strand weapons gain Unraveling Rounds whenever you gain Woven Mail while your Strand or Prismatic subclass is equipped.",
+   "compendium": "Upon receiving Woven Mail, while on a Strand or Prismatic Subclass:\n Grants Unraveling Rounds for 8 seconds."
+  }
+ },
+ {
+  "id": "art:supernova",
+  "n": "Supernova",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator",
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   2311625536,
+   3117519997
+  ],
+  "src": {
+   "bungie": "Picking up a Void Breach causes your next source of Void damage to create a large weakening pulse.",
+   "compendium": "On Void Breach Pickup: \nThe next Void Damage Instance within 10 seconds releases a weakening burst, inflicting Weaken to enemies within 5? metres."
+  }
+ },
+ {
+  "id": "art:suppressingglaive",
+  "n": "Suppressing Glaive",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   4232817858
+  ],
+  "src": {
+   "bungie": "Damaging combatants with your Glaive suppresses them, preventing them from using abilities for a short time.",
+   "compendium": "Upon dealing a Glaive Damage Instance against Combatants:\nInflicts Suppression for 10 seconds.\nGlaive Melee inflicts Suppression at the cost of 10% Glaive Energy.\nDoes not drain Glaive Energy if the enemy is suppressed."
+  }
+ },
+ {
+  "id": "art:sustainedfire",
+  "n": "Sustained Fire",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator",
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   255237659,
+   3116632773
+  ],
+  "src": {
+   "bungie": "Continuously damaging combatants or healing allies with an Auto Rifle grants you damage resistance.",
+   "compendium": "Upon scoring 10 Auto Rifle Hits within 1.5 seconds of each against a single Combatant:\nResist x2 (25% DR) for 6 seconds.\n Buff is refreshable and persists through stow.\nSupport Autos can also trigger the buff by healing injured allies."
+  }
+ },
+ {
+  "id": "art:swordstormcombo",
+  "n": "Sword Storm Combo",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2742146816
+  ],
+  "src": {
+   "bungie": "Performing three Sword light attacks followed by a heavy attack summons penumbral blades that surround you to damage and disorient combatants. Sword final blows extend the duration of these penumbral blades.",
+   "compendium": "Upon doing 3 Light Attacks followed by a Heavy Attack while grounded:\nGrants Sword Storm Combo for 5 seconds.\nScoring additional Sword Kills refresh the buff.\nSword Storm Combo:\nAutomatically deals 103 [?] Sword Kinetic Damage and disorients on hit for 3 seconds every 0.53 seconds over 6 meters around the user.\nDeals up to 15% more damage at <4 meters."
+  }
+ },
+ {
+  "id": "art:tangledweb",
+  "n": "Tangled Web",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   2659604385
+  ],
+  "src": {
+   "bungie": "Creating a Tangle by defeating a [Strand]Strand debuffed target suspends nearby combatants.",
+   "compendium": "Upon killing a Strand-Debuffed Combatant:\nTriggers a Suspending Blast.\nOnly triggers when a Tangle is created."
+  }
+ },
+ {
+  "id": "art:targetingautoloader",
+  "n": "Targeting Autoloader",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator",
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   4232817863,
+   2344320972
+  ],
+  "src": {
+   "bungie": "While you have an Auto Rifle equipped, defeating combatants reloads your equipped weapon and temporarily increases weapon damage. \n\nAwards bonus progress when dealing final blows while surrounded.",
+   "compendium": "Auto Rifle Combatant Kills progress a Counter.\nKills grant 50% Counter Progress.\nKills while within 15 meters of 3 enemies grants 100% Progress.\nKills while at 5 stacks grant 100% Progress.\nCounter Progress persists through stow.\nUpon reaching 100% Counter Progress:\nGrants a stack of Targeting Autoloader for 15 seconds, up to a maximum of 5 stacks.\nBuff is refreshable.\nTargeting Autoloader:\nRefills 20% | 20% | 30% | 40% | 40% of Magazine\n10% | 13% | 16% | 18% | 20% Increased Auto Rifle Damage.\nStacks with other buffs.\nBuff is removed upon readying a non-Auto Rifle Weapon."
+  }
+ },
+ {
+  "id": "art:tazertag",
+  "n": "Tazer Tag",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2742146818
+  ],
+  "src": {
+   "bungie": "Arc-powered melee hits jolt combatants and deal further damage for a short duration.",
+   "compendium": "Upon dealing Arc Melee Damage:\nInflicts Jolt and deals 23 Arc DoT every 0.25 seconds.\nDeals a total of ~800 Arc Damage over 8.75 seconds.\nNot including Jolt damage! With Jolt, it is 1245 damage."
+  }
+ },
+ {
+  "id": "art:thatfreshbulletssmell",
+  "n": "That Fresh Bullets Smell",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity"
+  ],
+  "hashes": [
+   3459646244
+  ],
+  "src": {
+   "bungie": "Picking up an ammo brick gives your Kinetic weapons increased damage for a short duration.",
+   "compendium": "On Ammo Brick Pickup:\nGrants Kinetic Weapon Surge for 11 seconds.\nSpecial Brick = x2 Kinetic Weapon Surge.\nHeavy Brick = x3 Kinetic Weapon Surge.\nDoes not overwrite stronger Weapon Surges."
+  }
+ },
+ {
+  "id": "art:thethickofit",
+  "n": "The Thick of It",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   4037132135
+  ],
+  "src": {
+   "bungie": "Rapid final blows while surrounded grant you Armor Charge. While you are surrounded, your weapons have increased handling; Swords gain increased charge rate.",
+   "compendium": "While within 15 meters of 3 enemies:\n+35? Handling and +? Charge Rate.\nScoring 3 Kills grants a stack of Armor Charge.\n Condition lingers for 1.5 seconds once criteria isn't met."
+  }
+ },
+ {
+  "id": "art:threadedblast",
+  "n": "Threaded Blast",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Implement of Curiosity",
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   3459646243,
+   3116632775
+  ],
+  "src": {
+   "bungie": "Destroying a Tangle with [Strand]Strand damage increases the radius of the explosion and its damage.",
+   "compendium": "Upon destroying a Tangle with Strand Damage:\nExplosion has an additional damage instance that deals 288 [?] damage, down to 75% damage over a 17 meter radius.\nAdditional damage counts as Tangle Damage for all interactions."
+  }
+ },
+ {
+  "id": "art:thunderousretort",
+  "n": "Thunderous Retort",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   255237656
+  ],
+  "src": {
+   "bungie": "Grants bonus Arc Super damage if cast while critically wounded or while amplified. Lasts until the end of the Super activation.",
+   "compendium": "While at Critical Health or Amplified:\n30% increased Arc Super Damage.\nOnly affects damage while in the Super Animation, resulting in lowered bonuses for Thundercrash and Gathering Storm."
+  }
+ },
+ {
+  "id": "art:toshreds",
+  "n": "To Shreds",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer",
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   1319563985
+  ],
+  "src": {
+   "bungie": "Dealing sustained damage to severed targets unravels them. Defeating a severed target creates a hotspot of Strand energy, granting Woven Mail to nearby allies for a short duration.",
+   "compendium": "Upon scoring 6 weapon damage instances against Severed Enemies:\nInflicts Unravel.\nOn Severed Enemy Kill:\nReleases 3 healing pulses on Enemy Death Location, restoring 15 HP and granting Woven Mail for 10 seconds to the user and allies within 10? metres every 2 seconds."
+  }
+ },
+ {
+  "id": "art:torch",
+  "n": "Torch",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   3547711349
+  ],
+  "src": {
+   "bungie": "While radiant, deal increased weapon damage to combatants affected by Strand and Stasis debuffs.",
+   "compendium": "While Radiant:\n5% Increased Weapon Damage against Non-Boss Combatants that are affected by Strand or Stasis debuffs.\nStrand Debuffs: Unraveled, Severed, Suspended\nStasis Debuffs: Slowed, or Frozen."
+  }
+ },
+ {
+  "id": "art:totalcarnage",
+  "n": "Total Carnage",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   4037132130
+  ],
+  "src": {
+   "bungie": "After finishing a powerful combatant, gain temporary damage resistance and replenish health.",
+   "compendium": "Upon finishing an Elite+ Combatant:\nRestores 100 HP.\nBegins Health Regeneration.\n25% Damage Resist (Resist x2) for 11 seconds."
+  }
+ },
+ {
+  "id": "art:traceevidence",
+  "n": "Trace Evidence",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   4037132132
+  ],
+  "src": {
+   "bungie": "Rapid precision hits or rapid final blows on targets affected by Jolt or Blind will generate Ionic Traces.\n\nPicking up an Ionic Trace grants an Armor Charge.",
+   "compendium": "Upon scoring 2 Precision Hits within 1 second of each against Arc-Debuffed Enemies, OR upon scoring 3 Arc-Debuffed Enemy Kills within 3 seconds of each:\nSpawns an Ionic Trace.\nIncurs a 4 second cooldown between Ionic Trace spawns.\nOn Ionic Trace Pickup:\nGrants a stack of Armor Charge."
+  }
+ },
+ {
+  "id": "art:transference",
+  "n": "Transference",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   1533272845
+  ],
+  "src": {
+   "bungie": "Gain increased grenade and melee damage while transcendent.\n\nWeapon final blows while transcendent refund Light and Dark energy after Transcendence ends.",
+   "compendium": "While Transcendent:\n10% Increased Grenade and Melee Damage.\nAfter Transcendence ends:\nEach Weapon Kill scored grants 4.2% Light and Darkness Energy.\nGrants up to 50% Light/Dark Energy after 12 kills."
+  }
+ },
+ {
+  "id": "art:unravelingorbs",
+  "n": "Unraveling Orbs",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer",
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   3585856464
+  ],
+  "src": {
+   "bungie": "Picking up an Orb of Power or a Tangle grants [Strand]Strand weapons Unraveling Rounds.",
+   "compendium": "On Orb of Power or Tangle Throw:\nUnraveling Rounds for 14 [?] seconds."
+  }
+ },
+ {
+  "id": "art:untothebreach",
+  "n": "Unto the Breach",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   255237662
+  ],
+  "src": {
+   "bungie": "Defeating a Void debuffed target creates a Void Breach while your Void or Prismatic subclass is equipped.",
+   "compendium": "On Void Debuffed Enemy Kill while on a Void or Prismatic Subclass:\n Spawns a Void Breach."
+  }
+ },
+ {
+  "id": "art:vileweave",
+  "n": "Vile Weave",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   2596646296
+  ],
+  "src": {
+   "bungie": "Targets hit by your Tangles are severed. Reduce Tangle cooldown by picking one up.",
+   "compendium": "Tangles inflict sever for 10+5 seconds upon dealing damage.\nOn Tangle Pickup:\nDecreases the Tangle Cooldown by 4 second.\nCan trigger from Moirai's Threaded Spike hitting a Tangle.\nCan trigger from harvesting a Tangle from Luzaku's Teeming Nest."
+  }
+ },
+ {
+  "id": "art:voidflux",
+  "n": "Void Flux",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   1319563987
+  ],
+  "src": {
+   "bungie": "Defeating weakened targets with a [Void] Void weapon applies Volatile to nearby targets.\nPowerful targets increase the radius of the explosion.",
+   "compendium": "On Weakened Enemy Kill with a Void Weapon:\nInflicts Volatile to enemies within ? meters.\nElite+? Combatants and Guardians? increase the radius to ? meters."
+  }
+ },
+ {
+  "id": "art:voidhegemony",
+  "n": "Void Hegemony",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Hunter's Journal"
+  ],
+  "hashes": [
+   2344320968
+  ],
+  "src": {
+   "bungie": "While you have a Void or Prismatic subclass equipped, defeating weakened targets provides a small Void Overshield.",
+   "compendium": "While a Void or Prismatic Subclass is equipped:\nKilling Weakened Enemies grants 15 Overshield HP."
+  }
+ },
+ {
+  "id": "art:voidinfestation",
+  "n": "Void Infestation",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Encrypted Data Disk"
+  ],
+  "hashes": [
+   2742146817
+  ],
+  "src": {
+   "bungie": "Defeating a weakened target spawns a tracking projectile that weakens other targets.",
+   "compendium": "Upon killing a Weakened Enemy:\nSpawns a tracking projectile that seeks enemies within 15 meters.\nProjectile deals 87 [?] Void Damage and inflicts Weaken over ? meters."
+  }
+ },
+ {
+  "id": "art:voidrenewal",
+  "n": "Void Renewal",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   611645147
+  ],
+  "src": {
+   "bungie": "While Devour is active, [Void] Void weapon final blows have a chance to generate a Void Breach.\n\nPicking up a Void Breach increases weapon reload and handling; Shotguns and Grenade Launchers are also reloaded from reserves.",
+   "compendium": "While Devour is active:\nVoid Weapon Kills progress a counter that spawns a Void Breach upon reaching 100%.\nRnF = 16.7% | Elite = 34% | Miniboss+ = 50% | Guardians = ?%\nOn Void Breach Pickup:\n+? Handling and +? Reload Speed for ? seconds.\nRefills Shotguns and Grenade Launchers."
+  }
+ },
+ {
+  "id": "art:voidweaponchanneling",
+  "n": "Void Weapon Channeling",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   2311625540
+  ],
+  "src": {
+   "bungie": "You gain a temporary bonus to Void weapon damage after you defeat a target with a Void weapon while at least one of your Void abilities is fully charged. This damage bonus increases based on the number of fully charged Void abilities you have.",
+   "compendium": "Upon scoring a Void Weapon Kill while having at least 1 charged Void Ability:\nGrants Weapon Surge stacks equal to the amount of Void Grenade, Melee, Class, and Super Ability Charges for 11 seconds.\nUp to x4 Weapon Surge by having 4 Void Ability Charges.\n2 Grenade + 2 Melee = x4 | Grenade + Melee + Class + Super = x4\nBuff can only be refreshed if the stack amount is less or equal (≤) to the amount of Void Ability Charges.\nWorks as expected on Prismatic!"
+  }
+ },
+ {
+  "id": "art:volatileflow",
+  "n": "Volatile Flow",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "NPA Repulsion Regulator"
+  ],
+  "hashes": [
+   255237663
+  ],
+  "src": {
+   "bungie": "Picking up an Orb of Power grants your Void weapons Volatile rounds.",
+   "compendium": "On Orb of Power or Void Breach Pickup:\nVolatile Rounds for 9 [?] seconds."
+  }
+ },
+ {
+  "id": "art:volatilemarksman",
+  "n": "Volatile Marksman",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Tablet of Ruin"
+  ],
+  "hashes": [
+   3585856471
+  ],
+  "src": {
+   "bungie": "Rapid [Void]Void weapon precision hits and rapid Void weapon final blows grant Volatile Rounds. Volatile detonations grant class ability energy.",
+   "compendium": "Upon scoring multiple Precision Hits within 3 seconds of each, or upon scoring 3 kills within 3 seconds of each with Void Weapons:\nGrants Volatile Rounds for 10 [6] seconds.\nPrecision Hits trigger for Volatile Rounds: \n (25% of Magazine Size) + 1, rounded down.\nBows: 2\nTriggering a Volatile detonation grants 10% Class Ability Energy."
+  }
+ },
+ {
+  "id": "art:weakenedclear",
+  "n": "Weakened Clear",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   611645144
+  ],
+  "src": {
+   "bungie": "When using a Grenade Launcher, damaging a boss, damaging a Champion, or breaking a combatant's shield reloads your stowed weapons and weakens the combatant.",
+   "compendium": "Upon damaging a Boss, Champion, or breaking a Combatant's Shield with a Grenade Launcher:\nInflicts Weaken for 20 seconds and refills stowed weapons.\nIncurs a 10 second cooldown before inflicting Weaken or refilling again.\nWeaken can be refreshed, except with Weakened Clear."
+  }
+ },
+ {
+  "id": "art:windchill",
+  "n": "Wind Chill",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Slayer Baron Apothecary Satchel"
+  ],
+  "hashes": [
+   4037132128
+  ],
+  "src": {
+   "bungie": "Rapid [Stasis] Stasis weapon hits grant you a stack of Frost Armor; hits against slowed or frozen targets also create a Stasis Shard.",
+   "compendium": "Upon scoring multiple non-simultaneous Stasis Weapon Damage instances within 3 seconds of each:\nGrants a stack of Frost Armor.\nIncurs a 0.45s cooldown between triggers. Additional hits during this time do not count.\nCounter resets on stow.\nInstances to trigger Frost Armor:\nBows: 3 | Breech GL, Swords: 2\n(35% of Magazine, rounded down) +2\nDoesn't require a Stasis Weapon to be readied, instead using the current weapon's magazine for calculations.\nUpon scoring multiple Stasis Weapon Damage instances within 3 seconds of each on Slowed Enemies:\nBows: 3 | Breech GLs, Swords: 2\n(25% of Magazine, rounded down) +2\nSpawns a Stasis Shard on top of the enemy."
+  }
+ },
+ {
+  "id": "art:wishedintobeing",
+  "n": "Wished into Being",
+  "kind": "artifactPerk",
+  "artifacts": [
+   "Queensfoil Censer"
+  ],
+  "hashes": [
+   3547711346
+  ],
+  "src": {
+   "bungie": "While your Super is nearly fully-charged, ability final blows spawn Orbs of Power.",
+   "compendium": "While Super Energy is above 60% but not fully charged:\nAbility Kills spawn 3 Orbs of Power.\nOrbs of Power grant 7.15% Super Energy each.\nIncurs a 30 second cooldown between spawning orbs.\nWorks with Roaming Supers as long as Super Energy is above 60%."
+  }
+ }
+]

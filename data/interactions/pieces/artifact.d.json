@@ -1,0 +1,1012 @@
+[
+ {
+  "id": "art:shatterorbs",
+  "n": "Shatter Orbs",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "first breaking a combatant's shield with the matching damage type",
+    "q": "The first time you break a combatant's shield, you create an Orb of Power if you break the shield with the matching damage type.",
+    "s": "bungie",
+    "note": "once per enemy"
+   },
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Performing a Finisher on a Combatant that didn't trigger the effect will also spawn an Orb of Power.",
+    "s": "compendium",
+    "pay": "finishing a combatant that didn't already drop a shield-break orb spawns an Orb of Power"
+   },
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "finishing a combatant that didn't trigger the shield-break orb",
+    "q": "Performing a Finisher on a Combatant that didn't trigger the effect will also spawn an Orb of Power.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "art:shieldcrush",
+  "n": "Shieldcrush",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "wovenmail",
+    "q": "While you have Woven Mail, Frost Armor, or a Void overshield, your melee recharges faster and deals increased damage.",
+    "s": "bungie",
+    "pay": "faster melee recharge and +50% powered melee damage"
+   },
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "While you have Woven Mail, Frost Armor, or a Void overshield, your melee recharges faster and deals increased damage.",
+    "s": "bungie",
+    "pay": "faster melee recharge and +50% powered melee damage"
+   },
+   {
+    "do": "uses",
+    "t": "overshield",
+    "q": "While you have Woven Mail, Frost Armor, or a Void overshield, your melee recharges faster and deals increased damage.",
+    "s": "bungie",
+    "pay": "faster melee recharge and +50% powered melee damage"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "While you are Amplified or Radiant, your grenade recharges faster and deals increased damage.",
+    "s": "bungie",
+    "pay": "faster grenade recharge and +25% grenade damage"
+   },
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "While you are Amplified or Radiant, your grenade recharges faster and deals increased damage.",
+    "s": "bungie",
+    "pay": "faster grenade recharge and +25% grenade damage"
+   },
+   {
+    "do": "grants",
+    "t": "meleedamage",
+    "if": [
+     {
+      "any": [
+       {
+        "has": "wovenmail"
+       },
+       {
+        "has": "frostarmor"
+       },
+       {
+        "has": "overshield"
+       }
+      ]
+     }
+    ],
+    "on": "while you have Woven Mail, Frost Armor or a Void Overshield",
+    "q": "50% [5%] Increased Powered Melee Damage.",
+    "s": "compendium",
+    "note": "also boosts Super melee and Ignition damage; Grapple Melee gets 12% per half instead"
+   }
+  ]
+ },
+ {
+  "id": "art:shockandawe",
+  "n": "Shock and Awe",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "Arc final blows while you are amplified summon a burst of lightning that damages and jolts targets.",
+    "s": "bungie",
+    "pay": "Arc kills while Amplified release a jolting lightning burst (5s cooldown)"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "if": [
+     {
+      "has": "amplified"
+     },
+     {
+      "any": [
+       {
+        "subclass": "arc"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "Arc final blows while Amplified",
+    "q": "Arc final blows while you are amplified summon a burst of lightning that damages and jolts targets.",
+    "s": "bungie",
+    "note": "8 m burst; 5 second cooldown; needs an Arc or Prismatic subclass (Compendium)"
+   }
+  ]
+ },
+ {
+  "id": "art:shouldertoshoulder",
+  "n": "Shoulder to Shoulder",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 25,
+    "vs": [
+     "all"
+    ],
+    "on": "sustained precision damage while within 15 m of two allies",
+    "q": "25% Damage Resist (Resist x2) for 10? seconds",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "art:solarfulmination",
+  "n": "Solar Fulmination",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "ignition",
+    "q": "Your ignitions do increased damage in an increased radius.",
+    "s": "bungie",
+    "pay": "ignitions add a second 12 m Solar blast (Fulmination) that counts as an ignition"
+   },
+   {
+    "do": "applies",
+    "t": "scorch",
+    "if": [
+     {
+      "piece": "Ember of Char"
+     }
+    ],
+    "on": "Fulminations with Ember of Char",
+    "q": "Fulminations inflict an additional x40+20 Scorch.",
+    "s": "compendium",
+    "note": "allows chain-ignitions with Ember of Ashes"
+   }
+  ]
+ },
+ {
+  "id": "art:squadgoals",
+  "n": "Squad Goals",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Performing a finisher while you are amplified grants Amplified to nearby allies.",
+    "s": "bungie",
+    "pay": "finishers share your Amplified, Woven Mail or Devour with nearby allies"
+   },
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "Performing a finisher while you are amplified grants Amplified to nearby allies.",
+    "s": "bungie",
+    "pay": "finishers give Amplified to nearby allies"
+   },
+   {
+    "do": "grants",
+    "t": "amplified",
+    "who": "allies",
+    "if": [
+     {
+      "has": "amplified"
+     }
+    ],
+    "on": "performing a finisher while you have Amplified",
+    "q": "Performing a finisher while you are amplified grants Amplified to nearby allies.",
+    "s": "bungie",
+    "note": "only one buff is shared: Amplified, then Devour, then Woven Mail"
+   },
+   {
+    "do": "uses",
+    "t": "wovenmail",
+    "q": "Performing a finisher while you have Woven Mail grants Woven Mail to nearby allies.",
+    "s": "bungie",
+    "pay": "finishers give Woven Mail to nearby allies"
+   },
+   {
+    "do": "grants",
+    "t": "wovenmail",
+    "who": "allies",
+    "if": [
+     {
+      "has": "wovenmail"
+     }
+    ],
+    "on": "performing a finisher while you have Woven Mail",
+    "q": "Performing a finisher while you have Woven Mail grants Woven Mail to nearby allies.",
+    "s": "bungie",
+    "note": "only one buff is shared: Amplified, then Devour, then Woven Mail"
+   },
+   {
+    "do": "uses",
+    "t": "devour",
+    "q": "Performing a finisher while you have Devour grants Devour to nearby allies.",
+    "s": "bungie",
+    "pay": "finishers give Devour to nearby allies"
+   },
+   {
+    "do": "grants",
+    "t": "devour",
+    "who": "allies",
+    "if": [
+     {
+      "has": "devour"
+     }
+    ],
+    "on": "performing a finisher while you have Devour",
+    "q": "Performing a finisher while you have Devour grants Devour to nearby allies.",
+    "s": "bungie",
+    "note": "only one buff is shared: Amplified, then Devour, then Woven Mail"
+   }
+  ]
+ },
+ {
+  "id": "art:strandsoldier",
+  "n": "Strand Soldier",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "wovenmail",
+    "q": "Your Strand weapons gain Unraveling Rounds whenever you gain Woven Mail while your Strand or Prismatic subclass is equipped.",
+    "s": "bungie",
+    "pay": "Unraveling Rounds for 8 seconds each time you gain Woven Mail"
+   },
+   {
+    "do": "grants",
+    "t": "unravelingrounds",
+    "if": [
+     {
+      "weapon": "strand"
+     },
+     {
+      "any": [
+       {
+        "subclass": "strand"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "gaining Woven Mail",
+    "q": "Your Strand weapons gain Unraveling Rounds whenever you gain Woven Mail while your Strand or Prismatic subclass is equipped.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:supernova",
+  "n": "Supernova",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Picking up a Void Breach causes your next source of Void damage to create a large weakening pulse.",
+    "s": "bungie",
+    "pay": "your next Void damage within 10 s releases a weakening pulse"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "on": "the next Void damage after picking up a Void Breach",
+    "q": "Picking up a Void Breach causes your next source of Void damage to create a large weakening pulse.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:suppressingglaive",
+  "n": "Suppressing Glaive",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suppress",
+    "dmg": [
+     "glaive"
+    ],
+    "on": "damaging combatants with a Glaive",
+    "q": "Damaging combatants with your Glaive suppresses them, preventing them from using abilities for a short time.",
+    "s": "bungie",
+    "note": "Glaive melee costs 10% Glaive energy to suppress"
+   }
+  ]
+ },
+ {
+  "id": "art:sustainedfire",
+  "n": "Sustained Fire",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 25,
+    "vs": [
+     "all"
+    ],
+    "on": "10 rapid Auto Rifle hits on a combatant (or healing allies with a Support Auto)",
+    "q": "Resist x2 (25% DR) for 6 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "art:tangledweb",
+  "n": "Tangled Web",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Creating a Tangle by defeating a [Strand]Strand debuffed target suspends nearby combatants.",
+    "s": "bungie",
+    "pay": "kills that create a Tangle trigger a suspending blast"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "Creating a Tangle by defeating a [Strand]Strand debuffed target suspends nearby combatants.",
+    "s": "bungie",
+    "pay": "kills that create a Tangle trigger a suspending blast"
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "Creating a Tangle by defeating a [Strand]Strand debuffed target suspends nearby combatants.",
+    "s": "bungie",
+    "pay": "kills that create a Tangle trigger a suspending blast"
+   },
+   {
+    "do": "applies",
+    "t": "suspend",
+    "on": "creating a Tangle by killing a Strand-debuffed target",
+    "q": "Creating a Tangle by defeating a [Strand]Strand debuffed target suspends nearby combatants.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:thethickofit",
+  "n": "The Thick of It",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "armorcharge",
+    "on": "3 kills while within 15 m of 3 enemies",
+    "q": "Rapid final blows while surrounded grant you Armor Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "handling",
+    "on": "while surrounded",
+    "q": "While you are surrounded, your weapons have increased handling",
+    "s": "bungie",
+    "note": "Swords also gain charge rate"
+   }
+  ]
+ },
+ {
+  "id": "art:threadedblast",
+  "n": "Threaded Blast",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "tangle",
+    "q": "Destroying a Tangle with [Strand]Strand damage increases the radius of the explosion and its damage.",
+    "s": "bungie",
+    "pay": "Tangles destroyed with Strand damage explode bigger and harder (extra 17 m blast)"
+   }
+  ]
+ },
+ {
+  "id": "art:thunderousretort",
+  "n": "Thunderous Retort",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "amplified",
+    "q": "Grants bonus Arc Super damage if cast while critically wounded or while amplified.",
+    "s": "bungie",
+    "pay": "+30% Arc Super damage when cast while Amplified"
+   },
+   {
+    "do": "uses",
+    "t": "criticalhealth",
+    "q": "Grants bonus Arc Super damage if cast while critically wounded or while amplified.",
+    "s": "bungie",
+    "pay": "+30% Arc Super damage when cast at critical health"
+   },
+   {
+    "do": "grants",
+    "t": "superdamage",
+    "if": [
+     {
+      "any": [
+       {
+        "has": "amplified"
+       },
+       {
+        "has": "criticalhealth"
+       }
+      ]
+     }
+    ],
+    "on": "casting an Arc Super while Amplified or critically wounded",
+    "q": "30% increased Arc Super Damage.",
+    "s": "compendium",
+    "note": "only damage during the Super animation; weaker for Thundercrash and Gathering Storm"
+   }
+  ]
+ },
+ {
+  "id": "art:torch",
+  "n": "Torch",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "radiant",
+    "q": "While radiant, deal increased weapon damage to combatants affected by Strand and Stasis debuffs.",
+    "s": "bungie",
+    "pay": "+5% weapon damage vs Strand/Stasis-debuffed non-boss combatants"
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "While radiant, deal increased weapon damage to combatants affected by Strand and Stasis debuffs.",
+    "s": "bungie",
+    "pay": "+5% weapon damage against it while Radiant"
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "While radiant, deal increased weapon damage to combatants affected by Strand and Stasis debuffs.",
+    "s": "bungie",
+    "pay": "+5% weapon damage against it while Radiant"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "While radiant, deal increased weapon damage to combatants affected by Strand and Stasis debuffs.",
+    "s": "bungie",
+    "pay": "+5% weapon damage against it while Radiant"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "While radiant, deal increased weapon damage to combatants affected by Strand and Stasis debuffs.",
+    "s": "bungie",
+    "pay": "+5% weapon damage against it while Radiant"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "While radiant, deal increased weapon damage to combatants affected by Strand and Stasis debuffs.",
+    "s": "bungie",
+    "pay": "+5% weapon damage against it while Radiant"
+   }
+  ]
+ },
+ {
+  "id": "art:toshreds",
+  "n": "To Shreds",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Dealing sustained damage to severed targets unravels them. Defeating a severed target creates a hotspot of Strand energy, granting Woven Mail to nearby allies for a short duration.",
+    "s": "bungie",
+    "pay": "sustained weapon damage unravels; kills leave a hotspot granting Woven Mail and healing"
+   },
+   {
+    "do": "applies",
+    "t": "unravel",
+    "dmg": [
+     "weapon"
+    ],
+    "on": "6 weapon damage instances on a severed target",
+    "q": "Dealing sustained damage to severed targets unravels them.",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "wovenmail",
+    "who": "allies",
+    "on": "killing a severed target",
+    "q": "granting Woven Mail to nearby allies for a short duration",
+    "s": "bungie",
+    "note": "you and allies within 10 m; pulses every 2 s, 3 times"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "who": "allies",
+    "on": "killing a severed target",
+    "q": "Releases 3 healing pulses on Enemy Death Location, restoring 15 HP",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "art:totalcarnage",
+  "n": "Total Carnage",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "After finishing a powerful combatant, gain temporary damage resistance and replenish health.",
+    "s": "bungie",
+    "pay": "finishing an Elite or stronger restores 100 HP and gives 25% damage resistance"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "finishing a powerful combatant",
+    "q": "Restores 100 HP.",
+    "s": "compendium"
+   },
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 25,
+    "vs": [
+     "all"
+    ],
+    "on": "finishing a powerful combatant",
+    "q": "25% Damage Resist (Resist x2) for 11 seconds.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "art:traceevidence",
+  "n": "Trace Evidence",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "jolt",
+    "q": "Rapid precision hits or rapid final blows on targets affected by Jolt or Blind will generate Ionic Traces.",
+    "s": "bungie",
+    "pay": "rapid precision hits or kills on them spawn Ionic Traces"
+   },
+   {
+    "do": "uses",
+    "t": "blind",
+    "q": "Rapid precision hits or rapid final blows on targets affected by Jolt or Blind will generate Ionic Traces.",
+    "s": "bungie",
+    "pay": "rapid precision hits or kills on them spawn Ionic Traces"
+   },
+   {
+    "do": "creates",
+    "t": "ionictrace",
+    "on": "rapid precision hits or kills on jolted or blinded targets",
+    "q": "Rapid precision hits or rapid final blows on targets affected by Jolt or Blind will generate Ionic Traces.",
+    "s": "bungie",
+    "note": "4 second cooldown"
+   },
+   {
+    "do": "grants",
+    "t": "armorcharge",
+    "by": "ionictrace",
+    "on": "picking up an Ionic Trace",
+    "q": "Picking up an Ionic Trace grants an Armor Charge.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:transference",
+  "n": "Transference",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "transcendence",
+    "q": "Gain increased grenade and melee damage while transcendent.",
+    "s": "bungie",
+    "pay": "+10% grenade and melee damage; weapon kills refund Light/Dark energy afterwards"
+   },
+   {
+    "do": "grants",
+    "t": "meleedamage",
+    "on": "while Transcendent",
+    "q": "10% Increased Grenade and Melee Damage.",
+    "s": "compendium",
+    "note": "grenades get the same 10%"
+   },
+   {
+    "do": "grants",
+    "t": "transcendenceenergy",
+    "on": "weapon kills while Transcendent, paid out when it ends",
+    "q": "Weapon final blows while transcendent refund Light and Dark energy after Transcendence ends.",
+    "s": "bungie",
+    "note": "4.2% per kill, up to 50% after 12 kills"
+   }
+  ]
+ },
+ {
+  "id": "art:unravelingorbs",
+  "n": "Unraveling Orbs",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "Picking up an Orb of Power or a Tangle grants [Strand]Strand weapons Unraveling Rounds.",
+    "s": "bungie",
+    "pay": "Unraveling Rounds on pickup"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "q": "Picking up an Orb of Power or a Tangle grants [Strand]Strand weapons Unraveling Rounds.",
+    "s": "bungie",
+    "pay": "Unraveling Rounds on pickup",
+    "note": "Compendium says Tangle throw"
+   },
+   {
+    "do": "grants",
+    "t": "unravelingrounds",
+    "if": [
+     {
+      "weapon": "strand"
+     }
+    ],
+    "on": "picking up an Orb of Power or a Tangle",
+    "q": "Picking up an Orb of Power or a Tangle grants [Strand]Strand weapons Unraveling Rounds.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:untothebreach",
+  "n": "Unto the Breach",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Defeating a Void debuffed target creates a Void Breach while your Void or Prismatic subclass is equipped.",
+    "s": "bungie",
+    "pay": "kills on Void-debuffed targets spawn a Void Breach"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "q": "Defeating a Void debuffed target creates a Void Breach while your Void or Prismatic subclass is equipped.",
+    "s": "bungie",
+    "pay": "kills on Void-debuffed targets spawn a Void Breach"
+   },
+   {
+    "do": "uses",
+    "t": "suppress",
+    "q": "Defeating a Void debuffed target creates a Void Breach while your Void or Prismatic subclass is equipped.",
+    "s": "bungie",
+    "pay": "kills on Void-debuffed targets spawn a Void Breach"
+   },
+   {
+    "do": "creates",
+    "t": "voidbreach",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "void"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "killing a Void-debuffed target",
+    "q": "Defeating a Void debuffed target creates a Void Breach while your Void or Prismatic subclass is equipped.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:vileweave",
+  "n": "Vile Weave",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "tangle",
+    "q": "Targets hit by your Tangles are severed. Reduce Tangle cooldown by picking one up.",
+    "s": "bungie",
+    "pay": "Tangle damage severs; picking one up cuts Tangle cooldown by 4 s"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "by": "tangle",
+    "on": "Tangle damage",
+    "q": "Targets hit by your Tangles are severed.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:voidflux",
+  "n": "Void Flux",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Defeating weakened targets with a [Void] Void weapon applies Volatile to nearby targets.",
+    "s": "bungie",
+    "pay": "Void weapon kills on weakened targets make nearby enemies Volatile"
+   },
+   {
+    "do": "applies",
+    "t": "volatile",
+    "if": [
+     {
+      "weapon": "void"
+     }
+    ],
+    "on": "Void weapon kills on weakened targets",
+    "q": "Defeating weakened targets with a [Void] Void weapon applies Volatile to nearby targets.",
+    "s": "bungie",
+    "note": "bigger radius from powerful targets"
+   }
+  ]
+ },
+ {
+  "id": "art:voidhegemony",
+  "n": "Void Hegemony",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "While you have a Void or Prismatic subclass equipped, defeating weakened targets provides a small Void Overshield.",
+    "s": "bungie",
+    "pay": "kills on weakened targets give a 15 HP Void Overshield"
+   },
+   {
+    "do": "grants",
+    "t": "overshield",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "void"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "killing weakened targets",
+    "q": "While you have a Void or Prismatic subclass equipped, defeating weakened targets provides a small Void Overshield.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:voidrenewal",
+  "n": "Void Renewal",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "devour",
+    "q": "While Devour is active, [Void] Void weapon final blows have a chance to generate a Void Breach.",
+    "s": "bungie",
+    "pay": "Void weapon kills build toward a Void Breach"
+   },
+   {
+    "do": "creates",
+    "t": "voidbreach",
+    "if": [
+     {
+      "has": "devour"
+     },
+     {
+      "weapon": "void"
+     }
+    ],
+    "on": "Void weapon kills while Devour is active",
+    "q": "While Devour is active, [Void] Void weapon final blows have a chance to generate a Void Breach.",
+    "s": "bungie",
+    "note": "Compendium: a counter (16.7% per minor kill, 50% per miniboss)"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "Picking up a Void Breach increases weapon reload and handling",
+    "s": "bungie",
+    "pay": "faster reload and handling; Shotguns and Grenade Launchers reload from reserves"
+   },
+   {
+    "do": "grants",
+    "t": "handling",
+    "on": "picking up a Void Breach",
+    "q": "Picking up a Void Breach increases weapon reload and handling",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "on": "picking up a Void Breach",
+    "q": "Shotguns and Grenade Launchers are also reloaded from reserves.",
+    "s": "bungie",
+    "note": "only Shotguns and Grenade Launchers"
+   }
+  ]
+ },
+ {
+  "id": "art:voidweaponchanneling",
+  "n": "Void Weapon Channeling",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "weaponsurge",
+    "if": [
+     {
+      "weapon": "void"
+     }
+    ],
+    "on": "Void weapon kills while at least one Void ability is fully charged",
+    "q": "You gain a temporary bonus to Void weapon damage after you defeat a target with a Void weapon while at least one of your Void abilities is fully charged.",
+    "s": "bungie",
+    "note": "one Surge stack per charged Void ability charge (grenade, melee, class, Super), up to x4; works on Prismatic"
+   }
+  ]
+ },
+ {
+  "id": "art:volatileflow",
+  "n": "Volatile Flow",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "Picking up an Orb of Power grants your Void weapons Volatile rounds.",
+    "s": "bungie",
+    "pay": "Volatile Rounds for 9 seconds on pickup"
+   },
+   {
+    "do": "uses",
+    "t": "voidbreach",
+    "q": "On Orb of Power or Void Breach Pickup:",
+    "s": "compendium",
+    "pay": "Volatile Rounds for 9 seconds on pickup",
+    "pq": "Volatile Rounds for 9 [?] seconds."
+   },
+   {
+    "do": "grants",
+    "t": "volatilerounds",
+    "if": [
+     {
+      "weapon": "void"
+     }
+    ],
+    "on": "picking up an Orb of Power or Void Breach",
+    "q": "Picking up an Orb of Power grants your Void weapons Volatile rounds.",
+    "s": "bungie",
+    "note": "Void Breach pickup per Compendium only"
+   }
+  ]
+ },
+ {
+  "id": "art:volatilemarksman",
+  "n": "Volatile Marksman",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "volatilerounds",
+    "if": [
+     {
+      "weapon": "void"
+     }
+    ],
+    "on": "rapid Void weapon precision hits or kills",
+    "q": "Rapid [Void]Void weapon precision hits and rapid Void weapon final blows grant Volatile Rounds.",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "volatile",
+    "q": "Volatile detonations grant class ability energy.",
+    "s": "bungie",
+    "pay": "10% class ability energy per Volatile detonation"
+   },
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "triggering a Volatile detonation",
+    "q": "Volatile detonations grant class ability energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:weakenedclear",
+  "n": "Weakened Clear",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "weaken",
+    "on": "Grenade Launcher damage to a boss or Champion, or breaking a shield with one",
+    "q": "When using a Grenade Launcher, damaging a boss, damaging a Champion, or breaking a combatant's shield reloads your stowed weapons and weakens the combatant.",
+    "s": "bungie",
+    "note": "20 s Weaken; 10 second cooldown"
+   },
+   {
+    "do": "grants",
+    "t": "reload",
+    "on": "Grenade Launcher damage to a boss or Champion, or breaking a shield with one",
+    "q": "reloads your stowed weapons",
+    "s": "bungie",
+    "note": "stowed weapons only"
+   }
+  ]
+ },
+ {
+  "id": "art:windchill",
+  "n": "Wind Chill",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "if": [
+     {
+      "weapon": "stasis"
+     }
+    ],
+    "on": "rapid Stasis weapon hits",
+    "q": "Rapid [Stasis] Stasis weapon hits grant you a stack of Frost Armor",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "hits against slowed or frozen targets also create a Stasis Shard",
+    "s": "bungie",
+    "pay": "rapid Stasis weapon hits on it create a Stasis Shard"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "hits against slowed or frozen targets also create a Stasis Shard",
+    "s": "bungie",
+    "pay": "rapid Stasis weapon hits on it create a Stasis Shard"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "if": [
+     {
+      "weapon": "stasis"
+     }
+    ],
+    "on": "rapid Stasis weapon hits on slowed or frozen targets",
+    "q": "hits against slowed or frozen targets also create a Stasis Shard",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:wishedintobeing",
+  "n": "Wished into Being",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "ability final blows while Super energy is above 60% but not full",
+    "q": "While your Super is nearly fully-charged, ability final blows spawn Orbs of Power.",
+    "s": "bungie",
+    "note": "3 orbs per trigger; 30 second cooldown"
+   }
+  ]
+ },
+ {
+  "id": "_skipped",
+  "ids": [
+   "art:solooperative",
+   "art:targetingautoloader",
+   "art:thatfreshbulletssmell"
+  ]
+ }
+]

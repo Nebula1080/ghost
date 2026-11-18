@@ -1,0 +1,968 @@
+[
+ {
+  "id": "art:ampedup",
+  "n": "Amped Up",
+  "fx": [
+   {
+    "do": "modifies",
+    "t": "amplified",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "arc"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "q": "Stay amplified longer while your Arc or Prismatic subclass is equipped.",
+    "s": "bungie",
+    "pay": "Amplified lasts longer (20 seconds) on Arc or Prismatic",
+    "note": "Compendium: duration becomes 20 seconds"
+   }
+  ]
+ },
+ {
+  "id": "art:arccompounding",
+  "n": "Arc Compounding",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "blind",
+    "q": "Arc sources deal increased damage to Blind targets.",
+    "s": "bungie",
+    "pay": "+15% Arc damage against blinded targets",
+    "note": "Compendium: 15% [7.5% PvP], stacks with everything"
+   }
+  ]
+ },
+ {
+  "id": "art:argentblade",
+  "n": "Argent Blade",
+  "fx": [
+   {
+    "do": "consumes",
+    "t": "armorcharge",
+    "q": "dealing damage with a Sword consumes an Armor Charge",
+    "s": "bungie",
+    "pay": "Sword gains bonus damage and charge rate for a short time",
+    "pq": "empowers your Sword for a short time, granting it bonus damage and energy charge rate",
+    "note": "Compendium: 15% Sword damage for 5 s; no further charges spent while active"
+   }
+  ]
+ },
+ {
+  "id": "art:argentordnance",
+  "n": "Argent Ordnance",
+  "fx": [
+   {
+    "do": "consumes",
+    "t": "armorcharge",
+    "q": "Firing a Rocket Launcher consumes one stack of Armor Charge",
+    "s": "bungie",
+    "pay": "Rocket Launcher gains damage and reload speed until reloaded or stowed",
+    "pq": "granting increased damage and reload speed until you reload or stow your Rocket Launcher",
+    "note": "Compendium: 15% damage"
+   }
+  ]
+ },
+ {
+  "id": "art:argentquiver",
+  "n": "Argent Quiver",
+  "fx": [
+   {
+    "do": "consumes",
+    "t": "armorcharge",
+    "q": "Reloading a Bow consumes one stack of Armor Charge",
+    "s": "bungie",
+    "pay": "Bow gains damage and reload speed for the next 3 shots",
+    "pq": "granting increased damage and reload speed for your next 3 shots or until you stow your Bow",
+    "note": "Compendium: +35% (Primary) / +25% (Heavy) damage to combatants"
+   }
+  ]
+ },
+ {
+  "id": "art:badamplitude",
+  "n": "Bad Amplitude",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "arcability",
+    "from": [
+     "arcability"
+    ],
+    "q": "Damaging a Champion with an Arc ability causes the Champion to become jolted.",
+    "s": "bungie",
+    "pay": "Arc ability damage jolts Champions"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "on": "Arc ability damage to a Champion",
+    "q": "Damaging a Champion with an Arc ability causes the Champion to become jolted.",
+    "s": "bungie",
+    "note": "Champions only"
+   }
+  ]
+ },
+ {
+  "id": "art:blastradius",
+  "n": "Blast Radius",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "armorcharge",
+    "on": "rapid Rocket or Grenade Launcher final blows",
+    "q": "Rapid final blows with Rocket Launchers and Grenade Launchers grant Armor Charge.",
+    "s": "bungie",
+    "note": "Compendium: 2 kills in quick succession"
+   }
+  ]
+ },
+ {
+  "id": "art:brainfreeze",
+  "n": "Brain Freeze",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Frozen combatants become surrounded by chilling fog",
+    "s": "bungie",
+    "pay": "frozen targets emit a fog that slows nearby combatants",
+    "pq": "which slows combatants that aren't already"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "by": "freeze",
+    "on": "combatants near a frozen target",
+    "q": "Frozen combatants become surrounded by chilling fog, which slows combatants that aren't already.",
+    "s": "bungie",
+    "note": "only targets without a Stasis debuff"
+   }
+  ]
+ },
+ {
+  "id": "art:cauterizeddarkness",
+  "n": "Cauterized Darkness",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Stasis or [Strand] Strand debuffed non-boss combatants take increased [Solar]Solar damage from all sources.",
+    "s": "bungie",
+    "pay": "debuffed non-boss targets take more Solar damage from all sources",
+    "note": "Compendium: 75% more Solar damage, acts like a Weaken source; 2 s cooldown"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Stasis or [Strand] Strand debuffed non-boss combatants take increased [Solar]Solar damage from all sources.",
+    "s": "bungie",
+    "pay": "debuffed non-boss targets take more Solar damage from all sources",
+    "note": "Compendium: 75% more Solar damage, acts like a Weaken source; 2 s cooldown"
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Stasis or [Strand] Strand debuffed non-boss combatants take increased [Solar]Solar damage from all sources.",
+    "s": "bungie",
+    "pay": "debuffed non-boss targets take more Solar damage from all sources",
+    "note": "Compendium: 75% more Solar damage, acts like a Weaken source; 2 s cooldown"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "Stasis or [Strand] Strand debuffed non-boss combatants take increased [Solar]Solar damage from all sources.",
+    "s": "bungie",
+    "pay": "debuffed non-boss targets take more Solar damage from all sources",
+    "note": "Compendium: 75% more Solar damage, acts like a Weaken source; 2 s cooldown"
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "Stasis or [Strand] Strand debuffed non-boss combatants take increased [Solar]Solar damage from all sources.",
+    "s": "bungie",
+    "pay": "debuffed non-boss targets take more Solar damage from all sources",
+    "note": "Compendium: 75% more Solar damage, acts like a Weaken source; 2 s cooldown"
+   }
+  ]
+ },
+ {
+  "id": "art:conductivecosmiccrystal",
+  "n": "Conductive Cosmic Crystal",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Your [Arc] Arc and [Void] Void abilities deal bonus damage to targets that are affected by a [Stasis] Stasis debuff.",
+    "s": "bungie",
+    "pay": "+5% Arc and Void ability damage against Stasis-debuffed targets",
+    "note": "Compendium: 5%"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Your [Arc] Arc and [Void] Void abilities deal bonus damage to targets that are affected by a [Stasis] Stasis debuff.",
+    "s": "bungie",
+    "pay": "+5% Arc and Void ability damage against Stasis-debuffed targets",
+    "note": "Compendium: 5%"
+   }
+  ]
+ },
+ {
+  "id": "art:conductivecosmicneedle",
+  "n": "Conductive Cosmic Needle",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Targets affected by Strand debuffs take increased damage from Arc and Void abilities.",
+    "s": "bungie",
+    "pay": "+5% Arc and Void ability damage per Strand debuff on the target",
+    "note": "Compendium: only while an Arc or Void Super is equipped; 1x 5% / 2x 10.25% / 3x 15.76%"
+   },
+   {
+    "do": "uses",
+    "t": "suspend",
+    "q": "Targets affected by Strand debuffs take increased damage from Arc and Void abilities.",
+    "s": "bungie",
+    "pay": "+5% Arc and Void ability damage per Strand debuff on the target",
+    "note": "Compendium: only while an Arc or Void Super is equipped; 1x 5% / 2x 10.25% / 3x 15.76%"
+   },
+   {
+    "do": "uses",
+    "t": "unravel",
+    "q": "Targets affected by Strand debuffs take increased damage from Arc and Void abilities.",
+    "s": "bungie",
+    "pay": "+5% Arc and Void ability damage per Strand debuff on the target",
+    "note": "Compendium: only while an Arc or Void Super is equipped; 1x 5% / 2x 10.25% / 3x 15.76%"
+   }
+  ]
+ },
+ {
+  "id": "art:countercharge",
+  "n": "Counter Charge",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stun",
+    "q": "Gain a stack of Armor Charge when you stun a Champion.",
+    "s": "bungie",
+    "pay": "one Armor Charge per Champion stun"
+   },
+   {
+    "do": "grants",
+    "t": "armorcharge",
+    "on": "stunning a Champion",
+    "q": "Gain a stack of Armor Charge when you stun a Champion.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:creepingchill",
+  "n": "Creeping Chill",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "slow",
+    "q": "Stasis final blows against slowed or frozen targets release a burst that slows combatants and grants Frost Armor to allies caught in the blast.",
+    "s": "bungie",
+    "pay": "Stasis kills on slowed targets release a slowing burst that grants Frost Armor"
+   },
+   {
+    "do": "uses",
+    "t": "freeze",
+    "q": "Stasis final blows against slowed or frozen targets release a burst that slows combatants and grants Frost Armor to allies caught in the blast.",
+    "s": "bungie",
+    "pay": "Stasis kills on frozen targets release a slowing burst that grants Frost Armor"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "on": "Stasis final blows on slowed or frozen targets",
+    "q": "Stasis final blows against slowed or frozen targets release a burst that slows combatants and grants Frost Armor to allies caught in the blast.",
+    "s": "bungie",
+    "note": "Compendium: 6 m burst, x20 Slow"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "who": "allies",
+    "on": "Stasis final blows on slowed or frozen targets",
+    "q": "Stasis final blows against slowed or frozen targets release a burst that slows combatants and grants Frost Armor to allies caught in the blast.",
+    "s": "bungie",
+    "note": "Compendium follows the Frost Armor line with \"Has no effect.\"; the grant may not work"
+   }
+  ]
+ },
+ {
+  "id": "art:crystallineconverter",
+  "n": "Crystalline Converter",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "classability",
+    "q": "After activating your class ability, your next [Stasis] Stasis weapon final blow creates a Stasis Shard.",
+    "s": "bungie",
+    "pay": "next Stasis weapon kill after a class ability creates a Stasis Shard"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "if": [
+     {
+      "weapon": "stasis"
+     }
+    ],
+    "on": "next Stasis weapon kill after using your class ability",
+    "q": "your next [Stasis] Stasis weapon final blow creates a Stasis Shard",
+    "s": "bungie"
+   },
+   {
+    "do": "uses",
+    "t": "stasisshard",
+    "q": "Gather Stasis Shards to gain stacks of Crystalline Converter",
+    "s": "bungie",
+    "pay": "shard stacks make your next powered Stasis melee hit create Stasis crystals",
+    "pq": "which cause your next powered Stasis melee hit to create Stasis crystals equal to the number of stacks you have",
+    "note": "Compendium: 8/12/15 shards = 1/2/3 crystals; Diamond Lance damage also cashes in"
+   },
+   {
+    "do": "creates",
+    "t": "stasiscrystal",
+    "on": "powered Stasis melee hit with Crystalline Converter stacks",
+    "q": "your next powered Stasis melee hit to create Stasis crystals",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:curativeorbs",
+  "n": "Curative Orbs",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "orbofpower",
+    "on": "first time you break a target's shield",
+    "q": "The first time you break a target's shield or break the shield of a Guardian using their Super, you create an Orb of Power.",
+    "s": "bungie",
+    "note": "Compendium: orb grants 7.15% Super energy"
+   },
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Performing a Finisher on a Combatant that didn't trigger the effect will also spawn an Orb of Power.",
+    "s": "compendium",
+    "pay": "finisher on a target that hadn't triggered it spawns an Orb of Power"
+   },
+   {
+    "do": "uses",
+    "t": "orbofpower",
+    "q": "Collecting an Elemental pickup, collecting an Orb of Power, or destroying a Tangle grants you a small amount of health.",
+    "s": "bungie",
+    "pay": "small heal on pickup (40 HP)"
+   },
+   {
+    "do": "uses",
+    "t": "elementalpickup",
+    "q": "Collecting an Elemental pickup, collecting an Orb of Power, or destroying a Tangle grants you a small amount of health.",
+    "s": "bungie",
+    "pay": "small heal on pickup (40 HP)"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "q": "Collecting an Elemental pickup, collecting an Orb of Power, or destroying a Tangle grants you a small amount of health.",
+    "s": "bungie",
+    "pay": "small heal when destroying a Tangle (40 HP)"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "on": "collecting an Orb of Power or Elemental pickup, or destroying a Tangle",
+    "q": "Restores 40 HP.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "art:debilitatingwave",
+  "n": "Debilitating Wave",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "finisher",
+    "q": "Finishers emit a damaging wave that matches the element of your currently equipped Super.",
+    "s": "bungie",
+    "pay": "finishers send out a Super-element damage wave (180 damage)"
+   },
+   {
+    "do": "applies",
+    "t": "blind",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "arc"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "finisher wave with an Arc Super",
+    "q": "Arc, Void, and Stasis waves apply Blind, Weaken, and Slow respectively.",
+    "s": "bungie",
+    "note": "needs an Arc Super equipped"
+   },
+   {
+    "do": "applies",
+    "t": "weaken",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "void"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "finisher wave with a Void Super",
+    "q": "Arc, Void, and Stasis waves apply Blind, Weaken, and Slow respectively.",
+    "s": "bungie",
+    "note": "needs a Void Super equipped"
+   },
+   {
+    "do": "applies",
+    "t": "slow",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "stasis"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "finisher wave with a Stasis Super",
+    "q": "Arc, Void, and Stasis waves apply Blind, Weaken, and Slow respectively.",
+    "s": "bungie",
+    "note": "needs a Stasis Super equipped"
+   }
+  ]
+ },
+ {
+  "id": "art:defibrillatingblast",
+  "n": "Defibrillating Blast",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stun",
+    "q": "Stunning a Champion grants maximum stacks of Bolt Charge.",
+    "s": "bungie",
+    "pay": "max Bolt Charge on Champion stun"
+   },
+   {
+    "do": "grants",
+    "t": "boltcharge",
+    "on": "stunning a Champion",
+    "q": "Stunning a Champion grants maximum stacks of Bolt Charge.",
+    "s": "bungie"
+   },
+   {
+    "do": "modifies",
+    "t": "boltcharge",
+    "q": "Damaging targets with Bolt Charge bolts jolts them and heals you.",
+    "s": "bungie",
+    "pay": "Bolt Charge bolts jolt targets and heal you"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "by": "boltcharge",
+    "on": "Bolt Charge bolt damage",
+    "q": "Damaging targets with Bolt Charge bolts jolts them",
+    "s": "bungie"
+   },
+   {
+    "do": "grants",
+    "t": "healing",
+    "by": "boltcharge",
+    "on": "triggering a Bolt Discharge",
+    "q": "Restores ~55 HP.",
+    "s": "compendium",
+    "note": "also starts health regeneration, not shields"
+   }
+  ]
+ },
+ {
+  "id": "art:dragonsbite",
+  "n": "Dragon's Bite",
+  "fx": [
+   {
+    "do": "applies",
+    "t": "suspend",
+    "if": [
+     {
+      "weapon": "strand"
+     }
+    ],
+    "on": "breaking shields with a Strand weapon",
+    "q": "Breaking a combatant's shield with a Strand or Stasis weapon has a chance to suspend or freeze that combatant.",
+    "s": "bungie",
+    "note": "Compendium: every third shield broken"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "if": [
+     {
+      "weapon": "stasis"
+     }
+    ],
+    "on": "breaking shields with a Stasis weapon",
+    "q": "Breaking a combatant's shield with a Strand or Stasis weapon has a chance to suspend or freeze that combatant.",
+    "s": "bungie",
+    "note": "Compendium: every third shield broken"
+   }
+  ]
+ },
+ {
+  "id": "art:elementalbenevolence",
+  "n": "Elemental Benevolence",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "classenergy",
+    "on": "giving an ally an elemental buff",
+    "q": "Granting allies an elemental buff gives class ability energy.",
+    "s": "bungie",
+    "note": "Compendium: ~15%, cooldown per ally; buffs such as Radiant, Amplified, Devour, Frost Armor, Woven Mail"
+   }
+  ]
+ },
+ {
+  "id": "art:elementalcoalescence",
+  "n": "Elemental Coalescence",
+  "fx": [
+   {
+    "do": "creates",
+    "t": "elementalpickup",
+    "on": "defeating targets",
+    "q": "Defeating targets has the chance to create an Elemental pickup matching your equipped Super element.",
+    "s": "bungie",
+    "note": "Compendium: 4-7 kills for Firesprites/Void Breaches, 9-11 for Ionic Traces/Stasis Shards/Tangles; pickup follows your Super element"
+   },
+   {
+    "do": "creates",
+    "t": "firesprite",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "solar"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "kills with a Solar Super equipped",
+    "q": "Firesprites, Void Breaches: 4–7 kills.",
+    "s": "compendium"
+   },
+   {
+    "do": "creates",
+    "t": "voidbreach",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "void"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "kills with a Void Super equipped",
+    "q": "Firesprites, Void Breaches: 4–7 kills.",
+    "s": "compendium"
+   },
+   {
+    "do": "creates",
+    "t": "ionictrace",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "arc"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "kills with an Arc Super equipped",
+    "q": "Ionic Trace, Stasis Shards, Tangles: 9–11 kills.",
+    "s": "compendium"
+   },
+   {
+    "do": "creates",
+    "t": "stasisshard",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "stasis"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "kills with a Stasis Super equipped",
+    "q": "Ionic Trace, Stasis Shards, Tangles: 9–11 kills.",
+    "s": "compendium"
+   },
+   {
+    "do": "creates",
+    "t": "tangle",
+    "if": [
+     {
+      "any": [
+       {
+        "subclass": "strand"
+       },
+       {
+        "subclass": "prismatic"
+       }
+      ]
+     }
+    ],
+    "on": "kills with a Strand Super equipped",
+    "q": "Ionic Trace, Stasis Shards, Tangles: 9–11 kills.",
+    "s": "compendium"
+   }
+  ]
+ },
+ {
+  "id": "art:elementaldaze",
+  "n": "Elemental Daze",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "stun",
+    "q": "Stunning a Champion with an elemental weapon creates an elementally aligned explosion, applying a matching elemental debuff to them and nearby targets.",
+    "s": "bungie",
+    "pay": "Champion stuns with an elemental weapon cause a matching elemental explosion and debuff",
+    "note": "no effect with Kinetic weapons"
+   },
+   {
+    "do": "applies",
+    "t": "jolt",
+    "if": [
+     {
+      "weapon": "arc"
+     }
+    ],
+    "on": "stunning a Champion with a Arc weapon",
+    "q": "Stunning a Champion with an elemental weapon creates an elementally aligned explosion, applying a matching elemental debuff to them and nearby targets.",
+    "s": "bungie",
+    "note": "Compendium: Arc Jolt, Solar Ignition, Void Volatile, Stasis Freeze, Strand Sever"
+   },
+   {
+    "do": "applies",
+    "t": "ignition",
+    "if": [
+     {
+      "weapon": "solar"
+     }
+    ],
+    "on": "stunning a Champion with a Solar weapon",
+    "q": "Stunning a Champion with an elemental weapon creates an elementally aligned explosion, applying a matching elemental debuff to them and nearby targets.",
+    "s": "bungie",
+    "note": "Compendium: Arc Jolt, Solar Ignition, Void Volatile, Stasis Freeze, Strand Sever"
+   },
+   {
+    "do": "applies",
+    "t": "volatile",
+    "if": [
+     {
+      "weapon": "void"
+     }
+    ],
+    "on": "stunning a Champion with a Void weapon",
+    "q": "Stunning a Champion with an elemental weapon creates an elementally aligned explosion, applying a matching elemental debuff to them and nearby targets.",
+    "s": "bungie",
+    "note": "Compendium: Arc Jolt, Solar Ignition, Void Volatile, Stasis Freeze, Strand Sever"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "if": [
+     {
+      "weapon": "stasis"
+     }
+    ],
+    "on": "stunning a Champion with a Stasis weapon",
+    "q": "Stunning a Champion with an elemental weapon creates an elementally aligned explosion, applying a matching elemental debuff to them and nearby targets.",
+    "s": "bungie",
+    "note": "Compendium: Arc Jolt, Solar Ignition, Void Volatile, Stasis Freeze, Strand Sever"
+   },
+   {
+    "do": "applies",
+    "t": "sever",
+    "if": [
+     {
+      "weapon": "strand"
+     }
+    ],
+    "on": "stunning a Champion with a Strand weapon",
+    "q": "Stunning a Champion with an elemental weapon creates an elementally aligned explosion, applying a matching elemental debuff to them and nearby targets.",
+    "s": "bungie",
+    "note": "Compendium: Arc Jolt, Solar Ignition, Void Volatile, Stasis Freeze, Strand Sever"
+   }
+  ]
+ },
+ {
+  "id": "art:elementaloverdrive",
+  "n": "Elemental Overdrive",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "elementalpickup",
+    "q": "Picking up an Elemental pickup or Tangle grants increased damage to weapons of the same element.",
+    "s": "bungie",
+    "pay": "+22% damage for weapons of the pickup's element for 7 s"
+   },
+   {
+    "do": "uses",
+    "t": "tangle",
+    "q": "Picking up an Elemental pickup or Tangle grants increased damage to weapons of the same element.",
+    "s": "bungie",
+    "pay": "+22% Strand weapon damage for 7 s"
+   },
+   {
+    "do": "grants",
+    "t": "weapondamage",
+    "on": "picking up an Elemental pickup or Tangle",
+    "q": "22% [?%] increased Pickup-Matching Weapon Damage for 7 seconds.",
+    "s": "compendium",
+    "note": "only weapons matching the pickup element; shows as Weapon Surge but stacks with it"
+   }
+  ]
+ },
+ {
+  "id": "art:elementalsupercharger",
+  "n": "Elemental Supercharger",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "exhaust",
+    "q": "Defeating exhausted or severed targets with weapons that match your Super element grants Super energy.",
+    "s": "bungie",
+    "pay": "Super energy on kills with Super-matching weapons",
+    "note": "Kill/damage type: weapon."
+   },
+   {
+    "do": "uses",
+    "t": "sever",
+    "q": "Defeating exhausted or severed targets with weapons that match your Super element grants Super energy.",
+    "s": "bungie",
+    "pay": "Super energy on kills with Super-matching weapons",
+    "note": "Kill/damage type: weapon."
+   },
+   {
+    "do": "grants",
+    "t": "superenergy",
+    "if": [
+     {
+      "weapon": "super"
+     }
+    ],
+    "on": "Super-matching weapon kills on exhausted or severed targets",
+    "q": "Defeating exhausted or severed targets with weapons that match your Super element grants Super energy.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:energydiffusionsubstrate",
+  "n": "Energy Diffusion Substrate",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "damageresistance",
+    "amt": 5,
+    "vs": [
+     "combatants"
+    ],
+    "on": "always",
+    "q": "5%? Damage Resist against Combatants.",
+    "s": "compendium",
+    "note": "exact value unconfirmed"
+   }
+  ]
+ },
+ {
+  "id": "art:expandingabyss",
+  "n": "Expanding Abyss",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "weaken",
+    "q": "Void sources deal increased damage to weakened targets.",
+    "s": "bungie",
+    "pay": "Void damage gets a bigger weaken bonus",
+    "note": "Compendium: e.g. 15% weaken becomes 25%; Divinity's weaken unaffected"
+   }
+  ]
+ },
+ {
+  "id": "art:feverandchill",
+  "n": "Fever and Chill",
+  "fx": [
+   {
+    "do": "grants",
+    "t": "radiant",
+    "if": [
+     {
+      "weapon": "solar"
+     }
+    ],
+    "on": "rapid precision hits with Solar weapons",
+    "q": "Rapid precision hits with [Solar]Solar weapons grant Radiant.",
+    "s": "bungie",
+    "note": "Compendium: 10+5 s; hits needed scale with magazine size"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "if": [
+     {
+      "weapon": "stasis"
+     }
+    ],
+    "on": "rapid precision hits with Stasis weapons",
+    "q": "Rapid precision hits with [Stasis]Stasis weapons grant Frost Armor.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:flashover",
+  "n": "Flashover",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "boltcharge",
+    "q": "When you gain maximum Bolt Charge, you also become amplified.",
+    "s": "bungie",
+    "pay": "amplified at max Bolt Charge; bolts deal 50% more damage",
+    "pq": "Lightning bolts deal more damage."
+   },
+   {
+    "do": "grants",
+    "t": "amplified",
+    "on": "reaching maximum Bolt Charge",
+    "q": "When you gain maximum Bolt Charge, you also become amplified.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "art:frigidglare",
+  "n": "Frigid Glare",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "While Frost Armor is active, [Stasis]Stasis precision final blows cause combatants to release a freezing burst.",
+    "s": "bungie",
+    "pay": "Stasis precision kills release a freezing burst"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "if": [
+     {
+      "has": "frostarmor"
+     },
+     {
+      "weapon": "stasis"
+     }
+    ],
+    "on": "Stasis precision final blows while Frost Armor is active",
+    "q": "Stasis precision final blows cause combatants to release a freezing burst",
+    "s": "bungie",
+    "note": "Compendium: Stasis weapon precision kills, 7 m burst"
+   }
+  ]
+ },
+ {
+  "id": "art:frostrenewal",
+  "n": "Frost Renewal",
+  "fx": [
+   {
+    "do": "uses",
+    "t": "frostarmor",
+    "q": "While you have Frost Armor, taking critical damage releases a burst that freezes nearby combatants and grants Frost Armor to you and nearby allies.",
+    "s": "bungie",
+    "pay": "shield break releases a burst that freezes and grants more Frost Armor"
+   },
+   {
+    "do": "applies",
+    "t": "freeze",
+    "if": [
+     {
+      "has": "frostarmor"
+     }
+    ],
+    "on": "your shield breaks while Frost Armor is active",
+    "q": "While you have Frost Armor, taking critical damage releases a burst that freezes nearby combatants and grants Frost Armor to you and nearby allies.",
+    "s": "bungie",
+    "note": "Compendium: 10 m burst"
+   },
+   {
+    "do": "grants",
+    "t": "frostarmor",
+    "who": "allies",
+    "if": [
+     {
+      "has": "frostarmor"
+     }
+    ],
+    "on": "your shield breaks while Frost Armor is active",
+    "q": "While you have Frost Armor, taking critical damage releases a burst that freezes nearby combatants and grants Frost Armor to you and nearby allies.",
+    "s": "bungie"
+   }
+  ]
+ },
+ {
+  "id": "_skipped",
+  "ids": [
+   "art:antichampionnosecone",
+   "art:bladestamina",
+   "art:bricksfrombeyond",
+   "art:energyacceleration",
+   "art:goldfromlead"
+  ]
+ }
+]

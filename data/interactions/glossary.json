@@ -112,7 +112,7 @@
    "q": "Blinded Combatants are disoriented, rendering them unable to attack or use abilities for 10 seconds.",
    "src": "compendium:arc"
   },
-  "amplified": {
+  "amplified": {"nat": "arc", 
    "l": "Amplified",
    "kind": "buff",
    "el": "arc",
@@ -586,7 +586,7 @@
    "q": "While airborne, jump a second time to reach greater heights.",
    "src": "sub:highjump"
   },
-  "finisher": {
+  "finisher": {"nat": true, 
    "l": "Finisher",
    "kind": "ability",
    "el": "",
@@ -730,7 +730,7 @@
    "q": "Stunning prevents the Champion from attacking, moving, or using any abilities.",
    "src": "compendium:game-mechanics"
   },
-  "airborne": {
+  "airborne": {"nat": true, 
    "l": "Airborne",
    "kind": "state",
    "el": "",
@@ -743,7 +743,7 @@
    "q": "While airborne, jump a second time to reach greater heights.",
    "src": "sub:highjump"
   },
-  "criticalhealth": {
+  "criticalhealth": {"nat": true, 
    "l": "Critical health",
    "kind": "state",
    "el": "",

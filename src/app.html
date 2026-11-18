@@ -2002,6 +2002,7 @@ function showSubDetail() {
 const BLD = { list: [], cur: null };
 let IXTAB = 'ov';   // open tab of the Interactions panel (kept while you edit the build)
 const IX = window.VS_IX || null;   // curated interactions (data/interactions)
+if (D && Array.isArray(IX?.art)) D.artp = IX.art;   // the artifacts and their perks (build maker artifact section)
 const IX_EL = t => EL_COL[IX?.t?.[t]?.el === 'prismatic' ? 'prism' : IX?.t?.[t]?.el] || '';
 const VERB = { creates: 'creates', applies: 'applies', grants: 'grants', uses: 'uses', modifies: 'changes', consumes: 'spends', counts: 'counts as' };
 const BLD_MAX = 60;
@@ -2027,7 +2028,7 @@ function validBuild(x) {
   const el = SV_ELS.some(e => e[0] === x.el) ? x.el : 'solar';
   const mem = m => Object.fromEntries(Object.entries(m && typeof m === 'object' ? m : {}).filter(([k]) => /^[a-z]{4,8}\.[a-z]{3,7}$/.test(k)).slice(0, 18).map(([k, v]) => [k, subOf(v)]));
   const amem = m => Object.fromEntries(Object.entries(m && typeof m === 'object' ? m : {}).filter(([k]) => B_CLASSES.some(c => c[0] === k)).map(([k, v]) => [k, { a: refs(v?.a, Core.A_SLOTS), mods: mods(v?.mods) }]));
-  return { id: String(x.id), name: str(x.name, 60) || 'Build', cls, el, sub: subOf(x.sub), w: refs(x.w, Core.W_SLOTS), a: refs(x.a, Core.A_SLOTS), mods: mods(x.mods), notes: str(x.notes, 1024), subMem: mem(x.subMem), aMem: amem(x.aMem), updated: Number.isFinite(x.updated) ? x.updated : 0 };
+  return { id: String(x.id), name: str(x.name, 60) || 'Build', cls, el, sub: subOf(x.sub), w: refs(x.w, Core.W_SLOTS), a: refs(x.a, Core.A_SLOTS), mods: mods(x.mods), notes: str(x.notes, 1024), artA: hash(x.artA) || 0, art: (Array.isArray(x.art) ? x.art : []).map(hash).filter(Boolean).slice(0, Core.ART_MAX), subMem: mem(x.subMem), aMem: amem(x.aMem), updated: Number.isFinite(x.updated) ? x.updated : 0 };
 }
 function loadBuildState() {
   const v = LS.get(PK('builds')) || {};
@@ -2054,11 +2055,15 @@ function newBuild(from) {
 const iIcon = (it, size) => `<span class="iwrap" style="--rc:${rarityColor(it.rarity)}">${itemIcon(it, size)}</span>`;
 const itemRef = it => ({ id: it.id, hash: it.hash, name: it.name });
 const scAll = b => D.sub[b.cls]?.[b.el];
+const setPerk = n => { for (const s of Object.values(D?.sets || {})) { const p = s.p.find(x => x.n === n); if (p) return { ...p, set: s.n }; } return null; };
+const artPerk = n => { for (const a of D?.artp || []) { const p = a.p.find(x => x[1] === n); if (p) return p; } return null; };
 const subPick = (b, sec, h) => Core.subList(scAll(b), sec).find(a => a.h === h) || null;
 function pieceIcon(pc, b) {
   if (pc.it) return iIcon(pc.it, 28);
   if (pc.g === 'mod') return plugIcon(pc.n, 'sq', pIdx(pc.n, 'armor'));
   if (pc.g === 'subclass') { const a = Core.subList(scAll(b), pc.slot).find(x => x.n === pc.n); return plugIcon(pc.n, 'sq', a?.i); }
+  if (pc.slot === 'set') return plugIcon(pc.n, 'sq', setPerk(pc.n)?.i);
+  if (pc.g === 'artifact') return plugIcon(pc.n, 'sq', artPerk(pc.n)?.[5]);
   return plugIcon(pc.n, 'sq');
 }
 const statChips = st => Object.entries(st || {}).map(([k, v]) => `<span class="bst ${v > 0 ? 'up' : 'dn'}">${v > 0 ? '+' : ''}${v} ${esc(k)}</span>`).join('');
@@ -2109,7 +2114,8 @@ function renderBuilds() {
     let body;
     if (it) {
       const sk = Core.sockets(it, D);
-      const perks = g === 'w' ? sk.cols.filter(c => c.ty === 't' || c.ty === 'o' || c.ty === '?').flatMap(c => c.perks.filter(p => p.s)).slice(0, 3) : sk.exotic.slice(0, 2);
+      // weapons: the whole equipped roll (intrinsic, barrel, magazine, traits, origin, catalyst); armor: exotic perks
+      const perks = g === 'w' ? [...new Map([...sk.intrinsic, ...sk.exotic, ...sk.cols.flatMap(c => c.perks.filter(p => p.s)), ...sk.catalyst.filter(p => p.s)].map(p => [p.n, p])).values()] : sk.exotic.slice(0, 2);
       const sub = g === 'w' ? [it.type, it.element, it.power != null ? '◆ ' + it.power : ''] : [it.type, it.frame, it.set ? '◈ ' + it.set : '', it.stats.Total != null ? 'Total ' + it.stats.Total : ''];
       const ws = g === 'w' ? STAT_SHOW_W.filter(k => it.stats[k] != null).slice(0, 4).map(k => `<span>${esc(k)} <b>${it.stats[k]}</b></span>`).join('') : '';
       body = `${iIcon(it, 48)}<span class="bit"><b style="color:${rarityColor(it.rarity)}">${esc(it.name)}</b><small>${sub.filter(Boolean).map(esc).join(' · ')}</small>${perks.length ? `<small class="bpk">${perks.map(p => `<span data-pk="${esc(p.n)}">${plugIcon(p.n, 'sm', pIdx(p.n, it.kind))}${esc(p.n)}</span>`).join('')}</small>` : ''}${ws ? `<small class="bws">${ws}</small>` : ''}</span>`;
@@ -2122,6 +2128,14 @@ function renderBuilds() {
     }
     return `<div class="bcard"><div class="bcl">${label}</div><div class="bcrow"><button class="bpick" data-${g}="${s}">${body}</button><span class="bacts">${it ? `<button class="x insp" data-insp="${esc(it.id)}" title="Details" aria-label="Show ${label} details">${ICO.info}</button>` : ''}${ref ? `<button class="x" data-clr${g}="${s}" title="Remove" aria-label="Remove ${label}">×</button>` : ''}</span></div>${mods}</div>`;
   };
+  // armor set bonuses: only the ones the chosen armor actually completes (2 or 4 pieces of one set)
+  const setPcs = pieces.filter(p => p.slot === 'set');
+  const setHtml = setPcs.length ? `<section class="bsec"><h2 class="bh">Set bonuses <small>active</small></h2><div class="bsets">${setPcs.map(p => { const sp = setPerk(p.n);
+    return `<button class="bsetb" data-setb="${esc(p.n)}">${plugIcon(p.n, 'sq', sp?.i)}<span class="bit"><b>${esc(p.n)}</b><small>${esc(p.label)}</small><small class="bsetd">${esc(sp?.d || '')}</small></span></button>`; }).join('')}</div></section>` : '';
+  // seasonal artifact: chosen perks (tap for details), Choose perks opens the tier grid
+  const artA = Core.artOf(b, D); const artSel = (b.art || []).map(h => artA?.p.find(p => p[0] === h)).filter(Boolean);
+  const artHtml = !D?.artp?.length ? '<p class="snote">No artifact data in this build of Ghost.</p>'
+    : `<div class="barts">${artA ? `<span class="bartn">${plugIcon(artA.n, 'sq', artA.i)}<b>${esc(artA.n)}</b></span>` : ''}${artSel.map(a => `<button class="bart" data-artinfo="${a[0]}">${plugIcon(a[1], 'sq', a[4])}<span><b>${esc(a[1])}</b><small>Tier ${a[2]}</small></span></button>`).join('')}<button class="btn" id="bArt">${artA ? 'Change artifact or perks' : 'Choose an artifact'}</button></div>`;
   // interactions panel (curated data only): one card per term with what provides it and what uses / changes it.
   // Tap a piece to read the quote, conditions and notes behind it.
   const inact = [...syn.inactive.filter(f => ['creates', 'applies', 'grants', 'uses', 'modifies', 'consumes'].includes(f.e.do)), ...syn.unmatched.map(u => ({ ...u.c, why: [`needs ${u.c.e.from.map(x => IX.t[x]?.l || x).join(' or ')}; here it comes from ${[...new Set(u.ps.flatMap(p => [...syn.srcOf(p.f)].map(x => IX.t[x]?.l || x)))].join(', ') || 'an unclassified source'}`] }))];
@@ -2170,6 +2184,8 @@ function renderBuilds() {
       <section class="bsec"><h2 class="bh">Subclass</h2>${subHtml}</section>
       <section class="bsec"><h2 class="bh">Weapons</h2><div class="bcards">${Core.W_SLOTS.map(s => itemCard('w', s)).join('')}</div></section>
       <section class="bsec"><h2 class="bh">Armor &amp; mods</h2><div class="bcards">${Core.A_SLOTS.map(s => itemCard('a', s)).join('')}</div></section>
+      ${setHtml}
+      <section class="bsec"><h2 class="bh">Artifact <small>${Core.artOf(b, D) ? `${(b.art || []).length}/${Core.ART_MAX} perks` : ''}</small></h2>${artHtml}</section>
       <section class="bsec"><h2 class="bh">Notes</h2><textarea class="notes" id="bNotes" maxlength="1024" placeholder="How to play it, what to swap…">${esc(b.notes)}</textarea></section>
     </div><aside class="bld-side">
       <section class="bsec syn" id="bSyn"><h2 class="bh">Interactions <small>${nLinks}</small></h2>${synHtml}</section>
@@ -2218,6 +2234,9 @@ function bindBuild(v, b, pieces, syn) {
   v.querySelectorAll('[data-sinfo]').forEach(x => x.onclick = e => { e.stopPropagation(); const [sec, h] = x.dataset.sinfo.split('|'); const a = Core.subList(scAll(b), sec).find(y => y.h === +h); if (a) pieceInfo(a.n, { bd: a.d, hash: a.h, icon: a.i, sq: true, kind: `${scAll(b)?.n || ''} · ${SUB_L[sec] || 'Transcendence'}` }, 'sub:' + Core.norm(a.n)); });
   v.querySelectorAll('[data-minfo]').forEach(x => x.onclick = e => { e.stopPropagation(); const n = x.dataset.minfo; pieceInfo(n, { ikind: 'armor', sq: true, kind: 'Armor mod' }, 'mod:' + Core.norm(n)); });
   v.querySelectorAll('[data-insp]').forEach(x => x.onclick = e => { e.stopPropagation(); openItem(x.dataset.insp); });
+  v.querySelectorAll('[data-setb]').forEach(x => x.onclick = () => { const sp = setPerk(x.dataset.setb); if (sp) pieceInfo(sp.n, { bd: sp.d, icon: sp.i, sq: true, kind: `${sp.set} · ${sp.c}-piece bonus` }, 'set:' + Core.norm(sp.n)); });
+  v.querySelectorAll('[data-artinfo]').forEach(x => x.onclick = () => { const a = Core.artOf(b, D); const p = a?.p.find(y => y[0] === +x.dataset.artinfo); if (p) pieceInfo(p[1], { bd: p[3], icon: p[4], sq: true, kind: `${a.n} · tier ${p[2]}` }, 'art:' + Core.norm(p[1])); });
+  const ab = $('#bArt'); if (ab) ab.onclick = () => pickArtifact(b);
   v.querySelectorAll('[data-clrw]').forEach(x => x.onclick = () => { delete b.w[x.dataset.clrw]; saveBuilds(); renderBuilds(); });
   v.querySelectorAll('[data-clra]').forEach(x => x.onclick = () => { delete b.a[x.dataset.clra]; saveBuilds(); renderBuilds(); });
   v.querySelectorAll('[data-mod]').forEach(x => x.onclick = () => pickMod(b, x.dataset.mod, +x.dataset.mi, pieces));
@@ -2483,6 +2502,27 @@ function pickItem(b, g, slot, pieces) {
     if (/exotic/i.test(it.rarity)) for (const [s, r] of Object.entries(refs)) { const o = S.byId.get(r.id); if (s !== slot && o && /exotic/i.test(o.rarity)) { delete refs[s]; toast(`Only one exotic ${g === 'w' ? 'weapon' : 'armor piece'}: removed ${o.name}.`); } }
     refs[slot] = itemRef(it); saveBuilds(); renderBuilds();
   }, { query, placeholder: g === 'w' ? 'Search: name, perk, is:void, frame:…' : 'Search: name, perk, set:, is:exotic…', clear: !!cur, note: pool.length ? `${pool.length} in your vault. Best synergy with the rest of the build first.` : `No ${g === 'w' ? W_LABEL[slot].toLowerCase() + ' weapons' : cls + ' ' + A_LABEL[slot].toLowerCase()} in this vault.` });
+}
+// artifact sheet: pick one of the artifacts, then up to 7 perks (2 tier-1 slots, 3 for tier 1-2, 2 for any tier)
+function pickArtifact(b) {
+  const arts = D.artp || [];
+  const draw = () => {
+    const art = Core.artOf(b, D); const sel = new Set(b.art || []);
+    const n = [1, 2, 3].map(t => [...sel].filter(h => art?.p.find(p => p[0] === h)?.[2] === t).length);
+    const canAdd = t => sel.size < Core.ART_MAX && (t < 3 || n[2] < Core.ART_SLOTS[2]) && (t < 2 || n[1] + n[2] < Core.ART_SLOTS[1] + Core.ART_SLOTS[2]);
+    modal(`<h2>Artifact ${art ? `<small class="faint">${sel.size}/${Core.ART_MAX} perks</small>` : ''}</h2>
+      <div class="artpick">${arts.map(a => `<button class="artc${art?.h === a.h ? ' on' : ''}" data-aa="${a.h}">${plugIcon(a.n, 'sq', a.i)}<span>${esc(a.n)}</span></button>`).join('')}</div>
+      ${art ? `<p class="snote">${esc(art.d.replace(/\s+/g, ' '))}</p><p class="snote">7 slots: 2 take tier 1 perks, 3 take tier 1 or 2, 2 take any tier.</p>
+      <div class="arttiers">${[1, 2, 3].map(t => `<div class="arttier"><div class="arth">Tier ${t}</div><div class="artg">${art.p.filter(p => p[2] === t).map(p =>
+        `<button class="artp${sel.has(p[0]) ? ' on' : ''}" data-ap="${p[0]}" ${sel.has(p[0]) || canAdd(t) ? '' : 'disabled'} title="${esc(p[3])}">${plugIcon(p[1], 'sq', p[4])}<span>${esc(p[1])}</span></button>`).join('')}</div></div>`).join('')}</div>` : '<p class="snote">Choose an artifact to see its perks.</p>'}
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><button class="btn" id="artClr">Clear</button><button class="btn primary" data-close>Done</button></div>`);
+    $('#modalBox').querySelectorAll('[data-aa]').forEach(x => x.onclick = () => { b.artA = +x.dataset.aa; b.art = Core.artValid(b.art, Core.artOf(b, D)); saveBuilds(); draw(); });
+    $('#modalBox').querySelectorAll('[data-ap]').forEach(x => x.onclick = () => {
+      const h = +x.dataset.ap; b.art = Core.artValid(sel.has(h) ? [...sel].filter(y => y !== h) : [...sel, h], art); saveBuilds(); draw(); });
+    $('#artClr').onclick = () => { b.artA = 0; b.art = []; saveBuilds(); draw(); };
+    $('#modalBox').querySelector('[data-close]').onclick = () => { closeModal(); renderBuilds(); };
+  };
+  draw();
 }
 function pickMod(b, slot, i, pieces) {
   const ms = b.mods[slot] || []; const cur = ms[i];

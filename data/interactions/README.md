@@ -30,6 +30,9 @@ what it does as structured data. The build maker only shows curated interactions
   `damage` (solarweapon, arcdamage… only when a piece really keys off them), `state` (e.g. `transcendence`, `airborne`).
 - `isa` (optional): more general terms this one also counts as, e.g. `overshield` (Void Overshield) has
   `"isa": ["overshieldgeneric"]`, so payoffs that accept any overshield link to Void ones too.
+- `nat` (optional, `true`): a state any build can enter on its own (airborne, sprinting, sliding, finisher, critical
+  health). Payoffs that use it are never listed as missing. A subclass element instead of `true` (`"nat": "arc"`)
+  means that subclass grants it intrinsically (Amplified from rapid Arc kills).
 - `def`: one or two sentences in our own words. `q`: an exact quote that supports it; `src`: where the quote is
   (a piece id from `src/*.json`, or `compendium:<tab>` for `src/glossary-sources.json`).
 
@@ -105,7 +108,10 @@ source. Record it:
   Damage").
 - `from`: on a `uses`/`modifies` payoff that only fires for some sources, the accepted source terms, e.g. a perk
   that triggers on "weapon final blows against scorched targets" → `{ "do": "uses", "t": "scorch", "from": ["weapon"] }`.
-  Only record `dmg`/`from` when the text (any source) states it.
+  Only record `dmg`/`from` when the text (any source) states it. `from` is about the provider's damage source; a
+  payoff on a buff or energy ("weapon final blows while you have Devour") never takes `from` (the checker refuses
+  it): write the kill type in `pay` / `note`. A payoff on the damage term itself (`uses poweredmelee` with
+  `from: ["poweredmelee"]`) links to every piece that provides that term.
 
 ## Damage resistance (`amt`, `vs`, `cat`)
 On `{ "do": "grants", "t": "damageresistance" }` effects:

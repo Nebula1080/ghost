@@ -163,4 +163,28 @@ t('equip build: subclass plan keeps what is in place, clears unwanted fragments 
   assert.deepStrictEqual(r.subs, [{ id: '6917529000000000009', hash: sc.h, cid: '2305843009300000001', eq: true, plugs }]);
   assert.strictEqual(r.weapons.length + r.armor.length, 0);
 });
+t('artifact perks, set bonuses, natural states and damage-source rules', () => {
+  // one artifact, 7 slots: 2 tier-1, 3 tier 1-2, 2 any tier
+  const art = { h: 9, n: 'Art', d: '', i: '', p: [[1, 'A', 1, 'x', ''], [2, 'B', 1, '', ''], [3, 'C', 1, '', ''], [4, 'D', 2, '', ''], [5, 'E', 2, '', ''], [6, 'F', 2, '', ''], [7, 'G', 3, '', ''], [8, 'H', 3, '', ''], [10, 'I', 3, '', ''], [11, 'J', 1, '', '']] };
+  const d = { ...D, artp: [art] };
+  assert.deepStrictEqual(C.artValid([7, 8, 10, 99, 7], art), [7, 8], 'two tier-3 perks at most, unknown and duplicate hashes drop');
+  assert.deepStrictEqual(C.artValid([4, 5, 6, 7, 8], art), [4, 5, 6, 7, 8], 'five slots take tier 2-3');
+  assert.deepStrictEqual(C.artValid([4, 5, 6, 7, 8, 1, 2, 3], art), [4, 5, 6, 7, 8, 1, 2], 'seven perks at most');
+  assert.deepStrictEqual(C.artValid([4, 5, 6, 7, 8, 9], art).length, 5);
+  const b = { cls: 'warlock', el: 'arc', sub: { aspects: [], fragments: [] }, w: {}, a: {}, mods: {}, artA: 9, art: [1, 7] };
+  const pcs = C.buildPieces(C.normBuild(b, d), d, new Map());
+  assert.deepStrictEqual(pcs.filter(p => p.g === 'artifact').map(p => p.n), ['A', 'G']);
+  assert.deepStrictEqual(C.normBuild({ ...b, artA: 5 }, d).art, [], 'perks of another artifact drop');
+  assert.deepStrictEqual(C.ixIds({ g: 'artifact', n: 'Elemental Siphon' }), ['art:elementalsiphon']);
+  assert.deepStrictEqual(C.ixIds({ g: 'armor', slot: 'set', n: "Stack 'Em Up" }), ['set:stackemup']);
+  // natural states are never missing; Amplified is intrinsic to Arc only
+  const ix = { t: { airborne: { kind: 'state', nat: true }, amplified: { kind: 'buff', nat: 'arc' } }, p: { 'mod:x': [{ do: 'uses', t: 'airborne' }, { do: 'uses', t: 'amplified' }] } };
+  const gaps = el => C.ixEval([{ g: 'mod', n: 'X' }], ix, D, el).gaps.map(g => g.e.t);
+  assert.deepStrictEqual(gaps('arc'), []);
+  assert.deepStrictEqual(gaps('void'), ['amplified']);
+  // a payoff on the damage term itself links to any piece that provides that term
+  const ix2 = { t: { poweredmelee: { kind: 'ability' } }, p: { 'sub:howl': [{ do: 'creates', t: 'poweredmelee' }], 'mod:y': [{ do: 'uses', t: 'poweredmelee', from: ['poweredmelee'] }] } };
+  const r = C.ixEval([{ g: 'subclass', slot: 'aspects', n: 'Howl' }, { g: 'mod', n: 'Y' }], ix2, D, 'stasis');
+  assert.strictEqual(r.links.length, 1); assert.strictEqual(r.unmatched.length, 0);
+});
 console.log(n, 'build tests passed');

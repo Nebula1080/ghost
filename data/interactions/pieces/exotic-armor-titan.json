@@ -1020,12 +1020,7 @@
     "q": "While your Solar Super is charged, ability final blows cure you and give stacks of Sunfire Furnace.",
     "s": "bungie",
     "pay": "Cure and Sunfire Furnace stacks on ability kills",
-    "note": "ability kills, including unpowered melees; Glaive melees do not count (Compendium)",
-    "from": [
-     "grenade",
-     "melee",
-     "classability"
-    ]
+    "note": "ability kills, including unpowered melees; Glaive melees do not count (Compendium)"
    },
    {
     "do": "grants",
