@@ -51,6 +51,9 @@ for (const w of Object.values(items)) {
     if (!n || /^(empty|default)/i.test(n)) continue;
     if (cat === 'intrinsics' || cat === 'frames' || /masterwork/.test(cat) && /catalyst/i.test(n)) perks.push({ n, role: cat === 'intrinsics' ? 'intrinsic' : cat === 'frames' ? 'trait' : 'catalyst', src: texts(n, (p.displayProperties.description || '').trim() || null, 'weapon') });
   }
+  // the weapon's catalyst (defs.wc / defs.cata, tools/build-defs.mjs): its effect text, when the sockets above missed it
+  const cn = D.wc?.[w.hash]; const cd = cn && D.cata?.[norm(cn)];
+  if (cn && !perks.some(p => norm(p.n) === norm(cn))) perks.push({ n: cn, role: 'catalyst', src: texts(cn, cd?.d || null, 'weapon') });
   const dcx = D.dcx?.[norm(w.displayProperties.name)];
   const dmg = { 1: 'kinetic', 2: 'arc', 3: 'solar', 4: 'void', 6: 'stasis', 7: 'strand' }[w.defaultDamageType] || '';
   add('exotic-weapons', { id, n: w.displayProperties.name, kind: 'exoticWeapon', type: w.itemTypeDisplayName || '', el: dmg, hashes: [w.hash], perks, src: dcx ? { compendium: plain(dcx) } : {} });

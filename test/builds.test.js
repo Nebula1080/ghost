@@ -220,4 +220,14 @@ t('weapon perk columns come from Bungie sockets (CSV flat list); armor sockets p
   const th = Object.entries(d.sock.a).find(([h]) => h === '2082858804');
   assert.deepStrictEqual(C.modLayout('2082858804', d).map(x => x[1]), ['g', 's', 's', 's', 't'], JSON.stringify(th));
 });
+t('exotic catalyst effects only count when the catalyst is applied', () => {
+  assert.ok(D.cata?.blacktaloncatalyst, 'defs.cata has Black Talon Catalyst');
+  const ix = { t: { weaken: { l: 'Weaken', kind: 'debuff' } }, p: { 'mod:w': [{ do: 'applies', t: 'weaken' }], 'xw:blacktalon': [{ do: 'uses', t: 'weaken', perk: 'Black Talon Catalyst', pay: 'more damage' }] } };
+  const bt = perks => ({ g: 'weapon', n: 'Black Talon', it: { kind: 'weapon', name: 'Black Talon', rarity: 'Exotic', hash: Object.keys(D.wc).find(h => D.wc[h] === 'Black Talon Catalyst') || '0', element: 'Void', type: 'Sword', ammo: 'Heavy', perks } });
+  const run = perks => C.ixEval([{ g: 'mod', n: 'W' }, bt(perks)], ix, D, 'void');
+  const on = run([{ n: 'Black Talon Catalyst', s: 1 }]); const off = run([]);
+  assert.strictEqual(on.links.filter(l => l.t === 'weaken').length, 1);
+  assert.strictEqual(off.links.filter(l => l.t === 'weaken').length, 0);
+  assert.ok(off.inactive.some(f => f.why.some(w => /Black Talon Catalyst applied/.test(w))), 'listed as Not active: needs the catalyst');
+});
 console.log(n, 'build tests passed');

@@ -895,3 +895,5 @@ a{color:var(--light)}
 .dcol .t .dcc{display:none;font-size:10px;letter-spacing:.04em;text-transform:none;color:var(--faint);font-weight:500}
 @media (max-width:760px){.dcol .t .dcc{display:inline}}
 .bmk{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);line-height:1.2}
+.bwms{display:flex;flex-wrap:wrap;gap:4px 10px}.bwm{color:var(--dim)}.bwc.has{color:var(--good)}.bwc.missing{color:var(--faint)}.bwc{cursor:pointer}
+.bwb{font-style:normal;font-size:11px;color:var(--good);margin-left:4px}

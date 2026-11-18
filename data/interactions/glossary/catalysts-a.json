@@ -1,0 +1,3 @@
+{ "terms": {
+  "wolfpackround": {"l":"Wolfpack Rounds","kind":"object","el":"","aka":["wolfpack round","wolfpack rounds","micro-missile","micro-missiles"],"def":"Tracking micro-missiles that Gjallarhorn's rockets (and nearby allies' non-Exotic Rocket Launchers) split into on detonation.","q":"Rounds fired split into tracking micro-missiles upon detonation.","src":"xw:gjallarhorn"}
+} }
