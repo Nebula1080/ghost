@@ -58,6 +58,14 @@ for (const [h, d] of Object.entries(stats)) {
   const short = STAT_ALIAS[n] || n;
   if (STAT_KEEP.has(short)) out.s[h] = short;
 }
+// Armor 3.0 stat rolls: the unnamed armor_stats plugs (primary / secondary / tertiary) -> {stat: value}, so a Bungie
+// load knows each piece's base stats (before masterwork, tuning and mods)
+out.as = {};
+for (const [h, d] of Object.entries(items)) {
+  if (d.plug?.plugCategoryIdentifier !== 'armor_stats') continue;
+  const o = {}; for (const x of d.investmentStats || []) { const sn = out.s[x.statTypeHash]; if (sn && x.value) o[sn] = x.value; }
+  if (Object.keys(o).length) out.as[h] = o;
+}
 fs.writeFileSync(OUT, JSON.stringify(out));
 console.log(`api-defs.json: ${Object.keys(out.i).length} items, ${Object.keys(out.p).length} plugs, ${Object.keys(out.s).length} stats, ${(fs.statSync(OUT).size / 1048576).toFixed(2)} MB`);
 

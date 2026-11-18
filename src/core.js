@@ -199,7 +199,7 @@ const Core = (() => {
       const kind = k === 'w' ? 'weapon' : 'armor';
       const ins = inst[id] || {}; const state = n(r.state) || 0;
       // perks: socket by socket, every option the item can switch to, the inserted one marked (like DIM's Perks N)
-      const perks = []; let frame = '', mwType = '', mwTier = null;
+      const perks = []; let frame = '', mwType = '', mwTier = null; const aBase = {}; let tuned = '';
       const sockets = Array.isArray(so[id]?.sockets) ? so[id].sockets : [];
       const opts = rp[id]?.plugs || {};
       sockets.forEach((s, i) => {
@@ -214,6 +214,9 @@ const Core = (() => {
           perks.push({ n: pn, s: h === cur ? 1 : 0, j: JUNK_PERK.test(pn) ? 1 : 0, si: i, h: /^\d{1,10}$/.test(h) ? +h : 0, ...(/^a[hacglx]$/.test(pc) ? { ac: pc } : {}), ...(rollIdx.has(i) ? { roll: 1 } : {}) });
         }
         const cat = plugCat(cur), cn = plugName(cur);
+        // Armor 3.0: the stat-roll plugs give the piece's base stats; the tuning socket's options name its Tuned stat
+        if (kind === 'armor') for (const [sn, v] of Object.entries(ad.as?.[cur] || {})) aBase[sn] = (aBase[sn] || 0) + v;
+        if (kind === 'armor' && cat === 'u' && Array.isArray(opts[i])) for (const o of opts[i]) { const m = plugName(String(o?.plugItemHash ?? '')).match(/^\+(\w+) \//); if (m) { tuned = m[1]; break; } }
         if (!frame && cn && (cat === 'i' && kind === 'weapon' || cat === 'r' && kind === 'armor')) frame = cn;
         if (cat === 'm' && cn) {
           const m = cn.match(/^Tier (\d+): (.+)$/) || cn.match(/^Masterworked: (.+)$/);
@@ -222,7 +225,7 @@ const Core = (() => {
       });
       const stats = {};
       for (const [sh, sv] of Object.entries(st[id]?.stats || {})) { const sn = ad.s?.[sh]; const v = n(sv?.value); if (sn && v != null) stats[sn] = v; }
-      let tertiary = '';
+      let tertiary = ''; 
       if (kind === 'armor') {
         const vals = ARMOR_STATS.filter(s => s in stats);
         if (vals.length) stats.Total = vals.reduce((a, s) => a + stats[s], 0);
@@ -234,10 +237,10 @@ const Core = (() => {
         id, hash, name, kind, tag: '', notes: '', rarity, tier: n(ins.gearTier), type, source: '',
         equippable: kind === 'armor' ? (API_CLASS[classType] || '') : '', category: kind === 'weapon' ? (API_SLOT[bucket] || '') : '',
         element: kind === 'weapon' ? (API_ELEMENT[ins.damageType] || '') : '', ammo: kind === 'weapon' ? (API_AMMO[ammoT] || '') : '',
-        power: n(ins.primaryStat?.value), energy: n(ins.energy?.energyCapacity), frame, tertiary, tuning: '',
+        power: n(ins.primaryStat?.value), energy: n(ins.energy?.energyCapacity), frame, tertiary, tuning: tuned,
         mwType, mwTier, owner, locked: !!(state & 1), equipped, featured: false, holofoil: false,
         year: null, season: null, event: '', crafted: !!(state & 8), level: null, kills: null, foundry: '', loadouts: '',
-        stats, base: {}, perks, src: 'api', cid: ID_RE.test(String(cid0)) ? String(cid0) : '', bucket: Number(bucket) || 0,
+        stats, base: Object.keys(aBase).length ? Object.fromEntries(ARMOR_STATS.map(k => [k, aBase[k] || 0])) : {}, perks, src: 'api', cid: ID_RE.test(String(cid0)) ? String(cid0) : '', bucket: Number(bucket) || 0,
       };
       (kind === 'weapon' ? weapons : armor).push(item);
     }
@@ -1344,19 +1347,56 @@ const Core = (() => {
   // character stats: armor (base values when DIM gives them, else current) + fragment and mod bonuses
   const ARMOR3 = ['Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee'];
   function buildStats(b, defs, byId) {
-    const out = Object.fromEntries(ARMOR3.map(k => [k, { armor: 0, frag: 0, mods: 0, total: 0 }]));
-    let src = '';
+    const out = Object.fromEntries(ARMOR3.map(k => [k, { armor: 0, mw: 0, tune: 0, frag: 0, mods: 0, total: 0 }]));
+    let src = ''; const pieces = {};
     for (const s of A_SLOTS) {
-      const it = byId?.get(b.a?.[s]?.id); if (!it) continue;
-      const useBase = ARMOR3.some(k => it.base?.[k] != null); src ||= useBase ? 'base' : 'current';
-      for (const k of ARMOR3) out[k].armor += (useBase ? it.base[k] : it.stats[k]) || 0;
+      const it = byId?.get(b.a?.[s]?.id); const pt = armorParts(it, defs, s); if (!pt) continue;
+      pieces[s] = pt; src ||= pt.hasBase ? (it.src === 'api' ? 'api' : 'base') : 'current';
+      for (const k of ARMOR3) { out[k].armor += pt.base[k]; out[k].mw += pt.mw[k]; }
+      // each mod socket: the build's mod, else the one on the piece now (Equip build leaves those in place)
+      pt.lay.forEach(([, c], i) => {
+        const n = b.mods?.[s]?.[i] || pt.inserted[i]; if (!n || !pt.hasBase) return;
+        for (const [k, v] of Object.entries(modStatsOn(n, s, pt.base, defs))) if (out[k]) out[k][c === 't' ? 'tune' : 'mods'] += v;
+      });
     }
+    // mods chosen for slots without a piece still count
+    for (const s of A_SLOTS) if (!pieces[s]) for (const n of (b.mods?.[s] || []).filter(Boolean)) for (const [k, v] of Object.entries(modStatsOn(n, s, {}, defs))) if (out[k]) out[k].mods += v;
     const sc = subOf(b, defs);
     for (const h of b.sub?.fragments || []) { const f = findSub(sc, 'fragments', h); for (const [k, v] of Object.entries(f?.st || {})) if (out[k]) out[k].frag += v; }
-    const modSt = n => { for (const l of Object.values(defs?.am || {})) { const m = l.find(x => norm(x[0]) === norm(n)); if (m) return m[2] || {}; } return {}; };
-    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(Boolean)) for (const [k, v] of Object.entries(modSt(n))) if (out[k]) out[k].mods += v;
-    for (const k of ARMOR3) out[k].total = out[k].armor + out[k].frag + out[k].mods;
-    return { stats: out, src, total: ARMOR3.reduce((a, k) => a + out[k].total, 0) };
+    for (const k of ARMOR3) out[k].total = out[k].armor + out[k].mw + out[k].tune + out[k].frag + out[k].mods;
+    return { stats: out, src, pieces, total: ARMOR3.reduce((a, k) => a + out[k].total, 0) };
+  }
+
+  // ---------- Armor 3.0 (Edge of Fate) ----------
+  // Bungie's rules, from the manifest: an archetype names the piece's primary and secondary stat (plus a random
+  // tertiary); a Masterwork raises the piece's 3 lowest stats by 1 per level, up to +5 each ("Upgrade this armor to
+  // improve its 3 lowest stats by 1, up to a maximum of 5"); legacy armor's Masterwork gives +2 to all stats; Tier 5
+  // armor has a tuning socket whose mods follow its Tuned stat (+5 tuned / -5 another) or Balanced Tuning ("slightly
+  // increases the three lowest stats", +1 each). Stats run 0-200; above 100 each stat gives an enhanced benefit.
+  const ARCH_RE = /Primary Stat:\s*(\w+)\s*Secondary Stat:\s*(\w+)/i;
+  function archetypeOf(name, defs) { const d = plugOf(name, defs, 'armor')?.[2] || ''; const m = d.match(ARCH_RE); return m ? { n: name, pri: m[1], sec: m[2] } : null; }
+  const lowest3 = base => ARMOR3.slice().sort((a, b) => (base[a] || 0) - (base[b] || 0) || ARMOR3.indexOf(a) - ARMOR3.indexOf(b)).slice(0, 3);
+  // a mod's stats: {stat: n}; Balanced Tuning: +1 to the piece's three lowest base stats
+  function modStatsOn(n, slot, base, defs) {
+    if (/^balanced tuning$/i.test(n)) return Object.fromEntries(lowest3(base).map(k => [k, 1]));
+    const m = modsFor(slot, defs).find(x => norm(x[0]) === norm(n)); return m?.[2] || {};
+  }
+  // one armor piece split into what it's made of: base roll, masterwork, the mods on it now (by socket)
+  function armorParts(it, defs, slot) {
+    if (!it || it.kind !== 'armor') return null;
+    const lay = modLayout(it.hash, defs);
+    const gen3 = (Number(it.tier) || 0) >= 1 || lay.some(([, c]) => c === 't');
+    const hasBase = ARMOR3.some(k => it.base?.[k] != null);
+    const base = Object.fromEntries(ARMOR3.map(k => [k, (hasBase ? it.base[k] : it.stats?.[k]) || 0]));
+    // mods on the piece right now: every equipped plug that is a mod some socket of this piece takes
+    const on = (it.perks || []).filter(p => p.s && !/^empty|^default/i.test(p.n) && lay.some(([, c]) => modFits(p.n, c, slot, defs))).map(p => p.n);
+    const inserted = placeMods(on, lay, slot, defs);
+    const insSt = {}; for (const n of inserted.filter(Boolean)) for (const [k, v] of Object.entries(modStatsOn(n, slot, base, defs))) insSt[k] = (insSt[k] || 0) + v;
+    // the masterwork is what's left between the current stats and base + mods on it
+    // (Armor 3.0: only the 3 lowest stats, at most +5; legacy: at most +2 each), anything else unexplained is ignored
+    const low = lowest3(base);
+    const mw = Object.fromEntries(ARMOR3.map(k => [k, !hasBase || (gen3 && !low.includes(k)) ? 0 : Math.min(gen3 ? 5 : 2, Math.max(0, (it.stats?.[k] || 0) - base[k] - (insSt[k] || 0)))])); const mwLevel = gen3 ? Math.min(5, Math.max(0, ...low.map(k => mw[k]))) : null;
+    return { gen3, hasBase, base, mw, mwLevel, low, inserted, lay, arch: archetypeOf(it.frame, defs), tertiary: it.tertiary || '', tuned: it.tuning || '' };
   }
   // armor mods a slot can take (its own list + general) and their energy cost
   // ---------- DIM loadout share link ----------
@@ -1419,9 +1459,10 @@ const Core = (() => {
   // armor mod sockets of one armor piece (Bungie, defs.sock): [[socketIndex, code]], code g general, s slot-specific,
   // t tuning, a artifice, x:<name> raid / seasonal. Without a known piece: 1 general + 3 slot sockets (Armor 3.0).
   const MOD_DEFAULT = [[-1, 'g'], [-1, 's'], [-1, 's'], [-1, 's']];
-  function modLayout(hash, defs) {
+  // tier: the piece's gear tier when known; the tuning socket only works on Tier 5 armor
+  function modLayout(hash, defs, tier) {
     const sk = defs?.sock; const i = sk?.a?.[String(hash || '')]; const lay = i != null ? sk.lay[i] : MOD_DEFAULT;
-    return lay.filter(([, c]) => c === 'g' || c === 's' || ((c === 't' || c === 'a' || c.startsWith('x:')) && (sk?.m?.[c] || []).length));
+    return lay.filter(([, c]) => c === 'g' || c === 's' || ((c === 't' || c === 'a' || c.startsWith('x:')) && (sk?.m?.[c] || []).length && !(c === 't' && tier != null && tier !== '' && Number(tier) < 5)));
   }
   const MOD_SOCK_L = { g: 'General', t: 'Tuning', a: 'Artifice' };
   const modSockLabel = (c, slotLabel) => c === 's' ? slotLabel : MOD_SOCK_L[c] || (/^x:raid/.test(c) ? 'Raid' : /^x:season/.test(c) ? 'Seasonal' : 'Activity');
@@ -1442,6 +1483,6 @@ const Core = (() => {
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
   return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

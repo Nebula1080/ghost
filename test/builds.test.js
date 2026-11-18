@@ -230,4 +230,29 @@ t('exotic catalyst effects only count when the catalyst is applied', () => {
   assert.strictEqual(off.links.filter(l => l.t === 'weaken').length, 0);
   assert.ok(off.inactive.some(f => f.why.some(w => /Black Talon Catalyst applied/.test(w))), 'listed as Not active: needs the catalyst');
 });
+t('Armor 3.0: archetypes, masterwork on the 3 lowest stats, legacy +2, Balanced Tuning, tuning on Tier 5 only, mods counted once', () => {
+  const d = { ...D, sock: JSON.parse(fs.readFileSync(__dirname + '/../data/sockets.json', 'utf8')) };
+  assert.deepStrictEqual(C.archetypeOf('Bulwark', d), { n: 'Bulwark', pri: 'Health', sec: 'Class' });
+  assert.deepStrictEqual(C.archetypeOf('Skirmisher', d), { n: 'Skirmisher', pri: 'Melee', sec: 'Weapons' });
+  const S6 = o => Object.fromEntries(C.ARMOR3.map(k => [k, o[k] || 0]));
+  const hood = '2082858804';   // Techsec Hood: general + 3 helmet + tuning sockets
+  // Tier 5, Gunner 30/25/20, masterwork 5 -> +5 on the three 0 stats; a +Weapons/-Health tuning mod on it
+  const base = S6({ Weapons: 30, Grenade: 25, Super: 20 });
+  const cur = S6({ Weapons: 35, Grenade: 25, Super: 20, Health: 0, Class: 5, Melee: 5 });
+  const it = { kind: 'armor', name: 'T5', hash: hood, tier: 5, frame: 'Gunner', tertiary: 'Super', tuning: 'Weapons', base, stats: cur, perks: [{ n: '+Weapons / -Health', s: 1 }] };
+  const pt = C.armorParts(it, d, 'head');
+  assert.strictEqual(pt.gen3, true); assert.deepStrictEqual(pt.low, ['Health', 'Class', 'Melee']); assert.strictEqual(pt.mwLevel, 5);
+  assert.deepStrictEqual(pt.mw, S6({ Health: 5, Class: 5, Melee: 5 }), 'masterwork credited to the 3 lowest only');
+  const st = C.buildStats({ cls: 'warlock', el: 'solar', sub: {}, a: { head: { id: '1', hash: hood } }, mods: { head: [] } }, d, new Map([['1', it]]));
+  assert.strictEqual(st.stats.Weapons.tune, 5); assert.strictEqual(st.stats.Health.tune, -5);
+  assert.strictEqual(st.stats.Weapons.total, 35); assert.strictEqual(st.stats.Health.total, 0, 'the mod already on the piece is not counted twice');
+  // Balanced Tuning: +1 to the three lowest base stats
+  const st2 = C.buildStats({ cls: 'warlock', el: 'solar', sub: {}, a: { head: { id: '1', hash: hood } }, mods: { head: [null, null, null, null, 'Balanced Tuning'] } }, d, new Map([['1', it]]));
+  assert.deepStrictEqual(C.ARMOR3.map(k => st2.stats[k].tune), C.ARMOR3.map(k => ['Health', 'Class', 'Melee'].includes(k) ? 1 : 0));
+  // tuning socket only on Tier 5
+  assert.ok(C.modLayout(hood, d, 5).some(x => x[1] === 't')); assert.ok(!C.modLayout(hood, d, 4).some(x => x[1] === 't'));
+  // legacy armor (no tier, six stats): masterwork +2 to every stat
+  const leg = { kind: 'armor', name: 'Old', hash: '0', tier: null, frame: 'Paragon', base: S6({ Weapons: 10, Health: 10, Class: 10, Grenade: 20, Super: 10, Melee: 5 }), stats: S6({ Weapons: 12, Health: 12, Class: 12, Grenade: 22, Super: 12, Melee: 7 }), perks: [] };
+  const lp = C.armorParts(leg, d, 'head'); assert.strictEqual(lp.gen3, false); assert.deepStrictEqual(Object.values(lp.mw), [2, 2, 2, 2, 2, 2]);
+});
 console.log(n, 'build tests passed');
