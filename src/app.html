@@ -667,8 +667,8 @@ function plugIcon(name, cls = '', idx) {
 }
 const stripHtml = h => String(h || '').replace(/<div class="cl-sp"><\/div>/g, '\n').replace(/<br>|<\/div>/g, '\n').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\n{3,}/g, '\n\n').trim();
 const pIdx = (n, kind) => Core.plugOf(n, D, kind)?.[0];
-function perkInfoText(name, kind) {
-  const i = Core.perkInfo(name, D, kind); if (!i) return '';
+function perkInfoText(name, kind, ph) {
+  const i = Core.perkInfo(name, D, kind, ph); if (!i) return '';
   const enh = /^enhanced\s/i.test(name);
   return stripHtml(i.cl ? (enh && i.cl.e ? i.cl.e : i.cl.h) : i.dc?.h || i.bd);
 }
@@ -685,7 +685,7 @@ const TYPE_LABEL = { i: 'Intrinsic', r: 'Armor archetype', b: 'Barrel / sight', 
 const COL_LABEL = { b: 'Barrel', m: 'Magazine', t: 'Trait', o: 'Origin', '?': 'Perk' };
 // Full detail block for one plug / perk / ability: Bungie text, Clarity, Data Compendium, light.gg link
 function infoHtml(name, opt = {}) {
-  const i = Core.perkInfo(name, D, opt.ikind) || {};
+  const i = Core.perkInfo(name, D, opt.ikind, opt.ph) || {};
   const enh = /^enhanced\s/i.test(name);
   const bd = opt.bd || i.bd;
   const hash = opt.hash || i.hash;
@@ -1361,13 +1361,14 @@ function groupIcon(g, name) {
 }
 // tooltip text for a socket
 function skTitle(p, it) {
-  const rel = it.perkRel?.[p.n]; const info = perkInfoText(p.n, it.kind);
+  const rel = it.perkRel?.[p.n]; const info = perkInfoText(p.n, it.kind, Core.intrinsicHash(it, p.n, D));
   return `${p.n} · ${p.s ? 'Equipped' : 'Selectable option'}${rel ? ` · Rating: PvE ${rel.e || '–'} · PvP ${rel.p || '–'}` : ''}${info ? '\n\n' + info.slice(0, 380) : ''}\n\nClick for details`;
 }
 function skHtml(p, it, hits, opt = {}) {
   const rel = it.perkRel?.[p.n]; const top = rel && rel.rel >= 85;
   const cls = ['sk', opt.stack ? 'stk' : '', p.s ? 'sel' : 'opt', top ? 'top' : '', /^enhanced\s/i.test(p.n) ? 'enh' : '', hits.has('perk:' + p.n) ? 'hit' : ''].join(' ');
-  return `<span class="${cls}" data-pk="${esc(p.n)}" title="${esc(skTitle(p, it))}">${plugIcon(p.n, opt.sq ? 'sq' + (opt.small ? ' sm' : '') : (opt.small ? 'sm' : ''), pIdx(p.n, it.kind))}${opt.noName ? '' : `<span class="nm2">${esc(p.n)}</span>`}</span>`;
+  const ph = Core.intrinsicHash(it, p.n, D);
+  return `<span class="${cls}" data-pk="${esc(p.n)}"${ph ? ` data-ph="${ph}"` : ''} title="${esc(skTitle(p, it))}">${plugIcon(p.n, opt.sq ? 'sq' + (opt.small ? ' sm' : '') : (opt.small ? 'sm' : ''), pIdx(p.n, it.kind))}${opt.noName ? '' : `<span class="nm2">${esc(p.n)}</span>`}</span>`;
 }
 // game-style perk grid (Clean up tiles): the intrinsic and exotic perks on top, then one labelled column per perk
 // socket (Barrel, Magazine, Trait 1, Trait 2, Origin) with the equipped perk and its name on top and the roll's
@@ -1537,7 +1538,7 @@ function openItem(id, paneId, focusPerk) {
       det.innerHTML = infoHtml(sp.n, { kind: `${set.n} · ${sp.c}-piece bonus`, bd: sp.d, icon: sp.i, sq: true, extra: dch && !Core.perkInfo(sp.n, D)?.dc ? `<span class="src2">Data Compendium · ${esc(set.n)}</span><div class="dctx">${SH(dch)}</div>` : '' });
     } else {
       const n = b.dataset.pk; const rel = it.perkRel?.[n];
-      det.innerHTML = infoHtml(n, { kind: b.dataset.kind, ikind: it.kind, sq: b.dataset.sq === '1', extra: `<span class="src2">Ghost rating</span><div class="btxt">PvE ${tierBadge(Core.perkTier(n, 'e', RT, UR))} · PvP ${tierBadge(Core.perkTier(n, 'p', RT, UR))} <button class="linkbtn" type="button" data-open-ratings>Change</button></div>` });
+      det.innerHTML = infoHtml(n, { kind: b.dataset.kind, ikind: it.kind, ph: Core.intrinsicHash(it, n, D), sq: b.dataset.sq === '1', extra: `<span class="src2">Ghost rating</span><div class="btxt">PvE ${tierBadge(Core.perkTier(n, 'e', RT, UR))} · PvP ${tierBadge(Core.perkTier(n, 'p', RT, UR))} <button class="linkbtn" type="button" data-open-ratings>Change</button></div>` });
       det.insertAdjacentHTML('beforeend', perkActHtml(it, n) + modActHtml(it, n)); bindPerkAct(it, det, reopenItem); bindModAct(it, det, reopenItem);
     }
     // place the description directly under the clicked row: after the intrinsic / set / mods block,
@@ -1689,11 +1690,11 @@ function renderCompare() {
   }
   // perks: intrinsic, then each column; perks every item shares are muted, unique ones stand out
   const pk = (p, shared) => `<span class="cpk${p.s ? ' sel' : ' opt'}${shared ? ' shared' : ' uniq'}" data-pk="${esc(p.n)}" title="${esc(p.n)}">${plugIcon(p.n, p.s ? '' : 'sm', pIdx(p.n, kind))}${p.s ? `<span>${esc(p.n)}</span>` : ''}</span>`;
-  const sqpk = (p, shared) => `<span class="cpk sel${shared ? ' shared' : ' uniq'}" data-pk="${esc(p.n)}" title="${esc(p.n)}">${plugIcon(p.n, 'sq', pIdx(p.n, kind))}<span>${esc(p.n)}</span></span>`;
+  const sqpk = (p, shared, it) => { const ph = Core.intrinsicHash(it, p.n, D); return `<span class="cpk sel${shared ? ' shared' : ' uniq'}" data-pk="${esc(p.n)}"${ph ? ` data-ph="${ph}"` : ''} title="${esc(p.n)}">${plugIcon(p.n, 'sq', pIdx(p.n, kind))}<span>${esc(p.n)}</span></span>`; };
   const sharedSet = lists => { const sets = lists.map(l => new Set(l.map(p => Core.norm(p.n)))); return x => sets.every(st => st.has(Core.norm(x.n))); };
   rows.push(`<div class="cr sech"><div class="cl">${kind === 'armor' ? 'Perks &amp; mods' : 'Perks &amp; traits'} <small>muted = all share it</small></div>${cols.map(() => '<div class="cc"></div>').join('')}</div>`);
   const intr = cols.map(c => [...c.sk.intrinsic, ...c.sk.exotic]);
-  { const sh = sharedSet(intr); row(kind === 'armor' ? 'Archetype / exotic' : 'Intrinsic', intr.map(l => l.map(p => sqpk(p, n > 1 && sh(p))).join('')), intr.map(l => l.map(p => Core.norm(p.n)).join())); }
+  { const sh = sharedSet(intr); row(kind === 'armor' ? 'Archetype / exotic' : 'Intrinsic', intr.map((l, ci) => l.map(p => sqpk(p, n > 1 && sh(p), cols[ci].it)).join('')), intr.map(l => l.map(p => Core.norm(p.n)).join())); }
   // perk rows line up by socket type (Barrel, Magazine, Trait 1, Trait 2, Origin…), never by position,
   // so each row compares like with like and an item without that socket shows a dash
   const byType = cols.map(c => { const m = {}; c.sk.cols.forEach(col => (m[col.ty] ||= []).push(col)); return m; });
@@ -1725,7 +1726,7 @@ function renderCompare() {
   v.querySelectorAll('[data-rm]').forEach(b => b.onclick = e => { e.stopPropagation(); CMP.ids = CMP.ids.filter(x => x !== b.dataset.rm); saveCmp(); renderCompare(); });
   v.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openItem(b.dataset.open, null));
   v.querySelectorAll('[data-stat]').forEach(b => b.onclick = () => { const k = b.dataset.stat; CMP.sort = CMP.sort?.[0] === k ? (CMP.sort[1] > 0 ? [k, -1] : null) : [k, lowerBetter.has(k) ? -1 : 1]; saveCmp(); renderCompare(); });
-  v.querySelectorAll('[data-pk]').forEach(b => b.onclick = () => { modal(`<div class="pdet" style="margin:0">${infoHtml(b.dataset.pk, { sq: !b.querySelector('.ic:not(.sq)'), ikind: kind })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); });
+  v.querySelectorAll('[data-pk]').forEach(b => b.onclick = () => { modal(`<div class="pdet" style="margin:0">${infoHtml(b.dataset.pk, { ph: b.dataset.ph, sq: !b.querySelector('.ic:not(.sq)'), ikind: kind })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); });
   $('#cmpDiff').onchange = e => { CMP.diff = e.target.checked; saveCmp(); renderCompare(); };
   $('#cmpClear').onclick = () => { CMP.ids = []; CMP.label = ''; CMP.q = ''; CMP.total = 0; saveCmp(); renderCompare(); };
   const cp = $('#cmpPane'); if (cp) cp.onclick = () => { setView('vault'); addPane(CMP.q, CMP.label || 'Compare'); };
@@ -1767,7 +1768,7 @@ function sheetDrag(d) {
     if (e.pointerType !== 'touch') return; const el = e.target.closest('[data-pk]'); if (!el) return;
     fired = false; x0 = e.clientX; y0 = e.clientY;
     const host = el.closest('[data-id]'); const ik = host ? S.byId.get(host.dataset.id)?.kind : (drawerItem?.kind);
-    t = setTimeout(() => { fired = true; navigator.vibrate?.(15); modal(`<div class="pdet" style="margin:0">${infoHtml(el.dataset.pk, { sq: !!el.querySelector('.ic.sq'), ikind: ik })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); }, 450);
+    t = setTimeout(() => { fired = true; navigator.vibrate?.(15); modal(`<div class="pdet" style="margin:0">${infoHtml(el.dataset.pk, { ph: el.dataset.ph, sq: !!el.querySelector('.ic.sq'), ikind: ik })}</div><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); }, 450);
   });
   const cancel = e => { if (t && (e.type !== 'pointermove' || Math.hypot(e.clientX - x0, e.clientY - y0) > 10)) { clearTimeout(t); t = null; } };
   ['pointerup', 'pointercancel', 'pointermove'].forEach(k => document.addEventListener(k, cancel));
@@ -2071,7 +2072,7 @@ function fxHtml(pc, f, extra = '') {
   const e = f.e; const src = { bungie: 'Bungie', clarity: 'Clarity', clarityEnhanced: 'Clarity (enhanced)', compendium: 'Data Compendium' }[e.s] || '';
   const condTxt = c => c.any ? c.any.map(condTxt).join(' or ') : c.subclass ? `a ${c.subclass} subclass` : c.piece ? c.piece : c.item ? c.item : c.slot ? c.is.join(' or ') : c.weapon ? (['super', 'grenade', 'melee'].includes(c.weapon) ? `a weapon matching your ${c.weapon}` : `a ${c.weapon} weapon`) : (IX?.t?.[c.has]?.l || c.has);
   const conds = (e.if || []).map(condTxt);
-  return `<b>${esc(pc.n)}</b> <small>${esc(VERB[e.do] || e.do)} ${esc(IX?.t?.[e.t]?.l || e.t)}${e.by ? ' through ' + esc(IX?.t?.[e.by]?.l || e.by) : ''}${e.perk ? ' · ' + esc(e.perk) : ''} · ${esc(src)}</small>${e.on ? `<span class="son">${esc(e.on)}</span>` : ''}${conds.length ? `<span class="son">only with ${esc(conds.join(' + '))}</span>` : ''}<q>${esc(e.q)}</q>${e.amt ? `<span class="son">${esc(e.amt)}% vs ${esc((e.vs || ['all']).map(v => Core.DR_VS[v] || v).join(', '))}</span>` : ''}${e.dmg ? `<span class="son">counts as ${esc(e.dmg.map(x => IX?.t?.[x]?.l || x).join(' + '))}</span>` : ''}${e.from ? `<span class="son">only from ${esc(e.from.map(x => IX?.t?.[x]?.l || x).join(' or '))}</span>` : ''}${e.note ? `<span class="snote2">${esc(e.note)}</span>` : ''}${extra}`;
+  return `<b>${esc(pc.n)}</b> <small>${esc(VERB[e.do] || e.do)} ${esc(IX?.t?.[e.t]?.l || e.t)}${e.by ? ' through ' + esc(IX?.t?.[e.by]?.l || e.by) : ''}${e.perk ? ' · ' + esc(e.perk) : ''} · ${esc(src)}</small>${e.on ? `<span class="son">${esc(e.on)}</span>` : ''}${conds.length ? `<span class="son">only with ${esc(conds.join(' + '))}</span>` : ''}${e.pay ? `<span class="spay">${esc(e.pay)}</span>` : ''}<q>${esc(e.q)}</q>${e.pq && e.pq !== e.q ? `<q>${esc(e.pq)}</q>` : ''}${e.amt ? `<span class="son">${esc(e.amt)}% vs ${esc((e.vs || ['all']).map(v => Core.DR_VS[v] || v).join(', '))}</span>` : ''}${e.dmg ? `<span class="son">counts as ${esc(e.dmg.map(x => IX?.t?.[x]?.l || x).join(' + '))}</span>` : ''}${e.from ? `<span class="son">only from ${esc(e.from.map(x => IX?.t?.[x]?.l || x).join(' or '))}</span>` : ''}${e.note ? `<span class="snote2">${esc(e.note)}</span>` : ''}${extra}`;
 }
 
 function renderBuilds() {
@@ -2135,14 +2136,15 @@ function renderBuilds() {
   const terms = [...T.values()].filter(x => x.prov.size);
   const pill = t => `<span class="ixt" style="--ec:${IX_EL(t) || 'var(--light)'}">${esc(IX.t[t]?.l || t)}</span>`;
   const who = (i, t, role) => `<button class="ixn" data-ev="${esc(t)}|${i}|${role}">${pieceIcon(pieces[i], b)}<span>${esc(pieces[i].n)}</span></button>`;
-  const row = x => `<div class="ixr${x.use.size ? '' : ' unused'}"><div class="ixrh">${pill(x.t)}${x.use.size ? '' : '<small>nothing uses it</small>'}</div><div class="ixrl"><span class="ixlab">From</span>${[...x.prov].map(i => who(i, x.t, 'p')).join('')}</div>${x.use.size ? `<div class="ixrl"><span class="ixlab">To</span>${[...x.use].map(i => who(i, x.t, 'u')).join('')}</div>` : ''}<div class="sev"></div></div>`;
+  const own = t => IX.t[t]?.def ? `<small class="ixown">On its own: ${esc(IX.t[t].def)}</small>` : '';
+  const row = x => `<div class="ixr${x.use.size ? '' : ' solo'}"><div class="ixrh">${pill(x.t)}${x.use.size ? '' : '<small>no other piece builds on it</small>'}</div>${x.use.size ? '' : own(x.t)}<div class="ixrl"><span class="ixlab">From</span>${[...x.prov].map(i => who(i, x.t, 'p')).join('')}</div>${x.use.size ? `<div class="ixrl"><span class="ixlab">To</span>${[...x.use].map(i => who(i, x.t, 'u')).join('')}</div>` : ''}<div class="sev"></div></div>`;
   const overview = IXK.map(([k, l, sub, c]) => { const list = terms.filter(x => kindOf(IX.t[x.t]?.kind) === k).sort((p, q) => q.use.size - p.use.size); const used = list.filter(x => x.use.size).length;
     // linked terms first; terms nothing uses fold into one compact line that opens on tap
     const unused = list.filter(x => !x.use.size);
-    const fold = unused.length ? `<details class="ixun"><summary><span>${unused.length} more provided, nothing uses ${unused.length === 1 ? 'it' : 'them'} yet</span><span class="ixpills">${unused.map(x => pill(x.t)).join('')}</span></summary>${unused.map(row).join('')}</details>` : '';
-    return `<details class="ixk" style="--kc:${c}"${list.length && ['buff', 'debuff', 'object'].includes(k) ? ' open' : ''}><summary><i></i><b>${l}</b><small>${sub}</small><span class="ixc">${list.length ? `${used} linked${unused.length ? ` · ${unused.length} unused` : ''}` : 'none'}</span></summary>${list.filter(x => x.use.size).map(row).join('')}${fold}${list.length ? '' : '<p class="snote">None in this build.</p>'}</details>`; }).join('');
+    const fold = unused.length ? `<details class="ixun"><summary><span>${unused.length} more that work on their own (no other piece builds on ${unused.length === 1 ? 'it' : 'them'})</span><span class="ixpills">${unused.map(x => pill(x.t)).join('')}</span></summary>${unused.map(row).join('')}</details>` : '';
+    return `<details class="ixk" style="--kc:${c}"${list.length && ['buff', 'debuff', 'object'].includes(k) ? ' open' : ''}><summary><i></i><b>${l}</b><small>${sub}</small><span class="ixc">${list.length ? `${used} linked${unused.length ? ` · ${unused.length} on their own` : ''}` : 'none'}</span></summary>${list.filter(x => x.use.size).map(row).join('')}${fold}${list.length ? '' : '<p class="snote">None in this build.</p>'}</details>`; }).join('');
   const byPiece = pieces.map((pc, i) => { const gives = terms.filter(x => x.prov.has(i)), gets = terms.filter(x => x.use.has(i)); if (!gives.length && !gets.length) return '';
-    const line = (x, dir) => { const others = [...(dir === '→' ? x.use : x.prov)].filter(j => j !== i); return `<div class="ixr"><div class="ixrl">${pill(x.t)}<span class="ixarr">${dir}</span>${others.map(j => who(j, x.t, dir === '→' ? 'u' : 'p')).join('') || '<small class="faint">nothing uses it</small>'}</div><div class="sev"></div></div>`; };
+    const line = (x, dir) => { const others = [...(dir === '→' ? x.use : x.prov)].filter(j => j !== i); return `<div class="ixr"><div class="ixrl">${pill(x.t)}<span class="ixarr">${dir}</span>${others.map(j => who(j, x.t, dir === '→' ? 'u' : 'p')).join('') || '<small class="faint">works on its own</small>'}</div><div class="sev"></div></div>`; };
     return `<details class="ixp"><summary>${pieceIcon(pc, b)}<b>${esc(pc.n)}</b><small>${esc(pc.label)}</small><span class="ixc">gives ${gives.length} · gets ${gets.length}</span></summary><div class="ixcols"><div><div class="ixh">Gives</div>${gives.map(x => line(x, '→')).join('') || '<p class="snote">Nothing.</p>'}</div><div><div class="ixh">Gets</div>${gets.map(x => line(x, '←')).join('') || '<p class="snote">Nothing.</p>'}</div></div></details>`; }).join('');
   const offHtml = inact.map((f, n) => `<div class="ixr"><div class="ixrl"><button class="ixn" data-in="${n}">${pieceIcon(pieces[f.i], b)}<span>${esc(pieces[f.i].n)}</span></button><span>${esc(VERB[f.e.do])}</span>${pill(f.e.t)}</div><small class="warn">${esc(f.why.join('; '))}</small><div class="sev"></div></div>`).join('') || '<p class="snote">Everything in this build is active.</p>';
   const gapHtml = syn.gaps.map(f => `<div class="ixr"><div class="ixrl"><button class="ixn" data-gap="${esc(f.key)}|${f.i}">${pieceIcon(pieces[f.i], b)}<span>${esc(pieces[f.i].n)}</span></button><span>uses</span>${pill(f.e.t)}</div><small>Nothing in this build provides it.</small><div class="sev"></div></div>`).join('') || '<p class="snote">Nothing missing.</p>';
@@ -2231,7 +2233,7 @@ function bindBuild(v, b, pieces, syn) {
     const [t, si, role] = x.dataset.ev.split('|'); const i = +si; const pc = pieces[i]; if (!pc) return;
     const ls = syn.links.filter(l => l.t === t && (role === 'p' ? l.from === i : l.to === i));
     const l = ls[0];
-    if (!l) { const f = syn.fx.find(g => g.i === i && g.ok && !g.implicit && g.e.t === t && ['creates', 'applies', 'grants'].includes(g.e.do)); if (f) showEv(x, fxHtml(pc, f, '<span class="son">Nothing in this build uses it yet.</span>')); return; }
+    if (!l) { const f = syn.fx.find(g => g.i === i && g.ok && !g.implicit && g.e.t === t && ['creates', 'applies', 'grants'].includes(g.e.do)); if (f) showEv(x, fxHtml(pc, f, IX.t[t]?.def ? `<span class="son">On its own: ${esc(IX.t[t].def)}</span>` : '')); return; }
     const f = role === 'p' ? l.pf : l.cf;
     const via = role === 'p' && l.via ? `<span class="son">${esc(IX.t[l.via.e.t]?.l || l.via.e.t)} counts as ${esc(IX.t[l.via.e.as]?.l || l.via.e.as)} (${esc(pieces[l.via.i].n)})</span><q>${esc(l.via.e.q)}</q>` : '';
     const others = [...new Set(ls.map(y => pieces[role === 'p' ? y.to : y.from].n))];

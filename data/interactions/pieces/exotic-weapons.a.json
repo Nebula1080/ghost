@@ -26,6 +26,7 @@
     "on": "activating Will Given Form at full Super",
     "q": "Immediately drains 20% Super Energy, then constantly drains 4% Super Energy per Second.",
     "s": "compendium",
+    "pay": "powers Will Given Form, which drains Super energy over time",
     "note": "catalyst; requires full Super energy to activate"
    },
    {
@@ -34,6 +35,7 @@
     "perk": "Rega's Refrain",
     "q": "Stasis final blows transfer ammo to this weapon's magazine from reserves.",
     "s": "bungie",
+    "pay": "refills the magazine from reserves",
     "note": "Stasis kills from any source"
    }
   ]
@@ -56,6 +58,7 @@
     "perk": "Arc Traps",
     "q": "Jolts on the 4th damage instance, 3 if Amplified.",
     "s": "compendium",
+    "pay": "jolts targets one hit sooner (3 hits instead of 4)",
     "note": "catalyst; Amplified jolts one hit sooner"
    }
   ]
@@ -85,6 +88,7 @@
     "on": "melee hits",
     "q": "After a successful melee hit, this weapon gains increased damage, reduced charge time, and improved reload speed for a short duration.",
     "s": "bungie",
+    "pay": "more damage, faster charge and faster reload for this weapon",
     "from": [
      "melee"
     ]
@@ -95,6 +99,7 @@
     "perk": "Saint's Fists",
     "q": "Hitting a target with most of the pellets in a burst increases melee damage for a short duration.",
     "s": "bungie",
+    "pay": "more melee damage for a short time",
     "note": "next melee within 3 s deals bonus damage"
    }
   ]
@@ -116,7 +121,8 @@
     "t": "suppress",
     "perk": "Crow's Wings",
     "q": "Hitting a target already suppressed spreads the effect to nearby targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "spreads suppression to nearby targets"
    }
   ]
  },
@@ -131,6 +137,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -140,6 +147,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -149,6 +157,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -158,6 +167,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -167,6 +177,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -176,6 +187,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -185,6 +197,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    }
   ]
@@ -228,6 +241,7 @@
     "perk": "Hungering Quarrel",
     "q": "While Devour is active: Hits inflict Weaken for 5 [?] seconds.",
     "s": "compendium",
+    "pay": "hits weaken targets while Devour is active",
     "note": "catalyst; Devour from any source enables weakening hits"
    }
   ]
@@ -251,6 +265,7 @@
     "perk": "Overcharge Capacitor",
     "q": "Passively generates 7% Charge per second and removes Passive Decay while Amplified.",
     "s": "compendium",
+    "pay": "passively builds charge and stops charge decay",
     "note": "catalyst (Static Buildup)"
    }
   ]
@@ -296,6 +311,7 @@
     "on": "collecting an Ionic Trace",
     "q": "Collecting an Ionic Trace grants 50% energy over 0.5 seconds",
     "s": "clarity",
+    "pay": "charges the beam toward full damage faster",
     "note": "Ionic Traces from any source charge the beam"
    },
    {
@@ -304,6 +320,7 @@
     "perk": "Coldheart Catalyst",
     "q": "Refills 5% of the magazine (rounded up) every 1.5 seconds while Amplified.",
     "s": "clarity",
+    "pay": "refills part of the magazine every 1.5 s",
     "note": "catalyst; Speed Booster makes the refill faster and overfills the magazine"
    }
   ]
@@ -319,6 +336,8 @@
     "on": "hitting debuffed targets",
     "q": "leeching them directly when the target is suppressed, weakened, or volatile",
     "s": "bungie",
+    "pay": "leeches the debuff into the gun for Void Leech mode",
+    "pq": "to cause damage from this weapon and to apply the stored debuffs",
     "note": "also leeches debuffs applied to you by enemies; self-applied debuffs do not count"
    },
    {
@@ -327,7 +346,9 @@
     "perk": "Void Leech",
     "on": "hitting debuffed targets",
     "q": "leeching them directly when the target is suppressed, weakened, or volatile",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "leeches the debuff into the gun for Void Leech mode",
+    "pq": "to cause damage from this weapon and to apply the stored debuffs"
    },
    {
     "do": "uses",
@@ -335,7 +356,9 @@
     "perk": "Void Leech",
     "on": "hitting debuffed targets",
     "q": "leeching them directly when the target is suppressed, weakened, or volatile",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "leeches the debuff into the gun for Void Leech mode",
+    "pq": "to cause damage from this weapon and to apply the stored debuffs"
    },
    {
     "do": "applies",
@@ -368,7 +391,8 @@
     "perk": "Umbral Sustenance",
     "on": "gaining the buff (refills magazine)",
     "q": "This weapon's magazine is automatically reloaded when you gain Devour, a Void overshield, or become invisible.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine"
    },
    {
     "do": "uses",
@@ -376,7 +400,8 @@
     "perk": "Umbral Sustenance",
     "on": "gaining the buff (refills magazine)",
     "q": "This weapon's magazine is automatically reloaded when you gain Devour, a Void overshield, or become invisible.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine"
    },
    {
     "do": "uses",
@@ -384,7 +409,8 @@
     "perk": "Umbral Sustenance",
     "on": "gaining the buff (refills magazine)",
     "q": "This weapon's magazine is automatically reloaded when you gain Devour, a Void overshield, or become invisible.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine"
    }
   ]
  },
@@ -443,6 +469,7 @@
     "on": "killing frozen targets",
     "q": "Scoring a Frozen Enemy Kill refills the Magazine.",
     "s": "compendium",
+    "pay": "refills the magazine",
     "note": "catalyst (Cold Efficiency); frozen targets from any source"
    }
   ]
@@ -457,6 +484,7 @@
     "perk": "Blades of Unmaking",
     "q": "Replaces your melee ability with a 2-hit combo blade attack.",
     "s": "clarity",
+    "pay": "melee becomes a 2-hit blade combo",
     "note": "while readied; scales with Melee stat and melee damage buffs, not a glaive melee",
     "dmg": [
      "melee"
@@ -510,6 +538,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -519,6 +548,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -528,6 +558,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -537,6 +568,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -546,6 +578,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -555,6 +588,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -564,6 +598,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    }
   ]
@@ -587,6 +622,7 @@
     "on": "collecting an Ionic Trace",
     "q": "Collecting an Ionic Trace overcharges this weapon's next shot, jolting targets on hit.",
     "s": "bungie",
+    "pay": "next shot is overcharged and jolts targets",
     "note": "Ionic Traces from any source work, even while stowed"
    },
    {
@@ -640,7 +676,8 @@
     "perk": "Close the Gap",
     "on": "picking up a Firesprite (enables laser mode)",
     "q": "After picking up a Firesprite, [Alternate Weapon Action]  to enable a high-powered Solar laser beam mode.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "unlocks the high-powered Solar laser mode"
    },
    {
     "do": "applies",
@@ -665,6 +702,7 @@
     "on": "hitting suspended targets",
     "q": "Hits against Suspended enemies inflicts 20 Scorch (30 with Ember of Ashes).",
     "s": "clarity",
+    "pay": "hits scorch suspended targets",
     "note": "Compendium: killing a suspended enemy also ignites; Ember of Ashes raises scorch stacks"
    },
    {
@@ -715,6 +753,7 @@
     "on": "nearby ignitions (any source)",
     "q": "Igniting nearby targets partially replenishes fuel.",
     "s": "bungie",
+    "pay": "refills part of the fuel",
     "note": "Clarity: ignitions within 70 m of you"
    },
    {
@@ -789,7 +828,9 @@
     "t": "amplified",
     "perk": "Edge of Concurrence",
     "q": "Being Amplified decreases the number of Hits required by 1.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "one fewer projectile hit needed to jolt",
+    "pq": "Scoring 4 Glaive Projectile Hits within 3 seconds of each causes the next Projectile to apply Jolt."
    },
    {
     "do": "applies",
@@ -900,6 +941,7 @@
     "perk": "Transcendent Duelist",
     "q": "Deals increased damage while Transcendent; defeating targets lengthens Transcendence.",
     "s": "bungie",
+    "pay": "more damage while Transcendent; kills extend Transcendence",
     "note": "Prismatic; kills also build Light and Darkness meters. Transcendent Duelist is one of several rolled Ergo Sum traits"
    },
    {
@@ -945,6 +987,7 @@
     "on": "Threadling damage (any source)",
     "q": "Threadling damage increases this weapon's damage.",
     "s": "bungie",
+    "pay": "more damage for this weapon",
     "note": "Clarity: damage from any Threadling counts"
    }
   ]
@@ -993,6 +1036,7 @@
     "perk": "Corrupted Nucleosynthesis",
     "q": "Hits while Amplified grant 50% Enrage on hit.",
     "s": "compendium",
+    "pay": "hits build Enrage faster",
     "note": "catalyst"
    }
   ]
@@ -1030,6 +1074,7 @@
     "perk": "Thin the Herd",
     "q": "Rapid final blows against grenade-damaged combatants refill the magazine.",
     "s": "bungie",
+    "pay": "refills the magazine",
     "note": "Clarity/Compendium: the refill is a kill with any other weapon or source within 6 s of Fighting Lion damage, not grenades specifically",
     "from": [
      "grenade"
@@ -1062,6 +1107,7 @@
     "on": "hold reload within 4 s of a weapon kill",
     "q": "replaces Grenade Ability with a Kinetic-Damage Fragmentation Grenade.",
     "s": "compendium",
+    "pay": "swaps your grenade for a Kinetic frag grenade",
     "note": "catalyst (The Rock); the frag counts as a Grenade Ability for grenade-kill and grenade-use effects",
     "dmg": [
      "grenade"
@@ -1090,7 +1136,7 @@
   "fx": [
    {
     "do": "grants",
-    "t": "overshield",
+    "t": "overshieldgeneric",
     "perk": "Graviton Lance Catalyst",
     "q": "Grants a 30 HP Overshield for 10 seconds.",
     "s": "clarity",
@@ -1116,7 +1162,8 @@
     "perk": "Temporal Anomaly",
     "on": "hitting Stasis crystals in Arc mode while overcharged",
     "q": "Hitting Stasis Crystals will consume 34% Arc Overcharge to call down a lightning strike on them.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "calls a lightning strike on the crystal (costs overcharge)"
    }
   ]
  },
@@ -1131,6 +1178,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -1140,6 +1188,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -1149,6 +1198,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -1158,6 +1208,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -1167,6 +1218,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -1176,6 +1228,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -1185,6 +1238,7 @@
     "on": "applying or gaining a buff/debuff matching the selected element",
     "q": "Grants this weapon temporarily increased damage when you apply or gain an elemental buff or debuff that matches this weapon's damage type.",
     "s": "bungie",
+    "pay": "this weapon deals more damage for a short time (element must match the weapon's mode)",
     "note": "only when the weapon is set to the matching element (Arc, Solar or Void); any matching elemental buff or debuff counts"
    },
    {
@@ -1193,6 +1247,7 @@
     "perk": "Hard Light Catalyst",
     "q": "While Amplified, Radiant, or Devour is active:",
     "s": "clarity",
+    "pay": "more handling and faster reload",
     "note": "catalyst; handling and reload bonuses"
    },
    {
@@ -1201,6 +1256,7 @@
     "perk": "Hard Light Catalyst",
     "q": "While Amplified, Radiant, or Devour is active:",
     "s": "clarity",
+    "pay": "more handling and faster reload",
     "note": "catalyst"
    },
    {
@@ -1209,6 +1265,7 @@
     "perk": "Hard Light Catalyst",
     "q": "While Amplified, Radiant, or Devour is active:",
     "s": "clarity",
+    "pay": "more handling and faster reload",
     "note": "catalyst"
    }
   ]
@@ -1231,6 +1288,7 @@
     "perk": "Shot in the Dark",
     "q": "Remaining invisible grants this weapon increased damage for a brief duration.",
     "s": "bungie",
+    "pay": "more damage for this weapon for a short time",
     "note": "Clarity: entering Void invisibility from any source grants Shot in the Dark"
    },
    {
@@ -1304,6 +1362,7 @@
     "perk": "Bolt Thrower",
     "q": "Deals 10% increased damage against Scorched Enemies.",
     "s": "compendium",
+    "pay": "more damage against scorched targets",
     "note": "catalyst; also grants Incandescent"
    }
   ]
@@ -1328,14 +1387,16 @@
     "t": "volatilerounds",
     "perk": "Guidance Ring",
     "q": "Seekers can benefit from Volatile Rounds, Unraveling Rounds, and more!",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "Guidance Ring seekers can trigger Volatile Rounds"
    },
    {
     "do": "uses",
     "t": "unravelingrounds",
     "perk": "Guidance Ring",
     "q": "Seekers can benefit from Volatile Rounds, Unraveling Rounds, and more!",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "Guidance Ring seekers can trigger Unraveling Rounds"
    },
    {
     "do": "modifies",
@@ -1352,6 +1413,8 @@
     ],
     "q": "Guidance Rings grant their benefits to any Combat Bow, including Legendaries, Exotics, Heavy Crossbows, Shadowshot, and also Buried Bloodline.",
     "s": "clarity",
+    "pay": "Shadowshot: Deadfall arrows through a Guidance Ring release six seekers",
+    "pq": "Casting Shadowshot: Deadfall releases six.",
     "note": "Shadowshot arrows through a ring release seekers (Deadfall: 6); those seekers count as Void Super damage",
     "dmg": [
      "super",
@@ -1378,14 +1441,16 @@
     "perk": "Ice Breaker",
     "on": "shattering frozen targets",
     "q": "Precision final blows or shattering a frozen target instead triggers an ignition.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "shattering a frozen target ignites"
    },
    {
     "do": "uses",
     "t": "shatter",
     "perk": "Ice Breaker",
     "q": "Precision Kills or Shattering a Frozen target triggers a Solar Ignition.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "shattering a frozen target ignites"
    },
    {
     "do": "uses",
@@ -1393,7 +1458,8 @@
     "perk": "Ice Breaker",
     "on": "shattering a Stasis crystal",
     "q": "Bodyshot Kills or Shattering a Stasis Crystal triggers a Solar Explosion",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "shattering a crystal causes a Solar explosion"
    },
    {
     "do": "uses",
@@ -1402,6 +1468,7 @@
     "on": "hitting Stasis-debuffed targets",
     "q": "Hits against enemies affected by Stasis Debuffs generates +1 Ammo",
     "s": "compendium",
+    "pay": "hits generate ammo",
     "note": "catalyst (Icing Breaker)"
    },
    {
@@ -1411,6 +1478,7 @@
     "on": "hitting Stasis-debuffed targets",
     "q": "Hits against enemies affected by Stasis Debuffs generates +1 Ammo",
     "s": "compendium",
+    "pay": "hits generate ammo",
     "note": "catalyst (Icing Breaker)"
    }
   ]
@@ -1425,7 +1493,8 @@
     "perk": "Eyes Up, Guardian",
     "on": "collecting Orbs of Power",
     "q": "Collecting Orbs of Power strengthens this weapon's next several ricochet shots",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "next several ricochet shots are stronger"
    },
    {
     "do": "uses",
@@ -1433,7 +1502,8 @@
     "perk": "Shoot to Loot",
     "on": "shooting Orbs of Power picks them up",
     "q": "Shooting an Orb of Power picks it up.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "shooting an Orb picks it up"
    }
   ]
  },
@@ -1469,6 +1539,8 @@
     "perk": "Arc Alignment",
     "q": "Dealing Arc damage from any source aligns the battery's coils.",
     "s": "bungie",
+    "pay": "charges Arc Alignment (magazine refill, less recoil, jolting hipfire)",
+    "pq": "When alignment is complete",
     "note": "Arc damage from any source (abilities included) charges Arc Alignment"
    },
    {
@@ -1477,6 +1549,7 @@
     "perk": "Starlight Beam",
     "q": "30% increased damage against Arc-Debuffed Enemies.",
     "s": "compendium",
+    "pay": "more damage against Arc-debuffed targets",
     "note": "any Arc debuff (jolt, blind)"
    },
    {
@@ -1484,7 +1557,8 @@
     "t": "blind",
     "perk": "Starlight Beam",
     "q": "30% increased damage against Arc-Debuffed Enemies.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage against Arc-debuffed targets"
    },
    {
     "do": "applies",
@@ -1500,6 +1574,8 @@
     "perk": "Starlight Beam",
     "q": "While Amplified:",
     "s": "compendium",
+    "pay": "faster reload, more aim assist, less ADS move penalty",
+    "pq": "Reload Speed, +10? Aim Assist, and ?% Decreased ADS Movement Speed Penalty",
     "note": "catalyst (Supercharged Matrix): reload, aim assist and ADS movement bonuses"
    }
   ]
@@ -1546,6 +1622,7 @@
     ],
     "q": "Receiving a 'Noble Seeker' from a rift empowered by Boots Of The Assembler also grants one Noble Round.",
     "s": "clarity",
+    "pay": "each Noble Seeker also grants a Noble Round",
     "note": "Boots of the Assembler's Noble Seekers grant Noble Rounds"
    }
   ]

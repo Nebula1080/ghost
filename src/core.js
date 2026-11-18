@@ -303,8 +303,18 @@ const Core = (() => {
     return p || null;
   }
   // Everything known about one plug/perk name: Clarity, Data Compendium (formatted), Bungie text + socket type
-  function perkInfo(name, defs, kind) {
+  // Intrinsics repeat names across weapon types with different effects ("Aggressive Frame" on swords, fusion
+  // rifles, pulse rifles…), so a weapon's own intrinsic is looked up by its plug hash (defs.wi / defs.ih,
+  // tools/build-defs.mjs). Returns the hash when `name` is that weapon's intrinsic and the name is ambiguous.
+  function intrinsicHash(it, name, defs) {
+    if (!it || it.kind !== 'weapon' || !defs?.wi) return null;
+    const h = defs.wi[it.hash]; const e = h && defs.ih?.[h];
+    return e && norm(name) === norm(e[0]) ? String(h) : null;
+  }
+  function perkInfo(name, defs, kind, ph) {
     if (!defs) return null;
+    const ih = ph && defs.ih?.[ph];
+    if (ih) return { cl: ih[2] ? { h: ih[2], ty: ih[3] || 'Intrinsic' } : null, dc: null, bd: ih[1] || '', ty: 'i', hash: Number(ph) };
     const k = norm(name); const cl = defs.cl?.[k]; let dc = defs.dc?.[k];
     if (dc?.x) dc = { h: defs.dcx?.[dc.x] || '', s: dc.s };
     const p = plugOf(name, defs, kind);
@@ -1018,8 +1028,8 @@ const Core = (() => {
     return out;
   }
   // description text of a plug / ability by name: [[source, plainText], …]
-  function pieceText(name, defs, bungie, kind) {
-    const i = perkInfo(name, defs, kind) || {};
+  function pieceText(name, defs, bungie, kind, ph) {
+    const i = perkInfo(name, defs, kind, ph) || {};
     const out = [];
     const bd = bungie || i.bd; if (bd) out.push(['Bungie', bd]);
     if (i.cl) out.push(['Clarity', stripTags(String(i.cl.h || '').replace(/<\/div>|<br>/g, '\n'))]);
@@ -1067,7 +1077,7 @@ const Core = (() => {
       const sk = sockets(it, defs);
       const perks = g === 'weapon' ? [...sk.intrinsic, ...sk.exotic, ...sk.cols.flatMap(c => c.perks.filter(p => p.s && c.ty !== 'b' && c.ty !== 'm')), ...sk.catalyst.filter(p => p.s)] : [...sk.exotic];
       const parts = [];
-      for (const p of perks) for (const [src, t] of pieceText(p.n, defs, null, it.kind)) parts.push([`${p.n} · ${src}`, t]);
+      for (const p of perks) for (const [src, t] of pieceText(p.n, defs, null, it.kind, intrinsicHash(it, p.n, defs))) parts.push([`${p.n} · ${src}`, t]);
       if (g === 'weapon' && /exotic/i.test(it.rarity) && !perks.length && defs?.dcx?.[norm(it.name)]) parts.push(['Data Compendium', stripTags(defs.dcx[norm(it.name)])]);
       out.push({ g, slot, n: it.name, label, it, parts });
     };
@@ -1146,6 +1156,8 @@ const Core = (() => {
     const prov = new Map(); const addP = (t, p) => { if (!prov.has(t)) prov.set(t, []); prov.get(t).push(p); };
     for (const f of fx) if (f.ok && PROVIDE.has(f.e.do)) addP(f.e.t, { f });
     for (const c of fx) if (c.ok && c.e.do === 'counts') for (const p of [...(prov.get(c.e.t) || [])]) if (!p.via) addP(c.e.as, { f: p.f, via: c });
+    // glossary "is a": a more specific term also provides the general one (a Void Overshield is an overshield)
+    for (const [t, list] of [...prov.entries()]) for (const g of ix?.t?.[t]?.isa || []) for (const p of list) addP(g, { f: p.f, via: p.via, isa: t });
     // damage sources: what an effect's damage counts as (weapon, grenade, melee, classability, super…). Curated `dmg`
     // wins; otherwise the piece's own kind (a weapon deals weapon damage, your grenade grenade damage). Active
     // "counts" rules extend it (Well of Radiance: weapon → super; a Void Soul counts as a grenade).
@@ -1321,7 +1333,7 @@ const Core = (() => {
   const modsFor = (slot, defs) => [...(defs?.am?.[slot] || []), ...(defs?.am?.general || [])];
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
-  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
+  return { LIMITS, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
     SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, subList, subclassPlan, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

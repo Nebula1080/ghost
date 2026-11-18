@@ -62,7 +62,8 @@
     "do": "uses",
     "t": "tangle",
     "q": "Grappling to a Tangle immediately recharges your grenade energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grappling a Tangle recharges your grenade energy"
    },
    {
     "do": "grants",
@@ -76,7 +77,8 @@
     "t": "grappletangle",
     "note": "Grappling a Tangle or Grapple Tangle refunds the Grapple charge.",
     "q": "Upon Grappling a Tangle or Grapple Tangle: Fully refunds a Grapple Ability Charge",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "grappling it refunds your Grapple charge"
    },
    {
     "do": "applies",
@@ -153,7 +155,8 @@
     "t": "suspend",
     "note": "25% more light-attack damage to suspended targets (Compendium).",
     "q": "dealing bonus damage to suspended targets",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "light attacks deal bonus damage (25%) to suspended targets"
    },
    {
     "do": "applies",
@@ -207,7 +210,8 @@
     "do": "modifies",
     "t": "threadling",
     "q": "Threadlings you create will return to you and perch if they can't find any nearby targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Threadlings with no target return and perch on you"
    },
    {
     "do": "creates",
@@ -220,7 +224,8 @@
     "t": "perchedthreadling",
     "on": "damaging targets with weapons or melee",
     "q": "Damaging targets with your weapons or melee will send out perched Threadlings to attack.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon or melee damage sends perched Threadlings out to attack"
    },
    {
     "do": "grants",
@@ -252,7 +257,8 @@
     "do": "modifies",
     "t": "grapple",
     "q": "Functionally identical to a Grapple Grenade that instantly recharges once grounded.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "Super grapple recharges instantly once you land"
    },
    {
     "do": "consumes",
@@ -265,7 +271,8 @@
     "on": "class ability input during the Super",
     "note": "With Ensnaring Slam, the class ability input repeats Ensnaring Slam during Silkstrike.",
     "q": "Allows the repeated usage of Ensnaring Slam while the Aspect is equipped at the cost of 4.5% Super Energy.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "repeat Ensnaring Slam during the Super for 4.5% Super energy each"
    },
    {
     "do": "grants",
@@ -299,26 +306,34 @@
     "do": "uses",
     "t": "melee",
     "q": "Defeat a target with a melee attack, finisher, or Sword to raise a Banner of War",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "melee kills raise a Banner that heals allies and boosts melee and Sword damage",
+    "pq": "periodically healing nearby allies and increasing melee and Sword damage"
    },
    {
     "do": "uses",
     "t": "finisher",
     "q": "Defeat a target with a melee attack, finisher, or Sword to raise a Banner of War",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "finisher kills raise a Banner that heals allies and boosts melee and Sword damage",
+    "pq": "periodically healing nearby allies and increasing melee and Sword damage"
    },
    {
     "do": "uses",
     "t": "sword",
     "q": "Defeat a target with a melee attack, finisher, or Sword to raise a Banner of War",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Sword kills raise a Banner that heals allies and boosts melee and Sword damage",
+    "pq": "periodically healing nearby allies and increasing melee and Sword damage"
    },
    {
     "do": "uses",
     "t": "glaive",
     "note": "Glaive melee kills (Compendium).",
     "q": "Scoring a kill with your Melee, Sword, Glaive, Super Light Attack, or Finisher begins 'Banner of War'",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "Glaive melee kills raise a Banner that heals allies and boosts melee damage",
+    "pq": "100% Increased Base Melee Damage"
    },
    {
     "do": "uses",
@@ -333,7 +348,9 @@
     ],
     "note": "Super light attack kills (Bladefury) also raise it.",
     "q": "Scoring a kill with your Melee, Sword, Glaive, Super Light Attack, or Finisher begins 'Banner of War'",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "Bladefury light attack kills raise a Banner that boosts Bladefury damage",
+    "pq": "40% Increased Bladefury Damage"
    },
    {
     "do": "grants",
@@ -355,14 +372,16 @@
     "t": "melee",
     "by": "bannerofwar",
     "q": "increasing melee and Sword damage",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "allies near the Banner deal more melee damage"
    },
    {
     "do": "modifies",
     "t": "sword",
     "by": "bannerofwar",
     "q": "increasing melee and Sword damage",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "allies near the Banner deal more Sword damage"
    },
    {
     "do": "modifies",
@@ -377,7 +396,8 @@
      }
     ],
     "q": "40% Increased Bladefury Damage",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "40% more Bladefury damage near the Banner"
    }
   ]
  },
@@ -389,7 +409,9 @@
     "do": "uses",
     "t": "barricade",
     "q": "Activate your Barricade ability to create a ripple in reality that travels forward along the ground",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Barricade sends a ground wave that suspends and damages targets",
+    "pq": "suspending and damaging the targets it hits"
    },
    {
     "do": "applies",
@@ -402,19 +424,22 @@
     "do": "uses",
     "t": "suspend",
     "q": "Final blows on targets affected by Suspend, Unravel, or Sever grant class ability energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "class ability energy on final blows"
    },
    {
     "do": "uses",
     "t": "unravel",
     "q": "Final blows on targets affected by Suspend, Unravel, or Sever grant class ability energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "class ability energy on final blows"
    },
    {
     "do": "uses",
     "t": "sever",
     "q": "Final blows on targets affected by Suspend, Unravel, or Sever grant class ability energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "class ability energy on final blows"
    },
    {
     "do": "grants",
@@ -434,19 +459,24 @@
     "do": "uses",
     "t": "melee",
     "q": "While sliding, activate your charged melee ability to leap into the air",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "sliding charged melee leaps up, then throws unraveling projectiles",
+    "pq": "activate your charged melee again to launch a cluster of damaging, unraveling projectiles"
    },
    {
     "do": "uses",
     "t": "sliding",
     "q": "While sliding, activate your charged melee ability to leap into the air",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "sliding charged melee leaps up, then throws unraveling projectiles",
+    "pq": "activate your charged melee again to launch a cluster of damaging, unraveling projectiles"
    },
    {
     "do": "consumes",
     "t": "meleeenergy",
     "q": "consumes 50% melee energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "each leap or salvo costs 50% melee energy"
    },
    {
     "do": "applies",
@@ -476,13 +506,15 @@
     "do": "uses",
     "t": "tangle",
     "q": "Destroying a Tangle or casting your Super grants Woven Mail for nearby allies.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "destroying a Tangle gives nearby allies Woven Mail"
    },
    {
     "do": "uses",
     "t": "super",
     "q": "Destroying a Tangle or casting your Super grants Woven Mail for nearby allies.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "casting your Super gives nearby allies Woven Mail"
    },
    {
     "do": "grants",
@@ -504,7 +536,8 @@
     "do": "uses",
     "t": "wovenmail",
     "q": "While you have Woven Mail, your melee regeneration rate is increased.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster melee regeneration while you have Woven Mail"
    },
    {
     "do": "grants",
@@ -535,7 +568,8 @@
      }
     ],
     "q": "Your grapple melee spawns three Threadlings.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grapple melee spawns three Threadlings"
    },
    {
     "do": "creates",
@@ -564,7 +598,9 @@
      }
     ],
     "q": "Hold to consume your Shackle Grenade and activate Weaver's Trance.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "spends Shackle Grenade for Weaver's Trance: kills create suspending detonations",
+    "pq": "Final blows while Weaver's Trance is active create a suspending detonation."
    },
    {
     "do": "grants",
@@ -639,7 +675,8 @@
      }
     ],
     "q": "Your grapple, Shackle Grenade, Threadling Grenade, and Slicewire Grenade have enhanced functionality.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "hold-to-charge versions: Weaver's Trance, Threadling Nest, Slicewire Tangle; grapple melee Threadlings"
    }
   ]
  },
@@ -651,7 +688,8 @@
     "do": "modifies",
     "t": "tangle",
     "q": "Tangles you throw attach to targets and detonate into a suspending burst.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "thrown Tangles attach to targets and burst to suspend"
    },
    {
     "do": "applies",
@@ -664,7 +702,8 @@
     "do": "uses",
     "t": "threadling",
     "q": "Threadling final blows create Tangles or reduce your current Tangle cooldown.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Threadling final blows create Tangles or cut Tangle cooldown"
    },
    {
     "do": "creates",
@@ -683,7 +722,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Activate your class ability to weave three Threadlings and deploy any Threadlings you have perched.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "casting it weaves three Threadlings and deploys perched ones"
    },
    {
     "do": "creates",
@@ -696,7 +736,8 @@
     "do": "consumes",
     "t": "perchedthreadling",
     "q": "deploy any Threadlings you have perched",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "sends all perched Threadlings out to attack"
    },
    {
     "do": "creates",
@@ -722,19 +763,24 @@
     "t": "movement",
     "note": "Clarity/Compendium: it is the air move input while airborne with a full melee charge.",
     "q": "Dodge while airborne to consume your melee energy and enter the weave",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "air dodge enters the weave: damage resistance, perched Threadlings",
+    "pq": "gaining damage resistance from combatants and players"
    },
    {
     "do": "uses",
     "t": "airborne",
     "q": "Dodge while airborne to consume your melee energy and enter the weave",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "air dodge enters the weave: damage resistance, perched Threadlings",
+    "pq": "gaining damage resistance from combatants and players"
    },
    {
     "do": "consumes",
     "t": "meleeenergy",
     "q": "Dodge while airborne to consume your melee energy and enter the weave",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "spends melee energy to enter and stay in the weave"
    },
    {
     "do": "grants",
@@ -760,7 +806,8 @@
     "do": "uses",
     "t": "rift",
     "q": "Reactivate your air dodge or cast your Rift to exit the weave, generating Woven Mail for you and nearby allies.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "casting Rift exits the weave and grants Woven Mail to you and allies"
    },
    {
     "do": "grants",
@@ -787,13 +834,16 @@
     "do": "uses",
     "t": "movement",
     "q": "Activate your air move to consume your class ability energy and dive to the ground",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "air move dives to the ground, suspending nearby targets",
+    "pq": "suspending all nearby targets on impact"
    },
    {
     "do": "consumes",
     "t": "classenergy",
     "q": "Activate your air move to consume your class ability energy and dive to the ground",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "spends your class ability charge on the slam"
    },
    {
     "do": "applies",
@@ -812,7 +862,8 @@
     "t": "classability",
     "note": "Clarity: triggers your dodge effects.",
     "q": "Triggers the effects of the equipped Class Ability, as well as Threaded Specter if equipped.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "the slam also triggers your class ability's effects"
    },
    {
     "do": "creates",
@@ -836,7 +887,9 @@
     "do": "uses",
     "t": "classability",
     "q": "Activating your class ability leaves behind a decoy",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "class ability leaves a decoy that detonates into Threadlings",
+    "pq": "the decoy detonates, dealing damage and releasing Threadlings that seek out and attack nearby foes"
    },
    {
     "do": "creates",
@@ -862,7 +915,8 @@
     "do": "uses",
     "t": "tangle",
     "q": "Destroying a Tangle will weave a violent, writhing mass of [Strand] Strand fibers.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "destroyed Tangles become a seeking Strand mass that unravels on kills"
    },
    {
     "do": "creates",
@@ -903,13 +957,15 @@
     "do": "modifies",
     "t": "grenade",
     "q": "You have an additional grenade charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "one extra grenade charge"
    },
    {
     "do": "uses",
     "t": "grapple",
     "q": "Your Grappling Hook creates a Grapple Tangle at the grapple point.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grapple leaves a Grapple Tangle you can grapple again"
    },
    {
     "do": "creates",
@@ -951,7 +1007,8 @@
     "do": "uses",
     "t": "grenade",
     "q": "Activating your grenade ability reloads your equipped weapon and grants bonus airborne effectiveness and handling for a short duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reloads your weapon and grants handling and airborne effectiveness"
    },
    {
     "do": "grants",
@@ -984,7 +1041,8 @@
     "do": "uses",
     "t": "super",
     "q": "Super final blows emit a suspending burst from the target.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Super final blows emit a suspending burst"
    },
    {
     "do": "applies",
@@ -1003,19 +1061,22 @@
     "do": "modifies",
     "t": "suspend",
     "q": "Suspend, unravel, and sever effects applied to targets have increased duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "longer suspend duration"
    },
    {
     "do": "modifies",
     "t": "unravel",
     "q": "Suspend, unravel, and sever effects applied to targets have increased duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "longer unravel duration"
    },
    {
     "do": "modifies",
     "t": "sever",
     "q": "Suspend, unravel, and sever effects applied to targets have increased duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "longer sever duration"
    }
   ]
  },
@@ -1027,7 +1088,8 @@
     "do": "modifies",
     "t": "threadling",
     "q": "Threadlings travel farther and deal additional damage.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Threadlings travel farther and deal more damage"
    }
   ]
  },
@@ -1039,7 +1101,8 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finisher final blows create Threadlings.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "finisher final blows create Threadlings"
    },
    {
     "do": "creates",
@@ -1058,7 +1121,8 @@
     "do": "uses",
     "t": "tangle",
     "q": "Damaging targets with a Tangle grants melee energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "melee energy when a Tangle damages targets"
    },
    {
     "do": "grants",
@@ -1103,7 +1167,8 @@
     "do": "uses",
     "t": "suspend",
     "q": "Defeating suspended targets grants class ability energy.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "class ability energy on kill"
    },
    {
     "do": "grants",
@@ -1122,7 +1187,8 @@
     "do": "uses",
     "t": "melee",
     "q": "Powered melee final blows grant your [Strand] Strand weapons Unraveling Rounds.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "powered melee kills give Strand weapons Unraveling Rounds"
    },
    {
     "do": "grants",
@@ -1164,13 +1230,15 @@
     "do": "uses",
     "t": "wovenmail",
     "q": "While you have Woven Mail, weapon final blows create a Tangle.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon final blows create a Tangle while you have Woven Mail"
    },
    {
     "do": "uses",
     "t": "weapon",
     "q": "While you have Woven Mail, weapon final blows create a Tangle.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon final blows create a Tangle while you have Woven Mail"
    },
    {
     "do": "creates",
@@ -1194,7 +1262,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Picking up an Orb of Power grants Woven Mail.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "picking up an Orb grants Woven Mail"
    },
    {
     "do": "grants",
@@ -1213,7 +1282,8 @@
     "do": "uses",
     "t": "suspend",
     "q": "Defeating suspended targets creates an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "defeating suspended targets creates an Orb of Power"
    },
    {
     "do": "creates",

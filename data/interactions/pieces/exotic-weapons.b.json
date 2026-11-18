@@ -9,6 +9,7 @@
     "perk": "Taken Predator",
     "q": "Deals 25% increased damage against Taken combatants, Invaders in Gambit, and targets blighted by Witherhoard.",
     "s": "clarity",
+    "pay": "more damage against blighted targets",
     "note": "bonus damage vs Witherhoard-blighted targets"
    }
   ]
@@ -46,14 +47,16 @@
     "t": "super",
     "perk": "Paracausal Imbuement",
     "q": "This weapon gains bonus damage once your Super expires.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more damage after your Super ends"
    },
    {
     "do": "uses",
     "t": "super",
     "perk": "Paracausal Imbuement",
     "q": "Refills the magazine on Super cast.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "refills the magazine when you cast your Super"
    }
   ]
  },
@@ -75,6 +78,7 @@
     "perk": "Markov Chain",
     "q": "This weapon gains increased damage from melee kills and kills with this weapon. Melee kills grant ammo for this weapon.",
     "s": "bungie",
+    "pay": "more damage and ammo for this weapon",
     "from": [
      "melee"
     ]
@@ -105,6 +109,8 @@
     "t": "corruption",
     "q": "or upon killing a Corrupted Enemy",
     "s": "compendium",
+    "pay": "triggers a Cursed Thrall explosion and faster reload",
+    "pq": "Triggers a Cursed Thrall Explosion",
     "note": "killing any corrupted target also triggers the Cursed Thrall explosion"
    }
   ]
@@ -140,6 +146,7 @@
     "perk": "Rewind Again",
     "q": "Precision shots and shots against combatants slowed or frozen by Stasis will return to the magazine.",
     "s": "bungie",
+    "pay": "shots return to the magazine",
     "note": "hits on slowed/frozen targets refill ammo and build Time-Slip portal stacks"
    },
    {
@@ -147,7 +154,8 @@
     "t": "freeze",
     "perk": "Rewind Again",
     "q": "Precision shots and shots against combatants slowed or frozen by Stasis will return to the magazine.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "shots return to the magazine"
    }
   ]
  },
@@ -169,6 +177,7 @@
     "perk": "Ahamkara's Eye",
     "q": "Scorch granted by me and Ignitions that started from me deal 31.6% increased damage.",
     "s": "clarity",
+    "pay": "more damage from scorch this weapon applied",
     "note": "only scorch/ignitions this weapon started"
    },
    {
@@ -176,13 +185,15 @@
     "t": "ignition",
     "perk": "Ahamkara's Eye",
     "q": "Scorch granted by me and Ignitions that started from me deal 31.6% increased damage.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "more damage from ignitions this weapon started"
    },
    {
     "do": "uses",
     "t": "blight",
     "q": "Blighted Enemies (Witherhoard Direct Hit) receive 100% increased tick damage.",
     "s": "compendium",
+    "pay": "more damage from blight ticks",
     "note": "catalyst Taken Seekers"
    }
   ]
@@ -220,7 +231,8 @@
     "t": "sivananite",
     "perk": "Parasitism",
     "q": "This weapon does more damage to enemies based on the number of SIVA nanites that attach to them.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more damage per nanite on the target"
    }
   ]
  },
@@ -313,6 +325,7 @@
     "perk": "Ranged Weapon",
     "q": "Melee Hits can discharge Bolt Charge stacks.",
     "s": "clarity",
+    "pay": "melee hits can discharge Bolt Charge",
     "note": "melee hits discharge Bolt Charge from any source"
    },
    {
@@ -476,14 +489,16 @@
     "t": "scorch",
     "perk": "Prismatic Inferno",
     "q": "Scorch and Ignitions that originate from this weapon deal 15% increased damage.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "more damage from scorch this weapon applied"
    },
    {
     "do": "modifies",
     "t": "ignition",
     "perk": "Prismatic Inferno",
     "q": "Scorch and Ignitions that originate from this weapon deal 15% increased damage.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "more damage from ignitions this weapon started"
    },
    {
     "do": "applies",
@@ -571,6 +586,7 @@
     "perk": "Arc Conductor",
     "q": "When taking Arc Damage, this weapon becomes more powerful and resists incoming Arc Damage.",
     "s": "bungie",
+    "pay": "stronger weapon and Arc damage resistance",
     "note": "only Arc damage you receive; the catalyst's explosion can self-trigger it"
    },
    {
@@ -642,7 +658,8 @@
     "do": "uses",
     "t": "volatilerounds",
     "q": "They are also able to inflict Volatile through Volatile Rounds.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "Transmutation Spheres can make targets volatile"
    },
    {
     "do": "grants",
@@ -697,7 +714,8 @@
     "t": "freeze",
     "perk": "Cryocannon",
     "q": "Deals 25% increased damage to Frozen Enemies and always destroys Stasis Crystals on hit.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "more damage against frozen targets"
    },
    {
     "do": "uses",
@@ -705,6 +723,7 @@
     "perk": "Shatter Shot",
     "q": "Rapidly destroying multiple Stasis crystals reloads this weapon from reserves.",
     "s": "bungie",
+    "pay": "reloads from reserves",
     "note": "crystals from any source"
    }
   ]
@@ -789,6 +808,7 @@
     "perk": "Skyburner Catalyst",
     "q": "Direct Hits against Scorched Enemies apply 10 [4] additional Scorch per Direct Hit",
     "s": "clarity",
+    "pay": "direct hits add more scorch",
     "note": "catalyst (Burning Ambition)"
    },
    {
@@ -822,7 +842,9 @@
     "t": "voidbreach",
     "perk": "Nightsworn Sight",
     "q": "Kills or collecting a Void Breach grants 'Nightsworn Sight' for 7 seconds and Truesight for 3 seconds.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "grants Nightsworn Sight (reload, precision damage, weakening submunitions) and Truesight",
+    "pq": "Nightsworn Sight grants ? Reload speed and the following benefits:"
    }
   ]
  },
@@ -836,6 +858,7 @@
     "perk": "Cayde's Retribution",
     "q": "Pick up Orbs of Power or land precision hits to charge this weapon's Super bar.",
     "s": "bungie",
+    "pay": "charges the Golden Gun mode",
     "note": "the Golden Gun mode does not count as a Super"
    },
    {
@@ -857,6 +880,7 @@
     ],
     "q": "Wearing Celestial Nighthawk transforms Cayde's Retribution into a single high-powered shot",
     "s": "clarity",
+    "pay": "Golden Gun mode fires one high-powered shot instead of three",
     "note": "one shot instead of three; ~43% more damage and targets explode on death"
    }
   ]
@@ -905,6 +929,7 @@
     "perk": "Dynamic Charge",
     "q": "Charged Arc Seeker hits grant, and can spend, Bolt Charge.",
     "s": "bungie",
+    "pay": "Arc Seeker hits discharge Bolt Charge",
     "dmg": [
      "weapon",
      "primaryweapon",
@@ -917,6 +942,7 @@
     "perk": "Revolution",
     "q": "Bolt Charge that is discharged through Arc Seeker hits counts as 'Scout Rifle Weapon Damage'",
     "s": "clarity",
+    "pay": "Bolt Charge counts as weapon damage (weapon buffs apply)",
     "note": "Bolt Charge discharges then scale with weapon damage buffs (Radiant, surges)",
     "dmg": [
      "weapon",
@@ -944,6 +970,7 @@
     ],
     "q": "Storm's Keep (and Well of Radiance's Caster) cause Bolt Discharge to occur twice simultaneously",
     "s": "compendium",
+    "pay": "Bolt Charge discharges twice at once",
     "note": "as Well of Radiance caster or behind a Storm's Keep barricade, Arc Seeker hits discharge Bolt Charge twice"
    }
   ]
@@ -957,7 +984,8 @@
     "t": "scorch",
     "perk": "Ravenous Beast",
     "q": "defeating combatants or dealing damage to Scorched combatants grants increased progress.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "charges Ravenous Beast faster"
    },
    {
     "do": "grants",
@@ -996,6 +1024,7 @@
     "perk": "Harbinger's Pulse",
     "q": "Scoring 3 Void Kills from any source within 4.5 seconds of each refills the magazine.",
     "s": "clarity",
+    "pay": "refills the magazine",
     "note": "Void kills from any source (abilities included) refill the magazine"
    }
   ]
@@ -1023,28 +1052,33 @@
     "t": "grenade",
     "perk": "Property: Undecidable",
     "q": "adapts its damage type to match your equipped grenade.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "shots take the grenade's element"
    },
    {
     "do": "consumes",
     "t": "grenade",
     "perk": "Property: Irreducible",
     "q": "Consume your grenade to load a large",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "loads an explosive shot matching your grenade",
+    "pq": "generates an elemental explosion on impact"
    },
    {
     "do": "consumes",
     "t": "prismaticgrenade",
     "perk": "Property: Irreducible",
     "q": "Can consume both Transcendence Grenades and Song of Flame Wisps.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "loads the explosive shot from these grenades"
    },
    {
     "do": "uses",
     "t": "transcendence",
     "perk": "Property: Irreducible",
     "q": "deals increased damage while Transcendence is active.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "explosive shot deals more damage"
    },
    {
     "do": "applies",
@@ -1157,7 +1191,8 @@
     "t": "orbofpower",
     "perk": "Shoot to Loot",
     "q": "Shooting an Orb of Power picks it up.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "shooting an Orb picks it up"
    }
   ]
  },
@@ -1190,7 +1225,8 @@
     "t": "airborne",
     "perk": "Swooping Talons",
     "q": "Dealing damage while airborne increases this weapon's damage output.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more damage for this weapon"
    },
    {
     "do": "grants",
@@ -1219,7 +1255,8 @@
     "t": "wovenmail",
     "perk": "Protective Weave",
     "q": "Deals more damage while you have Woven Mail.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more damage for this weapon"
    },
    {
     "do": "applies",
@@ -1439,6 +1476,7 @@
     "t": "arcdamage",
     "q": "Lightning Rod now triggers by scoring any Arc Kill.",
     "s": "compendium",
+    "pay": "any Arc kill grants Lightning Rod (chain lightning arrows)",
     "note": "catalyst (Forked Lightning): any Arc kill, abilities included, grants Lightning Rod"
    }
   ]
@@ -1515,6 +1553,7 @@
     "perk": "Hail Storm",
     "q": "This weapon deals 50% increased damage to Frozen enemies and Stasis Crystals",
     "s": "clarity",
+    "pay": "more damage against frozen targets",
     "note": "stacks with Whisper of Rending"
    },
    {
@@ -1522,13 +1561,15 @@
     "t": "stasiscrystal",
     "perk": "Hail Storm",
     "q": "This weapon deals 50% increased damage to Frozen enemies and Stasis Crystals",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "more damage against Stasis crystals"
    },
    {
     "do": "uses",
     "t": "freeze",
     "q": "0.65x Draw Time Multiplier for 5 seconds upon inflicting freeze or slow.",
     "s": "compendium",
+    "pay": "faster draw time",
     "note": "catalyst"
    },
    {
@@ -1536,6 +1577,7 @@
     "t": "slow",
     "q": "0.65x Draw Time Multiplier for 5 seconds upon inflicting freeze or slow.",
     "s": "compendium",
+    "pay": "faster draw time",
     "note": "catalyst"
    }
   ]
@@ -1569,10 +1611,11 @@
    },
    {
     "do": "uses",
-    "t": "overshield",
+    "t": "overshieldgeneric",
     "perk": "Perpetual Loophole",
     "q": "Deal additional melee damage while protected by an overshield.",
     "s": "bungie",
+    "pay": "more melee damage",
     "note": "any overshield; glaive melee kills refresh it"
    },
    {
@@ -1612,7 +1655,8 @@
     "t": "orbofpower",
     "perk": "Supercharged Battery",
     "q": "Collecting an Orb of Power grants a period of maximum power that starts with an automatic reload.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "maximum power mode with an automatic reload"
    },
    {
     "do": "applies",
@@ -1659,14 +1703,16 @@
     "t": "stasiscrystal",
     "perk": "Tithing Harvest",
     "q": "While Creeping Attrition is active, destroying Stasis crystals or landing precision final blows creates a Stasis shard.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "creates a Stasis shard"
    },
    {
     "do": "uses",
     "t": "stasisshard",
     "perk": "Tithing Harvest",
     "q": "collecting Stasis shards refills the magazine.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine"
    }
   ]
  },
@@ -1705,7 +1751,8 @@
     "do": "uses",
     "t": "blight",
     "q": "25% Increased damage against Combatants stuck by Witherhoard's Blight.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage against blighted targets"
    }
   ]
  },
@@ -1727,6 +1774,7 @@
     "perk": "Silkbound Slayer",
     "q": "This weapon deals bonus damage to suspended targets. Gain faster draw time for a short duration when you suspend a target from any source",
     "s": "bungie",
+    "pay": "bonus damage to suspended targets; suspending grants faster draw",
     "note": "suspends from any source (abilities included) trigger the buff"
    }
   ]
@@ -1767,7 +1815,8 @@
     "t": "sivananite",
     "perk": "Resurgence Directive",
     "q": "Wolfsbane's damage is increased against enemies with Outbreak Perfected Nanites on them",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "more damage against targets with nanites"
    },
    {
     "do": "grants",

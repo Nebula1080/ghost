@@ -28,6 +28,8 @@ what it does as structured data. The build maker only shows curated interactions
   (grenadeenergy, meleeenergy, classenergy, superenergy), `resource` (armorcharge…), `ability` (grenade, melee,
   classability, super, movement, rift, barricade, dodge, finisher, and named families like `healinggrenade`),
   `damage` (solarweapon, arcdamage… only when a piece really keys off them), `state` (e.g. `transcendence`, `airborne`).
+- `isa` (optional): more general terms this one also counts as, e.g. `overshield` (Void Overshield) has
+  `"isa": ["overshieldgeneric"]`, so payoffs that accept any overshield link to Void ones too.
 - `def`: one or two sentences in our own words. `q`: an exact quote that supports it; `src`: where the quote is
   (a piece id from `src/*.json`, or `compendium:<tab>` for `src/glossary-sources.json`).
 
@@ -82,6 +84,10 @@ For exotic weapons and armor, add `"perk": "<perk name>"` to an effect when it c
   for exotic weapon/armor perks the source of that perk). Copy it character for character (whitespace may differ).
   Never record an effect that the quote doesn't state. If sources disagree, record what the quote says and put the
   disagreement in `note`.
+- `pay` (required on `uses`, `modifies` and `consumes`): what the payoff actually does, in our own words, short
+  ("more damage for each different debuff on the target", "grenade energy on kill", "longer Void Soul"). The
+  trigger term alone is not enough: a reader must see the effect.
+- `pq` (optional): an exact quote that states the payoff, when `q` only names the trigger; checked like `q` (same `s`).
 - `note`: optional short interpretation for a person reading the record (e.g. "only Healing Rift; with Empowering Rift
   the soul heals instead").
 

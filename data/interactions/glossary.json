@@ -208,7 +208,10 @@
    ],
    "def": "A Void buff that adds a layer of extra health on top of your shields.",
    "q": "Void Overshield with up to 45 HP for 10+5 seconds.",
-   "src": "compendium:void"
+   "src": "compendium:void",
+   "isa": [
+    "overshieldgeneric"
+   ]
   },
   "invisibility": {
    "l": "Invisibility",

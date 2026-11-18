@@ -306,9 +306,38 @@ for (const [tab, gid] of Object.entries(TABS)) {
   }
 }
 
+// ---------- weapon intrinsics by plug hash ----------
+// Intrinsic names repeat across weapon types with different effects ("Aggressive Frame" is 39 plugs with 6 different
+// descriptions), so pi / cl / dc (keyed by name) can describe the wrong one. For names that are ambiguous, record each
+// weapon's own intrinsic plug: wi[weaponHash] = plugHash, ih[plugHash] = [name, bungieDesc, clarityHtml, clarityType].
+// Clarity text is used only when it's for that plug, or for a same-named plug with the very same Bungie description.
+const intrDescs = {};
+for (const it of Object.values(items)) if (it.plug?.plugCategoryIdentifier === 'intrinsics' && name(it)) (intrDescs[norm(name(it))] ||= new Set()).add(bungieDesc(it));
+const ambiguous = new Set(Object.entries(intrDescs).filter(([, s]) => s.size > 1).map(([k]) => k));
+const wi = {}, ih = {};
+const clarityFor = p => {
+  const own = clarity[p.hash]; if (own) { const h = clarityHtml(own); if (h) return [h, own.type]; }
+  const d = bungieDesc(p);
+  for (const q of Object.values(items)) {
+    if (q.hash === p.hash || q.plug?.plugCategoryIdentifier !== 'intrinsics' || name(q) !== name(p) || bungieDesc(q) !== d) continue;
+    const c = clarity[q.hash]; const h = c && clarityHtml(c); if (h) return [h, c.type];
+  }
+  return ['', ''];
+};
+for (const w of Object.values(items)) {
+  if (w.itemType !== 3) continue;
+  const cat = (w.sockets?.socketCategories || []).find(c => c.socketCategoryHash === 3956125808);
+  const ph = cat && w.sockets.socketEntries[cat.socketIndexes?.[0]]?.singleInitialItemHash;
+  const p = ph && items[ph];
+  if (!p || !name(p) || !ambiguous.has(norm(name(p)))) continue;
+  wi[w.hash] = ph;
+  if (!ih[ph]) { const [h, ty] = clarityFor(p); ih[ph] = [name(p), bungieDesc(p).slice(0, 600), h, ty]; }
+}
+console.log('intrinsics by hash:', Object.keys(wi).length, 'weapons,', Object.keys(ih).length, 'plugs,', ambiguous.size, 'ambiguous names');
+
 const out = {
   v: manifest.Response.version, built: new Date().toISOString().slice(0, 10), artifact: name(artifact),
-  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, am, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos],
+  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, am, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos], wi, ih,
 };
 fs.mkdirSync(path.join(root, 'data'), { recursive: true });
 fs.writeFileSync(path.join(root, 'data/defs.json'), JSON.stringify(out));
