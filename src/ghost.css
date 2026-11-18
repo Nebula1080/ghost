@@ -886,3 +886,4 @@ a{color:var(--light)}
 .dcn{display:inline-grid;place-items:center;width:18px;height:18px;margin-right:6px;border:1px solid var(--line2);font-style:normal;font-size:10px;letter-spacing:0;color:var(--dim)}
 .dcol .t .dcc{display:none;font-size:10px;letter-spacing:.04em;text-transform:none;color:var(--faint);font-weight:500}
 @media (max-width:760px){.dcol .t .dcc{display:inline}}
+.bmk{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);line-height:1.2}

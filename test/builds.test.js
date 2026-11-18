@@ -37,7 +37,12 @@ t('limits: 2 aspects, fragments up to aspect slots, 3 mods a slot, unknown hashe
   assert.strictEqual(b.sub.aspects.length, 2);
   assert.strictEqual(C.fragSlots(b, D), 4);   // Hellion 2 + Touch of Flame 2 (Bungie energyCapacity)
   assert.strictEqual(b.sub.fragments.length, 4);
-  assert.strictEqual(b.mods.head.length, 3);
+  // unknown mod names fit no socket; a default piece has 1 general + 3 helmet sockets
+  assert.deepStrictEqual(b.mods.head, [null, null, null, null]);
+  const g = D.am.general[0][0], hm = D.am.head[0][0], am = D.am.arms[0][0];
+  // mods land in sockets of their kind only (general -> socket 0, helmet mods -> 1-3, an arms mod is dropped); a mod that already fits its socket stays there
+  assert.deepStrictEqual(C.normBuild({ cls: 'warlock', el: 'solar', mods: { head: [hm, g, am, hm] } }, D).mods.head, [g, hm, null, hm]);
+  assert.ok(C.modsFor('head', D, 's').every(x => !D.am.arms.some(y => y[0] === x[0]) || D.am.head.some(y => y[0] === x[0])), 'helmet sockets list helmet mods only');
 });
 // curated engine, on a fixed fixture (the user's case: Child of the Old Gods with Empowering Rift + Briarbinds)
 const IXF = {
@@ -199,5 +204,20 @@ t('healing yourself vs healing allies (real data): Devour does not feed Speaker\
   const b = links([{ g: 'subclass', slot: 'grenade', n: 'Healing Grenade' }, ss]);
   assert.ok(b.some(l => /^Healing Grenade>Speaker's Sight:healallies$/.test(l)), 'Healing Grenade heals allies: ' + b.join(', '));
   assert.deepStrictEqual(ix.t.orbofpower.also, ['resource'], 'Orbs of Power also show under Resources');
+});
+t('weapon perk columns come from Bungie sockets (CSV flat list); armor sockets per piece', () => {
+  const d = { ...D, sock: JSON.parse(fs.readFileSync(__dirname + '/../data/sockets.json', 'utf8')) };
+  const r = C.parseDimCsv(fs.readFileSync(__dirname + '/fixtures/sample-weapons.csv', 'utf8'), 'weapon'); const items = r.items || r; C.applyDefs(items, d);
+  const reed = items.find(i => i.name === "Reed's Regret" && i.perks.some(p => p.n === 'Clown Cartridge'));
+  const cols = C.sockets(reed, d).cols.map(c => c.perks.map(p => p.n));
+  // the DIM row lists Triple Tap*, Clown Cartridge, Firing Line*: Clown Cartridge is a Trait 1 option in Bungie's data
+  assert.ok(cols.some(c => c.includes('Triple Tap') && c.includes('Clown Cartridge')), JSON.stringify(cols));
+  assert.ok(cols.some(c => c.length === 1 && c[0] === 'Firing Line'), JSON.stringify(cols));
+  // API items: grouped by socket index
+  const api = { kind: 'weapon', name: 'X', hash: '0', perks: [{ n: 'Triple Tap', s: 1, si: 3 }, { n: 'Firing Line', s: 1, si: 4 }, { n: 'Clown Cartridge', s: 0, si: 3 }] };
+  assert.deepStrictEqual(C.sockets(api, D).cols.map(c => c.perks.map(p => p.n)), [['Triple Tap', 'Clown Cartridge'], ['Firing Line']]);
+  // a Techsec Hood has a general socket, 3 helmet sockets and a tuning socket
+  const th = Object.entries(d.sock.a).find(([h]) => h === '2082858804');
+  assert.deepStrictEqual(C.modLayout('2082858804', d).map(x => x[1]), ['g', 's', 's', 's', 't'], JSON.stringify(th));
 });
 console.log(n, 'build tests passed');

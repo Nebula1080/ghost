@@ -60,3 +60,56 @@ for (const [h, d] of Object.entries(stats)) {
 }
 fs.writeFileSync(OUT, JSON.stringify(out));
 console.log(`api-defs.json: ${Object.keys(out.i).length} items, ${Object.keys(out.p).length} plugs, ${Object.keys(out.s).length} stats, ${(fs.statSync(OUT).size / 1048576).toFixed(2)} MB`);
+
+// ---------- data/sockets.json (both builds, window.VS_SOCK): weapon perk columns + armor mod sockets ----------
+// DIM's CSV lists perks flat, so Ghost needs Bungie's own sockets to know which column a perk belongs to, and which
+// mod sockets each armor piece has.
+//   n:   perk / mod names (index table)
+//   ps:  plug set hash -> [name index]           (each random perk column's possible perks)
+//   w:   weapon hash  -> [plug set hash, ...]    (perk columns in socket order: barrel, magazine, traits, origin)
+//   lay: armor socket layouts, each [[socketIndex, code], ...]; code g general, s slot (head / arms / ...),
+//        t tuning, a artifice, x:<name> activity / raid / seasonal
+//   a:   armor hash -> layout index
+//   m:   code -> [[name, energy cost, {stat: value} | 0, plug hash]] for t / a / x:* sockets
+const plugSets = read('plugsets.json');
+const SOUT = path.join(import.meta.dirname, '..', 'data', 'sockets.json');
+const so = { n: [], ps: {}, w: {}, lay: [], a: {}, m: {} };
+const nIdx = new Map(); const nameId = n => { if (!nIdx.has(n)) { nIdx.set(n, so.n.length); so.n.push(n); } return nIdx.get(n); };
+const psItems = h => plugSets[h]?.reusablePlugItems || [];
+for (const [h, d] of Object.entries(items)) {
+  if (d.itemType !== 3 || !d.sockets || d.redacted) continue;
+  const cat = (d.sockets.socketCategories || []).find(c => c.socketCategoryHash === 4241085061); if (!cat) continue;
+  const cols = [];
+  for (const i of cat.socketIndexes || []) {
+    const e = d.sockets.socketEntries[i]; const ph = e.randomizedPlugSetHash || e.reusablePlugSetHash; if (!ph) continue;
+    const plugs = psItems(ph).map(p => items[p.plugItemHash]).filter(Boolean);
+    if (!plugs.length || plugs.every(p => /tracker/.test(p.plug?.plugCategoryIdentifier || ''))) continue;
+    if (!so.ps[ph]) so.ps[ph] = [...new Set(plugs.map(p => p.displayProperties?.name).filter(Boolean).map(n => n.replace(/^Enhanced\s+/, '')))].map(nameId);
+    cols.push(+ph);
+  }
+  if (cols.length) so.w[h] = cols;
+}
+const modCode = c => !c ? '' : /v2_general|^enhancements\.universal$|rivens_curse/.test(c) ? 'g' : /v2_(head|arms|chest|legs|class_item)/.test(c) ? 's'
+  : /armor_tiering\.plugs\.tuning/.test(c) ? 't' : /^enhancements\.artifice/.test(c) ? 'a' : /^enhancements\./.test(c) ? 'x:' + c.slice(13) : '';
+const layIdx = new Map(); const statsOf = d => { const o = {}; for (const s of d.investmentStats || []) { const n = out.s[s.statTypeHash]; if (n && s.value) o[n] = s.value; } return Object.keys(o).length ? o : 0; };
+for (const [h, d] of Object.entries(items)) {
+  if (d.itemType !== 2 || !d.sockets || d.redacted) continue;
+  const cat = (d.sockets.socketCategories || []).find(c => c.socketCategoryHash === 590099826); if (!cat) continue;
+  const lay = [];
+  for (const i of cat.socketIndexes || []) {
+    const e = d.sockets.socketEntries[i]; const c = modCode(items[e.singleInitialItemHash]?.plug?.plugCategoryIdentifier); if (!c) continue;
+    lay.push([i, c]);
+    if (c === 't' || c === 'a' || c.startsWith('x:')) {
+      const list = so.m[c] ||= []; const seen = new Set(list.map(x => x[3]));
+      for (const p of psItems(e.reusablePlugSetHash || e.randomizedPlugSetHash)) {
+        const pd = items[p.plugItemHash]; const n = pd?.displayProperties?.name; if (!n || /^empty|^default/i.test(n) || seen.has(p.plugItemHash)) continue;
+        seen.add(p.plugItemHash); list.push([n, pd.plug?.energyCost?.energyCost || 0, statsOf(pd), p.plugItemHash]);
+      }
+    }
+  }
+  if (!lay.length) continue;
+  const key = JSON.stringify(lay); if (!layIdx.has(key)) { layIdx.set(key, so.lay.length); so.lay.push(lay); }
+  so.a[h] = layIdx.get(key);
+}
+fs.writeFileSync(SOUT, JSON.stringify(so));
+console.log(`sockets.json: ${Object.keys(so.w).length} weapons, ${Object.keys(so.ps).length} perk sets, ${Object.keys(so.a).length} armor, ${so.lay.length} layouts, ${(fs.statSync(SOUT).size / 1048576).toFixed(2)} MB`);

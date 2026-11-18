@@ -78,6 +78,10 @@ def page_json(obj):
     assert '</' not in j and '<!--' not in j
     return j
 assert '/*__BUNGIE__*/' in s and '/*__APIDEFS__*/null' in s and '/*__BUNGIECFG__*/null' in s
+# Bungie's sockets (tools/build-api-defs.mjs): weapon perk columns and armor mod sockets, both targets
+assert '/*__SOCK__*/null' in s
+sk = root / 'data/sockets.json'
+s = s.replace('/*__SOCK__*/null', page_json(json.loads(sk.read_text(encoding='utf-8'))) if sk.exists() else 'null')
 if TARGET == 'hosted':
     bj = (root / 'src/bungie.js').read_text(encoding='utf-8').replace("if (typeof module !== 'undefined') module.exports = Bungie;", '')
     assert '</script' not in bj.lower() and '<!--' not in bj and '-->' not in bj
