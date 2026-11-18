@@ -46,6 +46,7 @@ function check(only) {
     if (!KINDS.has(t.kind)) err(w, 'bad kind ' + t.kind);
     if (t.el != null && !ELS.has(t.el)) err(w, 'bad el ' + t.el);
     if (!t.def) err(w, 'missing def');
+    for (const g of t.isa || []) if (!L.terms[g] && !String(g).match(/^[a-z0-9]+$/)) err(w, 'isa names unknown term ' + g);
     if (t.dr) { const d = t.dr; const tab = String(d.src || '').startsWith('compendium:') ? L.gsrc[d.src.slice(11)] : null;
       if (!(typeof d.amt === 'number' && d.amt > 0 && d.amt < 100)) err(w, 'dr.amt must be a percent');
       if (!tab || !flat(tab).includes(flat(d.q)) || !String(d.q).includes(String(d.amt))) err(w, 'dr.q must be a Compendium quote (dr.src compendium:<tab>) containing dr.amt'); }
@@ -94,6 +95,8 @@ function check(only) {
           else if (c.weapon) { if (!(ELS.has(c.weapon) || ['super', 'grenade', 'melee'].includes(c.weapon)) || !c.weapon) err(we, 'bad weapon element ' + c.weapon); }
           else err(we, 'unknown condition ' + JSON.stringify(c));
         }
+        if (['uses', 'modifies', 'consumes'].includes(e.do) && !(typeof e.pay === 'string' && e.pay.trim().length >= 4)) err(we, 'missing pay (what the payoff does)');
+        if (e.pq != null) { const hay2 = sourceText(s, e.s, e.perk); if (!hay2.includes(flat(e.pq))) err(we, `pq not in ${e.s}: "${String(e.pq).slice(0, 90)}"`); }
         if (!SRCS.has(e.s)) err(we, 'bad s ' + e.s);
         else if (!e.q) err(we, 'missing quote');
         else { const hay = sourceText(s, e.s, e.perk); if (!hay.includes(flat(e.q))) err(we, `quote not in ${e.s}${e.perk ? ' of ' + e.perk : ''}: "${String(e.q).slice(0, 90)}"`); }

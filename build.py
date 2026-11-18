@@ -112,7 +112,7 @@ if (ixd / 'glossary.json').exists():
     gfiles = [ixd / 'glossary.json'] + sorted((ixd / 'glossary').glob('*.json')) if (ixd / 'glossary').exists() else [ixd / 'glossary.json']
     for f in gfiles:
         for tid, t in json.loads(f.read_text(encoding='utf-8')).get('terms', {}).items():
-            ix['t'].setdefault(tid, {k: t[k] for k in ('l', 'kind', 'el', 'def', 'dr') if t.get(k) is not None})
+            ix['t'].setdefault(tid, {k: t[k] for k in ('l', 'kind', 'el', 'def', 'dr', 'isa') if t.get(k) is not None})
     done = set()
     for f in sorted((ixd / 'pieces').glob('*.json')) if (ixd / 'pieces').exists() else []:
         for r in json.loads(f.read_text(encoding='utf-8')):

@@ -7,7 +7,8 @@
     "do": "uses",
     "t": "rift",
     "q": "Cast your Rift to create an Arc Soul that fires at targets in front of you.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "your rift gives you (and allies passing through) an Arc Soul that fires at targets"
    },
    {
     "do": "creates",
@@ -37,7 +38,8 @@
     "t": "amplified",
     "by": "arcsoul",
     "q": "While amplified, your Arc Souls are supercharged and gain increased fire rate.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Arc Souls are supercharged with a faster fire rate"
    },
    {
     "do": "counts",
@@ -89,6 +91,7 @@
     ],
     "q": "Allows the repeated usage of Ascension while the Aspect is equipped at the cost of ?% Super Energy.",
     "s": "compendium",
+    "pay": "Ascension can be recast during Arc Staff for Super energy",
     "note": "Ascension can be recast during Arc Staff for Super energy."
    },
    {
@@ -129,20 +132,25 @@
     "do": "uses",
     "t": "airborne",
     "q": "While airborne, consume your class ability energy to summon your Arc Staff",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "launches you upward in a burst that amplifies allies and jolts targets",
+    "pq": "propelling yourself upward and creating a burst of energy around you that amplifies allies and jolts targets"
    },
    {
     "do": "consumes",
     "t": "classenergy",
     "q": "While airborne, consume your class ability energy to summon your Arc Staff",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "spends class ability energy to launch you upward in a burst that amplifies allies and jolts targets",
+    "pq": "propelling yourself upward and creating a burst of energy around you that amplifies allies and jolts targets"
    },
    {
     "do": "uses",
     "t": "dodge",
     "note": "Counts as casting your dodge, so dodge perks and on-class-ability triggers fire.",
     "q": "Casting Ascension triggers the effects of your equipped dodge.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "also triggers your equipped dodge's effects"
    },
    {
     "do": "grants",
@@ -167,7 +175,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "While amplified, Ball Lightning releases additional lightning strikes before detonating.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "releases extra lightning strikes before detonating"
    }
   ]
  },
@@ -179,13 +188,17 @@
     "do": "uses",
     "t": "sprinting",
     "q": "After sprinting and while airborne, activate your charged melee ability to slam to the ground",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "enables a slam that damages nearby targets; Super energy and Bolt Charge per target hit",
+    "pq": "Gain Super energy and stacks of Bolt Charge based on number of targets hit by Ballistic Slam."
    },
    {
     "do": "uses",
     "t": "airborne",
     "q": "After sprinting and while airborne, activate your charged melee ability to slam to the ground",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "enables a slam that damages nearby targets; Super energy and Bolt Charge per target hit",
+    "pq": "Gain Super energy and stacks of Bolt Charge based on number of targets hit by Ballistic Slam."
    },
    {
     "do": "grants",
@@ -223,7 +236,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "While amplified, it creates an additional set of chains.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "an extra set of lightning chains"
    }
   ]
  },
@@ -359,19 +373,22 @@
      "arcability"
     ],
     "q": "Defeating targets with Arc abilities or defeating jolted or blinded targets creates an Ionic Trace.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Arc ability kills create an Ionic Trace"
    },
    {
     "do": "uses",
     "t": "jolt",
     "q": "Defeating targets with Arc abilities or defeating jolted or blinded targets creates an Ionic Trace.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "jolted kills create an Ionic Trace"
    },
    {
     "do": "uses",
     "t": "blind",
     "q": "Defeating targets with Arc abilities or defeating jolted or blinded targets creates an Ionic Trace.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "blinded kills create an Ionic Trace"
    },
    {
     "do": "grants",
@@ -385,7 +402,8 @@
     "t": "ionictrace",
     "note": "Any Ionic Trace (Spark of Discharge, Spark of Ions, Touch of Thunder Pulse) amplifies you.",
     "q": "Collecting an Ionic Trace makes you amplified.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "picking up any Ionic Trace makes you amplified"
    }
   ],
   "note": "1 second cooldown between Ionic Traces (Clarity)."
@@ -444,7 +462,8 @@
     "do": "uses",
     "t": "jolt",
     "q": "Defeating a jolted target makes you amplified.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "amplified on jolted kills"
    },
    {
     "do": "grants",
@@ -457,7 +476,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "While you are amplified, your dodge recharges more quickly, you are more resilient while dodging, and your reload speed is greatly increased.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster dodge recharge, tougher while dodging, much faster reload"
    },
    {
     "do": "grants",
@@ -502,7 +522,8 @@
     "do": "uses",
     "t": "dodge",
     "q": "While you are amplified, your dodge recharges more quickly, you are more resilient while dodging, and your reload speed is greatly increased.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "while amplified your dodge recharges faster and you are tougher while dodging"
    },
    {
     "do": "grants",
@@ -579,13 +600,16 @@
      "arcability"
     ],
     "q": "Defeat targets with Kinetic or Arc weapons or Arc abilities to charge up an Arc turret",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "charges an Arc turret that chains lightning and grants Bolt Charge",
+    "pq": "charge up an Arc turret that periodically chains lightning between nearby targets, granting a stack of Bolt Charge with each hit"
    },
    {
     "do": "uses",
     "t": "grenade",
     "q": "At 6 charges, replaces your Grenade Ability with a throwable Ionic Sentry.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "at 6 charges your grenade becomes a throwable Ionic Sentry"
    },
    {
     "do": "applies",
@@ -628,7 +652,9 @@
      "weapon"
     ],
     "q": "Defeat targets with Kinetic or Arc weapons or Arc abilities to charge up an Arc turret",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Arc or Kinetic weapon kills charge an Arc turret that chains lightning and grants Bolt Charge",
+    "pq": "charge up an Arc turret that periodically chains lightning between nearby targets, granting a stack of Bolt Charge with each hit"
    },
    {
     "do": "counts",
@@ -648,14 +674,16 @@
     "do": "uses",
     "t": "sprinting",
     "q": "With full class ability energy and after sprinting for a short time, you gain a frontal shield that blocks incoming damage.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "gain a frontal shield that blocks incoming damage"
    },
    {
     "do": "uses",
     "t": "classenergy",
     "note": "needs full class ability energy",
     "q": "With full class ability energy and after sprinting for a short time, you gain a frontal shield that blocks incoming damage.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "gain a frontal shield that blocks incoming damage"
    },
    {
     "do": "grants",
@@ -668,7 +696,8 @@
     "t": "classenergy",
     "by": "frontalshield",
     "q": "When the frontal shield breaks, your class ability energy is depleted.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "your class ability energy is emptied when the shield breaks"
    },
    {
     "do": "grants",
@@ -682,7 +711,8 @@
     "t": "amplified",
     "by": "frontalshield",
     "q": "While amplified, the shield blocks significantly more damage before breaking.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "the shield blocks much more damage before breaking"
    },
    {
     "do": "grants",
@@ -758,7 +788,8 @@
      "melee"
     ],
     "q": "Defeating targets with melee attacks makes you amplified and restores a portion of your health.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "melee kills make you amplified and restore health"
    },
    {
     "do": "grants",
@@ -796,7 +827,8 @@
     "do": "uses",
     "t": "dodge",
     "q": "After dodging, your next melee attack has increased lunge range, jolts the target, and creates a damaging aftershock.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "next melee gets more lunge range, jolts and adds a damaging aftershock"
    },
    {
     "do": "grants",
@@ -814,7 +846,8 @@
      }
     ],
     "q": "After dodging, your next melee attack has increased lunge range, jolts the target, and creates a damaging aftershock.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more lunge range, jolt and a damaging aftershock on the next melee"
    },
    {
     "do": "applies",
@@ -827,7 +860,8 @@
     "do": "uses",
     "t": "jolt",
     "q": "Damaging any jolted target with melee attacks also blinds them.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "melee hits on jolted targets also blind them"
    },
    {
     "do": "applies",
@@ -848,7 +882,8 @@
      }
     ],
     "q": "Lethal Current can consume and receive the benefits of Combination Blow.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "the empowered melee consumes and benefits from Combination Blow"
    }
   ],
   "note": "The jolt from its empowered melee sets up its own blind on the following melee hits."
@@ -867,13 +902,17 @@
     "do": "uses",
     "t": "sliding",
     "q": "While sliding, activate your charged melee ability to blink forward",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "blink forward calling lightning that jolts; also amplifies you and grants Bolt Charge",
+    "pq": "calling down lightning strikes that jolt targets as you rematerialize. This ability also makes you amplified and grants Bolt Charge."
    },
    {
     "do": "uses",
     "t": "melee",
     "q": "While sliding, activate your charged melee ability to blink forward",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "blink forward calling lightning that jolts; also amplifies you and grants Bolt Charge",
+    "pq": "calling down lightning strikes that jolt targets as you rematerialize. This ability also makes you amplified and grants Bolt Charge."
    },
    {
     "do": "applies",
@@ -922,7 +961,9 @@
     "do": "uses",
     "t": "sprinting",
     "q": "After sprinting for a short time, activate your charged melee ability to slam shoulder-first into your target",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "enables a shoulder charge that damages and blinds around the target",
+    "pq": "damaging and blinding targets in an area around them"
    },
    {
     "do": "applies",
@@ -934,7 +975,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "While you are amplified, the blind radius is increased.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "bigger blind radius"
    }
   ]
  },
@@ -952,7 +994,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "Rapidly defeating targets while you are amplified creates an Orb of Power.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Orb of Power on rapid kills"
    },
    {
     "do": "creates",
@@ -980,7 +1023,8 @@
      "weapon"
     ],
     "q": "While you are amplified, your Arc Special or Heavy ammo weapon final blows create a blinding explosion.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Arc Special and Heavy weapon kills cause a blinding explosion"
    },
    {
     "do": "applies",
@@ -1007,7 +1051,8 @@
     "do": "uses",
     "t": "blind",
     "q": "Defeating a blinded target with precision damage creates a blinding explosion.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "precision kills on blinded targets cause a blinding explosion"
    },
    {
     "do": "applies",
@@ -1045,7 +1090,8 @@
     "t": "ionictrace",
     "note": "Any Ionic Trace grants Bolt Charge with this equipped.",
     "q": "Collecting an Ionic Trace grants you a stack of Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "a Bolt Charge stack when you pick up an Ionic Trace"
    },
    {
     "do": "uses",
@@ -1059,7 +1105,8 @@
      }
     ],
     "q": "Arc weapon final blows have a chance to create an Ionic Trace.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Arc weapon kills may create an Ionic Trace"
    }
   ]
  },
@@ -1085,7 +1132,8 @@
     "do": "uses",
     "t": "sprinting",
     "q": "After sprinting for a short time, your class ability regeneration is increased.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster class ability regen"
    },
    {
     "do": "grants",
@@ -1104,7 +1152,8 @@
     "do": "uses",
     "t": "melee",
     "q": "Melee hits increase your equipped weapon's reload speed and stability for a short duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more reload speed and stability for a short time"
    },
    {
     "do": "grants",
@@ -1117,7 +1166,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "While amplified, the effects are increased and you gain increased stacks of Bolt Charge from all sources.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "stronger reload and stability bonus, plus more Bolt Charge stacks"
    },
    {
     "do": "modifies",
@@ -1128,7 +1178,8 @@
      }
     ],
     "q": "While amplified, the effects are increased and you gain increased stacks of Bolt Charge from all sources.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Bolt Charge stacks from all sources while amplified"
    }
   ],
   "note": "Does not speed up Storm's Keep barricade Bolt Charge (Clarity). Clarity says the amplified reload bonus is not actually increased (bug?)."
@@ -1141,7 +1192,8 @@
     "do": "uses",
     "t": "sprinting",
     "q": "While sprinting, you have greatly increased health stat.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "much higher health stat"
    },
    {
     "do": "grants",
@@ -1159,7 +1211,8 @@
     "do": "uses",
     "t": "criticalhealth",
     "q": "While critically wounded, taking damage emits a burst of damaging Arc energy that jolts targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "taking damage releases an Arc burst that damages and jolts"
    },
    {
     "do": "applies",
@@ -1184,13 +1237,15 @@
     "do": "uses",
     "t": "jolt",
     "q": "Defeating a jolted target or defeating a target with Bolt Charge creates an Ionic Trace.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "jolted kills create an Ionic Trace"
    },
    {
     "do": "uses",
     "t": "boltcharge",
     "q": "Defeating a jolted target or defeating a target with Bolt Charge creates an Ionic Trace.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Bolt Charge kills create an Ionic Trace"
    }
   ],
   "note": "10 second cooldown (Clarity)."
@@ -1213,7 +1268,8 @@
      }
     ],
     "q": "Your lingering Arc grenades (Lightning Grenade, Pulse Grenade, and Storm Grenade) have extended duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Lightning, Pulse and Storm Grenades last longer"
    },
    {
     "do": "modifies",
@@ -1230,7 +1286,8 @@
      }
     ],
     "q": "When combined with the Touch of Thunder titan aspect, Storm Grenade's Roaming Storm lasts 1.5 seconds longer.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "Storm Grenade's roaming storm lasts 1.5 seconds longer with Touch of Thunder"
    }
   ]
  },
@@ -1242,13 +1299,15 @@
     "do": "uses",
     "t": "sliding",
     "q": "Sliding over ammo bricks reloads your equipped weapon and grants you a small amount of Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "sliding over ammo reloads your weapon and gives some Bolt Charge"
    },
    {
     "do": "uses",
     "t": "ammobrick",
     "q": "Sliding over ammo bricks reloads your equipped weapon and grants you a small amount of Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "sliding over ammo reloads your weapon and gives some Bolt Charge"
    },
    {
     "do": "grants",
@@ -1273,7 +1332,8 @@
     "do": "uses",
     "t": "criticalhealth",
     "q": "While critically wounded, your melee and grenade energy regenerates more quickly.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster melee and grenade regen"
    },
    {
     "do": "grants",
@@ -1325,7 +1385,8 @@
     "do": "uses",
     "t": "grenade",
     "q": "Your Arc grenades jolt targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Arc grenades jolt targets"
    },
    {
     "do": "applies",
@@ -1344,7 +1405,8 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finishers make you amplified and grant you a stack of Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "finishers make you amplified and give a Bolt Charge stack"
    },
    {
     "do": "grants",
@@ -1403,7 +1465,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Cast your class ability to grant a moderate amount of Bolt Charge stacks to you and nearby allies.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Bolt Charge stacks for you and nearby allies"
    },
    {
     "do": "grants",
@@ -1431,7 +1494,8 @@
     "do": "uses",
     "t": "barricade",
     "q": "While behind your Barricade, you and allies gain stacks of Bolt Charge over time and your weapons can discharge max stacks of Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Bolt Charge over time behind it, and weapons can discharge max Bolt Charge"
    },
    {
     "do": "grants",
@@ -1467,7 +1531,8 @@
      "weapon"
     ],
     "q": "While behind your Barricade, you and allies gain stacks of Bolt Charge over time and your weapons can discharge max stacks of Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapons can discharge max Bolt Charge while behind your Barricade"
    }
   ],
   "note": "Multiple Storm's Keep barricades do not stack (Clarity)."
@@ -1514,13 +1579,17 @@
     "do": "uses",
     "t": "sliding",
     "q": "While sliding, activate your charged melee ability to unleash a devastating uppercut attack",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "enables an uppercut wave that damages and jolts",
+    "pq": "unleash a devastating uppercut attack that travels along the ground in front of you, damaging and jolting targets it hits"
    },
    {
     "do": "uses",
     "t": "melee",
     "q": "While sliding, activate your charged melee ability to unleash a devastating uppercut attack",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "an uppercut wave that damages and jolts",
+    "pq": "unleash a devastating uppercut attack that travels along the ground in front of you, damaging and jolting targets it hits"
    },
    {
     "do": "applies",
@@ -1532,7 +1601,8 @@
     "do": "uses",
     "t": "jolt",
     "q": "Defeating jolted targets grants a stack of Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "a Bolt Charge stack on jolted kills"
    },
    {
     "do": "grants",
@@ -1564,7 +1634,8 @@
      }
     ],
     "q": "Tempest Strike can consume and receive the benefits of Combination Blow and Lethal Current's aftershock.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "consumes and benefits from Combination Blow's melee damage bonus"
    },
    {
     "do": "consumes",
@@ -1575,7 +1646,8 @@
      }
     ],
     "q": "Tempest Strike can consume and receive the benefits of Combination Blow and Lethal Current's aftershock.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "consumes Lethal Current's aftershock and gains its benefits"
    }
   ],
   "note": "Does not interact with Disorienting Blow; its jolted-kill Bolt Charge does not stack with Dielectric's (compendium)."
@@ -1648,7 +1720,8 @@
      }
     ],
     "q": "Flashbang Grenade: Emits an additional blinding detonation on bounce.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Flashbang Grenade blinds again on bounce"
    },
    {
     "do": "applies",
@@ -1676,7 +1749,8 @@
      }
     ],
     "q": "Pulse Grenade: Creates Ionic Traces periodically as it damages targets and increases in damage over time.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Pulse Grenade creates Ionic Traces and ramps up in damage"
    },
    {
     "do": "creates",
@@ -1704,7 +1778,8 @@
      }
     ],
     "q": "Lightning Grenade: Grants an additional grenade charge, jolts targets hit by the initial blast, and grants Bolt Charge when it causes damage.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Lightning Grenade gets an extra charge, jolts and grants Bolt Charge"
    },
    {
     "do": "applies",
@@ -1747,7 +1822,8 @@
      }
     ],
     "q": "Storm Grenade: After detonating, creates a roaming thundercloud that tracks nearby targets and fires bolts of lightning at foes beneath it.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Storm Grenade leaves a roaming thundercloud that strikes foes"
    }
   ],
   "note": "Clarity says the storm cloud lasts longer \"with Spark of Amplitude\"; Spark of Magnitude's own text shows it is Magnitude."

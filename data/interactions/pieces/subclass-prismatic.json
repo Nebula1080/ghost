@@ -138,7 +138,8 @@
     "do": "uses",
     "t": "super",
     "q": "Scoring a Super Kill or Killing 3 enemies with Elemental Damage within 6 seconds of each spawns an Elemental Pickup.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "Super kills spawn an Elemental pickup"
    }
   ]
  },
@@ -157,7 +158,8 @@
     "do": "uses",
     "t": "lightdamage",
     "q": "Scoring 3 Kills within 3? seconds of each with Light-aligned damage grants 10% Melee energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "10% melee energy after 3 rapid Light kills"
    },
    {
     "do": "grants",
@@ -170,7 +172,8 @@
     "do": "uses",
     "t": "darknessdamage",
     "q": "Scoring 3 Kills within 3? seconds of each with Dark-aligned damage grants 10% Grenade energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "10% grenade energy after 3 rapid Darkness kills"
    }
   ]
  },
@@ -190,7 +193,8 @@
     "do": "uses",
     "t": "melee",
     "q": "Melee Kills start health regeneration.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "melee kills start health regeneration"
    },
    {
     "do": "grants",
@@ -208,7 +212,8 @@
     "do": "uses",
     "t": "transcendence",
     "q": "While Transcendent, this also applies to allies within ? meters.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "melee-kill health regeneration also covers nearby allies"
    }
   ]
  },
@@ -232,7 +237,8 @@
     "do": "uses",
     "t": "grenade",
     "q": "Grenade Kills grant Volatile Rounds to Void Weapons for 11 [7.5] seconds.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "grenade kills give Void weapons Volatile Rounds"
    },
    {
     "do": "grants",
@@ -251,7 +257,8 @@
     "t": "melee",
     "q": "Powered Melee Kills (including Knockout) grant Unraveling Rounds to Strand Weapons for 11 [7.5] seconds.",
     "s": "clarity",
-    "note": "Powered melee only (Knockout counts)."
+    "note": "Powered melee only (Knockout counts).",
+    "pay": "powered melee kills give Strand weapons Unraveling Rounds"
    }
   ]
  },
@@ -264,13 +271,15 @@
     "t": "freeze",
     "q": "Freezing or suppressing a target reloads your equipped weapons and increases weapon stability, aim assist, and airborne effectiveness.",
     "s": "bungie",
-    "note": "Refills the readied weapon + stability/aim assist/airborne for 11s; 4s cooldown (Clarity)."
+    "note": "Refills the readied weapon + stability/aim assist/airborne for 11s; 4s cooldown (Clarity).",
+    "pay": "reloads weapons and boosts stability, aim assist and airborne effectiveness"
    },
    {
     "do": "uses",
     "t": "suppress",
     "q": "Freezing or suppressing a target reloads your equipped weapons and increases weapon stability, aim assist, and airborne effectiveness.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reloads weapons and boosts stability, aim assist and airborne effectiveness"
    },
    {
     "do": "grants",
@@ -305,54 +314,62 @@
     "t": "arcability",
     "note": "Light powered melee abilities get a larger bonus in PvE (+50% of base damage).",
     "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Arc ability damage to Stasis/Strand-debuffed targets"
    },
    {
     "do": "uses",
     "t": "solarability",
     "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Solar ability damage to Stasis/Strand-debuffed targets"
    },
    {
     "do": "uses",
     "t": "voidability",
     "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more Void ability damage to Stasis/Strand-debuffed targets"
    },
    {
     "do": "uses",
     "t": "slow",
     "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
     "s": "bungie",
-    "note": "Any Stasis or Strand debuff on the target."
+    "note": "Any Stasis or Strand debuff on the target.",
+    "pay": "Light abilities deal more damage to this target (10%; Light melee +50% base in PvE)"
    },
    {
     "do": "uses",
     "t": "freeze",
     "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
     "s": "bungie",
-    "note": "Any Stasis or Strand debuff on the target."
+    "note": "Any Stasis or Strand debuff on the target.",
+    "pay": "Light abilities deal more damage to this target (10%; Light melee +50% base in PvE)"
    },
    {
     "do": "uses",
     "t": "sever",
     "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
     "s": "bungie",
-    "note": "Any Stasis or Strand debuff on the target."
+    "note": "Any Stasis or Strand debuff on the target.",
+    "pay": "Light abilities deal more damage to this target (10%; Light melee +50% base in PvE)"
    },
    {
     "do": "uses",
     "t": "suspend",
     "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
     "s": "bungie",
-    "note": "Any Stasis or Strand debuff on the target."
+    "note": "Any Stasis or Strand debuff on the target.",
+    "pay": "Light abilities deal more damage to this target (10%; Light melee +50% base in PvE)"
    },
    {
     "do": "uses",
     "t": "unravel",
     "q": "Your [Arc] Arc, [Solar] Solar, and [Void] Void abilities deal increased damage to targets afflicted with Darkness debuffs.",
     "s": "bungie",
-    "note": "Any Stasis or Strand debuff on the target."
+    "note": "Any Stasis or Strand debuff on the target.",
+    "pay": "Light abilities deal more damage to this target (10%; Light melee +50% base in PvE)"
    }
   ]
  },
@@ -380,7 +397,8 @@
     "do": "uses",
     "t": "melee",
     "q": "Elemental Melee Hits grant you Radiant for 5 seconds.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "elemental melee hits make you radiant"
    }
   ]
  },
@@ -392,7 +410,8 @@
     "do": "uses",
     "t": "finisher",
     "q": "Finishers create a detonation that either jolts, scorches, slows, severs, or makes targets volatile based on the damage type of your equipped Super.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "finishers detonate, applying your Super element's debuff"
    },
    {
     "do": "applies",
@@ -512,31 +531,36 @@
     "do": "uses",
     "t": "slow",
     "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "bonus Light Transcendence energy on kill"
    },
    {
     "do": "uses",
     "t": "freeze",
     "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "bonus Light Transcendence energy on kill"
    },
    {
     "do": "uses",
     "t": "sever",
     "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "bonus Light Transcendence energy on kill"
    },
    {
     "do": "uses",
     "t": "suspend",
     "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "bonus Light Transcendence energy on kill"
    },
    {
     "do": "uses",
     "t": "unravel",
     "q": "Killing enemies affected by Stasis or Strand Elemental debuffs grants additional Light Transcendence Energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "bonus Light Transcendence energy on kill"
    }
   ]
  },
@@ -612,7 +636,8 @@
        "Storm Grenade"
       ]
      }
-    ]
+    ],
+    "pay": "Void grenades weaken targets; Arc grenades jolt them"
    }
   ]
  },
@@ -637,7 +662,8 @@
     "do": "uses",
     "t": "transcendence",
     "q": "Kills while Transcendent spawn up to 4 Orbs of Power for allies",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "kills while transcendent create Orbs of Power for allies"
    },
    {
     "do": "grants",
@@ -678,7 +704,8 @@
     "do": "uses",
     "t": "super",
     "q": "Super Kills grant an additional 2% [?%] Light and Darkness Transcendence Energy to you and allies",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "Super kills grant extra Transcendence energy to you and allies"
    }
   ]
  },
@@ -697,32 +724,37 @@
     "do": "uses",
     "t": "firesprite",
     "q": "Ionic Traces, Firesprites, Void Breaches: 7.5% Light Transcendence Energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "collecting it grants 7.5% Light Transcendence energy"
    },
    {
     "do": "uses",
     "t": "ionictrace",
     "q": "Ionic Traces, Firesprites, Void Breaches: 7.5% Light Transcendence Energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "collecting it grants 7.5% Light Transcendence energy"
    },
    {
     "do": "uses",
     "t": "voidbreach",
     "q": "Ionic Traces, Firesprites, Void Breaches: 7.5% Light Transcendence Energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "collecting it grants 7.5% Light Transcendence energy"
    },
    {
     "do": "uses",
     "t": "stasisshard",
     "q": "Stasis Shards: 5% Darkness Transcendence Energy",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "collecting it grants 5% Darkness Transcendence energy"
    },
    {
     "do": "uses",
     "t": "tangle",
     "q": "Tangles: 10% Darkness Transcendence Energy",
     "s": "clarity",
-    "note": "Destroying a Tangle, not picking it up."
+    "note": "Destroying a Tangle, not picking it up.",
+    "pay": "destroying it grants 10% Darkness Transcendence energy"
    }
   ]
  },
@@ -741,55 +773,64 @@
     "do": "uses",
     "t": "amplified",
     "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "faster class ability regeneration (+40%; +60% with 2+ buffs)"
    },
    {
     "do": "uses",
     "t": "boltcharge",
     "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "faster class ability regeneration (+40%; +60% with 2+ buffs)"
    },
    {
     "do": "uses",
     "t": "radiant",
     "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "faster class ability regeneration (+40%; +60% with 2+ buffs)"
    },
    {
     "do": "uses",
     "t": "restoration",
     "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "faster class ability regeneration (+40%; +60% with 2+ buffs)"
    },
    {
     "do": "uses",
     "t": "devour",
     "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "faster class ability regeneration (+40%; +60% with 2+ buffs)"
    },
    {
     "do": "uses",
     "t": "invisibility",
     "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "faster class ability regeneration (+40%; +60% with 2+ buffs)"
    },
    {
     "do": "uses",
     "t": "overshield",
     "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "faster class ability regeneration (+40%; +60% with 2+ buffs)"
    },
    {
     "do": "uses",
     "t": "frostarmor",
     "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "faster class ability regeneration (+40%; +60% with 2+ buffs)"
    },
    {
     "do": "uses",
     "t": "wovenmail",
     "q": "Having an active elemental buff grants an additional 40% Base Class Ability Regeneration Rate.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "faster class ability regeneration (+40%; +60% with 2+ buffs)"
    }
   ]
  },
@@ -802,7 +843,8 @@
     "t": "transcendence",
     "q": "While transcendent, your ability final blows explode.",
     "s": "bungie",
-    "note": "The explosion deals ability-matching elemental damage; no debuff is stated."
+    "note": "The explosion deals ability-matching elemental damage; no debuff is stated.",
+    "pay": "ability final blows explode"
    },
    {
     "do": "uses",
@@ -813,7 +855,8 @@
      }
     ],
     "q": "Ability Kills while Transcendent trigger an explosion",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "grenade kills while transcendent trigger an elemental explosion"
    },
    {
     "do": "uses",
@@ -824,7 +867,8 @@
      }
     ],
     "q": "Ability Kills while Transcendent trigger an explosion",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "melee kills while transcendent trigger an elemental explosion"
    },
    {
     "do": "uses",
@@ -835,7 +879,8 @@
      }
     ],
     "q": "Ability Kills while Transcendent trigger an explosion",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "class ability kills while transcendent trigger an elemental explosion"
    }
   ]
  },
@@ -855,14 +900,16 @@
     "do": "uses",
     "t": "grenade",
     "q": "Grenade Ability Kills grant you Cure x1.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "grenade kills cure you (Cure x1)"
    },
    {
     "do": "uses",
     "t": "prismaticgrenade",
     "q": "Prismatic Grenade Kills grant you Cure x2.",
     "s": "clarity",
-    "note": "Transcendence grenade kills give the stronger Cure x2."
+    "note": "Transcendence grenade kills give the stronger Cure x2.",
+    "pay": "Prismatic grenade kills give a stronger Cure x2"
    }
   ]
  },
@@ -888,7 +935,8 @@
     "t": "transcendence",
     "q": "While transcendent, the effect is increased.",
     "s": "bungie",
-    "note": "Clarity: the 15% is NOT increased while Transcendent; it only stacks with Transcendence's own 20% resist (32% total)."
+    "note": "Clarity: the 15% is NOT increased while Transcendent; it only stacks with Transcendence's own 20% resist (32% total).",
+    "pay": "more damage resistance while surrounded (Clarity: only stacks with Transcendence's own)"
    }
   ]
  },
@@ -900,7 +948,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Picking up an Orb of Power grants either Bolt Charge, Restoration, Frost Armor, Woven Mail, or Overshield based on the damage type of your equipped Super.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Orb pickups grant a buff matching your Super's element"
    },
    {
     "do": "grants",
@@ -1012,25 +1061,29 @@
     "do": "modifies",
     "t": "ignition",
     "q": "increases the area of effect of Solar ignitions",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "bigger Solar ignitions"
    },
    {
     "do": "modifies",
     "t": "shatter",
     "q": "Increases the size and damage of the burst when you shatter a Stasis crystal or frozen target",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "bigger, stronger shatter bursts"
    },
    {
     "do": "modifies",
     "t": "stasiscrystal",
     "q": "Shattering enemies or destroying Crystals creates an additional damage instance",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "destroying a crystal adds an extra damage burst"
    },
    {
     "do": "uses",
     "t": "freeze",
     "q": "Increases the size and damage of the burst when you shatter a Stasis crystal or frozen target",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "shattering frozen targets makes a bigger, stronger burst"
    }
   ]
  },
@@ -1050,61 +1103,74 @@
     "do": "uses",
     "t": "amplified",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "ability kills grant extra Darkness Transcendence energy"
    },
    {
     "do": "uses",
     "t": "boltcharge",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "ability kills grant extra Darkness Transcendence energy"
    },
    {
     "do": "uses",
     "t": "radiant",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "ability kills grant extra Darkness Transcendence energy"
    },
    {
     "do": "uses",
     "t": "restoration",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "ability kills grant extra Darkness Transcendence energy"
    },
    {
     "do": "uses",
     "t": "devour",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "ability kills grant extra Darkness Transcendence energy"
    },
    {
     "do": "uses",
     "t": "invisibility",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "ability kills grant extra Darkness Transcendence energy"
    },
    {
     "do": "uses",
     "t": "overshield",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "ability kills grant extra Darkness Transcendence energy"
    },
    {
     "do": "uses",
     "t": "grenade",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "kills with an Arc, Solar or Void buff active grant extra Darkness Transcendence energy",
+    "pq": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy."
    },
    {
     "do": "uses",
     "t": "melee",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "kills with an Arc, Solar or Void buff active grant extra Darkness Transcendence energy",
+    "pq": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy."
    },
    {
     "do": "uses",
     "t": "classability",
     "q": "Ability Kills with an active Arc, Solar, or Void Elemental buff",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "kills with an Arc, Solar or Void buff active grant extra Darkness Transcendence energy",
+    "pq": "Ability Kills with an active Arc, Solar, or Void Elemental buff grant an additional 1% [?%] Darkness Transcendence Energy."
    }
   ]
  },
@@ -1125,7 +1191,8 @@
     "t": "transcendence",
     "q": "While transcendent, the severing blast is bigger.",
     "s": "bungie",
-    "note": "Radius 3 m to 6 m."
+    "note": "Radius 3 m to 6 m.",
+    "pay": "bigger severing blast"
    }
   ]
  },
@@ -1143,19 +1210,22 @@
     "do": "uses",
     "t": "transcendenceenergy",
     "q": "Dealing damage, alongside applying Elemental Effects grants Transcendence Energy.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "damage and elemental effects fill your Transcendence bars"
    },
    {
     "do": "uses",
     "t": "lightdamage",
     "q": "Achieve harmony by dealing damage with Light and Dark damage types in equal measure",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Light damage fills the Light Transcendence bar"
    },
    {
     "do": "uses",
     "t": "darknessdamage",
     "q": "Achieve harmony by dealing damage with Light and Dark damage types in equal measure",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Darkness damage fills the Darkness Transcendence bar"
    },
    {
     "do": "grants",
@@ -1194,7 +1264,8 @@
     "do": "modifies",
     "t": "grenade",
     "q": "your grenade is replaced by a unique Prismatic grenade that deals both Light and Dark damage",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "while transcendent your grenade becomes a Prismatic grenade"
    },
    {
     "do": "grants",
@@ -1233,7 +1304,8 @@
     "do": "uses",
     "t": "melee",
     "q": "Dealing Melee Ability Damage while Transcendent increases the Prismatic Grenade Regeneration Speed",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "melee damage while transcendent speeds Prismatic grenade regeneration"
    },
    {
     "do": "grants",
@@ -1246,13 +1318,15 @@
     "do": "uses",
     "t": "grenade",
     "q": "Dealing Grenade Ability Damage while Transcendent increases the Melee Regeneration Speed",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "grenade damage while transcendent speeds melee regeneration"
    },
    {
     "do": "modifies",
     "t": "transcendence",
     "q": "Defeating targets while transcendent extends its duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills extend its duration"
    },
    {
     "do": "grants",

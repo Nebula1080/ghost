@@ -6,70 +6,91 @@
    {
     "do": "uses",
     "t": "blind",
-    "on": "more damage per unique elemental debuff on the target",
     "note": "Bonus scales with the number of unique elemental debuffs on the target (10/20/30% at 1/2/3 debuffs).",
     "q": "Blind - Jolt",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "jolt",
     "q": "Blind - Jolt",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "scorch",
     "q": "Scorch - Ignition",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "suppress",
     "q": "Suppression - Volatile - Weaken",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "volatile",
     "q": "Suppression - Volatile - Weaken",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "weaken",
     "q": "Suppression - Volatile - Weaken",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "slow",
     "q": "Slow - Freeze - Shatter",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "freeze",
     "q": "Slow - Freeze - Shatter",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "sever",
     "q": "Sever - Suspend - Unravel",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "suspend",
     "q": "Sever - Suspend - Unravel",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    },
    {
     "do": "uses",
     "t": "unravel",
     "q": "Sever - Suspend - Unravel",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more damage for each unique debuff on the target (10/20/30% at 1/2/3)",
+    "pq": "10% ↑11% | 20% ↑22% | 30% ↑33% increased damage."
    }
   ]
  },
@@ -108,67 +129,89 @@
     "t": "blind",
     "note": "Any elemental debuff counts; kills of debuffed targets build micro-missile stacks (Clarity: kills of debuffed targets with this weapon spawn a missile instantly).",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "jolt",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "scorch",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "suppress",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "volatile",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "weaken",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "slow",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "freeze",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "sever",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "suspend",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    },
    {
     "do": "uses",
     "t": "unravel",
     "q": "final blows on targets affected by elemental debuffs",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of debuffed targets prepare homing micro-missiles",
+    "pq": "periodically prepare a homing micro-missile, which is launched from your target after this weapon's next final blow"
    }
   ]
  },
@@ -187,13 +230,15 @@
     "do": "uses",
     "t": "volatilerounds",
     "q": "Seekers can benefit from Volatile Rounds, Unraveling Rounds, and more!",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "Guidance Ring seekers benefit from Volatile Rounds"
    },
    {
     "do": "uses",
     "t": "unravelingrounds",
     "q": "Seekers can benefit from Volatile Rounds, Unraveling Rounds, and more!",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "Guidance Ring seekers benefit from Unraveling Rounds"
    }
   ]
  },
@@ -206,7 +251,9 @@
     "t": "arcdamage",
     "note": "Arc damage from any source (abilities included) charges Arc Alignment.",
     "q": "Dealing Arc damage from any source aligns the battery's coils.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "charges Arc Alignment: hip-fire jolts targets",
+    "pq": "enable hip-fired Starlight Beam to apply Jolt to any targets damaged for a short time"
    },
    {
     "do": "applies",
@@ -219,13 +266,15 @@
     "t": "jolt",
     "note": "Weapon intrinsic: bonus damage against Arc-debuffed (jolted or blinded) targets.",
     "q": "30% increased damage against Arc-Debuffed Enemies.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "30% more damage against Arc-debuffed targets"
    },
    {
     "do": "uses",
     "t": "blind",
     "q": "30% increased damage against Arc-Debuffed Enemies.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "30% more damage against Arc-debuffed targets"
    },
    {
     "do": "applies",
@@ -239,7 +288,9 @@
     "t": "amplified",
     "note": "Catalyst (Supercharged Matrix): handling bonuses while amplified.",
     "q": "While Amplified:",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "more reload speed and aim assist (catalyst)",
+    "pq": "+? Reload Speed, +10? Aim Assist"
    }
   ]
  },
@@ -311,6 +362,8 @@
     ],
     "q": "Darkness final blows boost Arc, Solar, and Void weapons.",
     "s": "bungie",
+    "pay": "more weapon damage for a short time",
+    "pq": "Elemental final blows opposite this weapon increase damage for a short duration.",
     "note": "On Arc/Solar/Void versions of the weapon; kills from any source count (Clarity: Kinetic kills count too)."
    },
    {
@@ -333,6 +386,8 @@
     ],
     "q": "Light final blows boost Stasis, Strand, and Kinetic weapons.",
     "s": "bungie",
+    "pay": "more weapon damage for a short time",
+    "pq": "Elemental final blows opposite this weapon increase damage for a short duration.",
     "note": "On Stasis/Strand/Kinetic versions of the weapon; kills from any source count."
    }
   ]
@@ -346,6 +401,7 @@
     "t": "melee",
     "q": "Replaces your melee ability with a 2-hit combo blade attack.",
     "s": "clarity",
+    "pay": "replaces your melee with a two-hit blade combo",
     "note": "Cull's Shadow; scales with Melee stat and melee damage buffs, not a glaive melee"
    }
   ]
@@ -372,7 +428,8 @@
     "t": "scorch",
     "note": "Tarrabah intrinsic: hits on scorched targets charge Ravenous Beast faster.",
     "q": "Hits against Scorched Enemies grant 3% [6.7%] Power.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "hits on scorched targets charge Ravenous Beast faster"
    }
   ]
  },
@@ -408,19 +465,25 @@
     "do": "uses",
     "t": "wovenmail",
     "q": "while you have Woven Mail, Frost Armor, or Void Overshield",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more stability, aim assist and flinch resistance",
+    "pq": "Gain aim assist, stability, and flinch resistance"
    },
    {
     "do": "uses",
     "t": "frostarmor",
     "q": "while you have Woven Mail, Frost Armor, or Void Overshield",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more stability, aim assist and flinch resistance",
+    "pq": "Gain aim assist, stability, and flinch resistance"
    },
    {
     "do": "uses",
     "t": "overshield",
     "q": "while you have Woven Mail, Frost Armor, or Void Overshield",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more stability, aim assist and flinch resistance",
+    "pq": "Gain aim assist, stability, and flinch resistance"
    }
   ]
  },
@@ -440,7 +503,8 @@
     "t": "scorch",
     "note": "Catalyst only.",
     "q": "Deals 10% increased damage against Scorched Enemies.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "10% more damage to scorched targets"
    }
   ]
  },
@@ -462,6 +526,7 @@
     "t": "scorch",
     "q": "Dealing damage to a scorched target inflicts scorch.",
     "s": "bungie",
+    "pay": "hits on scorched targets apply more scorch",
     "dmg": [
      "weapon"
     ]
@@ -532,32 +597,42 @@
     "do": "uses",
     "t": "firesprite",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "stacking period of more weapon damage (30%)",
+    "pq": "grants this weapon a stacking period of increased damage"
    },
    {
     "do": "uses",
     "t": "voidbreach",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "stacking period of more weapon damage (30%)",
+    "pq": "grants this weapon a stacking period of increased damage"
    },
    {
     "do": "uses",
     "t": "ionictrace",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "stacking period of more weapon damage (30%)",
+    "pq": "grants this weapon a stacking period of increased damage"
    },
    {
     "do": "uses",
     "t": "stasisshard",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
     "s": "bungie",
+    "pay": "stacking period of more weapon damage (30%)",
+    "pq": "grants this weapon a stacking period of increased damage",
     "note": "Clarity: shards from Facet of Awakening or Facet of Command do not trigger it."
    },
    {
     "do": "uses",
     "t": "tangle",
     "q": "or destroying a Tangle",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "stacking period of more weapon damage (30%)",
+    "pq": "grants this weapon a stacking period of increased damage"
    }
   ]
  },
@@ -569,31 +644,41 @@
     "do": "uses",
     "t": "firesprite",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate grenade energy for a while",
+    "pq": "grants this weapon a stacking period of grenade energy generation on hit"
    },
    {
     "do": "uses",
     "t": "voidbreach",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate grenade energy for a while",
+    "pq": "grants this weapon a stacking period of grenade energy generation on hit"
    },
    {
     "do": "uses",
     "t": "ionictrace",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate grenade energy for a while",
+    "pq": "grants this weapon a stacking period of grenade energy generation on hit"
    },
    {
     "do": "uses",
     "t": "stasisshard",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate grenade energy for a while",
+    "pq": "grants this weapon a stacking period of grenade energy generation on hit"
    },
    {
     "do": "uses",
     "t": "tangle",
     "q": "or destroying a Tangle",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate grenade energy for a while",
+    "pq": "grants this weapon a stacking period of grenade energy generation on hit"
    },
    {
     "do": "grants",
@@ -611,31 +696,41 @@
     "do": "uses",
     "t": "firesprite",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate melee energy for a while",
+    "pq": "grants this weapon a stacking period of melee energy generation on hit"
    },
    {
     "do": "uses",
     "t": "voidbreach",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate melee energy for a while",
+    "pq": "grants this weapon a stacking period of melee energy generation on hit"
    },
    {
     "do": "uses",
     "t": "ionictrace",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate melee energy for a while",
+    "pq": "grants this weapon a stacking period of melee energy generation on hit"
    },
    {
     "do": "uses",
     "t": "stasisshard",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate melee energy for a while",
+    "pq": "grants this weapon a stacking period of melee energy generation on hit"
    },
    {
     "do": "uses",
     "t": "tangle",
     "q": "or destroying a Tangle",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "weapon hits generate melee energy for a while",
+    "pq": "grants this weapon a stacking period of melee energy generation on hit"
    },
    {
     "do": "grants",
@@ -653,37 +748,49 @@
     "do": "uses",
     "t": "firesprite",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reduces this weapon's heat",
+    "pq": "reduces heat"
    },
    {
     "do": "uses",
     "t": "voidbreach",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reduces this weapon's heat",
+    "pq": "reduces heat"
    },
    {
     "do": "uses",
     "t": "ionictrace",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reduces this weapon's heat",
+    "pq": "reduces heat"
    },
    {
     "do": "uses",
     "t": "stasisshard",
     "q": "Elemental pickups include [Solar]Firesprites, [Void]Void Breaches, [Arc]Ionic Traces, [Stasis]Stasis Shards, and [Strand]Strand Tangles.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reduces this weapon's heat",
+    "pq": "reduces heat"
    },
    {
     "do": "uses",
     "t": "tangle",
     "q": "or destroying a Tangle",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reduces this weapon's heat",
+    "pq": "reduces heat"
    },
    {
     "do": "uses",
     "t": "orbofpower",
     "q": "collecting an Orb of Power",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reduces this weapon's heat",
+    "pq": "reduces heat"
    }
   ]
  },
@@ -756,7 +863,8 @@
     "do": "consumes",
     "t": "boltcharge",
     "q": "Melee Attacks can discharge Bolt Charge.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "sword melee attacks can discharge Bolt Charge"
    }
   ]
  },
@@ -937,7 +1045,8 @@
     "do": "uses",
     "t": "grenade",
     "q": "Activating your grenade ability reloads this weapon from reserves.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reloads this weapon from reserves"
    }
   ]
  },
@@ -979,7 +1088,8 @@
     "do": "uses",
     "t": "voidbreach",
     "q": "Collecting a Void Breach causes final blows to provide a Void Overshield.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "the next weapon kills grant a Void Overshield"
    },
    {
     "do": "grants",
@@ -1005,6 +1115,7 @@
     "note": "Arc Seeker discharges count as weapon damage; unaffected by Spark of Frequency.",
     "q": "Charged Arc Seeker hits grant, and can spend, Bolt Charge.",
     "s": "bungie",
+    "pay": "charged Arc Seeker hits discharge Bolt Charge as weapon damage",
     "dmg": [
      "weapon",
      "primaryweapon",
@@ -1021,7 +1132,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "Temporarily increases reload speed and handling after sprinting or while amplified.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more reload speed and handling"
    }
   ]
  },
@@ -1059,7 +1171,8 @@
     "t": "volatilerounds",
     "note": "Spheres count as generic Void weapons; they do not trigger Void ability or melee effects.",
     "q": "They are also able to inflict Volatile through Volatile Rounds.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "Transmutation sphere attacks can apply volatile"
    },
    {
     "do": "grants",
@@ -1094,7 +1207,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Picking up an Orb of Power increases the next projectile's blast radius and damage.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "next shot gets a bigger blast radius and more damage"
    }
   ]
  },
@@ -1106,7 +1220,8 @@
     "do": "uses",
     "t": "grenade",
     "q": "This weapon gains bonus stability and reload speed when activating a grenade ability.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more stability and reload speed"
    },
    {
     "do": "uses",
@@ -1122,6 +1237,7 @@
     "note": "Each Healing Grenade orb pickup (by anyone) grants a stack.",
     "q": "Healing grenades and grenade final blows grant additional stacks of the bonus.",
     "s": "bungie",
+    "pay": "extra stacks of the stability and reload bonus",
     "from": [
      "grenade"
     ]
@@ -1136,7 +1252,9 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting Orbs of Power strengthens this weapon's next several ricochet shots",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "ricochet shots deal more damage and bounce more",
+    "pq": "providing more damage and more bounces between targets"
    }
   ]
  },
@@ -1174,7 +1292,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "Reloading after a final blow or becoming amplified grants a period of increased damage.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "stacking weapon damage bonus (15-35%, up to 5 stacks)"
    }
   ]
  },
@@ -1245,13 +1364,15 @@
     "do": "uses",
     "t": "freeze",
     "q": "This weapon deals 50% increased damage to Frozen enemies and Stasis Crystals",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "50% more damage to frozen targets"
    },
    {
     "do": "uses",
     "t": "stasiscrystal",
     "q": "This weapon deals 50% increased damage to Frozen enemies and Stasis Crystals",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "50% more damage to Stasis crystals"
    }
   ]
  },
@@ -1264,7 +1385,8 @@
     "t": "voiddamage",
     "note": "Void kills from any source count.",
     "q": "Multikills with Void damage immediately reload this weapon from reserves.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "Void multikills refill the magazine"
    }
   ]
  },
@@ -1314,7 +1436,9 @@
     "t": "voidbreach",
     "note": "Exotic shotgun intrinsic (Compendium), not the Heart Piercer line.",
     "q": "Scoring a kill or picking up a Void Breach grants Nightsworn Sight",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "Nightsworn Sight: more precision damage and reload speed",
+    "pq": "15% increased Precision Damage and +? Reload Speed."
    },
    {
     "do": "applies",
@@ -1352,7 +1476,8 @@
     "t": "ignition",
     "note": "Ignitions from any source nearby count.",
     "q": "Igniting nearby targets partially replenishes fuel.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "replenishes fuel; full fuel refills the weapon from reserves"
    },
    {
     "do": "applies",
@@ -1383,19 +1508,22 @@
     "do": "uses",
     "t": "freeze",
     "q": "Precision final blows or shattering a frozen target instead triggers an ignition.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "shattering a frozen target triggers an ignition"
    },
    {
     "do": "uses",
     "t": "stasiscrystal",
     "q": "Bodyshot Kills or Shattering a Stasis Crystal triggers a Solar Explosion",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "shattering a crystal triggers a Solar explosion"
    },
    {
     "do": "uses",
     "t": "shatter",
     "q": "Precision Kills or Shattering a Frozen target triggers a Solar Ignition.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "shattering a frozen target triggers an ignition"
    }
   ]
  },
@@ -1509,7 +1637,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "While amplified, Jolt is applied faster.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "jolt is applied with fewer hits"
    }
   ]
  },
@@ -1521,7 +1650,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Picking up an Orb of Power causes your next final blow with this weapon to grant bonus Special ammo meter progress.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "next kill gives bonus Special ammo progress"
    }
   ]
  },
@@ -1546,19 +1676,25 @@
     "do": "uses",
     "t": "amplified",
     "q": "when you are amplified, radiant, or have Devour",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more reload speed, handling and ADS speed",
+    "pq": "This weapon gains reload speed, handling, and aim down sight speed"
    },
    {
     "do": "uses",
     "t": "radiant",
     "q": "when you are amplified, radiant, or have Devour",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more reload speed, handling and ADS speed",
+    "pq": "This weapon gains reload speed, handling, and aim down sight speed"
    },
    {
     "do": "uses",
     "t": "devour",
     "q": "when you are amplified, radiant, or have Devour",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more reload speed, handling and ADS speed",
+    "pq": "This weapon gains reload speed, handling, and aim down sight speed"
    }
   ]
  },
@@ -1626,7 +1762,9 @@
     "t": "ionictrace",
     "note": "Picking up a trace builds beam energy.",
     "q": "Upon picking up an Ionic Trace:",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "builds beam energy, which ramps damage up",
+    "pq": "Slowly grants 50% Energy over 0.5 seconds."
    }
   ]
  },
@@ -1679,6 +1817,7 @@
     "t": "melee",
     "q": "Melee kills grant ammo for this weapon.",
     "s": "bungie",
+    "pay": "melee kills refill this weapon's ammo",
     "from": [
      "melee"
     ]
@@ -1751,7 +1890,8 @@
     "do": "modifies",
     "t": "melee",
     "q": "Hitting an enemy with every pellet in a shot increases melee damage for a short duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more damage on your next melee"
    }
   ]
  },
@@ -1764,7 +1904,8 @@
     "t": "grenade",
     "note": "Grenade replacements (Transcendence grenades) also trigger it; Kinetic weapons lose their combatant damage bonus.",
     "q": "Using your grenade ability partially refills the magazine and changes this weapon's damage type to match your grenade until you stow it.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills part of the magazine and switches this weapon to your grenade's element"
    }
   ]
  },
@@ -1777,6 +1918,7 @@
     "t": "grenade",
     "q": "replaces Grenade Ability with a Kinetic-Damage Fragmentation Grenade.",
     "s": "compendium",
+    "pay": "replaces your grenade with a Kinetic fragmentation grenade (catalyst)",
     "note": "Forerunner catalyst (The Rock); the frag counts as a Grenade Ability for grenade-kill and grenade-use effects",
     "dmg": [
      "grenade"
@@ -1808,6 +1950,8 @@
     ],
     "q": "Light final blows boost Arc, Solar, and Void weapons.",
     "s": "bungie",
+    "pay": "more weapon damage for a short time",
+    "pq": "Final blows of energy types matching this weapon's alignment grant increased damage for a short period of time.",
     "note": "On Arc/Solar/Void versions; kills from any source count."
    },
    {
@@ -1827,6 +1971,8 @@
     ],
     "q": "Darkness final blows boost Stasis and Strand weapons.",
     "s": "bungie",
+    "pay": "more weapon damage for a short time",
+    "pq": "Final blows of energy types matching this weapon's alignment grant increased damage for a short period of time.",
     "note": "On Stasis/Strand versions; kills from any source count."
    }
   ]
@@ -1845,7 +1991,8 @@
     "do": "uses",
     "t": "super",
     "q": "This weapon gains bonus damage once your Super expires.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more weapon damage after your Super ends"
    }
   ]
  },
@@ -1886,9 +2033,11 @@
   "fx": [
    {
     "do": "uses",
-    "t": "overshield",
+    "t": "overshieldgeneric",
     "q": "Deal additional melee damage while protected by an overshield.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more glaive melee damage; melee kills refresh the overshield",
+    "note": "Compendium: any kind of overshield; Clarity says Void Overshield"
    },
    {
     "do": "grants",
@@ -2041,19 +2190,23 @@
     "t": "grenade",
     "note": "The shot's element always matches your equipped grenade.",
     "q": "Consume your grenade to load a large",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "loads an explosive shot of your grenade's element",
+    "pq": "generates an elemental explosion on impact"
    },
    {
     "do": "uses",
     "t": "prismaticgrenade",
     "q": "Can consume both Transcendence Grenades and Song of Flame Wisps.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "Transcendence grenades can be spent for the explosive shot"
    },
    {
     "do": "uses",
     "t": "transcendence",
     "q": "deals increased damage while Transcendence is active",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "the explosive shot deals more damage while Transcendent"
    },
    {
     "do": "grants",
@@ -2184,6 +2337,7 @@
     "t": "melee",
     "q": "Dealing melee damage briefly improves this weapon's handling.",
     "s": "bungie",
+    "pay": "better handling for a short time",
     "from": [
      "melee"
     ]
@@ -2216,19 +2370,22 @@
     "do": "uses",
     "t": "firesprite",
     "q": "Picking up a Firesprite grants Pyrogenesis Available.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "readies the Pyrogenesis laser special reload"
    },
    {
     "do": "uses",
     "t": "suspend",
     "q": "Hits against Suspended Enemies inflict x20+10 Scorch.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "hits on suspended targets scorch them"
    },
    {
     "do": "uses",
     "t": "suspend",
     "q": "Killing a Suspended Enemy triggers an ignition.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "killing a suspended target triggers an ignition"
    }
   ]
  },
@@ -2240,7 +2397,9 @@
     "do": "uses",
     "t": "weaken",
     "q": "Triggers on any yellow damage number, such as bodyshots on Weakened Enemies.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "body hits on weakened targets build Rapid Hit stacks (stability, reload)",
+    "pq": "Rapid Hit grants Stability, Reload Speed, and Reload Duration Multiplier."
    }
   ]
  },
@@ -2253,7 +2412,8 @@
     "t": "stasisdamage",
     "note": "Stasis kills from any source.",
     "q": "Stasis final blows transfer ammo to this weapon's magazine from reserves.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine from reserves"
    },
    {
     "do": "applies",
@@ -2279,7 +2439,9 @@
     "t": "amplified",
     "note": "Catalyst (Static Buildup) only.",
     "q": "removes Passive Decay while Amplified",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "charge builds passively and stops decaying (catalyst)",
+    "pq": "Passively generates 7% Charge per second"
    }
   ]
  },
@@ -2330,25 +2492,28 @@
     "t": "volatile",
     "note": "Any Void debuff (volatile, weaken, suppression) on the target.",
     "q": "Defeating a Void-debuffed target grants an overshield.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of Void-debuffed targets grant a Void Overshield"
    },
    {
     "do": "uses",
     "t": "weaken",
     "q": "Defeating a Void-debuffed target grants an overshield.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of Void-debuffed targets grant a Void Overshield"
    },
    {
     "do": "uses",
     "t": "suppress",
     "q": "Defeating a Void-debuffed target grants an overshield.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills of Void-debuffed targets grant a Void Overshield"
    },
    {
     "do": "grants",
     "t": "overshield",
-    "q": "Defeating a Void-debuffed target grants an overshield.",
-    "s": "bungie"
+    "q": "Kills against Void Debuffed enemies grant a 45 HP Void Overshield",
+    "s": "clarity"
    }
   ]
  },
@@ -2360,7 +2525,9 @@
     "do": "uses",
     "t": "finisher",
     "q": "Reviving allies or defeating combatants with finishers reloads this weapon",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "reloads this weapon and readies an emergency ammo refill",
+    "pq": "readies an emergency ammo refill for the next time this weapon runs out of ammo"
    }
   ]
  },
@@ -2443,13 +2610,15 @@
     "do": "uses",
     "t": "stasiscrystal",
     "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grants Frost Armor"
    },
    {
     "do": "uses",
     "t": "freeze",
     "q": "Destroying a Stasis crystal or defeating a frozen target with this weapon grants you Frost Armor.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "grants Frost Armor"
    }
   ]
  },
@@ -2467,7 +2636,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "While amplified, final blows grant additional Bolt Charge.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "kills grant extra Bolt Charge"
    }
   ]
  },
@@ -2480,7 +2650,8 @@
     "t": "orbofpower",
     "note": "Golden Gun Mode is not a Super for any purpose.",
     "q": "Scoring Precision Hits and picking up Orbs of Power charge up Golden Gun Mode.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "charges Golden Gun Mode"
    }
   ]
  },
@@ -2492,13 +2663,15 @@
     "do": "uses",
     "t": "stasiscrystal",
     "q": "Rapidly destroying multiple Stasis crystals reloads this weapon from reserves.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "rapid crystal shatters reload the weapon from reserves"
    },
    {
     "do": "uses",
     "t": "freeze",
     "q": "deal bonus damage to Stasis crystals and frozen targets",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "bonus damage to frozen targets"
    },
    {
     "do": "creates",
@@ -2517,13 +2690,15 @@
     "do": "uses",
     "t": "freeze",
     "q": "Freezing or slowing a target grants this weapon faster draw speed",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster draw time"
    },
    {
     "do": "uses",
     "t": "slow",
     "q": "Freezing or slowing a target grants this weapon faster draw speed",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster draw time"
    }
   ]
  },
@@ -2535,7 +2710,8 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Shooting an Orb of Power picks it up.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "shooting an Orb of Power collects it"
    }
   ]
  },
@@ -2547,7 +2723,8 @@
     "do": "uses",
     "t": "invisibility",
     "q": "Remaining invisible grants this weapon increased damage for a brief duration.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more damage; hits weaken and kills make you invisible again"
    },
    {
     "do": "applies",
@@ -2571,13 +2748,16 @@
     "do": "uses",
     "t": "suspend",
     "q": "This weapon deals bonus damage to suspended targets.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "bonus damage to suspended targets"
    },
    {
     "do": "uses",
     "t": "suspend",
     "q": "when you suspend a target from any source",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "faster draw time for a short time",
+    "pq": "Gain faster draw time for a short duration"
    },
    {
     "do": "applies",
@@ -2596,7 +2776,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Casting your class ability allows this weapon to sever targets on hit",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "hits sever targets for a short time"
    },
    {
     "do": "applies",
@@ -2615,7 +2796,8 @@
     "t": "threadling",
     "note": "Threadlings from any source.",
     "q": "Threadling damage increases this weapon's damage.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "stacking weapon damage bonus (2% per stack, up to 50%)"
    },
    {
     "do": "creates",
@@ -2640,7 +2822,8 @@
     "do": "uses",
     "t": "classability",
     "q": "Activating your class ability briefly improves this weapon's stability.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more stability for a short time"
    }
   ]
  },
@@ -2676,7 +2859,9 @@
     "do": "uses",
     "t": "orbofpower",
     "q": "Collecting an Orb of Power grants a period of maximum power",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "maximum power level and an automatic reload; sustained fire suppresses",
+    "pq": "starts with an automatic reload"
    },
    {
     "do": "applies",
@@ -2694,7 +2879,8 @@
     "do": "uses",
     "t": "amplified",
     "q": "While amplified, ammo is gradually transferred from reserves to the magazine.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine from reserves over time"
    }
   ]
  },
@@ -2707,7 +2893,9 @@
     "t": "arcdamage",
     "note": "Taking Arc damage (Riskrunner intrinsic).",
     "q": "Receiving Arc Damage activates Arc Conductor for 6 seconds.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "Arc Conductor: more damage, handling, Arc resist and chain lightning",
+    "pq": "10% increased damage, +100 Handling, and 50% [15%] Arc Damage Resist."
    }
   ]
  },
@@ -2738,7 +2926,8 @@
     "do": "uses",
     "t": "airborne",
     "q": "Dealing damage while airborne increases this weapon's damage output.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "stacking damage bonus while airborne"
    },
    {
     "do": "grants",
@@ -2782,7 +2971,9 @@
     "t": "ionictrace",
     "note": "Ionic Traces from any source.",
     "q": "Collecting an Ionic Trace overcharges this weapon's next shot",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "next shot is overcharged and jolts targets",
+    "pq": "overcharges this weapon's next shot, jolting targets on hit"
    },
    {
     "do": "applies",
@@ -2814,6 +3005,7 @@
     "t": "stasiscrystal",
     "q": "Hitting Stasis Crystals will consume 34% Arc Overcharge to call down a lightning strike on them.",
     "s": "compendium",
+    "pay": "shooting a crystal calls down a lightning strike (Arc overcharge)",
     "note": "Arc mode while overcharged"
    }
   ]
@@ -2846,6 +3038,7 @@
     "note": "Clarity/Compendium describe the refill as a kill with another weapon or source within 6s of Fighting Lion damage, not grenades specifically.",
     "q": "Rapid final blows against grenade-damaged combatants refill the magazine.",
     "s": "bungie",
+    "pay": "refills the magazine",
     "from": [
      "grenade"
     ]
@@ -2878,7 +3071,9 @@
     "do": "uses",
     "t": "super",
     "q": "When your Super expires",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "doubles magazine size for a long time and reloads from reserves",
+    "pq": "this weapon's magazine size is doubled for a long duration and reloads from reserves"
    }
   ]
  },
@@ -2897,14 +3092,16 @@
     "do": "uses",
     "t": "stasiscrystal",
     "q": "destroying Stasis crystals or landing precision final blows creates a Stasis shard",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "creates a Stasis shard that refills the magazine"
    },
    {
     "do": "uses",
     "t": "stasisshard",
     "note": "Shards from any source refill the magazine.",
     "q": "collecting Stasis shards refills the magazine",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine"
    },
    {
     "do": "applies",
@@ -2938,7 +3135,8 @@
     "do": "uses",
     "t": "transcendence",
     "q": "Deals increased damage while Transcendent; defeating targets lengthens Transcendence.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "more damage; kills extend Transcendence"
    },
    {
     "do": "grants",
@@ -2950,7 +3148,8 @@
     "do": "modifies",
     "t": "prismaticgrenade",
     "q": "Dealing sword damage increases Transcendence Grenade Regeneration by 35% for 2 seconds",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "sword damage speeds Transcendence grenade regeneration"
    }
   ]
  },
@@ -2962,7 +3161,8 @@
     "do": "uses",
     "t": "transcendence",
     "q": "While Transcendent, this weapon gets both bonuses.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "gets both alignment stat bonuses (stability, handling, range, aim assist)"
    }
   ]
  },
@@ -2974,7 +3174,8 @@
     "do": "uses",
     "t": "boltcharge",
     "q": "Receiving or discharging Bolt Charge partially loads the magazine from reserves.",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "partially reloads the magazine from reserves"
    }
   ]
  },
@@ -2984,10 +3185,10 @@
   "fx": [
    {
     "do": "grants",
-    "t": "overshield",
+    "t": "overshieldgeneric",
     "q": "Using this weapon to break the shield of a combatant or a Guardian using their Super will grant you an overshield.",
     "s": "bungie",
-    "note": "Compendium: stacks with Void and class-stat overshields"
+    "note": "Not a Void Overshield: Compendium says it stacks with Void and class-stat overshields"
    }
   ]
  },
@@ -2999,38 +3200,47 @@
     "do": "uses",
     "t": "devour",
     "q": "when you gain Devour, a Void overshield, or become invisible",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine"
    },
    {
     "do": "uses",
     "t": "overshield",
     "q": "when you gain Devour, a Void overshield, or become invisible",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine"
    },
    {
     "do": "uses",
     "t": "invisibility",
     "q": "when you gain Devour, a Void overshield, or become invisible",
-    "s": "bungie"
+    "s": "bungie",
+    "pay": "refills the magazine"
    },
    {
     "do": "uses",
     "t": "volatile",
     "note": "Collider intrinsic (Compendium): leeches Void debuffs from targets (or on you) and reapplies them during Void Leech.",
     "q": "Scoring 27 hits leeches Void Debuffs in the order of Volatile -> Weaken -> Suppression.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "leeched and reapplied by hits in Void Leech mode, with 20% more damage",
+    "pq": "Hits will inflict the Void Debuffs that were leeched and grants 20% increased damage."
    },
    {
     "do": "uses",
     "t": "weaken",
     "q": "Scoring 27 hits leeches Void Debuffs in the order of Volatile -> Weaken -> Suppression.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "leeched and reapplied by hits in Void Leech mode, with 20% more damage",
+    "pq": "Hits will inflict the Void Debuffs that were leeched and grants 20% increased damage."
    },
    {
     "do": "uses",
     "t": "suppress",
     "q": "Scoring 27 hits leeches Void Debuffs in the order of Volatile -> Weaken -> Suppression.",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "leeched and reapplied by hits in Void Leech mode, with 20% more damage",
+    "pq": "Hits will inflict the Void Debuffs that were leeched and grants 20% increased damage."
    },
    {
     "do": "applies",
@@ -3072,13 +3282,17 @@
     "do": "uses",
     "t": "healing",
     "q": "Guarding while receiving Healing Effects (including healing over time from Restoration) from allies also activates the perk.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "longer sword lunge on the next swing",
+    "pq": "increases Lunge Distance by 80% for the next swing"
    },
    {
     "do": "uses",
     "t": "restoration",
     "q": "Guarding while receiving Healing Effects (including healing over time from Restoration) from allies also activates the perk.",
-    "s": "clarity"
+    "s": "clarity",
+    "pay": "longer sword lunge on the next swing",
+    "pq": "increases Lunge Distance by 80% for the next swing"
    }
   ]
  },
@@ -3147,7 +3361,9 @@
     "t": "wovenmail",
     "note": "Weapon intrinsic: bonus damage while you have Woven Mail.",
     "q": "While Woven Mail is active:",
-    "s": "compendium"
+    "s": "compendium",
+    "pay": "25% more damage and more ammo generation",
+    "pq": "25% [5%] increased damage and +40 Ammo Generation."
    }
   ]
  },
