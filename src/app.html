@@ -2191,12 +2191,8 @@ function renderBuilds() {
     return `<button class="bsetb" data-setb="${esc(p.n)}">${plugIcon(p.n, 'sq', sp?.i)}<span class="bit"><b>${esc(p.n)}</b><small>${esc(p.label)}</small><small class="bsetd">${esc(sp?.d || '')}</small></span></button>`; }).join('')}</div></section>` : '';
   // seasonal artifact: chosen perks (tap for details), Choose perks opens the tier grid
   const artA = Core.artOf(b, D); const artSel = (b.art || []).map(h => artA?.p.find(p => p[0] === h)).filter(Boolean);
-  const ROW_L = ['Tier I', 'Tier I–II', 'Any tier'];
-  const slotRows = (rows, small) => `<div class="artslots${small ? ' sm' : ''}">${rows.map((r, ri) => `<div class="asr"><span class="asl">${ROW_L[ri]}<small>${r.filter(Boolean).length}/${r.length}</small></span><div class="asc">${r.map(p => p
-    ? `<button class="aslot on t${p[2]}" data-artinfo="${p[0]}" title="${esc(p[1])}">${plugIcon(p[1], 'sq', p[4])}<span>${esc(p[1])}</span><i>T${p[2]}</i></button>`
-    : `<span class="aslot">${small ? '' : '<span class="ic sq ph0">+</span>'}<span class="faint">Empty</span></span>`).join('')}</div></div>`).join('')}</div>`;
   const artHtml = !D?.artp?.length ? '<p class="snote">No artifact data in this build of Ghost.</p>'
-    : `${artA ? `<div class="bartn">${plugIcon(artA.n, 'sq', artA.i)}<b>${esc(artA.n)}</b></div>${slotRows(Core.artSlots(b.art, artA), true)}` : ''}<div class="barts"><button class="btn" id="bArt">${artA ? 'Change artifact or perks' : 'Choose an artifact'}</button></div>`;
+    : `${artA ? `<div class="bartn">${plugIcon(artA.n, 'sq', artA.i)}<b>${esc(artA.n)}</b></div>${artRowHtml(Core.artSlots(b.art, artA), 'artinfo')}${artSel.length ? `<div class="barts">${artSel.map(a => `<button class="bart" data-artinfo="${a[0]}">${plugIcon(a[1], 'sq', a[4])}<span><b>${esc(a[1])}</b><small>${'◆'.repeat(a[2])} Tier ${a[2]}</small></span></button>`).join('')}</div>` : ''}` : ''}<div class="barts"><button class="btn" id="bArt">${artA ? 'Change artifact or perks' : 'Choose an artifact'}</button></div>`;
   // interactions panel (curated data only): one card per term with what provides it and what uses / changes it.
   // Tap a piece to read the quote, conditions and notes behind it.
   const inact = [...syn.inactive.filter(f => ['creates', 'applies', 'grants', 'uses', 'modifies', 'consumes'].includes(f.e.do)), ...syn.unmatched.map(u => ({ ...u.c, why: [`needs ${u.c.e.from.map(x => IX.t[x]?.l || x).join(' or ')}; here it comes from ${[...new Set(u.ps.flatMap(p => [...syn.srcOf(p.f)].map(x => IX.t[x]?.l || x)))].join(', ') || 'an unclassified source'}`] }))];
@@ -2567,8 +2563,14 @@ function pickItem(b, g, slot, pieces) {
   }, { query, placeholder: g === 'w' ? 'Search: name, perk, is:void, frame:…' : 'Search: name, perk, set:, is:exotic…', clear: !!cur, note: pool.length ? `${pool.length} in your vault. Best synergy with the rest of the build first.` : `No ${g === 'w' ? W_LABEL[slot].toLowerCase() + ' weapons' : cls + ' ' + A_LABEL[slot].toLowerCase()} in this vault.` });
 }
 // artifact sheet: pick one of the artifacts, then up to 7 perks (2 tier-1 slots, 3 for tier 1-2, 2 for any tier)
+// the artifact's 7 slots as the game shows them: one line, bracketed ◆ (2 slots: tier I perks), ◆◆ (3: tier I-II),
+// ◆◆◆ (2: any tier). rows = Core.artSlots(); attr = the data attribute a filled slot carries ('artinfo' / 'ap')
+const ART_GROUPS = [['◆', 'Tier I'], ['◆◆', 'Tier I–II'], ['◆◆◆', 'Any tier']];
+const artRowHtml = (rows, attr) => `<div class="artrow">${rows.map((r, ri) => `<div class="arg" style="--n:${r.length}"><div class="argh"><b>${ART_GROUPS[ri][0]}</b><small>${ART_GROUPS[ri][1]} · ${r.filter(Boolean).length}/${r.length}</small></div><div class="args">${r.map(p => p
+  ? `<button class="aslot on t${p[2]}" data-${attr}="${p[0]}" title="${esc(p[1])} (tier ${p[2]})" aria-label="${esc(p[1])}">${plugIcon(p[1], 'sq', p[4])}<i>${'◆'.repeat(p[2])}</i></button>`
+  : '<span class="aslot" title="Empty slot"><span class="ic sq ph0">+</span></span>').join('')}</div></div>`).join('')}</div>`;
 function pickArtifact(b) {
-  const arts = D.artp || []; const ROW_L = ['Tier I', 'Tier I–II', 'Any tier'];
+  const arts = D.artp || [];
   const draw = () => {
     const art = Core.artOf(b, D); const sel = new Set(b.art || []); const rows = Core.artSlots(b.art, art);
     const free = rows.map(r => r.filter(x => !x).length);
@@ -2578,11 +2580,9 @@ function pickArtifact(b) {
     modal(`<h2>Artifact</h2>
       <div class="artpick">${arts.map(a => `<button class="artc${art?.h === a.h ? ' on' : ''}" data-aa="${a.h}">${plugIcon(a.n, 'sq', a.i)}<span>${esc(a.n)}</span></button>`).join('')}</div>
       ${art ? `<p class="snote">${esc(art.d.replace(/\s+/g, ' '))}</p>
-      <div class="artslots">${rows.map((r, ri) => `<div class="asr"><span class="asl">${ROW_L[ri]}<small>${r.filter(Boolean).length}/${r.length}</small></span><div class="asc">${r.map(p => p
-        ? `<button class="aslot on t${p[2]}" data-ap="${p[0]}" title="Remove ${esc(p[1])}">${plugIcon(p[1], 'sq', p[4])}<span>${esc(p[1])}</span><i>T${p[2]}</i></button>`
-        : '<span class="aslot"><span class="ic sq ph0">+</span><span class="faint">Empty</span></span>').join('')}</div></div>`).join('')}</div>
-      <p class="snote">Like the in-game artifact: 7 slots. Tier I perks fit any slot, Tier II perks only the Tier I–II and Any tier rows, Tier III perks only the 2 Any tier slots. Tap a perk to slot it, tap it again to take it out.</p>
-      <div class="arttiers">${[1, 2, 3].map(t => `<div class="arttier"><div class="arth">Tier ${'I'.repeat(t)} <small>${t === 1 ? 'fits any slot' : t === 2 ? 'fits Tier I–II and Any tier' : 'fits the 2 Any tier slots only'}</small></div><div class="artg">${art.p.filter(p => p[2] === t).map(p => { const on = sel.has(p[0]); const ok = on || fits(t);
+      ${artRowHtml(rows, 'ap')}
+      <p class="snote">Like the in-game artifact: 7 slots. ◆ slots take Tier I perks, ◆◆ slots Tier I or II, ◆◆◆ slots any tier. Tap a perk to slot it, tap it again (or its slot) to take it out.</p>
+      <div class="arttiers">${[1, 2, 3].map(t => `<div class="arttier"><div class="arth">${'◆'.repeat(t)} Tier ${'I'.repeat(t)} <small>${t === 1 ? 'fits any slot' : t === 2 ? 'fits Tier I–II and Any tier' : 'fits the 2 Any tier slots only'}</small></div><div class="artg">${art.p.filter(p => p[2] === t).map(p => { const on = sel.has(p[0]); const ok = on || fits(t);
         return `<button class="artp${on ? ' on' : ''}" data-ap="${p[0]}" ${ok ? '' : 'disabled'} title="${esc(ok ? p[3] : why(t))}">${plugIcon(p[1], 'sq', p[4])}<span><b>${esc(p[1])}</b><small>${esc(on ? 'Slotted' : ok ? (p[3] || '').slice(0, 90) + ((p[3] || '').length > 90 ? '…' : '') : why(t))}</small></span></button>`; }).join('')}</div></div>`).join('')}</div>` : '<p class="snote">Choose an artifact to see its perks.</p>'}
       <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><button class="btn" id="artClr">Clear</button><button class="btn primary" data-close>Done</button></div>`);
     $('#modalBox').querySelectorAll('[data-aa]').forEach(x => x.onclick = () => { b.artA = +x.dataset.aa; b.art = Core.artValid(b.art, Core.artOf(b, D)); saveBuilds(); draw(); });
@@ -2593,6 +2593,8 @@ function pickArtifact(b) {
   };
   draw();
 }
+// mods Bungie has retired (their own text says so) are left out of the pickers, unless one is already in the socket
+const deadMod = n => /deprecated|no longer functions/i.test(Core.plugOf(n, D, 'armor')?.[2] || '');
 function pickMod(b, slot, i, pieces) {
   const ms = b.mods[slot] || []; const cur = ms[i];
   const it = S.byId.get(b.a?.[slot]?.id); const lay = Core.modLayout(b.a?.[slot]?.hash, D, it?.tier); const code = lay[i]?.[1] || 's'; const sl = Core.modSockLabel(code, A_LABEL[slot]);

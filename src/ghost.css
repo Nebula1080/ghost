@@ -919,3 +919,11 @@ a{color:var(--light)}
 .aslot>span:not(.ic){white-space:normal;font-size:11.5px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 @media (max-width:760px){.asr{grid-template-columns:64px 1fr}.aslot .ic{display:none}}
 .aslot.on{padding-right:20px}
+.artrow{display:flex;gap:10px;margin:8px 0;padding:10px;background:var(--well);border:1px solid var(--line)}
+.arg{flex:var(--n) 1 0;min-width:0;display:flex;flex-direction:column;gap:6px}
+.argh{display:flex;flex-direction:column;align-items:center;border-top:1px solid var(--line2);padding-top:4px;text-align:center}
+.argh b{font-size:11px;letter-spacing:.1em;color:var(--light);font-weight:600}.argh small{font-size:10.5px;color:var(--faint);white-space:nowrap}
+.args{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:6px}
+.artrow .aslot{justify-content:center;padding:4px;min-height:48px;aspect-ratio:1}.artrow .aslot .ic{display:inline-block}
+.artrow .aslot i{right:3px;top:1px;font-size:8px;letter-spacing:-1px}
+@media (max-width:760px){.artrow{gap:6px;padding:8px}.args{gap:4px}.argh small{font-size:9.5px;white-space:normal}.artrow .aslot{min-height:40px}}
