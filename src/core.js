@@ -1126,6 +1126,14 @@ const Core = (() => {
   // build, 7 perk slots: 2 take tier-1 perks, 3 take tier 1-2, 2 take any tier (Bungie socket categories).
   const ART_MAX = 7, ART_SLOTS = [2, 3, 2];
   const artOf = (b, defs) => (defs?.artp || []).find(a => a.h === b?.artA) || null;
+  // which of the 7 slots each chosen perk sits in, like the in-game artifact: row 0 = 2 tier-1 slots, row 1 = 3 slots for
+  // tier 1-2, row 2 = 2 slots for any tier. Higher tiers take their only rows first, tier 1 fills from the top.
+  function artSlots(list, art) {
+    const rows = ART_SLOTS.map(n => Array(n).fill(null));
+    const ps = (list || []).map(h => art?.p.find(x => x[0] === h)).filter(Boolean).sort((x, y) => y[2] - x[2]);
+    for (const p of ps) { for (let r = p[2] - 1; r < 3; r++) { const k = rows[r].indexOf(null); if (k >= 0) { rows[r][k] = p; break; } } }
+    return rows;
+  }
   function artValid(list, art) {
     const out = []; const n = [0, 0, 0];
     for (const h of Array.isArray(list) ? list : []) {
@@ -1225,15 +1233,17 @@ const Core = (() => {
       }
     });
     const abilEl = Object.fromEntries(pieces.filter(p => p.g === 'subclass' && p.el && ABIL_TERM[p.slot]).map(p => [p.slot, p.el]));
-    const wOk = w => ['super', 'grenade', 'melee'].includes(w) ? !!abilEl[w] && wEls.has(abilEl[w]) : wEls.has(w);
+    // a weapon's own perks (Physic, Golden Tricorn…) look at that weapon's element; anything else at every weapon in the build
+    const wOk = (w, f) => { const own = pieces[f?.i]?.g === 'weapon' && pieces[f.i].it ? new Set([norm(pieces[f.i].it.element)]) : wEls;
+      return ['super', 'grenade', 'melee'].includes(w) ? !!abilEl[w] && own.has(abilEl[w]) : own.has(w); };
     const names = new Set(pieces.filter(p => p.g === 'subclass').map(p => p.n)), items = new Set(pieces.filter(p => p.it).map(p => p.it.name));
-    const fails = (c, provided) => c.any ? c.any.every(x => fails(x, provided)) : c.subclass ? (c.subclass === 'prismatic' ? 'prism' : c.subclass) !== subEl : c.piece ? !names.has(c.piece) : c.item ? !items.has(c.item) : c.slot ? !(c.is || []).includes(slotName[c.slot]) : c.weapon ? !wOk(c.weapon) : c.has ? !provided.has(c.has) : true;
+    const fails = (c, provided, f) => c.any ? c.any.every(x => fails(x, provided, f)) : c.subclass ? (c.subclass === 'prismatic' ? 'prism' : c.subclass) !== subEl : c.piece ? !names.has(c.piece) : c.item ? !items.has(c.item) : c.slot ? !(c.is || []).includes(slotName[c.slot]) : c.weapon ? !wOk(c.weapon, f) : c.has ? !provided.has(c.has) : true;
     // an exotic's catalyst effects only count when that weapon has its catalyst applied (Core.catalyst)
     const catOf = new Map();
     const catGate = f => { const pc = pieces[f.i]; if (!f.e.perk || !defs?.cata?.[norm(f.e.perk)] || pc?.g !== 'weapon' || !pc.it) return [];
       if (!catOf.has(f.i)) catOf.set(f.i, catalyst(pc.it, defs)); const c = catOf.get(f.i);
       return c?.state === 'has' && norm(c.name) === norm(f.e.perk) ? [] : [{ catalyst: f.e.perk }]; };
-    const unmetOf = (f, provided) => [...catGate(f), ...(f.e.if || []).filter(c => fails(c, provided))];
+    const unmetOf = (f, provided) => [...catGate(f), ...(f.e.if || []).filter(c => fails(c, provided, f))];
     let provided = new Set();
     for (let pass = 0; pass < 3; pass++) {           // `has` conditions can depend on other conditional effects
       const next = new Set();
@@ -1294,7 +1304,7 @@ const Core = (() => {
       if (!k) keys.push(k = { t: l.t, l: l.l, el: ix?.t?.[l.t]?.el || '', kind: ix?.t?.[l.t]?.kind || '', p: [], u: [], links: [] });
       if (!k.p.includes(l.from)) k.p.push(l.from); if (!k.u.includes(l.to)) k.u.push(l.to); k.links.push(l);
     }
-    const inactive = fx.filter(f => !f.ok && !f.implicit && f.e.do !== 'counts').map(f => ({ ...f, why: f.unmet.map(function say(c) { return c.any ? c.any.map(say).join(' or ') : c.catalyst ? `needs ${c.catalyst} applied` : c.subclass ? `needs a ${c.subclass[0].toUpperCase() + c.subclass.slice(1)} subclass` : c.piece ? `needs ${c.piece}` : c.item ? `needs ${c.item}` : c.slot ? `needs ${c.is.join(' or ')} (${slotName[c.slot] ? 'you have ' + slotName[c.slot] : 'no ' + SLOT_L[c.slot] + ' chosen'})` : c.weapon ? (['super', 'grenade', 'melee'].includes(c.weapon) ? `needs a weapon matching your ${c.weapon}'s element` : `needs a ${c.weapon[0].toUpperCase() + c.weapon.slice(1)} weapon`) : `needs ${tLabel(ix, c.has)}`; }) }));
+    const inactive = fx.filter(f => !f.ok && !f.implicit && f.e.do !== 'counts').map(f => ({ ...f, why: f.unmet.map(function say(c) { return c.any ? c.any.map(say).join(' or ') : c.catalyst ? `needs ${c.catalyst} applied` : c.subclass ? `needs a ${c.subclass[0].toUpperCase() + c.subclass.slice(1)} subclass` : c.piece ? `needs ${c.piece}` : c.item ? `needs ${c.item}` : c.slot ? `needs ${c.is.join(' or ')} (${slotName[c.slot] ? 'you have ' + slotName[c.slot] : 'no ' + SLOT_L[c.slot] + ' chosen'})` : c.weapon ? (['super', 'grenade', 'melee'].includes(c.weapon) ? `needs a weapon matching your ${c.weapon}'s element` : pieces[f.i]?.g === 'weapon' ? `only when this weapon is ${c.weapon[0].toUpperCase() + c.weapon.slice(1)} (it's ${pieces[f.i].it?.element || 'unknown'})` : `needs a ${c.weapon[0].toUpperCase() + c.weapon.slice(1)} weapon`) : `needs ${tLabel(ix, c.has)}`; }) }));
     // damage resistance: active curated amounts per kind of incoming damage, stacked multiplicatively (each source
     // multiplies the damage you take by 1 - amount); the same `cat` counts once (highest). Situational sources (with a
     // trigger `on`) are totalled separately from always-on ones.
@@ -1491,6 +1501,6 @@ const Core = (() => {
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
   return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

@@ -267,4 +267,14 @@ t('engine: charged melee is powered melee, weapons stun Champions, "any of" payo
   assert.ok(L.includes('R>SC:radiant'), L.join(', '));
   assert.ok(!r.gaps.some(g => g.e.t === 'devour'), 'devour is an alternative, not missing');
 });
+t('a weapon perk\'s element condition checks that weapon; artifact slots fill like the game', () => {
+  const ix = { t: { restoration: { kind: 'buff' }, woven: { kind: 'buff' } }, p: { 'xw:testgun': [{ do: 'grants', t: 'restoration', if: [{ weapon: 'solar' }] }, { do: 'grants', t: 'woven', if: [{ weapon: 'strand' }] }] } };
+  const gun = (n, el) => ({ g: 'weapon', n, it: { kind: 'weapon', name: n, rarity: 'Exotic', type: 'Sword', element: el, ammo: 'Heavy', perks: [] } });
+  const r = C.ixEval([gun('Test Gun', 'Strand'), gun('Sun Gun', 'Solar')], ix, D, 'solar');
+  assert.ok(r.inactive.some(f => f.e.t === 'restoration' && /only when this weapon is Solar \(it's Strand\)/.test(f.why[0])), 'a Strand weapon\'s Solar-only perk is not active because another weapon is Solar');
+  assert.ok(!r.inactive.some(f => f.e.t === 'woven'), 'its Strand perk is active');
+  const art = { h: 1, n: 'A', d: '', i: '', p: [[1, 'a', 1, '', ''], [2, 'b', 1, '', ''], [3, 'c', 1, '', ''], [4, 'd', 2, '', ''], [5, 'e', 3, '', '']] };
+  const rows = C.artSlots([1, 2, 3, 4, 5], art).map(r => r.map(p => p && p[1]));
+  assert.deepStrictEqual(rows, [['a', 'b'], ['d', 'c', null], ['e', null]]);
+});
 console.log(n, 'build tests passed');
