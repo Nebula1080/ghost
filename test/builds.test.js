@@ -277,4 +277,17 @@ t('a weapon perk\'s element condition checks that weapon; artifact slots fill li
   const rows = C.artSlots([1, 2, 3, 4, 5], art).map(r => r.map(p => p && p[1]));
   assert.deepStrictEqual(rows, [['a', 'b'], ['d', 'c', null], ['e', null]]);
 });
+t('character stats: per-point effects and ability cooldowns (Clarity Character Stats v2)', () => {
+  const d = { ...D, stats: JSON.parse(fs.readFileSync(__dirname + '/../data/stats.json', 'utf8')) };
+  assert.strictEqual(C.statAt('Weapons', 50, d).ReloadSpeed, 5, '0-100: reload 10% at 100, linear');
+  assert.strictEqual(C.statAt('Weapons', 150, d).SpecialDamageIncrease, 7.5, '100-200: enhanced boss damage, linear to 15%');
+  assert.strictEqual(C.statAt('Weapons', 250, d).LargeAmmoBrickChance, 100, 'values clamp at 200');
+  const sc = D.sub.warlock.solar; const g = sc.s.grenade.find(x => x.n === 'Solar Grenade');
+  const b = { cls: 'warlock', el: 'solar', sub: { grenade: g.h, aspects: [], fragments: [] }, a: {}, w: {} };
+  const c0 = C.abilityCooldown('grenade', g, 0, b, d), c70 = C.abilityCooldown('grenade', g, 70, b, d), c100 = C.abilityCooldown('grenade', g, 100, b, d);
+  assert.strictEqual(c0.base, 219.5); assert.deepStrictEqual(c0.applied, ['Warlock']); assert.strictEqual(c0.cd, 199.5, 'Warlock grenades recharge 10% faster');
+  assert.ok(c70.cd < c0.cd / 2 && c100.cd < c70.cd && c100.cd > c70.cd * 0.85, 'most of the gain comes by 70');
+  const hb = { ...b, cls: 'hunter' }; assert.strictEqual(C.abilityCooldown('grenade', g, 0, hb, d).cd, 219.5, 'no Warlock bonus for a Hunter');
+  const sup = sc.s.super.find(x => x.n === 'Well of Radiance'); assert.strictEqual(C.abilityCooldown('super', sup, 0, b, d).cd, C.abilityCooldown('super', sup, 100, b, d).cd, 'Super cooldown does not scale with the stat');
+});
 console.log(n, 'build tests passed');

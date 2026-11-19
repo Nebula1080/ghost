@@ -1416,6 +1416,42 @@ const Core = (() => {
     const mw = Object.fromEntries(ARMOR3.map(k => [k, !hasBase || (gen3 && !low.includes(k)) ? 0 : Math.min(gen3 ? 5 : 2, Math.max(0, (it.stats?.[k] || 0) - base[k] - (insSt[k] || 0)))])); const mwLevel = gen3 ? Math.min(5, Math.max(0, ...low.map(k => mw[k]))) : null;
     return { gen3, hasBase, base, mw, mwLevel, low, inserted, lay, arch: archetypeOf(it.frame, defs), tertiary: it.tertiary || '', tuned: it.tuning || '' };
   }
+  // ---------- character stat effects + ability cooldowns (data/stats.json = Clarity Character Stats v2) ----------
+  // defs.stats = window.VS_STATS. A field is a constant or [from, [value per stat point]]: read at the stat, clamped.
+  const CLASS_HASH = { titan: 3655393761, hunter: 671679327, warlock: 2271682572 };
+  const STAT_KEY = { super: 'Super', classAbility: 'Class', melee: 'Melee', grenade: 'Grenade' };
+  function statAt(name, v, defs) {
+    const st = defs?.stats?.stats?.[name]; if (!st) return null;
+    return Object.fromEntries(Object.entries(st.f).map(([k, f]) => [k, Array.isArray(f) ? f[1][Math.max(0, Math.min(f[1].length - 1, Math.round(v) - f[0]))] : f]));
+  }
+  // what in the build can trigger a cooldown override: class, subclass, its pieces, armor and weapons
+  function activeHashes(b, defs) {
+    const sc = subOf(b, defs); const out = new Set([CLASS_HASH[b?.cls], sc?.h]);
+    for (const k of SUB_SINGLE) if (b?.sub?.[k]) out.add(b.sub[k]);
+    for (const h of [...(b?.sub?.aspects || []), ...(b?.sub?.fragments || [])]) out.add(h);
+    for (const r of [...Object.values(b?.a || {}), ...Object.values(b?.w || {})]) if (r?.hash) out.add(Number(r.hash));
+    out.delete(undefined); return out;
+  }
+  // an ability's passive cooldown at a stat value (Clarity's recipe: base, overrides, scalars, then the stat curve);
+  // Supers don't scale with their stat. Falls back to the Data Compendium's base cooldown by name.
+  function abilityCooldown(slot, a, v, b, defs) {
+    const S = defs?.stats; const statName = STAT_KEY[slot]; const st = S?.stats?.[statName]; if (!st || !a) return null;
+    const rec = slot === 'super' ? st.sup?.[a.h] : st.ab?.[a.h];
+    const fb = !rec && S.ddc?.[norm(a.n)];
+    let base = rec ? rec[1] : fb ? fb[0] : null; if (base == null) return null;
+    const act = activeHashes(b, defs); const sc = subOf(b, defs); const applied = [];
+    let secs = base; const scal = [];
+    for (const [hash, name, req, co, sca] of st.ov || []) {
+      if (!act.has(hash)) continue;
+      const idx = req.flatMap((r, i) => (r === 0 || r === a.h || (r < 0 && -r === sc?.h)) ? [i] : []); if (!idx.length) continue;
+      applied.push(name);
+      if (co != null) secs = co;
+      for (const i of idx) if (sca?.[i] != null) scal.push(sca[i]);
+    }
+    for (const x of scal) secs *= x;
+    const curve = slot === 'super' ? 1 : (statAt(statName, v, defs)?.CooldownScalars ?? 1);
+    return { base, cd: Math.round(secs * curve * 10) / 10, scalar: curve, applied, src: rec ? 'clarity' : 'compendium', ...(slot === 'super' ? { activeRegen: rec?.[2] ?? null, duration: rec?.[3] ?? null } : { chunk: rec ? rec[2] : fb[1], charges: rec?.[3] || null }) };
+  }
   // armor mods a slot can take (its own list + general) and their energy cost
   // ---------- DIM loadout share link ----------
   // DIM opens https://app.destinyitemmanager.com/loadouts?loadout=<JSON of its API Loadout> (DIM source:
@@ -1501,6 +1537,6 @@ const Core = (() => {
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
   return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
