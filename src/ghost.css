@@ -927,3 +927,8 @@ a{color:var(--light)}
 .artrow .aslot{justify-content:center;padding:4px;min-height:48px;aspect-ratio:1}.artrow .aslot .ic{display:inline-block}
 .artrow .aslot i{right:3px;top:1px;font-size:8px;letter-spacing:-1px}
 @media (max-width:760px){.artrow{gap:6px;padding:8px}.args{gap:4px}.argh small{font-size:9.5px;white-space:normal}.artrow .aslot{min-height:40px}}
+.bstat{position:relative;cursor:help}.bstat .sinfo{display:inline-grid;place-items:center;width:14px;height:14px;border:1px solid var(--line2);border-radius:50%;font-size:9px;font-style:normal;color:var(--faint);vertical-align:1px}
+.bstip{display:none;position:absolute;z-index:30;left:0;right:0;top:100%;margin-top:4px;padding:10px 12px;background:var(--bg2);border:1px solid var(--line2);box-shadow:0 12px 30px rgba(0,0,0,.5);font-size:12.5px;line-height:1.45;color:var(--text);white-space:normal}
+.bstip b{display:block;margin-bottom:4px}.bstip small{display:block;margin-top:6px;color:var(--faint);font-size:10.5px}
+@media (hover:hover){.bstat:hover .bstip{display:block}}.bstat:focus-visible .bstip,.bstat.open .bstip{display:block}
+.bstip b{text-align:left;font-size:13px;color:var(--light)}

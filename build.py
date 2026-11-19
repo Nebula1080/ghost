@@ -79,7 +79,10 @@ def page_json(obj):
     return j
 assert '/*__BUNGIE__*/' in s and '/*__APIDEFS__*/null' in s and '/*__BUNGIECFG__*/null' in s
 # Bungie's sockets (tools/build-api-defs.mjs): weapon perk columns and armor mod sockets, both targets
-assert '/*__SOCK__*/null' in s
+assert '/*__SOCK__*/null' in s and '/*__STATS__*/null' in s
+# what each character stat does + ability cooldowns (tools/build-stats.mjs, Clarity Character Stats v2), both targets
+stp = root / 'data/stats.json'
+s = s.replace('/*__STATS__*/null', page_json(json.loads(stp.read_text(encoding='utf-8'))) if stp.exists() else 'null')
 sk = root / 'data/sockets.json'
 s = s.replace('/*__SOCK__*/null', page_json(json.loads(sk.read_text(encoding='utf-8'))) if sk.exists() else 'null')
 if TARGET == 'hosted':
