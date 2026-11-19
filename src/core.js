@@ -1205,6 +1205,8 @@ const Core = (() => {
         // a weapon is weapon damage, its type (handcannon, glaive…), its element (solarweapon…) and its ammo (primaryweapon)
         const ty = norm(pc.it.type).replace(/^combat/, '');
         for (const t of ['weapon', ty, norm(pc.it.element) + 'weapon', /primary/i.test(pc.it.ammo) ? 'primaryweapon' : '']) if (t && ix?.t?.[t]) fx.push({ i, e: { do: 'creates', t }, implicit: 1 });
+        // since Update 9.7.0 every weapon carries a Champion breaker, so any weapon can stun
+        if (ix?.t?.stun) fx.push({ i, e: { do: 'applies', t: 'stun' }, implicit: 1 });
       }
       pc.ixIds = ixIds(pc, defs);
       const recs = pc.ixIds.map(id => [id, ix?.p?.[id]]).filter(x => x[1]);
@@ -1213,6 +1215,8 @@ const Core = (() => {
       // the chosen abilities are themselves things other pieces use, and they spend their own energy
       if (pc.g === 'subclass' && ABIL_TERM[pc.slot]) {
         fx.push({ i, e: { do: 'creates', t: ABIL_TERM[pc.slot] }, implicit: 1 });
+        // your charged melee is powered melee damage (Heavy Handed, Impact Induction, Focusing Strike…)
+        if (pc.slot === 'melee' && ix?.t?.poweredmelee) fx.push({ i, e: { do: 'creates', t: 'poweredmelee' }, implicit: 1 });
         // a Void grenade / melee / Super is Void ability damage (terms solarability, arcability, voidability…)
         if (pc.el && ['super', 'melee', 'grenade'].includes(pc.slot) && ix?.t?.[pc.el + 'ability']) fx.push({ i, e: { do: 'creates', t: pc.el + 'ability' }, implicit: 1 });
         if (pc.el && ['super', 'melee', 'grenade'].includes(pc.slot)) lightDark(i, pc.el);
@@ -1278,6 +1282,10 @@ const Core = (() => {
       const seen = new Set();
       for (const p of ps) { const id = p.f.i + '>' + c.i; if (seen.has(id)) continue; seen.add(id); links.push({ t: c.e.t, l: tLabel(ix, c.e.t), from: p.f.i, to: c.i, pf: p.f, cf: c, via: p.via }); }
     }
+    // "any of" payoffs (one quote naming several buffs / debuffs, e.g. Shieldcrush, Limit Break): once one alternative
+    // links, the others aren't missing
+    const linkedQ = new Set(links.map(l => l.to + '|' + (l.cf.e.q || '')));
+    for (let k = gaps.length - 1; k >= 0; k--) if (gaps[k].e.q && linkedQ.has(gaps[k].i + '|' + gaps[k].e.q)) gaps.splice(k, 1);
     // a meaningful interaction has at least one curated side (not just "your grenade spends grenade energy")
     const real = links.filter(l => !(l.pf.implicit && l.cf.implicit));
     const keys = [];

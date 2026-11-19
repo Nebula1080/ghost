@@ -255,4 +255,16 @@ t('Armor 3.0: archetypes, masterwork on the 3 lowest stats, legacy +2, Balanced 
   const leg = { kind: 'armor', name: 'Old', hash: '0', tier: null, frame: 'Paragon', base: S6({ Weapons: 10, Health: 10, Class: 10, Grenade: 20, Super: 10, Melee: 5 }), stats: S6({ Weapons: 12, Health: 12, Class: 12, Grenade: 22, Super: 12, Melee: 7 }), perks: [] };
   const lp = C.armorParts(leg, d, 'head'); assert.strictEqual(lp.gen3, false); assert.deepStrictEqual(Object.values(lp.mw), [2, 2, 2, 2, 2, 2]);
 });
+t('engine: charged melee is powered melee, weapons stun Champions, "any of" payoffs are not missing once one links', () => {
+  const ix = { t: { poweredmelee: { kind: 'ability' }, melee: { kind: 'ability' }, stun: { kind: 'debuff' }, radiant: { kind: 'buff' }, devour: { kind: 'buff' }, weapon: { kind: 'damage' } },
+    p: { 'mod:hh': [{ do: 'uses', t: 'poweredmelee', q: 'powered melee' }], 'art:defib': [{ do: 'uses', t: 'stun', q: 'stun' }], 'mod:r': [{ do: 'grants', t: 'radiant' }],
+      'art:sc': [{ do: 'uses', t: 'radiant', q: 'while radiant or devour' }, { do: 'uses', t: 'devour', q: 'while radiant or devour' }] } };
+  const pcs = [{ g: 'subclass', slot: 'melee', n: 'Snap', el: 'solar' }, { g: 'mod', n: 'HH' }, { g: 'artifact', n: 'Defib' }, { g: 'mod', n: 'R' }, { g: 'artifact', n: 'SC' },
+    { g: 'weapon', n: 'Gun', it: { kind: 'weapon', name: 'Gun', rarity: 'Legendary', type: 'Hand Cannon', element: 'Kinetic', ammo: 'Primary', perks: [] } }];
+  const r = C.ixEval(pcs, ix, D, 'solar'); const L = r.links.map(l => `${pcs[l.from].n}>${pcs[l.to].n}:${l.t}`);
+  assert.ok(L.includes('Snap>HH:poweredmelee'), L.join(', '));
+  assert.ok(L.includes('Gun>Defib:stun'), L.join(', '));
+  assert.ok(L.includes('R>SC:radiant'), L.join(', '));
+  assert.ok(!r.gaps.some(g => g.e.t === 'devour'), 'devour is an alternative, not missing');
+});
 console.log(n, 'build tests passed');
