@@ -290,4 +290,18 @@ t('character stats: per-point effects and ability cooldowns (Clarity Character S
   const hb = { ...b, cls: 'hunter' }; assert.strictEqual(C.abilityCooldown('grenade', g, 0, hb, d).cd, 219.5, 'no Warlock bonus for a Hunter');
   const sup = sc.s.super.find(x => x.n === 'Well of Radiance'); assert.strictEqual(C.abilityCooldown('super', sup, 0, b, d).cd, C.abilityCooldown('super', sup, 100, b, d).cd, 'Super cooldown does not scale with the stat');
 });
+t('artifact score: each perk scored against the build, best set fits the 7 slots', () => {
+  const ix = { t: { weaken: { l: 'Weaken', kind: 'debuff', el: 'void' }, scorch: { l: 'Scorch', kind: 'debuff', el: 'solar' } },
+    p: { 'mod:w': [{ do: 'applies', t: 'weaken' }], 'art:usesweaken': [{ do: 'uses', t: 'weaken' }], 'art:usesscorch': [{ do: 'uses', t: 'scorch' }], 'art:t3a': [{ do: 'uses', t: 'weaken' }], 'art:t3b': [{ do: 'uses', t: 'weaken' }], 'art:t3c': [{ do: 'uses', t: 'weaken' }] } };
+  const art = { h: 1, n: 'Test Artifact', p: [[11, 'Uses Weaken', 1, ''], [12, 'Uses Scorch', 1, ''], [13, 'T3 A', 3, ''], [14, 'T3 B', 3, ''], [15, 'T3 C', 3, '']] };
+  const pieces = [{ g: 'mod', n: 'W' }, { g: 'artifact', n: 'Uses Scorch' }];
+  assert.ok(C.artPerkScore(art.p[0], art, pieces, ix, D).score > 0, 'a perk that uses what the build makes scores');
+  assert.strictEqual(C.artPerkScore(art.p[1], art, pieces, ix, D).score, 0, 'a perk with nothing to use scores 0 (other artifact perks are left out)');
+  const best = C.artBest(art, pieces, ix, D);
+  assert.deepStrictEqual(best.picks.map(x => x.p[1]).sort(), ['T3 A', 'T3 B', 'Uses Weaken'], 'only 2 tier-3 perks fit; 0-score perks are left out');
+  assert.strictEqual(best.score, best.picks.reduce((n, x) => n + x.score, 0));
+  assert.ok(C.artFits([[0, '', 3], [0, '', 3], [0, '', 2], [0, '', 2], [0, '', 2], [0, '', 1], [0, '', 1]]));
+  assert.ok(!C.artFits([[0, '', 3], [0, '', 3], [0, '', 3]]), 'three tier-3 perks do not fit');
+  assert.ok(!C.artFits([[0, '', 2], [0, '', 2], [0, '', 2], [0, '', 2], [0, '', 2], [0, '', 2]]), 'six tier 2-3 perks do not fit');
+});
 console.log(n, 'build tests passed');
