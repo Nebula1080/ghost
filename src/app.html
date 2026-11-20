@@ -2221,7 +2221,7 @@ function renderBuilds() {
   // seasonal artifact: chosen perks (tap for details), Choose perks opens the tier grid
   const artA = Core.artOf(b, D); const artSel = (b.art || []).map(h => artA?.p.find(p => p[0] === h)).filter(Boolean);
   const artHtml = !D?.artp?.length ? '<p class="snote">No artifact data in this build of Ghost.</p>'
-    : `${artA ? `<div class="bartn">${plugIcon(artA.n, 'sq', artA.i)}<b>${esc(artA.n)}</b></div>${artRowHtml(Core.artSlots(b.art, artA), 'artinfo')}${artSel.length ? `<div class="barts">${artSel.map(a => `<button class="bart" data-artinfo="${a[0]}">${plugIcon(a[1], 'sq', a[4])}<span><b>${esc(a[1])}</b><small>${'◆'.repeat(a[2])} Tier ${a[2]}</small></span></button>`).join('')}</div>` : ''}` : ''}<div class="barts"><button class="btn" id="bArt">${artA ? 'Change artifact or perks' : 'Choose an artifact'}</button></div>`;
+    : `${artA ? `<div class="bartn">${plugIcon(artA.n, 'sq', artA.i)}<b>${esc(artA.n)}</b></div>${artRowHtml(Core.artSlots(b.art, artA), 'artinfo')}${artSel.length ? '<p class="snote">Tap a perk for its details.</p>' : ''}` : ''}<div class="barts"><button class="btn" id="bArt">${artA ? 'Change artifact or perks' : 'Choose an artifact'}</button></div>`;
   // interactions panel (curated data only): one card per term with what provides it and what uses / changes it.
   // Tap a piece to read the quote, conditions and notes behind it.
   const inact = [...syn.inactive.filter(f => ['creates', 'applies', 'grants', 'uses', 'modifies', 'consumes'].includes(f.e.do)), ...syn.unmatched.map(u => ({ ...u.c, why: [`needs ${u.c.e.from.map(x => IX.t[x]?.l || x).join(' or ')}; here it comes from ${[...new Set(u.ps.flatMap(p => [...syn.srcOf(p.f)].map(x => IX.t[x]?.l || x)))].join(', ') || 'an unclassified source'}`] }))];
@@ -2274,7 +2274,7 @@ function renderBuilds() {
     <div class="bld-body"><div class="bld-main">
       <section class="bsec"><h2 class="bh">Subclass</h2>${subHtml}</section>
       <section class="bsec"><h2 class="bh">Weapons</h2><div class="bcards">${Core.W_SLOTS.map(s => itemCard('w', s)).join('')}</div></section>
-      <section class="bsec"><h2 class="bh">Armor &amp; mods</h2><div class="optcta"><button class="btn" id="bOpt">Find armor for target stats</button><small>Pick stat targets; Ghost finds the armor, stat mods and tuning that reach them.</small></div><div class="bcards">${Core.A_SLOTS.map(s => itemCard('a', s)).join('')}</div></section>
+      <section class="bsec"><div class="bh-row"><h2 class="bh">Armor &amp; mods</h2><button class="btn" id="bOpt" title="Pick stat targets; Ghost finds the armor, stat mods and tuning that reach them.">Find armor for target stats</button></div><div class="bcards">${Core.A_SLOTS.map(s => itemCard('a', s)).join('')}</div></section>
       ${setHtml}
       <section class="bsec"><h2 class="bh">Artifact <small>${Core.artOf(b, D) ? `${(b.art || []).length}/${Core.ART_MAX} perks` : ''}</small></h2>${artHtml}</section>
       <section class="bsec"><h2 class="bh">Notes</h2><textarea class="notes" id="bNotes" maxlength="1024" placeholder="How to play it, what to swap…">${esc(b.notes)}</textarea></section>
