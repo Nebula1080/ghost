@@ -1949,7 +1949,7 @@ async function copyDimQuery(p) {
 }
 
 // ---------- modal / help ----------
-function modal(html) { $('#modalBox').classList.remove('rbd-box', 'opt-box'); $('#modalBox').innerHTML = html; $('#modal').classList.add('open'); $('#modalBox').querySelectorAll('[data-close]').forEach(b => b.onclick = closeModal); }
+function modal(html) { $('#modalBox').classList.remove('rbd-box', 'opt-box', 'art-box'); $('#modalBox').innerHTML = html; $('#modal').classList.add('open'); $('#modalBox').querySelectorAll('[data-close]').forEach(b => b.onclick = closeModal); }
 function closeModal() { $('#modal').classList.remove('open'); }
 $('#modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
 // About & privacy (GHOST_PLAN A7): Bungie notice, credits, what is stored where, and "Delete my data"
@@ -2306,6 +2306,11 @@ function openOptimizer(b) {
   if (OPT.cls !== b.cls) { OPT.res = null; OPT.cls = b.cls; }
   renderOptimizer(b);
 }
+// sheet chrome shared by the build maker's big sheets (Find armor, Artifact): an inscription header in the build's
+// element colour (no art, user choice 2026-11-19), Cinzel section heads between hairlines, square toggles
+const sheetHead = (b, kicker, title, sub) => `<div class="gsh" style="--ec:${EL_COL[b.el] || 'var(--light)'}"><div class="gsk">${esc(kicker)}</div><h2>${esc(title)}</h2>${sub ? `<p>${sub}</p>` : ''}</div>`;
+const sheetSec = (t, small) => `<div class="gss"><span>${esc(t)}</span>${small ? `<small>${small}</small>` : ''}</div>`;
+const gTog = (id, on, label, sub, attr = '') => `<label class="gtog"><input type="checkbox"${id ? ` id="${id}"` : ''}${attr}${on ? ' checked' : ''}><span><b>${label}</b>${sub ? `<small>${sub}</small>` : ''}</span></label>`;
 function renderOptimizer(b) {
   const c = optCfg(); const items = optClassItems(b);
   const cls = B_CLASSES.find(x => x[0] === b.cls)?.[1] || '';
@@ -2313,41 +2318,66 @@ function renderOptimizer(b) {
   const sets = [...new Set(items.map(it => it.set).filter(Boolean))].sort();
   const frag = Core.buildStats(b, D, S.byId).stats;
   const r = OPT.res;
-  const tgt = Core.ARMOR3.map((k, i) => { const max = r && r.exact.includes(i) && !OPT.stale ? r.max[i] : null;
-    return `<label class="optt"><span>${esc(k)}</span><input type="range" min="0" max="${Core.OPT_CAP}" step="5" value="${c.target[i]}" data-ot="${i}" aria-label="${esc(k)} target"><input class="qin" type="number" min="0" max="${Core.OPT_CAP}" step="1" value="${c.target[i]}" data-on="${i}" aria-label="${esc(k)} target value"><small>${max != null ? `up to <b>${max}</b>` : ''}</small></label>`; }).join('');
+  // one card per stat: name, the target as a big numeral, a slider with the 100 mark (enhanced effects above it)
+  const tgt = Core.ARMOR3.map((k, i) => { const max = r && r.exact.includes(i) && !OPT.stale ? r.max[i] : null; const v = c.target[i];
+    return `<label class="optt${v ? ' set' : ''}"><span class="otn">${esc(k)}</span><input class="otv" type="number" min="0" max="${Core.OPT_CAP}" step="1" value="${v}" data-on="${i}" aria-label="${esc(k)} target value"><span class="otr"><input type="range" min="0" max="${Core.OPT_CAP}" step="5" value="${v}" data-ot="${i}" style="--p:${v / Core.OPT_CAP * 100}%" aria-label="${esc(k)} target"></span><small class="otm">${max != null ? `up to <b>${max}</b>` : v ? 'target' : 'no target'}</small></label>`; }).join('');
   const kept = Core.A_SLOTS.filter(s => b.a?.[s] && S.byId.get(b.a[s].id));
   const fragTot = Core.ARMOR3.map(k => frag[k].frag);
-  const opts = `<div class="optopts">
-      <label class="rsel">Exotic <select class="tsel" id="oEx"><option value="">Any or none</option><option value="any"${c.exotic === 'any' ? ' selected' : ''}>Any exotic</option><option value="none"${c.exotic === 'none' ? ' selected' : ''}>No exotic</option>${exos.map(it => `<option value="${esc(it.hash)}"${c.exotic === it.hash ? ' selected' : ''}>${esc(it.name)}</option>`).join('')}</select></label>
-      <label class="rsel">Set bonus <select class="tsel" id="oSet"><option value="">Any</option>${sets.map(s => `<option${c.set === s ? ' selected' : ''}>${esc(s)}</option>`).join('')}</select><select class="tsel" id="oSetN" aria-label="Pieces of the set"><option value="2">2 pieces</option><option value="4"${c.setN === 4 ? ' selected' : ''}>4 pieces</option></select></label>
-      <label class="rsel">Stat mods <select class="tsel" id="oMods">${[0, 1, 2, 3, 4, 5].map(n => `<option${n === c.maxMods ? ' selected' : ''}>${n}</option>`).join('')}</select></label>
-      <label class="rsel">of them major (+10) <select class="tsel" id="oMaj">${[0, 1, 2, 3, 4, 5].map(n => `<option${n === c.maxMajor ? ' selected' : ''}>${n}</option>`).join('')}</select></label>
-      <label class="rchk"><input type="checkbox" id="oTune"${c.tuning ? ' checked' : ''}> Tier 5 tuning</label>
-      <label class="rchk"><input type="checkbox" id="oMwL"${c.assumeLegendaryMw ? ' checked' : ''}> Count legendaries as masterworked</label>
-      <label class="rchk"><input type="checkbox" id="oMwE"${c.assumeExoticMw ? ' checked' : ''}> Count exotics as masterworked</label>
-      <label class="rchk"><input type="checkbox" id="oFrag"${c.frags ? ' checked' : ''}> Include this build’s fragments${fragTot.some(Boolean) ? ` <small>(${Core.ARMOR3.map((k, i) => fragTot[i] ? `${fragTot[i] > 0 ? '+' : ''}${fragTot[i]} ${k}` : '').filter(Boolean).join(', ')})</small>` : ' <small>(none)</small>'}</label>
-      ${kept.length ? `<div class="optkeep"><span>Keep from this build:</span>${kept.map(s => `<label class="rchk"><input type="checkbox" data-keep="${s}"${c.keep.includes(s) ? ' checked' : ''}> ${esc(b.a[s].name)}</label>`).join('')}</div>` : ''}
-    </div>`;
+  const fragTxt = fragTot.some(Boolean) ? Core.ARMOR3.map((k, i) => fragTot[i] ? `${fragTot[i] > 0 ? '+' : ''}${fragTot[i]} ${k}` : '').filter(Boolean).join(', ') : 'none chosen';
+  // exotic: tiles with each exotic's icon, by slot, after the three general choices
+  const exTile = (v, inner, cls2 = '') => `<button class="optxo${cls2}${c.exotic === v ? ' on' : ''}" data-ex="${esc(v)}" aria-pressed="${c.exotic === v}">${inner}</button>`;
+  const exoHtml = `${sheetSec('Exotic', exos.length ? `${exos.length} in your vault` : 'none in your vault')}${exos.length > 6 ? `<input class="qin optxq" id="oExq" type="search" placeholder="Search exotics: name, slot, perk, is:arc…" aria-label="Search your exotic armor" autocomplete="off" spellcheck="false"><div class="pkn" id="oExn" aria-live="polite"></div>` : ''}<div class="optxos">${exTile('', '<span class="xg">◇</span><span><b>Any or none</b><small>at most one</small></span>', ' gen')}${exTile('any', '<span class="xg">◆</span><span><b>Any exotic</b><small>exactly one</small></span>', ' gen')}${exTile('none', '<span class="xg">∅</span><span><b>No exotic</b><small>legendaries only</small></span>', ' gen')}${exos.map(it => exTile(it.hash, `${iIcon(it, 36)}<span><b>${esc(it.name)}</b><small>${esc(A_LABEL[Core.armorSlot(it)] || it.type || '')}</small></span>`)).join('')}</div>`;
+  // set bonus: tiles with the set's 2-piece bonus icon and how many pieces you own; ⓘ shows both bonuses
+  const setDef = n => (D?.sets || []).find(x => x.n === n);
+  const own = n => items.filter(it => it.set === n).length;
+  const setTile = n => { const d = setDef(n); const p2 = d?.p?.[0];
+    return `<div class="optst${c.set === n ? ' on' : ''}"><button class="optsb" data-set="${esc(n)}" aria-pressed="${c.set === n}">${p2 ? plugIcon(p2.n, 'sq', p2.i) : '<span class="xg">◈</span>'}<span><b>${esc(n)}</b><small>${own(n)} piece${own(n) === 1 ? '' : 's'} in your vault</small></span></button>${d ? `<button class="binfo" data-setinf="${esc(n)}" title="Set bonuses" aria-label="Show ${esc(n)} bonuses" aria-expanded="false">${ICO.info}</button>` : ''}</div>`; };
+  const setHtml = `${sheetSec('Set bonus', c.set ? `${c.setN} pieces of ${esc(c.set)}` : 'any')}
+    <div class="optstn"><div class="seg" role="group" aria-label="Pieces of the set"><button data-setn="2" class="${c.setN === 2 ? 'on' : ''}">2-piece bonus</button><button data-setn="4" class="${c.setN === 4 ? 'on' : ''}">4-piece bonus</button></div></div>
+    <div class="optsts"><div class="optst gen${c.set ? '' : ' on'}"><button class="optsb" data-set="" aria-pressed="${!c.set}"><span class="xg">◇</span><span><b>Any set</b><small>no set required</small></span></button></div>${sets.map(setTile).join('')}</div>${sets.map(n => { const d = setDef(n); return d ? `<div class="optsinf" data-setbox="${esc(n)}" hidden><b class="osi-h">${esc(d.n)}</b>${d.p.map(q => `<div class="osi">${plugIcon(q.n, 'sq', q.i)}<span><small>${q.c}-piece bonus</small><b>${esc(q.n)}</b><span>${esc(q.d || '')}</span></span></div>`).join('')}</div>` : ''; }).join('')}`;
+  const opts = `<div class="optf">
+      <div class="gfield"><span>Stat mods</span><div class="gpair"><select class="tsel" id="oMods" aria-label="Stat mods at most">${[0, 1, 2, 3, 4, 5].map(n => `<option value="${n}"${n === c.maxMods ? ' selected' : ''}>Up to ${n}</option>`).join('')}</select><select class="tsel" id="oMaj" aria-label="Major (+10) mods at most">${[0, 1, 2, 3, 4, 5].map(n => `<option value="${n}"${n === c.maxMajor ? ' selected' : ''}>${n} major</option>`).join('')}</select></div></div>
+    </div>
+    <div class="gtogs">${gTog('oTune', c.tuning, 'Tier 5 tuning', '+5 / −5 or Balanced')}${gTog('oMwL', c.assumeLegendaryMw, 'Legendaries masterworked', 'count them at level 5')}${gTog('oMwE', c.assumeExoticMw, 'Exotics masterworked', 'count them at level 5')}${gTog('oFrag', c.frags, 'This build’s fragments', esc(fragTxt))}</div>
+    ${kept.length ? `${sheetSec('Keep from this build')}<div class="gtogs">${kept.map(s => gTog('', c.keep.includes(s), esc(b.a[s].name), esc(A_LABEL[s]), ` data-keep="${s}"`)).join('')}</div>` : ''}`;
   const running = !!OPT.run;
-  modal(`<div class="opt"><h2>Find armor · ${esc(cls)}</h2>
-    <p class="snote">Set a target for the stats you care about, then press <b>Find armor</b>. Ghost tries your ${items.length} ${esc(cls)} armor pieces in every combination (one exotic at most) and works out the fewest stat mods (one per piece, minor +5 or major +10), artifice mods (+3) and Tier 5 tunings (+5 / −5, or Balanced) that reach every target. Stats run to 200.</p>
-    <div class="opttgts">${tgt}</div>${opts}
+  modal(`<div class="opt">${sheetHead(b, 'Build maker · Armor', 'Find armor', `${esc(cls)} · ${items.length} armor pieces in your vault`)}
+    <p class="glead">Set a target for each stat you care about, then press <b>Find armor</b>. Ghost tries every combination (one exotic at most) and works out the fewest stat mods (one per piece: +5 or +10), artifice mods (+3) and Tier 5 tunings that reach every target.</p>
+    ${sheetSec('Stat targets', 'stats run to 200 · enhanced above 100')}
+    <div class="opttgts">${tgt}</div>
+    ${exoHtml}${setHtml}${sheetSec('Rules')}${opts}
     <div class="optrun"><button class="btn primary" id="oRun"${running ? ' hidden' : ''}>Find armor</button><button class="btn" id="oStop"${running ? '' : ' hidden'}>Cancel</button><button class="btn" id="oReset">Clear targets</button><span class="optprog" id="oProg" aria-live="polite">${OPT.stale && r ? 'Settings changed: press Find armor to search again.' : ''}</span></div>
     <div class="progress optbar"${running ? '' : ' hidden'}><i id="oBar" style="width:0%"></i></div>
     <div id="oRes">${optResultsHtml(b)}</div>
-    <p class="snote">The approach comes from <b>D2ArmorPicker</b> by Mijago (d2armorpicker.com), used with permission. Pieces that another of yours matches or beats on every stat with a target (and on the rest combined) are skipped.</p>
-    <div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div></div>`);
+    <div class="gfoot"><small>Approach from <b>D2ArmorPicker</b> by Mijago (d2armorpicker.com), used with permission. Pieces another of yours matches or beats on every targeted stat (and on the rest combined) are skipped.</small><button class="btn" data-close>Close</button></div></div>`);
   $('#modalBox').classList.add('opt-box');
   bindOptimizer(b);
 }
 // what changed in the settings marks the results out of date; nothing searches until Find armor is pressed
 function bindOptimizer(b) {
   const box = $('#modalBox'); const c = optCfg();
-  const stale = () => { optSave(c); if (OPT.res && !OPT.stale) { OPT.stale = true; const p = $('#oProg'); if (p) p.textContent = 'Settings changed: press Find armor to search again.'; box.querySelectorAll('.optt small').forEach(s => s.textContent = ''); } };
-  box.querySelectorAll('[data-ot]').forEach(r => r.oninput = () => { const i = +r.dataset.ot; c.target[i] = +r.value; box.querySelector(`[data-on="${i}"]`).value = r.value; stale(); });
-  box.querySelectorAll('[data-on]').forEach(r => r.onchange = () => { const i = +r.dataset.on; const v = Math.max(0, Math.min(Core.OPT_CAP, Math.round(+r.value) || 0)); r.value = v; c.target[i] = v; box.querySelector(`[data-ot="${i}"]`).value = v; stale(); });
+  const stale = () => { optSave(c); if (OPT.res && !OPT.stale) { OPT.stale = true; const p = $('#oProg'); if (p) p.textContent = 'Settings changed: press Find armor to search again.'; box.querySelectorAll('.optt').forEach((el, i) => { el.querySelector('.otm').textContent = c.target[i] ? 'target' : 'no target'; }); } };
+  const paint = i => { const v = c.target[i]; const rg = box.querySelector(`[data-ot="${i}"]`); rg.style.setProperty('--p', `${v / Core.OPT_CAP * 100}%`); const card = rg.closest('.optt'); card.classList.toggle('set', v > 0); if (OPT.stale || !OPT.res) card.querySelector('.otm').textContent = v ? 'target' : 'no target'; };
+  box.querySelectorAll('[data-ot]').forEach(r => r.oninput = () => { const i = +r.dataset.ot; c.target[i] = +r.value; box.querySelector(`[data-on="${i}"]`).value = r.value; stale(); paint(i); });
+  box.querySelectorAll('[data-on]').forEach(r => r.onchange = () => { const i = +r.dataset.on; const v = Math.max(0, Math.min(Core.OPT_CAP, Math.round(+r.value) || 0)); r.value = v; c.target[i] = v; box.querySelector(`[data-ot="${i}"]`).value = v; stale(); paint(i); });
   const sel = (id, f) => { const e = box.querySelector(id); if (e) e.onchange = () => { f(e); stale(); }; };
-  sel('#oEx', e => c.exotic = e.value); sel('#oSet', e => c.set = e.value); sel('#oSetN', e => c.setN = +e.value);
+  // exotic search: Ghost's own query language over this class's exotic armor (same as the item pickers)
+  const exq = box.querySelector('#oExq');
+  if (exq) { let tq, qctx = null; const pool = optClassItems(b).filter(it => /exotic/i.test(it.rarity));
+    const run = () => { const t = exq.value.trim(); let hit = null;
+      if (t) { try { hit = new Set([...Core.runQuery(Core.parseQuery(t), pool, qctx ||= Core.buildCtx(S.items, new Set(pendingIds()), D)).keys()].map(id => S.byId.get(id)?.hash)); } catch { hit = new Set(); } }
+      let n = 0; const tiles = box.querySelectorAll('.optxo:not(.gen)'); tiles.forEach(x => { const hide = !!hit && !hit.has(x.dataset.ex) && !x.classList.contains('on'); x.hidden = hide; if (!hide) n++; });
+      $('#oExn').textContent = t ? (n ? `${n} of ${tiles.length} match` : 'No exotic matches this search.') : ''; };
+    exq.oninput = () => { clearTimeout(tq); tq = setTimeout(run, 120); }; }
+  box.querySelectorAll('[data-ex]').forEach(x => x.onclick = () => { c.exotic = x.dataset.ex; box.querySelectorAll('[data-ex]').forEach(y => { y.classList.toggle('on', y === x); y.setAttribute('aria-pressed', y === x); }); stale(); });
+  box.querySelectorAll('[data-set]').forEach(x => x.onclick = () => { c.set = x.dataset.set; box.querySelectorAll('.optst').forEach(t => { const on = t.querySelector('[data-set]') === x; t.classList.toggle('on', on); t.querySelector('[data-set]').setAttribute('aria-pressed', on); }); stale(); });
+  box.querySelectorAll('[data-setn]').forEach(x => x.onclick = () => { c.setN = +x.dataset.setn; box.querySelectorAll('[data-setn]').forEach(y => y.classList.toggle('on', y === x)); stale(); });
+  // ⓘ on a set: its 2- and 4-piece bonuses (Bungie text) under the tiles; tap again to close
+  box.querySelectorAll('[data-setinf]').forEach(x => x.onclick = () => {
+    const n = x.dataset.setinf; const open = x.getAttribute('aria-expanded') === 'true';
+    box.querySelectorAll('[data-setinf]').forEach(y => y.setAttribute('aria-expanded', 'false'));
+    box.querySelectorAll('[data-setbox]').forEach(y => { y.hidden = open || y.dataset.setbox !== n; });
+    if (!open) { x.setAttribute('aria-expanded', 'true'); box.querySelector(`[data-setbox="${CSS.escape(n)}"]`)?.scrollIntoView({ block: 'nearest' }); } });
   sel('#oMods', e => c.maxMods = +e.value); sel('#oMaj', e => c.maxMajor = +e.value);
   sel('#oTune', e => c.tuning = e.checked); sel('#oMwL', e => c.assumeLegendaryMw = e.checked); sel('#oMwE', e => c.assumeExoticMw = e.checked); sel('#oFrag', e => c.frags = e.checked);
   box.querySelectorAll('[data-keep]').forEach(e => e.onchange = () => { c.keep = c.keep.filter(s => s !== e.dataset.keep); if (e.checked) c.keep.push(e.dataset.keep); stale(); });
@@ -2387,12 +2417,12 @@ function optSorted() {
 function optResultsHtml(b) {
   const r = OPT.res; if (!r) return '';
   if (r.empty) return `<div class="empty"><b>No ${esc(r.empty.map(s => A_LABEL[s].toLowerCase()).join(', '))} to choose from</b><span>Your vault has no ${esc(B_CLASSES.find(x => x[0] === b.cls)?.[1] || '')} armor in ${r.empty.length === 1 ? 'that slot' : 'those slots'} matching these settings (exotic, kept pieces).</span></div>`;
-  const head = `<p class="optsum"><b>${r.results.length.toLocaleString()}${r.truncated ? '+' : ''}</b> combination${r.results.length === 1 ? '' : 's'} reach your targets · ${r.checked.toLocaleString()} checked${OPT.secs != null ? ` in ${OPT.secs.toFixed(1)} s` : ''}${r.truncated ? ' · showing the 30,000 with the fewest mods' : ''}</p>`;
+  const head = sheetSec('Results') + `<p class="optsum"><b>${r.results.length.toLocaleString()}${r.truncated ? '+' : ''}</b> combination${r.results.length === 1 ? '' : 's'} reach your targets · ${r.checked.toLocaleString()} checked${OPT.secs != null ? ` in ${OPT.secs.toFixed(1)} s` : ''}${r.truncated ? ' · showing the 30,000 with the fewest mods' : ''}</p>`;
   if (!r.results.length) return head + `<div class="empty"><b>No armor reaches all of these targets</b><span>${r.exact.length ? `The most each stat can reach with the others kept: ${r.exact.map(i => `${esc(Core.ARMOR3[i])} ${r.max[i] || '—'}`).join(', ')}.` : ''} Lower a target, allow more mods, or turn on tuning and masterwork assumptions.</span></div>`;
   const list = optSorted().slice(0, OPT.shown);
   const tgt = optCfg().target;
   const row = (x, n) => { const ex = x.exotic && S.byId.get(x.exotic);
-    return `<div class="optr${OPT.open === n ? ' open' : ''}"><button class="optrh" data-or="${n}" aria-expanded="${OPT.open === n}"><span class="optex">${ex ? `${iIcon(ex, 28)}<span>${esc(ex.name)}</span>` : '<span class="faint">No exotic</span>'}</span>${x.stats.map((v, i) => `<span class="optv${tgt[i] && v >= tgt[i] ? ' hit' : ''}${v > Core.OPT_CAP ? ' over' : ''}" title="${esc(Core.ARMOR3[i])}"><small>${esc(Core.ARMOR3[i].slice(0, 3))}</small>${v}</span>`).join('')}<span class="optv tot"><small>Total</small>${x.total}</span><span class="optv"><small>Mods</small>${x.nMods}${x.art ? `<i>+${x.art}A</i>` : ''}</span></button>${OPT.open === n ? optDetail(b, x) : ''}</div>`; };
+    return `<div class="optr${OPT.open === n ? ' open' : ''}"><button class="optrh" data-or="${n}" aria-expanded="${OPT.open === n}"><span class="optex">${ex ? `${iIcon(ex, 28)}<span>${esc(ex.name)}</span>` : '<span class="faint">No exotic</span>'}</span>${x.stats.map((v, i) => `<span class="optv${tgt[i] ? ' tg' : ''}${tgt[i] && v >= tgt[i] ? ' hit' : ''}${v > Core.OPT_CAP ? ' over' : ''}" title="${esc(Core.ARMOR3[i])}${tgt[i] ? ` (target ${tgt[i]})` : ''}"><small>${esc(Core.ARMOR3[i].slice(0, 3))}</small><b>${v}</b><i style="--w:${Math.min(100, v / 2)}%"></i></span>`).join('')}<span class="optv tot"><small>Total</small><b>${x.total}</b></span><span class="optv md"><small>Mods</small><b>${x.nMods}</b>${x.art ? `<em>+${x.art} artifice</em>` : ''}</span></button>${OPT.open === n ? optDetail(b, x) : ''}</div>`; };
   return head + `<div class="optsort" role="group" aria-label="Sort results">${OPT_SORTS.map(([k, l]) => `<button class="tchip${OPT.sort === k ? ' on' : ''}" data-os="${k}">${esc(l)}</button>`).join('')}</div>
     <div class="optlist">${list.map(row).join('')}</div>${r.results.length > OPT.shown ? `<div style="text-align:center;margin-top:10px"><button class="btn" id="oMore">Show more</button></div>` : ''}`;
 }
@@ -2407,7 +2437,7 @@ function optDetail(b, x) {
     return `<div class="optp">${iIcon(it, 40)}<span class="bit"><b style="color:${rarityColor(it.rarity)}">${esc(it.name)}</b><small>${esc(A_LABEL[s])}${p?.tier ? ` · Tier ${p.tier}` : ''}${it.frame ? ` · ${esc(it.frame)}` : ''}${it.set ? ` · ◈ ${esc(it.set)}` : ''}${it.owner ? ` · ${esc(it.owner)}` : ''}</small><small>${Core.ARMOR3.map((k2, i) => `${esc(k2.slice(0, 3))} ${p.st[i]}`).join(' · ')}</small>${tags ? `<small class="optmods">${tags}</small>` : ''}</span></div>`; }).join('');
   const parts = Core.ARMOR3.map((k, i) => { const m = x.mods[i]; const s = [m[2] ? `${m[2]}× major` : '', m[1] ? `${m[1]}× minor` : '', m[0] ? `${m[0]}× artifice` : ''].filter(Boolean).join(', '); return s ? `${esc(k)}: ${s}` : ''; }).filter(Boolean);
   return `<div class="optd">${pcs}<p class="snote">${parts.length ? `Mods: ${parts.join(' · ')}.` : 'No stat mods needed.'}${x.tunes.length ? ` Tuning: ${x.tunes.map(([s, t]) => `${esc(A_LABEL[s])} ${esc(t)}`).join(', ')}.` : ''}${x.waste ? ` ${x.waste} points over the 200 cap.` : ''} Stats include masterwork${optCfg().frags ? ', fragments' : ''} and these mods.</p>
-    <div class="msheet"><button class="btn primary" data-ouse>Use this armor in ${esc(b.name)}</button></div></div>`;
+    <div class="msheet optuse"><button class="btn primary" data-ouse>Use this armor in ${esc(b.name)}</button></div></div>`;
 }
 function bindOptResults(b) {
   const box = $('#oRes'); if (!box) return;
@@ -2754,14 +2784,17 @@ function pickArtifact(b) {
     // a tier-t perk fits a free slot in row t-1 or any row below it
     const fits = t => free.slice(t - 1).some(n => n > 0);
     const why = t => sel.size >= Core.ART_MAX ? 'All 7 slots are full' : `No free ${t === 3 ? 'Any tier' : t === 2 ? 'Tier I–II or Any tier' : ''} slot`;
-    modal(`<h2>Artifact</h2>
-      <div class="artpick">${arts.map(a => `<button class="artc${art?.h === a.h ? ' on' : ''}" data-aa="${a.h}">${plugIcon(a.n, 'sq', a.i)}<span>${esc(a.n)}</span></button>`).join('')}</div>
-      ${art ? `<p class="snote">${esc(art.d.replace(/\s+/g, ' '))}</p>
-      ${artRowHtml(rows, 'ap')}
-      <p class="snote">Like the in-game artifact: 7 slots. ◆ slots take Tier I perks, ◆◆ slots Tier I or II, ◆◆◆ slots any tier. Tap a perk to slot it, tap it again (or its slot) to take it out.</p>
-      <div class="arttiers">${[1, 2, 3].map(t => `<div class="arttier"><div class="arth">${'◆'.repeat(t)} Tier ${'I'.repeat(t)} <small>${t === 1 ? 'fits any slot' : t === 2 ? 'fits Tier I–II and Any tier' : 'fits the 2 Any tier slots only'}</small></div><div class="artg">${art.p.filter(p => p[2] === t).map(p => { const on = sel.has(p[0]); const ok = on || fits(t);
-        return `<button class="artp${on ? ' on' : ''}" data-ap="${p[0]}" ${ok ? '' : 'disabled'} title="${esc(ok ? p[3] : why(t))}">${plugIcon(p[1], 'sq', p[4])}<span><b>${esc(p[1])}</b><small>${esc(on ? 'Slotted' : ok ? (p[3] || '').slice(0, 90) + ((p[3] || '').length > 90 ? '…' : '') : why(t))}</small></span></button>`; }).join('')}</div></div>`).join('')}</div>` : '<p class="snote">Choose an artifact to see its perks.</p>'}
-      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><button class="btn" id="artClr">Clear</button><button class="btn primary" data-close>Done</button></div>`);
+    const top = $('#modal').classList.contains('open') && $('#modalBox').classList.contains('art-box') ? $('#modalBox').scrollTop : 0;
+    const TIER_FIT = { 1: 'fits any slot', 2: 'fits Tier I–II and Any tier slots', 3: 'fits the 2 Any tier slots only' };
+    modal(`<div class="artsheet">${sheetHead(b, 'Build maker · Seasonal artifact', art ? art.n : 'Artifact', art ? `<b>${sel.size}</b> of ${Core.ART_MAX} perks slotted` : 'Choose this season’s artifact, then slot up to 7 perks.')}
+      ${sheetSec('Artifact')}
+      <div class="artpick">${arts.map(a => `<button class="artc${art?.h === a.h ? ' on' : ''}" data-aa="${a.h}" aria-pressed="${art?.h === a.h}">${plugIcon(a.n, 'sq', a.i)}<span>${esc(a.n)}</span></button>`).join('')}</div>
+      ${art ? `<p class="glead artlead">${esc(art.d.replace(/\s+/g, ' '))}</p>
+      <div class="artboard">${artRowHtml(rows, 'ap')}<small>Like the in-game artifact: ◆ slots take Tier I perks, ◆◆ Tier I or II, ◆◆◆ any tier. Tap a perk to slot it; tap it again, or its slot, to take it out.</small></div>
+      ${[1, 2, 3].map(t => `${sheetSec(`Tier ${'I'.repeat(t)}`, `${'◆'.repeat(t)} ${TIER_FIT[t]}`)}<div class="artg">${art.p.filter(p => p[2] === t).map(p => { const on = sel.has(p[0]); const ok = on || fits(t);
+        return `<button class="artp t${t}${on ? ' on' : ''}" data-ap="${p[0]}" ${ok ? '' : 'disabled'} aria-pressed="${on}" title="${esc(ok ? p[3] : why(t))}">${plugIcon(p[1], 'sq', p[4])}<span><b>${esc(p[1])}</b><small>${esc(ok ? (p[3] || '') : why(t))}</small></span>${on ? '<em>Slotted</em>' : ''}</button>`; }).join('')}</div>`).join('')}` : '<div class="empty"><b>No artifact chosen</b><span>Pick one above to see its perks.</span></div>'}
+      <div class="gfoot"><button class="btn" id="artClr">Clear</button><button class="btn primary" data-close>Done</button></div></div>`);
+    $('#modalBox').classList.add('art-box'); $('#modalBox').scrollTop = top;
     $('#modalBox').querySelectorAll('[data-aa]').forEach(x => x.onclick = () => { b.artA = +x.dataset.aa; b.art = Core.artValid(b.art, Core.artOf(b, D)); saveBuilds(); draw(); });
     $('#modalBox').querySelectorAll('[data-ap]').forEach(x => x.onclick = () => {
       const h = +x.dataset.ap; b.art = Core.artValid(sel.has(h) ? [...sel].filter(y => y !== h) : [...sel, h], art); saveBuilds(); draw(); });
