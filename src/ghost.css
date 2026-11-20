@@ -1025,7 +1025,7 @@ a{color:var(--light)}
 .artsheet .artc.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--well));box-shadow:inset 0 -2px 0 var(--accent)}
 .artlead{font-style:italic}
 .artboard{position:sticky;top:0;z-index:2;margin:14px -26px 0;padding:10px 26px 12px;background:var(--bg2);border-bottom:1px solid var(--line2)}
-.artboard .artrow{margin:0 0 6px;background:var(--well)}.artboard .artrow .aslot{aspect-ratio:auto;height:52px;min-height:0}.artboard small{display:block;font-size:11.5px;color:var(--faint)}
+.artboard .artrow{margin:0 0 6px;background:var(--well)}.artboard small{display:block;font-size:11.5px;color:var(--faint)}
 .artsheet .arttiers{max-height:none;overflow:visible}
 .artsheet .artg{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
 .artsheet .artp{position:relative;display:flex;gap:10px;align-items:flex-start;min-height:64px;padding:10px 12px 10px 10px;background:var(--well);border:1px solid var(--line);font-size:13px;transition:border-color .25s,background-color .25s}
@@ -1054,3 +1054,23 @@ a{color:var(--light)}
   .optd{grid-template-columns:1fr;padding:2px 8px 12px}
   .artsheet .artpick,.artsheet .artg{grid-template-columns:1fr}
 }
+
+/* artifact slot board: every slot a 64px square holding its perk icon at the sprite's own 48px (no scaling) */
+.artrow{flex-wrap:wrap;justify-content:center;gap:12px 26px;padding:12px 14px}
+.artrow .arg{flex:none}.artrow .args{display:flex;gap:6px}
+.artrow .aslot{width:64px;height:64px;min-height:0;aspect-ratio:auto;padding:0;justify-content:center;align-items:center;background:var(--panel)}
+.artrow .aslot.on{padding:0;background:color-mix(in srgb,var(--accent) 10%,var(--well));box-shadow:inset 0 -2px 0 var(--accent)}
+.artrow .aslot.on.t2{background:color-mix(in srgb,var(--arc) 10%,var(--well));box-shadow:inset 0 -2px 0 var(--arc)}
+.artrow .aslot.on.t3{background:color-mix(in srgb,var(--prismatic) 10%,var(--well));box-shadow:inset 0 -2px 0 var(--prismatic)}
+.artrow .aslot.on .ic{width:48px;height:48px;border:0;border-radius:0;background:none}
+.artrow .aslot.on:hover{border-color:var(--light)}
+.artrow .aslot:not(.on) .ic{width:22px;height:22px;background:none;border:1px dashed var(--line2);color:var(--faint)}
+.artrow .aslot i{right:4px;top:2px}
+/* Armor & mods heading: Find armor sits on the heading line, clear of the cards */
+.bh-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin:0 0 14px}.bh-row .bh{margin:0}
+@media (max-width:760px){
+  .artrow{gap:10px 14px;padding:10px 8px}.artrow .args{gap:4px}
+  .artrow .aslot{width:48px;height:48px}.artrow .aslot.on .ic{width:40px;height:40px}
+  .bh-row #bOpt{width:100%;min-height:44px}
+}
+.artsheet .artp .ic{width:40px;height:40px;border:0;border-radius:0;background:none}
