@@ -126,7 +126,10 @@ function plugType(cat) {
 const pi = {}, pw = {}, pa = {};
 const pref = it => (/^Enhanced/.test(it.itemTypeDisplayName || '') ? 1 : 0);
 const sideOf = (cat, ty) => (ty === 'r' || ty === 'a' || /armor/.test(cat)) ? 'a' : (ty === 'i' ? 'both' : 'w');
-for (const it of Object.values(items).filter(it => it.plug && name(it) && it.displayProperties?.hasIcon).sort((a, b) => pref(a) - pref(b))) {
+// a working plug wins over a retired one of the same name (Bungie keeps old "Weapons Mod" etc. as enhancements.universal
+// with "This mod has been deprecated…", which made the picker hide the real stat mods)
+const dead = it => /deprecated|no longer functions/i.test(bungieDesc(it)) ? 1 : 0;
+for (const it of Object.values(items).filter(it => it.plug && name(it) && it.displayProperties?.hasIcon).sort((a, b) => pref(a) - pref(b) || dead(a) - dead(b) || (plugStats(b) ? 1 : 0) - (plugStats(a) ? 1 : 0))) {
   const cat = it.plug.plugCategoryIdentifier; const ty = plugType(cat); if (!ty) continue;
   const k = norm(name(it)); const entry = [iconTail(it.displayProperties.icon), ty, bungieDesc(it).slice(0, 600), it.hash];
   const side = sideOf(cat, ty);
@@ -204,7 +207,8 @@ for (const sc of Object.values(items).filter(x => x.itemType === 16 && x.sockets
 // Icons and descriptions come from pi/pa by name (Core.plugOf(name, defs, 'armor')).
 const AM_CAT = { 'enhancements.v2_head': 'head', 'enhancements.v2_arms': 'arms', 'enhancements.v2_chest': 'chest', 'enhancements.v2_legs': 'legs', 'enhancements.v2_class_item': 'class', 'enhancements.v2_general': 'general' };
 const am = { head: [], arms: [], chest: [], legs: [], class: [], general: [] }; const amSeen = new Set();
-for (const it of Object.values(items).sort((a, b) => (b.plug?.energyCost?.energyCost || 0) - (a.plug?.energyCost?.energyCost || 0))) {
+// same-named copies: the one that actually gives stats wins (Bungie also has stat-less "Minor Class Mod" variants)
+for (const it of Object.values(items).sort((a, b) => (b.plug?.energyCost?.energyCost || 0) - (a.plug?.energyCost?.energyCost || 0) || (plugStats(b) ? 1 : 0) - (plugStats(a) ? 1 : 0))) {
   const slot = AM_CAT[it.plug?.plugCategoryIdentifier]; const n = name(it); if (!slot || !n || it.redacted || !it.displayProperties?.hasIcon) continue;
   if (/^(empty|locked|default)\b/i.test(n) || /deprecated|no longer functions/i.test(bungieDesc(it))) continue;
   const k = slot + ':' + norm(n); if (amSeen.has(k)) continue; amSeen.add(k);
