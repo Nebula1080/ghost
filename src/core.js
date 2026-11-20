@@ -1536,7 +1536,244 @@ const Core = (() => {
   }
   const modCost = (n, slot, defs) => modsFor(slot, defs).find(x => norm(x[0]) === norm(n))?.[1] || 0;
 
+  // ---------- Armor optimizer ----------
+  // Based on D2ArmorPicker by Mijago (d2armorpicker.com, github.com/Mijago/D2ArmorPicker), used with the author's
+  // permission; Ghost's version is a rewrite of its approach: dedupe and prune each slot, try every combination of
+  // the five slots (one exotic at most), and for each one find the fewest stat mods (one per piece's general socket:
+  // minor +5 / major +10; artifice sockets +3) and Tier 5 tunings (+5 / -5, or Balanced +1 to the three lowest) that
+  // reach the target of every stat. Stats run to 200. Masterwork: Armor 3.0 +1 per level to the 3 lowest base stats
+  // (D2AP: the non-archetype stats), legacy +2 to all.
+  const OPT_CAP = 200;
+  const OPT_MINOR = 5, OPT_MAJOR = 10, OPT_ART = 3, OPT_TUNE = 5;
+  const OPT_COST = { minor: 1, major: 3 };
+  // per stat distance d: every way to cover it ([artifice, minor, major, points]) that no other way beats on all three
+  // counts (D2AP precomputes the same table)
+  const OPT_TABLE = (() => {
+    const all = [];
+    for (let a = 0; a <= 5; a++) for (let mi = 0; mi <= 5; mi++) for (let ma = 0; mi + ma <= 5; ma++) all.push([a, mi, ma, a * OPT_ART + mi * OPT_MINOR + ma * OPT_MAJOR]);
+    const T = [];
+    for (let d = 0; d <= 80; d++) {
+      const ok = all.filter(e => e[3] >= d);
+      const keep = ok.filter(e => !ok.some(f => f !== e && f[0] <= e[0] && f[2] <= e[2] && f[1] + f[2] <= e[1] + e[2] && (f[0] < e[0] || f[2] < e[2] || f[1] + f[2] < e[1] + e[2] || f[3] < e[3])));
+      keep.sort((x, y) => (x[1] + x[2]) - (y[1] + y[2]) || x[2] - y[2] || x[0] - y[0]);
+      T.push(keep);
+    }
+    return T;
+  })();
+  const optScore = (mi, ma, a) => (mi + ma) * 1000 + (mi * OPT_COST.minor + ma * OPT_COST.major) * 10 + a;
+  // fewest mods covering dist[6]: {score, pick: [[a, mi, ma, pts] per stat]} or null. lim = {art, mods, major}
+  function optSolve(dist, lim, bound = Infinity) {
+    let sum = 0; for (let i = 0; i < 6; i++) { if (dist[i] > 80) return null; sum += dist[i]; }
+    if (!sum) return { score: 0, pick: dist.map(() => [0, 0, 0, 0]) };
+    if (sum > lim.art * OPT_ART + Math.min(lim.mods, lim.major) * OPT_MAJOR + Math.max(0, lim.mods - lim.major) * OPT_MINOR) return null;
+    let best = null, bestS = bound; const cur = [];
+    const dfs = (i, a, mi, ma) => {
+      if (optScore(mi, ma, a) >= bestS) return;
+      if (i === 6) { bestS = optScore(mi, ma, a); best = cur.slice(); return; }
+      for (const e of OPT_TABLE[dist[i]]) {
+        const na = a + e[0], nmi = mi + e[1], nma = ma + e[2];
+        if (na > lim.art || nma > lim.major || nmi + nma > lim.mods) continue;
+        cur[i] = e; dfs(i + 1, na, nmi, nma);
+      }
+    };
+    dfs(0, 0, 0, 0);
+    return best ? { score: bestS, pick: best } : null;
+  }
+  // one vault piece as the optimizer sees it (null when it can't take part)
+  function optPiece(it, defs, cfg = {}) {
+    const slot = armorSlot(it); const ap = slot && armorParts(it, defs, slot); if (!ap) return null;
+    const exotic = /exotic/i.test(it.rarity || '');
+    const assume = exotic ? cfg.assumeExoticMw !== false : cfg.assumeLegendaryMw !== false;
+    const st = ARMOR3.map(k => ap.base[k] || 0);
+    if (ap.hasBase) {
+      if (ap.gen3) { const lvl = assume ? 5 : (ap.mwLevel || 0); ARMOR3.forEach((k, i) => { if (ap.low.includes(k)) st[i] += lvl; }); }
+      else { const on = assume || Object.values(ap.mw).some(Boolean); if (on) for (let i = 0; i < 6; i++) st[i] += 2; }
+    }
+    const lay = modLayout(it.hash, defs, it.tier);
+    const locked = (it.perks || []).some(p => p.s && /^(locked artifice socket|upgrade to artifice armor)$/i.test(p.n));
+    const art = lay.some(([, c]) => c === 'a') && !locked ? 1 : 0;
+    // Tier 5 tuning: a legendary follows its Tuned stat; an exotic with no Tuned stat can tune any pair (D2AP)
+    const tuneSock = ap.gen3 && lay.some(([, c]) => c === 't') && (exotic || Number(it.tier) >= 5);
+    const tunedK = ARMOR3.find(k => norm(k) === norm(it.tuning || '') || norm(k) === norm(String(it.tuning || '').replace(/s$/i, '')));
+    const tune = !tuneSock ? null : tunedK ? { fixed: ARMOR3.indexOf(tunedK) } : exotic ? { flex: true } : { bal: true };
+    const low = lowest3(ap.base).map(k => ARMOR3.indexOf(k));
+    return { id: String(it.id), hash: String(it.hash || ''), name: it.name, slot, exotic, gen3: ap.gen3, st, art, tune, low, set: it.set || '', cls: norm(it.equippable || ''), tier: Number(it.tier) || 0 };
+  }
+  // tuning choices of one piece that could help: [vector, mod name] (no change is always allowed)
+  function optTunes(p, need) {
+    if (!p.tune) return [];
+    const out = [];
+    if (p.low.some(i => need[i])) { const v = [0, 0, 0, 0, 0, 0]; for (const i of p.low) v[i] = 1; out.push([v, 'Balanced Tuning']); }
+    if (p.tune.bal) return out;
+    const ups = p.tune.flex ? [0, 1, 2, 3, 4, 5] : [p.tune.fixed];
+    for (const u of ups) { if (!need[u]) continue; for (let d = 0; d < 6; d++) if (d !== u) { const v = [0, 0, 0, 0, 0, 0]; v[u] = OPT_TUNE; v[d] = -OPT_TUNE; out.push([v, `+${ARMOR3[u]} / -${ARMOR3[d]}`]); } }
+    return out;
+  }
+  // run the search. items: vault armor; cfg: {cls, target[6], exotic ('' at most one | 'none' | 'any' | hash),
+  // lock {slot: id}, exclude [ids], sets [{n, c}], bonus[6], maxMods, maxMajor, tuning, assumeLegendaryMw,
+  // assumeExoticMw, limit}. A generator: yields progress {done, total} now and then; returns
+  // {results, max[6], checked, total, truncated, pieces: Map(id → piece)}.
+  function* armorSearch(items, defs, cfg = {}) {
+    const target = ARMOR3.map((_, i) => Math.max(0, Math.min(OPT_CAP, Number(cfg.target?.[i]) || 0)));
+    const bonus = ARMOR3.map((_, i) => Number(cfg.bonus?.[i]) || 0);
+    const lim = { mods: Math.max(0, Math.min(5, cfg.maxMods ?? 5)), major: Math.max(0, Math.min(5, cfg.maxMajor ?? 5)) };
+    const exclude = new Set(cfg.exclude || []); const lock = cfg.lock || {}; const limit = cfg.limit || 30000;
+    const ex = cfg.exotic || '';
+    const pieces = new Map(); const by = Object.fromEntries(A_SLOTS.map(s => [s, []]));
+    for (const it of items || []) {
+      if (it?.kind !== 'armor' || exclude.has(String(it.id))) continue;
+      const p = optPiece(it, defs, cfg); if (!p || (cfg.cls && p.cls && p.cls !== norm(cfg.cls))) continue;
+      if (lock[p.slot] && lock[p.slot] !== p.id) continue;
+      if (p.exotic && (ex === 'none' || (ex && ex !== 'any' && p.hash !== String(ex)))) continue;
+      if (!cfg.tuning) p.tune = null;
+      pieces.set(p.id, p); by[p.slot].push(p);
+    }
+    // a chosen exotic must be in its slot: other slots then take legendaries only (dropped below)
+    const exSlot = ex && ex !== 'any' && ex !== 'none' ? A_SLOTS.find(s => by[s].some(p => p.exotic)) : null;
+    if (exSlot) for (const s of A_SLOTS) by[s] = s === exSlot ? by[s].filter(p => p.exotic) : by[s].filter(p => !p.exotic);
+    // dedupe + prune: within pieces that are the same apart from stats (exotic, set, artifice, tuning), drop any piece
+    // another one matches or beats on every stat (D2AP's per-slot pruning)
+    // q covers p: same exotic (or both legendary), same set where sets are asked for, at least p's artifice, a tuning
+    // at least as useful (none < balanced < one fixed stat < any stat), and every stat at least as high
+    const setNames = new Set((cfg.sets || []).map(x => x.n));
+    // Stats without a target only matter as a whole (they can give 5 points to a tuning, and add to the total), so
+    // they're compared as one sum; a fixed tuning into a stat with no target works like Balanced. Armor 3.0 rolls are
+    // spreads of 30/25/20/5, so comparing every stat would keep almost every piece (~300M combinations for 300 pieces).
+    const tv = [0, 1, 2, 3, 4, 5].filter(i => target[i] > 0);
+    const rest = p => p.st.reduce((n, v, i) => n + (target[i] > 0 ? 0 : v), 0);
+    const tl = p => !p.tune ? 0 : p.tune.flex ? 3 : p.tune.fixed != null && target[p.tune.fixed] > 0 ? 2 : 1;
+    const tuneCovers = (q, p) => tl(q) >= tl(p) && (tl(p) !== 2 || tl(q) === 3 || q.tune.fixed === p.tune.fixed);
+    const covers = (q, p) => (q.exotic ? q.hash : 'L') === (p.exotic ? p.hash : 'L') && (!setNames.size || (setNames.has(q.set) ? q.set : '') === (setNames.has(p.set) ? p.set : ''))
+      && q.art >= p.art && tuneCovers(q, p) && tv.every(k => q.st[k] >= p.st[k]) && rest(q) >= rest(p);
+    for (const s of A_SLOTS) {
+      const l = by[s];
+      by[s] = l.filter((p, i) => !l.some((q, j) => j !== i && covers(q, p) && !(covers(p, q) && j > i)));
+    }
+    const lists = A_SLOTS.map(s => by[s]);
+    if (lists.some(l => !l.length)) return { results: [], max: target.map(() => 0), exact: tv, checked: 0, total: 0, truncated: false, pieces, empty: A_SLOTS.filter(s => !by[s].length) };
+    // best case left per slot onwards (stats, artifice, tuning) for pruning partial combinations
+    const remMax = Array.from({ length: 6 }, () => [0, 0, 0, 0, 0, 0]); const remArt = [0, 0, 0, 0, 0, 0], remTune = [0, 0, 0, 0, 0, 0];
+    for (let k = 4; k >= 0; k--) for (let i = 0; i < 6; i++) {
+      remMax[k][i] = remMax[k + 1][i] + Math.max(...lists[k].map(p => p.st[i]));
+      if (i === 0) { remArt[k] = remArt[k + 1] + (lists[k].some(p => p.art) ? 1 : 0); remTune[k] = remTune[k + 1] + (lists[k].some(p => p.tune && !p.tune.bal) ? OPT_TUNE : lists[k].some(p => p.tune) ? 1 : 0); }
+    }
+    const modMax = Math.min(lim.mods, lim.major) * OPT_MAJOR + Math.max(0, lim.mods - lim.major) * OPT_MINOR;
+    const total = lists.reduce((n, l) => n * l.length, 1);
+    const results = []; const max = target.map(() => 0); let checked = 0, truncated = false;
+    const rank = r => r.nMods * 1e6 + r.cost * 1e4 - r.total; let worst = Infinity;
+    const trim = () => { results.sort((x, y) => rank(x) - rank(y)); results.length = Math.min(results.length, limit); truncated = true; worst = rank(results[results.length - 1]); };
+    const pick = [null, null, null, null, null]; const acc = Array.from({ length: 6 }, () => [0, 0, 0, 0, 0, 0]);
+    for (let i = 0; i < 6; i++) acc[0][i] = bonus[i];
+    const setsOk = () => { if (!cfg.sets?.length) return true; const n = {}; for (const p of pick) if (p.set) n[p.set] = (n[p.set] || 0) + 1; return cfg.sets.every(x => (n[x.n] || 0) >= x.c); };
+    // best stat mods + tunings for the picked five: {score, mods, tunes, stats} or null
+    // quick: only whether the targets can be reached (a solution without tuning is enough)
+    const L = { art: 0, mods: lim.mods, major: lim.major }; const dist = [0, 0, 0, 0, 0, 0];
+    const evalCombo = (st, tgt, quick) => {
+      let art = 0, tun = false; for (const p of pick) { art += p.art; if (p.tune) tun = true; } L.art = art;
+      let any = false; for (let i = 0; i < 6; i++) { dist[i] = tgt[i] > st[i] ? tgt[i] - st[i] : 0; if (dist[i]) any = true; }
+      let best = null; const base = optSolve(dist, L);
+      if (base) best = { score: base.score, sol: base, net: [0, 0, 0, 0, 0, 0], tunes: [] };
+      if (!any || !tun || (base && (quick || !base.score))) return best;
+      // tunings, one piece at a time: each moves 5 points from the stat with the most room above its target into the
+      // stat that is furthest short (Balanced: +1 to the piece's 3 lowest). Kept only while they save mods.
+      const cur = st.slice(); const net = [0, 0, 0, 0, 0, 0]; const tunes = []; const short = [0, 0, 0, 0, 0, 0];
+      // fixed tunings first, flexible (exotic) ones last so they cover whatever is still short
+      for (let pass = 0; pass < 2; pass++) for (let k = 0; k < 5; k++) {
+        const p = pick[k]; if (!p.tune || (pass === 0) === !!p.tune.flex) continue;
+        for (let i = 0; i < 6; i++) short[i] = tgt[i] - cur[i];
+        let up = -1;
+        if (p.tune.fixed != null) up = short[p.tune.fixed] > 0 ? p.tune.fixed : -1;
+        else if (p.tune.flex) { for (let i = 0; i < 6; i++) if (short[i] > 0 && (up < 0 || short[i] > short[up])) up = i; }
+        let v = null, name = '';
+        if (up >= 0) {
+          let dn = -1; for (let i = 0; i < 6; i++) if (i !== up && -short[i] >= OPT_TUNE && (dn < 0 || -short[i] > -short[dn])) dn = i;
+          if (dn >= 0) { v = [0, 0, 0, 0, 0, 0]; v[up] = OPT_TUNE; v[dn] = -OPT_TUNE; name = `+${ARMOR3[up]} / -${ARMOR3[dn]}`; }
+        }
+        if (!v && (short[p.low[0]] > 0 || short[p.low[1]] > 0 || short[p.low[2]] > 0)) { v = [0, 0, 0, 0, 0, 0]; for (const i of p.low) v[i] = 1; name = 'Balanced Tuning'; }
+        if (!v) continue;
+        for (let i = 0; i < 6; i++) { cur[i] += v[i]; net[i] += v[i]; dist[i] = tgt[i] > cur[i] ? tgt[i] - cur[i] : 0; }
+        tunes.push([k, name, v]);
+        const sol = optSolve(dist, L, best ? best.score : Infinity);
+        if (sol) { best = { score: sol.score, sol, net: net.slice(), tunes: tunes.slice() }; if (!sol.score) break; }
+      }
+      // then leave out every tuning that doesn't save a mod (the stats it moves stay where the armor has them)
+      if (best?.tunes.length) for (let j = best.tunes.length - 1; j >= 0; j--) {
+        const v = best.tunes[j][2]; const n2 = best.net.map((x, i) => x - v[i]);
+        const sol = optSolve(st.map((x, i) => Math.max(0, tgt[i] - x - n2[i])), L, best.score + 1);
+        if (sol) best = { score: sol.score, sol, net: n2, tunes: best.tunes.filter((_, i) => i !== j) };
+      }
+      if (best) best.tunes = best.tunes.map(([k, n]) => [k, n]);
+      return best;
+    };
+    // highest value stat i can reach with the others' targets kept (D2AP's reachable tiers)
+    const reach = (st, i, extra) => {
+      let lo = Math.max(max[i], target[i]), hi = Math.min(OPT_CAP, st[i] + extra);
+      if (hi <= lo) return;
+      const tg = target.slice(); tg[i] = lo + 1;
+      if (!evalCombo(st, tg, true)) return;
+      lo += 1;
+      while (lo < hi) { const mid = Math.ceil((lo + hi) / 2); tg[i] = mid; if (evalCombo(st, tg, true)) lo = mid; else hi = mid - 1; }
+      max[i] = Math.max(max[i], lo);
+    };
+    let since = 0;
+    function* walk(k, exo) {
+      for (const p of lists[k]) {
+        if (p.exotic && exo) continue;
+        const nexo = exo + (p.exotic ? 1 : 0);
+        if (k === 4 && ex === 'any' && !nexo) continue;
+        pick[k] = p; const a = acc[k], b = acc[k + 1];
+        for (let i = 0; i < 6; i++) b[i] = a[i] + p.st[i];
+        if (k < 4) {
+          // prune: even the best of the remaining slots plus every mod and tuning can't reach the targets
+          let short = 0; for (let i = 0; i < 6; i++) short += Math.max(0, target[i] - b[i] - remMax[k + 1][i]);
+          const extra = modMax + OPT_ART * (pick.slice(0, k + 1).reduce((n, q) => n + q.art, 0) + remArt[k + 1]) + OPT_TUNE * 5;
+          if (short > extra) { const skip = lists.slice(k + 1).reduce((n, l) => n * l.length, 1); checked += skip; since += skip; continue; }
+          yield* walk(k + 1, nexo);
+          continue;
+        }
+        checked++; since++;
+        if (since >= 3000) { since = 0; yield { done: checked, total, sizes: lists.map(l => l.length) }; }
+        if (!setsOk()) continue;
+        const st = b.slice();
+        let extra = modMax, free = 0; for (const q of pick) { const t = q.tune ? (q.tune.bal ? 3 : OPT_TUNE) : 0; extra += q.art * OPT_ART + t; free += q.art * OPT_ART + t; }
+        // once the kept results all need no mods, a combination that can't do without mods only matters for the
+        // reachable maximums
+        if (worst < 0) { let need = 0; for (let i = 0; i < 6; i++) need += target[i] > st[i] ? target[i] - st[i] : 0;
+          if (need > free) { for (const i of tv) if (st[i] + extra > max[i]) reach(st, i, extra); truncated = true; continue; } }
+        const r = evalCombo(st, target); if (!r) continue;
+        for (const i of tv) if (st[i] + extra > max[i]) reach(st, i, extra);
+        const mods = r.sol.pick.map(e => [e[0], e[1], e[2]]);
+        const fin = st.map((v, i) => Math.max(0, v + r.net[i] + r.sol.pick[i][3]));
+        const nMods = mods.reduce((n, m) => n + m[1] + m[2], 0), cost = mods.reduce((n, m) => n + m[1] * OPT_COST.minor + m[2] * OPT_COST.major, 0);
+        const rec = { ids: pick.map(q => q.id), stats: fin, base: st, mods, tunes: r.tunes.map(([s, n]) => [A_SLOTS[s], n]), nMods, cost, art: mods.reduce((n, m) => n + m[0], 0),
+          total: fin.reduce((x, y) => x + Math.min(OPT_CAP, y), 0), waste: fin.reduce((x, y) => x + Math.max(0, y - OPT_CAP), 0), exotic: pick.find(q => q.exotic)?.id || '' };
+        // keep the best `limit` (fewest mods, then the highest total): trim back to the limit whenever twice as many pile up
+        if (results.length >= limit && rank(rec) >= worst) { truncated = true; continue; }
+        results.push(rec);
+        if (results.length >= limit * 2) trim();
+      }
+    }
+    yield* walk(0, 0);
+    if (results.length > limit) trim();
+    return { results, max, exact: tv, checked, total, truncated, pieces, sizes: lists.map(l => l.length) };
+  }
+  // run armorSearch to the end in one go (tests, small vaults)
+  function armorOptimize(items, defs, cfg) { const g = armorSearch(items, defs, cfg); let r; do r = g.next(); while (!r.done); return r.value; }
+  // where a result's mods go: per slot {g: stat mod, a: artifice mod, t: tuning mod}. Each piece's general socket
+  // takes one stat mod (majors first), artifice sockets one +3 each, tunings stay on the piece that has them.
+  function optMods(res, pieces) {
+    const out = Object.fromEntries(A_SLOTS.map(s => [s, {}]));
+    const majors = [], minors = [], arts = [];
+    res.mods.forEach(([a, mi, ma], i) => { for (let n = 0; n < ma; n++) majors.push(`${ARMOR3[i]} Mod`); for (let n = 0; n < mi; n++) minors.push(`Minor ${ARMOR3[i]} Mod`); for (let n = 0; n < a; n++) arts.push(`${ARMOR3[i]} Forged`); });
+    const gen = [...majors, ...minors];
+    A_SLOTS.forEach((s, k) => { if (gen[k]) out[s].g = gen[k]; });
+    for (const s of A_SLOTS) { const p = pieces.get(res.ids[A_SLOTS.indexOf(s)]); if (p?.art && arts.length) out[s].a = arts.shift(); }
+    for (const [s, n] of res.tunes) out[s].t = n;
+    return out;
+  }
+
   return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink };
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink,
+    OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

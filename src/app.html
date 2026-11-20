@@ -1949,7 +1949,7 @@ async function copyDimQuery(p) {
 }
 
 // ---------- modal / help ----------
-function modal(html) { $('#modalBox').classList.remove('rbd-box'); $('#modalBox').innerHTML = html; $('#modal').classList.add('open'); $('#modalBox').querySelectorAll('[data-close]').forEach(b => b.onclick = closeModal); }
+function modal(html) { $('#modalBox').classList.remove('rbd-box', 'opt-box'); $('#modalBox').innerHTML = html; $('#modal').classList.add('open'); $('#modalBox').querySelectorAll('[data-close]').forEach(b => b.onclick = closeModal); }
 function closeModal() { $('#modal').classList.remove('open'); }
 $('#modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
 // About & privacy (GHOST_PLAN A7): Bungie notice, credits, what is stored where, and "Delete my data"
@@ -1962,6 +1962,7 @@ function openAbout() {
       <li><b>Bungie</b>: game data, item and perk icons, and all backdrop and subclass art (Bungie Press Room and the Destiny 2 manifest).</li>
       <li><b>Aegis’s Endgame Analysis</b> (Destiny 2: Endgame Analysis spreadsheet by Aegis): weapon tiers and PvE perk / origin trait tiers in Ghost’s ratings, used with his permission.</li>
       <li><b>DIM community wish lists</b>: voltron.txt from github.com/48klocs/dim-wish-list-sources (MIT) by 48klocs, with community rolls from u/-seudonym- and u/zman2100 (ShardItKeepIt)${RT.meta.credits ? ` and the curators it credits: ${esc(RT.meta.credits.replace(/^Thanks to /i, '').replace(/ for their contributions\..*$/i, ''))}` : ''}.</li>
+      <li><b>D2ArmorPicker</b> by Mijago (d2armorpicker.com): the approach behind the build maker’s “Find armor for target stats”, used with the author’s permission.</li>
       <li><b>light.gg</b>: item page links.</li>
       <li><b>Clarity</b> (Database Clarity): tested perk descriptions.</li>
       <li><b>Destiny Data Compendium</b> by Pip1n: perk, exotic and set-bonus notes.</li>
@@ -2273,7 +2274,7 @@ function renderBuilds() {
     <div class="bld-body"><div class="bld-main">
       <section class="bsec"><h2 class="bh">Subclass</h2>${subHtml}</section>
       <section class="bsec"><h2 class="bh">Weapons</h2><div class="bcards">${Core.W_SLOTS.map(s => itemCard('w', s)).join('')}</div></section>
-      <section class="bsec"><h2 class="bh">Armor &amp; mods</h2><div class="bcards">${Core.A_SLOTS.map(s => itemCard('a', s)).join('')}</div></section>
+      <section class="bsec"><h2 class="bh">Armor &amp; mods</h2><div class="optcta"><button class="btn" id="bOpt">Find armor for target stats</button><small>Pick stat targets; Ghost finds the armor, stat mods and tuning that reach them.</small></div><div class="bcards">${Core.A_SLOTS.map(s => itemCard('a', s)).join('')}</div></section>
       ${setHtml}
       <section class="bsec"><h2 class="bh">Artifact <small>${Core.artOf(b, D) ? `${(b.art || []).length}/${Core.ART_MAX} perks` : ''}</small></h2>${artHtml}</section>
       <section class="bsec"><h2 class="bh">Notes</h2><textarea class="notes" id="bNotes" maxlength="1024" placeholder="How to play it, what to swap…">${esc(b.notes)}</textarea></section>
@@ -2283,6 +2284,153 @@ function renderBuilds() {
       <section class="bsec"><h2 class="bh">Stats <small>${st.total} total</small></h2>${statHtml}<p class="snote">${st.src ? 'Each piece: its base roll, its masterwork (Armor 3.0: +1 per level to its 3 lowest stats, up to +5; legacy: +2 to all), tuning, then the mods chosen here (or the ones on the armor where a socket is left empty) and fragments.' : 'Add armor to see its stats.'} Stats run to 200; 0–100 gives each stat's base effect, 100–200 adds the ↑ enhanced bonus. Hover or tap a stat for exactly what it does at your value. Numbers and cooldowns from Clarity's Character Stats v2 (Clarity marks them as placeholders until tested), with base cooldowns from the Destiny Data Compendium where Clarity has none.</p></section>
     </aside></div>`;
   bindBuildList(v); bindBuild(v, b, pieces, syn);
+  const ob = v.querySelector('#bOpt'); if (ob) ob.onclick = () => openOptimizer(b);
+}
+// ---------- armor optimizer (Core.armorSearch; approach from D2ArmorPicker by Mijago, used with permission) ----------
+// Settings per profile in localStorage PK('optimizer'); the search only runs when "Find armor" is pressed, in small
+// steps so the page stays responsive, and can be cancelled. Results live in memory only.
+const OPT = { res: null, sort: 'mods', shown: 25, open: -1, run: null, stale: false, cls: '' };
+const OPT_DEF = () => ({ target: [0, 0, 0, 0, 0, 0], exotic: '', tuning: true, assumeLegendaryMw: true, assumeExoticMw: true, frags: true, maxMods: 5, maxMajor: 5, keep: [], set: '', setN: 2 });
+function optCfg() {
+  const v = LS.get(PK('optimizer')); const d = OPT_DEF(); if (!v || typeof v !== 'object') return d;
+  const int = (x, lo, hi, def) => Number.isInteger(x) && x >= lo && x <= hi ? x : def;
+  return { target: d.target.map((_, i) => int(v.target?.[i], 0, Core.OPT_CAP, 0)), exotic: /^(|none|any|\d{1,12})$/.test(String(v.exotic ?? '')) ? String(v.exotic ?? '') : '',
+    tuning: v.tuning !== false, assumeLegendaryMw: v.assumeLegendaryMw !== false, assumeExoticMw: v.assumeExoticMw !== false, frags: v.frags !== false,
+    maxMods: int(v.maxMods, 0, 5, 5), maxMajor: int(v.maxMajor, 0, 5, 5), keep: (Array.isArray(v.keep) ? v.keep : []).filter(s => Core.A_SLOTS.includes(s)),
+    set: typeof v.set === 'string' ? v.set.slice(0, 80) : '', setN: v.setN === 4 ? 4 : 2 };
+}
+const optSave = c => LS.set(PK('optimizer'), c);
+const optClassItems = b => S.items.filter(it => it.kind === 'armor' && Core.norm(it.equippable || '') === b.cls);
+function openOptimizer(b) {
+  if (!S.items.length) return toast('Load your vault first.');
+  if (OPT.cls !== b.cls) { OPT.res = null; OPT.cls = b.cls; }
+  renderOptimizer(b);
+}
+function renderOptimizer(b) {
+  const c = optCfg(); const items = optClassItems(b);
+  const cls = B_CLASSES.find(x => x[0] === b.cls)?.[1] || '';
+  const exos = [...new Map(items.filter(it => /exotic/i.test(it.rarity)).map(it => [it.hash, it])).values()].sort((x, y) => Core.A_SLOTS.indexOf(Core.armorSlot(x)) - Core.A_SLOTS.indexOf(Core.armorSlot(y)) || x.name.localeCompare(y.name));
+  const sets = [...new Set(items.map(it => it.set).filter(Boolean))].sort();
+  const frag = Core.buildStats(b, D, S.byId).stats;
+  const r = OPT.res;
+  const tgt = Core.ARMOR3.map((k, i) => { const max = r && r.exact.includes(i) && !OPT.stale ? r.max[i] : null;
+    return `<label class="optt"><span>${esc(k)}</span><input type="range" min="0" max="${Core.OPT_CAP}" step="5" value="${c.target[i]}" data-ot="${i}" aria-label="${esc(k)} target"><input class="qin" type="number" min="0" max="${Core.OPT_CAP}" step="1" value="${c.target[i]}" data-on="${i}" aria-label="${esc(k)} target value"><small>${max != null ? `up to <b>${max}</b>` : ''}</small></label>`; }).join('');
+  const kept = Core.A_SLOTS.filter(s => b.a?.[s] && S.byId.get(b.a[s].id));
+  const fragTot = Core.ARMOR3.map(k => frag[k].frag);
+  const opts = `<div class="optopts">
+      <label class="rsel">Exotic <select class="tsel" id="oEx"><option value="">Any or none</option><option value="any"${c.exotic === 'any' ? ' selected' : ''}>Any exotic</option><option value="none"${c.exotic === 'none' ? ' selected' : ''}>No exotic</option>${exos.map(it => `<option value="${esc(it.hash)}"${c.exotic === it.hash ? ' selected' : ''}>${esc(it.name)}</option>`).join('')}</select></label>
+      <label class="rsel">Set bonus <select class="tsel" id="oSet"><option value="">Any</option>${sets.map(s => `<option${c.set === s ? ' selected' : ''}>${esc(s)}</option>`).join('')}</select><select class="tsel" id="oSetN" aria-label="Pieces of the set"><option value="2">2 pieces</option><option value="4"${c.setN === 4 ? ' selected' : ''}>4 pieces</option></select></label>
+      <label class="rsel">Stat mods <select class="tsel" id="oMods">${[0, 1, 2, 3, 4, 5].map(n => `<option${n === c.maxMods ? ' selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="rsel">of them major (+10) <select class="tsel" id="oMaj">${[0, 1, 2, 3, 4, 5].map(n => `<option${n === c.maxMajor ? ' selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="rchk"><input type="checkbox" id="oTune"${c.tuning ? ' checked' : ''}> Tier 5 tuning</label>
+      <label class="rchk"><input type="checkbox" id="oMwL"${c.assumeLegendaryMw ? ' checked' : ''}> Count legendaries as masterworked</label>
+      <label class="rchk"><input type="checkbox" id="oMwE"${c.assumeExoticMw ? ' checked' : ''}> Count exotics as masterworked</label>
+      <label class="rchk"><input type="checkbox" id="oFrag"${c.frags ? ' checked' : ''}> Include this build’s fragments${fragTot.some(Boolean) ? ` <small>(${Core.ARMOR3.map((k, i) => fragTot[i] ? `${fragTot[i] > 0 ? '+' : ''}${fragTot[i]} ${k}` : '').filter(Boolean).join(', ')})</small>` : ' <small>(none)</small>'}</label>
+      ${kept.length ? `<div class="optkeep"><span>Keep from this build:</span>${kept.map(s => `<label class="rchk"><input type="checkbox" data-keep="${s}"${c.keep.includes(s) ? ' checked' : ''}> ${esc(b.a[s].name)}</label>`).join('')}</div>` : ''}
+    </div>`;
+  const running = !!OPT.run;
+  modal(`<div class="opt"><h2>Find armor · ${esc(cls)}</h2>
+    <p class="snote">Set a target for the stats you care about, then press <b>Find armor</b>. Ghost tries your ${items.length} ${esc(cls)} armor pieces in every combination (one exotic at most) and works out the fewest stat mods (one per piece, minor +5 or major +10), artifice mods (+3) and Tier 5 tunings (+5 / −5, or Balanced) that reach every target. Stats run to 200.</p>
+    <div class="opttgts">${tgt}</div>${opts}
+    <div class="optrun"><button class="btn primary" id="oRun"${running ? ' hidden' : ''}>Find armor</button><button class="btn" id="oStop"${running ? '' : ' hidden'}>Cancel</button><button class="btn" id="oReset">Clear targets</button><span class="optprog" id="oProg" aria-live="polite">${OPT.stale && r ? 'Settings changed: press Find armor to search again.' : ''}</span></div>
+    <div class="progress optbar"${running ? '' : ' hidden'}><i id="oBar" style="width:0%"></i></div>
+    <div id="oRes">${optResultsHtml(b)}</div>
+    <p class="snote">The approach comes from <b>D2ArmorPicker</b> by Mijago (d2armorpicker.com), used with permission. Pieces that another of yours matches or beats on every stat with a target (and on the rest combined) are skipped.</p>
+    <div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div></div>`);
+  $('#modalBox').classList.add('opt-box');
+  bindOptimizer(b);
+}
+// what changed in the settings marks the results out of date; nothing searches until Find armor is pressed
+function bindOptimizer(b) {
+  const box = $('#modalBox'); const c = optCfg();
+  const stale = () => { optSave(c); if (OPT.res && !OPT.stale) { OPT.stale = true; const p = $('#oProg'); if (p) p.textContent = 'Settings changed: press Find armor to search again.'; box.querySelectorAll('.optt small').forEach(s => s.textContent = ''); } };
+  box.querySelectorAll('[data-ot]').forEach(r => r.oninput = () => { const i = +r.dataset.ot; c.target[i] = +r.value; box.querySelector(`[data-on="${i}"]`).value = r.value; stale(); });
+  box.querySelectorAll('[data-on]').forEach(r => r.onchange = () => { const i = +r.dataset.on; const v = Math.max(0, Math.min(Core.OPT_CAP, Math.round(+r.value) || 0)); r.value = v; c.target[i] = v; box.querySelector(`[data-ot="${i}"]`).value = v; stale(); });
+  const sel = (id, f) => { const e = box.querySelector(id); if (e) e.onchange = () => { f(e); stale(); }; };
+  sel('#oEx', e => c.exotic = e.value); sel('#oSet', e => c.set = e.value); sel('#oSetN', e => c.setN = +e.value);
+  sel('#oMods', e => c.maxMods = +e.value); sel('#oMaj', e => c.maxMajor = +e.value);
+  sel('#oTune', e => c.tuning = e.checked); sel('#oMwL', e => c.assumeLegendaryMw = e.checked); sel('#oMwE', e => c.assumeExoticMw = e.checked); sel('#oFrag', e => c.frags = e.checked);
+  box.querySelectorAll('[data-keep]').forEach(e => e.onchange = () => { c.keep = c.keep.filter(s => s !== e.dataset.keep); if (e.checked) c.keep.push(e.dataset.keep); stale(); });
+  $('#oReset').onclick = () => { c.target = [0, 0, 0, 0, 0, 0]; optSave(c); OPT.stale = !!OPT.res; renderOptimizer(b); };
+  $('#oRun').onclick = () => optRun(b, c);
+  $('#oStop').onclick = () => { if (OPT.run) OPT.run.cancel = true; };
+  bindOptResults(b);
+}
+function optRun(b, c) {
+  if (!c.target.some(Boolean)) return toast('Set a target for at least one stat first.');
+  const st = Core.buildStats(b, D, S.byId).stats;
+  const lock = Object.fromEntries(c.keep.filter(s => b.a?.[s] && S.byId.get(b.a[s].id)).map(s => [s, b.a[s].id]));
+  const cfg = { cls: b.cls, target: c.target, exotic: c.exotic, tuning: c.tuning, assumeLegendaryMw: c.assumeLegendaryMw, assumeExoticMw: c.assumeExoticMw,
+    maxMods: c.maxMods, maxMajor: Math.min(c.maxMajor, c.maxMods), lock, sets: c.set ? [{ n: c.set, c: c.setN }] : [], bonus: c.frags ? Core.ARMOR3.map(k => st[k].frag) : null };
+  const g = Core.armorSearch(optClassItems(b), D, cfg);
+  const run = OPT.run = { cancel: false };
+  const prog = $('#oProg'), bar = $('#oBar');
+  $('#oRun').hidden = true; $('#oStop').hidden = false; $('.optbar').hidden = false; prog.textContent = 'Searching…';
+  const t0 = performance.now();
+  const step = () => {
+    if (OPT.run !== run) return;
+    if (run.cancel) { OPT.run = null; prog.textContent = 'Cancelled.'; $('#oRun').hidden = false; $('#oStop').hidden = true; $('.optbar').hidden = true; return; }
+    const until = performance.now() + 14; let r;
+    do r = g.next(); while (!r.done && performance.now() < until);
+    if (!r.done) { const p = r.value.total ? r.value.done / r.value.total : 0; if (bar) bar.style.width = `${Math.round(p * 100)}%`; prog.textContent = `Searching… ${Math.round(p * 100)}%`; setTimeout(step, 0); return; }
+    OPT.run = null; OPT.res = r.value; OPT.stale = false; OPT.shown = 25; OPT.open = -1; OPT.secs = (performance.now() - t0) / 1000;
+    if ($('#modal').classList.contains('open') && $('#modalBox').classList.contains('opt-box')) { const top = $('#modalBox').scrollTop; renderOptimizer(b); $('#modalBox').scrollTop = top; }
+  };
+  setTimeout(step, 0);
+}
+const OPT_SORTS = [['mods', 'Fewest mods'], ['total', 'Total'], ...Core.ARMOR3.map((k, i) => ['s' + i, k])];
+function optSorted() {
+  const L = OPT.res?.results || []; const k = OPT.sort;
+  const key = k === 'mods' ? r => r.nMods * 100 + r.cost - r.total / 1000 : k === 'total' ? r => -r.total : r => -r.stats[+k.slice(1)];
+  return L.slice().sort((x, y) => key(x) - key(y) || x.nMods - y.nMods || y.total - x.total);
+}
+function optResultsHtml(b) {
+  const r = OPT.res; if (!r) return '';
+  if (r.empty) return `<div class="empty"><b>No ${esc(r.empty.map(s => A_LABEL[s].toLowerCase()).join(', '))} to choose from</b><span>Your vault has no ${esc(B_CLASSES.find(x => x[0] === b.cls)?.[1] || '')} armor in ${r.empty.length === 1 ? 'that slot' : 'those slots'} matching these settings (exotic, kept pieces).</span></div>`;
+  const head = `<p class="optsum"><b>${r.results.length.toLocaleString()}${r.truncated ? '+' : ''}</b> combination${r.results.length === 1 ? '' : 's'} reach your targets · ${r.checked.toLocaleString()} checked${OPT.secs != null ? ` in ${OPT.secs.toFixed(1)} s` : ''}${r.truncated ? ' · showing the 30,000 with the fewest mods' : ''}</p>`;
+  if (!r.results.length) return head + `<div class="empty"><b>No armor reaches all of these targets</b><span>${r.exact.length ? `The most each stat can reach with the others kept: ${r.exact.map(i => `${esc(Core.ARMOR3[i])} ${r.max[i] || '—'}`).join(', ')}.` : ''} Lower a target, allow more mods, or turn on tuning and masterwork assumptions.</span></div>`;
+  const list = optSorted().slice(0, OPT.shown);
+  const tgt = optCfg().target;
+  const row = (x, n) => { const ex = x.exotic && S.byId.get(x.exotic);
+    return `<div class="optr${OPT.open === n ? ' open' : ''}"><button class="optrh" data-or="${n}" aria-expanded="${OPT.open === n}"><span class="optex">${ex ? `${iIcon(ex, 28)}<span>${esc(ex.name)}</span>` : '<span class="faint">No exotic</span>'}</span>${x.stats.map((v, i) => `<span class="optv${tgt[i] && v >= tgt[i] ? ' hit' : ''}${v > Core.OPT_CAP ? ' over' : ''}" title="${esc(Core.ARMOR3[i])}"><small>${esc(Core.ARMOR3[i].slice(0, 3))}</small>${v}</span>`).join('')}<span class="optv tot"><small>Total</small>${x.total}</span><span class="optv"><small>Mods</small>${x.nMods}${x.art ? `<i>+${x.art}A</i>` : ''}</span></button>${OPT.open === n ? optDetail(b, x) : ''}</div>`; };
+  return head + `<div class="optsort" role="group" aria-label="Sort results">${OPT_SORTS.map(([k, l]) => `<button class="tchip${OPT.sort === k ? ' on' : ''}" data-os="${k}">${esc(l)}</button>`).join('')}</div>
+    <div class="optlist">${list.map(row).join('')}</div>${r.results.length > OPT.shown ? `<div style="text-align:center;margin-top:10px"><button class="btn" id="oMore">Show more</button></div>` : ''}`;
+}
+// one result: each piece with the stat mod, artifice mod and tuning to put on it
+function optDetail(b, x) {
+  const r = OPT.res; const where = Core.optMods(x, r.pieces);
+  const pcs = Core.A_SLOTS.map((s, k) => { const it = S.byId.get(x.ids[k]); if (!it) return ''; const w = where[s]; const p = r.pieces.get(x.ids[k]);
+    // counted as masterworked but isn't yet: say so (Armor 3.0 to level 5, legacy armor masterworked)
+    const ap = Core.armorParts(it, D, s); const c = optCfg(); const assumed = /exotic/i.test(it.rarity) ? c.assumeExoticMw : c.assumeLegendaryMw;
+    const needMw = assumed && ap?.hasBase && (ap.gen3 ? (ap.mwLevel || 0) < 5 : !Object.values(ap.mw).some(Boolean));
+    const tags = [needMw ? `<span class="bwb b-mw">Masterwork it${ap.gen3 ? ` to 5 (now ${ap.mwLevel || 0})` : ''}</span>` : '', w.g ? `<span class="bwb b-mod">${esc(w.g)}</span>` : '', w.a ? `<span class="bwb b-mod">${esc(w.a)}</span>` : '', w.t ? `<span class="bwb b-tune">${esc(w.t)}</span>` : ''].join('');
+    return `<div class="optp">${iIcon(it, 40)}<span class="bit"><b style="color:${rarityColor(it.rarity)}">${esc(it.name)}</b><small>${esc(A_LABEL[s])}${p?.tier ? ` · Tier ${p.tier}` : ''}${it.frame ? ` · ${esc(it.frame)}` : ''}${it.set ? ` · ◈ ${esc(it.set)}` : ''}${it.owner ? ` · ${esc(it.owner)}` : ''}</small><small>${Core.ARMOR3.map((k2, i) => `${esc(k2.slice(0, 3))} ${p.st[i]}`).join(' · ')}</small>${tags ? `<small class="optmods">${tags}</small>` : ''}</span></div>`; }).join('');
+  const parts = Core.ARMOR3.map((k, i) => { const m = x.mods[i]; const s = [m[2] ? `${m[2]}× major` : '', m[1] ? `${m[1]}× minor` : '', m[0] ? `${m[0]}× artifice` : ''].filter(Boolean).join(', '); return s ? `${esc(k)}: ${s}` : ''; }).filter(Boolean);
+  return `<div class="optd">${pcs}<p class="snote">${parts.length ? `Mods: ${parts.join(' · ')}.` : 'No stat mods needed.'}${x.tunes.length ? ` Tuning: ${x.tunes.map(([s, t]) => `${esc(A_LABEL[s])} ${esc(t)}`).join(', ')}.` : ''}${x.waste ? ` ${x.waste} points over the 200 cap.` : ''} Stats include masterwork${optCfg().frags ? ', fragments' : ''} and these mods.</p>
+    <div class="msheet"><button class="btn primary" data-ouse>Use this armor in ${esc(b.name)}</button></div></div>`;
+}
+function bindOptResults(b) {
+  const box = $('#oRes'); if (!box) return;
+  const redraw = () => { box.innerHTML = optResultsHtml(b); bindOptResults(b); };
+  box.querySelectorAll('[data-os]').forEach(x => x.onclick = () => { OPT.sort = x.dataset.os; OPT.open = -1; redraw(); });
+  box.querySelectorAll('[data-or]').forEach(x => x.onclick = () => { const n = +x.dataset.or; OPT.open = OPT.open === n ? -1 : n; redraw(); });
+  const more = box.querySelector('#oMore'); if (more) more.onclick = () => { OPT.shown += 25; redraw(); };
+  const use = box.querySelector('[data-ouse]'); if (use) use.onclick = () => optUse(b, optSorted()[OPT.open]);
+}
+// put a result's armor and its stat mods / artifice / tuning into the build; other mods (slot, raid…) stay
+function optUse(b, x) {
+  if (!x) return;
+  const where = Core.optMods(x, OPT.res.pieces); const own = /^(minor )?(weapons|health|class|grenade|super|melee) mod$|^(weapons|health|class|grenade|super|melee) forged$|^balanced tuning$|^\+\w+ \/ -\w+$/i;
+  Core.A_SLOTS.forEach((s, k) => {
+    const it = S.byId.get(x.ids[k]); if (!it) return;
+    b.a[s] = itemRef(it);
+    const lay = Core.modLayout(it.hash, D, it.tier);
+    const arr = Core.placeMods((b.mods[s] || []).filter(n => n && !own.test(n) && !lay.some(([, c]) => c === 'g' && Core.modFits(n, 'g', s, D))), lay, s, D);
+    const put = (code, n) => { const i = lay.findIndex(([, c], j) => c === code && !arr[j]); if (n && i >= 0) arr[i] = n; };
+    put('g', where[s].g); put('a', where[s].a); put('t', where[s].t);
+    b.mods[s] = arr;
+  });
+  saveBuilds(); closeModal(); renderBuilds(); toast('Armor, stat mods and tuning added to the build.');
 }
 function bindBuildList(v) {
   v.querySelectorAll('[data-bid]').forEach(t => t.onclick = () => { BLD.cur = t.dataset.bid; saveBuilds(); renderBuilds(); });

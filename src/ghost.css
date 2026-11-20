@@ -932,3 +932,37 @@ a{color:var(--light)}
 .bstip b{display:block;margin-bottom:4px}.bstip small{display:block;margin-top:6px;color:var(--faint);font-size:10.5px}
 @media (hover:hover){.bstat:hover .bstip{display:block}}.bstat:focus-visible .bstip,.bstat.open .bstip{display:block}
 .bstip b{text-align:left;font-size:13px;color:var(--light)}
+
+/* ---------- armor optimizer (Builds → Find armor for target stats) ---------- */
+.optcta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin:0 0 12px}.optcta small{color:var(--faint);font-size:12px}
+#modalBox.opt-box{max-width:min(1040px,96vw)}
+.opttgts{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:6px 22px;margin:12px 0}
+.optt{display:grid;grid-template-columns:70px minmax(0,1fr) 64px 70px;gap:8px;align-items:center;font-size:13px;color:var(--dim)}
+.optt>span{color:var(--text)}.optt input[type=range]{accent-color:var(--accent);min-height:32px;width:100%}
+.optt .qin{width:64px;min-height:32px;padding:0 6px;font-variant-numeric:tabular-nums}
+.optt small{color:var(--faint);font-size:11.5px}.optt small b{color:var(--light)}
+.optopts{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.optkeep{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;width:100%;font-size:12.5px;color:var(--dim)}
+.optrun{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:12px 0 0}.optprog{color:var(--dim);font-size:12.5px}
+.optbar{margin:10px 0 0}.optbar i{display:block;height:100%}
+.optsum{margin:14px 0 6px;color:var(--dim);font-size:13px}.optsum b{color:var(--text)}
+.optsort{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}.optsort .tchip{flex-direction:row;min-height:32px;align-items:center}
+.optlist{display:grid;gap:4px}
+.optr{border:1px solid var(--line);background:var(--panel)}.optr.open{border-color:var(--line2)}
+.optrh{display:grid;grid-template-columns:minmax(150px,1.6fr) repeat(8,minmax(42px,1fr));gap:6px;align-items:center;width:100%;padding:6px 10px;background:none;border:0;color:var(--text);text-align:left;font:inherit;cursor:pointer}
+.optrh:hover{background:color-mix(in srgb,var(--light) 6%,transparent)}
+.optex{display:flex;gap:8px;align-items:center;min-width:0;font-size:12.5px}.optex>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.optv{display:grid;font-variant-numeric:tabular-nums;font-size:14px;color:var(--dim)}.optv small{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:.04em}
+.optv.hit{color:var(--text);font-weight:600}.optv.over{color:var(--bad)}.optv.tot{color:var(--text)}.optv i{font-style:normal;font-size:10.5px;color:var(--bon-mod)}
+.optd{padding:4px 10px 10px;border-top:1px solid var(--line)}
+.optp{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--line)}.optp .bit{display:grid;gap:2px;min-width:0}
+.optp small{color:var(--dim);font-size:12px}.optmods{display:flex;flex-wrap:wrap;gap:4px 10px}.optmods .bwb{margin:0;font-size:12px}
+@media (max-width:760px){
+  #modalBox.opt-box{max-width:none}
+  .opttgts{grid-template-columns:1fr}
+  .optt{grid-template-columns:64px minmax(0,1fr) 58px;row-gap:0}.optt small{grid-column:2/-1}
+  .optt input[type=range]{min-height:44px}.optt .qin{width:58px;min-height:44px}
+  .optopts .rsel{flex:1 1 140px}
+  .optrh{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:4px}.optex{grid-column:1/-1}
+  .optsort .tchip,.optrun .btn{min-height:44px}
+}
