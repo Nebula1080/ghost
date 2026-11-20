@@ -125,4 +125,13 @@ t('no tuning: same answer as trying every combination by hand', () => {
     for (const r of res.results) check(r, res, target);
   }
 });
+t('game data: all 12 stat mods sit in the general socket with their stats, none read as retired', () => {
+  const G = require('../data/defs.json'); const gen = G.am.general;
+  for (const k of K) for (const [pre, v, cost] of [['', 10, 3], ['Minor ', 5, 1]]) {
+    const m = gen.find(x => x[0] === `${pre}${k} Mod`);
+    assert.ok(m, `${pre}${k} Mod is offered`); assert.deepStrictEqual(m[2], { [k]: v }, `${pre}${k} Mod gives +${v} ${k}`); assert.strictEqual(m[1], cost);
+    assert.ok(!/deprecated|no longer functions/i.test(C.plugOf(m[0], G, 'armor')?.[2] || ''), `${m[0]} isn't described as retired`);
+    assert.strictEqual(C.plugOf(m[0], G, 'armor')?.[3], m[3], `${m[0]}: description and icon come from the same plug`);
+  }
+});
 console.log(`${n} optimizer tests passed`);
