@@ -2208,9 +2208,11 @@ function renderBuilds() {
     else body = `<span class="itm ph0" style="--is:48px">+</span><span class="bit"><b class="faint">Choose ${label.toLowerCase()}</b><small>${S.items.length ? 'From your vault, best synergy first' : 'Load your vault to pick items'}</small></span>`;
     let mods = '';
     if (g === 'a') {
-      const ms = b.mods[s] || []; const used = ms.filter(Boolean).reduce((n, m) => n + Core.modCost(m, s, D), 0); const cap = it?.energy;
+      const ms = b.mods[s] || []; const cap = it?.energy;
       const lay = Core.modLayout(ref?.hash, D, it?.tier); const ins = it ? Core.armorParts(it, D, s)?.inserted || [] : [];
-      mods = `<div class="bmods">${lay.map(([, c], i) => { const m = ms[i]; const on = !m && ins[i]; const sl = Core.modSockLabel(c, A_LABEL[s]); return `<span class="bmodw"><button class="bmod${m ? ' on' : ''}${on ? ' ins' : ''}" data-mod="${s}" data-mi="${i}" title="${m ? esc(m) : on ? `On the armor now: ${esc(on)}. Tap to plan another mod.` : `Add a ${esc(sl.toLowerCase())} mod`}">${m || on ? plugIcon(m || on, 'sq', pIdx(m || on, 'armor')) : '<span class="ic sq ph0">+</span>'}<span><small class="bmk">${esc(sl)}${on ? ' · on armor' : ''}</small>${m ? esc(m) : on ? esc(on) : 'Mod'}</span></button>${m ? infoBtn(`data-minfo="${esc(m)}"`, m) : ''}</span>`; }).join('')}<span class="ben${cap != null && used > cap ? ' over' : ''}" title="Armor energy used by these mods">${used}${cap != null ? '/' + cap : ''} energy</span></div>`;
+      const used = lay.reduce((n, _, i) => { const m = ms[i] === Core.MOD_NONE ? null : ms[i] || ins[i]; return n + (m ? Core.modCost(m, s, D) : 0); }, 0);
+      mods = `<div class="bmods">${lay.map(([, c], i) => { if (ms[i] === Core.MOD_NONE) { const sl = Core.modSockLabel(c, A_LABEL[s]); return `<span class="bmodw"><button class="bmod none" data-mod="${s}" data-mi="${i}" title="Planned empty${ins[i] ? `: take ${esc(ins[i])} out` : ''}. Tap to change."><span class="ic sq ph0">∅</span><span><small class="bmk">${esc(sl)} · empty</small>${ins[i] ? `<s>${esc(ins[i])}</s>` : 'No mod'}</span></button></span>`; }
+        const m = ms[i]; const on = !m && ins[i]; const sl = Core.modSockLabel(c, A_LABEL[s]); return `<span class="bmodw"><button class="bmod${m ? ' on' : ''}${on ? ' ins' : ''}" data-mod="${s}" data-mi="${i}" title="${m ? esc(m) : on ? `On the armor now: ${esc(on)}. Tap to plan another mod.` : `Add a ${esc(sl.toLowerCase())} mod`}">${m || on ? plugIcon(m || on, 'sq', pIdx(m || on, 'armor')) : '<span class="ic sq ph0">+</span>'}<span><small class="bmk">${esc(sl)}${on ? ' · on armor' : ''}</small>${m ? esc(m) : on ? esc(on) : 'Mod'}</span></button>${m ? infoBtn(`data-minfo="${esc(m)}"`, m) : ''}</span>`; }).join('')}<span class="ben${cap != null && used > cap ? ' over' : ''}" title="Armor energy used by these mods">${used}${cap != null ? '/' + cap : ''} energy</span></div>`;
     }
     return `<div class="bcard"><div class="bcl">${label}</div><div class="bcrow"><button class="bpick" data-${g}="${s}">${body}</button><span class="bacts">${it ? `<button class="x insp" data-insp="${esc(it.id)}" title="Details" aria-label="Show ${label} details">${ICO.info}</button>` : ''}${ref ? `<button class="x" data-clr${g}="${s}" title="Remove" aria-label="Remove ${label}">×</button>` : ''}</span></div>${mods}</div>`;
   };
@@ -2541,6 +2543,20 @@ function bindBuild(v, b, pieces, syn) {
 
 }
 // DIM loadout link: opens the build on DIM's Loadouts page, where it can be saved, equipped or shared from DIM
+// before a build leaves Ghost (Send to DIM, Equip build): mod sockets that will be empty and armor over its energy
+function modWarnings(b) {
+  const out = [];
+  for (const s of Core.A_SLOTS) {
+    const it = S.byId.get(b.a?.[s]?.id); if (!it) continue;
+    const lay = Core.modLayout(it.hash, D, it.tier); const ins = Core.armorParts(it, D, s)?.inserted || []; const ms = b.mods?.[s] || [];
+    let used = 0; const empty = [];
+    lay.forEach(([, c], i) => { const m = ms[i] === Core.MOD_NONE ? null : ms[i] || ins[i]; if (m) used += Core.modCost(m, s, D); else if (c === 'g' || c === 's') empty.push(Core.modSockLabel(c, A_LABEL[s]).toLowerCase()); });
+    if (empty.length) out.push(`${A_LABEL[s]}: ${empty.length} empty ${[...new Set(empty)].join(' / ')} socket${empty.length === 1 ? '' : 's'}`);
+    if (it.energy != null && used > it.energy) out.push(`${A_LABEL[s]}: mods need ${used} energy, ${it.name} has ${it.energy}`);
+  }
+  return out;
+}
+const modWarnHtml = b => { const w = modWarnings(b); return w.length ? `<div class="warnbox" role="note"><b>Check before you go</b><ul>${w.map(x => `<li>${esc(x)}</li>`).join('')}</ul><small>Empty sockets stay empty; plan a mod for them in Armor &amp; mods. Mods over a piece’s energy won’t fit.</small></div>` : ''; };
 function openDimLink(b) {
   const lo = Core.dimLoadout(b, D, S.byId, globalThis.crypto?.randomUUID?.() || 'ghost-' + uid());
   const url = Core.dimLink(lo);
@@ -2548,6 +2564,7 @@ function openDimLink(b) {
   const nSub = Object.keys(lo.equipped[0]?.socketOverrides || {}).length;
   modal(`<h2>Send “${esc(b.name)}” to DIM</h2>
     <p class="stat-pill">The link opens DIM’s Loadouts page with this build: ${esc(scAll(b)?.n || 'subclass')}${nSub ? ` (${nSub} choices)` : ''}, ${nItems} item${nItems === 1 ? '' : 's'}, ${lo.parameters?.mods?.length || 0} mod${lo.parameters?.mods?.length === 1 ? '' : 's'}${lo.notes ? ', notes' : ''}. In DIM you can save it, equip it or share it. Anyone you send it to sees the same build with their own copies of the items.</p>
+    ${modWarnHtml(b)}
     <input class="qin" id="dimUrl" readonly aria-label="DIM loadout link" value="${esc(url)}" style="width:100%;max-width:none">
     <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px"><button class="btn" data-close>Close</button><button class="btn" id="dimCopy">Copy link</button><a class="btn" id="dimOpen" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Open in DIM</a></div>`);
   const inp = $('#dimUrl');
@@ -2650,11 +2667,14 @@ function equipBuildPlan(b, ch) {
     lay.forEach(([si, code], i) => {
       const n = want[i]; if (!n || si < 0) return;
       const k = it.perks.find(x => x.si === si && x.s) || it.perks.find(x => x.si === si); if (k && Core.norm(k.n) === Core.norm(n)) return;
+      if (n === Core.MOD_NONE) { if (!k || /^empty/i.test(k.n)) return; const e = lay[i]?.[2];
+        if (!e) { skipped.push(`take ${k.n} out of ${it.name} in game (no empty plug known for that socket)`); return; }
+        swaps.push({ k, h: e, n: 'Empty Mod Socket', d: -Core.modCost(k.n, s, D), rm: true }); return; }
       const h = Core.modsFor(s, D, code).find(x => Core.norm(x[0]) === Core.norm(n))?.[3];
       if (!h || !k) { skipped.push(`${n} on ${it.name} (socket not found)`); return; }
       swaps.push({ k, h, n, d: Core.modCost(n, s, D) - Core.modCost(k.n, s, D) });
     });
-    for (const w of swaps.sort((x, y) => x.d - y.d)) steps.push({ action: 'plug', label: `${it.name}: ${/^Empty/.test(w.k.n) ? 'add' : `replace ${w.k.n} with`} ${w.n}`,
+    for (const w of swaps.sort((x, y) => x.d - y.d)) steps.push({ action: 'plug', label: w.rm ? `${it.name}: take out ${w.k.n}` : `${it.name}: ${/^Empty/.test(w.k.n) ? 'add' : `replace ${w.k.n} with`} ${w.n}`,
       body: { plug: { socketIndex: w.k.si, socketArrayType: 0, plugItemHash: w.h }, itemId: String(it.id), characterId: ch.id, membershipType: ctx.type }, apply: () => { w.k.n = w.n; w.k.h = w.h; } });
   }
   return { steps, skipped };
@@ -2665,7 +2685,7 @@ function equipBuild(b) {
   if (!chars.length) return toast(`No ${B_CLASSES.find(c => c[0] === b.cls)?.[1] || b.cls} on this account.`, 5000);
   const go = ch => {
     const { steps, skipped } = equipBuildPlan(b, ch);
-    const note = skipped.length ? `Skipped: ${skipped.join('; ')}.` : '';
+    const w = modWarnings(b); const note = [skipped.length ? `Skipped: ${skipped.join('; ')}.` : '', w.length ? `Check first: ${w.join('; ')}.` : ''].filter(Boolean).join(' ');
     if (!steps.length) return toast(skipped.length ? note : `${b.name} is already equipped on your ${ch.cls}.`, 6000);
     runActions(`Equip ${b.name} on your ${ch.cls}`, steps, ok => { if (ok) toast(`${b.name} equipped on your ${ch.cls}.`); renderBuilds(); }, note);
   };
@@ -2712,7 +2732,7 @@ function bindModAct(it, root, after) {
 // picker sheet: a searchable list of choices, best synergy first
 function openPicker(title, rows, onPick, opt = {}) {
   modal(`<h2>${esc(title)}</h2>${opt.note ? `<p class="stat-pill">${opt.note}</p>` : ''}<input class="qin" id="pkq" type="search" placeholder="${esc(opt.placeholder || 'Search names and descriptions…')}" aria-label="Search choices" autocomplete="off" spellcheck="false"><div class="pkn" id="pkn" aria-live="polite"></div>
-    <div class="plist" id="plist">${opt.clear ? '<button class="prow none" data-k="">Empty this slot</button>' : ''}${rows.map(r => `<button class="prow${r.on ? ' on' : ''}${r.off ? ' off' : ''}${r.fluff ? ' fluff' : ''}" data-k="${esc(r.k)}" data-s="${esc(r.s.toLowerCase())}">${r.icon}<span class="pt"><b>${esc(r.n)}</b>${r.sub ? `<small>${r.sub}</small>` : ''}${r.perks ? `<span class="ppks">${r.perks}</span>` : ''}${r.why?.length ? `<span class="whys">${whyHtml(r.why)}</span>` : ''}</span>${r.score ? `<span class="pscore" title="Synergy with the rest of this build">+${r.score}</span>` : ''}</button>`).join('') || '<div class="empty">Nothing to choose here.</div>'}</div>
+    <div class="plist" id="plist">${opt.clear ? '<button class="prow none" data-k="">Empty this slot</button>' : ''}${rows.map(r => `<button class="prow${r.on ? ' on' : ''}${r.off ? ' off' : ''}${r.fluff ? ' fluff' : ''}${r.cls ? ' ' + r.cls : ''}" data-k="${esc(r.k)}" data-s="${esc(r.s.toLowerCase())}">${r.icon}<span class="pt"><b>${esc(r.n)}</b>${r.sub ? `<small>${r.sub}</small>` : ''}${r.perks ? `<span class="ppks">${r.perks}</span>` : ''}${r.why?.length ? `<span class="whys">${whyHtml(r.why)}</span>` : ''}</span>${r.score ? `<span class="pscore" title="Synergy with the rest of this build">+${r.score}</span>` : ''}</button>`).join('') || '<div class="empty">Nothing to choose here.</div>'}</div>
     <div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`);
   // item pickers search with Ghost's query language (names, perks, descriptions, is:void, frame:…); others match text
   const q = $('#pkq'); let tq;
@@ -2833,10 +2853,17 @@ function pickMod(b, slot, i, pieces) {
     const fluff = IX?.skip?.includes('mod:' + Core.norm(n));
     return { k: n, n, fluff, icon: plugIcon(n, 'sq', pIdx(n, 'armor')), sub: `${fluff ? '<span class="bst">weapon / stat only</span>' : ''}<span class="bst">${cost} energy</span>${statChips(st)} ${esc(bd.slice(0, 140))}${bd.length > 140 ? '…' : ''}`, s: n + ' ' + bd, score: r.score, why: r.why, on: n === cur }; })
     .sort((x, y) => (x.fluff - y.fluff) || (y.score - x.score) || x.n.localeCompare(y.n));
-  openPicker(`${A_LABEL[slot]} · ${sl} mod socket`, rows, n => {
+  // take the mod out: plan this socket empty (it shows the mod that's on the armor now, or the planned one)
+  const onArmor = it ? Core.armorParts(it, D, slot)?.inserted?.[i] : null;
+  const top = [];
+  if (cur !== Core.MOD_NONE && (cur || onArmor)) top.push({ k: Core.MOD_NONE, n: `Remove ${cur || onArmor}`, icon: '<span class="ic sq ph0">∅</span>', sub: `Leave this socket empty${onArmor && !cur ? ' (the mod is on the armor now)' : ''}.`, s: 'remove empty none clear', score: 0, why: [], fluff: false });
+  if (cur && onArmor && cur !== onArmor) top.push({ k: '', n: `Keep ${onArmor}`, icon: plugIcon(onArmor, 'sq', pIdx(onArmor, 'armor')), sub: 'Drop the planned mod and keep the one on the armor.', s: 'keep armor current ' + onArmor, score: 0, why: [], fluff: false });
+  else if (cur && cur !== Core.MOD_NONE && !onArmor) top.length = 0, top.push({ k: '', n: `Remove ${cur}`, icon: '<span class="ic sq ph0">∅</span>', sub: 'Leave this socket empty.', s: 'remove empty none clear', score: 0, why: [], fluff: false });
+  else if (cur === Core.MOD_NONE) top.push({ k: '', n: onArmor ? `Keep ${onArmor}` : 'Empty socket', icon: onArmor ? plugIcon(onArmor, 'sq', pIdx(onArmor, 'armor')) : '<span class="ic sq ph0">∅</span>', sub: onArmor ? 'Undo: keep the mod that is on the armor.' : 'Nothing planned for this socket.', s: 'keep armor current undo', score: 0, why: [], fluff: false, on: !onArmor });
+  openPicker(`${A_LABEL[slot]} · ${sl} mod socket`, [...top.map(r => ({ ...r, cls: 'pin' })), ...rows], n => {
     const arr = lay.map((_, k) => ms[k] ?? null); arr[i] = n || null;
     b.mods[slot] = arr; saveBuilds(); renderBuilds();
-  }, { clear: !!cur, note: code === 't' ? `Tier 5 tuning: +5 to this piece's Tuned stat${it?.tuning ? ` (${esc(it.tuning)})` : ''} at -5 to another, or Balanced Tuning (+1 to its three lowest stats).` : code === 's' ? `Only ${A_LABEL[slot].toLowerCase()} mods fit this socket.` : code === 'g' ? 'General mods (stat mods) fit any armor piece’s general socket.' : `Only ${sl.toLowerCase()} mods fit this socket.` });
+  }, { clear: false, note: code === 't' ? `Tier 5 tuning: +5 to this piece's Tuned stat${it?.tuning ? ` (${esc(it.tuning)})` : ''} at -5 to another, or Balanced Tuning (+1 to its three lowest stats).` : code === 's' ? `Only ${A_LABEL[slot].toLowerCase()} mods fit this socket.` : code === 'g' ? 'General mods (stat mods) fit any armor piece’s general socket.' : `Only ${sl.toLowerCase()} mods fit this socket.` });
 }
 
 // ---------- views: Vault (panes) · Clean up · Subclasses ----------

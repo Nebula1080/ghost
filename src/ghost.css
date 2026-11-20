@@ -1096,3 +1096,11 @@ a{color:var(--light)}
 .artbest>span{display:grid;gap:2px;min-width:0}.artbest b{color:var(--good);font-size:13.5px}.artbest small{color:var(--dim);font-size:12px}
 .artbest em{font:600 10px var(--ui);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--good)}
 @media (max-width:760px){.artbest .btn{width:100%;min-height:44px}}
+/* mod sockets planned empty, and the picker's Remove / Keep rows */
+.bmod.none{border-style:dashed;opacity:.85}.bmod.none s{color:var(--faint)}
+.prow.pin{border-style:dashed;border-color:var(--line2)}.prow.pin+.prow:not(.pin){margin-top:10px}
+
+/* warning before a build leaves Ghost (Send to DIM, Equip build) */
+.warnbox{margin:12px 0;padding:10px 14px;border:1px solid color-mix(in srgb,var(--accent) 55%,var(--line2));background:color-mix(in srgb,var(--accent) 8%,var(--well));box-shadow:inset 2px 0 0 var(--accent)}
+.warnbox b{display:block;font:600 11px var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.warnbox ul{margin:6px 0;padding-left:18px;font-size:13px;color:var(--text)}.warnbox small{color:var(--dim);font-size:12px}

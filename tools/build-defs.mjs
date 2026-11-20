@@ -40,7 +40,10 @@ async function cached(file, url, binary = false) {
 }
 const norm = s => String(s ?? '').toLowerCase().replace(/^enhanced\s+/, '').replace(/[^a-z0-9]/g, '');
 const dataUri = (buf, mime = 'image/png') => `data:${mime};base64,${buf.toString('base64')}`;
-const iconTail = p => (p || '').match(/\/common\/destiny2_content\/icons\/(.+)$/)?.[1] || '';
+// Bungie's magenta "missing texture" placeholder (e.g. the Dual Siphon helmet mods) counts as no icon: the page shows a
+// letter tile instead
+const NO_ICON = new Set(['8b20acd1a243c966117e2e40a683b066.png']);
+const iconTail = p => { const t = (p || '').match(/\/common\/destiny2_content\/icons\/(.+)$/)?.[1] || ''; return NO_ICON.has(t) ? '' : t; };
 const escHtml = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 // ---------- Bungie manifest ----------

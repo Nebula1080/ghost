@@ -106,7 +106,7 @@ for (const [h, d] of Object.entries(items)) {
   const lay = [];
   for (const i of cat.socketIndexes || []) {
     const e = d.sockets.socketEntries[i]; const c = modCode(items[e.singleInitialItemHash]?.plug?.plugCategoryIdentifier); if (!c) continue;
-    lay.push([i, c]);
+    lay.push([i, c, e.singleInitialItemHash || 0]);   // [socketIndex, code, its empty plug] (Equip build empties a socket with it)
     if (c === 't' || c === 'a' || c.startsWith('x:')) {
       const list = so.m[c] ||= []; const seen = new Set(list.map(x => x[3]));
       for (const p of psItems(e.reusablePlugSetHash || e.randomizedPlugSetHash)) {
