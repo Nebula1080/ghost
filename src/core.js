@@ -1357,6 +1357,20 @@ const Core = (() => {
     const mine = { g: 'subclass', slot: sec, n: a.n, label: sec };
     return fitScore(mine, pieces.filter(p => !(p.g === 'subclass' && (p.n === a.n || (SUB_SINGLE.includes(sec) && p.slot === sec)))), ix, defs);
   }
+  // artifacts: each perk scored like any other candidate (against the build without its artifact perks), then the
+  // best set that fits the 7 slots. The slot rules (≤2 tier 3, ≤5 tier 2-3, ≤7 in all) form a matroid, so taking the
+  // highest-scoring perk whenever it still fits gives the best total.
+  const artFits = ps => { const n = [0, 0, 0]; for (const p of ps) n[p[2] - 1]++; return ps.length <= ART_MAX && n[2] <= ART_SLOTS[2] && n[1] + n[2] <= ART_SLOTS[1] + ART_SLOTS[2]; };
+  function artPerkScore(p, art, pieces, ix, defs) {
+    const mine = { g: 'artifact', slot: 'artifact', n: p[1], label: `${art.n} · tier ${p[2]}`, parts: p[3] ? [['Bungie', p[3]]] : [] };
+    return fitScore(mine, pieces.filter(q => q.g !== 'artifact'), ix, defs);
+  }
+  function artBest(art, pieces, ix, defs) {
+    const perks = (art?.p || []).map(p => ({ p, ...artPerkScore(p, art, pieces, ix, defs) }));
+    const picks = [];
+    for (const x of perks.filter(x => x.score > 0).sort((a, b) => b.score - a.score || a.p[2] - b.p[2])) if (artFits([...picks.map(y => y.p), x.p])) picks.push(x);
+    return { score: picks.reduce((n, x) => n + x.score, 0), picks, perks };
+  }
   // a mod as a candidate for an armor slot
   function modScore(n, slot, defs, pieces, ix) {
     const mine = { g: 'mod', slot, n, label: 'Armor mod' };
@@ -1774,6 +1788,6 @@ const Core = (() => {
 
   return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
     SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink,
-    OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
+    artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

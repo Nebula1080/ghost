@@ -2781,7 +2781,16 @@ const artRowHtml = (rows, attr) => `<div class="artrow">${rows.map((r, ri) => `<
   ? `<button class="aslot on t${p[2]}" data-${attr}="${p[0]}" title="${esc(p[1])} (tier ${p[2]})" aria-label="${esc(p[1])}">${plugIcon(p[1], 'sq', p[4])}<i>${'◆'.repeat(p[2])}</i></button>`
   : '<span class="aslot" title="Empty slot"><span class="ic sq ph0">+</span></span>').join('')}</div></div>`).join('')}</div>`;
 function pickArtifact(b) {
-  const arts = D.artp || [];
+  // fit with this build (curated interactions, like the other pickers): every perk scored against the build without
+  // its artifact perks, each artifact by its best set of perks that fits the 7 slots; best fit first
+  const pieces = Core.buildPieces(b, D, S.byId);
+  const fit = new Map((D.artp || []).map(a => [a.h, IX ? Core.artBest(a, pieces, IX, D) : { score: 0, picks: [], perks: [] }]));
+  const arts = (D.artp || []).slice().sort((x, y) => fit.get(y.h).score - fit.get(x.h).score);
+  const topH = arts[0] && fit.get(arts[0].h).score > 0 ? arts[0].h : null;
+  // one short line per perk: what it uses / provides and from which piece ("uses Scorch · Daybreak, Celestial Fire")
+  const whyLine = w => { const by = new Map(); for (const x of w) { const k = (x.role === 'p' ? 'provides ' : x.role === 'u' ? 'uses ' : 'turns on ') + x.l; if (!by.has(k)) by.set(k, []); if (x.other && !by.get(k).includes(x.other)) by.get(k).push(x.other); }
+    return [...by].slice(0, 2).map(([k, o]) => k + (o.length ? ` (${o.slice(0, 2).join(', ')}${o.length > 2 ? '…' : ''})` : '')).join(' · '); };
+  const whyTxt = w => w.slice(0, 4).map(x => `${x.role === 'p' ? 'provides' : x.role === 'u' ? 'uses' : 'turns on'} ${x.l}${x.other ? ' · ' + x.other : ''}`).join('\n');
   const draw = () => {
     const art = Core.artOf(b, D); const sel = new Set(b.art || []); const rows = Core.artSlots(b.art, art);
     const free = rows.map(r => r.filter(x => !x).length);
@@ -2792,17 +2801,23 @@ function pickArtifact(b) {
     const TIER_FIT = { 1: 'fits any slot', 2: 'fits Tier I–II and Any tier slots', 3: 'fits the 2 Any tier slots only' };
     modal(`<div class="artsheet">${sheetHead(b, 'Build maker · Seasonal artifact', art ? art.n : 'Artifact', art ? `<b>${sel.size}</b> of ${Core.ART_MAX} perks slotted` : 'Choose this season’s artifact, then slot up to 7 perks.')}
       ${sheetSec('Artifact')}
-      <div class="artpick">${arts.map(a => `<button class="artc${art?.h === a.h ? ' on' : ''}" data-aa="${a.h}" aria-pressed="${art?.h === a.h}">${plugIcon(a.n, 'sq', a.i)}<span>${esc(a.n)}</span></button>`).join('')}</div>
+      <div class="artpick">${arts.map(a => { const f = fit.get(a.h);
+        return `<button class="artc${art?.h === a.h ? ' on' : ''}" data-aa="${a.h}" aria-pressed="${art?.h === a.h}" title="${f.score ? `Best ${f.picks.length} perks for this build: ${esc(f.picks.map(x => x.p[1]).join(', '))}` : 'No perk links to this build yet'}">${plugIcon(a.n, 'sq', a.i)}<span class="acn"><b>${esc(a.n)}</b><small>${a.h === topH ? 'Best fit · ' : ''}${f.picks.length ? `${f.picks.length} perk${f.picks.length === 1 ? '' : 's'} fit this build` : 'nothing links yet'}</small></span>${f.score ? `<span class="pscore" title="Synergy with the rest of this build (best set of its perks)">+${f.score}</span>` : ''}</button>`; }).join('')}</div>
+      <p class="snote">Scores count how the best set of each artifact’s perks links to your subclass, weapons, armor and mods (curated interactions), like the other pickers. Perks nothing in the build uses score 0.</p>
       ${art ? `<p class="glead artlead">${esc(art.d.replace(/\s+/g, ' '))}</p>
+      ${(() => { const f = fit.get(art.h); const same = f.picks.length && f.picks.every(x => sel.has(x.p[0])) && f.picks.length === sel.size;
+        return f.score ? `<div class="artbest"><span><b>Best for this build: +${f.score}</b><small>${esc(f.picks.map(x => x.p[1]).join(' · '))}</small></span>${same ? '<em>Slotted</em>' : '<button class="btn" id="artBest">Slot these perks</button>'}</div>` : ''; })()}
       <div class="artboard">${artRowHtml(rows, 'ap')}<small>Like the in-game artifact: ◆ slots take Tier I perks, ◆◆ Tier I or II, ◆◆◆ any tier. Tap a perk to slot it; tap it again, or its slot, to take it out.</small></div>
       ${[1, 2, 3].map(t => `${sheetSec(`Tier ${'I'.repeat(t)}`, `${'◆'.repeat(t)} ${TIER_FIT[t]}`)}<div class="artg">${art.p.filter(p => p[2] === t).map(p => { const on = sel.has(p[0]); const ok = on || fits(t);
-        return `<button class="artp t${t}${on ? ' on' : ''}" data-ap="${p[0]}" ${ok ? '' : 'disabled'} aria-pressed="${on}" title="${esc(ok ? p[3] : why(t))}">${plugIcon(p[1], 'sq', p[4])}<span><b>${esc(p[1])}</b><small>${esc(ok ? (p[3] || '') : why(t))}</small></span>${on ? '<em>Slotted</em>' : ''}</button>`; }).join('')}</div>`).join('')}` : '<div class="empty"><b>No artifact chosen</b><span>Pick one above to see its perks.</span></div>'}
+        const sc = fit.get(art.h).perks.find(x => x.p[0] === p[0]); const best = fit.get(art.h).picks.some(x => x.p[0] === p[0]);
+        return `<button class="artp t${t}${on ? ' on' : ''}${best ? ' best' : ''}" data-ap="${p[0]}" ${ok ? '' : 'disabled'} aria-pressed="${on}" title="${esc(ok ? p[3] : why(t))}">${plugIcon(p[1], 'sq', p[4])}<span><b>${esc(p[1])}</b><small>${esc(ok ? (p[3] || '') : why(t))}</small>${sc?.score ? `<small class="awhy">${esc(whyLine(sc.why))}</small>` : ''}</span>${on ? '<em>Slotted</em>' : ''}${sc?.score ? `<span class="pscore" title="${esc(whyTxt(sc.why))}">+${sc.score}</span>` : ''}</button>`; }).join('')}</div>`).join('')}` : '<div class="empty"><b>No artifact chosen</b><span>Pick one above to see its perks.</span></div>'}
       <div class="gfoot"><button class="btn" id="artClr">Clear</button><button class="btn primary" data-close>Done</button></div></div>`);
     $('#modalBox').classList.add('art-box'); $('#modalBox').scrollTop = top;
     $('#modalBox').querySelectorAll('[data-aa]').forEach(x => x.onclick = () => { b.artA = +x.dataset.aa; b.art = Core.artValid(b.art, Core.artOf(b, D)); saveBuilds(); draw(); });
     $('#modalBox').querySelectorAll('[data-ap]').forEach(x => x.onclick = () => {
       const h = +x.dataset.ap; b.art = Core.artValid(sel.has(h) ? [...sel].filter(y => y !== h) : [...sel, h], art); saveBuilds(); draw(); });
     $('#artClr').onclick = () => { b.artA = 0; b.art = []; saveBuilds(); draw(); };
+    const bb = $('#artBest'); if (bb) bb.onclick = () => { b.art = Core.artValid(fit.get(art.h).picks.map(x => x.p[0]), art); saveBuilds(); draw(); };
     $('#modalBox').querySelector('[data-close]').onclick = () => { closeModal(); renderBuilds(); };
   };
   draw();
