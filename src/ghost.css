@@ -1074,3 +1074,13 @@ a{color:var(--light)}
   .bh-row #bOpt{width:100%;min-height:44px}
 }
 .artsheet .artp .ic{width:40px;height:40px;border:0;border-radius:0;background:none}
+
+/* set tiles: which slots you own pieces of */
+.optsb{flex-wrap:wrap;row-gap:6px}
+.sspips{flex-basis:100%;display:grid;grid-template-columns:repeat(5,auto);gap:3px}
+.sspips i{font:600 9.5px/1 var(--ui);letter-spacing:.03em;text-transform:uppercase;font-style:normal;padding:4px 2px;border:1px dashed var(--line2);color:var(--faint);display:flex;gap:3px;align-items:baseline;justify-content:center;white-space:nowrap}
+.sspips i.on{border-style:solid;border-color:color-mix(in srgb,var(--light) 45%,var(--line2));color:var(--dim);background:color-mix(in srgb,var(--light) 6%,transparent)}
+.sspips b{font-weight:700;color:var(--light);letter-spacing:0}
+.optsts{grid-template-columns:repeat(auto-fill,minmax(290px,1fr));max-height:440px}
+.optsb .osn{display:grid;gap:1px;min-width:0;flex:1}.optsb>.sspips{display:grid}
+@media (max-width:760px){.optsts{grid-template-columns:1fr}}
