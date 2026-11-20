@@ -1170,7 +1170,7 @@ const Core = (() => {
     const setN = {};
     for (const s of A_SLOTS) { const it = byId?.get(b.a?.[s]?.id); const si = it && defs?.as?.[it.hash]; if (si != null) setN[si] = (setN[si] || 0) + 1; }
     for (const [si, n] of Object.entries(setN)) for (const p of defs.sets[si]?.p || []) if (n >= p.c) out.push({ g: 'armor', slot: 'set', n: p.n, label: `${defs.sets[si].n} · ${p.c}-piece bonus`, parts: [['Bungie', p.d]] });
-    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(Boolean)) out.push({ g: 'mod', slot: s, n, label: 'Armor mod', parts: pieceText(n, defs, null, 'armor') });
+    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(n => n && n !== MOD_NONE)) out.push({ g: 'mod', slot: s, n, label: 'Armor mod', parts: pieceText(n, defs, null, 'armor') });
     // artifact perks (one artifact per build)
     const art = artOf(b, defs);
     for (const h of b.art || []) { const p = art?.p.find(x => x[0] === h); if (p) out.push({ g: 'artifact', slot: 'artifact', n: p[1], label: `${art.n} · tier ${p[2]}`, parts: p[3] ? [['Bungie', p[3]]] : [] }); }
@@ -1387,12 +1387,12 @@ const Core = (() => {
       for (const k of ARMOR3) { out[k].armor += pt.base[k]; out[k].mw += pt.mw[k]; }
       // each mod socket: the build's mod, else the one on the piece now (Equip build leaves those in place)
       pt.lay.forEach(([, c], i) => {
-        const n = b.mods?.[s]?.[i] || pt.inserted[i]; if (!n || !pt.hasBase) return;
+        const n = b.mods?.[s]?.[i] || pt.inserted[i]; if (!n || n === MOD_NONE || !pt.hasBase) return;
         for (const [k, v] of Object.entries(modStatsOn(n, s, pt.base, defs))) if (out[k]) out[k][c === 't' ? 'tune' : 'mods'] += v;
       });
     }
     // mods chosen for slots without a piece still count
-    for (const s of A_SLOTS) if (!pieces[s]) for (const n of (b.mods?.[s] || []).filter(Boolean)) for (const [k, v] of Object.entries(modStatsOn(n, s, {}, defs))) if (out[k]) out[k].mods += v;
+    for (const s of A_SLOTS) if (!pieces[s]) for (const n of (b.mods?.[s] || []).filter(n => n && n !== MOD_NONE)) for (const [k, v] of Object.entries(modStatsOn(n, s, {}, defs))) if (out[k]) out[k].mods += v;
     const sc = subOf(b, defs);
     for (const h of b.sub?.fragments || []) { const f = findSub(sc, 'fragments', h); for (const [k, v] of Object.entries(f?.st || {})) if (out[k]) out[k].frag += v; }
     for (const k of ARMOR3) out[k].total = out[k].armor + out[k].mw + out[k].tune + out[k].frag + out[k].mods;
@@ -1488,7 +1488,7 @@ const Core = (() => {
       equipped.push(ID_RE.test(String(r.id)) ? { id: String(r.id), hash } : { hash });
     }
     const mods = [];
-    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(Boolean)) { const m = modsFor(s, defs).find(x => norm(x[0]) === norm(n)); if (m?.[3]) mods.push(m[3]); }
+    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(n => n && n !== MOD_NONE)) { const m = modsFor(s, defs).find(x => norm(x[0]) === norm(n)); if (m?.[3]) mods.push(m[3]); }
     const lo = { id, name: String(b.name || 'Ghost build').slice(0, 60), classType: DIM_CLASS[b.cls] ?? 3, equipped, unequipped: [] };
     if (mods.length) lo.parameters = { mods };
     if (b.notes) lo.notes = String(b.notes).slice(0, 1024);
@@ -1542,9 +1542,11 @@ const Core = (() => {
   const modsFor = (slot, defs, code) => code === 'g' ? (defs?.am?.general || []) : code === 's' ? (defs?.am?.[slot] || []) : code ? (defs?.sock?.m?.[code] || [])
     : [...(defs?.am?.[slot] || []), ...(defs?.am?.general || []), ...Object.values(defs?.sock?.m || {}).flat()];
   const modFits = (n, code, slot, defs) => modsFor(slot, defs, code).some(x => norm(x[0]) === norm(n));
+  // b.mods[slot][i] === MOD_NONE: the socket is planned empty (take out the mod that's on the armor); it stays put
+  const MOD_NONE = '-';
   function placeMods(list, lay, slot, defs) {
     const out = lay.map(() => null); const rest = [];
-    (Array.isArray(list) ? list : []).forEach((n, i) => { if (typeof n !== 'string' || !n) return; if (i < lay.length && out[i] == null && modFits(n, lay[i][1], slot, defs)) out[i] = n; else rest.push(n); });
+    (Array.isArray(list) ? list : []).forEach((n, i) => { if (typeof n !== 'string' || !n) return; if (n === MOD_NONE) { if (i < lay.length) out[i] = MOD_NONE; return; } if (i < lay.length && out[i] == null && modFits(n, lay[i][1], slot, defs)) out[i] = n; else rest.push(n); });
     for (const n of rest) { const j = out.findIndex((x, k) => x == null && modFits(n, lay[k][1], slot, defs)); if (j >= 0) out[j] = n; }
     return out;
   }
@@ -1788,6 +1790,6 @@ const Core = (() => {
 
   return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
     SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink,
-    artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
+    MOD_NONE, artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

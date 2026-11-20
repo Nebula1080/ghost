@@ -304,4 +304,13 @@ t('artifact score: each perk scored against the build, best set fits the 7 slots
   assert.ok(!C.artFits([[0, '', 3], [0, '', 3], [0, '', 3]]), 'three tier-3 perks do not fit');
   assert.ok(!C.artFits([[0, '', 2], [0, '', 2], [0, '', 2], [0, '', 2], [0, '', 2], [0, '', 2]]), 'six tier 2-3 perks do not fit');
 });
+t('a mod socket planned empty stays empty: no stats, no piece, kept in place, not in the DIM link', () => {
+  const lay = [[0, 'g'], [1, 's'], [2, 's']];
+  assert.deepStrictEqual(C.placeMods(['Grenade Mod', C.MOD_NONE, null], lay, 'head', D), ['Grenade Mod', C.MOD_NONE, null]);
+  const b = C.normBuild({ cls: 'warlock', el: 'solar', a: {}, mods: { head: [null, C.MOD_NONE] } }, D);
+  assert.strictEqual(b.mods.head[1], C.MOD_NONE, 'normBuild keeps the empty plan');
+  assert.ok(!C.buildPieces(b, D, new Map()).some(p => p.n === C.MOD_NONE), 'not an interaction piece');
+  assert.ok(!(C.dimLoadout(b, D, new Map(), 'x').parameters?.mods || []).length, 'no mod hash for it');
+  assert.strictEqual(C.modCost(C.MOD_NONE, 'head', D), 0);
+});
 console.log(n, 'build tests passed');
