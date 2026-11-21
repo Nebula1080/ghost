@@ -1476,6 +1476,69 @@ const Core = (() => {
     return { base, cd: Math.round(secs * curve * 10) / 10, scalar: curve, applied, src: rec ? 'clarity' : 'compendium', ...(slot === 'super' ? { activeRegen: rec?.[2] ?? null, duration: rec?.[3] ?? null } : { chunk: rec ? rec[2] : fb[1], charges: rec?.[3] || null }) };
   }
   // armor mods a slot can take (its own list + general) and their energy cost
+  // ---------- DIM loadout import ----------
+  // The reverse of dimLoadout: DIM's API Loadout JSON (from a ?loadout= share URL, or the JSON itself) -> a Ghost
+  // build. Subclass + artifact come from their socketOverrides; weapons and armor are matched to the vault by
+  // instance id, else by item hash; parameters.mods are placed in the pieces' sockets (slot mods on their slot,
+  // then raid / artifice / tuning / general wherever a socket takes them).
+  // Returns { b, missing: [hash], unplaced: [mod name], cls } (b still needs normBuild).
+  function parseDimLoadout(text) {
+    const t = String(text || '').trim(); if (!t) return { err: 'empty' };
+    if (/^\{/.test(t)) { try { return { lo: JSON.parse(t) }; } catch { return { err: 'json' }; } }
+    if (/^(https?:\/\/)?dim\.gg\//i.test(t) || /^[a-z0-9]{7,}$/i.test(t)) return { err: 'dimgg' };
+    try {
+      const u = new URL(/^https?:/i.test(t) ? t : 'https://' + t); const j = u.searchParams.get('loadout');
+      if (!/destinyitemmanager\.com$/i.test(u.hostname) || !j) return { err: 'url' };
+      return { lo: JSON.parse(j) };
+    } catch { return { err: 'url' }; }
+  }
+  function fromDimLoadout(lo, defs, items) {
+    const CLS = ['titan', 'hunter', 'warlock'];
+    const all = [...(Array.isArray(lo?.equipped) ? lo.equipped : []).map(e => [e, true]), ...(Array.isArray(lo?.unequipped) ? lo.unequipped : []).map(e => [e, false])];
+    let sub = null, art = null;
+    for (const [e] of all) {
+      const h = Number(e?.hash);
+      for (const c of CLS) for (const [el, sc] of Object.entries(defs?.sub?.[c] || {})) if (sc?.h === h) sub ||= { c, el, sc, ov: e.socketOverrides || {} };
+      const a = (defs?.artp || []).find(x => x.h === h); if (a) art ||= { a, ov: e.socketOverrides || {} };
+    }
+    const cls = CLS[lo?.classType] || sub?.c || 'warlock';
+    const b = { name: String(lo?.name || 'DIM loadout').slice(0, 60), cls, el: sub?.c === cls ? sub.el : 'solar', sub: { aspects: [], fragments: [] }, w: {}, a: {}, mods: {} };
+    if (lo?.notes) b.notes = String(lo.notes).slice(0, 1024);
+    if (sub && sub.c === cls) for (const h of Object.values(sub.ov).map(Number)) {
+      const k = SUB_SINGLE.find(k => findSub(sub.sc, k, h)); if (k) { b.sub[k] = h; continue; }
+      for (const k2 of ['aspects', 'fragments']) if (findSub(sub.sc, k2, h)) b.sub[k2].push(h);
+    }
+    if (art) { b.artA = art.a.h; b.art = Object.values(art.ov).map(Number).filter(h => art.a.p.some(p => p[0] === h)); }
+    // weapons and armor: the same copy (instance id), else another copy of the same item in the vault
+    const byId = new Map((items || []).map(it => [String(it.id), it])); const used = new Set(); const missing = [];
+    for (const [e, eq] of all) {
+      const h = String(e?.hash || ''); if (!h || (sub && Number(h) === sub.sc.h) || (art && Number(h) === art.a.h)) continue;
+      let it = byId.get(String(e.id || ''));
+      if (!it || String(it.hash) !== h) it = (items || []).find(x => String(x.hash) === h && !used.has(String(x.id)) && (x.kind !== 'armor' || !x.equippable || norm(x.equippable) === cls || /any/i.test(x.equippable)));
+      if (!it) { if (eq && !(defs?.sub && Object.values(defs.sub).some(o => Object.values(o).some(sc => sc.h === Number(h))))) missing.push(Number(h)); continue; }
+      const g = it.kind === 'weapon' ? 'w' : it.kind === 'armor' ? 'a' : ''; const s = g === 'w' ? weaponSlot(it) : g === 'a' ? armorSlot(it) : '';
+      if (!s || (b[g][s] && !eq)) continue;
+      b[g][s] = { id: String(it.id), hash: String(it.hash || ''), name: it.name }; used.add(String(it.id));
+    }
+    // mods: name + which sockets take it
+    const info = new Map();
+    for (const s of A_SLOTS) for (const m of defs?.am?.[s] || []) info.set(m[3], [m[0], 's', s]);
+    for (const m of defs?.am?.general || []) info.set(m[3], [m[0], 'g']);
+    for (const [code, list] of Object.entries(defs?.sock?.m || {})) for (const m of list) if (!info.has(m[3])) info.set(m[3], [m[0], code]);
+    const pieceOf = s => (items || []).find(x => String(x.id) === b.a[s]?.id);
+    const lays = Object.fromEntries(A_SLOTS.map(s => { const it = pieceOf(s); return [s, modLayout(b.a[s]?.hash, defs, it ? tuneTier(it) : undefined)]; }));
+    for (const s of A_SLOTS) b.mods[s] = lays[s].map(() => null);
+    const rank = c => c === 's' ? 0 : c.startsWith('x:') ? 1 : c === 'a' ? 2 : c === 't' ? 3 : 4;
+    const wanted = (Array.isArray(lo?.parameters?.mods) ? lo.parameters.mods : []).map(h => info.get(Number(h))).filter(Boolean).sort((x, y) => rank(x[1]) - rank(y[1]));
+    const unplaced = [];
+    for (const [n, code, slot] of wanted) {
+      const fits = s => { const it = pieceOf(s); if (code === 't' && it && !isExoticArmor(it) && it.tuning && !/^balanced tuning$/i.test(n) && !n.startsWith(`+${it.tuning} /`)) return -1;
+        return lays[s].findIndex(([, c], i) => b.mods[s][i] == null && c === code && (code !== 's' || s === slot)); };
+      const s = (code === 's' ? [slot] : A_SLOTS).find(s => fits(s) >= 0);
+      if (s) b.mods[s][fits(s)] = n; else unplaced.push(n);
+    }
+    return { b, missing, unplaced, cls };
+  }
   // ---------- DIM loadout share link ----------
   // DIM opens https://app.destinyitemmanager.com/loadouts?loadout=<JSON of its API Loadout> (DIM source:
   // loadout-share/loadout-import.ts decodeUrlLoadout; type: dim-api api/shapes/loadouts.ts). The subclass is an
@@ -1815,7 +1878,7 @@ const Core = (() => {
   }
 
   return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, tuneTier, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink,
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, tuneTier, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink, parseDimLoadout, fromDimLoadout,
     MOD_NONE, artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
