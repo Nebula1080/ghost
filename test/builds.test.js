@@ -313,4 +313,26 @@ t('a mod socket planned empty stays empty: no stats, no piece, kept in place, no
   assert.ok(!(C.dimLoadout(b, D, new Map(), 'x').parameters?.mods || []).length, 'no mod hash for it');
   assert.strictEqual(C.modCost(C.MOD_NONE, 'head', D), 0);
 });
+const DD = D;
+t('DIM loadout: mods left on the armor go too, Tier 4 tuning does not, artifact perks as socket overrides; stats in game order', () => { const D0 = DD;
+  const D = { ...D0, sock: JSON.parse(fs.readFileSync(__dirname + '/../data/sockets.json', 'utf8')) }; const sk = D.sock; const hash = Object.keys(sk.a).find(h => sk.lay[sk.a[h]].some(x => x[1] === 't') && sk.lay[sk.a[h]][0][1] === 'g' && sk.lay[sk.a[h]].at(-1)[1] === 't');
+  const lay = sk.lay[sk.a[hash]]; const ti = lay.findIndex(x => x[1] === 't');
+  const arm = t => ({ id: '6917529000000000009', kind: 'armor', type: 'Helmet', category: 'Helmet', hash, tier: t, name: 'H', perks: [{ n: 'Grenade Mod', s: true }], stats: { Health: 30, Grenade: 20 }, base: { Health: 30, Grenade: 10 } });
+  const mods = Array(lay.length).fill(null); mods[ti] = 'Balanced Tuning';
+  const b = C.normBuild({ cls: 'warlock', el: 'solar', a: { head: { id: '6917529000000000009', hash } }, mods: { head: mods } }, D);
+  const gm = D.am.general.find(x => x[0] === 'Grenade Mod')[3], bt = D.sock.m.t.find(x => x[0] === 'Balanced Tuning')[3];
+  const lo5 = C.dimLoadout(b, D, new Map([['6917529000000000009', arm(5)]]), 'x');
+  assert.ok(lo5.parameters.mods.includes(gm), 'the Grenade Mod on the armor is sent'); assert.ok(lo5.parameters.mods.includes(bt), 'tuning on Tier 5');
+  const lo4 = C.dimLoadout(b, D, new Map([['6917529000000000009', arm(4)]]), 'x');
+  assert.ok(!lo4.parameters.mods.includes(bt), 'no tuning socket below Tier 5');
+  assert.strictEqual(C.buildStats(b, D, new Map([['6917529000000000009', arm(4)]])).stats.Health.tune, 0, 'hidden tuning is not counted');
+  const art = D.artp ? D.artp[0] : JSON.parse(fs.readFileSync(__dirname + '/../data/interactions/artifacts.json', 'utf8'))[0];
+  const D2 = { ...D, artp: [art] }; const t1 = art.p.filter(p => p[2] === 1).slice(0, 2), t3 = art.p.filter(p => p[2] === 3).slice(0, 1);
+  const b2 = C.normBuild({ cls: 'warlock', el: 'solar', artA: art.h, art: [...t1, ...t3].map(p => p[0]) }, D2); b2.artA = art.h; b2.art = [...t1, ...t3].map(p => p[0]);
+  const ae = C.dimLoadout(b2, D2, new Map(), 'x').equipped.find(e => e.hash === art.h);
+  assert.ok(ae, 'artifact equipped'); const ov = ae.socketOverrides;
+  for (const [si, ph] of Object.entries(ov)) { const tier = art.s.find(x => x[0] === +si)[1]; assert.ok(art.p.find(p => p[0] === ph)[2] <= tier, 'perk in a socket of its tier or higher'); }
+  assert.deepStrictEqual(Object.values(ov).sort(), [...t1, ...t3].map(p => p[0]).sort());
+  assert.deepStrictEqual(C.STAT_ORDER, ['Health', 'Melee', 'Grenade', 'Super', 'Class', 'Weapons']);
+});
 console.log(n, 'build tests passed');

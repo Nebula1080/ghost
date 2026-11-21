@@ -136,7 +136,7 @@
    1834163303
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Your Arc weapons gain a small bonus to damage while you have any Armor Charge. Your Armor Charge now decays over time. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Increases Arc Weapon damage while you have active Armor Charges:\n• PVE: 10%|17%|22%|25% increased damage with 1|2|3|4 Mods\n• PVP: 3%|4.5%|5.5%|6% increased damage\nThe 4th tier of the damage buff is only obtainable through Artifact Perks and Exotic Armor.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default."
   }
  },
@@ -150,7 +150,7 @@
    2077016094
   ],
   "src": {
-   "bungie": "Rapid Arc weapon final blows create an Orb of Power."
+   "bungie": "Rapid Arc or Stasis weapon final blows create an Orb of Power."
   }
  },
  {
@@ -163,7 +163,7 @@
    2812559045
   ],
   "src": {
-   "bungie": "Rapid Arc weapon final blows create an Orb of Power.",
+   "bungie": "Rapid Arc or Strand weapon final blows create an Orb of Power.",
    "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with an Arc or Strand Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
   }
  },
@@ -192,7 +192,7 @@
    3064687909
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Using a finisher on a combatant spawns Orbs of Power for your allies. \n\nConsumes 3 stacks of Armor Charge. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Finishers consume 3 Stacks of Armor Charge and spawn an Orb of Power for your allies that grants 7.15% Super Energy.",
    "compendium": "On Finisher:\nConsumes x3 Armor Charge.\nAllies are spawned an Orb of Power that grants 7.15% Super Energy."
   }
@@ -252,7 +252,7 @@
    4004774874
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Finisher final blows generate an overshield.\n\nConsumes 3 or more stacks of Armor Charge, granting a longer duration to the overshield for each charge consumed. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Finishers consume 3 or more Stacks of Armor Charge and grant a 45 HP Void Overshield.\nOvershield lasts 8|10|12|14 seconds with 3|4|5|6 Stacks of Armor Charge consumed.",
    "compendium": "On Finisher:\nConsumes x3 or more Armor Charges\nGrants Void Overshield for a varying duration.\nOvershield Duration at x3, x4, x5, and x6 Charges:\n8 | 10 | 12 | 14 seconds."
   }
@@ -282,7 +282,7 @@
    1193713026
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "You gain a bonus to your class stat while you have any Armor Charge. Your Armor Charge decays over time. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Grants 20|40|50 Class stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
    "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Class."
   }
@@ -300,7 +300,7 @@
    "Class": 10
   },
   "src": {
-   "bungie": "This mod has been deprecated and no longer functions. You may replace it with another mod."
+   "bungie": "+10 Class ▲"
   }
  },
  {
@@ -417,7 +417,7 @@
    4004774877
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Finishers restore grenades. \n\nConsumes 3 or more stacks of Armor Charge, granting additional energy for each charge consumed. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Finisher consume 3 or more Stacks of Armor Charge and grant Grenade Ability Energy.\nEnergy Gains with 3|4|5|6 Stacks Consumed:\n70% | 80% | 90% | 100%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
    "compendium": "On Finisher:\nConsumes x3 or more Armor Charge.\nGrants Grenade Ability Energy.\nx3 = 70% | x4 = 80% | x5 = 90% | x6 = 100%"
   }
@@ -538,7 +538,7 @@
    1971149752
   ],
   "src": {
-   "bungie": "Increases the ammo generation of Arc weapons."
+   "bungie": "Increases the ammo generation of weapons matching your subclass element."
   }
  },
  {
@@ -551,7 +551,7 @@
    1677180919
   ],
   "src": {
-   "bungie": "Faster ready and stow speed for Arc weapons.",
+   "bungie": "Faster ready and stow speed for weapons matching your subclass element.",
    "clarity": "Grants a 0.8x|0.75x|0.7x Ready/Stow Animation Duration Multiplier to Weapons matching your Super Element with 1|2|3 Mods equipped.\nStow Animation Duration cannot be decreased below what it would be at 100 Handling."
   }
  },
@@ -565,7 +565,7 @@
    3969361392
   ],
   "src": {
-   "bungie": "Gradually reloads your stowed Arc weapons over time.",
+   "bungie": "Gradually reloads your stowed weapons matching your subclass element over time.",
    "clarity": "After stowing a Weapon matching your Super Element:\nBegins to refill 10%|10%|15% of the stowed weapon's magazine (rounded up) from reserves every 2.5|2|2 seconds with 1|2|3 Mods equipped.\nDoes not work with Breech-Loaded Grenades Launchers, Crossbows, and Rocket Launchers."
   }
  },
@@ -579,7 +579,7 @@
    2657604783
   ],
   "src": {
-   "bungie": "Increases reload speed of Arc weapons.",
+   "bungie": "Increases reload speed of weapons matching your subclass element.",
    "clarity": "Grants the following to Weapons matching your Super Element ~0.5 seconds after readying them:\n• 10|15|18 Reload Speed with 1|2|3 Mods equipped\n• 0.85x Reload Duration Multiplier"
   }
  },
@@ -593,7 +593,7 @@
    1293710444
   ],
   "src": {
-   "bungie": "Reduces incoming Arc damage from combatants.",
+   "bungie": "Reduces incoming damage matching your subclass element from combatants.",
    "clarity": "Reduces Incoming PVE Combatant Damage matching your Subclass Element by 15%|25%|30% with 1|2|3 Mods equipped.\nThe effects of different Resistance Mods stack multiplicatively with each other."
   }
  },
@@ -607,7 +607,7 @@
    1301391064
   ],
   "src": {
-   "bungie": "Arc weapons get bonus reserves when picking up ammo used by that weapon.",
+   "bungie": "Weapons matching your subclass element get bonus reserves when picking up ammo used by that weapon.",
    "clarity": "Only works in PvE game modes.\nAmmo Brick pickups generally grant 1 additional ammo to Weapons matching your Super Element and the Ammo Type.\nMachine Guns receive 7 additional ammo, Trace Rifles receive 10% of their Total Reserves (rounded up) as additional ammo.\nFunctions the same way regardless of what spawned the Ammo Brick.\nContext: normal Ammo Bricks grant 25-33% of your Total Reserves by default."
   }
  },
@@ -621,7 +621,7 @@
    3832366019
   ],
   "src": {
-   "bungie": "Rapid Arc weapon final blows create an Orb of Power.",
+   "bungie": "Rapid final blows with weapons matching your subclass element create an Orb of Power.",
    "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Weapon matching your Super Element.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
   }
  },
@@ -635,7 +635,7 @@
    1305536863
   ],
   "src": {
-   "bungie": "Improved target acquisition, accuracy, and aim-down-sights speed for Arc weapons.",
+   "bungie": "Improved target acquisition, accuracy, and aim-down-sights speed for weapons matching your subclass element.",
    "clarity": "Grants the following to Weapons matching your Super Element 1 second after readying them:\n• 5|8|10 Aim Assist with 1|2|3 Mods equipped\n• 0.9x|0.85x|0.8x Accuracy Cone Size\n• 0.85x|0.75x|0.7x ADS Animation Duration Multiplier"
   }
  },
@@ -649,7 +649,7 @@
    686455429
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "You gain a bonus to your health stat while you have any Armor Charge. Your Armor Charge decays over time. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Grants 20|40|50 Health stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
    "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Health."
   }
@@ -680,7 +680,7 @@
    4004774875
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Finishers heal you.\n\nConsumes 1 stack of Armor Charge. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Finishers consume 1 Stack of Armor Charge to fully restore Health and Shields.",
    "compendium": "On Finisher:\nConsumes x1 Armor Charge.\nInstantly fully restores Health and Shields."
   }
@@ -826,7 +826,7 @@
    2733010662
   ],
   "src": {
-   "bungie": "Rapid Kinetic weapon final blows create an Orb of Power."
+   "bungie": "Rapid Kinetic or Arc weapon final blows create an Orb of Power."
   }
  },
  {
@@ -853,7 +853,7 @@
    1433540272
   ],
   "src": {
-   "bungie": "Rapid Kinetic weapon final blows create an Orb of Power."
+   "bungie": "Rapid Kinetic or Void weapon final blows create an Orb of Power."
   }
  },
  {
@@ -936,7 +936,7 @@
    2734970071
   ],
   "src": {
-   "bungie": "Rapid Kinetic weapon final blows create an Orb of Power."
+   "bungie": "Rapid Kinetic or Solar weapon final blows create an Orb of Power."
   }
  },
  {
@@ -949,7 +949,7 @@
    14520248
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Your Kinetic weapons gain a small bonus to damage while you have any Armor Charge. Your Armor Charge now decays over time. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Increases Kinetic Weapon damage while you have active Armor Charges:\n• PVE: 10%|17%|22%|25% increased damage with 1|2|3|4 Mods\n• PVP: 3%|4.5%|5.5%|6% increased damage\nThe 4th tier of the damage buff is only obtainable through Artifact Perks and Exotic Armor.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default."
   }
  },
@@ -992,7 +992,7 @@
    633101315
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "You gain a bonus to your melee stat while you have any Armor Charge. Your Armor Charge decays over time. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Grants 20|40|50 Melee stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
    "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Melee."
   }
@@ -1034,8 +1034,11 @@
   "slot": "general",
   "cost": 1,
   "hashes": [
-   1124184622
+   1237786518
   ],
+  "stats": {
+   "Class": 5
+  },
   "src": {
    "bungie": "+5 Class ▲"
   }
@@ -1063,8 +1066,11 @@
   "slot": "general",
   "cost": 1,
   "hashes": [
-   2113881316
+   2532323436
   ],
+  "stats": {
+   "Health": 5
+  },
   "src": {
    "bungie": "+5 Health ▲"
   }
@@ -1142,7 +1148,7 @@
    4004774873
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Finishers restore melee abilities.\n\nConsumes 3 or more stacks of Armor Charge, granting additional energy for each charge consumed. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Finishers consume 3 or more Stacks of Armor Charge and grant Melee Ability Energy.\nEnergy Gains with 3|4|5|6 Stacks Consumed:\n70% | 80% | 90% | 100%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
    "compendium": "On Finisher:\nConsumes x3 or more Armor Charge.\nGrants Melee Ability Energy.\nx3 = 70% | x4 = 80% | x5 = 90% | x6 = 100%"
   }
@@ -1292,7 +1298,7 @@
    1170405455
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "When you use a finisher, you gain a portion of energy for your least-recharged ability. \n\nConsumes 2 stacks of Armor Charge. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Finishers consume 2 Stacks of Armor Charge and grant 50% Ability Energy to your least-charged Ability.\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
    "compendium": "On Finisher:\nConsumes x2 Armor Charge.\n50% Ability Energy to the least-charged Ability."
   }
@@ -1322,7 +1328,7 @@
    4004774876
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Finishers reload all your weapons. \n\nConsumes 1 stack of Armor Charge. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Finishers consume 1 Stack of Armor Charge and refill all your weapons from reserves.",
    "compendium": "On Finisher:\nConsumes x1 Armor Charge.\nRefills all weapons."
   }
@@ -1476,7 +1482,7 @@
    2831374162
   ],
   "src": {
-   "bungie": "Rapid Solar weapon final blows create an Orb of Power.",
+   "bungie": "Rapid Solar or Strand weapon final blows create an Orb of Power.",
    "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Solar or Strand Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
   }
  },
@@ -1518,7 +1524,7 @@
    4004774872
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Finishers generate Special ammo for the whole fireteam. \n\nConsumes 3 stacks of Armor Charge. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Finishers consume 3 Stacks of Armor Charge and generate a Special Ammo Brick for you and allies.",
    "compendium": "On Finisher:\nConsumes x3 Armor Charge.\nGenerates a Special Ammo Brick for the user and allies."
   }
@@ -1798,7 +1804,7 @@
    1130820873
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "You gain a bonus to your Super stat while you have any Armor Charge. Armor Charges decay over time. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Grants 20|40|50 Super stat with 1|2|3 Mods equipped while you have active Armor Charges.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default.",
    "compendium": "While Armor Charge is active:\n+20 | +40 | +50 Super."
   }
@@ -1816,7 +1822,7 @@
    "Super": 10
   },
   "src": {
-   "bungie": "This mod has been deprecated and no longer functions. You may replace it with another mod."
+   "bungie": "+10 Super ▲"
   }
  },
  {
@@ -1829,7 +1835,7 @@
    521530777
   ],
   "src": {
-   "bungie": "Rapid Stasis weapon final blows create an Orb of Power.",
+   "bungie": "Rapid Stasis or Solar weapon final blows create an Orb of Power.",
    "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Solar or Stasis Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
   }
  },
@@ -1872,7 +1878,7 @@
    3094620656
   ],
   "src": {
-   "bungie": "Reduces flinching from incoming fire while aiming an Arc weapon.",
+   "bungie": "Reduces flinching from incoming fire while aiming a weapon matching your subclass element.",
    "clarity": "While Aiming Down Sights with Weapons matching your Subclass Element:\nGrants 25%|30%|35% Flinch Resistance with 1|2|3 Mods equipped.\nStacks multiplicatively with other Flinch Resistance sources."
   }
  },
@@ -1956,7 +1962,7 @@
    1125986156
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Finishers restore class abilities. \n\nConsumes 3 or more stacks of Armor Charge, granting additional energy for each charge consumed. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Finisher consume 3 or more Stacks of Armor Charge and grant Class Ability Energy.\nEnergy Gains with 3|4|5|6 Stacks Consumed:\n70% | 80% | 90% | 100%\nAbility energy gained may be significantly decreased based on your selected ability's Chunk Energy Scalar. Learn more about this mechanic in our explainer blog post on the Clarity website.",
    "compendium": "On Finisher:\nConsumes x3 or more Armor Charge.\nGrants Class Ability Energy.\nx3 = 70% | x4 = 80% | x5 = 90% | x6 = 100%"
   }
@@ -2097,7 +2103,7 @@
    3467460423
   ],
   "src": {
-   "bungie": "Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
+   "bungie": "Your Void weapons gain a small bonus to damage while you have any Armor Charge. Your Armor Charge now decays over time. Collecting an Orb of Power causes you to gain 1 temporary Armor Charge.",
    "clarity": "Increases Void Weapon damage while you have active Armor Charges:\n• PVE: 10%|17%|22%|25% increased damage with 1|2|3|4 Mods\n• PVP: 3%|4.5%|5.5%|6% increased damage\nThe 4th tier of the damage buff is only obtainable through Artifact Perks and Exotic Armor.\nArmor Charge now decays over time at the rate of 1 every 10 seconds by default."
   }
  },
@@ -2111,7 +2117,7 @@
    3458160468
   ],
   "src": {
-   "bungie": "Rapid Void weapon final blows create an Orb of Power."
+   "bungie": "Rapid Void or Stasis weapon final blows create an Orb of Power."
   }
  },
  {
@@ -2124,7 +2130,7 @@
    110793779
   ],
   "src": {
-   "bungie": "Rapid Void weapon final blows create an Orb of Power.",
+   "bungie": "Rapid Void or Strand weapon final blows create an Orb of Power.",
    "clarity": "Spawns an Orb of Power upon scoring 2 Kills within ? seconds of each with a Void or Strand Weapon.\nKills within 1 second of an activation do not count.\nSpawned Orbs of Power grant 2.5%|3.25%|4.4% Super Energy with 1|2|3 Mods equipped."
   }
  },
@@ -2156,7 +2162,7 @@
    "Weapons": 10
   },
   "src": {
-   "bungie": "This mod has been deprecated and no longer functions. You may replace it with another mod."
+   "bungie": "+10 Weapon ▲"
   }
  }
 ]

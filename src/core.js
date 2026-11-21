@@ -1378,6 +1378,9 @@ const Core = (() => {
   }
   // character stats: armor (base values when DIM gives them, else current) + fragment and mod bonuses
   const ARMOR3 = ['Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee'];
+  // the order the game (and DIM) lists them; ARMOR3 keeps its order because saved optimizer targets index into it
+  const STAT_ORDER = ['Health', 'Melee', 'Grenade', 'Super', 'Class', 'Weapons'];
+  const byStatOrder = list => [...list].sort((a, b) => STAT_ORDER.indexOf(a) - STAT_ORDER.indexOf(b));
   function buildStats(b, defs, byId) {
     const out = Object.fromEntries(ARMOR3.map(k => [k, { armor: 0, mw: 0, tune: 0, frag: 0, mods: 0, total: 0 }]));
     let src = ''; const pieces = {};
@@ -1387,6 +1390,7 @@ const Core = (() => {
       for (const k of ARMOR3) { out[k].armor += pt.base[k]; out[k].mw += pt.mw[k]; }
       // each mod socket: the build's mod, else the one on the piece now (Equip build leaves those in place)
       pt.lay.forEach(([, c], i) => {
+        if (c === 't' && Number(it.tier) && Number(it.tier) < 5) return;
         const n = b.mods?.[s]?.[i] || pt.inserted[i]; if (!n || n === MOD_NONE || !pt.hasBase) return;
         for (const [k, v] of Object.entries(modStatsOn(n, s, pt.base, defs))) if (out[k]) out[k][c === 't' ? 'tune' : 'mods'] += v;
       });
@@ -1487,10 +1491,24 @@ const Core = (() => {
       const hash = Number(byId?.get(r.id)?.hash || r.hash); if (!hash) continue;
       equipped.push(ID_RE.test(String(r.id)) ? { id: String(r.id), hash } : { hash });
     }
-    const mods = [];
-    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(n => n && n !== MOD_NONE)) { const m = modsFor(s, defs).find(x => norm(x[0]) === norm(n)); if (m?.[3]) mods.push(m[3]); }
+    // artifact: an equipped item like the subclass, its perks as socketOverrides (row r, cell k -> the k-th socket of tier r+1)
+    const art = artOf(b, defs);
+    if (art) {
+      const ov = {}; const socks = [1, 2, 3].map(t => (art.s || []).filter(x => x[1] === t).map(x => x[0]));
+      artSlots(artValid(b.art, art), art).forEach((row, r) => row.forEach((p, k) => { if (p && socks[r][k] != null) ov[socks[r][k]] = p[0]; }));
+      equipped.push(Object.keys(ov).length ? { hash: art.h, socketOverrides: ov } : { hash: art.h });
+    }
+    // armor mods: exactly what the page shows per socket, the build's mod or else the one on the armor now
+    // (DIM counts only the mods in the loadout); planned-empty sockets ask DIM to clear the rest
+    const mods = []; let clear = false;
+    const hashOf = (n, s, c) => (modsFor(s, defs, c).find(x => norm(x[0]) === norm(n)) || modsFor(s, defs).find(x => norm(x[0]) === norm(n)))?.[3];
+    for (const s of A_SLOTS) {
+      const list = b.mods?.[s] || []; const it = byId?.get(b.a?.[s]?.id);
+      const pt = it && armorParts(it, defs, s); const lay = pt?.lay || modLayout(b.a?.[s]?.hash, defs); const ins = pt?.inserted || [];
+      lay.forEach(([, c], i) => { if (c === 't' && Number(it?.tier) && Number(it.tier) < 5) return; if (list[i] === MOD_NONE) { clear = true; return; } const n = list[i] || ins[i]; const h = n && hashOf(n, s, c); if (h) mods.push(h); });
+    }
     const lo = { id, name: String(b.name || 'Ghost build').slice(0, 60), classType: DIM_CLASS[b.cls] ?? 3, equipped, unequipped: [] };
-    if (mods.length) lo.parameters = { mods };
+    if (mods.length || clear) lo.parameters = { mods, ...(clear ? { clearMods: true } : {}) };
     if (b.notes) lo.notes = String(b.notes).slice(0, 1024);
     return lo;
   }
@@ -1789,7 +1807,7 @@ const Core = (() => {
   }
 
   return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink,
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink,
     MOD_NONE, artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
 if (typeof module !== 'undefined') module.exports = Core;
