@@ -355,7 +355,7 @@ nav.views button.on{color:var(--text);border-bottom-color:var(--accent)}
 .row2{margin-top:10px;font-size:12.5px}
 .row2 input{width:56px;background:var(--well);border:1px solid var(--raise);padding:4px 6px;color:var(--text)}
 .setup-foot{display:flex;gap:10px;align-items:center;padding-top:16px;flex-wrap:wrap}
-.rev-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rev-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
 .rev-list{display:flex;flex-direction:column;gap:3px;max-height:none}
 .rev{display:flex;gap:10px;align-items:baseline;background:var(--panel2);border-left:3px solid var(--rc);padding:5px 9px;cursor:pointer;flex-wrap:wrap}
 .rev:hover{background:var(--raise)}
@@ -3117,13 +3117,13 @@ const CLEAN_KEYS = {
 const CLEAN_RANK = { weapon: [['rating', 'Rating (PvE + PvP)'], ['tier', 'Gear tier'], ['power', 'Power'], ['season', 'Newest season'], ['kills', 'Kills']], armor: [['total', 'Stat total'], ['tier', 'Gear tier'], ['power', 'Power'], ['season', 'Newest season']] };
 const CL = {
   setup: { kind: 'weapon', keys: { weapon: ['type', 'frame', 'element'], armor: ['class', 'type', 'frame'] }, rank: { weapon: 'rating', armor: 'total' }, keep: 1, filter: '', exoticsByName: true, protectTags: true, protectLocked: true, onlyNeeded: true },
-  dec: {},        // itemId -> 'keep' | 'trash' (explicit choices; otherwise the suggestion applies)
+  dec: {},        // itemId -> 'keep' | 'infuse' | 'trash' (explicit choices; otherwise the suggestion applies)
   gi: 0, step: 'setup',
 };
 const CL_DEFAULT = JSON.stringify(CL.setup);
 function loadCleanState() {
   CL.setup = JSON.parse(CL_DEFAULT); CL.dec = {}; CL.gi = 0; CL.step = 'setup';
-  const v = LS.get(PK('clean')); if (v) { Object.assign(CL.setup, v.setup || {}); CL.dec = v.dec || {}; CL.gi = v.gi || 0; CL.step = v.step || 'setup'; }
+  const v = LS.get(PK('clean')); if (v) { Object.assign(CL.setup, v.setup || {}); CL.dec = cleanDecs(v.dec); CL.gi = v.gi || 0; CL.step = v.step || 'setup'; }
 }
 let cleanSaveT;
 async function writeClean() {
@@ -3135,9 +3135,12 @@ function saveClean() {
   clearTimeout(cleanSaveT);
   cleanSaveT = setTimeout(() => { cleanSaveT = null; writeClean(); }, 600);
 }
-async function loadCleanFromDb() { if (!S.db) return; try { const v = await dbGet(PP('config/clean')); if (v) { Object.assign(CL.setup, structuredClone(v.setup || {})); CL.dec = structuredClone(v.dec || {}); CL.gi = v.gi || 0; CL.step = v.step || 'setup'; } } catch {} }
+async function loadCleanFromDb() { if (!S.db) return; try { const v = await dbGet(PP('config/clean')); if (v) { Object.assign(CL.setup, structuredClone(v.setup || {})); CL.dec = cleanDecs(structuredClone(v.dec || {})); CL.gi = v.gi || 0; CL.step = v.step || 'setup'; } } catch {} }
 const cleanKey = (it, k) => k === 'slot' ? (it.category || '—') : k === 'class' ? (it.equippable || '—') : k === 'tertiary' ? (it.tertiary || '—') : Core.groupKey(it, k) || '—';
 function cleanRankVal(it, r) { const v = r === 'total' ? Core.findStat(it.stats, 'total')[1] : r === 'rating' ? it.rating : it[r]; return v == null ? -Infinity : v; }
+// Infuse = stays in the vault as infusion fuel (DIM tag infuse), kept apart from items you keep to use (2026-11-21)
+const CL_DECS = ['keep', 'infuse', 'trash'];
+const cleanDecs = o => Object.fromEntries(Object.entries(o && typeof o === 'object' ? o : {}).filter(([id, d]) => /^\d{1,20}$/.test(id) && CL_DECS.includes(d)));
 const isProtected = it => (CL.setup.protectTags && (it.tag === 'favorite' || it.tag === 'keep')) || (CL.setup.protectLocked && it.locked);
 function cleanGroups() {
   const st = CL.setup, kind = st.kind;
@@ -3159,6 +3162,7 @@ function cleanGroups() {
     let kept = 0;
     g.sugg = {};
     for (const it of g.items) {
+      if (it.tag === 'infuse') { g.sugg[it.id] = 'infuse'; continue; }
       if (isProtected(it)) { g.sugg[it.id] = 'keep'; kept++; continue; }
       g.sugg[it.id] = kept < st.keep ? 'keep' : 'trash'; if (g.sugg[it.id] === 'keep') kept++;
     }
@@ -3193,7 +3197,7 @@ function renderClean() {
     <div class="clean-body">
       <div class="gnav"><button class="btn" id="clPrev" aria-label="Previous group" ${CL.gi ? '' : 'disabled'}>${ICO.prev}<span class="lfull"> Previous</span></button>
         <button class="btn" id="clKeepAll">Keep all</button><button class="btn" id="clReset"><span class="lfull">Use suggestions</span><span class="lshort">Suggested</span></button><button class="btn" id="clTrashRest"><span class="lfull">Keep best ${CL.setup.keep}, trash rest</span><span class="lshort">Best ${CL.setup.keep} only</span></button>
-        <span class="grow"></span><span class="stat-pill hint-desk">Keys: K keep · T trash · ← → groups</span><span class="stat-pill hint-touch">Swipe a card right to keep, left to trash</span>
+        <span class="grow"></span><span class="stat-pill hint-desk">Keys: K keep · I infuse · T trash · ← → groups</span><span class="stat-pill hint-touch">Swipe right to keep, left to trash, or tap Infuse</span>
         <button class="btn primary" id="clNext" aria-label="${CL.gi < G.groups.length - 1 ? 'Next group' : 'Review'}"><span class="lfull">${CL.gi < G.groups.length - 1 ? 'Next group' : 'Review'} </span>${ICO.next}</button></div>
       <div class="tiles">${g.items.map((it, i) => cleanTile(it, g, i)).join('')}</div>
     </div>`;
@@ -3231,13 +3235,13 @@ function cleanTile(it, g, i) {
   const sk = socketsCard(it, new Set());
   const stats = kind === 'armor' ? `<div class="stats">${['Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee'].filter(k => k in it.stats).map(k => `<span>${k} <b>${it.stats[k]}</b></span>`).join('')}${'Total' in it.stats ? `<span>Total <b>${it.stats.Total}</b></span>` : ''}</div>` : '';
   const slam = CL.slam === it.id && motionOK(); if (slam) CL.slam = null;
-  return `<div class="tile ${d}" data-id="${esc(it.id)}" style="--rc:${rarityColor(it.rarity)}"><span class="stamp${slam ? ' slam' : ''}">${d === 'keep' ? 'KEEP' : 'TRASH'}</span>
+  return `<div class="tile ${d}" data-id="${esc(it.id)}" style="--rc:${rarityColor(it.rarity)}"><span class="stamp${slam ? ' slam' : ''}">${d === 'keep' ? 'KEEP' : d === 'infuse' ? 'INFUSE' : 'TRASH'}</span>
     <div class="tile-h">${itemIcon(it, 44)}<span class="tn">${esc(it.name)}<br><span class="rank">#${i + 1}</span></span><span class="rv"${r === 'rating' ? rbdAttr(it) : ''}>${rv === -Infinity ? '–' : rv}</span></div>
     <div class="tile-b">
       <div class="sub">${it.element ? `<span class="cfield">${elIcon(it.element)}${esc(it.element)}</span>` : ''}${it.tier != null ? `<span>Tier ${it.tier}</span>` : ''}${it.power != null ? `<span>${ICO.power} ${it.power}</span>` : ''}${it.tag ? `<span>${TAG_ICON[it.tag] || ''} ${esc(TAG_LABEL[it.tag] || it.tag)}</span>` : ''}${it.locked ? `<span title="Locked in game">${ICO.lock}</span>` : ''}${Core.anyBreaker(it) ? breakerChips(it) : ''}</div>
       ${sk}${stats}${it.notes ? `<div class="note">${esc(it.notes)}</div>` : ''}
     </div>
-    <div class="tile-f"><button class="dec keep${d === 'keep' ? ' on' : ''}" data-dec="keep">Keep</button><button class="dec trash${d === 'trash' ? ' on' : ''}" data-dec="trash">Trash</button>
+    <div class="tile-f"><button class="dec keep${d === 'keep' ? ' on' : ''}" data-dec="keep">Keep</button><button class="dec infuse${d === 'infuse' ? ' on' : ''}" data-dec="infuse" title="Keep in the vault as infusion fuel">Infuse</button><button class="dec trash${d === 'trash' ? ' on' : ''}" data-dec="trash">Trash</button>
       <span class="sugg">${CL.dec[it.id] ? 'Your choice' : prot ? 'Protected' : 'Suggested'}</span></div>
   </div>`;
 }
@@ -3269,21 +3273,21 @@ function renderCleanSetup(v) {
   $('#clKeep').onchange = e => { st.keep = Math.max(0, Math.min(20, +e.target.value || 0)); saveClean(); renderClean(); };
   let ft; $('#clFilter').oninput = e => { clearTimeout(ft); ft = setTimeout(() => { st.filter = e.target.value; saveClean(); const pos = e.target.selectionStart; renderClean(); const n = $('#clFilter'); n.focus(); n.setSelectionRange(pos, pos); }, 350); };
   $('#clStart').onclick = () => { CL.step = 'groups'; CL.gi = 0; saveClean(); renderClean(); };
-  const cc = $('#clClear'); if (cc) cc.onclick = () => { CL.dec = {}; saveClean(); renderClean(); toast('Cleared your keep/trash choices.'); };
+  const cc = $('#clClear'); if (cc) cc.onclick = () => { CL.dec = {}; saveClean(); renderClean(); toast('Cleared your keep / infuse / trash choices.'); };
 }
 function renderCleanReview(v, G) {
-  const keep = [], trash = [];
-  for (const g of G.groups) for (const it of g.items) (decOf(it, g) === 'trash' ? trash : keep).push(it);
-  const newTag = (it, d) => d === 'trash' ? 'junk' : (it.tag === 'favorite' ? 'favorite' : 'keep');
-  const changes = [...keep.map(it => [it, 'keep']), ...trash.map(it => [it, 'trash'])].filter(([it, d]) => it.tag !== newTag(it, d));
+  const keep = [], infuse = [], trash = [];
+  for (const g of G.groups) for (const it of g.items) { const d = decOf(it, g); (d === 'trash' ? trash : d === 'infuse' ? infuse : keep).push(it); }
+  const newTag = (it, d) => d === 'trash' ? 'junk' : d === 'infuse' ? 'infuse' : (it.tag === 'favorite' ? 'favorite' : 'keep');
+  const changes = [...keep.map(it => [it, 'keep']), ...infuse.map(it => [it, 'infuse']), ...trash.map(it => [it, 'trash'])].filter(([it, d]) => it.tag !== newTag(it, d));
   const list = (arr, cls) => arr.length ? `<div class="rev-list">${arr.map(it => `<div class="rev ${cls}" data-id="${esc(it.id)}" style="--rc:${rarityColor(it.rarity)}"><span class="tn">${esc(it.name)}</span><span class="stat-pill">${esc(it.type)}${it.frame ? ' · ' + esc(it.frame) : ''}${it.tier != null ? ' · T' + it.tier : ''}${it.power != null ? ' · ' + ICO.power + ' ' + it.power : ''}</span></div>`).join('')}</div>` : '<div class="stat-pill">None.</div>';
-  v.innerHTML = `<div class="band"><div class="eyebrow">Clean up · review</div><h1><span class="k">${keep.length}</span> keep · <span class="t">${trash.length}</span> trash</h1>
-      <p>Applying sets the DIM tag: <b>keep</b> (favorites stay favorite) or <b>junk</b>. Nothing is deleted. Then use <b>Export to DIM</b>, import the CSV in DIM, and use the copied DIM search to find the junk items and dismantle them in game.</p></div>
+  v.innerHTML = `<div class="band"><div class="eyebrow">Clean up · review</div><h1><span class="k">${keep.length}</span> keep · <span class="i">${infuse.length}</span> infuse · <span class="t">${trash.length}</span> trash</h1>
+      <p>Applying sets the DIM tag: <b>keep</b> (favorites stay favorite), <b>infuse</b> (stays in the vault as infusion fuel) or <b>junk</b>. Nothing is deleted. Then use <b>Export to DIM</b>, import the CSV in DIM, and use the copied DIM search to find the junk items and dismantle them in game.</p></div>
     <div class="clean-body">
-      <div class="gnav"><button class="btn" id="clBack">← Back to groups</button><button class="btn" id="clSetup2">Setup</button><span class="grow"></span>
+      <div class="gnav rgnav"><button class="btn" id="clBack">← Back to groups</button><button class="btn" id="clSetup2">Setup</button><span class="grow"></span>
         <button class="btn" id="clCopyT" ${trash.length ? '' : 'disabled'}>Copy DIM search: trash</button>
         <button class="btn primary" id="clApply" ${changes.length ? '' : 'disabled'}>Apply ${changes.length} tag change${changes.length === 1 ? '' : 's'}</button></div>
-      <div class="rev-cols"><div><div class="vlabel h2">Trash · ${trash.length}</div>${list(trash, 'trash')}</div><div><div class="vlabel h2">Keep · ${keep.length}</div>${list(keep, 'keep')}</div></div>
+      <div class="rev-cols"><div><div class="vlabel h2">Trash · ${trash.length}</div>${list(trash, 'trash')}</div><div><div class="vlabel h2">Infuse · ${infuse.length}</div>${list(infuse, 'infuse')}</div><div><div class="vlabel h2">Keep · ${keep.length}</div>${list(keep, 'keep')}</div></div>
     </div>`;
   v.querySelectorAll('.rev').forEach(r => r.onclick = () => openItem(r.dataset.id, null));
   $('#clBack').onclick = () => { CL.step = 'groups'; saveClean(); renderClean(); };
@@ -3296,7 +3300,7 @@ document.addEventListener('keydown', e => {
   if (VIEW !== 'clean' || CL.step !== 'groups' || e.target.closest('input,textarea,select') || $('#drawer').classList.contains('open')) return;
   if (e.key === 'ArrowRight') $('#clNext')?.click();
   else if (e.key === 'ArrowLeft') $('#clPrev')?.click();
-  else if ((e.key === 'k' || e.key === 't') && CL.hover) document.querySelector(`#clean .tile[data-id="${CL.hover}"] [data-dec=${e.key === 'k' ? 'keep' : 'trash'}]`)?.click();
+  else if ({ k: 1, i: 1, t: 1 }[e.key] && CL.hover) document.querySelector(`#clean .tile[data-id="${CL.hover}"] [data-dec=${{ k: 'keep', i: 'infuse', t: 'trash' }[e.key]}]`)?.click();
 });
 
 // ---------- header ----------

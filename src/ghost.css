@@ -10,7 +10,7 @@
   --rail:232px;
   --solar:#f2721b;--arc:#7aecf3;--void:#b98ae8;--stasis:#6aa6ff;--strand:#3fe07a;--kinetic:#e9e2d6;--prismatic:#ff7ad9;
   --exotic:#ceae33;--legendary:#8e5fd0;--rare:#5a8fd6;--uncommon:#4f9a5f;--common:#c3bcb4;
-  --keep:#6fd389;--trash:#f0715f;--good:#6fd389;--bad:#f0715f;
+  --keep:#6fd389;--trash:#f0715f;--infuse:#5cb8ff;--good:#6fd389;--bad:#f0715f;
 }
 /* Dusk: Traveler at sunset (#30) */
 :root,:root[data-theme=dusk]{--bg:#170f1c;--bg2:#211627;--well:#130c18;--panel:#241a2b;--panel2:#2b1e33;--raise:#352640;--line:#4a3a55;--line2:#62506d;--text:#f7ece5;--dim:#c9b8bf;--faint:#a08e9a;--light:#f7d3bd;--accent:#f2a65a;--accent-ink:#2a1608;--mid:#f2a65a;--sel:rgba(247,211,189,.28)}
@@ -302,9 +302,11 @@ a{color:var(--light)}
 .dec:hover{color:var(--text);background:var(--raise)}
 .dec.keep.on{background:color-mix(in srgb,var(--keep) 16%,transparent);color:var(--keep)}
 .dec.trash.on{background:color-mix(in srgb,var(--trash) 16%,transparent);color:var(--trash)}
+.dec.infuse.on{background:color-mix(in srgb,var(--infuse) 16%,transparent);color:var(--infuse)}
 .tile.keep{box-shadow:none;border-color:color-mix(in srgb,var(--keep) 55%,var(--line))}.tile.trash{box-shadow:none;border-color:color-mix(in srgb,var(--trash) 55%,var(--line));opacity:.8}
 .stamp{position:absolute;right:12px;bottom:50px;padding:4px 8px;border:1.5px solid currentColor;font:700 10.5px var(--ui);letter-spacing:.22em;transform:rotate(-8deg);pointer-events:none}
-.tile.keep .stamp{color:var(--keep)}.tile.trash .stamp{color:var(--trash)}
+.tile.infuse{box-shadow:none;border-color:color-mix(in srgb,var(--infuse) 55%,var(--line))}.band .i,.tally .i{color:var(--infuse)}
+.tile.keep .stamp{color:var(--keep)}.tile.trash .stamp{color:var(--trash)}.tile.infuse .stamp{color:var(--infuse)}
 .stamp.slam{animation:slam .38s var(--ease)}@keyframes slam{from{transform:rotate(-8deg) scale(2);opacity:0}}
 .vsec{border-bottom-color:var(--line)}
 .check small{background:var(--accent);color:var(--accent-ink)}
@@ -501,6 +503,7 @@ a{color:var(--light)}
   .gnav{flex-wrap:nowrap;gap:4px;margin-bottom:8px;padding:4px 0}
   .gnav .btn{flex:1 1 auto;min-height:34px;padding:2px 6px;font-size:12px;justify-content:center;min-width:0}
   .gnav #clPrev,.gnav #clNext{flex:0 0 40px}
+  .gnav.rgnav{flex-wrap:wrap}.gnav.rgnav .btn{flex:1 1 30%;white-space:normal}.gnav.rgnav #clApply{flex-basis:100%}
   .gnav .hint-touch,.gnav .grow{display:none}
   .lfull{display:none}.lshort{display:inline}
 }
