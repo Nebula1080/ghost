@@ -335,4 +335,13 @@ t('DIM loadout: mods left on the armor go too, Tier 4 tuning does not, artifact 
   assert.deepStrictEqual(Object.values(ov).sort(), [...t1, ...t3].map(p => p[0]).sort());
   assert.deepStrictEqual(C.STAT_ORDER, ['Health', 'Melee', 'Grenade', 'Super', 'Class', 'Weapons']);
 });
+t('exotic armor takes any tuning mod at any tier; legendaries follow Tier 5', () => {
+  assert.strictEqual(C.tuneTier({ rarity: 'Exotic', tier: 2 }), 5);
+  assert.strictEqual(C.tuneTier({ rarity: 'Legendary', tier: 4 }), 4);
+  const d = { ...D, sock: JSON.parse(fs.readFileSync(__dirname + '/../data/sockets.json', 'utf8')) };
+  const hash = Object.keys(d.sock.a).find(h => d.sock.lay[d.sock.a[h]].some(x => x[1] === 't'));
+  const piece = (rarity, tuning) => C.optPiece({ id: '1', kind: 'armor', type: 'Helmet', category: 'Helmet', hash, tier: 3, rarity, tuning, name: 'H', perks: [], stats: { Health: 30 }, base: { Health: 30, Melee: 10, Grenade: 10, Super: 10, Class: 10, Weapons: 10 } }, d, {});
+  const ex = piece('Exotic', 'Weapons'); assert.ok(ex && ex.tune && ex.tune.flex, 'exotic: any pair even with a Tuned stat');
+  const lg = piece('Legendary', 'Weapons'); assert.ok(lg && !lg.tune, 'Tier 3 legendary: no tuning');
+});
 console.log(n, 'build tests passed');
