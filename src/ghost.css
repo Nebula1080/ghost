@@ -305,6 +305,10 @@ a{color:var(--light)}
 .dec.infuse.on{background:color-mix(in srgb,var(--infuse) 16%,transparent);color:var(--infuse)}
 .tile.keep{box-shadow:none;border-color:color-mix(in srgb,var(--keep) 55%,var(--line))}.tile.trash{box-shadow:none;border-color:color-mix(in srgb,var(--trash) 55%,var(--line));opacity:.8}
 .stamp{position:absolute;right:12px;bottom:50px;padding:4px 8px;border:1.5px solid currentColor;font:700 10.5px var(--ui);letter-spacing:.22em;transform:rotate(-8deg);pointer-events:none}
+/* Send to another device */
+.xopts{display:grid;gap:6px;margin:10px 0}.xopts .check{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}.xopts .check small{flex-basis:100%;background:none;color:var(--faint);font-weight:400;padding:0 0 0 24px}
+.xqr{display:flex;flex-direction:column;align-items:center;gap:6px;margin:12px 0;min-height:60px}.xqr img{width:min(300px,80vw);height:auto;image-rendering:pixelated;background:#fff;padding:0;border:6px solid #fff}.xqr small{color:var(--faint)}
+.xto{display:flex;gap:10px;align-items:center;margin:8px 0 12px}.xto select.s{flex:1 1 auto;min-width:0;width:auto;max-width:none}
 .tile.infuse{box-shadow:none;border-color:color-mix(in srgb,var(--infuse) 55%,var(--line))}.band .i,.tally .i{color:var(--infuse)}
 .tile.keep .stamp{color:var(--keep)}.tile.trash .stamp{color:var(--trash)}.tile.infuse .stamp{color:var(--infuse)}
 .stamp.slam{animation:slam .38s var(--ease)}@keyframes slam{from{transform:rotate(-8deg) scale(2);opacity:0}}

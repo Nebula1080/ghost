@@ -617,6 +617,37 @@ const Core = (() => {
   // Personal overrides (per profile): { p: {normName: {e, p}}, c: {comboKey: {a, b, e, p}}, w: {perks, wish, aegis} }
   // A tier ('S'…'F'), 'x' = unrated on purpose; missing = use Ghost's default.
   const DEFAULT_WEIGHTS = { perks: 50, wish: 25, aegis: 25 };
+  // ---- Send to another device (2026-11-21): a profile's builds / tags & notes / panes / perk ratings travel in a link
+  // (#xfer=...). The payload is untrusted (anyone can make such a link): every field is rebuilt here; builds are
+  // rebuilt again by the page's validBuild. Shape: {v:1, from:{name, at}, b:[build], e:{itemId:{t,n,h,m}}, p:[pane], r:{p,c,w}}
+  const XFER_MAX = { builds: 60, edits: 20000, panes: 12 };
+  const XFER_TAGS = ['', 'favorite', 'keep', 'junk', 'infuse', 'archive'];
+  function xferClean(x) {
+    if (!x || typeof x !== 'object' || x.v !== 1) return null;
+    const str = (v, n) => typeof v === 'string' ? v.slice(0, n) : '';
+    const out = { v: 1, from: { name: str(x.from?.name, 60).trim() || 'Another device', at: Number.isFinite(x.from?.at) ? x.from.at : 0 } };
+    if (Array.isArray(x.b)) out.b = x.b.slice(0, XFER_MAX.builds);
+    if (x.e && typeof x.e === 'object' && !Array.isArray(x.e)) {
+      out.e = {}; let n = 0;
+      for (const [id, e] of Object.entries(x.e)) {
+        if (n >= XFER_MAX.edits) break;
+        if (!/^\d{1,20}$/.test(id) || !e || typeof e !== 'object') continue;
+        const o = {};
+        if ('t' in e && XFER_TAGS.includes(e.t)) o.tag = e.t;
+        if ('n' in e && typeof e.n === 'string') o.notes = e.n.slice(0, 1024);
+        if (!('tag' in o) && !('notes' in o)) continue;
+        o.hash = String(e.h ?? '').replace(/\D/g, '').slice(0, 12); o.name = str(e.m, 120);
+        out.e[id] = o; n++;
+      }
+    }
+    if (Array.isArray(x.p)) {
+      const key = v => typeof v === 'string' && /^[\w:. -]{0,40}$/.test(v) ? v : '';
+      out.p = x.p.slice(0, XFER_MAX.panes).filter(p => p && typeof p === 'object' && /^[a-z0-9]{1,16}$/.test(String(p.id)))
+        .map(p => ({ id: String(p.id), title: str(p.title, 60), q: str(p.q, 1000), sort: key(p.sort), dir: p.dir === 'asc' ? 'asc' : 'desc', group: key(p.group), wide: p.wide === true }));
+    }
+    if (x.r && typeof x.r === 'object') out.r = prepUserRatings(x.r);
+    return out;
+  }
   function prepUserRatings(raw) {
     const U = { p: {}, c: {}, w: { ...DEFAULT_WEIGHTS } };
     if (!raw || typeof raw !== 'object') return U;
@@ -1877,7 +1908,7 @@ const Core = (() => {
     return out;
   }
 
-  return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
+  return { LIMITS, xferClean, XFER_MAX, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
     SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, tuneTier, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink, parseDimLoadout, fromDimLoadout,
     MOD_NONE, artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
