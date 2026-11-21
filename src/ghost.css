@@ -1107,3 +1107,7 @@ a{color:var(--light)}
 .warnbox{margin:12px 0;padding:10px 14px;border:1px solid color-mix(in srgb,var(--accent) 55%,var(--line2));background:color-mix(in srgb,var(--accent) 8%,var(--well));box-shadow:inset 2px 0 0 var(--accent)}
 .warnbox b{display:block;font:600 11px var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
 .warnbox ul{margin:6px 0;padding-left:18px;font-size:13px;color:var(--text)}.warnbox small{color:var(--dim);font-size:12px}
+.bstat .bsrc{display:flex;flex-wrap:wrap;gap:2px 10px}.bstat .bsrc span{white-space:nowrap}.bstat .bsrc i{font-style:normal;color:var(--faint)}.bstat .bsrc .sarm{color:var(--dim)}
+.bstat .bdelta{display:inline-block;margin-left:4px;font-size:10.5px;font-style:normal;font-weight:600;animation:bdelta 2.4s ease-out forwards}.bstat .bdelta.up{color:var(--good)}.bstat .bdelta.dn{color:var(--bad)}
+@keyframes bdelta{0%,70%{opacity:1}100%{opacity:0}}@media (prefers-reduced-motion:reduce){.bstat .bdelta{animation:none}}
+.bstat{grid-template-columns:72px minmax(40px,auto) 1fr}

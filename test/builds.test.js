@@ -344,4 +344,18 @@ t('exotic armor takes any tuning mod at any tier; legendaries follow Tier 5', ()
   const ex = piece('Exotic', 'Weapons'); assert.ok(ex && ex.tune && ex.tune.flex, 'exotic: any pair even with a Tuned stat');
   const lg = piece('Legendary', 'Weapons'); assert.ok(lg && !lg.tune, 'Tier 3 legendary: no tuning');
 });
+t('stats tracker: every source listed; swapping the mod on a piece without base stats changes the total', () => {
+  const arm = { id: '1', kind: 'armor', type: 'Helmet', category: 'Helmet', hash: '0', name: 'H', perks: [{ n: 'Grenade Mod', s: true }], stats: { Health: 30, Grenade: 25 } };
+  const by = new Map([['1', arm]]);
+  const keep = C.buildStats(C.normBuild({ cls: 'warlock', el: 'solar', a: { head: { id: '1' } } }, D), D, by);
+  assert.strictEqual(keep.stats.Grenade.total, 25, 'kept mod: same as the armor shows');
+  assert.strictEqual(keep.stats.Grenade.armor, 15, 'base = current minus the mod on it');
+  assert.ok(keep.stats.Grenade.src.some(([p, n, sl, v]) => p === 'mods' && n === 'Grenade Mod' && sl === 'head' && v === 10));
+  const swap = C.buildStats(C.normBuild({ cls: 'warlock', el: 'solar', a: { head: { id: '1' } }, mods: { head: ['Health Mod'] } }, D), D, by);
+  assert.strictEqual(swap.stats.Grenade.total, 15); assert.strictEqual(swap.stats.Health.total, 40);
+  const DS = { ...D, sock: JSON.parse(fs.readFileSync(__dirname + '/../data/sockets.json', 'utf8')) };
+  const tb = C.normBuild({ cls: 'warlock', el: 'solar', a: {} }, DS); tb.mods.head = ['+Health / -Melee'];
+  const tuned = C.buildStats(tb, DS, new Map());
+  assert.strictEqual(tuned.stats.Health.tune, 5); assert.strictEqual(tuned.stats.Melee.tune, -5);
+});
 console.log(n, 'build tests passed');

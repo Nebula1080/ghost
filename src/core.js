@@ -1381,24 +1381,26 @@ const Core = (() => {
   // the order the game (and DIM) lists them; ARMOR3 keeps its order because saved optimizer targets index into it
   const STAT_ORDER = ['Health', 'Melee', 'Grenade', 'Super', 'Class', 'Weapons'];
   const byStatOrder = list => [...list].sort((a, b) => STAT_ORDER.indexOf(a) - STAT_ORDER.indexOf(b));
+  const TUNE_RE = /^(balanced tuning|[+][a-z]+ \/ -[a-z]+)$/i;
   function buildStats(b, defs, byId) {
-    const out = Object.fromEntries(ARMOR3.map(k => [k, { armor: 0, mw: 0, tune: 0, frag: 0, mods: 0, total: 0 }]));
+    // per stat: totals by part, and src = every contribution [part, what, slot, value] (the page lists them)
+    const out = Object.fromEntries(ARMOR3.map(k => [k, { armor: 0, mw: 0, tune: 0, frag: 0, mods: 0, total: 0, src: [] }]));
+    const add = (k, part, what, slot, v) => { if (!out[k] || !v) return; out[k][part] += v; out[k].src.push([part, what, slot, v]); };
     let src = ''; const pieces = {};
     for (const s of A_SLOTS) {
       const it = byId?.get(b.a?.[s]?.id); const pt = armorParts(it, defs, s); if (!pt) continue;
       pieces[s] = pt; src ||= pt.hasBase ? (it.src === 'api' ? 'api' : 'base') : 'current';
-      for (const k of ARMOR3) { out[k].armor += pt.base[k]; out[k].mw += pt.mw[k]; }
+      for (const k of ARMOR3) { add(k, 'armor', it.name, s, pt.base[k]); add(k, 'mw', 'Masterwork', s, pt.mw[k]); }
       // each mod socket: the build's mod, else the one on the piece now (Equip build leaves those in place)
       pt.lay.forEach(([, c], i) => {
-        if (c === 't' && Number(tuneTier(it)) && Number(tuneTier(it)) < 5) return;
-        const n = b.mods?.[s]?.[i] || pt.inserted[i]; if (!n || n === MOD_NONE || !pt.hasBase) return;
-        for (const [k, v] of Object.entries(modStatsOn(n, s, pt.base, defs))) if (out[k]) out[k][c === 't' ? 'tune' : 'mods'] += v;
+        const n = b.mods?.[s]?.[i] || pt.inserted[i]; if (!n || n === MOD_NONE) return;
+        for (const [k, v] of Object.entries(modStatsOn(n, s, pt.base, defs))) add(k, c === 't' || TUNE_RE.test(n) ? 'tune' : 'mods', n, s, v);
       });
     }
     // mods chosen for slots without a piece still count
-    for (const s of A_SLOTS) if (!pieces[s]) for (const n of (b.mods?.[s] || []).filter(n => n && n !== MOD_NONE)) for (const [k, v] of Object.entries(modStatsOn(n, s, {}, defs))) if (out[k]) out[k].mods += v;
+    for (const s of A_SLOTS) if (!pieces[s]) for (const n of (b.mods?.[s] || []).filter(n => n && n !== MOD_NONE)) for (const [k, v] of Object.entries(modStatsOn(n, s, {}, defs))) add(k, TUNE_RE.test(n) ? 'tune' : 'mods', n, s, v);
     const sc = subOf(b, defs);
-    for (const h of b.sub?.fragments || []) { const f = findSub(sc, 'fragments', h); for (const [k, v] of Object.entries(f?.st || {})) if (out[k]) out[k].frag += v; }
+    for (const h of b.sub?.fragments || []) { const f = findSub(sc, 'fragments', h); for (const [k, v] of Object.entries(f?.st || {})) add(k, 'frag', f.n, '', v); }
     for (const k of ARMOR3) out[k].total = out[k].armor + out[k].mw + out[k].tune + out[k].frag + out[k].mods;
     return { stats: out, src, pieces, total: ARMOR3.reduce((a, k) => a + out[k].total, 0) };
   }
@@ -1420,14 +1422,17 @@ const Core = (() => {
   // one armor piece split into what it's made of: base roll, masterwork, the mods on it now (by socket)
   function armorParts(it, defs, slot) {
     if (!it || it.kind !== 'armor') return null;
-    const lay = modLayout(it.hash, defs);
-    const gen3 = (Number(it.tier) || 0) >= 1 || lay.some(([, c]) => c === 't');
+    // the sockets the page shows (no tuning socket below Tier 5 on legendaries), so socket i means the same everywhere
+    const lay = modLayout(it.hash, defs, tuneTier(it));
+    const gen3 = (Number(it.tier) || 0) >= 1 || modLayout(it.hash, defs).some(([, c]) => c === 't');
     const hasBase = ARMOR3.some(k => it.base?.[k] != null);
     const base = Object.fromEntries(ARMOR3.map(k => [k, (hasBase ? it.base[k] : it.stats?.[k]) || 0]));
     // mods on the piece right now: every equipped plug that is a mod some socket of this piece takes
     const on = (it.perks || []).filter(p => p.s && !/^empty|^default/i.test(p.n) && lay.some(([, c]) => modFits(p.n, c, slot, defs))).map(p => p.n);
     const inserted = placeMods(on, lay, slot, defs);
     const insSt = {}; for (const n of inserted.filter(Boolean)) for (const [k, v] of Object.entries(modStatsOn(n, slot, base, defs))) insSt[k] = (insSt[k] || 0) + v;
+    // no base columns: the current stats include the mods on it, so take those out (changing a mod then shows)
+    if (!hasBase) for (const k of ARMOR3) base[k] = Math.max(0, base[k] - (insSt[k] || 0));
     // the masterwork is what's left between the current stats and base + mods on it
     // (Armor 3.0: only the 3 lowest stats, at most +5; legacy: at most +2 each), anything else unexplained is ignored
     const low = lowest3(base);
@@ -1505,7 +1510,7 @@ const Core = (() => {
     for (const s of A_SLOTS) {
       const list = b.mods?.[s] || []; const it = byId?.get(b.a?.[s]?.id);
       const pt = it && armorParts(it, defs, s); const lay = pt?.lay || modLayout(b.a?.[s]?.hash, defs); const ins = pt?.inserted || [];
-      lay.forEach(([, c], i) => { if (c === 't' && Number(tuneTier(it)) && Number(tuneTier(it)) < 5) return; if (list[i] === MOD_NONE) { clear = true; return; } const n = list[i] || ins[i]; const h = n && hashOf(n, s, c); if (h) mods.push(h); });
+      lay.forEach(([, c], i) => { if (list[i] === MOD_NONE) { clear = true; return; } const n = list[i] || ins[i]; const h = n && hashOf(n, s, c); if (h) mods.push(h); });
     }
     const lo = { id, name: String(b.name || 'Ghost build').slice(0, 60), classType: DIM_CLASS[b.cls] ?? 3, equipped, unequipped: [] };
     if (mods.length || clear) lo.parameters = { mods, ...(clear ? { clearMods: true } : {}) };
