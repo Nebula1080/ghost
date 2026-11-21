@@ -581,6 +581,7 @@ nav.views svg{display:none}
 <script>window.VS_DEFS = /*__DEFS__*/null;window.VS_ART = /*__ART__*/null;window.VS_ISPR = /*__ISPR__*/null;window.VS_APIDEFS = /*__APIDEFS__*/null;window.VS_BUNGIE_CFG = /*__BUNGIECFG__*/null;window.VS_IX = /*__IX__*/null;window.VS_SOCK = /*__SOCK__*/null;window.VS_STATS = /*__STATS__*/null;window.VS_RATE = /*__RATE__*/null;</script>
 <script>
 /*__CORE__*/
+/*__QR__*/
 /*__BUNGIE__*/
 </script>
 <script>
@@ -1882,7 +1883,8 @@ function openProfiles() {
   modal(`<h2>Profiles</h2><p class="stat-pill">Each profile keeps its own vault, tags and notes, panes, Clean up and Compare. Loading CSVs that belong to another profile's account is caught and you're asked what to do.</p>
     <div class="plist">${rows}</div>
     <div class="pnew"><input class="qin" id="newProf" placeholder="New profile name, e.g. a friend's Bungie name"><button class="btn primary" id="addProf">+ Add profile</button></div>
-    <div style="text-align:right;margin-top:10px"><button class="btn" data-close>Close</button></div>`);
+    <div class="msheet" style="margin-top:10px"><button class="btn" id="pSend">Send to another device…</button><button class="btn" data-close>Close</button></div>`);
+  $('#pSend').onclick = openSend;
   document.querySelectorAll('.prow').forEach(r => r.onclick = e => { if (e.target.closest('button')) return; switchProfile(r.dataset.pid); });
   document.querySelectorAll('[data-ren]').forEach(b => b.onclick = () => {
     const pr = PROF.list.find(x => x.id === b.dataset.ren);
@@ -1907,6 +1909,109 @@ function openProfiles() {
   $('#addProf').onclick = add; $('#newProf').onkeydown = e => { if (e.key === 'Enter') add(); };
 }
 $('#bProf').onclick = openProfiles;
+
+// ---------- Send to another device (2026-11-21, user's choice: link + QR, no server) ----------
+// The open profile's builds, tags & notes, panes and perk ratings go into a link (#xfer=<deflate-raw, base64url>).
+// The hash never reaches a server; anyone holding the link can read it, so the sheet says to send it only to yourself.
+// The other device validates everything (Core.xferClean + validBuild), shows what would change and merges on Add.
+const XFER_HOST = 'https://nebula1080.github.io/ghost/';
+const XFER_MAX_BYTES = 4e6;
+const xferBase = () => /^https?:$/.test(location.protocol) && !/claude\.(ai|site)|claudeusercontent/.test(location.hostname) ? location.origin + location.pathname : XFER_HOST;
+const b64u = bytes => { let s = ''; for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000)); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
+const unb64u = s => { const b = atob(s.replace(/-/g, '+').replace(/_/g, '/')); const u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; };
+async function xferEncode(obj) {
+  const raw = new TextEncoder().encode(JSON.stringify(obj));
+  if (!window.CompressionStream) return 'j' + b64u(raw);
+  return 'z' + b64u(new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer()));
+}
+async function xferDecode(code) {
+  if (code.length > XFER_MAX_BYTES * 1.5) throw new Error('too big');
+  const kind = code[0], bytes = unb64u(code.slice(1)); let raw;
+  if (kind === 'j') raw = bytes;
+  else if (kind === 'z' && window.DecompressionStream) {
+    // read the inflated stream in chunks and stop past the cap (a tiny link can't inflate into something huge)
+    const rd = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw')).getReader(); const parts = []; let n = 0;
+    for (;;) { const { done, value } = await rd.read(); if (done) break; n += value.length; if (n > XFER_MAX_BYTES) { rd.cancel(); throw new Error('too big'); } parts.push(value); }
+    raw = new Uint8Array(n); let o = 0; for (const p of parts) { raw.set(p, o); o += p.length; }
+  } else throw new Error('unknown format');
+  if (raw.length > XFER_MAX_BYTES) throw new Error('too big');
+  return JSON.parse(new TextDecoder().decode(raw));
+}
+const XFER_PARTS = [['b', 'Builds'], ['e', 'Tags & notes'], ['p', 'Search panes'], ['r', 'Perk ratings & weights']];
+function xferOpts() { let o = null; try { o = JSON.parse(localStorage.getItem('vs:xferOpts')); } catch {} return { b: o?.b ?? true, e: o?.e ?? true, p: o?.p ?? false, r: o?.r ?? false }; }
+function xferPayload(o) {
+  const x = { v: 1, from: { name: activeProfile().name, at: Date.now() } };
+  if (o.b) x.b = BLD.list;
+  if (o.e) x.e = Object.fromEntries(Object.entries(S.edits).filter(([, e]) => 'tag' in e || 'notes' in e).map(([id, e]) => [id, { ...('tag' in e ? { t: e.tag } : {}), ...('notes' in e ? { n: e.notes } : {}), h: e.hash, m: e.name }]));
+  if (o.p) x.p = S.panes.map(({ id, title, q, sort, dir, group, wide }) => ({ id, title, q, sort, dir, group, wide: !!wide }));
+  if (o.r) x.r = { p: UR.p, c: UR.c, w: UR.w };
+  return x;
+}
+function openSend() {
+  const o = xferOpts();
+  const cnt = { b: BLD.list.length, e: Object.values(S.edits).filter(e => 'tag' in e || 'notes' in e).length, p: S.panes.length, r: Object.keys(UR.p || {}).length + Object.keys(UR.c || {}).length };
+  const what = { b: n => `${n} build${n === 1 ? '' : 's'}`, e: n => `${n} item${n === 1 ? '' : 's'} with your tags or notes`, p: n => `${n} pane${n === 1 ? '' : 's'}; replaces the other device's panes`, r: n => `${n} personal rating${n === 1 ? '' : 's'} and your weights; replaces the other device's` };
+  modal(`<h2>Send to another device</h2><p class="stat-pill">Scan the code with your phone's camera, or copy the link and open it on the other device. It adds what you tick below to a profile there; you see what will change before anything is saved. Anyone with the link can read what's in it, so send it only to yourself.</p>
+    <div class="xopts">${XFER_PARTS.map(([k, l]) => `<label class="check${o[k] ? ' on' : ''}"><input type="checkbox" data-xo="${k}" ${o[k] ? 'checked' : ''}> ${l} <small>${esc(what[k](cnt[k]))}</small></label>`).join('')}</div>
+    <div class="xqr" id="xQr" aria-live="polite"></div>
+    <div class="msheet"><button class="btn primary" id="xCopy">Copy link</button><button class="btn" data-close>Close</button></div>`);
+  let url = '';
+  const draw = async () => {
+    const box = $('#xQr'); if (!box) return;
+    if (!Object.values(o).some(Boolean)) { url = ''; box.innerHTML = '<p class="stat-pill">Tick at least one thing to send.</p>'; return; }
+    url = xferBase() + '#xfer=' + await xferEncode(xferPayload(o));
+    let img = '';
+    try { const q = qrcode(0, 'L'); q.addData(url, 'Byte'); q.make(); const n = q.getModuleCount(); const cell = Math.max(2, Math.min(6, Math.floor(300 / (n + 8)))); img = q.createDataURL(cell, cell * 4); } catch { img = ''; }
+    box.innerHTML = img ? `<img src="${img}" alt="QR code for the transfer link" width="300" height="300"><small>${Math.ceil(url.length / 1024)} KB link</small>`
+      : `<p class="stat-pill">That's too much for one QR code (${Math.ceil(url.length / 1024)} KB). Untick something, or use Copy link and open it on the other device.</p>`;
+  };
+  document.querySelectorAll('[data-xo]').forEach(c => c.onchange = () => { o[c.dataset.xo] = c.checked; c.closest('label').classList.toggle('on', c.checked); try { localStorage.setItem('vs:xferOpts', JSON.stringify(o)); } catch {} draw(); });
+  $('#xCopy').onclick = async () => { if (!url) return; try { await navigator.clipboard.writeText(url); toast('Copied the transfer link. Open it on the other device.'); } catch { modal(`<h2>Transfer link</h2><textarea class="notes" readonly>${esc(url)}</textarea><div style="text-align:right;margin-top:8px"><button class="btn" data-close>Close</button></div>`); } };
+  if (navigator.share) { const b = document.createElement('button'); b.className = 'btn'; b.textContent = 'Share…'; b.onclick = async () => { if (url) try { await navigator.share({ title: 'Ghost profile', url }); } catch {} }; $('#xCopy').insertAdjacentElement('afterend', b); }
+  draw();
+}
+async function xferReceive(code) {
+  let x;
+  try { x = Core.xferClean(await xferDecode(code)); } catch { x = null; }
+  if (!x) return toast('That transfer link is damaged or from a newer Ghost. Send it again from the other device.');
+  const builds = (x.b || []).map(validBuild).filter(Boolean);
+  const edits = Object.entries(x.e || {});
+  if (!builds.length && !edits.length && !x.p?.length && !x.r) return toast('That transfer link has nothing in it.');
+  const sameName = PROF.list.find(p => p.name.trim().toLowerCase() === x.from.name.toLowerCase());
+  const opts = PROF.list.map(p => `<option value="${esc(p.id)}" ${p.id === (sameName || activeProfile()).id ? 'selected' : ''}>${esc(p.name)}${p.id === PROF.active ? ' (open)' : ''}</option>`).join('') + `<option value="">New profile: ${esc(x.from.name)}</option>`;
+  const when = x.from.at ? new Date(x.from.at).toLocaleString() : 'unknown time';
+  const rows = [builds.length && ['b', `${builds.length} build${builds.length === 1 ? '' : 's'}`, 'New builds are added; a build you already have is replaced only if the sent one was edited more recently.'],
+    edits.length && ['e', `Tags & notes on ${edits.length} item${edits.length === 1 ? '' : 's'}`, 'They replace this device\'s tag and notes on those items (Export to DIM still sends them to DIM).'],
+    x.p?.length && ['p', `${x.p.length} search pane${x.p.length === 1 ? '' : 's'}`, 'They replace the panes here.'],
+    x.r && ['r', 'Perk ratings & weights', 'They replace your personal perk ratings and weights here.']].filter(Boolean);
+  modal(`<h2>Add from ${esc(x.from.name)}</h2><p class="stat-pill">Sent from another device on ${esc(when)}. Only add it if you sent it yourself.</p>
+    <div class="xopts">${rows.map(([k, l, d]) => `<label class="check on"><input type="checkbox" data-xi="${k}" checked> ${esc(l)} <small>${esc(d)}</small></label>`).join('')}</div>
+    <label class="xto">Into profile <select class="s" id="xTo">${opts}</select></label>
+    <div class="msheet"><button class="btn primary" id="xAdd">Add</button><button class="btn" data-close>Cancel</button></div>`);
+  document.querySelectorAll('[data-xi]').forEach(c => c.onchange = () => c.closest('label').classList.toggle('on', c.checked));
+  $('#xAdd').onclick = async () => {
+    const use = Object.fromEntries([...document.querySelectorAll('[data-xi]')].map(c => [c.dataset.xi, c.checked])); const to = $('#xTo').value;
+    closeModal();
+    if (!to) await createProfile(x.from.name); else if (to !== PROF.active) await switchProfile(to);
+    const done = [];
+    if (use.b && builds.length) {
+      let add = 0, upd = 0;
+      for (const b of builds) { const i = BLD.list.findIndex(y => y.id === b.id);
+        if (i < 0) { if (BLD.list.length < BLD_MAX) { BLD.list.push(b); add++; } } else if ((b.updated || 0) > (BLD.list[i].updated || 0)) { BLD.list[i] = b; upd++; } }
+      if (!BLD.cur && BLD.list.length) BLD.cur = BLD.list[0].id;
+      await writeBuilds(); done.push(`${add} new build${add === 1 ? '' : 's'}` + (upd ? `, ${upd} updated` : ''));
+    }
+    if (use.e && edits.length) {
+      for (const [id, e] of edits) { S.edits[id] = e; const it = S.byId.get(id); if (it) { it.tag = effTag(it); it.notes = effNotes(it); } if (S.db) saveEdit(id); }
+      if (!S.db) LS.set(PK('edits'), S.edits);
+      done.push(`tags & notes on ${edits.length} item${edits.length === 1 ? '' : 's'}`);
+    }
+    if (use.p && x.p?.length) { S.panes = x.p.map(p => ({ ...p })); await writePanes(); done.push('search panes'); }
+    if (use.r && x.r) { UR = x.r; await writeUserRatings(); rerate(); done.push('perk ratings'); }
+    renderAll(); if (VIEW === 'builds') renderBuilds();
+    toast(done.length ? `Added ${done.join(', ')} to ${activeProfile().name}.` : 'Nothing added.');
+  };
+}
 
 function closeDrawer() { const dr = $('#drawer'); if (dr.classList.contains('open') && !isMobile() && motionOK()) { dr.classList.add('closing'); setTimeout(() => dr.classList.remove('closing'), 230); } dr.classList.remove('open'); $('#scrim').classList.remove('open'); if (drawerItem) { drawerItem = null; if (VIEW === 'clean') renderClean(); else if (VIEW === 'compare') renderCompare(); else if (VIEW !== 'builds') refreshBodies(); } syncCompact(); }
 $('#scrim').onclick = closeDrawer;
@@ -1972,6 +2077,7 @@ function openAbout() {
       <li><b>Aegis’s Endgame Analysis</b> (Destiny 2: Endgame Analysis spreadsheet by Aegis): weapon tiers and PvE perk / origin trait tiers in Ghost’s ratings, used with his permission.</li>
       <li><b>DIM community wish lists</b>: voltron.txt from github.com/48klocs/dim-wish-list-sources (MIT) by 48klocs, with community rolls from u/-seudonym- and u/zman2100 (ShardItKeepIt)${RT.meta.credits ? ` and the curators it credits: ${esc(RT.meta.credits.replace(/^Thanks to /i, '').replace(/ for their contributions\..*$/i, ''))}` : ''}.</li>
       <li><b>D2ArmorPicker</b> by Mijago (d2armorpicker.com): the approach behind the build maker’s “Find armor for target stats”, used with the author’s permission.</li>
+      <li><b>qrcode-generator</b> by Kazuhiko Arase (MIT license): draws the QR code for “Send to another device”. QR Code is a registered trademark of DENSO WAVE INCORPORATED.</li>
       <li><b>light.gg</b>: item page links.</li>
       <li><b>Clarity</b> (Database Clarity): tested perk descriptions.</li>
       <li><b>Destiny Data Compendium</b> by Pip1n: perk, exotic and set-bonus notes.</li>
@@ -3371,6 +3477,7 @@ $('#bMenu').onclick = () => {
       ${n ? `<button class="btn warn" id="mExport">Export ${n} change${n > 1 ? 's' : ''} to DIM</button>` : ''}
       <button class="btn" id="mHelp">Search help</button>
       <button class="btn" id="mRatings">Perk ratings</button>
+      <button class="btn" id="mSend">Send to another device</button>
       <button class="btn" id="mAbout">About &amp; privacy</button>
       ${installPrompt ? '<button class="btn" id="mInstall">Install app on this phone</button>' : ''}
       <button class="btn" data-close>Close</button></div>
@@ -3379,6 +3486,7 @@ $('#bMenu').onclick = () => {
   $('#mProf').onclick = () => openProfiles();
   $('#mHelp').onclick = () => { closeModal(); openHelp(); };
   $('#mRatings').onclick = () => { closeModal(); openRatings(); };
+  $('#mSend').onclick = () => { closeModal(); openSend(); };
   $('#mAbout').onclick = () => { closeModal(); openAbout(); };
   const mb = $('#mBungie'); if (mb) mb.onclick = async () => { closeModal(); if (BG.signedIn()) loadFromBungie(); else { try { await flushSaves(); location.assign(BG.authorizeUrl()); } catch (e) { toast(e.message || 'Couldn’t start Bungie sign-in.', 6000); } } };
   const me = $('#mExport'); if (me) me.onclick = () => { closeModal(); exportCsv(); };
@@ -3402,7 +3510,11 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 matchMedia('(max-width: 760px)').addEventListener?.('change', () => { if (VIEW === 'vault') renderPanes(); else setView(VIEW); });
 
 renderAll();
-loadAll().then(bungieReturn).finally(renderBungieBtn);
+const XFER_IN = /^#xfer=[A-Za-z0-9_-]{2,}$/.test(location.hash) ? location.hash.slice(6) : null;
+if (location.hash.startsWith('#xfer=')) { try { history.replaceState(null, '', location.pathname + location.search); } catch {} }
+loadAll().then(bungieReturn).then(() => XFER_IN && xferReceive(XFER_IN)).finally(renderBungieBtn);
+// a transfer link opened while Ghost is already open in this tab only changes the hash
+window.addEventListener('hashchange', () => { const m = /^#xfer=([A-Za-z0-9_-]{2,})$/.exec(location.hash); if (!location.hash.startsWith('#xfer=')) return; try { history.replaceState(null, '', location.pathname + location.search); } catch {} if (m) xferReceive(m[1]); });
 })();
 </script>
 </body>

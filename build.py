@@ -33,6 +33,12 @@ assert '</script' not in core.lower(), 'core.js must not contain "</script"'
 for bad in ('<!--', '-->'):
     assert bad not in core, f'core.js must not contain "{bad}" (write it as \\x3c!-- / --\\x3e)'
 s = s.replace('/*__CORE__*/', core)
+# QR encoder for "Send to another device" (src/vendor/qrcode.js: qrcode-generator, MIT), inlined like core
+qr = (root / 'src/vendor/qrcode.js').read_text(encoding='utf-8')
+assert '/*__QR__*/' in s
+for bad in ('</script', '<!--', '-->'):
+    assert bad not in qr.lower(), f'qrcode.js must not contain "{bad}"'
+s = s.replace('/*__QR__*/', qr)
 
 # ---- Ghost design: stylesheet, embedded fonts (OFL, data/fonts), art next to the page ----
 assert '/*__GHOST_CSS__*/' in s and '/*__FONTS__*/' in s

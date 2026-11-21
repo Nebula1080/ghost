@@ -345,6 +345,30 @@ t('hosted build: Bungie config only in the hosted build; artifact build has no s
   assert.ok(/os\.environ\.get\('BUNGIE_API_KEY'\)/.test(bp) && !/print\([^)]*\bkey\b[^)]*\)/.test(bp.replace(/'[^']*'/g, "''")), 'build.py must not print the key');
 });
 
+t('transfer link payload: hostile fields are dropped or capped (Core.xferClean)', () => {
+  assert.strictEqual(C.xferClean(null), null); assert.strictEqual(C.xferClean({ v: 2 }), null); assert.strictEqual(C.xferClean('x'), null);
+  const x = C.xferClean({ v: 1, from: { name: '<img src=x onerror=alert(1)>'.repeat(9), at: 'now' },
+    e: { '123': { t: 'keep', n: 'a'.repeat(5000), h: '99abc', m: 'Gun' }, 'abc': { t: 'keep' }, '1"><b>': { t: 'junk' }, '456': { t: 'evil', n: 7 }, '789': { t: 'infuse' }, __proto__: { t: 'keep' } },
+    p: [{ id: 'p1', title: 'T', q: 'is:weapon', sort: 'rating"><x', dir: 'up', group: 'type', wide: 'yes' }, { id: '../x', q: 'x' }, null],
+    r: { p: { 'kill clip': { e: 'S', p: 'Z' } }, w: { perks: 500 } } });
+  assert.strictEqual(x.from.name.length, 60); assert.strictEqual(x.from.at, 0);
+  assert.deepStrictEqual(Object.keys(x.e).sort(), ['123', '789']);
+  assert.strictEqual(x.e['123'].notes.length, 1024); assert.strictEqual(x.e['123'].hash, '99');
+  assert.deepStrictEqual(x.p, [{ id: 'p1', title: 'T', q: 'is:weapon', sort: '', dir: 'desc', group: 'type', wide: false }]);
+  assert.ok(x.r && x.r.w.perks <= 100, 'ratings go through prepUserRatings');
+  const many = C.xferClean({ v: 1, b: Array(500).fill({}), p: Array(50).fill({ id: 'a' }) });
+  assert.strictEqual(many.b.length, C.XFER_MAX.builds); assert.strictEqual(many.p.length, C.XFER_MAX.panes);
+});
+t('transfer link: read from the hash only, address bar cleaned, decompression capped, QR library vetted', () => {
+  const app = read('src/app.html');
+  assert.ok(/XFER_IN = \/\^#xfer=\[A-Za-z0-9_-\]\{2,\}\$\/\.test\(location\.hash\)/.test(app), 'transfer code must come from the URL hash (never the query string, which reaches the server)');
+  assert.ok(/history\.replaceState\(null, '', location\.pathname \+ location\.search\)/.test(app), 'the transfer link must be removed from the address bar');
+  assert.ok(/n > XFER_MAX_BYTES\) \{ rd\.cancel\(\); throw/.test(app), 'inflating must stop past the size cap');
+  assert.ok(/Core\.xferClean\(await xferDecode\(code\)\)/.test(app) && /\.map\(validBuild\)/.test(app), 'incoming data must go through xferClean and validBuild');
+  const q = read('src/vendor/qrcode.js');
+  assert.ok(!/\beval\s*\(|new Function|document\.|XMLHttpRequest|fetch\(/.test(q), 'vendored QR encoder must not touch the DOM, network or eval');
+});
+
 (async () => {
   for (const [name, fn] of asyncTests) { try { await fn(); pass++; } catch (e) { fail++; console.log('FAIL', name, '\n   ', e.message); } }
   console.log(`security unit tests: ${pass} passed, ${fail} failed`);
