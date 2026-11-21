@@ -2134,6 +2134,26 @@ function defaultClass() {
   const n = {}; for (const it of S.armor) { const c = Core.norm(it.equippable); if (D?.sub?.[c]) n[c] = (n[c] || 0) + 1; }
   return Object.entries(n).sort((a, b) => b[1] - a[1])[0]?.[0] || 'warlock';
 }
+// import a DIM loadout: a full DIM share URL (app.destinyitemmanager.com/loadouts?loadout=…) or its JSON
+function importDimBuild() {
+  if (BLD.list.length >= BLD_MAX) return toast(`Up to ${BLD_MAX} builds. Delete one first.`);
+  modal(`<h2>Import a DIM loadout</h2>
+    <p class="snote">Paste a DIM loadout link. In DIM: open the loadout, choose <b>Share</b>, open the dim.gg link it copies, then right-click (or long-press) <b>Open Loadout in DIM</b> and copy that link (it starts with app.destinyitemmanager.com/loadouts?loadout=). The loadout's JSON works too.</p>
+    <textarea class="notes" id="dimIn" style="min-height:110px;font-family:ui-monospace,monospace;font-size:11.5px" placeholder="https://app.destinyitemmanager.com/loadouts?loadout=…" spellcheck="false"></textarea>
+    <p class="snote" id="dimErr" style="color:var(--bad)" hidden></p>
+    <div class="msheet"><button class="btn primary" id="dimGo">Import</button><button class="btn" data-close>Cancel</button></div>`);
+  const ERR = { empty: 'Paste a link first.', json: 'That JSON could not be read.', url: 'That isn’t a DIM loadout link with the loadout in it.',
+    dimgg: 'Ghost can’t read dim.gg short links: they hold only an ID that DIM looks up on its own server. Open the dim.gg link, right-click (or long-press) “Open Loadout in DIM”, copy that link and paste it here.' };
+  $('#dimGo').onclick = () => {
+    const r = Core.parseDimLoadout($('#dimIn').value); const e = $('#dimErr');
+    if (r.err || !r.lo || typeof r.lo !== 'object') { e.textContent = ERR[r.err] || ERR.url; e.hidden = false; return; }
+    const { b: raw, missing, unplaced } = Core.fromDimLoadout(r.lo, D, S.items);
+    const b = validBuild({ ...raw, id: uid() }); if (!b) { e.textContent = ERR.url; e.hidden = false; return; }
+    BLD.list.push(b); BLD.cur = b.id; saveBuilds(); closeModal(); renderBuilds();
+    const notes = [missing.length ? `${missing.length} item${missing.length === 1 ? '' : 's'} not in your vault` : '', unplaced.length ? `${unplaced.length} mod${unplaced.length === 1 ? '' : 's'} had no free socket (${unplaced.slice(0, 3).join(', ')}${unplaced.length > 3 ? '…' : ''})` : ''].filter(Boolean);
+    toast(`Imported “${b.name}”${notes.length ? ': ' + notes.join('; ') : ''}.`, notes.length ? 6000 : 2600);
+  };
+}
 function newBuild(from) {
   if (BLD.list.length >= BLD_MAX) return toast(`Up to ${BLD_MAX} builds. Delete one first.`);
   const b = from ? validBuild({ ...structuredClone(from), id: uid(), name: (from.name + ' copy').slice(0, 60) }) : validBuild({ id: uid(), name: `Build ${BLD.list.length + 1}`, cls: defaultClass(), el: 'solar' });
@@ -2170,13 +2190,13 @@ function fxHtml(pc, f, extra = '') {
 
 function renderBuilds() {
   const v = $('#builds');
-  const list = `<div class="blist" role="tablist">${BLD.list.map(x => `<button class="tab${x.id === BLD.cur ? ' on' : ''}" data-bid="${esc(x.id)}" role="tab">${esc(x.name)}</button>`).join('')}<button class="tab add" id="bNew">+ New build</button></div>`;
+  const list = `<div class="blist" role="tablist">${BLD.list.map(x => `<button class="tab${x.id === BLD.cur ? ' on' : ''}" data-bid="${esc(x.id)}" role="tab">${esc(x.name)}</button>`).join('')}<button class="tab add" id="bNew">+ New build</button><button class="tab add" id="bImp" title="Import a loadout from DIM">Import from DIM</button></div>`;
   if (!D?.sub) { v.innerHTML = `<div class="band slim"><div class="eyebrow">Builds</div><h1>Builds</h1><p>Subclass data isn’t in this build of Ghost.</p></div>`; return; }
   const b = curBuild();
   if (!b) {
     v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Builds</div><h1>Make a build</h1><p>Pick a subclass, weapons, armor and mods from your vault. Ghost reads every piece’s description and shows how they feed each other: what makes scorch, jolt or volatile, and what pays off on it.</p></div></div>${list}</div>
-      <div class="empty"><b>No builds yet</b><span>${S.items.length ? 'Start one with the button above.' : 'Load your vault first to pick weapons and armor; you can already plan the subclass.'}</span><button class="btn" id="bNew2">+ New build</button></div>`;
-    bindBuildList(v); $('#bNew2').onclick = () => newBuild(); return;
+      <div class="empty"><b>No builds yet</b><span>${S.items.length ? 'Start one with the button above.' : 'Load your vault first to pick weapons and armor; you can already plan the subclass.'}</span><button class="btn" id="bNew2">+ New build</button><button class="btn" id="bImp2">Import from DIM</button></div>`;
+    bindBuildList(v); $('#bNew2').onclick = () => newBuild(); $('#bImp2').onclick = importDimBuild; return;
   }
   Core.normBuild(b, D);
   const sc = scAll(b);
@@ -2487,6 +2507,7 @@ function optUse(b, x) {
 function bindBuildList(v) {
   v.querySelectorAll('[data-bid]').forEach(t => t.onclick = () => { BLD.cur = t.dataset.bid; saveBuilds(); renderBuilds(); });
   const nb = v.querySelector('#bNew'); if (nb) nb.onclick = () => newBuild();
+  const ib = v.querySelector('#bImp'); if (ib) ib.onclick = importDimBuild;
 }
 function bindBuild(v, b, pieces, syn) {
   const rename = () => {

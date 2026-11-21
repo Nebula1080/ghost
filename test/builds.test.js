@@ -358,4 +358,28 @@ t('stats tracker: every source listed; swapping the mod on a piece without base 
   const tuned = C.buildStats(tb, DS, new Map());
   assert.strictEqual(tuned.stats.Health.tune, 5); assert.strictEqual(tuned.stats.Melee.tune, -5);
 });
+t('DIM import: our own DIM link comes back as the same build (subclass, items, mods, artifact)', () => {
+  const DS = { ...D, sock: JSON.parse(fs.readFileSync(__dirname + '/../data/sockets.json', 'utf8')), artp: JSON.parse(fs.readFileSync(__dirname + '/../data/interactions/artifacts.json', 'utf8')) };
+  const sc0 = DS.sub.warlock.solar; const hh = (k, nm) => sc0.s[k].find(x => x.n === nm).h;
+  const helm = { id: '6917529000000000011', kind: 'armor', type: 'Helmet', category: 'Helmet', hash: '111', name: 'H', rarity: 'Legendary', equippable: 'Warlock', perks: [], stats: {}, base: { Health: 10 } };
+  const gun = { id: '6917529000000000012', kind: 'weapon', category: 'Energy', hash: '1399243961', name: 'G', perks: [], stats: {} };
+  const art = DS.artp[0]; const ap = art.p.filter(p => p[2] === 1).slice(0, 2).map(p => p[0]);
+  const b = C.normBuild({ cls: 'warlock', el: 'solar', name: 'Sun', notes: 'hi', sub: { melee: hh('melee', 'Incinerator Snap'), aspects: [hh('aspects', 'Touch of Flame'), hh('aspects', 'Heat Rises')], fragments: [hh('fragments', 'Ember of Searing')] },
+    w: { energy: { id: gun.id, hash: gun.hash } }, a: { head: { id: helm.id, hash: '111' } }, mods: { head: ['Grenade Mod', 'Ashes to Assets'] }, artA: art.h, art: ap }, DS);
+  const by = new Map([[helm.id, helm], [gun.id, gun]]);
+  const url = C.dimLink(C.dimLoadout(b, DS, by, 'x'));
+  const p = C.parseDimLoadout(url); assert.ok(p.lo, 'URL parsed');
+  const r = C.fromDimLoadout(p.lo, DS, [helm, gun]); const nb = C.normBuild(r.b, DS);
+  assert.strictEqual(nb.cls, 'warlock'); assert.strictEqual(nb.el, 'solar'); assert.strictEqual(nb.name, 'Sun'); assert.strictEqual(nb.notes, 'hi');
+  assert.strictEqual(nb.sub.melee, b.sub.melee); assert.deepStrictEqual(nb.sub.aspects.sort(), b.sub.aspects.sort()); assert.deepStrictEqual(nb.sub.fragments, b.sub.fragments);
+  assert.strictEqual(nb.w.energy.id, gun.id); assert.strictEqual(nb.a.head.id, helm.id);
+  assert.deepStrictEqual(nb.mods.head.filter(Boolean).sort(), ['Ashes to Assets', 'Grenade Mod']);
+  assert.strictEqual(nb.artA, art.h); assert.deepStrictEqual(nb.art.sort(), ap.sort());
+  assert.deepStrictEqual(r.missing, []); assert.deepStrictEqual(r.unplaced, []);
+  assert.strictEqual(C.parseDimLoadout('https://dim.gg/abcdefg/Sun').err, 'dimgg');
+  assert.strictEqual(C.parseDimLoadout('https://example.com/loadouts?loadout={}').err, 'url');
+  assert.ok(C.parseDimLoadout(JSON.stringify(p.lo)).lo, 'raw JSON works');
+  const r2 = C.fromDimLoadout({ ...p.lo, equipped: [...p.lo.equipped, { id: '6917529000000000099', hash: 123 }] }, DS, [helm, gun]);
+  assert.deepStrictEqual(r2.missing, [123], 'items not in the vault are reported');
+});
 console.log(n, 'build tests passed');
