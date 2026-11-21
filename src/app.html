@@ -1380,6 +1380,15 @@ const fillStatTip = (t, vals, extra = {}) => String(t || '').replace(/\{\{(\w+)(
   const v = k in extra ? extra[k] : vals?.[k]; if (v == null) return '?';
   return fmt === 'ScalarPercent' ? `${Math.round(v * 100)}%` : typeof v === 'number' ? String(r1(v)) : String(v); });
 // the short lines under each stat (base 0-100, then the enhanced 100-200 bonus) + the full text for hover / tap
+const STAT_LAST = new Map();   // build id -> {stat: total} as last drawn
+function statDelta(b, k, v) {
+  // the page can redraw more than once per edit: the change stays on show for a moment
+  const key = b.id || b.name; const last = STAT_LAST.get(key) || {}; const e = last[k]; const now = Date.now();
+  if (!e) { last[k] = { v, d: 0, at: 0 }; STAT_LAST.set(key, last); return ''; }
+  if (e.v !== v) { e.d = v - e.v; e.v = v; e.at = now; }
+  if (!e.d || now - e.at > 2500) return '';
+  return `<em class="bdelta ${e.d > 0 ? 'up' : 'dn'}" title="Changed by your last edit">${e.d > 0 ? '+' : ''}${e.d}</em>`;
+}
 function statLines(k, v, b, pieces) {
   const S = D?.stats; const f = S && Core.statAt(k, v, D); if (!f) return { lines: STAT_FX[k](v).filter(Boolean), tip: '' };
   const SLOT = { Grenade: 'grenade', Melee: 'melee', Class: 'classAbility', Super: 'super' }[k];
@@ -1391,7 +1400,7 @@ function statLines(k, v, b, pieces) {
   if (k === 'Health') { L.push(`Orbs of Power restore ${r1(f.OrbOfPowerHealthRestore)} HP; ${r1(f.FlinchResistance)}% flinch resistance while aiming`);
     if (E) L.push(`↑ +${r1(f.PVEBonusShieldHP)} shield HP in PvE; shields start recharging after ${r1(f.ShieldRechargeDelay)} s (base ${f.BaseShieldRechargeDelay} s) at ${r1(f.ShieldRechargeSpeed)}%/s (base ${f.BaseShieldRechargeSpeed}%/s)`); }
   if (k === 'Grenade' || k === 'Melee' || k === 'Class') {
-    L.push(cdLine || `${k === 'Class' ? 'Class ability' : k} cooldown ×${r1(f.CooldownScalars * 100) / 100} of its base (choose one to see seconds)`);
+    L.push(cdLine || `${k === 'Class' ? 'Class ability' : k} cooldown ×${+f.CooldownScalars.toFixed(3)} of its base (choose one to see seconds)`);
     if (E) L.push(k === 'Class' ? `↑ Casting it grants a ${r1(f.PVEOvershieldHP)} HP overshield (PvP ${r1(f.PVPOvershieldHP)}); damaging class abilities +${r1(f.PVEClassAbilityDamageIncrease)}%`
       : `↑ +${r1(f[`PVE${k}DamageIncrease`])}% ${k.toLowerCase()} damage (PvP +${r1(f[`PVP${k}DamageIncrease`])}%)`); }
   if (k === 'Super') { L.push(`${cdLine || 'Super cooldown doesn’t change with this stat'}; Super energy from orbs, damage and perks at ${Math.round(f.EnergyGainScalar * 100)}%`);
@@ -2265,10 +2274,17 @@ function renderBuilds() {
   const drKinds = Object.entries(syn.dr || {}).sort((a, b) => b[1].all - a[1].all);
   const drHtml = !drKinds.length ? `<p class="snote">No damage resistance from the reviewed pieces in this build.</p>` : drKinds.map(([v, d]) => `<div class="drk sgap"><div class="drh"><b>${esc(Core.DR_VS[v] || v)}${d.incl.length ? `<small class="faint"> incl. ${esc(d.incl.map(x => x === 'all' ? 'all-damage' : 'combatant').join(' + '))} resist</small>` : ''}</b><span class="drv">${d.always ? `<b>${d.always}%</b> always` : ''}${d.all > d.always ? `${d.always ? ' · ' : ''}up to <b>${d.all}%</b> when triggered` : ''}</span></div><div class="sfxl">${d.items.map(f => `<button class="schip sm" data-dr="${esc(f.key)}|${f.i}"><span class="pn">${esc(pieces[f.i].n)} ${esc(f.e.amt)}%<small>${esc(f.e.on || 'always')}</small></span></button>`).join('')}</div><div class="sev"></div></div>`).join('');
   const PARTS = [['armor', 'armor'], ['mw', 'masterwork'], ['tune', 'tuning'], ['mods', 'mods'], ['frag', 'fragments']];
+  // where each point comes from: armor base by piece (shown in the hover), masterwork, each mod / tuning mod by
+  // name and piece, fragments by name
+  const SRC_CLS = { mw: 'b-mw', tune: 'b-tune', mods: 'b-mod', frag: 'b-frag' };
+  const statSrcHtml = s => { const g = new Map();
+    for (const [p, what, slot, v] of s.src) { if (p === 'armor') continue; const key = p + '|' + what + '|' + Math.sign(v); const e = g.get(key) || { p, what, v: 0, at: [] }; e.v += v; if (slot) e.at.push(A_LABEL[slot] || slot); g.set(key, e); }
+    const armor = s.src.filter(x => x[0] === 'armor');
+    return `<span class="sarm" title="${esc(armor.map(([, n, sl, v]) => `${A_LABEL[sl] || sl}: ${n} ${v}`).join('\n'))}">${s.armor} armor</span>` + [...g.values()].map(e => `<span class="${e.v > 0 ? 'up ' + (SRC_CLS[e.p] || 'b-mod') : 'dn'}" title="${esc(e.at.length ? e.at.join(', ') : e.what)}">${e.v > 0 ? '+' : ''}${e.v} ${esc(e.what)}${e.at.length > 1 ? ` ×${e.at.length}` : e.at.length ? ` <i>${esc(e.at[0])}</i>` : ''}</span>`).join(''); };
   const statHtml = Core.STAT_ORDER.map(k => { const s = st.stats[k]; const w = x => Math.max(0, Math.min(100, x / 2)); const v = Math.max(0, Math.min(200, s.total));
     const { lines: fx, tip } = statLines(k, v, b, pieces);
-    return `<div class="bstat" tabindex="0" data-stip>${tip ? `<div class="bstip" role="tooltip"><b>${esc(k)} ${v}</b>${esc(tip).replace(/\n/g, '<br>')}<small>Clarity Character Stats v2 · Clarity marks these values as placeholders until tested</small></div>` : ''}<span class="sn">${esc(k)}${tip ? ' <i class="sinfo">i</i>' : ''}</span><b class="${s.total > 200 ? 'over' : ''}">${s.total}</b><span class="tr" title="${PARTS.map(([p, l]) => `${l} ${s[p]}`).join(', ')}">${PARTS.map(([p]) => s[p] > 0 ? `<i class="p-${p}" style="width:${w(s[p])}%"></i>` : '').join('')}<i class="t100"></i></span>
-      <small>${PARTS.filter(([p]) => p !== 'armor' && s[p]).map(([p, l]) => `<span class="${s[p] > 0 ? 'up b-' + ({ mw: 'mw', tune: 'tune', mods: 'mod', frag: 'frag' }[p] || 'mod') : 'dn'}">${s[p] > 0 ? '+' : ''}${s[p]} ${l}</span>`).join(' ')}${s.total > 200 ? ' <span class="dn">over the 200 cap</span>' : ''}</small>
+    return `<div class="bstat" tabindex="0" data-stip>${tip ? `<div class="bstip" role="tooltip"><b>${esc(k)} ${v}</b>${esc(tip).replace(/\n/g, '<br>')}<small>Clarity Character Stats v2 · Clarity marks these values as placeholders until tested</small></div>` : ''}<span class="sn">${esc(k)}${tip ? ' <i class="sinfo">i</i>' : ''}</span><b class="${s.total > 200 ? 'over' : ''}">${s.total}${statDelta(b, k, s.total)}</b><span class="tr" title="${PARTS.map(([p, l]) => `${l} ${s[p]}`).join(', ')}">${PARTS.map(([p]) => s[p] > 0 ? `<i class="p-${p}" style="width:${w(s[p])}%"></i>` : '').join('')}<i class="t100"></i></span>
+      <small class="bsrc">${statSrcHtml(s)}${s.total > 200 ? ' <span class="dn">over the 200 cap</span>' : ''}</small>
       <div class="bfx">${fx.map(t => `<span class="${/^↑/.test(t) ? 'enh' : ''}">${esc(t)}</span>`).join('')}</div></div>`; }).join('');
   const subName = sc?.n || '';
   v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Builds</div><h1><span id="bName" class="bname" tabindex="0" title="Rename">${esc(b.name)}</span></h1><p class="sum"><b style="color:${EL_COL[b.el]}">${esc(subName)}</b> · ${esc(B_CLASSES.find(c => c[0] === b.cls)?.[1] || '')} · <button class="linkbtn" id="bJump">${nLinks} interaction${nLinks === 1 ? '' : 's'}</button> · ${st.total} stat total</p></div>
