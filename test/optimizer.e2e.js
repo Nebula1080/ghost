@@ -43,8 +43,8 @@ const setT = async (pg, i, v) => { await pg.fill(`[data-on="${i}"]`, String(v));
   await pg.click('#oRun'); await pg.waitForSelector('.optsum', { timeout: 30000 });
   const sum = await pg.$eval('.optsum', e => e.textContent); const nRes = parseInt(sum.replace(/,/g, ''));
   nRes > 0 ? ok('Find armor lists combinations: ' + sum.trim()) : fail('no results: ' + sum);
-  const vals = await pg.$$eval('.optr:first-child .optv', x => x.slice(0, 6).map(e => +e.querySelector('b').textContent));
-  vals[1] >= 100 && vals[3] >= 80 && vals[5] >= 40 ? ok('first result reaches every target ' + vals.join('/')) : fail('first result ' + vals.join('/'));
+  const vals = await pg.$$eval('.optr:first-child .optv', x => x.slice(0, 6).map(e => +e.querySelector('b').textContent));   // columns in game order: Health, Melee, Grenade, Super, Class, Weapons
+  vals[0] >= 100 && vals[2] >= 80 && vals[1] >= 40 ? ok('first result reaches every target ' + vals.join('/')) : fail('first result ' + vals.join('/'));
   const maxes = await pg.$$eval('.optt small b', x => x.map(e => +e.textContent));
   maxes.length === 3 && maxes.every(v => v >= 40) ? ok('reachable max shown for the 3 targeted stats') : fail('max labels ' + maxes.join(','));
   // changing a setting marks the results out of date, still without searching

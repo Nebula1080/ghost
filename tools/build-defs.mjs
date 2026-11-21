@@ -61,7 +61,36 @@ const ARMOR_STATS = new Set(['Weapons', 'Health', 'Class', 'Grenade', 'Super', '
 const plugStats = it => { const o = {}; for (const x of it?.investmentStats || []) { const n = statDefs[x.statTypeHash]?.displayProperties?.name; if (ARMOR_STATS.has(n) && x.value) o[n] = x.value; } return Object.keys(o).length ? o : undefined; };
 const name = it => it?.displayProperties?.name || '';
 // Bungie description, falling back to the item's first sandbox perk (aspects, set perks, many mods)
-const bungieDesc = it => (it?.displayProperties?.description || '').trim() || (it?.perks || []).map(p => perkDefs[p.perkHash]?.displayProperties?.description).find(Boolean) || '';
+const bungieDesc0 = it => (it?.displayProperties?.description || '').trim() || (it?.perks || []).map(p => perkDefs[p.perkHash]?.displayProperties?.description).find(Boolean) || '';
+// armor mods: the item's own text is often only part of it. Font / Charged mods say how Armor Charge is gained and
+// keep the effect on their perk; harmonic mods carry one perk per element ("…of Arc weapons", "…of Solar weapons")
+// and work with whichever matches the subclass. So: the perk effects first (element copies merged into one line),
+// then the item's own line when it adds something.
+const EL_RE = /\b(Arc|Solar|Void|Stasis|Strand|Kinetic)\b/g;
+const EL_ONE = /\b(Arc|Solar|Void|Stasis|Strand|Kinetic)\b/;
+function harmonic(t) {
+  return t.replace(/§ weapons\b/g, 'weapons matching your subclass element')
+    .replace(/\b(Rapid )?§ weapon (final blows|damage|kills)/g, (m, r, x) => `${r || ''}${x} with weapons matching your subclass element`)
+    .replace(/\ba § weapon\b/g, 'a weapon matching your subclass element').replace(/\bincoming § damage\b/g, 'incoming damage matching your subclass element')
+    .replace(/§/g, 'subclass-element').replace(/^./, c => c.toUpperCase());
+}
+function modDesc(it) {
+  const own = (it.displayProperties?.description || '').trim();
+  const ps = [...new Set((it.perks || []).map(p => perkDefs[p.perkHash]).filter(d => d && d.isDisplayable !== false).map(d => (d.displayProperties?.description || '').trim()).filter(Boolean))];
+  // copies of one line that differ only by element: harmonic (4+ elements) reads "matching your subclass element",
+  // dual siphons read "Void or Strand"
+  const tpl = t => t.replace(EL_RE, '§').replace(/\ban? §/g, 'a §').replace(/\bcreate Orbs of Power\b/g, 'create an Orb of Power');
+  const groups = new Map();
+  for (const t of ps) { const k = EL_ONE.test(t) ? tpl(t) : t; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(t); }
+  const out = [...groups].map(([k, ts]) => {
+    if (ts.length < 2) return ts[0];
+    const els = [...new Set(ts.flatMap(t => t.match(EL_RE) || []))];
+    return els.length >= 4 ? harmonic(k) : k.replace(/\ba §/g, () => (/^[AEIOU]/.test(els[0]) ? 'an ' : 'a ') + '§').replace(/§/g, els.join(' or '));
+  });
+  if (own && !out.some(t => t.includes(own) || own.includes(t))) out.push(own);
+  return out.join(' ').trim();
+}
+const bungieDesc = it => /^enhancements\./.test(it?.plug?.plugCategoryIdentifier || '') ? (modDesc(it) || bungieDesc0(it)) : bungieDesc0(it);
 
 const icons = {};
 for (const v of Object.values(breakerDefs)) icons['breaker-' + v.enumValue] = dataUri(await cached(`icons/breaker-${v.enumValue}.png`, B + v.displayProperties.icon, true));

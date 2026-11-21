@@ -108,10 +108,11 @@ const ART_TIER = { 2631166533: 1, 2631166534: 2, 2631166535: 3 };
 const artRecs = new Map(); const artifactList = [];
 for (const [ah, a] of Object.entries(items)) {
   if (a.itemTypeDisplayName !== 'Artifact' || !a.sockets || a.redacted) continue;
-  const perks = []; const seen = new Set();
+  const perks = []; const seen = new Set(); const socks = [];
   for (const cat of a.sockets.socketCategories || []) {
     const tier = ART_TIER[cat.socketCategoryHash]; if (!tier) continue;
     for (const si of cat.socketIndexes || []) {
+      socks.push([si, tier]);
       const e = a.sockets.socketEntries[si]; const list = plugsets[e.reusablePlugSetHash || e.randomizedPlugSetHash]?.reusablePlugItems || [];
       for (const pl of list) {
         const d = items[pl.plugItemHash]; const n = d?.displayProperties?.name;
@@ -125,10 +126,11 @@ for (const [ah, a] of Object.entries(items)) {
       }
     }
   }
-  artifactList.push({ h: +ah, n: a.displayProperties.name, d: (a.displayProperties.description || '').trim(), i: a.displayProperties.icon || '', p: perks });
+  artifactList.push({ h: +ah, n: a.displayProperties.name, d: (a.displayProperties.description || '').trim(), i: a.displayProperties.icon || '', p: perks, s: socks });
 }
 for (const r of artRecs.values()) add('artifact', r);
 // the page's artifact table (bundled by build.py): artifacts with their perks [hash, name, tier, Bungie text, icon]
+// and perk sockets s: [[socketIndex, tier]] (DIM loadouts set artifact perks as socketOverrides by socket index)
 fs.writeFileSync(path.join(root, 'data/interactions/artifacts.json'), JSON.stringify(artifactList.sort((x, y) => x.n.localeCompare(y.n))) + '\n');
 
 const dir = path.join(root, 'data/interactions/src'); fs.mkdirSync(dir, { recursive: true });

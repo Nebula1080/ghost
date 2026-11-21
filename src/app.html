@@ -2197,7 +2197,7 @@ function renderBuilds() {
       const sub = g === 'w' ? [it.type, it.element, it.power != null ? '◆ ' + it.power : ''] : [it.type, it.set ? '◈ ' + it.set : '', it.stats.Total != null ? 'Total ' + it.stats.Total : ''];
       const ap = g === 'a' ? Core.armorParts(it, D, s) : null;
       const a3 = ap ? [ap.gen3 && it.tier ? `Tier ${it.tier}` : (ap.gen3 ? '' : 'Legacy armor'), ap.arch ? `${ap.arch.n}: ${ap.arch.pri} / ${ap.arch.sec}${ap.tertiary && ![ap.arch.pri, ap.arch.sec].includes(ap.tertiary) ? ` / ${ap.tertiary}` : ''}` : it.frame, ap.tuned ? `Tuned: ${ap.tuned}` : '',
-        ap.gen3 ? (ap.mwLevel ? `Masterwork ${ap.mwLevel}/5: +${ap.mwLevel} ${ap.low.join(', ')}` : `Not masterworked (up to +5 ${ap.low.join(', ')})`) : (Object.values(ap.mw).some(Boolean) ? 'Masterworked: +2 all stats' : '')].filter(Boolean) : [];
+        ap.gen3 ? (ap.mwLevel ? `Masterwork ${ap.mwLevel}/5: +${ap.mwLevel} ${Core.byStatOrder(ap.low).join(', ')}` : `Not masterworked (up to +5 ${Core.byStatOrder(ap.low).join(', ')})`) : (Object.values(ap.mw).some(Boolean) ? 'Masterworked: +2 all stats' : '')].filter(Boolean) : [];
       // masterwork + catalyst: what they are and how much of each shown 0-100 stat they add (not counts like Mag / ROF)
       const mw = g === 'w' ? Core.masterwork(it, D) : null; const cat = g === 'w' ? Core.catalyst(it, D) : null;
       const add = k => /^(ROF|Mag|Charge Time|Draw Time)$/.test(k) ? '' : [[mw?.bonus?.[k], 'MW'], [cat?.state === 'has' ? cat.bonus?.[k] : 0, 'catalyst']].filter(([v]) => v).map(([v, l]) => `<i class="bwb ${l === 'MW' ? 'b-mw' : 'b-cat'}">${v > 0 ? '+' : ''}${v} ${l}</i>`).join('');
@@ -2265,7 +2265,7 @@ function renderBuilds() {
   const drKinds = Object.entries(syn.dr || {}).sort((a, b) => b[1].all - a[1].all);
   const drHtml = !drKinds.length ? `<p class="snote">No damage resistance from the reviewed pieces in this build.</p>` : drKinds.map(([v, d]) => `<div class="drk sgap"><div class="drh"><b>${esc(Core.DR_VS[v] || v)}${d.incl.length ? `<small class="faint"> incl. ${esc(d.incl.map(x => x === 'all' ? 'all-damage' : 'combatant').join(' + '))} resist</small>` : ''}</b><span class="drv">${d.always ? `<b>${d.always}%</b> always` : ''}${d.all > d.always ? `${d.always ? ' · ' : ''}up to <b>${d.all}%</b> when triggered` : ''}</span></div><div class="sfxl">${d.items.map(f => `<button class="schip sm" data-dr="${esc(f.key)}|${f.i}"><span class="pn">${esc(pieces[f.i].n)} ${esc(f.e.amt)}%<small>${esc(f.e.on || 'always')}</small></span></button>`).join('')}</div><div class="sev"></div></div>`).join('');
   const PARTS = [['armor', 'armor'], ['mw', 'masterwork'], ['tune', 'tuning'], ['mods', 'mods'], ['frag', 'fragments']];
-  const statHtml = Core.ARMOR3.map(k => { const s = st.stats[k]; const w = x => Math.max(0, Math.min(100, x / 2)); const v = Math.max(0, Math.min(200, s.total));
+  const statHtml = Core.STAT_ORDER.map(k => { const s = st.stats[k]; const w = x => Math.max(0, Math.min(100, x / 2)); const v = Math.max(0, Math.min(200, s.total));
     const { lines: fx, tip } = statLines(k, v, b, pieces);
     return `<div class="bstat" tabindex="0" data-stip>${tip ? `<div class="bstip" role="tooltip"><b>${esc(k)} ${v}</b>${esc(tip).replace(/\n/g, '<br>')}<small>Clarity Character Stats v2 · Clarity marks these values as placeholders until tested</small></div>` : ''}<span class="sn">${esc(k)}${tip ? ' <i class="sinfo">i</i>' : ''}</span><b class="${s.total > 200 ? 'over' : ''}">${s.total}</b><span class="tr" title="${PARTS.map(([p, l]) => `${l} ${s[p]}`).join(', ')}">${PARTS.map(([p]) => s[p] > 0 ? `<i class="p-${p}" style="width:${w(s[p])}%"></i>` : '').join('')}<i class="t100"></i></span>
       <small>${PARTS.filter(([p]) => p !== 'armor' && s[p]).map(([p, l]) => `<span class="${s[p] > 0 ? 'up b-' + ({ mw: 'mw', tune: 'tune', mods: 'mod', frag: 'frag' }[p] || 'mod') : 'dn'}">${s[p] > 0 ? '+' : ''}${s[p]} ${l}</span>`).join(' ')}${s.total > 200 ? ' <span class="dn">over the 200 cap</span>' : ''}</small>
@@ -2321,11 +2321,11 @@ function renderOptimizer(b) {
   const frag = Core.buildStats(b, D, S.byId).stats;
   const r = OPT.res;
   // one card per stat: name, the target as a big numeral, a slider with the 100 mark (enhanced effects above it)
-  const tgt = Core.ARMOR3.map((k, i) => { const max = r && r.exact.includes(i) && !OPT.stale ? r.max[i] : null; const v = c.target[i];
+  const tgt = Core.STAT_ORDER.map(k => { const i = Core.ARMOR3.indexOf(k); const max = r && r.exact.includes(i) && !OPT.stale ? r.max[i] : null; const v = c.target[i];
     return `<label class="optt${v ? ' set' : ''}"><span class="otn">${esc(k)}</span><input class="otv" type="number" min="0" max="${Core.OPT_CAP}" step="1" value="${v}" data-on="${i}" aria-label="${esc(k)} target value"><span class="otr"><input type="range" min="0" max="${Core.OPT_CAP}" step="5" value="${v}" data-ot="${i}" style="--p:${v / Core.OPT_CAP * 100}%" aria-label="${esc(k)} target"></span><small class="otm">${max != null ? `up to <b>${max}</b>` : v ? 'target' : 'no target'}</small></label>`; }).join('');
   const kept = Core.A_SLOTS.filter(s => b.a?.[s] && S.byId.get(b.a[s].id));
   const fragTot = Core.ARMOR3.map(k => frag[k].frag);
-  const fragTxt = fragTot.some(Boolean) ? Core.ARMOR3.map((k, i) => fragTot[i] ? `${fragTot[i] > 0 ? '+' : ''}${fragTot[i]} ${k}` : '').filter(Boolean).join(', ') : 'none chosen';
+  const fragTxt = fragTot.some(Boolean) ? Core.STAT_ORDER.map(k => Core.ARMOR3.indexOf(k)).map(i => [Core.ARMOR3[i], i]).map(([k, i]) => fragTot[i] ? `${fragTot[i] > 0 ? '+' : ''}${fragTot[i]} ${k}` : '').filter(Boolean).join(', ') : 'none chosen';
   // exotic: tiles with each exotic's icon, by slot, after the three general choices
   const exTile = (v, inner, cls2 = '') => `<button class="optxo${cls2}${c.exotic === v ? ' on' : ''}" data-ex="${esc(v)}" aria-pressed="${c.exotic === v}">${inner}</button>`;
   const exoHtml = `${sheetSec('Exotic', exos.length ? `${exos.length} in your vault` : 'none in your vault')}${exos.length > 6 ? `<input class="qin optxq" id="oExq" type="search" placeholder="Search exotics: name, slot, perk, is:arc…" aria-label="Search your exotic armor" autocomplete="off" spellcheck="false"><div class="pkn" id="oExn" aria-live="polite"></div>` : ''}<div class="optxos">${exTile('', '<span class="xg">◇</span><span><b>Any or none</b><small>at most one</small></span>', ' gen')}${exTile('any', '<span class="xg">◆</span><span><b>Any exotic</b><small>exactly one</small></span>', ' gen')}${exTile('none', '<span class="xg">∅</span><span><b>No exotic</b><small>legendaries only</small></span>', ' gen')}${exos.map(it => exTile(it.hash, `${iIcon(it, 36)}<span><b>${esc(it.name)}</b><small>${esc(A_LABEL[Core.armorSlot(it)] || it.type || '')}</small></span>`)).join('')}</div>`;
@@ -2414,7 +2414,7 @@ function optRun(b, c) {
   };
   setTimeout(step, 0);
 }
-const OPT_SORTS = [['mods', 'Fewest mods'], ['total', 'Total'], ...Core.ARMOR3.map((k, i) => ['s' + i, k])];
+const OPT_SORTS = [['mods', 'Fewest mods'], ['total', 'Total'], ...Core.STAT_ORDER.map(k => ['s' + Core.ARMOR3.indexOf(k), k])];
 function optSorted() {
   const L = OPT.res?.results || []; const k = OPT.sort;
   const key = k === 'mods' ? r => r.nMods * 100 + r.cost - r.total / 1000 : k === 'total' ? r => -r.total : r => -r.stats[+k.slice(1)];
@@ -2428,7 +2428,7 @@ function optResultsHtml(b) {
   const list = optSorted().slice(0, OPT.shown);
   const tgt = optCfg().target;
   const row = (x, n) => { const ex = x.exotic && S.byId.get(x.exotic);
-    return `<div class="optr${OPT.open === n ? ' open' : ''}"><button class="optrh" data-or="${n}" aria-expanded="${OPT.open === n}"><span class="optex">${ex ? `${iIcon(ex, 28)}<span>${esc(ex.name)}</span>` : '<span class="faint">No exotic</span>'}</span>${x.stats.map((v, i) => `<span class="optv${tgt[i] ? ' tg' : ''}${tgt[i] && v >= tgt[i] ? ' hit' : ''}${v > Core.OPT_CAP ? ' over' : ''}" title="${esc(Core.ARMOR3[i])}${tgt[i] ? ` (target ${tgt[i]})` : ''}"><small>${esc(Core.ARMOR3[i].slice(0, 3))}</small><b>${v}</b><i style="--w:${Math.min(100, v / 2)}%"></i></span>`).join('')}<span class="optv tot"><small>Total</small><b>${x.total}</b></span><span class="optv md"><small>Mods</small><b>${x.nMods}</b>${x.art ? `<em>+${x.art} artifice</em>` : ''}</span></button>${OPT.open === n ? optDetail(b, x) : ''}</div>`; };
+    return `<div class="optr${OPT.open === n ? ' open' : ''}"><button class="optrh" data-or="${n}" aria-expanded="${OPT.open === n}"><span class="optex">${ex ? `${iIcon(ex, 28)}<span>${esc(ex.name)}</span>` : '<span class="faint">No exotic</span>'}</span>${Core.STAT_ORDER.map(k => Core.ARMOR3.indexOf(k)).map(i => [x.stats[i], i]).map(([v, i]) => `<span class="optv${tgt[i] ? ' tg' : ''}${tgt[i] && v >= tgt[i] ? ' hit' : ''}${v > Core.OPT_CAP ? ' over' : ''}" title="${esc(Core.ARMOR3[i])}${tgt[i] ? ` (target ${tgt[i]})` : ''}"><small>${esc(Core.ARMOR3[i].slice(0, 3))}</small><b>${v}</b><i style="--w:${Math.min(100, v / 2)}%"></i></span>`).join('')}<span class="optv tot"><small>Total</small><b>${x.total}</b></span><span class="optv md"><small>Mods</small><b>${x.nMods}</b>${x.art ? `<em>+${x.art} artifice</em>` : ''}</span></button>${OPT.open === n ? optDetail(b, x) : ''}</div>`; };
   return head + `<div class="optsort" role="group" aria-label="Sort results">${OPT_SORTS.map(([k, l]) => `<button class="tchip${OPT.sort === k ? ' on' : ''}" data-os="${k}">${esc(l)}</button>`).join('')}</div>
     <div class="optlist">${list.map(row).join('')}</div>${r.results.length > OPT.shown ? `<div style="text-align:center;margin-top:10px"><button class="btn" id="oMore">Show more</button></div>` : ''}`;
 }
@@ -2440,8 +2440,8 @@ function optDetail(b, x) {
     const ap = Core.armorParts(it, D, s); const c = optCfg(); const assumed = /exotic/i.test(it.rarity) ? c.assumeExoticMw : c.assumeLegendaryMw;
     const needMw = assumed && ap?.hasBase && (ap.gen3 ? (ap.mwLevel || 0) < 5 : !Object.values(ap.mw).some(Boolean));
     const tags = [needMw ? `<span class="bwb b-mw">Masterwork it${ap.gen3 ? ` to 5 (now ${ap.mwLevel || 0})` : ''}</span>` : '', w.g ? `<span class="bwb b-mod">${esc(w.g)}</span>` : '', w.a ? `<span class="bwb b-mod">${esc(w.a)}</span>` : '', w.t ? `<span class="bwb b-tune">${esc(w.t)}</span>` : ''].join('');
-    return `<div class="optp">${iIcon(it, 40)}<span class="bit"><b style="color:${rarityColor(it.rarity)}">${esc(it.name)}</b><small>${esc(A_LABEL[s])}${p?.tier ? ` · Tier ${p.tier}` : ''}${it.frame ? ` · ${esc(it.frame)}` : ''}${it.set ? ` · ◈ ${esc(it.set)}` : ''}${it.owner ? ` · ${esc(it.owner)}` : ''}</small><small>${Core.ARMOR3.map((k2, i) => `${esc(k2.slice(0, 3))} ${p.st[i]}`).join(' · ')}</small>${tags ? `<small class="optmods">${tags}</small>` : ''}</span></div>`; }).join('');
-  const parts = Core.ARMOR3.map((k, i) => { const m = x.mods[i]; const s = [m[2] ? `${m[2]}× major` : '', m[1] ? `${m[1]}× minor` : '', m[0] ? `${m[0]}× artifice` : ''].filter(Boolean).join(', '); return s ? `${esc(k)}: ${s}` : ''; }).filter(Boolean);
+    return `<div class="optp">${iIcon(it, 40)}<span class="bit"><b style="color:${rarityColor(it.rarity)}">${esc(it.name)}</b><small>${esc(A_LABEL[s])}${p?.tier ? ` · Tier ${p.tier}` : ''}${it.frame ? ` · ${esc(it.frame)}` : ''}${it.set ? ` · ◈ ${esc(it.set)}` : ''}${it.owner ? ` · ${esc(it.owner)}` : ''}</small><small>${Core.STAT_ORDER.map(k2 => `${esc(k2.slice(0, 3))} ${p.st[Core.ARMOR3.indexOf(k2)]}`).join(' · ')}</small>${tags ? `<small class="optmods">${tags}</small>` : ''}</span></div>`; }).join('');
+  const parts = Core.STAT_ORDER.map(k => { const i = Core.ARMOR3.indexOf(k); const m = x.mods[i]; const s = [m[2] ? `${m[2]}× major` : '', m[1] ? `${m[1]}× minor` : '', m[0] ? `${m[0]}× artifice` : ''].filter(Boolean).join(', '); return s ? `${esc(k)}: ${s}` : ''; }).filter(Boolean);
   return `<div class="optd">${pcs}<p class="snote">${parts.length ? `Mods: ${parts.join(' · ')}.` : 'No stat mods needed.'}${x.tunes.length ? ` Tuning: ${x.tunes.map(([s, t]) => `${esc(A_LABEL[s])} ${esc(t)}`).join(', ')}.` : ''}${x.waste ? ` ${x.waste} points over the 200 cap.` : ''} Stats include masterwork${optCfg().frags ? ', fragments' : ''} and these mods.</p>
     <div class="msheet optuse"><button class="btn primary" data-ouse>Use this armor in ${esc(b.name)}</button></div></div>`;
 }
@@ -3229,7 +3229,7 @@ function cleanTile(it, g, i) {
   const kind = it.kind; const r = CL.setup.rank[kind] || 'rating';
   const rv = cleanRankVal(it, r);
   const sk = socketsCard(it, new Set());
-  const stats = kind === 'armor' ? `<div class="stats">${['Weapons', 'Health', 'Class', 'Grenade', 'Super', 'Melee'].filter(k => k in it.stats).map(k => `<span>${k} <b>${it.stats[k]}</b></span>`).join('')}${'Total' in it.stats ? `<span>Total <b>${it.stats.Total}</b></span>` : ''}</div>` : '';
+  const stats = kind === 'armor' ? `<div class="stats">${Core.STAT_ORDER.filter(k => k in it.stats).map(k => `<span>${k} <b>${it.stats[k]}</b></span>`).join('')}${'Total' in it.stats ? `<span>Total <b>${it.stats.Total}</b></span>` : ''}</div>` : '';
   const slam = CL.slam === it.id && motionOK(); if (slam) CL.slam = null;
   return `<div class="tile ${d}" data-id="${esc(it.id)}" style="--rc:${rarityColor(it.rarity)}"><span class="stamp${slam ? ' slam' : ''}">${d === 'keep' ? 'KEEP' : 'TRASH'}</span>
     <div class="tile-h">${itemIcon(it, 44)}<span class="tn">${esc(it.name)}<br><span class="rank">#${i + 1}</span></span><span class="rv"${r === 'rating' ? rbdAttr(it) : ''}>${rv === -Infinity ? '–' : rv}</span></div>

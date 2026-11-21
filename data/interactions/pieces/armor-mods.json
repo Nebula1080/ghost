@@ -484,7 +484,7 @@
       ]
      }
     ],
-    "q": "Rapid Arc weapon final blows create an Orb of Power.",
+    "q": "Rapid Arc or Stasis weapon final blows create an Orb of Power.",
     "s": "bungie",
     "note": "Bungie text only names Arc; the mod name says Arc/Stasis (no Clarity text)"
    }
@@ -510,7 +510,7 @@
       ]
      }
     ],
-    "q": "Rapid Void weapon final blows create an Orb of Power.",
+    "q": "Rapid Void or Stasis weapon final blows create an Orb of Power.",
     "s": "bungie",
     "note": "Bungie text only names Void; the mod name says Void/Stasis (no Clarity text)"
    }
@@ -529,7 +529,7 @@
       "weapon": "kinetic"
      }
     ],
-    "q": "Rapid Kinetic weapon final blows create an Orb of Power.",
+    "q": "Rapid Kinetic or Arc weapon final blows create an Orb of Power.",
     "s": "bungie",
     "note": "name suggests a second element (likely Arc); no source text states it"
    }
@@ -548,7 +548,7 @@
       "weapon": "kinetic"
      }
     ],
-    "q": "Rapid Kinetic weapon final blows create an Orb of Power.",
+    "q": "Rapid Kinetic or Void weapon final blows create an Orb of Power.",
     "s": "bungie",
     "note": "name suggests a second element; no source text states it"
    }
@@ -567,7 +567,7 @@
       "weapon": "kinetic"
      }
     ],
-    "q": "Rapid Kinetic weapon final blows create an Orb of Power.",
+    "q": "Rapid Kinetic or Solar weapon final blows create an Orb of Power.",
     "s": "bungie",
     "note": "name suggests a second element (likely Solar); no source text states it"
    }
