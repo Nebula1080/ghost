@@ -1390,7 +1390,7 @@ const Core = (() => {
       for (const k of ARMOR3) { out[k].armor += pt.base[k]; out[k].mw += pt.mw[k]; }
       // each mod socket: the build's mod, else the one on the piece now (Equip build leaves those in place)
       pt.lay.forEach(([, c], i) => {
-        if (c === 't' && Number(it.tier) && Number(it.tier) < 5) return;
+        if (c === 't' && Number(tuneTier(it)) && Number(tuneTier(it)) < 5) return;
         const n = b.mods?.[s]?.[i] || pt.inserted[i]; if (!n || n === MOD_NONE || !pt.hasBase) return;
         for (const [k, v] of Object.entries(modStatsOn(n, s, pt.base, defs))) if (out[k]) out[k][c === 't' ? 'tune' : 'mods'] += v;
       });
@@ -1505,7 +1505,7 @@ const Core = (() => {
     for (const s of A_SLOTS) {
       const list = b.mods?.[s] || []; const it = byId?.get(b.a?.[s]?.id);
       const pt = it && armorParts(it, defs, s); const lay = pt?.lay || modLayout(b.a?.[s]?.hash, defs); const ins = pt?.inserted || [];
-      lay.forEach(([, c], i) => { if (c === 't' && Number(it?.tier) && Number(it.tier) < 5) return; if (list[i] === MOD_NONE) { clear = true; return; } const n = list[i] || ins[i]; const h = n && hashOf(n, s, c); if (h) mods.push(h); });
+      lay.forEach(([, c], i) => { if (c === 't' && Number(tuneTier(it)) && Number(tuneTier(it)) < 5) return; if (list[i] === MOD_NONE) { clear = true; return; } const n = list[i] || ins[i]; const h = n && hashOf(n, s, c); if (h) mods.push(h); });
     }
     const lo = { id, name: String(b.name || 'Ghost build').slice(0, 60), classType: DIM_CLASS[b.cls] ?? 3, equipped, unequipped: [] };
     if (mods.length || clear) lo.parameters = { mods, ...(clear ? { clearMods: true } : {}) };
@@ -1550,6 +1550,9 @@ const Core = (() => {
     const sk = defs?.sock; const i = sk?.a?.[String(hash || '')]; const lay = i != null ? sk.lay[i] : MOD_DEFAULT;
     return lay.filter(([, c]) => c === 'g' || c === 's' || ((c === 't' || c === 'a' || c.startsWith('x:')) && (sk?.m?.[c] || []).length && !(c === 't' && tier != null && tier !== '' && Number(tier) < 5)));
   }
+  // the tier that decides the tuning socket: exotics take any tuning mod at any tier, legendaries need Tier 5
+  const isExoticArmor = it => /exotic/i.test(it?.rarity || '');
+  const tuneTier = it => isExoticArmor(it) ? 5 : it?.tier;
   const MOD_SOCK_L = { g: 'General', t: 'Tuning', a: 'Artifice' };
   const modSockLabel = (c, slotLabel) => c === 's' ? slotLabel : MOD_SOCK_L[c] || (/^x:raid/.test(c) ? 'Raid' : /^x:season/.test(c) ? 'Seasonal' : 'Activity');
   // the mods one socket takes (code given), or every mod an armor slot can hold (lookups: costs, stats, hashes)
@@ -1623,13 +1626,13 @@ const Core = (() => {
       if (ap.gen3) { const lvl = assume ? 5 : (ap.mwLevel || 0); ARMOR3.forEach((k, i) => { if (ap.low.includes(k)) st[i] += lvl; }); }
       else { const on = assume || Object.values(ap.mw).some(Boolean); if (on) for (let i = 0; i < 6; i++) st[i] += 2; }
     }
-    const lay = modLayout(it.hash, defs, it.tier);
+    const lay = modLayout(it.hash, defs, tuneTier(it));
     const locked = (it.perks || []).some(p => p.s && /^(locked artifice socket|upgrade to artifice armor)$/i.test(p.n));
     const art = lay.some(([, c]) => c === 'a') && !locked ? 1 : 0;
-    // Tier 5 tuning: a legendary follows its Tuned stat; an exotic with no Tuned stat can tune any pair (D2AP)
+    // Tier 5 tuning: a legendary follows its Tuned stat; an exotic can tune any pair at any tier
     const tuneSock = ap.gen3 && lay.some(([, c]) => c === 't') && (exotic || Number(it.tier) >= 5);
     const tunedK = ARMOR3.find(k => norm(k) === norm(it.tuning || '') || norm(k) === norm(String(it.tuning || '').replace(/s$/i, '')));
-    const tune = !tuneSock ? null : tunedK ? { fixed: ARMOR3.indexOf(tunedK) } : exotic ? { flex: true } : { bal: true };
+    const tune = !tuneSock ? null : exotic ? { flex: true } : tunedK ? { fixed: ARMOR3.indexOf(tunedK) } : { bal: true };
     const low = lowest3(ap.base).map(k => ARMOR3.indexOf(k));
     return { id: String(it.id), hash: String(it.hash || ''), name: it.name, slot, exotic, gen3: ap.gen3, st, art, tune, low, set: it.set || '', cls: norm(it.equippable || ''), tier: Number(it.tier) || 0 };
   }
@@ -1807,7 +1810,7 @@ const Core = (() => {
   }
 
   return { LIMITS, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink,
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, tuneTier, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink,
     MOD_NONE, artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

@@ -2196,7 +2196,7 @@ function renderBuilds() {
       const perks = g === 'w' ? [...new Map([...sk.intrinsic, ...sk.exotic, ...sk.cols.flatMap(c => c.perks.filter(p => p.s)), ...sk.catalyst.filter(p => p.s)].map(p => [p.n, p])).values()] : sk.exotic.slice(0, 2);
       const sub = g === 'w' ? [it.type, it.element, it.power != null ? '◆ ' + it.power : ''] : [it.type, it.set ? '◈ ' + it.set : '', it.stats.Total != null ? 'Total ' + it.stats.Total : ''];
       const ap = g === 'a' ? Core.armorParts(it, D, s) : null;
-      const a3 = ap ? [ap.gen3 && it.tier ? `Tier ${it.tier}` : (ap.gen3 ? '' : 'Legacy armor'), ap.arch ? `${ap.arch.n}: ${ap.arch.pri} / ${ap.arch.sec}${ap.tertiary && ![ap.arch.pri, ap.arch.sec].includes(ap.tertiary) ? ` / ${ap.tertiary}` : ''}` : it.frame, ap.tuned ? `Tuned: ${ap.tuned}` : '',
+      const a3 = ap ? [ap.gen3 && it.tier ? `Tier ${it.tier}` : (ap.gen3 ? '' : 'Legacy armor'), ap.arch ? `${ap.arch.n}: ${ap.arch.pri} / ${ap.arch.sec}${ap.tertiary && ![ap.arch.pri, ap.arch.sec].includes(ap.tertiary) ? ` / ${ap.tertiary}` : ''}` : it.frame, Core.isExoticArmor(it) && ap.gen3 && Core.modLayout(it.hash, D, 5).some(([, c]) => c === 't') ? 'Exotic: any tuning' : ap.tuned ? `Tuned: ${ap.tuned}` : '',
         ap.gen3 ? (ap.mwLevel ? `Masterwork ${ap.mwLevel}/5: +${ap.mwLevel} ${Core.byStatOrder(ap.low).join(', ')}` : `Not masterworked (up to +5 ${Core.byStatOrder(ap.low).join(', ')})`) : (Object.values(ap.mw).some(Boolean) ? 'Masterworked: +2 all stats' : '')].filter(Boolean) : [];
       // masterwork + catalyst: what they are and how much of each shown 0-100 stat they add (not counts like Mag / ROF)
       const mw = g === 'w' ? Core.masterwork(it, D) : null; const cat = g === 'w' ? Core.catalyst(it, D) : null;
@@ -2209,7 +2209,7 @@ function renderBuilds() {
     let mods = '';
     if (g === 'a') {
       const ms = b.mods[s] || []; const cap = it?.energy;
-      const lay = Core.modLayout(ref?.hash, D, it?.tier); const ins = it ? Core.armorParts(it, D, s)?.inserted || [] : [];
+      const lay = Core.modLayout(ref?.hash, D, Core.tuneTier(it)); const ins = it ? Core.armorParts(it, D, s)?.inserted || [] : [];
       const used = lay.reduce((n, _, i) => { const m = ms[i] === Core.MOD_NONE ? null : ms[i] || ins[i]; return n + (m ? Core.modCost(m, s, D) : 0); }, 0);
       mods = `<div class="bmods">${lay.map(([, c], i) => { if (ms[i] === Core.MOD_NONE) { const sl = Core.modSockLabel(c, A_LABEL[s]); return `<span class="bmodw"><button class="bmod none" data-mod="${s}" data-mi="${i}" title="Planned empty${ins[i] ? `: take ${esc(ins[i])} out` : ''}. Tap to change."><span class="ic sq ph0">∅</span><span><small class="bmk">${esc(sl)} · empty</small>${ins[i] ? `<s>${esc(ins[i])}</s>` : 'No mod'}</span></button></span>`; }
         const m = ms[i]; const on = !m && ins[i]; const sl = Core.modSockLabel(c, A_LABEL[s]); return `<span class="bmodw"><button class="bmod${m ? ' on' : ''}${on ? ' ins' : ''}" data-mod="${s}" data-mi="${i}" title="${m ? esc(m) : on ? `On the armor now: ${esc(on)}. Tap to plan another mod.` : `Add a ${esc(sl.toLowerCase())} mod`}">${m || on ? plugIcon(m || on, 'sq', pIdx(m || on, 'armor')) : '<span class="ic sq ph0">+</span>'}<span><small class="bmk">${esc(sl)}${on ? ' · on armor' : ''}</small>${m ? esc(m) : on ? esc(on) : 'Mod'}</span></button>${m ? infoBtn(`data-minfo="${esc(m)}"`, m) : ''}</span>`; }).join('')}<span class="ben${cap != null && used > cap ? ' over' : ''}" title="Armor energy used by these mods">${used}${cap != null ? '/' + cap : ''} energy</span></div>`;
@@ -2460,7 +2460,7 @@ function optUse(b, x) {
   Core.A_SLOTS.forEach((s, k) => {
     const it = S.byId.get(x.ids[k]); if (!it) return;
     b.a[s] = itemRef(it);
-    const lay = Core.modLayout(it.hash, D, it.tier);
+    const lay = Core.modLayout(it.hash, D, Core.tuneTier(it));
     const arr = Core.placeMods((b.mods[s] || []).filter(n => n && !own.test(n) && !lay.some(([, c]) => c === 'g' && Core.modFits(n, 'g', s, D))), lay, s, D);
     const put = (code, n) => { const i = lay.findIndex(([, c], j) => c === code && !arr[j]); if (n && i >= 0) arr[i] = n; };
     put('g', where[s].g); put('a', where[s].a); put('t', where[s].t);
@@ -2548,7 +2548,7 @@ function modWarnings(b) {
   const out = [];
   for (const s of Core.A_SLOTS) {
     const it = S.byId.get(b.a?.[s]?.id); if (!it) continue;
-    const lay = Core.modLayout(it.hash, D, it.tier); const ins = Core.armorParts(it, D, s)?.inserted || []; const ms = b.mods?.[s] || [];
+    const lay = Core.modLayout(it.hash, D, Core.tuneTier(it)); const ins = Core.armorParts(it, D, s)?.inserted || []; const ms = b.mods?.[s] || [];
     let used = 0; const empty = [];
     lay.forEach(([, c], i) => { const m = ms[i] === Core.MOD_NONE ? null : ms[i] || ins[i]; if (m) used += Core.modCost(m, s, D); else if (c === 'g' || c === 's') empty.push(Core.modSockLabel(c, A_LABEL[s]).toLowerCase()); });
     if (empty.length) out.push(`${A_LABEL[s]}: ${empty.length} empty ${[...new Set(empty)].join(' / ')} socket${empty.length === 1 ? '' : 's'}`);
@@ -2846,9 +2846,9 @@ function pickArtifact(b) {
 const deadMod = n => /deprecated|no longer functions/i.test(Core.plugOf(n, D, 'armor')?.[2] || '');
 function pickMod(b, slot, i, pieces) {
   const ms = b.mods[slot] || []; const cur = ms[i];
-  const it = S.byId.get(b.a?.[slot]?.id); const lay = Core.modLayout(b.a?.[slot]?.hash, D, it?.tier); const code = lay[i]?.[1] || 's'; const sl = Core.modSockLabel(code, A_LABEL[slot]);
+  const it = S.byId.get(b.a?.[slot]?.id); const lay = Core.modLayout(b.a?.[slot]?.hash, D, Core.tuneTier(it)); const code = lay[i]?.[1] || 's'; const sl = Core.modSockLabel(code, A_LABEL[slot]);
   // tuning mods are aligned with the piece's Tuned stat (Bungie): +Tuned / -another, or Balanced Tuning
-  const tunedOk = n => code !== 't' || !it?.tuning || /^balanced tuning$/i.test(n) || n.startsWith(`+${it.tuning} /`);
+  const tunedOk = n => code !== 't' || !it?.tuning || Core.isExoticArmor(it) || /^balanced tuning$/i.test(n) || n.startsWith(`+${it.tuning} /`);
   const rows = Core.modsFor(slot, D, code).filter(([n]) => !/^empty|^default/i.test(n) && (n === cur || !deadMod(n)) && tunedOk(n)).map(([n, cost, st]) => { const r = Core.modScore(n, slot, D, pieces, IX); const bd = Core.plugOf(n, D, 'armor')?.[2] || '';
     const fluff = IX?.skip?.includes('mod:' + Core.norm(n));
     return { k: n, n, fluff, icon: plugIcon(n, 'sq', pIdx(n, 'armor')), sub: `${fluff ? '<span class="bst">weapon / stat only</span>' : ''}<span class="bst">${cost} energy</span>${statChips(st)} ${esc(bd.slice(0, 140))}${bd.length > 140 ? '…' : ''}`, s: n + ' ' + bd, score: r.score, why: r.why, on: n === cur }; })
@@ -2863,7 +2863,7 @@ function pickMod(b, slot, i, pieces) {
   openPicker(`${A_LABEL[slot]} · ${sl} mod socket`, [...top.map(r => ({ ...r, cls: 'pin' })), ...rows], n => {
     const arr = lay.map((_, k) => ms[k] ?? null); arr[i] = n || null;
     b.mods[slot] = arr; saveBuilds(); renderBuilds();
-  }, { clear: false, note: code === 't' ? `Tier 5 tuning: +5 to this piece's Tuned stat${it?.tuning ? ` (${esc(it.tuning)})` : ''} at -5 to another, or Balanced Tuning (+1 to its three lowest stats).` : code === 's' ? `Only ${A_LABEL[slot].toLowerCase()} mods fit this socket.` : code === 'g' ? 'General mods (stat mods) fit any armor piece’s general socket.' : `Only ${sl.toLowerCase()} mods fit this socket.` });
+  }, { clear: false, note: code === 't' ? (Core.isExoticArmor(it) ? 'Exotic tuning: any +5 / −5 pair, or Balanced Tuning (+1 to its three lowest stats). Exotics aren’t limited to a Tuned stat.' : `Tier 5 tuning: +5 to this piece's Tuned stat${it?.tuning ? ` (${esc(it.tuning)})` : ''} at -5 to another, or Balanced Tuning (+1 to its three lowest stats).`) : code === 's' ? `Only ${A_LABEL[slot].toLowerCase()} mods fit this socket.` : code === 'g' ? 'General mods (stat mods) fit any armor piece’s general socket.' : `Only ${sl.toLowerCase()} mods fit this socket.` });
 }
 
 // ---------- views: Vault (panes) · Clean up · Subclasses ----------
