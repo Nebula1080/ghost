@@ -1115,3 +1115,4 @@ a{color:var(--light)}
 .bstat .bdelta{display:inline-block;margin-left:4px;font-size:10.5px;font-style:normal;font-weight:600;animation:bdelta 2.4s ease-out forwards}.bstat .bdelta.up{color:var(--good)}.bstat .bdelta.dn{color:var(--bad)}
 @keyframes bdelta{0%,70%{opacity:1}100%{opacity:0}}@media (prefers-reduced-motion:reduce){.bstat .bdelta{animation:none}}
 .bstat{grid-template-columns:72px minmax(40px,auto) 1fr}
+.shareimg{display:block;width:auto;max-width:100%;max-height:56vh;height:auto;margin:8px auto 12px;border-radius:8px;border:1px solid var(--line2)}

@@ -2414,7 +2414,7 @@ function renderBuilds() {
       <div class="bfx">${fx.map(t => `<span class="${/^↑/.test(t) ? 'enh' : ''}">${esc(t)}</span>`).join('')}</div></div>`; }).join('');
   const subName = sc?.n || '';
   v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Builds</div><h1><span id="bName" class="bname" tabindex="0" title="Rename">${esc(b.name)}</span></h1><p class="sum"><b style="color:${EL_COL[b.el]}">${esc(subName)}</b> · ${esc(B_CLASSES.find(c => c[0] === b.cls)?.[1] || '')} · <button class="linkbtn" id="bJump">${nLinks} interaction${nLinks === 1 ? '' : 's'}</button> · ${st.total} stat total</p></div>
-      <div class="band-actions">${BG?.signedIn?.() && buildChar(b).length ? '<button class="btn primary" id="bEquip">Equip build</button>' : ''}<button class="btn" id="bDim">Send to DIM</button><button class="btn" id="bRen">Rename</button><button class="btn" id="bDup">Duplicate</button><button class="btn" id="bDel">Delete</button></div></div>${list}</div>
+      <div class="band-actions">${BG?.signedIn?.() && buildChar(b).length ? '<button class="btn primary" id="bEquip">Equip build</button>' : ''}<button class="btn" id="bDim">Send to DIM</button><button class="btn" id="bShare">Share image</button><button class="btn" id="bRen">Rename</button><button class="btn" id="bDup">Duplicate</button><button class="btn" id="bDel">Delete</button></div></div>${list}</div>
     <div class="bld-body"><div class="bld-main">
       <section class="bsec"><h2 class="bh">Subclass</h2>${subHtml}</section>
       <section class="bsec"><h2 class="bh">Weapons</h2><div class="bcards">${Core.W_SLOTS.map(s => itemCard('w', s)).join('')}</div></section>
@@ -2625,6 +2625,7 @@ function bindBuild(v, b, pieces, syn) {
   $('#bRen').onclick = rename; $('#bName').onclick = rename; $('#bName').onkeydown = e => { if (e.key === 'Enter') rename(); };
   $('#bDup').onclick = () => newBuild(b);
   $('#bDim').onclick = () => openDimLink(b);
+  $('#bShare').onclick = () => openShareImage(b);
   const eb = $('#bEquip'); if (eb) eb.onclick = () => equipBuild(b);
   v.querySelectorAll('[data-stip]').forEach(x => x.onclick = () => { const o = x.classList.contains('open'); v.querySelectorAll('[data-stip].open').forEach(y => y.classList.remove('open')); x.classList.toggle('open', !o); });
   $('#bJump').onclick = () => $('#bSyn').scrollIntoView({ behavior: motionOK() ? 'smooth' : 'auto', block: 'start' });
@@ -2700,6 +2701,136 @@ function modWarnings(b) {
   return out;
 }
 const modWarnHtml = b => { const w = modWarnings(b); return w.length ? `<div class="warnbox" role="note"><b>Check before you go</b><ul>${w.map(x => `<li>${esc(x)}</li>`).join('')}</ul><small>Empty sockets stay empty; plan a mod for them in Armor &amp; mods. Mods over a piece’s energy won’t fit.</small></div>` : ''; };
+// ---------- share image (2026-11-22, colour option B: neutral dark card, accent = the subclass element) ----------
+// One 1080×1350 PNG drawn on a canvas: header, subclass, weapons, armor, stats, artifact, how it works (the build's
+// strongest interactions) and a QR code that opens the build in DIM. Icons come from Ghost's own sprite sheets
+// (same origin); Bungie item art is used only when it loads with CORS, so the canvas is never tainted.
+const SHARE_EL = { solar: '#f2721b', arc: '#7aecf3', void: '#b98ae8', stasis: '#6aa6ff', strand: '#3fe07a', prism: '#ff7ad9' };
+const SHARE_C = { bg: '#121417', pn: '#1c1f24', ln: '#2a2e35', tx: '#eef0f2', mu: '#8d949c', ex: '#e8c25a' };
+const shareImg = src => new Promise(res => { if (!src) return res(null); const im = new Image(); if (/^https:/.test(src)) im.crossOrigin = 'anonymous'; im.onload = () => res(im); im.onerror = () => res(null); im.src = src; });
+// the DIM link, kept short enough for a QR code: no notes, and only the characters a URL can't carry are escaped
+function shareDimUrl(b) {
+  // anyone can scan it, so items go by hash (DIM picks the scanner's own copy) instead of the owner's instance ids
+  const lo = Core.dimLoadout({ ...b, notes: '' }, D, S.byId, 'g'); lo.equipped = lo.equipped.map(e => e.socketOverrides ? e : { id: '0', hash: e.hash });
+  return 'https://app.destinyitemmanager.com/loadouts?loadout=' + JSON.stringify(lo).replace(/[%&#+ ?<>"`{}|\\^\[\]]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase().padStart(2, '0'));
+}
+// the strongest interactions: per term, who makes it and who uses it (most links first)
+function shareLoops(syn, pieces, n = 4) {
+  const T = new Map();
+  for (const l of syn.links || []) { if (l.from === l.to) continue; const x = T.get(l.t) || { l: l.l || l.t, p: new Set(), u: new Set(), n: 0 }; x.p.add(l.from); x.u.add(l.to); x.n++; T.set(l.t, x); }
+  return [...T.values()].sort((a, b) => b.n - a.n).slice(0, n).map(x => ({ term: x.l, from: [...x.p].map(i => pieces[i]?.n).filter(Boolean), to: [...x.u].map(i => pieces[i]?.n).filter(Boolean) }));
+}
+async function shareCard(b) {
+  const W = 1080, H = 1350, P = 48, C = SHARE_C; const AC = SHARE_EL[b.el] || '#f2721b';
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const x = cv.getContext('2d');
+  if (!x.roundRect) x.roundRect = function (a, b2, c, d) { this.rect(a, b2, c, d); };
+  try { await Promise.all(['500 20px "Hanken Grotesk"', '400 20px "Hanken Grotesk"', '600 20px "Cinzel"'].map(f => document.fonts?.load?.(f))); } catch {}
+  const UI = '"Hanken Grotesk", system-ui, sans-serif', INS = '"Cinzel", Georgia, serif';
+  const spr = D?.spr ? await shareImg(D.spr.f) : null;
+  const font = (px, w = 400, fam = UI) => { x.font = `${w} ${px}px ${fam}`; };
+  const fit = (t, w) => { t = String(t || ''); if (x.measureText(t).width <= w) return t; while (t.length > 1 && x.measureText(t + '…').width > w) t = t.slice(0, -1); return t + '…'; };
+  const text = (t, tx, ty, w, col = C.tx) => { x.fillStyle = col; x.fillText(fit(t, w), tx, ty); };
+  const rr = (rx, ry, rw, rh, r, fill, stroke) => { x.beginPath(); x.roundRect(rx, ry, rw, rh, r); if (fill) { x.fillStyle = fill; x.fill(); } if (stroke) { x.strokeStyle = stroke; x.lineWidth = 2; x.stroke(); } };
+  const icon = (idx, ix, iy, s, name = '?') => {
+    if (spr && typeof idx === 'number' && idx >= 0) { const c = idx % D.spr.c, r = Math.floor(idx / D.spr.c); x.drawImage(spr, c * 48, r * 48, 48, 48, ix, iy, s, s); return; }
+    rr(ix, iy, s, s, 6, C.ln); font(s * 0.45, 500); x.textAlign = 'center'; text(String(name)[0] || '?', ix + s / 2, iy + s * 0.65, s, C.mu); x.textAlign = 'left';
+  };
+  const itemPic = async (it, ix, iy, s) => {
+    const a = itemArt(it); const im = a ? await shareImg(a.icon) : null; if (im) { x.drawImage(im, ix, iy, s, s); return; }
+    const k = ISPR && ISPR.i?.[it.hash]; const sheet = typeof k === 'number' ? ISPR.sheets?.[Math.floor(k / ISPR.per)] : '';
+    const sim = /^items-\d+\.webp$/.test(sheet || '') ? await shareImg('isprites/' + sheet) : null;
+    if (sim) { const c = k % ISPR.per; x.drawImage(sim, (c % ISPR.cols) * 64, Math.floor(c / ISPR.cols) * 64, 64, 64, ix, iy, s, s); return; }
+    const sk = Core.sockets(it, D); const intr = (sk.intrinsic[0] || sk.exotic[0])?.n || it.frame; icon(pIdx(intr, it.kind), ix, iy, s, it.name);
+  };
+  const sp = t => t.toUpperCase().split('').join(String.fromCharCode(8202));
+  const head = (t, hy, hx = P, hw = W - 2 * P) => { font(15, 500); x.fillStyle = AC; x.fillText(sp(t), hx, hy); const tw = x.measureText(sp(t)).width; x.fillStyle = C.ln; x.fillRect(hx + tw + 14, hy - 5, Math.max(0, hw - tw - 14), 1); };
+  // background + header
+  x.fillStyle = C.bg; x.fillRect(0, 0, W, H); x.fillStyle = AC; x.fillRect(0, 0, W, 8);
+  const sc = scAll(b); const pieces = Core.buildPieces(b, D, S.byId); const syn = Core.synergy(pieces, IX, D, b.el);
+  icon(sc?.i, P, 40, 72, sc?.n);
+  font(46, 600, INS); text(b.name, P + 92, 84, W - 2 * P - 92 - 120);
+  font(22); text(`${B_CLASSES.find(c => c[0] === b.cls)?.[1] || ''} · ${sc?.n || ''}`, P + 92, 118, W - 2 * P - 92, AC);
+  font(16, 500, INS); x.textAlign = 'right'; text('GHOST', W - P, 70, 120, C.mu); x.textAlign = 'left';
+  // subclass: abilities, aspects, fragments
+  let y = 172; head('Subclass', y); y += 18;
+  const SL = [['super', 'Super'], ['classAbility', 'Class ability'], ['melee', 'Melee'], ['grenade', 'Grenade']]; const cw = (W - 2 * P) / 4;
+  SL.forEach(([k, l], i) => { const a = subPick(b, k, b.sub?.[k]); const cx = P + i * cw; icon(a?.i, cx, y, 56, a?.n || l); font(13, 500); text(l.toUpperCase(), cx + 66, y + 20, cw - 76, C.mu); font(19, 500); text(a?.n || '—', cx + 66, y + 45, cw - 76); });
+  y += 72;
+  const asp = (b.sub?.aspects || []).map(h => subPick(b, 'aspects', h)).filter(Boolean);
+  asp.forEach((a, i) => { const cx = P + i * (W - 2 * P) / 2; icon(a.i, cx, y, 44, a.n); font(13, 500); text('ASPECT', cx + 54, y + 17, 400, C.mu); font(18, 500); text(a.n, cx + 54, y + 38, (W - 2 * P) / 2 - 64); });
+  if (asp.length) y += 56;
+  const frs = (b.sub?.fragments || []).map(h => subPick(b, 'fragments', h)).filter(Boolean); const fw = (W - 2 * P) / 3;
+  frs.forEach((a, i) => { const cx = P + (i % 3) * fw, cy = y + Math.floor(i / 3) * 40; icon(a.i, cx, cy, 32, a.n); font(16); text(a.n, cx + 40, cy + 22, fw - 50); });
+  y += Math.ceil(frs.length / 3) * 40 + 18;
+  // weapons
+  head('Weapons', y); y += 16; const ww = (W - 2 * P - 2 * 16) / 3;
+  for (const [i, s] of Core.W_SLOTS.entries()) {
+    const it = S.byId.get(b.w?.[s]?.id); const cx = P + i * (ww + 16); const ex = it && /exotic/i.test(it.rarity || '');
+    rr(cx, y, ww, 128, 10, C.pn, ex ? C.ex : null);
+    if (!it) { font(17); text('No ' + s + ' weapon', cx + 16, y + 70, ww - 32, C.mu); continue; }
+    await itemPic(it, cx + 14, y + 14, 56);
+    font(19, 500); text(it.name, cx + 80, y + 36, ww - 94, ex ? C.ex : C.tx);
+    font(14); text([it.type, it.element].filter(Boolean).join(' · '), cx + 80, y + 58, ww - 94, C.mu);
+    const sk = Core.sockets(it, D); const perks = sk.cols.flatMap(c => c.perks.filter(p => p.s).map(p => p.n)).slice(-3);
+    font(14); text(perks.join(' · '), cx + 14, y + 100, ww - 28, C.tx);
+  }
+  y += 150;
+  // armor: the exotic large, the rest listed, then active set bonuses
+  head('Armor', y); y += 16;
+  const arm = Core.A_SLOTS.map(s => S.byId.get(b.a?.[s]?.id)).filter(Boolean); const exo = arm.find(it => /exotic/i.test(it.rarity || ''));
+  const lw = 470; rr(P, y, lw, 150, 10, C.pn, exo ? C.ex : null);
+  if (exo) { await itemPic(exo, P + 16, y + 16, 72); font(13, 500); text('EXOTIC ' + (Core.armorSlot(exo) === 'class' ? 'CLASS ITEM' : (exo.type || '').toUpperCase()), P + 104, y + 34, lw - 120, C.mu); font(22, 500); text(exo.name, P + 104, y + 62, lw - 120, C.ex);
+    const sk = Core.sockets(exo, D); font(15); text(sk.exotic.map(p => p.n).slice(0, 2).join(' · '), P + 104, y + 88, lw - 120); }
+  else { font(18); text('No exotic armor', P + 20, y + 80, lw - 40, C.mu); }
+  const rest = arm.filter(it => it !== exo); const rx = P + lw + 20, rw = W - P - rx;
+  for (const [i, it] of rest.entries()) { const ry = y + i * 38; await itemPic(it, rx, ry, 32); font(17); text(it.name, rx + 42, ry + 23, rw - 42); }
+  const sets = pieces.filter(pc => pc.g === 'armor' && pc.slot === 'set');
+  font(15); text(sets.length ? '◈ ' + sets.map(pc => `${pc.n} (${pc.label.split(' · ').pop()})`).join('  ·  ') : '', P + 16, y + 136, lw - 32, AC);
+  y += 172;
+  // stats (game order) + artifact
+  head('Stats', y, P, 512); head('Artifact', y, P + 560, W - P - (P + 560));
+  y += 18; const st = Core.buildStats(b, D, S.byId);
+  Core.STAT_ORDER.forEach((k, i) => { const sy = y + i * 30; const v = Math.max(0, Math.min(200, st.stats[k].total)); font(16); text(k, P, sy + 16, 90, C.mu); font(17, 500); x.textAlign = 'right'; text(String(st.stats[k].total), P + 140, sy + 16, 50); x.textAlign = 'left';
+    rr(P + 152, sy + 6, 360, 10, 3, C.pn); if (v) rr(P + 152, sy + 6, 360 * v / 200, 10, 3, AC); x.fillStyle = C.mu; x.fillRect(P + 152 + 180, sy + 3, 2, 16); });
+  const art = Core.artOf(b, D);
+  if (art) { const rows = Core.artSlots(b.art, art); icon(art.i, P + 560, y, 28, art.n); font(17, 500); text(art.n, P + 596, y + 20, W - P - 596);
+    let ay = y + 40; const aw = (W - P - (P + 560)) / 2;
+    rows.flat().filter(Boolean).forEach((p, i) => { const ax = P + 560 + (i % 2) * aw, yy = ay + Math.floor(i / 2) * 32; icon(p[4], ax, yy, 24, p[1]); font(14); text(p[1], ax + 30, yy + 17, aw - 36); }); }
+  else { font(16); text('No artifact chosen', P + 560, y + 20, 400, C.mu); }
+  y += 6 * 30 + 24;
+  // how it works + QR
+  head('How it works', y); y += 18; const qs = 270, qx = W - P - qs, lw2 = qx - P - 24;
+  const loops = shareLoops(syn, pieces);
+  if (!loops.length) { font(17); text('Pick abilities and gear to see how the pieces feed each other.', P, y + 30, lw2, C.mu); }
+  loops.forEach((l, i) => { const ly = y + i * 62; rr(P, ly, lw2, 52, 8, C.pn);
+    font(16, 500); const term = l.term.toUpperCase(); const tw = Math.min(200, x.measureText(term).width + 24);
+    const fromT = l.from.slice(0, 2).join(', ') + (l.from.length > 2 ? ` +${l.from.length - 2}` : ''); font(15); const fw2 = Math.min(x.measureText(fromT).width, (lw2 - tw - 100) * 0.5);
+    text(fromT, P + 14, ly + 32, fw2 + 1); const mid = P + 14 + fw2 + 34;
+    rr(mid, ly + 12, tw, 28, 14, AC); font(14, 500); x.textAlign = 'center'; text(term, mid + tw / 2, ly + 31, tw - 12, C.bg); x.textAlign = 'left';
+    x.fillStyle = AC; font(18, 500); x.fillText('→', mid - 26, ly + 33); x.fillText('→', mid + tw + 8, ly + 33);
+    font(15); text(l.to.slice(0, 2).join(', ') + (l.to.length > 2 ? ` +${l.to.length - 2}` : ''), mid + tw + 34, ly + 32, P + lw2 - (mid + tw + 34) - 12); });
+  // QR: white quiet zone so phones read it on the dark card
+  let qOk = false;
+  try { const q = qrcode(0, 'L'); q.addData(shareDimUrl(b), 'Byte'); q.make(); const n = q.getModuleCount(); const m = (qs - 24) / n; const off = 12; const px = v => Math.round(v);
+    rr(qx, y, qs, qs, 8, '#ffffff'); x.fillStyle = '#000000';
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) { const x0 = px(qx + off + c * m), y0 = px(y + off + r * m); x.fillRect(x0, y0, px(qx + off + (c + 1) * m) - x0, px(y + off + (r + 1) * m) - y0); } qOk = true; } catch { qOk = false; }
+  font(14); x.textAlign = 'center'; text(qOk ? 'Scan to open in DIM' : 'Build too big for a QR code', qx + qs / 2, y + qs + 22, qs, C.mu); x.textAlign = 'left';
+  // footer
+  font(14); text('Made with Ghost · nebula1080.github.io/ghost', P, H - 28, 600, C.mu);
+  return cv;
+}
+async function openShareImage(b) {
+  modal(`<h2>Share image</h2><p class="snote">Drawing “${esc(b.name)}”…</p>`);
+  let cv, url; try { cv = await shareCard(b); url = cv.toDataURL('image/png'); } catch { modal(`<h2>Share image</h2><p class="snote">The image couldn’t be drawn in this browser.</p><div class="msheet"><button class="btn" data-close>Close</button></div>`); return; } const fname = (String(b.name || 'build').replace(/[^\w -]+/g, '').trim().replace(/\s+/g, '-') || 'build') + '.png';
+  modal(`<h2>Share image</h2><img class="shareimg" src="${url}" alt="Build image for ${esc(b.name)}">
+    <div class="msheet"><button class="btn primary" id="shDl">Download PNG</button><button class="btn" id="shCp">Copy image</button><button class="btn" data-close>Close</button></div>`);
+  $('#shDl').onclick = async () => {
+    if (S.downloads) { try { const blob = await new Promise(r => cv.toBlob(r, 'image/png')); await S.downloads.save({ filename: fname, data: blob }); toast('Saved ' + fname); } catch { toast('Download was cancelled or refused.'); } return; }
+    const a = document.createElement('a'); a.href = url; a.download = fname; document.body.appendChild(a); a.click(); a.remove(); };
+  const cp = $('#shCp'); if (!navigator.clipboard?.write || typeof ClipboardItem === 'undefined') cp.remove();
+  else cp.onclick = async () => { try { const blob = await new Promise(r => cv.toBlob(r, 'image/png')); await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]); toast('Image copied.'); } catch { toast('Copy blocked by the browser.'); } };
+  cv.toBlob(blob => { if (blob) addShareButton($('#shDl'), { file: new File([blob], fname, { type: 'image/png' }) }); }, 'image/png');
+}
 function openDimLink(b) {
   const lo = Core.dimLoadout(b, D, S.byId, globalThis.crypto?.randomUUID?.() || 'ghost-' + uid());
   const url = Core.dimLink(lo);
