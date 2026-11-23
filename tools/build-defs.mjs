@@ -139,7 +139,7 @@ const artifact = Object.values(artifactDefs).sort((a, b) => b.index - a.index)[0
 // ---------- plugs: icon, socket type, Bungie description ----------
 // socket type codes for the game-style layout: i intrinsic, b barrel-like, m magazine-like, t trait,
 // o origin, w weapon mod, k masterwork, c catalyst, a armor mod, x exotic armor perk
-function plugType(cat) {
+function plugType(cat, it) {
   if (/confetti|kill_vfx|flair/i.test(cat)) return ''; // Combat Flair: cosmetic, hidden like shaders
   if (cat === 'intrinsics') return 'i';
   if (cat === 'armor_archetypes') return 'r';
@@ -150,6 +150,11 @@ function plugType(cat) {
   if (/weapon\.mod_|^v\d+\.weapon\.mod|weapon_tiering\.plugs\.mods|crafting\.plugs\.weapons\.mods/.test(cat)) return 'w';
   if (/masterworks?\.(stat|generic\.weapons)|exotic\.weapon\.masterwork|_masterwork$/.test(cat)) return 'k';
   if (cat === 'catalysts') return 'c';
+  // newer weapons with their own plug families (Praxic Blade: v950.new.sword0.blades / guards / masterwork / forms…):
+  // tang = barrel-like, grip = magazine-like, a 'masterwork'-family plug Bungie labels Trait is a trait (the same family
+  // also holds exotic catalysts, which stay out), the rest are mods
+  const nw = /^v\d+\.new\.[a-z0-9_]+\.([a-z_]+)$/.exec(cat);
+  if (nw) return nw[1] === 'masterwork' ? (it?.itemTypeDisplayName === 'Trait' ? 't' : '') : ({ blades: 'b', guards: 'm', grips: 'm', forms: 'w', stat_upgrades: 'w', perk_upgrades: 'w', cosmetics: 'w' }[nw[1]] || '');
   if (/^enhancements\./.test(cat)) return 'a';
   return '';
 }
@@ -162,7 +167,7 @@ const sideOf = (cat, ty) => (ty === 'r' || ty === 'a' || /armor/.test(cat)) ? 'a
 // with "This mod has been deprecated…", which made the picker hide the real stat mods)
 const dead = it => /deprecated|no longer functions/i.test(bungieDesc(it)) ? 1 : 0;
 for (const it of Object.values(items).filter(it => it.plug && name(it) && it.displayProperties?.hasIcon).sort((a, b) => pref(a) - pref(b) || dead(a) - dead(b) || (plugStats(b) ? 1 : 0) - (plugStats(a) ? 1 : 0))) {
-  const cat = it.plug.plugCategoryIdentifier; const ty = plugType(cat); if (!ty) continue;
+  const cat = it.plug.plugCategoryIdentifier; const ty = plugType(cat, it); if (!ty) continue;
   const k = norm(name(it)); const entry = [iconTail(it.displayProperties.icon), ty, bungieDesc(it).slice(0, 600), it.hash];
   const side = sideOf(cat, ty);
   if ((side === 'w' || side === 'both') && !pw[k]) pw[k] = entry;

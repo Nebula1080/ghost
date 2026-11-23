@@ -3,7 +3,9 @@
 import fs from 'node:fs'; import path from 'node:path'; import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const d = JSON.parse(fs.readFileSync(path.join(root, 'data/defs.json'), 'utf8'));
-const s = new Set();
+// start from the committed sheet's order so a rebuild keeps every cell where it is (new icons go at the end)
+const idxFile = path.join(root, 'data/sprite-index.json');
+const s = new Set(fs.existsSync(idxFile) ? JSON.parse(fs.readFileSync(idxFile, 'utf8')) : []);
 Object.values(d.pi).forEach(p => p[0] && s.add(p[0]));
 d.sets.forEach(x => x.p.forEach(p => p.i && s.add(p.i)));
 for (const c of Object.values(d.sub)) for (const e of Object.values(c)) { e.i && s.add(e.i); Object.values(e.s).flat().forEach(a => a.i && s.add(a.i)); }

@@ -382,4 +382,24 @@ t('DIM import: our own DIM link comes back as the same build (subclass, items, m
   const r2 = C.fromDimLoadout({ ...p.lo, equipped: [...p.lo.equipped, { id: '6917529000000000099', hash: 123 }] }, DS, [helm, gun]);
   assert.deepStrictEqual(r2.missing, [123], 'items not in the vault are reported');
 });
+t('sockets: Praxic Blade columns + mods, no duplicate perks, a perk named like an exotic intrinsic stays in its column', () => {
+  const W = (name, hash, frame, perks) => { const it = { kind: 'weapon', name, hash, frame, rarity: 'Exotic', perks: perks.map(x => ({ n: x.replace(/\*$/, ''), s: x.endsWith('*') })) }; C.applyDefs([it], D); return it; };
+  // Praxic Blade from the DIM CSV: tang / grip / two traits + Echoing Blade in columns; form, blade focus, core, crystal = mods; the skin hidden
+  const px = C.sockets(W('Praxic Blade', '3049715579', 'Ranged Weapon', ['Ranged Weapon*', 'Fencing Tang*', 'Offensive Grip*', 'Cormorant Reversal*', 'Kill Tracker', 'Cormorant Combo*', 'Royal Guard Hilt*', 'Echoing Blade*', 'Dark Matter Crystal: Taken*', 'Forceful Blade*', 'Offensive Form*', 'Impact Core*']), D);
+  assert.deepStrictEqual(px.intrinsic.map(p => p.n), ['Ranged Weapon']);
+  assert.deepStrictEqual(px.cols.map(c => c.perks.map(p => p.n).join('/')), ['Fencing Tang', 'Offensive Grip', 'Cormorant Reversal', 'Cormorant Combo', 'Echoing Blade']);
+  assert.deepStrictEqual(px.mods.map(p => p.n).sort(), ['Dark Matter Crystal: Taken', 'Forceful Blade', 'Impact Core', 'Offensive Form']);
+  for (const n of ['Fencing Tang', 'Offensive Grip', 'Echoing Blade', 'Impact Core']) assert.ok(C.plugOf(n, D, 'weapon')?.[0], n + ' has an icon');
+  // The Slammer: Honed Edge is one of its blade options, not Izanagi's Burden's intrinsic
+  const sl = C.sockets(W('The Slammer', '2466028274', 'Vortex Frame', ['Vortex Frame*', 'Hungry Edge*', 'Honed Edge', 'Jagged Edge', 'Balanced Guard*', 'Enduring Guard']), D);
+  assert.deepStrictEqual(sl.intrinsic.map(p => p.n), ['Vortex Frame']);
+  assert.ok(sl.cols[0].perks.some(p => p.n === 'Honed Edge'), 'Honed Edge sits in the blade column');
+  // Bungie-loaded Blasphemer: the equipped trait listed again among its socket's options shows once
+  const bl = { kind: 'weapon', name: 'Blasphemer', hash: '2782847179', frame: 'Pinpoint Slug Frame', perks: [
+    { n: 'Pinpoint Slug Frame', s: 1, si: 0 }, { n: 'Hammer-Forged Rifling', s: 1, si: 1 }, { n: 'Arrowhead Brake', s: 0, si: 1 },
+    { n: 'Quickdraw', s: 1, si: 3 }, { n: 'Quickdraw', s: 0, si: 3 }, { n: 'Opening Shot', s: 1, si: 4 }, { n: 'Enhanced Opening Shot', s: 0, si: 4 }] };
+  C.applyDefs([bl], D);
+  const bs = C.sockets(bl, D);
+  assert.deepStrictEqual(bs.cols.map(c => c.perks.map(p => p.n + (p.s ? '*' : '')).join('/')), ['Hammer-Forged Rifling*/Arrowhead Brake', 'Quickdraw*', 'Opening Shot*']);
+});
 console.log(n, 'build tests passed');
