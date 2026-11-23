@@ -426,4 +426,12 @@ t('gameplay loops: closed cycles in the interactions, each once, central pieces 
   assert.ok(L.every(l => l.every(s => s.t)), 'every step says what it gives the next');
   assert.deepStrictEqual(C.buildLoops([{ from: 0, to: 1, l: 'x' }], pieces), [], 'no cycle, no loop');
 });
+t('artifact-only siphons: flagged, not part of the build, left out of the DIM link', () => {
+  assert.ok(D.aml.includes('Arc/Stasis Dual Siphon') && D.aml.includes('Kinetic Charge Siphon'));
+  assert.ok(!D.aml.includes('Harmonic Siphon') && !D.aml.includes('Super Mod'), 'normal mods are not flagged');
+  const b = C.normBuild({ cls: 'warlock', el: 'solar', a: {}, mods: { head: [null, 'Arc/Stasis Dual Siphon', 'Harmonic Siphon'] } }, D);
+  assert.ok(!C.buildPieces(b, D, new Map()).some(p => p.n === 'Arc/Stasis Dual Siphon'), 'not an interaction piece');
+  const mods = C.dimLoadout(b, D, new Map(), 'x').parameters.mods; const h = n => D.am.head.find(x => x[0] === n)[3];
+  assert.ok(mods.includes(h('Harmonic Siphon')) && !mods.includes(h('Arc/Stasis Dual Siphon')));
+});
 console.log(n, 'build tests passed');

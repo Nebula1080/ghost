@@ -271,12 +271,19 @@ for (const sc of Object.values(items).filter(x => x.itemType === 16 && x.sockets
 // Icons and descriptions come from pi/pa by name (Core.plugOf(name, defs, 'armor')).
 const AM_CAT = { 'enhancements.v2_head': 'head', 'enhancements.v2_arms': 'arms', 'enhancements.v2_chest': 'chest', 'enhancements.v2_legs': 'legs', 'enhancements.v2_class_item': 'class', 'enhancements.v2_general': 'general' };
 const am = { head: [], arms: [], chest: [], legs: [], class: [], general: [] }; const amSeen = new Set();
-// same-named copies: the one that actually gives stats wins (Bungie also has stat-less "Minor Class Mod" variants)
-for (const it of Object.values(items).sort((a, b) => (b.plug?.energyCost?.energyCost || 0) - (a.plug?.energyCost?.energyCost || 0) || (plugStats(b) ? 1 : 0) - (plugStats(a) ? 1 : 0))) {
+// a copy that only works "selected in the Seasonal Artifact" (Bungie insertion rule): the artifact's reduced-cost
+// copies, and the dual / combo siphons, which no current artifact offers. The normal copy wins; names whose only
+// copy is artifact-gated go to aml (the picker hides them, the DIM link leaves them out, DIM greys them).
+const artGated = it => (it.plug?.insertionRules || []).some(r => /Seasonal Artifact/i.test(r.failureMessage || ''));
+const aml = [];
+// same-named copies: not artifact-gated first, then the full-cost one, then one that gives stats (Bungie also has
+// stat-less "Minor Class Mod" variants)
+for (const it of Object.values(items).sort((a, b) => artGated(a) - artGated(b) || (b.plug?.energyCost?.energyCost || 0) - (a.plug?.energyCost?.energyCost || 0) || (plugStats(b) ? 1 : 0) - (plugStats(a) ? 1 : 0))) {
   const slot = AM_CAT[it.plug?.plugCategoryIdentifier]; const n = name(it); if (!slot || !n || it.redacted || !it.displayProperties?.hasIcon) continue;
   if (/^(empty|locked|default)\b/i.test(n) || /deprecated|no longer functions/i.test(bungieDesc(it))) continue;
   const k = slot + ':' + norm(n); if (amSeen.has(k)) continue; amSeen.add(k);
   am[slot].push([n, it.plug.energyCost?.energyCost || 0, plugStats(it) || 0, it.hash]);   // [name, cost, stats|0, hash]
+  if (artGated(it)) aml.push(n);
 }
 for (const l of Object.values(am)) l.sort((a, b) => a[0].localeCompare(b[0]));
 
@@ -435,7 +442,7 @@ console.log('intrinsics by hash:', Object.keys(wi).length, 'weapons,', Object.ke
 
 const out = {
   v: manifest.Response.version, built: new Date().toISOString().slice(0, 10), artifact: name(artifact),
-  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, am, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos], wi, ih, mwp, cata, wc, xs,
+  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, am, aml, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos], wi, ih, mwp, cata, wc, xs,
 };
 fs.mkdirSync(path.join(root, 'data'), { recursive: true });
 fs.writeFileSync(path.join(root, 'data/defs.json'), JSON.stringify(out));
