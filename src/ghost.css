@@ -1123,3 +1123,4 @@ a{color:var(--light)}
 .lprow{margin-top:8px}
 @media (max-width:760px){.lpstep{grid-template-columns:22px minmax(0,1fr) 40px}.lpstep .qin{grid-column:2/3}}
 .lpstep .qin{font-family:var(--ui)}.lpfound::before{content:"Loops Ghost found:";flex-basis:100%;font-size:12px;color:var(--faint)}
+.bmod.locked{border-color:var(--bad)}.bmod.locked>span:last-child{text-decoration:line-through;text-decoration-color:var(--bad)}.bmod.locked .bmk::after{content:' · locked';color:var(--bad)}

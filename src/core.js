@@ -1217,7 +1217,7 @@ const Core = (() => {
     const setN = {};
     for (const s of A_SLOTS) { const it = byId?.get(b.a?.[s]?.id); const si = it && defs?.as?.[it.hash]; if (si != null) setN[si] = (setN[si] || 0) + 1; }
     for (const [si, n] of Object.entries(setN)) for (const p of defs.sets[si]?.p || []) if (n >= p.c) out.push({ g: 'armor', slot: 'set', n: p.n, label: `${defs.sets[si].n} · ${p.c}-piece bonus`, parts: [['Bungie', p.d]] });
-    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(n => n && n !== MOD_NONE)) out.push({ g: 'mod', slot: s, n, label: 'Armor mod', parts: pieceText(n, defs, null, 'armor') });
+    for (const s of A_SLOTS) for (const n of (b.mods?.[s] || []).filter(n => n && n !== MOD_NONE && !modLocked(n, defs))) out.push({ g: 'mod', slot: s, n, label: 'Armor mod', parts: pieceText(n, defs, null, 'armor') });
     // artifact perks (one artifact per build)
     const art = artOf(b, defs);
     for (const h of b.art || []) { const p = art?.p.find(x => x[0] === h); if (p) out.push({ g: 'artifact', slot: 'artifact', n: p[1], label: `${art.n} · tier ${p[2]}`, parts: p[3] ? [['Bungie', p[3]]] : [] }); }
@@ -1646,7 +1646,7 @@ const Core = (() => {
     for (const s of A_SLOTS) {
       const list = b.mods?.[s] || []; const it = byId?.get(b.a?.[s]?.id);
       const pt = it && armorParts(it, defs, s); const lay = pt?.lay || modLayout(b.a?.[s]?.hash, defs); const ins = pt?.inserted || [];
-      lay.forEach(([, c], i) => { if (list[i] === MOD_NONE) { clear = true; return; } const n = list[i] || ins[i]; const h = n && hashOf(n, s, c); if (h) mods.push(h); });
+      lay.forEach(([, c], i) => { if (list[i] === MOD_NONE) { clear = true; return; } const n = list[i] || ins[i]; const h = n && !modLocked(n, defs) && hashOf(n, s, c); if (h) mods.push(h); });
     }
     const lo = { id, name: String(b.name || 'Ghost build').slice(0, 60), classType: DIM_CLASS[b.cls] ?? 3, equipped, unequipped: [] };
     if (mods.length || clear) lo.parameters = { mods, ...(clear ? { clearMods: true } : {}) };
@@ -1697,6 +1697,8 @@ const Core = (() => {
   // can this tuning mod go on this piece: Balanced anywhere; +X / -Y only where X is the Tuned stat (exotics: any).
   // DIM writes the Tuned stat in lower case ("weapons"), the mod names are capitalised.
   const tuneFits = (n, it) => !/^[+]/.test(n) || !it || isExoticArmor(it) || !it.tuning || n.toLowerCase().startsWith(`+${String(it.tuning).toLowerCase()} /`);
+  // mods whose only copy needs a Seasonal Artifact selection no current artifact offers (dual / combo siphons)
+  const modLocked = (n, defs) => !!defs?.aml?.includes(n);
   const MOD_SOCK_L = { g: 'General', t: 'Tuning', a: 'Artifice' };
   const modSockLabel = (c, slotLabel) => c === 's' ? slotLabel : MOD_SOCK_L[c] || (/^x:raid/.test(c) ? 'Raid' : /^x:season/.test(c) ? 'Seasonal' : 'Activity');
   // the mods one socket takes (code given), or every mod an armor slot can hold (lookups: costs, stats, hashes)
@@ -1954,7 +1956,7 @@ const Core = (() => {
   }
 
   return { LIMITS, xferClean, XFER_MAX, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, tuneTier, tuneFits, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink, parseDimLoadout, fromDimLoadout, buildLoops,
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, modLocked, tuneTier, tuneFits, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink, parseDimLoadout, fromDimLoadout, buildLoops,
     MOD_NONE, artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

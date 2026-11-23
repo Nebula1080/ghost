@@ -2353,7 +2353,7 @@ function renderBuilds() {
       const lay = Core.modLayout(ref?.hash, D, Core.tuneTier(it)); const ins = it ? Core.armorParts(it, D, s)?.inserted || [] : [];
       const used = lay.reduce((n, _, i) => { const m = ms[i] === Core.MOD_NONE ? null : ms[i] || ins[i]; return n + (m ? Core.modCost(m, s, D) : 0); }, 0);
       mods = `<div class="bmods">${lay.map(([, c], i) => { if (ms[i] === Core.MOD_NONE) { const sl = Core.modSockLabel(c, A_LABEL[s]); return `<span class="bmodw"><button class="bmod none" data-mod="${s}" data-mi="${i}" title="Planned empty${ins[i] ? `: take ${esc(ins[i])} out` : ''}. Tap to change."><span class="ic sq ph0">∅</span><span><small class="bmk">${esc(sl)} · empty</small>${ins[i] ? `<s>${esc(ins[i])}</s>` : 'No mod'}</span></button></span>`; }
-        const m = ms[i]; const on = !m && ins[i]; const sl = Core.modSockLabel(c, A_LABEL[s]); return `<span class="bmodw"><button class="bmod${m ? ' on' : ''}${on ? ' ins' : ''}" data-mod="${s}" data-mi="${i}" title="${m ? esc(m) : on ? `On the armor now: ${esc(on)}. Tap to plan another mod.` : `Add a ${esc(sl.toLowerCase())} mod`}">${m || on ? plugIcon(m || on, 'sq', pIdx(m || on, 'armor')) : '<span class="ic sq ph0">+</span>'}<span><small class="bmk">${esc(sl)}${on ? ' · on armor' : ''}</small>${m ? esc(m) : on ? esc(on) : 'Mod'}</span></button>${m ? infoBtn(`data-minfo="${esc(m)}"`, m) : ''}</span>`; }).join('')}<span class="ben${cap != null && used > cap ? ' over' : ''}" title="Armor energy used by these mods">${used}${cap != null ? '/' + cap : ''} energy</span></div>`;
+        const m = ms[i]; const on = !m && ins[i]; const sl = Core.modSockLabel(c, A_LABEL[s]); const lk = (m || on) && Core.modLocked(m || on, D); return `<span class="bmodw"><button class="bmod${m ? ' on' : ''}${on ? ' ins' : ''}${lk ? ' locked' : ''}" data-mod="${s}" data-mi="${i}" title="${lk ? esc(LOCK_TIP) : m ? esc(m) : on ? `On the armor now: ${esc(on)}. Tap to plan another mod.` : `Add a ${esc(sl.toLowerCase())} mod`}">${m || on ? plugIcon(m || on, 'sq', pIdx(m || on, 'armor')) : '<span class="ic sq ph0">+</span>'}<span><small class="bmk">${esc(sl)}${on ? ' · on armor' : ''}</small>${m ? esc(m) : on ? esc(on) : 'Mod'}</span></button>${m ? infoBtn(`data-minfo="${esc(m)}"`, m) : ''}</span>`; }).join('')}<span class="ben${cap != null && used > cap ? ' over' : ''}" title="Armor energy used by these mods">${used}${cap != null ? '/' + cap : ''} energy</span></div>`;
     }
     return `<div class="bcard"><div class="bcl">${label}</div><div class="bcrow"><button class="bpick" data-${g}="${s}">${body}</button><span class="bacts">${it ? `<button class="x insp" data-insp="${esc(it.id)}" title="Details" aria-label="Show ${label} details">${ICO.info}</button>` : ''}${ref ? `<button class="x" data-clr${g}="${s}" title="Remove" aria-label="Remove ${label}">×</button>` : ''}</span></div>${mods}</div>`;
   };
@@ -3184,7 +3184,8 @@ function pickArtifact(b) {
   draw();
 }
 // mods Bungie has retired (their own text says so) are left out of the pickers, unless one is already in the socket
-const deadMod = n => /deprecated|no longer functions/i.test(Core.plugOf(n, D, 'armor')?.[2] || '');
+const deadMod = n => /deprecated|no longer functions/i.test(Core.plugOf(n, D, 'armor')?.[2] || '') || Core.modLocked(n, D);
+const LOCK_TIP = 'Needs a Seasonal Artifact selection that no current artifact offers. The game (and DIM) won’t insert it, so it doesn’t count and isn’t sent to DIM.';
 function pickMod(b, slot, i, pieces) {
   const ms = b.mods[slot] || []; const cur = ms[i];
   const it = S.byId.get(b.a?.[slot]?.id); const lay = Core.modLayout(b.a?.[slot]?.hash, D, Core.tuneTier(it)); const code = lay[i]?.[1] || 's'; const sl = Core.modSockLabel(code, A_LABEL[slot]);
