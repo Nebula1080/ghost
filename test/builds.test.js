@@ -387,8 +387,17 @@ t('sockets: Praxic Blade columns + mods, no duplicate perks, a perk named like a
   // Praxic Blade from the DIM CSV: tang / grip / two traits + Echoing Blade in columns; form, blade focus, core, crystal = mods; the skin hidden
   const px = C.sockets(W('Praxic Blade', '3049715579', 'Ranged Weapon', ['Ranged Weapon*', 'Fencing Tang*', 'Offensive Grip*', 'Cormorant Reversal*', 'Kill Tracker', 'Cormorant Combo*', 'Royal Guard Hilt*', 'Echoing Blade*', 'Dark Matter Crystal: Taken*', 'Forceful Blade*', 'Offensive Form*', 'Impact Core*']), D);
   assert.deepStrictEqual(px.intrinsic.map(p => p.n), ['Ranged Weapon']);
-  assert.deepStrictEqual(px.cols.map(c => c.perks.map(p => p.n).join('/')), ['Fencing Tang', 'Offensive Grip', 'Cormorant Reversal', 'Cormorant Combo', 'Echoing Blade']);
-  assert.deepStrictEqual(px.mods.map(p => p.n).sort(), ['Dark Matter Crystal: Taken', 'Forceful Blade', 'Impact Core', 'Offensive Form']);
+  assert.deepStrictEqual(px.cols.map(c => c.perks.map(p => p.n + (p.s ? '*' : '')).join('/')), ['Fencing Tang*', 'Offensive Grip*', 'Cormorant Reversal*', 'Cormorant Combo*', 'Echoing Blade*/Upper Hand/Hyperblade/Energy Conduit']);
+  // the switchable sockets: Form first, each with its equipped choice first and every other option after it
+  assert.deepStrictEqual(px.cfg.map(c => c.label), ['Form', 'Crystal', 'Blade Focus', 'Power Core']);
+  assert.deepStrictEqual(px.cfg[0].perks.map(p => p.n + (p.s ? '*' : '')), ['Offensive Form*', 'Balanced Form', 'Defensive Form']);
+  assert.deepStrictEqual(px.cfg.find(c => c.label === 'Power Core').perks.map(p => p.n + (p.s ? '*' : '')), ['Impact Core*', 'Refraction Core', 'Gyro Core']);
+  assert.deepStrictEqual(px.mods, [], 'the special mods are no longer plain mods');
+  // Vexcalibur's Authorization mod and Cull's Shadow's Soulfire trait are switchable too
+  const vx = C.sockets(W('Vexcalibur', '3118061005', 'M1R Distribution Matrix', ['M1R Distribution Matrix*', 'Ballistic Tuning*', 'Extended Mag*', 'Perpetual Loophole*', 'Hand-Laid Stock*', 'Authorization Override*']), D);
+  assert.deepStrictEqual(vx.cfg.map(c => c.label + ':' + c.perks.map(p => p.n + (p.s ? '*' : '')).join('/')), ['Authorization Mod:Authorization Override*/Expert Authorization Override']);
+  const cs = C.sockets(W("Cull's Shadow", '2200470033', 'Soulburn', ['Soulburn*', 'Blades of Unmaking*', 'Fluted Barrel*', 'High-Caliber Rounds*', 'Soulforge*', 'Short-Action Stock*', 'Soulfire Zeal*']), D);
+  assert.ok(cs.cols.some(c => c.perks[0].n === 'Soulfire Zeal' && c.perks.length === 4), "Cull's Shadow's Soulfire column lists all four");
   for (const n of ['Fencing Tang', 'Offensive Grip', 'Echoing Blade', 'Impact Core']) assert.ok(C.plugOf(n, D, 'weapon')?.[0], n + ' has an icon');
   // The Slammer: Honed Edge is one of its blade options, not Izanagi's Burden's intrinsic
   const sl = C.sockets(W('The Slammer', '2466028274', 'Vortex Frame', ['Vortex Frame*', 'Hungry Edge*', 'Honed Edge', 'Jagged Edge', 'Balanced Guard*', 'Enduring Guard']), D);
