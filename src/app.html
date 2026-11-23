@@ -2227,7 +2227,7 @@ function validBuild(x) {
   const el = SV_ELS.some(e => e[0] === x.el) ? x.el : 'solar';
   const mem = m => Object.fromEntries(Object.entries(m && typeof m === 'object' ? m : {}).filter(([k]) => /^[a-z]{4,8}\.[a-z]{3,7}$/.test(k)).slice(0, 18).map(([k, v]) => [k, subOf(v)]));
   const amem = m => Object.fromEntries(Object.entries(m && typeof m === 'object' ? m : {}).filter(([k]) => B_CLASSES.some(c => c[0] === k)).map(([k, v]) => [k, { a: refs(v?.a, Core.A_SLOTS), mods: mods(v?.mods) }]));
-  return { id: String(x.id), name: str(x.name, 60) || 'Build', cls, el, sub: subOf(x.sub), w: refs(x.w, Core.W_SLOTS), a: refs(x.a, Core.A_SLOTS), mods: mods(x.mods), notes: str(x.notes, 1024), artA: hash(x.artA) || 0, art: (Array.isArray(x.art) ? x.art : []).map(hash).filter(Boolean).slice(0, Core.ART_MAX), subMem: mem(x.subMem), aMem: amem(x.aMem), updated: Number.isFinite(x.updated) ? x.updated : 0 };
+  return { id: String(x.id), name: str(x.name, 60) || 'Build', cls, el, sub: subOf(x.sub), w: refs(x.w, Core.W_SLOTS), a: refs(x.a, Core.A_SLOTS), mods: mods(x.mods), notes: str(x.notes, 1024), artA: hash(x.artA) || 0, art: (Array.isArray(x.art) ? x.art : []).map(hash).filter(Boolean).slice(0, Core.ART_MAX), loop: (Array.isArray(x.loop) ? x.loop : []).slice(0, 6).map(v => ({ n: str(v?.n, 80), t: str(v?.t, 32) })).filter(v => v.n), subMem: mem(x.subMem), aMem: amem(x.aMem), updated: Number.isFinite(x.updated) ? x.updated : 0 };
 }
 function loadBuildState() {
   const v = LS.get(PK('builds')) || {};
@@ -2420,7 +2420,7 @@ function renderBuilds() {
       <div class="bfx">${fx.map(t => `<span class="${/^↑/.test(t) ? 'enh' : ''}">${esc(t)}</span>`).join('')}</div></div>`; }).join('');
   const subName = sc?.n || '';
   v.innerHTML = `<div class="band slim"><div class="band-row"><div><div class="eyebrow">Builds</div><h1><span id="bName" class="bname" tabindex="0" title="Rename">${esc(b.name)}</span></h1><p class="sum"><b style="color:${EL_COL[b.el]}">${esc(subName)}</b> · ${esc(B_CLASSES.find(c => c[0] === b.cls)?.[1] || '')} · <button class="linkbtn" id="bJump">${nLinks} interaction${nLinks === 1 ? '' : 's'}</button> · ${st.total} stat total</p></div>
-      <div class="band-actions">${BG?.signedIn?.() && buildChar(b).length ? '<button class="btn primary" id="bEquip">Equip build</button>' : ''}<button class="btn" id="bDim">Send to DIM</button><button class="btn" id="bRen">Rename</button><button class="btn" id="bDup">Duplicate</button><button class="btn" id="bDel">Delete</button></div></div>${list}</div>
+      <div class="band-actions">${BG?.signedIn?.() && buildChar(b).length ? '<button class="btn primary" id="bEquip">Equip build</button>' : ''}<button class="btn" id="bDim">Send to DIM</button><button class="btn" id="bShare">Share image</button><button class="btn" id="bRen">Rename</button><button class="btn" id="bDup">Duplicate</button><button class="btn" id="bDel">Delete</button></div></div>${list}</div>
     <div class="bld-body"><div class="bld-main">
       <section class="bsec"><h2 class="bh">Subclass</h2>${subHtml}</section>
       <section class="bsec"><h2 class="bh">Weapons</h2><div class="bcards">${Core.W_SLOTS.map(s => itemCard('w', s)).join('')}</div></section>
@@ -2631,6 +2631,7 @@ function bindBuild(v, b, pieces, syn) {
   $('#bRen').onclick = rename; $('#bName').onclick = rename; $('#bName').onkeydown = e => { if (e.key === 'Enter') rename(); };
   $('#bDup').onclick = () => newBuild(b);
   $('#bDim').onclick = () => openDimLink(b);
+  $('#bShare').onclick = () => openShareImage(b);
   const eb = $('#bEquip'); if (eb) eb.onclick = () => equipBuild(b);
   v.querySelectorAll('[data-stip]').forEach(x => x.onclick = () => { const o = x.classList.contains('open'); v.querySelectorAll('[data-stip].open').forEach(y => y.classList.remove('open')); x.classList.toggle('open', !o); });
   $('#bJump').onclick = () => $('#bSyn').scrollIntoView({ behavior: motionOK() ? 'smooth' : 'auto', block: 'start' });
@@ -2706,6 +2707,197 @@ function modWarnings(b) {
   return out;
 }
 const modWarnHtml = b => { const w = modWarnings(b); return w.length ? `<div class="warnbox" role="note"><b>Check before you go</b><ul>${w.map(x => `<li>${esc(x)}</li>`).join('')}</ul><small>Empty sockets stay empty; plan a mod for them in Armor &amp; mods. Mods over a piece’s energy won’t fit.</small></div>` : ''; };
+// ---------- share image (2026-11-22, colour option B: neutral dark card, accent = the subclass element) ----------
+// One 1080×1350 PNG drawn on a canvas: header, subclass (one 4-column tile grid), weapons (equipped perks as icons),
+// armor (each piece's art, archetype or exotic perk, and its mods as icons), stats, artifact, the build's gameplay loop
+// (a real cycle in the interactions, or the one the player wrote in the share sheet) and a QR code that opens the build
+// in DIM. Icons come from Ghost's own sprite sheets (same origin); Bungie item art only when it loads with CORS, so the
+// canvas is never tainted.
+const SHARE_EL = { solar: '#f2721b', arc: '#7aecf3', void: '#b98ae8', stasis: '#6aa6ff', strand: '#3fe07a', prism: '#ff7ad9' };
+const SHARE_C = { bg: '#121417', pn: '#1c1f24', ln: '#2a2e35', tx: '#eef0f2', mu: '#9aa1a9', ex: '#e8c25a' };
+const shareImg = src => new Promise(res => { if (!src) return res(null); const im = new Image(); if (/^https:/.test(src)) im.crossOrigin = 'anonymous'; im.onload = () => res(im); im.onerror = () => res(null); im.src = src; });
+// the DIM link, kept short enough for a QR code: no notes, and only the characters a URL can't carry are escaped;
+// anyone can scan it, so items go by hash (DIM picks the scanner's own copy) instead of the owner's instance ids
+function shareDimUrl(b) {
+  const lo = Core.dimLoadout({ ...b, notes: '' }, D, S.byId, 'g'); lo.equipped = lo.equipped.map(e => e.socketOverrides ? e : { id: '0', hash: e.hash });
+  return 'https://app.destinyitemmanager.com/loadouts?loadout=' + JSON.stringify(lo).replace(/[%&#+ ?<>"`{}|\\^\[\]]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase().padStart(2, '0'));
+}
+// the loop on the card: the player's own (b.loop, ≥2 steps), else the strongest cycle Ghost finds
+function shareLoopOf(b, pieces, syn) {
+  if (Array.isArray(b.loop) && b.loop.length >= 2) return b.loop;
+  const L = Core.buildLoops(syn.links, pieces, 1)[0]; return L ? L.map(s => ({ n: s.n, t: s.t })) : [];
+}
+async function shareCard(b) {
+  const W = 1080, H = 1350, P = 48, C = SHARE_C; const AC = SHARE_EL[b.el] || '#f2721b';
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const x = cv.getContext('2d');
+  if (!x.roundRect) x.roundRect = function (a, b2, c, d) { this.rect(a, b2, c, d); };
+  try { await Promise.all(['500 20px "Hanken Grotesk"', '400 20px "Hanken Grotesk"', '600 20px "Cinzel"'].map(f => document.fonts?.load?.(f))); } catch {}
+  const UI = '"Hanken Grotesk", system-ui, sans-serif', INS = '"Cinzel", Georgia, serif';
+  const spr = D?.spr ? await shareImg(D.spr.f) : null;
+  const font = (px, w = 400, fam = UI) => { x.font = `${w} ${px}px ${fam}`; };
+  const fit = (t, w) => { t = String(t || ''); if (x.measureText(t).width <= w) return t; while (t.length > 1 && x.measureText(t + '…').width > w) t = t.slice(0, -1); return t + '…'; };
+  const text = (t, tx, ty, w, col = C.tx) => { x.fillStyle = col; x.fillText(fit(t, w), tx, ty); };
+  const rr = (rx, ry, rw, rh, r, fill, stroke, lw = 2) => { x.beginPath(); x.roundRect(rx, ry, rw, rh, r); if (fill) { x.fillStyle = fill; x.fill(); } if (stroke) { x.strokeStyle = stroke; x.lineWidth = lw; x.stroke(); } };
+  const icon = (idx, ix, iy, s, name = '?', ring) => {
+    if (spr && typeof idx === 'number' && idx >= 0) { const c = idx % D.spr.c, r = Math.floor(idx / D.spr.c); x.drawImage(spr, c * 48, r * 48, 48, 48, ix, iy, s, s); }
+    else { rr(ix, iy, s, s, 6, C.ln); font(Math.round(s * 0.45), 500); x.textAlign = 'center'; text(String(name)[0] || '?', ix + s / 2, iy + s * 0.66, s, C.mu); x.textAlign = 'left'; }
+    if (ring) rr(ix - 1, iy - 1, s + 2, s + 2, 6, null, ring, 2);
+  };
+  const AB = { weapons: 'WPN', health: 'HP', class: 'CLS', grenade: 'GRN', super: 'SUP', melee: 'MEL' };
+  const modIcon = (n, ix, iy, s) => {
+    const m = String(n).match(/^\+(\w+) \/ -(\w+)$/); if (!m && !/^balanced tuning$/i.test(n)) return icon(pIdx(n, 'armor'), ix, iy, s, n);
+    rr(ix, iy, s, s, 6, C.ln); x.textAlign = 'center';
+    if (m) { font(Math.round(s * 0.3), 700); text('+' + (AB[m[1].toLowerCase()] || m[1].slice(0, 3)), ix + s / 2, iy + s * 0.45, s - 2, '#5bd17a'); text('−' + (AB[m[2].toLowerCase()] || m[2].slice(0, 3)), ix + s / 2, iy + s * 0.85, s - 2, '#e5624f'); }
+    else { font(Math.round(s * 0.32), 700); text('BAL', ix + s / 2, iy + s * 0.62, s - 2, C.tx); }
+    x.textAlign = 'left';
+  };
+  const itemPic = async (it, ix, iy, s) => {
+    const a = itemArt(it); const im = a ? await shareImg(a.icon) : null; if (im) { x.drawImage(im, ix, iy, s, s); return; }
+    const k = ISPR && ISPR.i?.[it.hash]; const sheet = typeof k === 'number' ? ISPR.sheets?.[Math.floor(k / ISPR.per)] : '';
+    const sim = /^items-\d+\.webp$/.test(sheet || '') ? await shareImg('isprites/' + sheet) : null;
+    if (sim) { const c = k % ISPR.per; x.drawImage(sim, (c % ISPR.cols) * 64, Math.floor(c / ISPR.cols) * 64, 64, 64, ix, iy, s, s); return; }
+    const sk = Core.sockets(it, D); const intr = (sk.intrinsic[0] || sk.exotic[0])?.n || it.frame; icon(pIdx(intr, it.kind), ix, iy, s, it.name);
+  };
+  const sp = t => t.toUpperCase().split('').join(String.fromCharCode(8202));
+  const head = (t, hy, hx = P, hw = W - 2 * P) => { font(15, 500); x.fillStyle = AC; x.fillText(sp(t), hx, hy); const tw = x.measureText(sp(t)).width; x.fillStyle = C.ln; x.fillRect(hx + tw + 14, hy - 5, Math.max(0, hw - tw - 14), 1); };
+  const sc = scAll(b); const pieces = Core.buildPieces(b, D, S.byId); const syn = Core.synergy(pieces, IX, D, b.el);
+  // a piece's icon (loop nodes): subclass plug, item art, mod, artifact perk, set bonus
+  const pieceDraw = async (n, ix, iy, s) => {
+    const pc = pieces.find(p => p.n === n);
+    if (pc?.it) return itemPic(pc.it, ix, iy, s);
+    if (pc?.g === 'subclass') return icon(Core.subList(sc, pc.slot).find(a => a.n === n)?.i, ix, iy, s, n);
+    if (pc?.g === 'artifact') return icon(artPerk(n)?.[4], ix, iy, s, n);
+    if (pc?.slot === 'set') return icon(setPerk(n)?.i, ix, iy, s, n);
+    const sub = sc && Object.keys(sc.s || {}).map(k => Core.subList(sc, k).find(a => a.n === n)).find(Boolean);
+    return icon(sub ? sub.i : pIdx(n, 'armor') ?? pIdx(n, 'weapon'), ix, iy, s, n);
+  };
+  // background + header
+  x.fillStyle = C.bg; x.fillRect(0, 0, W, H); x.fillStyle = AC; x.fillRect(0, 0, W, 8);
+  icon(sc?.i, P, 40, 72, sc?.n);
+  font(46, 600, INS); text(b.name, P + 92, 84, W - 2 * P - 92 - 120);
+  font(22); text(`${B_CLASSES.find(c => c[0] === b.cls)?.[1] || ''} · ${sc?.n || ''}`, P + 92, 118, W - 2 * P - 92, AC);
+  font(16, 500, INS); x.textAlign = 'right'; text('GHOST', W - P, 70, 120, C.mu); x.textAlign = 'left';
+  // subclass: one 4-column grid of equal tiles: abilities, then aspects and fragments
+  let y = 172; head('Subclass', y); y += 18; const cw = (W - 2 * P) / 4;
+  const tiles = [...[['super', 'Super'], ['classAbility', 'Class ability'], ['melee', 'Melee'], ['grenade', 'Grenade']].map(([k, l]) => [subPick(b, k, b.sub?.[k]), l]),
+    ...(b.sub?.aspects || []).map(h => [subPick(b, 'aspects', h), 'Aspect']), ...(b.sub?.fragments || []).map(h => [subPick(b, 'fragments', h), 'Fragment'])];
+  tiles.forEach(([a, l], i) => { const tx = P + (i % 4) * cw, ty = y + Math.floor(i / 4) * 62; icon(a?.i, tx, ty, 48, a?.n || l);
+    font(12, 500); text(l.toUpperCase(), tx + 58, ty + 18, cw - 66, C.mu); font(17, 500); text(a?.n || '—', tx + 58, ty + 40, cw - 66); });
+  y += Math.ceil(tiles.length / 4) * 62 + 14;
+  // weapons: art, name, type, then the equipped perks as icons
+  head('Weapons', y); y += 16; const ww = (W - 2 * P - 2 * 16) / 3;
+  for (const [i, s] of Core.W_SLOTS.entries()) {
+    const it = S.byId.get(b.w?.[s]?.id); const cx = P + i * (ww + 16); const ex = it && /exotic/i.test(it.rarity || '');
+    rr(cx, y, ww, 116, 10, C.pn, ex ? C.ex : null);
+    if (!it) { font(16); text('No ' + s + ' weapon', cx + 16, y + 64, ww - 32, C.mu); continue; }
+    await itemPic(it, cx + 12, y + 12, 52);
+    font(18, 500); text(it.name, cx + 76, y + 34, ww - 88, ex ? C.ex : C.tx); font(13); text([it.type, it.element].filter(Boolean).join(' · '), cx + 76, y + 54, ww - 88, C.mu);
+    const sk = Core.sockets(it, D); const perks = sk.cols.flatMap(c => c.perks.filter(p => p.s)).slice(0, 7);
+    perks.forEach((p, k) => icon(pIdx(p.n, 'weapon'), cx + 12 + k * 40, y + 72, 34, p.n));
+  }
+  y += 138;
+  // armor: per piece its art, its archetype (exotic: its exotic perks, gold) and its mods as icons; set bonuses last
+  head('Armor', y); y += 16; const aw2 = (W - 2 * P - 20) / 2;
+  const rows = [];
+  for (const s of Core.A_SLOTS) {
+    const it = S.byId.get(b.a?.[s]?.id); if (!it) continue; const ex = /exotic/i.test(it.rarity || '');
+    const ap = Core.armorParts(it, D, s); const lay = Core.modLayout(it.hash, D, Core.tuneTier(it)); const ms = b.mods?.[s] || [];
+    const mods = lay.map((_, i) => ms[i] === Core.MOD_NONE ? null : ms[i] || ap?.inserted?.[i]).filter(Boolean);
+    const lead = ex ? Core.sockets(it, D).exotic.map(p => p.n).filter(n => !/^[+]|tuning$/i.test(n) && Core.plugOf(n, D, 'armor')?.[1] !== 'a').slice(0, 2) : [it.frame].filter(Boolean);
+    rows.push({ it, ex, mods, lead, s });
+  }
+  rows.sort((p, q) => q.ex - p.ex);
+  const sets = pieces.filter(pc => pc.g === 'armor' && pc.slot === 'set');
+  for (const [i, r] of rows.entries()) {
+    const ax = P + (i % 2) * (aw2 + 20), ay = y + Math.floor(i / 2) * 66; rr(ax, ay, aw2, 58, 8, C.pn, r.ex ? C.ex : null);
+    await itemPic(r.it, ax + 7, ay + 7, 44); let ix = ax + 62;
+    if (r.ex) { font(13, 500); text(r.it.name, ix, ay + 18, aw2 - 70, C.ex); }
+    const iy = r.ex ? ay + 24 : ay + 13, s2 = r.ex ? 28 : 32;
+    for (const n of r.lead) { icon(pIdx(n, 'armor'), ix, iy, s2, n, r.ex ? C.ex : C.mu); ix += s2 + 8; }
+    x.fillStyle = C.ln; x.fillRect(ix, iy + 2, 1, s2 - 4); ix += 9;
+    for (const n of r.mods) { if (ix + s2 > ax + aw2 - 6) break; modIcon(n, ix, iy, s2); ix += s2 + 5; }
+  }
+  if (sets.length) { const i = rows.length, ax = P + (i % 2) * (aw2 + 20), ay = y + Math.floor(i / 2) * 66; let sx = ax + 8;
+    for (const pc of sets.slice(0, 2)) { icon(setPerk(pc.n)?.i, sx, ay + 13, 32, pc.n, AC); font(13, 500); text(`${pc.label.split(' · ').pop()}`, sx + 40, ay + 26, aw2 / 2 - 50, C.mu); font(15, 500); text(pc.n, sx + 40, ay + 44, aw2 / 2 - 50); sx += aw2 / 2; } }
+  y += Math.ceil((rows.length + (sets.length ? 1 : 0)) / 2) * 66 + 12;
+  // stats on a panel (game order) + artifact
+  head('Stats', y, P, 512); head('Artifact', y, P + 560, W - P - (P + 560)); y += 14;
+  const st = Core.buildStats(b, D, S.byId); rr(P, y, 512, 6 * 28 + 18, 10, C.pn);
+  Core.STAT_ORDER.forEach((k, i) => { const sy = y + 10 + i * 28; const v = Math.max(0, Math.min(200, st.stats[k].total));
+    font(16, 500); text(k, P + 16, sy + 16, 100, C.tx); font(17, 600); x.textAlign = 'right'; text(String(st.stats[k].total), P + 160, sy + 17, 50, C.tx); x.textAlign = 'left';
+    rr(P + 176, sy + 6, 316, 10, 3, C.ln); if (v) rr(P + 176, sy + 6, 316 * v / 200, 10, 3, AC); x.fillStyle = C.tx; x.fillRect(P + 176 + 158, sy + 2, 2, 18); });
+  const art = Core.artOf(b, D);
+  if (art) { const ar = Core.artSlots(b.art, art); icon(art.i, P + 560, y + 4, 28, art.n); font(17, 500); text(art.n, P + 596, y + 24, W - P - 596);
+    const aw = (W - P - (P + 560)) / 2;
+    ar.flat().filter(Boolean).forEach((p, i) => { const ax = P + 560 + (i % 2) * aw, yy = y + 44 + Math.floor(i / 2) * 32; icon(p[4], ax, yy, 24, p[1]); font(14); text(p[1], ax + 30, yy + 17, aw - 36); }); }
+  else { font(16); text('No artifact chosen', P + 560, y + 24, 400, C.mu); }
+  y += 6 * 28 + 18 + 26;
+  // the gameplay loop: nodes round an ellipse, each arrow labelled with what it passes on; QR code beside it
+  head('Gameplay loop', y); y += 16; const qs = 260, qx = W - P - qs, lw2 = qx - P - 24, lh = Math.max(qs, H - 56 - y);
+  rr(P, y, lw2, lh, 12, C.pn);
+  const loop = shareLoopOf(b, pieces, syn);
+  if (loop.length < 2) { font(17); text('No gameplay loop yet. Add one in the share sheet.', P + 24, y + lh / 2, lw2 - 48, C.mu); }
+  else {
+    const n = loop.length, sp2 = (lw2 - 60) / n, ry = y + 104, ns = 60;
+    const nx = i => P + 30 + sp2 * i + sp2 / 2;
+    const chip = (t, lx, ly, maxw) => { if (!t) return; font(12, 700); const term = String(t).toUpperCase(); const tw = Math.min(maxw, x.measureText(term).width + 18);
+      rr(lx - tw / 2, ly - 12, tw, 24, 12, AC); x.textAlign = 'center'; text(term, lx, ly + 4, tw - 10, C.bg); x.textAlign = 'left'; };
+    const arrow = (x2, y2, a) => { x.fillStyle = AC; x.beginPath(); x.moveTo(x2, y2); x.lineTo(x2 - 11 * Math.cos(a - 0.45), y2 - 11 * Math.sin(a - 0.45)); x.lineTo(x2 - 11 * Math.cos(a + 0.45), y2 - 11 * Math.sin(a + 0.45)); x.fill(); };
+    x.strokeStyle = AC; x.lineWidth = 3;
+    for (let i = 0; i < n - 1; i++) { const x1 = nx(i) + ns / 2 + 6, x2 = nx(i + 1) - ns / 2 - 6; x.beginPath(); x.moveTo(x1, ry); x.lineTo(x2 - 4, ry); x.stroke(); arrow(x2, ry, 0); chip(loop[i].t, (x1 + x2) / 2, ry - 52, sp2 - 8); }
+    // back round: out of the last step, under the names, up into the first
+    const xl = nx(n - 1) + ns / 2 + 6, xr = P + lw2 - 18, yb = y + lh - 34, x0 = P + 18, xf = nx(0) - ns / 2 - 6;
+    x.beginPath(); x.moveTo(xl, ry); x.lineTo(xr - 10, ry); x.quadraticCurveTo(xr, ry, xr, ry + 10); x.lineTo(xr, yb - 10); x.quadraticCurveTo(xr, yb, xr - 10, yb);
+    x.lineTo(x0 + 10, yb); x.quadraticCurveTo(x0, yb, x0, yb - 10); x.lineTo(x0, ry + 10); x.quadraticCurveTo(x0, ry, x0 + 10, ry); x.lineTo(xf - 4, ry); x.stroke(); arrow(xf, ry, 0);
+    chip(loop[n - 1].t, P + lw2 / 2, yb, 260);
+    for (const [i, st2] of loop.entries()) { const px = nx(i); rr(px - ns / 2, ry - ns / 2, ns, ns, 10, C.bg, AC, 2); await pieceDraw(st2.n, px - 24, ry - 24, 48);
+      font(14, 500); x.textAlign = 'center'; const words = String(st2.n).split(' '); let l1 = '', l2 = '';
+      for (const w of words) { if (!l2 && x.measureText((l1 + ' ' + w).trim()).width <= sp2 - 12) l1 = (l1 + ' ' + w).trim(); else l2 = (l2 + ' ' + w).trim(); }
+      text(l1, px, ry + ns / 2 + 22, sp2 - 8); if (l2) text(l2, px, ry + ns / 2 + 40, sp2 - 8); x.textAlign = 'left'; }
+  }
+  // QR: white quiet zone so phones read it on the dark card
+  let qOk = false; const qy = y + (lh - qs) / 2;
+  try { const q = qrcode(0, 'L'); q.addData(shareDimUrl(b), 'Byte'); q.make(); const n = q.getModuleCount(); const mi = Math.floor((qs - 24) / n); const m = mi >= 2 ? mi : (qs - 24) / n; const o = (qs - m * n) / 2; const px = v => Math.round(v);
+    rr(qx, qy, qs, qs, 8, '#ffffff'); x.fillStyle = '#000000';
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) { const x0 = px(qx + o + c * m), y0 = px(qy + o + r * m); x.fillRect(x0, y0, px(qx + o + (c + 1) * m) - x0, px(qy + o + (r + 1) * m) - y0); } qOk = true; } catch { qOk = false; }
+  font(14); x.textAlign = 'center'; text(qOk ? 'Scan to open in DIM' : 'Build too big for a QR code', qx + qs / 2, qy + qs + 22, qs, C.mu); x.textAlign = 'left';
+  font(14); text('Made with Ghost · nebula1080.github.io/ghost', P, H - 22, 600, C.mu);
+  return cv;
+}
+// the share sheet: preview, the gameplay loop editor (pick a loop Ghost found or write your own), then export
+async function openShareImage(b) {
+  const pieces = Core.buildPieces(b, D, S.byId); const syn = Core.synergy(pieces, IX, D, b.el);
+  const found = Core.buildLoops(syn.links, pieces, 4).map(L => L.map(s => ({ n: s.n, t: s.t })));
+  const names = [...new Set(pieces.map(p => p.n).filter(n => n && n !== Core.MOD_NONE))];
+  let steps = (Array.isArray(b.loop) && b.loop.length >= 2 ? b.loop : found[0] || []).map(s => ({ ...s }));
+  const fname = (String(b.name || 'build').replace(/[^\w -]+/g, '').trim().replace(/\s+/g, '-') || 'build') + '.png';
+  let cv, url;
+  const draw = async () => { const box = $('#shPrev'); if (box) box.classList.add('busy');
+    try { cv = await shareCard(b); url = cv.toDataURL('image/png'); } catch { cv = null; url = ''; }
+    if (box) { box.classList.remove('busy'); box.innerHTML = url ? `<img class="shareimg" src="${url}" alt="Build image for ${esc(b.name)}">` : '<p class="snote">The image couldn’t be drawn in this browser.</p>'; } };
+  const stepsHtml = () => steps.map((s, i) => `<div class="lpstep"><span class="lpn">${i + 1}</span><select class="tsel" data-ln="${i}" aria-label="Step ${i + 1} piece">${[...new Set([s.n, ...names])].filter(Boolean).map(n => `<option${n === s.n ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select><input class="qin" data-lt="${i}" maxlength="32" value="${esc(s.t || '')}" placeholder="what it gives the next step" aria-label="Step ${i + 1} gives"><button class="btn" data-lx="${i}" aria-label="Remove step ${i + 1}">×</button></div>`).join('');
+  modal(`<h2>Share image</h2><div id="shPrev" class="shprev"><p class="snote">Drawing “${esc(b.name)}”…</p></div>
+    <details class="lped"${steps.length ? '' : ' open'}><summary><b>Gameplay loop</b> <small>${b.loop?.length >= 2 ? 'yours' : found.length ? 'found by Ghost' : 'none found'}: edit it before you export</small></summary>
+      ${found.length ? `<div class="lpfound">${found.map((L, i) => `<button class="btn" data-lf="${i}">${esc(L.map(s => s.n).join(' → '))}</button>`).join('')}</div>` : '<p class="snote">Ghost found no closed loop in this build’s interactions. Write one below: each step gives something to the next, and the last feeds the first.</p>'}
+      <div id="lpSteps">${stepsHtml()}</div>
+      <div class="msheet lprow"><button class="btn" id="lpAdd">Add step</button><button class="btn" id="lpAuto">Use Ghost’s loop</button><button class="btn primary" id="lpGo">Update image</button></div></details>
+    <div class="msheet"><button class="btn primary" id="shDl">Download PNG</button><button class="btn" id="shCp">Copy image</button><button class="btn" data-close>Close</button></div>`);
+  const box = $('#modalBox');
+  const read = () => { steps = steps.map((s, i) => ({ n: box.querySelector(`[data-ln="${i}"]`)?.value || s.n, t: (box.querySelector(`[data-lt="${i}"]`)?.value || '').slice(0, 32) })); };
+  const paint = () => { $('#lpSteps').innerHTML = stepsHtml(); box.querySelectorAll('[data-lx]').forEach(e => e.onclick = () => { read(); steps.splice(+e.dataset.lx, 1); paint(); }); };
+  paint();
+  box.querySelectorAll('[data-lf]').forEach(e => e.onclick = () => { steps = found[+e.dataset.lf].map(s => ({ ...s })); paint(); });
+  $('#lpAdd').onclick = () => { read(); if (steps.length < 6) steps.push({ n: names[0] || '', t: '' }); paint(); };
+  $('#lpAuto').onclick = async () => { b.loop = []; steps = (found[0] || []).map(s => ({ ...s })); paint(); saveBuilds(); await draw(); };
+  $('#lpGo').onclick = async () => { read(); b.loop = steps.filter(s => s.n).slice(0, 6); saveBuilds(); await draw(); };
+  $('#shDl').onclick = async () => { if (!cv) return;
+    if (S.downloads) { try { const blob = await new Promise(r => cv.toBlob(r, 'image/png')); await S.downloads.save({ filename: fname, data: blob }); toast('Saved ' + fname); } catch { toast('Download was cancelled or refused.'); } return; }
+    const a = document.createElement('a'); a.href = url; a.download = fname; document.body.appendChild(a); a.click(); a.remove(); };
+  const cp = $('#shCp'); if (!navigator.clipboard?.write || typeof ClipboardItem === 'undefined') cp.remove();
+  else cp.onclick = async () => { try { const blob = await new Promise(r => cv.toBlob(r, 'image/png')); await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]); toast('Image copied.'); } catch { toast('Copy blocked by the browser.'); } };
+  await draw();
+  if (cv) cv.toBlob(blob => { if (blob) addShareButton($('#shDl'), { file: new File([blob], fname, { type: 'image/png' }) }); }, 'image/png');
+}
 function openDimLink(b) {
   const lo = Core.dimLoadout(b, D, S.byId, globalThis.crypto?.randomUUID?.() || 'ghost-' + uid());
   const url = Core.dimLink(lo);
@@ -2997,7 +3189,7 @@ function pickMod(b, slot, i, pieces) {
   const ms = b.mods[slot] || []; const cur = ms[i];
   const it = S.byId.get(b.a?.[slot]?.id); const lay = Core.modLayout(b.a?.[slot]?.hash, D, Core.tuneTier(it)); const code = lay[i]?.[1] || 's'; const sl = Core.modSockLabel(code, A_LABEL[slot]);
   // tuning mods are aligned with the piece's Tuned stat (Bungie): +Tuned / -another, or Balanced Tuning
-  const tunedOk = n => code !== 't' || !it?.tuning || Core.isExoticArmor(it) || /^balanced tuning$/i.test(n) || n.startsWith(`+${it.tuning} /`);
+  const tunedOk = n => code !== 't' || Core.tuneFits(n, it);
   const rows = Core.modsFor(slot, D, code).filter(([n]) => !/^empty|^default/i.test(n) && (n === cur || !deadMod(n)) && tunedOk(n)).map(([n, cost, st]) => { const r = Core.modScore(n, slot, D, pieces, IX); const bd = Core.plugOf(n, D, 'armor')?.[2] || '';
     const fluff = IX?.skip?.includes('mod:' + Core.norm(n));
     return { k: n, n, fluff, icon: plugIcon(n, 'sq', pIdx(n, 'armor')), sub: `${fluff ? '<span class="bst">weapon / stat only</span>' : ''}<span class="bst">${cost} energy</span>${statChips(st)} ${esc(bd.slice(0, 140))}${bd.length > 140 ? '…' : ''}`, s: n + ' ' + bd, score: r.score, why: r.why, on: n === cur }; })
