@@ -1564,13 +1564,14 @@ const Core = (() => {
     const pieceOf = s => (items || []).find(x => String(x.id) === b.a[s]?.id);
     const lays = Object.fromEntries(A_SLOTS.map(s => { const it = pieceOf(s); return [s, modLayout(b.a[s]?.hash, defs, it ? tuneTier(it) : undefined)]; }));
     for (const s of A_SLOTS) b.mods[s] = lays[s].map(() => null);
-    const rank = c => c === 's' ? 0 : c.startsWith('x:') ? 1 : c === 'a' ? 2 : c === 't' ? 3 : 4;
-    const wanted = (Array.isArray(lo?.parameters?.mods) ? lo.parameters.mods : []).map(h => info.get(Number(h))).filter(Boolean).sort((x, y) => rank(x[1]) - rank(y[1]));
+    const rank = ([n, c]) => c === 's' ? 0 : c.startsWith('x:') ? 1 : c === 'a' ? 2 : c === 't' ? (/^balanced/i.test(n) ? 4 : 3) : 5;
+    const wanted = (Array.isArray(lo?.parameters?.mods) ? lo.parameters.mods : []).map(h => info.get(Number(h))).filter(Boolean).sort((x, y) => rank(x) - rank(y));
     const unplaced = [];
     for (const [n, code, slot] of wanted) {
-      const fits = s => { const it = pieceOf(s); if (code === 't' && it && !isExoticArmor(it) && it.tuning && !/^balanced tuning$/i.test(n) && !n.startsWith(`+${it.tuning} /`)) return -1;
+      const fits = s => { const it = pieceOf(s); if (code === 't' && !tuneFits(n, it)) return -1;
         return lays[s].findIndex(([, c], i) => b.mods[s][i] == null && c === code && (code !== 's' || s === slot)); };
-      const s = (code === 's' ? [slot] : A_SLOTS).find(s => fits(s) >= 0);
+      const order = code === 's' ? [slot] : code === 't' ? [...A_SLOTS].sort((p, q) => isExoticArmor(pieceOf(p)) - isExoticArmor(pieceOf(q))) : A_SLOTS;
+      const s = order.find(s => fits(s) >= 0);
       if (s) b.mods[s][fits(s)] = n; else unplaced.push(n);
     }
     return { b, missing, unplaced, cls };
@@ -1657,6 +1658,9 @@ const Core = (() => {
   // the tier that decides the tuning socket: exotics take any tuning mod at any tier, legendaries need Tier 5
   const isExoticArmor = it => /exotic/i.test(it?.rarity || '');
   const tuneTier = it => isExoticArmor(it) ? 5 : it?.tier;
+  // can this tuning mod go on this piece: Balanced anywhere; +X / -Y only where X is the Tuned stat (exotics: any).
+  // DIM writes the Tuned stat in lower case ("weapons"), the mod names are capitalised.
+  const tuneFits = (n, it) => !/^[+]/.test(n) || !it || isExoticArmor(it) || !it.tuning || n.toLowerCase().startsWith(`+${String(it.tuning).toLowerCase()} /`);
   const MOD_SOCK_L = { g: 'General', t: 'Tuning', a: 'Artifice' };
   const modSockLabel = (c, slotLabel) => c === 's' ? slotLabel : MOD_SOCK_L[c] || (/^x:raid/.test(c) ? 'Raid' : /^x:season/.test(c) ? 'Seasonal' : 'Activity');
   // the mods one socket takes (code given), or every mod an armor slot can hold (lookups: costs, stats, hashes)
@@ -1914,7 +1918,7 @@ const Core = (() => {
   }
 
   return { LIMITS, xferClean, XFER_MAX, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, tuneTier, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink, parseDimLoadout, fromDimLoadout,
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, tuneTier, tuneFits, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink, parseDimLoadout, fromDimLoadout,
     MOD_NONE, artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

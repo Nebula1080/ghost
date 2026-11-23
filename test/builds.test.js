@@ -402,4 +402,10 @@ t('sockets: Praxic Blade columns + mods, no duplicate perks, a perk named like a
   const bs = C.sockets(bl, D);
   assert.deepStrictEqual(bs.cols.map(c => c.perks.map(p => p.n + (p.s ? '*' : '')).join('/')), ['Hammer-Forged Rifling*/Arrowhead Brake', 'Quickdraw*', 'Opening Shot*']);
 });
+t('tuning mods follow the Tuned stat whatever its case (DIM writes "weapons"); exotics take any', () => {
+  assert.ok(C.tuneFits('+Weapons / -Melee', { rarity: 'Legendary', tuning: 'weapons' }));
+  assert.ok(!C.tuneFits('+Super / -Health', { rarity: 'Legendary', tuning: 'weapons' }));
+  assert.ok(C.tuneFits('+Super / -Health', { rarity: 'Exotic', tuning: '' }));
+  assert.ok(C.tuneFits('Balanced Tuning', { rarity: 'Legendary', tuning: 'class' }));
+});
 console.log(n, 'build tests passed');
