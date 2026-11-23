@@ -2857,9 +2857,9 @@ async function shareCard(b) {
   }
   // QR: white quiet zone so phones read it on the dark card
   let qOk = false; const qy = y + (lh - qs) / 2;
-  try { const q = qrcode(0, 'L'); q.addData(shareDimUrl(b), 'Byte'); q.make(); const n = q.getModuleCount(); const m = (qs - 24) / n; const px = v => Math.round(v);
+  try { const q = qrcode(0, 'L'); q.addData(shareDimUrl(b), 'Byte'); q.make(); const n = q.getModuleCount(); const mi = Math.floor((qs - 24) / n); const m = mi >= 2 ? mi : (qs - 24) / n; const o = (qs - m * n) / 2; const px = v => Math.round(v);
     rr(qx, qy, qs, qs, 8, '#ffffff'); x.fillStyle = '#000000';
-    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) { const x0 = px(qx + 12 + c * m), y0 = px(qy + 12 + r * m); x.fillRect(x0, y0, px(qx + 12 + (c + 1) * m) - x0, px(qy + 12 + (r + 1) * m) - y0); } qOk = true; } catch { qOk = false; }
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) { const x0 = px(qx + o + c * m), y0 = px(qy + o + r * m); x.fillRect(x0, y0, px(qx + o + (c + 1) * m) - x0, px(qy + o + (r + 1) * m) - y0); } qOk = true; } catch { qOk = false; }
   font(14); x.textAlign = 'center'; text(qOk ? 'Scan to open in DIM' : 'Build too big for a QR code', qx + qs / 2, qy + qs + 22, qs, C.mu); x.textAlign = 'left';
   font(14); text('Made with Ghost · nebula1080.github.io/ghost', P, H - 22, 600, C.mu);
   return cv;

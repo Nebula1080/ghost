@@ -34,7 +34,7 @@ srv.listen(8773, async () => {
       const img = await pg.evaluate(async () => {
         const im = document.querySelector('.shareimg'); await im.decode();
         const c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight; const x = c.getContext('2d'); x.drawImage(im, 0, 0);
-        const q = { x: c.width - 340, y: c.height - 380, w: 340, h: 380 };
+        const q = { x: c.width - 380, y: 500, w: 380, h: c.height - 500 };   // the QR sits right of the loop; its height depends on the build
         return { w: c.width, h: c.height, qw: q.w, qh: q.h, d: Array.from(x.getImageData(q.x, q.y, q.w, q.h).data) };
       });
       img.w === 1080 && img.h === 1350 ? ok(`${name}: the image is 1080×1350`) : fail(`${name}: image is ${img.w}×${img.h}`);
