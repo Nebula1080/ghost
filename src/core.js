@@ -423,7 +423,10 @@ const Core = (() => {
         else out.mods.push(p);
         continue;
       }
-      if (isIntr && !out.cols.length) { out.intrinsic.push(p); continue; }
+      // the intrinsic comes before any perk column; a later plug that shares an intrinsic's name is a column perk
+      // ("Honed Edge" is a sword blade perk and Izanagi's Burden's intrinsic)
+      if (isIntr && (!colPerks.length || norm(p.n) === norm(it.frame))) { out.intrinsic.push(p); continue; }
+      if (isIntr) { colPerks.push([p, '?']); continue; }
       if (ty === 'k' || /^masterwork|masterwork$|^tier \d+:/i.test(p.n)) { out.mw.push(p); continue; }
       if (ty === 'c' || /catalyst/i.test(p.n)) { out.catalyst.push(p); continue; }
       const colTy = COL_TYPES.has(ty) ? ty : (ty ? '' : '?');
@@ -450,7 +453,9 @@ const Core = (() => {
       out.cols = cols.filter(c => c.perks.length);
       for (const [p, ty] of loose) guess(p, ty);
     } else for (const [p, ty] of colPerks) guess(p, ty);
-    for (const c of out.cols) c.perks.sort((a, b) => b.s - a.s);
+    // one entry per perk name in a column: Bungie lists the equipped plug again among the options (often as its
+    // enhanced twin with the same name), which showed Quickdraw twice on Blasphemer
+    for (const c of out.cols) { c.perks.sort((a, b) => b.s - a.s); const seen = new Set(); c.perks = c.perks.filter(p => { const k = norm(p.n.replace(/^Enhanced\s+/i, '')); if (seen.has(k)) return false; seen.add(k); return true; }); }
     return out;
   }
 
