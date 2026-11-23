@@ -1116,3 +1116,10 @@ a{color:var(--light)}
 @keyframes bdelta{0%,70%{opacity:1}100%{opacity:0}}@media (prefers-reduced-motion:reduce){.bstat .bdelta{animation:none}}
 .bstat{grid-template-columns:72px minmax(40px,auto) 1fr}
 .shareimg{display:block;width:auto;max-width:100%;max-height:56vh;height:auto;margin:8px auto 12px;border-radius:8px;border:1px solid var(--line2)}
+.shprev{min-height:120px;display:grid;place-items:center}.shprev.busy{opacity:.5}
+.lped{margin:4px 0 12px;border:1px solid var(--line2);padding:10px 12px}.lped summary{cursor:pointer}.lped summary small{color:var(--faint);margin-left:6px}
+.lpfound{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.lpfound .btn{font-size:12.5px;text-align:left;white-space:normal}
+.lpstep{display:grid;grid-template-columns:22px minmax(0,1fr) minmax(0,1fr) 40px;gap:6px;align-items:center;margin:6px 0}.lpstep .lpn{color:var(--faint);text-align:center}.lpstep .qin,.lpstep .tsel{width:100%;min-width:0}
+.lprow{margin-top:8px}
+@media (max-width:760px){.lpstep{grid-template-columns:22px minmax(0,1fr) 40px}.lpstep .qin{grid-column:2/3}}
+.lpstep .qin{font-family:var(--ui)}.lpfound::before{content:"Loops Ghost found:";flex-basis:100%;font-size:12px;color:var(--faint)}

@@ -1512,6 +1512,31 @@ const Core = (() => {
     return { base, cd: Math.round(secs * curve * 10) / 10, scalar: curve, applied, src: rec ? 'clarity' : 'compendium', ...(slot === 'super' ? { activeRegen: rec?.[2] ?? null, duration: rec?.[3] ?? null } : { chunk: rec ? rec[2] : fb[1], charges: rec?.[3] || null }) };
   }
   // armor mods a slot can take (its own list + general) and their energy cost
+  // ---------- gameplay loops (share image) ----------
+  // Closed cycles in the interaction graph: piece A gives a term to piece B … and the last piece feeds A again
+  // (Healing Grenade → cure → Ember of Benevolence → grenade energy → Healing Grenade). Each cycle is found once (from
+  // its lowest piece index), 2-5 steps. Ranked by how central its pieces are (abilities, aspects, exotics first), a
+  // little against length. Returns up to `max` loops: [[{i, n, t: what step i gives the next}]].
+  function buildLoops(links, pieces, max = 3) {
+    const adj = new Map();
+    for (const l of links || []) { if (l.from === l.to) continue; if (!adj.has(l.from)) adj.set(l.from, new Map()); const m = adj.get(l.from); if (!m.has(l.to)) m.set(l.to, l.l || l.t); }
+    const weight = pc => !pc ? 0 : pc.g === 'subclass' ? ({ super: 3, grenade: 3, melee: 3, classAbility: 3, aspects: 2.5, fragments: 1.5 }[pc.slot] || 1)
+      : pc.it ? (/exotic/i.test(pc.it.rarity || '') ? 3 : 1.5) : pc.g === 'artifact' ? 1 : 1.2;
+    const out = []; let budget = 20000;
+    const dfs = (start, cur, path) => {
+      for (const [to] of adj.get(cur) || []) {
+        if (--budget < 0) return;
+        if (to === start && path.length >= 2) out.push(path.slice());
+        else if (to > start && !path.includes(to) && path.length < 5) { path.push(to); dfs(start, to, path); path.pop(); }
+      }
+    };
+    for (const s of [...adj.keys()].sort((a, b) => a - b)) dfs(s, s, [s]);
+    const seen = new Set();
+    return out.map(p => ({ p, score: p.reduce((n, i) => n + weight(pieces[i]), 0) / (1 + 0.2 * (p.length - 2)) }))
+      .sort((a, b) => b.score - a.score)
+      .filter(({ p }) => { const k = p.map(i => pieces[i]?.n).sort().join('|'); if (seen.has(k)) return false; seen.add(k); return true; })
+      .slice(0, max).map(({ p }) => p.map((i, k) => ({ i, n: pieces[i]?.n || '', t: adj.get(i).get(p[(k + 1) % p.length]) || '' })));
+  }
   // ---------- DIM loadout import ----------
   // The reverse of dimLoadout: DIM's API Loadout JSON (from a ?loadout= share URL, or the JSON itself) -> a Ghost
   // build. Subclass + artifact come from their socketOverrides; weapons and armor are matched to the vault by
@@ -1918,7 +1943,7 @@ const Core = (() => {
   }
 
   return { LIMITS, xferClean, XFER_MAX, sourceName, sanitizeHtml, sanitizeCss, parseCSV, toCSV, parseDimCsv, rowToItem, apiToItems, intrinsicHash, masterwork, catalyst, prepRatings, rateItem, WL, wlTags, parseWishlist, wlNote, TIERS, TIER_SCORE, prepGhostRatings, prepUserRatings, DEFAULT_WEIGHTS, comboKey, perkTier, combos, rateGhost, ratingGrade, parseQuery, runQuery, buildCtx, sortItems, groupKey, groupOrder, norm, findStat, applyDefs, perkInfo, breakerId, anyBreaker, sockets, descText, keywordRe, descHits, identifiers, plugOf, archetypeBreaker,
-    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, tuneTier, tuneFits, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink, parseDimLoadout, fromDimLoadout,
+    SYN, SYN_BY, synTags, pieceText, buildPieces, synergy, ixEval, ixIds, DR_VS, synScore, subScore, modScore, fitScore, buildStats, STAT_ORDER, byStatOrder, normBuild, fragSlots, weaponSlot, armorSlot, W_SLOTS, A_SLOTS, ARMOR3, modsFor, modCost, modLayout, armorParts, statAt, abilityCooldown, activeHashes, CLASS_HASH, archetypeOf, lowest3, modSockLabel, modFits, tuneTier, tuneFits, isExoticArmor, placeMods, subList, subclassPlan, artValid, artOf, artSlots, ART_MAX, ART_SLOTS, dimLoadout, dimLink, parseDimLoadout, fromDimLoadout, buildLoops,
     MOD_NONE, artFits, artPerkScore, artBest, OPT_CAP, OPT_TABLE, optSolve, optPiece, optTunes, armorSearch, armorOptimize, optMods };
 })();
 if (typeof module !== 'undefined') module.exports = Core;

@@ -408,4 +408,13 @@ t('tuning mods follow the Tuned stat whatever its case (DIM writes "weapons"); e
   assert.ok(C.tuneFits('+Super / -Health', { rarity: 'Exotic', tuning: '' }));
   assert.ok(C.tuneFits('Balanced Tuning', { rarity: 'Legendary', tuning: 'class' }));
 });
+t('gameplay loops: closed cycles in the interactions, each once, central pieces first', () => {
+  const pieces = [{ g: 'subclass', slot: 'grenade', n: 'G' }, { g: 'subclass', slot: 'fragments', n: 'F' }, { g: 'mod', n: 'M' }, { g: 'subclass', slot: 'aspects', n: 'A' }];
+  const links = [{ from: 0, to: 1, l: 'cure' }, { from: 1, to: 0, l: 'grenade energy' }, { from: 2, to: 3, l: 'orb' }, { from: 0, to: 2, l: 'kill' }, { from: 3, to: 0, l: 'grenade energy' }];
+  const L = C.buildLoops(links, pieces, 5);
+  assert.strictEqual(L.length, 2, 'two loops: G→F→G and G→M→A→G');
+  assert.deepStrictEqual(L.map(l => l.map(s => s.n).join('>')).sort(), ['G>F', 'G>M>A']);
+  assert.ok(L.every(l => l.every(s => s.t)), 'every step says what it gives the next');
+  assert.deepStrictEqual(C.buildLoops([{ from: 0, to: 1, l: 'x' }], pieces), [], 'no cycle, no loop');
+});
 console.log(n, 'build tests passed');
