@@ -693,7 +693,10 @@ const TYPE_LABEL = { i: 'Intrinsic', r: 'Armor archetype', b: 'Barrel / sight', 
 const COL_LABEL = { b: 'Barrel', m: 'Magazine', t: 'Trait', o: 'Origin', '?': 'Perk' };
 // Column headings in order: traits are numbered; a second column of the same type (an exotic's stock or grip column is
 // magazine-type) is named from its perks (Stock / Grip), else numbered, so no two headings repeat.
-const colLabels = cols => { let tn = 0; const seen = {}; return cols.map(c => { if (c.ty === 't') return 'Trait ' + (++tn); const base = COL_LABEL[c.ty] || 'Perk'; const n = seen[c.ty] = (seen[c.ty] || 0) + 1; if (n === 1) return base; const names = c.perks.map(p => p.n).join(' '); return /stock/i.test(names) ? 'Stock' : /grip/i.test(names) ? 'Grip' : base + ' ' + n; }); };
+const colLabels = cols => { let tn = 0; const seen = {}; return cols.map(c => { if (c.ty === 't') return 'Trait ' + (++tn); const all = c.perks.map(p => p.n);
+  // Praxic Blade names its barrel- and magazine-like columns Tang and Grip
+  if (c.ty === 'b' && all.every(n => / Tang$/.test(n))) return 'Tang'; if (c.ty === 'm' && all.every(n => / Grip$/.test(n))) return 'Grip';
+  const base = COL_LABEL[c.ty] || 'Perk'; const n = seen[c.ty] = (seen[c.ty] || 0) + 1; if (n === 1) return base; const names = c.perks.map(p => p.n).join(' '); return /stock/i.test(names) ? 'Stock' : /grip/i.test(names) ? 'Grip' : base + ' ' + n; }); };
 // Full detail block for one plug / perk / ability: Bungie text, Clarity, Data Compendium, light.gg link
 function infoHtml(name, opt = {}) {
   const i = Core.perkInfo(name, D, opt.ikind, opt.ph) || {};
@@ -1443,7 +1446,7 @@ function socketsCard(it, hits) {
     const lab = labs[ci];
     return `<div class="pg-col"><span class="pg-h">${lab}</span>${eq.map(p => skHtml(p, it, hits, { stack: true })).join('')}${opts.length ? `<div class="pg-opts">${opts.map(p => skHtml(p, it, hits, { small: true, noName: true })).join('')}</div>` : ''}</div>`;
   }).join('');
-  const mods = [...s.mods, ...s.mw, ...s.catalyst];
+  const mods = [...s.cfg.flatMap(c => c.perks.filter(p => p.s)), ...s.mods, ...s.mw, ...s.catalyst];
   const junk = it.perks.filter(p => p.j && hits.has('perk:' + p.n)).map(p => skHtml(p, it, hits, { sq: true, small: true })).join('');
   if (!head && !cols && !mods.length && !junk) return '';
   return `<div class="pgrid">${head ? `<div class="pg-head">${head}</div>` : ''}${cols ? `<div class="pg-cols" style="--n:${s.cols.length}">${cols}</div>` : ''}${mods.length ? `<div class="pg-mods"><span class="pg-h">Mods</span>${mods.map(p => skHtml({ ...p, s: 1 }, it, hits, { sq: true, small: true, noName: true })).join('')}</div>` : ''}${junk ? `<div class="pg-mods">${junk}</div>` : ''}</div>`;
@@ -1645,6 +1648,9 @@ function socketsDrawer(it, hits) {
   const si = D?.as?.[it.hash]; const set = si != null ? D.sets[si] : null;
   if (set) out.push(`<div class="dset"><div class="h2">◈ ${esc(set.n)} <span class="stat-pill">set bonus</span></div>${set.p.map((sp, i) => `<div class="dsk sel" data-setp="${si}:${i}" title="${esc(sp.n)}">${plugIcon(sp.n, 'sq lg', sp.i)}<span class="nm2"><b>${sp.c}-piece</b> · ${esc(sp.n)}</span></div>`).join('')}</div>`);
   const grp = (label, list, kind) => list.length ? `<div class="t stat-pill" style="margin:2px 0 4px">${label}</div><div class="dmods">${list.map(p => dsk({ ...p, s: 1 }, { sq: true, kind: kind || TYPE_LABEL[Core.plugOf(p.n, D, it.kind)?.[1]] || 'Mod' })).join('')}</div>` : '';
+  // configurable exotic sockets (Praxic Blade's Form, Blade Focus, Power Core, Crystal; Vexcalibur's Authorization mod):
+  // one column each with every option, the equipped one first
+  if (s.cfg.length) out.push(`<div class="t stat-pill" style="margin:6px 0 4px">Exotic configuration <small>you can swap these on the weapon in game</small></div><div class="dcols dcfg" style="grid-template-columns:repeat(${Math.min(s.cfg.length, 5)},minmax(0,1fr))">${s.cfg.map(c => `<div class="dcol"><div class="t">${esc(c.label)}<small class="dcc">${c.perks.length > 1 ? `${c.perks.length} options` : ''}</small></div>${c.perks.map(p => dsk(p, { sq: true, kind: c.label })).join('')}</div>`).join('')}</div>`);
   out.push(grp('Mods', s.mods));
   out.push(grp(it.mwType ? `Masterwork · ${esc(it.mwType)}${it.mwTier != null ? ' tier ' + it.mwTier : ''}` : 'Masterwork', s.mw, 'Masterwork'));
   out.push(grp('Catalyst', s.catalyst, 'Catalyst'));
