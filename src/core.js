@@ -404,7 +404,7 @@ const Core = (() => {
   // Columns break when the socket type changes or a second equipped perk of the same type appears.
   const COL_TYPES = new Set(['b', 'm', 't', 'o']);
   function sockets(it, defs) {
-    const out = { intrinsic: [], cols: [], mods: [], exotic: [], mw: [], catalyst: [] };
+    const out = { intrinsic: [], cols: [], mods: [], exotic: [], mw: [], catalyst: [], cfg: [] };
     let cur = null; const colPerks = [];
     // the old guess: a new column when the type changes or a second equipped perk appears
     const guess = (p, colTy) => {
@@ -453,6 +453,17 @@ const Core = (() => {
       out.cols = cols.filter(c => c.perks.length);
       for (const [p, ty] of loose) guess(p, ty);
     } else for (const [p, ty] of colPerks) guess(p, ty);
+    // configurable exotics (defs.xs: Praxic Blade's Form / Blade Focus / Power Core / Crystal, Vexcalibur's Authorization
+    // mod, switchable traits like Cull's Shadow's Soulfire): a choice that is a perk column gets its other options; the
+    // rest leave Mods and form their own labelled groups (out.cfg), equipped first, so the panel shows what can be swapped
+    for (const [label, names] of (it.kind === 'weapon' && defs?.xs?.[it.hash]) || []) {
+      const ks = new Set(names.map(norm)); const opt = n => ({ n, s: 0 });
+      const col = out.cols.find(c => c.perks.some(p => ks.has(norm(p.n))));
+      if (col) { const have = new Set(col.perks.map(p => norm(p.n))); for (const n of names) if (!have.has(norm(n))) col.perks.push(opt(n)); continue; }
+      const eq = out.mods.filter(p => ks.has(norm(p.n))); out.mods = out.mods.filter(p => !ks.has(norm(p.n)));
+      const have = new Set(eq.map(p => norm(p.n)));
+      if (eq.length || it.src === 'api') out.cfg.push({ label, perks: [...eq.map(p => ({ ...p, s: p.s ?? 1 })), ...names.filter(n => !have.has(norm(n))).map(opt)] });
+    }
     // one entry per perk name in a column: Bungie lists the equipped plug again among the options (often as its
     // enhanced twin with the same name), which showed Quickdraw twice on Blasphemer
     for (const c of out.cols) { c.perks.sort((a, b) => b.s - a.s); const seen = new Set(); c.perks = c.perks.filter(p => { const k = norm(p.n.replace(/^Enhanced\s+/i, '')); if (seen.has(k)) return false; seen.add(k); return true; }); }

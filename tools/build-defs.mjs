@@ -177,6 +177,33 @@ for (const k of new Set([...Object.keys(pw), ...Object.keys(pa)])) pi[k] = pw[k]
 // keep only the side entries that differ from pi (the rest would just duplicate it)
 for (const m of [pw, pa]) for (const k of Object.keys(m)) if (m[k] === pi[k]) delete m[k];
 
+// configurable exotics (2026-11-22): switchable sockets beyond the usual perk columns, e.g. Praxic Blade's Form (it sets
+// tang + grip, the swappable intrinsic-like choice), Trait choice, Blade Focus, Power Core and Crystal, Cull's Shadow's
+// Soulfire trait, Vexcalibur's Authorization mod. Only reusable (switchable) plug sets count: roll-time ones (Ergo Sum's
+// intrinsic, Refit catalysts) are fixed per copy. xs[weaponHash] = [[label, [optionName…]]]
+const xs = {};
+{
+  const STDCOL = /^(frames|scopes|origins|barrels|magazines.*|tubes|arrows|hafts|blades|bowstrings|batteries|guards|grips|stocks)$/;
+  const SKIPX = /tracker|skins|ornament|transfusers|extractors|mementos|shader|holofoil|kill_vfx|confetti|flair|^v\d+\.weapon\.mod_|crafting\.recipes/i;
+  for (const [h, d] of Object.entries(items)) {
+    if (d.itemType !== 3 || d.inventory?.tierType !== 6 || !d.sockets || d.redacted) continue;
+    const rows = [];
+    for (const e of d.sockets.socketEntries || []) {
+      const ps = plugSets[e.reusablePlugSetHash]; if (!ps) continue;
+      const hs = [...new Set(ps.reusablePlugItems.map(p => p.plugItemHash))].filter(x => items[x] && name(items[x]) && !/^Empty |^Default |^Protocol Socket$/.test(name(items[x])) && !/ (II|III|IV|V)$/.test(name(items[x])));
+      const names = [...new Set(hs.map(x => name(items[x])))];
+      if (names.length < 2 || names.every(n => / Catalyst$/.test(n))) continue;
+      const cats = [...new Set(hs.map(x => items[x].plug?.plugCategoryIdentifier || ''))];
+      if (cats.every(c => SKIPX.test(c)) || cats.every(c => STDCOL.test(c))) continue;
+      const label = (items[hs[0]].itemTypeDisplayName || 'Option').replace(name(d) + ' ', '');
+      rows.push([label, names]);
+      // every option gets an icon + description entry (Vexcalibur's Authorization mods have no regular plug type)
+      for (const x of hs) { const k = norm(name(items[x])); if (!pi[k] && !pw[k] && items[x].displayProperties?.hasIcon) pi[k] = [iconTail(items[x].displayProperties.icon), 'w', bungieDesc(items[x]).slice(0, 600), items[x].hash]; }
+    }
+    // the Form-like choice first, then the rest in socket order
+    if (rows.length) xs[h] = rows.sort((a, b) => /form/i.test(b[0]) - /form/i.test(a[0]));
+  }
+}
 // cosmetic sockets to hide (shaders, ornaments / "skins", trackers, mementos): normalized names
 const cos = new Set();
 for (const it of Object.values(items)) {
@@ -408,7 +435,7 @@ console.log('intrinsics by hash:', Object.keys(wi).length, 'weapons,', Object.ke
 
 const out = {
   v: manifest.Response.version, built: new Date().toISOString().slice(0, 10), artifact: name(artifact),
-  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, am, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos], wi, ih, mwp, cata, wc,
+  breakers, icons, wb, fb, wa, pi, pw, pa, sets, as, sub, am, cl, dc, dcx, dset, dcs: STYLES, cos: [...cos], wi, ih, mwp, cata, wc, xs,
 };
 fs.mkdirSync(path.join(root, 'data'), { recursive: true });
 fs.writeFileSync(path.join(root, 'data/defs.json'), JSON.stringify(out));

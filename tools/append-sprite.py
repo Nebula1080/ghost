@@ -42,6 +42,7 @@ for k, t in enumerate(want):
     im = Image.open(io.BytesIO(urllib.request.urlopen(req, timeout=30).read())).convert('RGBA').resize((SIZE, SIZE), Image.LANCZOS)
     i = len(tails) + k
     sheet.paste(im, ((i % COLS) * SIZE, (i // COLS) * SIZE))
+# lossy like build-sprite.py (lossless is ~6 MB, too heavy for phones); each append re-encodes the sheet once
 sheet.save(spr_path, 'WEBP', quality=90, method=6, alpha_quality=100)
 idx_path.write_text(json.dumps(tails + want, separators=(',', ':')), encoding='utf-8', newline='\n')
 print(f'sprite: added {len(want)} icons, now {n} ({COLS} x {rows}), {spr_path.stat().st_size} bytes')
